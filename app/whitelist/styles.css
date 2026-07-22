@@ -1,0 +1,66 @@
+.pg-whitelist {
+  /* product tabs */
+  .wl-tabs { display: flex; gap: 6px; margin: 34px 0 18px; flex-wrap: wrap; }
+  .wl-tabs button {
+    all: unset;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--line-solid);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .wl-tabs button:hover { color: var(--text); border-color: var(--line-strong); }
+  .wl-tabs button .n { font-family: var(--font-mono); font-size: 10.5px; color: var(--faint); }
+  .wl-tabs button[data-t="alpha"].on { color: var(--alpha); border-color: color-mix(in srgb, var(--alpha) 50%, transparent); background: color-mix(in srgb, var(--alpha) 9%, transparent); }
+  .wl-tabs button[data-t="prime"].on { color: var(--prime); border-color: color-mix(in srgb, var(--prime) 50%, transparent); background: color-mix(in srgb, var(--prime) 9%, transparent); }
+  .wl-tabs button[data-t="cash"].on  { color: var(--mkt); border-color: color-mix(in srgb, var(--mkt) 50%, transparent); background: color-mix(in srgb, var(--mkt) 9%, transparent); }
+
+  .wl-panel { display: none; }
+  .wl-panel.on { display: block; }
+
+  .wl-table-wrap { overflow-x: auto; border: 1px solid var(--line-solid); border-radius: var(--r-md); background: var(--surface); }
+  table.wl { width: 100%; border-collapse: collapse; min-width: 860px; }
+  table.wl th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--faint);
+    font-weight: 500;
+    text-align: left;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line-solid);
+  }
+  table.wl td { padding: 16px 18px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: top; }
+  table.wl tr:last-child td { border-bottom: none; }
+  table.wl tbody tr { transition: background .15s ease; }
+  table.wl tbody tr:hover { background: color-mix(in srgb, var(--citrus) 3%, transparent); }
+  table.wl .proto { font-weight: 640; font-family: var(--font-display); font-size: 14.5px; white-space: nowrap; }
+  table.wl .assets { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
+  table.wl .desc { color: var(--muted); line-height: 1.55; font-size: 12.5px; max-width: 46ch; }
+  table.wl .date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+  .st { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
+  .st::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .st.active { color: var(--good); }
+  .st.activating { color: var(--prime); }
+  .st.activating::before { animation: pulse 2.2s ease-in-out infinite; }
+  .st.paused { color: var(--risk); }
+  .st-left { display: block; font-family: var(--font-mono); font-size: 10.5px; color: var(--faint); margin-top: 5px; letter-spacing: .04em; text-transform: none; }
+
+  .wl-foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+  .wl-count { font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+
+  .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .rules { grid-template-columns: 1fr; } }
+  .rules .card { padding: 22px; }
+  .rules b { font-family: var(--font-display); font-weight: 620; font-size: 14.5px; display: block; margin-bottom: 6px; }
+  .rules span { font-size: 12.5px; color: var(--muted); line-height: 1.6; display: block; }
+  .rules em { font-family: var(--font-mono); font-style: normal; font-size: 10px; color: var(--citrus); letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 12px; }
+}

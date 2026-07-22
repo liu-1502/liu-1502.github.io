@@ -1,0 +1,46 @@
+.pg-marketplace {
+  .prod-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+  .prod-head .tk-strip img { width: 30px; height: 30px; }
+  .prod-head h1 { font-size: 22px; }
+  .prod-head p { flex-basis: 100%; margin: 2px 0 0; font-size: 13px; color: var(--muted); max-width: 74ch; line-height: 1.6; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 34px 0 18px; }
+  .filters button {
+    all: unset;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: .05em;
+    padding: 8px 15px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--line-solid);
+    color: var(--muted);
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .filters button:hover { color: var(--text); border-color: var(--line-strong); }
+  .filters button.on {
+    color: var(--mkt);
+    border-color: color-mix(in srgb, var(--mkt) 45%, transparent);
+    background: color-mix(in srgb, var(--mkt) 9%, transparent);
+  }
+
+  .vaults { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 980px) { .vaults { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .vaults { grid-template-columns: 1fr; } }
+
+  .vault { padding: 22px; display: flex; flex-direction: column; gap: 13px; text-decoration: none; }
+  .vault .vhead { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .vault h3 { font-size: 16.5px; line-height: 1.25; }
+  .vault .venue { font-size: 12px; color: var(--faint); margin-top: 3px; font-family: var(--font-mono); }
+  .vault .strat { font-size: 12.5px; color: var(--muted); line-height: 1.55; flex: 1; margin: 0; }
+  .vault .vstats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    gap: 8px;
+  }
+  .vault .vstats .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+  .vault .vstats .v { font-family: var(--font-mono); font-size: 14.5px; font-weight: 560; margin-top: 3px; font-variant-numeric: tabular-nums; }
+  .vault .vstats .v.apy { color: var(--mkt); }
+  .vault:hover { border-color: color-mix(in srgb, var(--mkt) 45%, var(--line-strong)); }
+}

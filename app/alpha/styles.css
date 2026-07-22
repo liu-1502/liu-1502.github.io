@@ -1,0 +1,29 @@
+.pg-alpha {
+  .prod-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+  .prod-head .tk-strip img { width: 30px; height: 30px; }
+  .prod-head h1 { font-size: 22px; }
+  .prod-head p { flex-basis: 100%; margin: 2px 0 0; font-size: 13px; color: var(--muted); max-width: 74ch; line-height: 1.6; }
+
+  /* composition */
+  .compo { padding: 24px; }
+  .compo > p { font-size: 12.5px; color: var(--muted); max-width: 66ch; line-height: 1.6; margin: 0 0 20px; }
+  .compo-rows { display: flex; flex-direction: column; gap: 14px; }
+  .compo-row { display: grid; grid-template-columns: 250px 1fr 56px; gap: 18px; align-items: center; }
+  @media (max-width: 680px) { .compo-row { grid-template-columns: 1fr 56px; } .compo-row .bar { grid-column: 1 / -1; order: 3; } }
+  .compo-row .name { font-size: 13px; font-weight: 600; }
+  .compo-row .sub { font-size: 11px; color: var(--faint); font-weight: 400; display: block; }
+  .compo-row .bar { height: 8px; border-radius: 2px; background: var(--surface-2); overflow: hidden; position: relative; }
+  .compo-row .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 2px; background: var(--alpha); display: block; }
+  .compo-row:nth-child(2) .bar i { opacity: .78; }
+  .compo-row:nth-child(3) .bar i { opacity: .58; }
+  .compo-row:nth-child(4) .bar i { opacity: .42; }
+  .compo-row:nth-child(5) .bar i { opacity: .3; }
+  .compo-row .pct { font-family: var(--font-mono); font-size: 13.5px; text-align: right; color: var(--alpha); font-variant-numeric: tabular-nums; }
+  .dir-switch { display: flex; align-items: center; gap: 2px; border: 1px solid var(--line-solid); border-radius: var(--r-sm); padding: 3px; background: var(--surface-2); width: fit-content; margin-bottom: 18px; }
+  .dir-switch button { all: unset; cursor: pointer; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 4px; color: var(--faint); }
+  .dir-switch button.on { background: var(--surface); color: var(--alpha); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .dir-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .gate-switch { display: inline-flex; gap: 2px; border: 1px solid var(--line-solid); border-radius: var(--r-sm); padding: 3px; background: var(--surface); margin-bottom: 4px; }
+  .gate-switch button { all: unset; cursor: pointer; font-size: 11.5px; font-weight: 550; padding: 6px 13px; border-radius: 4px; color: var(--faint); font-family: var(--font-mono); }
+  .gate-switch button.on { background: color-mix(in srgb, var(--prime) 14%, transparent); color: var(--prime); }
+}

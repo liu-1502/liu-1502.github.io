@@ -1,0 +1,14 @@
+/node_modules
+/.next
+/out
+/build
+.DS_Store
+*.pem
+npm-debug.log*
+.env*
+next-env.d.ts
+*.tsbuildinfo
+
+# Nguồn tạm để bung 12 trang gốc (npm run split). App đã convert xong, không cần commit.
+/legacy-html
+/yuzu-source-bundle.txt

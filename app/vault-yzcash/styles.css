@@ -1,0 +1,18 @@
+.pg-vault-yzcash {
+  .vmeta { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 14px; }
+  .vdetail-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line-solid);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: var(--surface);
+    margin-top: 30px;
+  }
+  @media (max-width: 700px) { .vdetail-stats { grid-template-columns: 1fr 1fr; } }
+  .vdetail-stats > div { padding: 18px 22px; border-right: 1px solid var(--line-solid); }
+  .vdetail-stats > div:last-child { border-right: none; }
+  .vdetail-stats .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .vdetail-stats .v { font-family: var(--font-mono); font-size: 19px; font-weight: 560; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .app-title img.tk-lg { width: 40px; height: 40px; border-radius: 50%; }
+}
