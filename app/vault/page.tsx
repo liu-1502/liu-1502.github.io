@@ -1,5 +1,8 @@
 import "./styles.css";
 import { pageMetadata } from "@/lib/pages";
+import TokenPill from "@/components/ui/TokenPill";
+import Button from "@/components/ui/Button";
+import SegmentedTabs from "@/components/ui/SegmentedTabs";
 
 export const metadata = pageMetadata("/vault");
 
@@ -9,10 +12,14 @@ export default function Vault() {
       <div className="app-layout" style={{ paddingTop: 34 }}>
 
         <div className="xchg rv">
-          <div className="xchg-tabs">
-            <button className="on" data-tab="deposit">Deposit</button>
-            <button data-tab="withdraw">Withdraw</button>
-          </div>
+          <SegmentedTabs
+            className="xchg-tabs"
+            attr="data-tab"
+            items={[
+              { id: "deposit", label: "Deposit" },
+              { id: "withdraw", label: "Withdraw" },
+            ]}
+          />
 
           <div className="xchg-body" data-panel="deposit">
             <div className="xfield">
@@ -22,7 +29,7 @@ export default function Vault() {
               </div>
               <div className="xrow">
                 <input type="text" inputMode="decimal" placeholder="0.00" data-src data-rate="0.9812" aria-label="Amount to deposit" />
-                <span className="token"><img src="/assets/tokens/usdc.svg" alt="" />USDC</span>
+                <TokenPill sym="usdc" label="USDC" />
               </div>
               <div className="xusd">≈ $0.00</div>
             </div>
@@ -33,7 +40,7 @@ export default function Vault() {
               <div className="xlabel"><span>You receive</span></div>
               <div className="xrow">
                 <input type="text" placeholder="0.00" data-dst readOnly aria-label="Amount received" />
-                <span className="token"><img src="/assets/tokens/yzSyrup.svg" alt="" />yzSyrup</span>
+                <TokenPill sym="yzSyrup" label="yzSyrup" />
               </div>
             </div>
 
@@ -44,7 +51,7 @@ export default function Vault() {
               <div><span className="k">Custody</span><span className="v hi">Your wallet, always</span></div>
             </div>
 
-            <button className="btn btn-accent btn-block">Connect Wallet</button>
+            <Button block>Connect Wallet</Button>
           </div>
 
           <div className="xchg-body" data-panel="withdraw" style={{ display: "none" }}>
@@ -55,7 +62,7 @@ export default function Vault() {
               </div>
               <div className="xrow">
                 <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to withdraw" />
-                <span className="token"><img src="/assets/tokens/yzSyrup.svg" alt="" />yzSyrup</span>
+                <TokenPill sym="yzSyrup" label="yzSyrup" />
               </div>
               <div className="xusd">≈ $0.00</div>
             </div>
@@ -64,14 +71,14 @@ export default function Vault() {
               <div className="xlabel"><span>You receive</span></div>
               <div className="xrow">
                 <input type="text" placeholder="0.00" readOnly aria-label="Amount received" />
-                <span className="token"><img src="/assets/tokens/usdc.svg" alt="" />USDC</span>
+                <TokenPill sym="usdc" label="USDC" />
               </div>
             </div>
             <div className="xmeta">
               <div><span className="k">Token price</span><span className="v">1 yzSyrup = $1.0192</span></div>
               <div><span className="k">Withdrawal</span><span className="v">Open, no lockup</span></div>
             </div>
-            <button className="btn btn-accent btn-block">Connect Wallet</button>
+            <Button block>Connect Wallet</Button>
           </div>
         </div>
 

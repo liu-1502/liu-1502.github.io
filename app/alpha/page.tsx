@@ -2,6 +2,9 @@ import Link from "next/link";
 import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
+import TokenPill from "@/components/ui/TokenPill";
+import Button from "@/components/ui/Button";
+import SegmentedTabs from "@/components/ui/SegmentedTabs";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -14,7 +17,7 @@ export default function Alpha() {
           <div className="t">Eligibility verification required for primary mint and redeem</div>
           <div className="d">Minting and redeeming yzUSD and yzPP is reserved to Eligible Investors after KYC and Source-of-Funds screening. Staking syzUSD needs nothing: no KYC, ever. You can also acquire any Alpha token on Curve without KYC.</div>
         </div>
-        <button className="btn btn-accent">Verify eligibility <span className="arr">→</span></button>
+        <Button>Verify eligibility <span className="arr">→</span></Button>
       </div>
 
       <div className="app-layout" style={{ paddingTop: 26 }}>
@@ -22,19 +25,28 @@ export default function Alpha() {
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
         <div className="xchg rv">
-          <div className="xchg-tabs" id="alphaTabs">
-            <button className="on" data-tab="yzusd">Mint / Redeem yzUSD</button>
-            <button data-tab="yzpp">Mint / Redeem yzPP</button>
-            <button data-tab="syzusd">Stake / Unstake syzUSD</button>
-          </div>
+          <SegmentedTabs
+            className="xchg-tabs"
+            attr="data-tab"
+            id="alphaTabs"
+            items={[
+              { id: "yzusd", label: "Mint / Redeem yzUSD" },
+              { id: "yzpp", label: "Mint / Redeem yzPP" },
+              { id: "syzusd", label: "Stake / Unstake syzUSD" },
+            ]}
+          />
 
           {/* ============ yzUSD ============ */}
           <div className="xchg-body" data-panel="yzusd">
             <div className="dir-row">
-              <div className="dir-switch">
-                <button className="on" data-dir="mint">Mint</button>
-                <button data-dir="redeem">Redeem</button>
-              </div>
+              <SegmentedTabs
+                className="dir-switch"
+                attr="data-dir"
+                items={[
+                  { id: "mint", label: "Mint" },
+                  { id: "redeem", label: "Redeem" },
+                ]}
+              />
               <span className="chip gated">KYC gated</span>
             </div>
 
@@ -43,7 +55,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You deposit</span><span>Balance 0.00 <button type="button">Max</button></span></div>
                 <div className="xrow">
                   <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to deposit"/>
-                  <span className="token"><img src="/assets/tokens/usdt.svg" alt=""/>USDT0</span>
+                  <TokenPill sym="usdt" label="USDT0" />
                 </div>
                 <div className="xusd">≈ $0.00</div>
               </div>
@@ -52,7 +64,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You receive</span></div>
                 <div className="xrow">
                   <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <span className="token"><img src="/assets/tokens/yzUSD.svg" alt=""/>yzUSD</span>
+                  <TokenPill sym="yzUSD" label="yzUSD" />
                 </div>
               </div>
               <div className="xmeta">
@@ -61,7 +73,7 @@ export default function Alpha() {
                 <div><span className="k">Alternative</span><span className="v hi">Swap on Curve, no KYC</span></div>
                 <div><span className="k">Network</span><span className="v">Plasma</span></div>
               </div>
-              <button className="btn btn-accent btn-block gcta" disabled>Verify eligibility to continue</button>
+              <Button block className="gcta" disabled>Verify eligibility to continue</Button>
             </div>
 
             <div data-dirpanel="redeem" style={{ display: "none" }}>
@@ -69,7 +81,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You redeem</span><span>Balance 0.00 <button type="button">Max</button></span></div>
                 <div className="xrow">
                   <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to redeem"/>
-                  <span className="token"><img src="/assets/tokens/yzUSD.svg" alt=""/>yzUSD</span>
+                  <TokenPill sym="yzUSD" label="yzUSD" />
                 </div>
                 <div className="xusd">≈ $0.00</div>
               </div>
@@ -78,7 +90,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You receive</span></div>
                 <div className="xrow">
                   <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <span className="token"><img src="/assets/tokens/usdt.svg" alt=""/>USDT0</span>
+                  <TokenPill sym="usdt" label="USDT0" />
                 </div>
               </div>
               <div className="xmeta">
@@ -86,17 +98,21 @@ export default function Alpha() {
                 <div><span className="k">Access</span><span className="v">Eligible Investors, KYC</span></div>
                 <div><span className="k">Alternative</span><span className="v hi">Swap on Curve, no KYC</span></div>
               </div>
-              <button className="btn btn-accent btn-block gcta" disabled>Verify eligibility to continue</button>
+              <Button block className="gcta" disabled>Verify eligibility to continue</Button>
             </div>
           </div>
 
           {/* ============ yzPP ============ */}
           <div className="xchg-body" data-panel="yzpp" style={{ display: "none" }}>
             <div className="dir-row">
-              <div className="dir-switch">
-                <button className="on" data-dir="mint">Mint</button>
-                <button data-dir="redeem">Redeem</button>
-              </div>
+              <SegmentedTabs
+                className="dir-switch"
+                attr="data-dir"
+                items={[
+                  { id: "mint", label: "Mint" },
+                  { id: "redeem", label: "Redeem" },
+                ]}
+              />
               <span className="chip gated">KYC gated</span>
             </div>
 
@@ -105,7 +121,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You deposit</span><span>Balance 0.00 <button type="button">Max</button></span></div>
                 <div className="xrow">
                   <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to deposit"/>
-                  <span className="token"><img src="/assets/tokens/usdt.svg" alt=""/>USDT0</span>
+                  <TokenPill sym="usdt" label="USDT0" />
                 </div>
                 <div className="xusd">≈ $0.00</div>
               </div>
@@ -114,7 +130,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You receive</span></div>
                 <div className="xrow">
                   <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <span className="token"><img src="/assets/tokens/yzPP.svg" alt=""/>yzPP</span>
+                  <TokenPill sym="yzPP" label="yzPP" />
                 </div>
               </div>
               <div className="xmeta">
@@ -123,7 +139,7 @@ export default function Alpha() {
                 <div><span className="k">Role</span><span className="v">Junior tranche, absorbs losses first</span></div>
                 <div><span className="k">Access</span><span className="v">Eligible Investors, KYC</span></div>
               </div>
-              <button className="btn btn-accent btn-block gcta" disabled>Verify eligibility to continue</button>
+              <Button block className="gcta" disabled>Verify eligibility to continue</Button>
             </div>
 
             <div data-dirpanel="redeem" style={{ display: "none" }}>
@@ -131,7 +147,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You redeem</span><span>Balance 0.00 <button type="button">Max</button></span></div>
                 <div className="xrow">
                   <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to redeem"/>
-                  <span className="token"><img src="/assets/tokens/yzPP.svg" alt=""/>yzPP</span>
+                  <TokenPill sym="yzPP" label="yzPP" />
                 </div>
                 <div className="xusd">≈ $0.00</div>
               </div>
@@ -140,7 +156,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You receive</span></div>
                 <div className="xrow">
                   <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <span className="token"><img src="/assets/tokens/usdt.svg" alt=""/>USDT0</span>
+                  <TokenPill sym="usdt" label="USDT0" />
                 </div>
               </div>
               <div className="xmeta">
@@ -149,17 +165,21 @@ export default function Alpha() {
                 <div><span className="k">During a loss event</span><span className="v">Redemptions pause until assessed</span></div>
                 <div><span className="k">Access</span><span className="v">Eligible Investors, KYC</span></div>
               </div>
-              <button className="btn btn-accent btn-block gcta" disabled>Verify eligibility to continue</button>
+              <Button block className="gcta" disabled>Verify eligibility to continue</Button>
             </div>
           </div>
 
           {/* ============ syzUSD ============ */}
           <div className="xchg-body" data-panel="syzusd" style={{ display: "none" }}>
             <div className="dir-row">
-              <div className="dir-switch">
-                <button className="on" data-dir="stake">Stake</button>
-                <button data-dir="unstake">Unstake</button>
-              </div>
+              <SegmentedTabs
+                className="dir-switch"
+                attr="data-dir"
+                items={[
+                  { id: "stake", label: "Stake" },
+                  { id: "unstake", label: "Unstake" },
+                ]}
+              />
               <span className="chip open">No KYC</span>
             </div>
 
@@ -168,7 +188,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You stake</span><span>Balance 0.00 <button type="button">Max</button></span></div>
                 <div className="xrow">
                   <input type="text" inputMode="decimal" placeholder="0.00" data-src data-rate="0.9361" aria-label="Amount to stake"/>
-                  <span className="token"><img src="/assets/tokens/yzUSD.svg" alt=""/>yzUSD</span>
+                  <TokenPill sym="yzUSD" label="yzUSD" />
                 </div>
                 <div className="xusd">≈ $0.00</div>
               </div>
@@ -177,7 +197,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You receive</span></div>
                 <div className="xrow">
                   <input type="text" placeholder="0.00" data-dst readOnly aria-label="Amount received"/>
-                  <span className="token"><img src="/assets/tokens/syzUSD.svg" alt=""/>syzUSD</span>
+                  <TokenPill sym="syzUSD" label="syzUSD" />
                 </div>
               </div>
               <div className="xmeta">
@@ -186,7 +206,7 @@ export default function Alpha() {
                 <div><span className="k">Unstaking</span><span className="v">One step, near instant</span></div>
                 <div><span className="k">Network</span><span className="v">Plasma</span></div>
               </div>
-              <button className="btn btn-accent btn-block">Connect Wallet</button>
+              <Button block>Connect Wallet</Button>
             </div>
 
             <div data-dirpanel="unstake" style={{ display: "none" }}>
@@ -194,7 +214,7 @@ export default function Alpha() {
                 <div className="xlabel"><span>You unstake</span><span>Balance 0.00 <button type="button">Max</button></span></div>
                 <div className="xrow">
                   <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to unstake"/>
-                  <span className="token"><img src="/assets/tokens/syzUSD.svg" alt=""/>syzUSD</span>
+                  <TokenPill sym="syzUSD" label="syzUSD" />
                 </div>
                 <div className="xusd">≈ $0.00</div>
               </div>
@@ -203,14 +223,14 @@ export default function Alpha() {
                 <div className="xlabel"><span>You receive</span></div>
                 <div className="xrow">
                   <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <span className="token"><img src="/assets/tokens/yzUSD.svg" alt=""/>yzUSD</span>
+                  <TokenPill sym="yzUSD" label="yzUSD" />
                 </div>
               </div>
               <div className="xmeta">
                 <div><span className="k">Exchange rate</span><span className="v">1 syzUSD = 1.0683 yzUSD</span></div>
                 <div><span className="k">Settlement</span><span className="v">Near instant</span></div>
               </div>
-              <button className="btn btn-accent btn-block">Connect Wallet</button>
+              <Button block>Connect Wallet</Button>
             </div>
           </div>
         </div>
@@ -306,7 +326,7 @@ export default function Alpha() {
             </div>
           </div>
           <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
-            <Link className="btn btn-line" href="/whitelist">See all whitelisted assets and protocols <span className="arr">→</span></Link>
+            <Button href="/whitelist" variant="line">See all whitelisted assets and protocols <span className="arr">→</span></Button>
           </div>
         </div>
       </section>

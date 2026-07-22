@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { STORAGE_KEYS } from "@/lib/constants";
+import { readStorage, writeStorage } from "@/lib/storage";
+import { chainSrc } from "@/lib/assets";
+import type { Chain } from "@/lib/types";
 
-/** Bộ chọn chain ở topbar. State lưu ở localStorage ("yuzu-chain") và phát sự kiện
- *  "yuzu-chain" để phần còn lại của app phản ứng — đúng như hành vi app.js gốc. */
-type Chain = { id: string; name: string; img?: string; letter?: string };
-
+/** Bộ chọn chain ở topbar. State lưu ở localStorage và phát sự kiện "yuzu-chain"
+ *  để phần còn lại của app phản ứng — đúng hành vi app.js gốc. */
 const CHAINS: Chain[] = [
   { id: "all", name: "All chains" },
-  { id: "plasma", name: "Plasma", img: "/assets/chains/plasma.svg" },
-  { id: "monad", name: "Monad", img: "/assets/chains/monad.svg" },
-  { id: "ethereum", name: "Ethereum", img: "/assets/chains/ethereum.svg" },
+  { id: "plasma", name: "Plasma", img: chainSrc("plasma") },
+  { id: "monad", name: "Monad", img: chainSrc("monad") },
+  { id: "ethereum", name: "Ethereum", img: chainSrc("ethereum") },
   { id: "sei", name: "SEI EVM", letter: "S" },
 ];
 
@@ -33,12 +35,8 @@ export default function ChainSelector() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let c = "all";
-    try {
-      c = localStorage.getItem("yuzu-chain") || "all";
-    } catch {}
-    if (!CHAINS.some((x) => x.id === c)) c = "all";
-    setCur(c);
+    const saved = readStorage(STORAGE_KEYS.chain, "all");
+    setCur(CHAINS.some((x) => x.id === saved) ? saved : "all");
   }, []);
 
   // Đóng khi click ra ngoài. Kiểm tra ref.contains để bỏ qua click bên trong —
@@ -54,14 +52,12 @@ export default function ChainSelector() {
 
   const pick = (id: string) => {
     setCur(id);
-    try {
-      localStorage.setItem("yuzu-chain", id);
-    } catch {}
+    writeStorage(STORAGE_KEYS.chain, id);
     setOpen(false);
     document.dispatchEvent(new CustomEvent("yuzu-chain", { detail: { chain: id } }));
   };
 
-  const current = CHAINS.find((x) => x.id === cur) || CHAINS[0];
+  const current = CHAINS.find((x) => x.id === cur) ?? CHAINS[0];
 
   return (
     <div className={`chain-sel${open ? " open" : ""}`} ref={ref}>

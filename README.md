@@ -39,10 +39,14 @@ app/
   vault-yzcash/         "/vault-yzcash" (yzCash)
 
 components/
-  Sidebar.tsx           Sidebar + nav active theo route (usePathname).
-  Topbar.tsx            Tiêu đề/crumb theo route + control: ModeSwitch (lite/pro),
-                        EligibilityToggle, ThemeToggle.
-  ChainSelector.tsx     Bộ chọn chain ở topbar (dropdown), state qua localStorage + event.
+  ui/                   Primitive tái sử dụng (không phụ thuộc nghiệp vụ):
+    Button.tsx            Nút đa hình (button / link nội bộ / link ngoài) + variant .btn-*.
+    TokenIcon/Strip/Pill  Logo token đơn / dải logo (.tk-strip) / nhãn token (.token).
+    SegmentedTabs.tsx     Thanh tab "chọn một" dùng chung (xchg-tabs, dir-switch, wl-tabs).
+  topbar/               Các control ở topbar, mỗi cái một file (SRP):
+    ModeSwitch, EligibilityToggle, ThemeToggle, ChainSelector.
+  Sidebar.tsx           Sidebar — điều hướng khai báo bằng dữ liệu (NAV_GROUPS) + <SideItem>.
+  Topbar.tsx            Ghép tiêu đề/crumb (theo route) với các control ở topbar/.
   LiquidBackground.tsx  Canvas bong bóng (chỉ ở chế độ lite) — port từ initLiquid().
   YuzuClient.tsx        Port hành vi global của app.js sang useEffect: count-up, reveal-on-scroll,
                         tape marquee, exchange tabs, mirror ô nhập số, marketplace filter,
@@ -50,9 +54,11 @@ components/
   Logo.tsx              SVG logo Yuzu.
 
 lib/
-  pages.ts              Map route → { nav, title, crumb, bodyClass, metaTitle }. Nguồn duy nhất
-                        cho nav active, tiêu đề topbar, breadcrumb, class accent và <title> mỗi
-                        trang (pageMetadata() dùng trong `export const metadata`).
+  pages.ts              Map route → { nav, title, crumb, bodyClass, metaTitle } + pageMetadata().
+  constants.ts          STORAGE_KEYS (khoá localStorage dùng chung).
+  storage.ts            readStorage/writeStorage (bọc try/catch, an toàn SSR).
+  assets.ts             tokenSrc()/chainSrc() — dựng đường dẫn asset.
+  types.ts              Kiểu dùng chung (Chain, NavItem).
   watchVisible.ts       Tiện ích reveal-khi-cuộn dùng chung (YuzuClient + TransparencyClient).
 
 public/assets/          tokens/*.svg, chains/*.svg (placeholder — xem "Ghi chú").

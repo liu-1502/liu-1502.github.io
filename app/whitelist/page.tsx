@@ -1,6 +1,8 @@
 import "./styles.css";
 import WhitelistClient from "./WhitelistClient";
 import { pageMetadata } from "@/lib/pages";
+import Button from "@/components/ui/Button";
+import SegmentedTabs from "@/components/ui/SegmentedTabs";
 
 export const metadata = pageMetadata("/whitelist");
 
@@ -13,7 +15,7 @@ export default function Whitelist() {
           <p className="lede">These lists are the boundaries of the mandate: each product keeps its own whitelist, and anything not on it is out of bounds. New entries pass a full risk review, then wait out a 7-day activation window in public view before any funds move. Underlying asset exposures only, not the routers, DEXs and bridges crossed during deployment.</p>
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, flexWrap: "wrap" }}>
-          <a className="btn btn-line" href="https://t.me/yuzumoney_stats" target="_blank" rel="noopener">Get whitelist alerts <span className="arr">↗</span></a>
+          <Button href="https://t.me/yuzumoney_stats" target="_blank" rel="noopener" variant="line">Get whitelist alerts <span className="arr">↗</span></Button>
         </div>
       </section>
 
@@ -25,11 +27,16 @@ export default function Whitelist() {
         <a className="go" href="#wlTabs">Check it now ↓</a>
       </div>
 
-      <div className="wl-tabs" id="wlTabs">
-        <button className="on" data-t="alpha">Alpha <span className="n">33</span></button>
-        <button data-t="prime">Prime <span className="n">16</span></button>
-        <button data-t="cash">Cash <span className="n">2</span></button>
-      </div>
+      <SegmentedTabs
+        className="wl-tabs"
+        attr="data-t"
+        id="wlTabs"
+        items={[
+          { id: "alpha", label: <>Alpha <span className="n">33</span></> },
+          { id: "prime", label: <>Prime <span className="n">16</span></> },
+          { id: "cash", label: <>Cash <span className="n">2</span></> },
+        ]}
+      />
 
       {/* ================= ALPHA ================= */}
       <section className="wl-panel on rv" data-t="alpha">

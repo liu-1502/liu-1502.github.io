@@ -7,6 +7,7 @@ import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import LiquidBackground from "@/components/LiquidBackground";
 import YuzuClient from "@/components/YuzuClient";
+import { STORAGE_KEYS } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Yuzu Money",
@@ -16,9 +17,9 @@ export const metadata: Metadata = {
 // Chạy trước khi paint: khôi phục theme/mode/eligibility từ localStorage để
 // tránh nháy giao diện và để CSS (html[data-mode] / [data-theme] / [data-eligible]) đúng ngay.
 const noFlash = `(function(){var d=document.documentElement;try{
-if(localStorage.getItem('yuzu-theme')==='dark')d.setAttribute('data-theme','dark');
-d.setAttribute('data-mode',localStorage.getItem('yuzu-mode')||'lite');
-d.setAttribute('data-eligible',localStorage.getItem('yuzu-eligible')==='1'?'1':'0');
+if(localStorage.getItem('${STORAGE_KEYS.theme}')==='dark')d.setAttribute('data-theme','dark');
+d.setAttribute('data-mode',localStorage.getItem('${STORAGE_KEYS.mode}')||'lite');
+d.setAttribute('data-eligible',localStorage.getItem('${STORAGE_KEYS.eligible}')==='1'?'1':'0');
 }catch(e){d.setAttribute('data-mode','lite');d.setAttribute('data-eligible','0');}})();`;
 
 export default function RootLayout({

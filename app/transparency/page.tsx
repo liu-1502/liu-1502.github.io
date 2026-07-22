@@ -2,6 +2,7 @@ import Link from "next/link";
 import "./styles.css";
 import TransparencyClient from "./TransparencyClient";
 import { pageMetadata } from "@/lib/pages";
+import Button from "@/components/ui/Button";
 
 export const metadata = pageMetadata("/transparency");
 
@@ -13,7 +14,7 @@ export default function Transparency() {
           <h1>Every dollar, <span className="grad">accounted for</span>.</h1>
           <p className="lede">An independent proof of solvency, live: assets and liabilities across Yuzu Alpha and Prime are attested every 15 minutes by Accountable, a verification network using secure enclaves and zero-knowledge proofs. This page renders their verified feed, position by position.</p>
           <div style={{ display: "flex", gap: 12, marginTop: 26, flexWrap: "wrap" }}>
-            <a className="btn btn-accent" href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">Official Accountable dashboard <span className="arr">↗</span></a>
+            <Button href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">Official Accountable dashboard <span className="arr">↗</span></Button>
           </div>
           <p className="asof">Data snapshot: 2026-07-16 05:03 UTC</p>
         </div>

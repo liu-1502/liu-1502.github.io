@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import { pageMeta } from "@/lib/pages";
+import type { NavItem } from "@/lib/types";
 
 /* Icon set — trước đây nằm trong biến ICONS của app.js. */
 const IconDash = () => (
@@ -49,11 +50,64 @@ const IconDocs = () => (
   </svg>
 );
 
-export default function Sidebar() {
-  const pathname = usePathname();
-  const active = pageMeta(pathname).nav;
-  const on = (nav: string) => `side-item${active === nav ? " on" : ""}`;
+/* Cấu trúc điều hướng — khai báo dữ liệu để dễ thêm/sửa mục về sau. */
+const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
+  {
+    heading: "Products",
+    items: [
+      { nav: "dashboard", label: "Dashboard", href: "/", icon: <IconDash /> },
+      { nav: "alpha", label: "Alpha", href: "/alpha", meta: "7.75-27%" },
+      { nav: "prime", label: "Prime", href: "/prime", meta: "7.00%" },
+      { nav: "mkt", label: "Marketplace", href: "/marketplace", meta: "2 live" },
+    ],
+  },
+  {
+    heading: "Earn",
+    items: [
+      { nav: "opportunities", label: "Opportunities", href: "/opportunities", icon: <IconOpps />, meta: "16 live" },
+      { nav: "points", label: "Points", href: "/points", icon: <IconPoints />, meta: "#95" },
+    ],
+  },
+  {
+    heading: "Protocol",
+    items: [
+      { nav: "transparency", label: "Transparency", href: "/transparency", icon: <IconTransparency /> },
+      { nav: "whitelist", label: "Whitelist", href: "/whitelist", icon: <IconWhitelist /> },
+      { nav: "bridge", label: "Bridge", href: "/bridge", icon: <IconBridge /> },
+      { nav: "docs", label: "Docs", href: "/docs", icon: <IconDocs /> },
+    ],
+  },
+  {
+    heading: "Links",
+    items: [
+      { label: "Research", href: "https://research.yuzu.money/", external: true },
+      { label: "Accountable", href: "https://yuzu.accountable.capital/", external: true },
+      { label: "Telegram", href: "https://t.me/yuzumoney_stats", external: true },
+      { label: "Discord", href: "https://discord.gg/gjKw4KJyu8", external: true },
+    ],
+  },
+];
 
+function SideItem({ item, active }: { item: NavItem; active: string }) {
+  if (item.external) {
+    return (
+      <a className="side-item" href={item.href} target="_blank" rel="noopener">
+        {item.label}
+        <span className="ext">↗</span>
+      </a>
+    );
+  }
+  return (
+    <Link className={`side-item${item.nav === active ? " on" : ""}`} href={item.href}>
+      {item.icon}
+      {item.label}
+      {item.meta && <span className="meta">{item.meta}</span>}
+    </Link>
+  );
+}
+
+export default function Sidebar() {
+  const active = pageMeta(usePathname()).nav;
   return (
     <aside className="side">
       <Link className="brand" href="/">
@@ -65,70 +119,14 @@ export default function Sidebar() {
         Capital preservation first.
       </p>
 
-      <div className="side-group">
-        <h6>Products</h6>
-        <Link className={on("dashboard")} href="/">
-          <IconDash />
-          Dashboard
-        </Link>
-        <Link className={on("alpha")} href="/alpha">
-          Alpha<span className="meta">7.75-27%</span>
-        </Link>
-        <Link className={on("prime")} href="/prime">
-          Prime<span className="meta">7.00%</span>
-        </Link>
-        <Link className={on("mkt")} href="/marketplace">
-          Marketplace<span className="meta">2 live</span>
-        </Link>
-      </div>
-
-      <div className="side-group">
-        <h6>Earn</h6>
-        <Link className={on("opportunities")} href="/opportunities">
-          <IconOpps />
-          Opportunities<span className="meta">16 live</span>
-        </Link>
-        <Link className={on("points")} href="/points">
-          <IconPoints />
-          Points<span className="meta">#95</span>
-        </Link>
-      </div>
-
-      <div className="side-group">
-        <h6>Protocol</h6>
-        <Link className={on("transparency")} href="/transparency">
-          <IconTransparency />
-          Transparency
-        </Link>
-        <Link className={on("whitelist")} href="/whitelist">
-          <IconWhitelist />
-          Whitelist
-        </Link>
-        <Link className={on("bridge")} href="/bridge">
-          <IconBridge />
-          Bridge
-        </Link>
-        <Link className={on("docs")} href="/docs">
-          <IconDocs />
-          Docs
-        </Link>
-      </div>
-
-      <div className="side-group">
-        <h6>Links</h6>
-        <a className="side-item" href="https://research.yuzu.money/" target="_blank" rel="noopener">
-          Research<span className="ext">↗</span>
-        </a>
-        <a className="side-item" href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">
-          Accountable<span className="ext">↗</span>
-        </a>
-        <a className="side-item" href="https://t.me/yuzumoney_stats" target="_blank" rel="noopener">
-          Telegram<span className="ext">↗</span>
-        </a>
-        <a className="side-item" href="https://discord.gg/gjKw4KJyu8" target="_blank" rel="noopener">
-          Discord<span className="ext">↗</span>
-        </a>
-      </div>
+      {NAV_GROUPS.map((group) => (
+        <div className="side-group" key={group.heading}>
+          <h6>{group.heading}</h6>
+          {group.items.map((item) => (
+            <SideItem key={item.label} item={item} active={active} />
+          ))}
+        </div>
+      ))}
 
       <div className="side-foot">
         <span className="live">

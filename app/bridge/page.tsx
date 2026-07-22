@@ -1,6 +1,7 @@
 import "./styles.css";
 import BridgeClient from "./BridgeClient";
 import { pageMetadata } from "@/lib/pages";
+import Button from "@/components/ui/Button";
 
 export const metadata = pageMetadata("/bridge");
 
@@ -66,7 +67,7 @@ export default function Bridge() {
               <div><span className="k">CCIP fee</span><span className="v">Paid in native gas</span></div>
             </div>
 
-            <button className="btn btn-accent btn-block">Connect Wallet</button>
+            <Button block>Connect Wallet</Button>
 
             <div className="lane-note"><span className="pulse"></span>All lanes healthy. Per-lane rate limits enforced onchain.</div>
           </div>

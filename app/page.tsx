@@ -1,6 +1,7 @@
 import Link from "next/link";
 import "./dashboard.css";
 import { pageMetadata } from "@/lib/pages";
+import TokenStrip from "@/components/ui/TokenStrip";
 
 export const metadata = pageMetadata("/");
 
@@ -40,11 +41,7 @@ export default function Dashboard() {
         <div className="prod-rows">
           <Link className="card ticked prod-row alpha" href="/alpha">
             <span className="id">
-              <span className="tk-strip">
-                <img src="/assets/tokens/yzUSD.svg" alt="" />
-                <img src="/assets/tokens/syzUSD.svg" alt="" />
-                <img src="/assets/tokens/yzPP.svg" alt="" />
-              </span>
+              <TokenStrip syms={["yzUSD", "syzUSD", "yzPP"]} />
               <span>
                 <b>Alpha</b>
                 <small>Stablecoin engine · Open</small>
@@ -65,9 +62,7 @@ export default function Dashboard() {
           </Link>
           <Link className="card ticked prod-row prime" href="/prime">
             <span className="id">
-              <span className="tk-strip">
-                <img src="/assets/tokens/yzPrime.svg" alt="" />
-              </span>
+              <TokenStrip syms={["yzPrime"]} />
               <span>
                 <b>Prime</b>
                 <small>Fixed income · Gated KYC</small>
@@ -87,10 +82,7 @@ export default function Dashboard() {
           </Link>
           <Link className="card ticked prod-row mkt" href="/marketplace">
             <span className="id">
-              <span className="tk-strip">
-                <img src="/assets/tokens/yzCash.svg" alt="" />
-                <img src="/assets/tokens/yzSyrup.svg" alt="" />
-              </span>
+              <TokenStrip syms={["yzCash", "yzSyrup"]} />
               <span>
                 <b>Marketplace</b>
                 <small>Curated strategies · Permissionless</small>

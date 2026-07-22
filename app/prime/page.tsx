@@ -1,6 +1,9 @@
 import Link from "next/link";
 import "./styles.css";
 import { pageMetadata } from "@/lib/pages";
+import TokenPill from "@/components/ui/TokenPill";
+import Button from "@/components/ui/Button";
+import SegmentedTabs from "@/components/ui/SegmentedTabs";
 
 export const metadata = pageMetadata("/prime");
 
@@ -12,7 +15,7 @@ export default function Prime() {
           <div className="t">Eligibility verification required</div>
           <div className="d">Minting and redeeming yzPrime is reserved to Accredited, Qualified, Institutional or Sophisticated Investors. Complete identity and Source-of-Funds screening to unlock this desk.</div>
         </div>
-        <button className="btn btn-accent">Verify eligibility <span className="arr">→</span></button>
+        <Button>Verify eligibility <span className="arr">→</span></Button>
       </div>
 
       <div className="app-layout" style={{ paddingTop: 26 }}>
@@ -20,10 +23,14 @@ export default function Prime() {
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
         <div className="xchg rv">
-          <div className="xchg-tabs">
-            <button className="on" data-tab="mint">Mint</button>
-            <button data-tab="redeem">Redeem</button>
-          </div>
+          <SegmentedTabs
+            className="xchg-tabs"
+            attr="data-tab"
+            items={[
+              { id: "mint", label: "Mint" },
+              { id: "redeem", label: "Redeem" },
+            ]}
+          />
 
           <div className="xchg-body" data-panel="mint">
             <div className="xfield">
@@ -33,7 +40,7 @@ export default function Prime() {
               </div>
               <div className="xrow">
                 <input type="text" inputMode="decimal" placeholder="0.00" data-src data-rate="0.9860" aria-label="Amount to deposit"/>
-                <span className="token"><img src="/assets/tokens/usdc.svg" alt=""/>USDC</span>
+                <TokenPill sym="usdc" label="USDC" />
               </div>
               <div className="xusd">≈ $0.00</div>
             </div>
@@ -44,7 +51,7 @@ export default function Prime() {
               <div className="xlabel"><span>You receive</span></div>
               <div className="xrow">
                 <input type="text" placeholder="0.00" data-dst readOnly aria-label="Amount received"/>
-                <span className="token"><img src="/assets/tokens/yzPrime.svg" alt=""/>yzPrime</span>
+                <TokenPill sym="yzPrime" label="yzPrime" />
               </div>
             </div>
 
@@ -55,7 +62,7 @@ export default function Prime() {
               <div><span className="k">Network</span><span className="v">Monad</span></div>
             </div>
 
-            <button className="btn btn-accent btn-block" data-gate-cta disabled>Verify eligibility to mint</button>
+            <Button block data-gate-cta disabled>Verify eligibility to mint</Button>
           </div>
 
           <div className="xchg-body" data-panel="redeem" style={{ display: "none" }}>
@@ -66,7 +73,7 @@ export default function Prime() {
               </div>
               <div className="xrow">
                 <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to redeem"/>
-                <span className="token"><img src="/assets/tokens/yzPrime.svg" alt=""/>yzPrime</span>
+                <TokenPill sym="yzPrime" label="yzPrime" />
               </div>
               <div className="xusd">≈ $0.00</div>
             </div>
@@ -75,14 +82,14 @@ export default function Prime() {
               <div className="xlabel"><span>You receive</span></div>
               <div className="xrow">
                 <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                <span className="token"><img src="/assets/tokens/usdc.svg" alt=""/>USDC</span>
+                <TokenPill sym="usdc" label="USDC" />
               </div>
             </div>
             <div className="xmeta">
               <div><span className="k">Prevailing NAV</span><span className="v">1 yzPrime = $1.01243</span></div>
               <div><span className="k">Settlement</span><span className="v">Per program rules</span></div>
             </div>
-            <button className="btn btn-accent btn-block" data-gate-cta disabled>Verify eligibility to continue</button>
+            <Button block data-gate-cta disabled>Verify eligibility to continue</Button>
           </div>
         </div>
 
@@ -147,7 +154,7 @@ export default function Prime() {
             </div>
           </div>
           <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
-            <Link className="btn btn-line" href="/whitelist">See all whitelisted assets and protocols <span className="arr">→</span></Link>
+            <Button href="/whitelist" variant="line">See all whitelisted assets and protocols <span className="arr">→</span></Button>
           </div>
           <p className="prime-note">Primary minting and redeeming of yzPrime are restricted to Eligible Investors. Yuzu Money may decline, pause or revoke access to remain compliant. Retail users are not eligible to mint, subscribe or redeem yzPrime. Secondary-market activity is not operated by Yuzu and remains subject to third-party venue rules and applicable law.</p>
         </div>

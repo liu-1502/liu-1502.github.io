@@ -2,6 +2,7 @@ import Link from "next/link";
 import "./styles.css";
 import PointsClient from "./PointsClient";
 import { pageMetadata } from "@/lib/pages";
+import Button from "@/components/ui/Button";
 
 export const metadata = pageMetadata("/points");
 
@@ -18,7 +19,7 @@ export default function Points() {
         </div>
         <div className="right">
           <span className="boost-pill" title="Referral boost applied to everything you earn">ACTIVE BOOST <b>+5%</b></span>
-          <Link className="btn btn-accent" href="/opportunities">Earn Juice <span className="arr">→</span></Link>
+          <Button href="/opportunities">Earn Juice <span className="arr">→</span></Button>
         </div>
       </div>
 
