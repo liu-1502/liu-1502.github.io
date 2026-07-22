@@ -68,9 +68,8 @@ scripts/split-bundle.mjs Chỉ dùng để bung lại HTML gốc từ bundle (kh
 
 ## Ghi chú / việc còn lại cho dev
 
-- **Token & chain SVG là placeholder**: các file trong `public/assets/tokens|chains` **không có
-  trong source bundle gốc** (bản HTML gốc để ảnh vỡ). Placeholder tròn có ký hiệu để UI hoàn
-  chỉnh — hãy thay bằng logo thật khi có.
+- **Token & chain SVG**: các file trong `public/assets/tokens|chains` **không có trong source
+  bundle gốc** nên đã được tải lại từ site gốc (`yuzu-v2.vercel.app/assets`) — là **logo thật**.
 - **"Connect Wallet" chỉ là nút tĩnh.** Bước tiếp theo hợp lý: tích hợp web3 (wagmi/viem +
   RainbowKit) rồi nối vào ChainSelector và các nút mint/redeem/stake.
 - Số liệu (TVL, APY, tỉ lệ…) đang **hard-code** như bản gốc — thay bằng dữ liệu thật/API sau.
