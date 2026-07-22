@@ -1,6 +1,9 @@
 import Link from "next/link";
 import "./styles.css";
 import PointsClient from "./PointsClient";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/points");
 
 export default function Points() {
   return (

@@ -8,9 +8,15 @@ bong bóng) và các hành vi tương tác được port từ `app.js` gốc san
 ## Chạy dev
 ```bash
 npm install
-npm run dev
-# http://localhost:3000
+npm run dev            # http://localhost:3000
+npm run lint           # ESLint (next/core-web-vitals)
+npx tsc --noEmit       # typecheck
+npm run build          # production build (đừng chạy khi `npm run dev` đang chạy — chung .next)
 ```
+
+`.eslintrc.json` tắt 2 rule có chủ đích: `@next/next/no-img-element` (token/chain là SVG tĩnh
+của design system, kích thước do CSS gốc quản; `next/image` không phù hợp) và
+`react/no-unescaped-entities` (dấu nháy trong văn bản render đúng, rule chỉ gây nhiễu).
 
 ## Kiến trúc
 
@@ -34,8 +40,9 @@ app/
 
 components/
   Sidebar.tsx           Sidebar + nav active theo route (usePathname).
-  Topbar.tsx            Tiêu đề/crumb theo route + các control:
-                        ModeSwitch (lite/pro), EligibilityToggle, ChainSelector, ThemeToggle.
+  Topbar.tsx            Tiêu đề/crumb theo route + control: ModeSwitch (lite/pro),
+                        EligibilityToggle, ThemeToggle.
+  ChainSelector.tsx     Bộ chọn chain ở topbar (dropdown), state qua localStorage + event.
   LiquidBackground.tsx  Canvas bong bóng (chỉ ở chế độ lite) — port từ initLiquid().
   YuzuClient.tsx        Port hành vi global của app.js sang useEffect: count-up, reveal-on-scroll,
                         tape marquee, exchange tabs, mirror ô nhập số, marketplace filter,
@@ -43,8 +50,10 @@ components/
   Logo.tsx              SVG logo Yuzu.
 
 lib/
-  pages.ts              Map route → { nav, title, crumb, bodyClass }. Nguồn duy nhất cho
-                        nav active, tiêu đề topbar, breadcrumb và class accent.
+  pages.ts              Map route → { nav, title, crumb, bodyClass, metaTitle }. Nguồn duy nhất
+                        cho nav active, tiêu đề topbar, breadcrumb, class accent và <title> mỗi
+                        trang (pageMetadata() dùng trong `export const metadata`).
+  watchVisible.ts       Tiện ích reveal-khi-cuộn dùng chung (YuzuClient + TransparencyClient).
 
 public/assets/          tokens/*.svg, chains/*.svg (placeholder — xem "Ghi chú").
 styles/yuzu.css         Design system GỐC, giữ nguyên bản. Đừng sửa để không lệch UI.

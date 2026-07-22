@@ -1,5 +1,8 @@
 import Link from "next/link";
 import "./dashboard.css";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/");
 
 export default function Dashboard() {
   return (

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import "./styles.css";
 import AlphaClient from "./AlphaClient";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/alpha");
 
 export default function Alpha() {
   return (

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import "./styles.css";
 import DocsClient from "./DocsClient";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/docs");
 
 export default function Docs() {
   return (

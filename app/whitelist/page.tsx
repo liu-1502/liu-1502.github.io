@@ -1,5 +1,8 @@
 import "./styles.css";
 import WhitelistClient from "./WhitelistClient";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/whitelist");
 
 export default function Whitelist() {
   return (

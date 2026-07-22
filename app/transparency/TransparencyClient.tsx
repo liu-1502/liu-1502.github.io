@@ -1,16 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-
-declare global {
-  interface Window {
-    yuzuWatch?: (
-      els: NodeListOf<Element> | Element[],
-      cb: (el: Element) => void,
-      margin?: number
-    ) => void;
-  }
-}
+import { watchVisible } from "@/lib/watchVisible";
 
 export default function TransparencyClient() {
   useEffect(() => {
@@ -175,42 +166,15 @@ export default function TransparencyClient() {
     line("chartRatio", ratio, col("--good"), { min: 100, max: 116 });
     line("chartApy", apy, col("--alpha"), { min: 5, max: 17 });
 
-    /* ---- backing bars ---- */
-    const cleanups: Array<() => void> = [];
+    /* ---- backing bars: reveal widths when scrolled into view ---- */
     const barEls = document.querySelectorAll<HTMLElement>(".bvs-row .bar i");
     const applyBar = (bar: Element) => {
       (bar as HTMLElement).style.width = bar.getAttribute("data-w") || "";
     };
-    if (typeof window !== "undefined" && typeof window.yuzuWatch === "function") {
-      window.yuzuWatch(barEls, applyBar, 30);
-    } else {
-      /* Local fallback mirroring app.js watchVisible (page-specific reveal of backing bars) */
-      const pending = Array.prototype.slice.call(barEls) as Element[];
-      const margin = 30;
-      const onScroll = () => {
-        for (let i = pending.length - 1; i >= 0; i--) {
-          const r = pending[i].getBoundingClientRect();
-          if (r.top < window.innerHeight - margin) {
-            applyBar(pending[i]);
-            pending.splice(i, 1);
-          }
-        }
-        if (!pending.length) {
-          window.removeEventListener("scroll", onScroll);
-          window.removeEventListener("resize", onScroll);
-        }
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll);
-      onScroll();
-      cleanups.push(() => {
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onScroll);
-      });
-    }
+    const stopWatch = watchVisible(barEls, applyBar, 30);
 
     return () => {
-      cleanups.forEach((fn) => fn());
+      stopWatch();
     };
   }, []);
 

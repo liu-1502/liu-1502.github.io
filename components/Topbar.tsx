@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { pageMeta } from "@/lib/pages";
+import ChainSelector from "./ChainSelector";
 
 /* ---------- mode lite / pro ---------- */
 function ModeSwitch() {
@@ -61,95 +62,6 @@ function EligibilityToggle() {
     >
       <i>&#10003;</i>ELIGIBLE
     </button>
-  );
-}
-
-/* ---------- chain selector ---------- */
-type Chain = { id: string; name: string; img?: string; letter?: string };
-const CHAINS: Chain[] = [
-  { id: "all", name: "All chains" },
-  { id: "plasma", name: "Plasma", img: "/assets/chains/plasma.svg" },
-  { id: "monad", name: "Monad", img: "/assets/chains/monad.svg" },
-  { id: "ethereum", name: "Ethereum", img: "/assets/chains/ethereum.svg" },
-  { id: "sei", name: "SEI EVM", letter: "S" },
-];
-
-const Globe = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-    <circle cx="12" cy="12" r="8.5" />
-    <path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z" />
-  </svg>
-);
-
-function ChainIcon({ c }: { c: Chain }) {
-  if (c.img) return <img src={c.img} alt="" />;
-  if (c.letter) return <i className="ch-l">{c.letter}</i>;
-  return <Globe />;
-}
-
-function ChainSelector() {
-  const [cur, setCur] = useState("all");
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let c = "all";
-    try {
-      c = localStorage.getItem("yuzu-chain") || "all";
-    } catch {}
-    if (!CHAINS.some((x) => x.id === c)) c = "all";
-    setCur(c);
-  }, []);
-
-  useEffect(() => {
-    const close = () => setOpen(false);
-    document.addEventListener("click", close);
-    return () => document.removeEventListener("click", close);
-  }, []);
-
-  const pick = (id: string) => {
-    setCur(id);
-    try {
-      localStorage.setItem("yuzu-chain", id);
-    } catch {}
-    setOpen(false);
-    document.dispatchEvent(new CustomEvent("yuzu-chain", { detail: { chain: id } }));
-  };
-
-  const current = CHAINS.find((x) => x.id === cur) || CHAINS[0];
-
-  return (
-    <div className={`chain-sel${open ? " open" : ""}`} ref={ref}>
-      <button
-        className="chain-btn"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        onClick={(e) => {
-          e.stopPropagation();
-          setOpen((v) => !v);
-        }}
-      >
-        <ChainIcon c={current} />
-        <span>{current.name}</span>
-        <b className="caret">&#9662;</b>
-      </button>
-      <div className="chain-menu" role="listbox">
-        {CHAINS.map((x) => (
-          <button
-            key={x.id}
-            role="option"
-            className={x.id === cur ? "on" : ""}
-            onClick={(e) => {
-              e.stopPropagation();
-              pick(x.id);
-            }}
-          >
-            <ChainIcon c={x} />
-            <span>{x.name}</span>
-          </button>
-        ))}
-      </div>
-    </div>
   );
 }
 

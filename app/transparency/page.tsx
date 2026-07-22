@@ -1,6 +1,9 @@
 import Link from "next/link";
 import "./styles.css";
 import TransparencyClient from "./TransparencyClient";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/transparency");
 
 export default function Transparency() {
   return (
@@ -76,7 +79,7 @@ export default function Transparency() {
       <section className="section rv pro-only">
         <div className="section-head">
           <h2>Realized APY</h2>
-          <a href="/docs#epochs">How targets work →</a>
+          <Link href="/docs#epochs">How targets work →</Link>
         </div>
         <div className="card tp-panel" style={{ margin: 0 }}>
           <table className="apy-table">
@@ -195,7 +198,7 @@ export default function Transparency() {
       <section className="section rv pro-only">
         <div className="section-head">
           <h2>Custody policy, verified</h2>
-          <a href="/docs#security">Security stack →</a>
+          <Link href="/docs#security">Security stack →</Link>
         </div>
         <div className="two-col">
           <div className="card tp-panel" style={{ margin: 0 }}>

@@ -1,5 +1,8 @@
 import "./styles.css";
 import BridgeClient from "./BridgeClient";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/bridge");
 
 export default function Bridge() {
   return (

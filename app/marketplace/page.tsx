@@ -1,5 +1,8 @@
 import Link from "next/link";
 import "./styles.css";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/marketplace");
 
 export default function Marketplace() {
   return (

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { pageMeta } from "@/lib/pages";
+import { watchVisible } from "@/lib/watchVisible";
 
 /**
  * Các hành vi thao tác trên nội dung trang — port từ app.js. Chạy lại mỗi khi
@@ -23,43 +24,10 @@ export default function YuzuClient() {
     // Class accent trên body theo trang hiện tại.
     document.body.className = pageMeta(pathname).bodyClass || "";
 
-    /* ---------- visibility engine (scroll-based) ---------- */
-    function watchVisible(els: NodeListOf<Element> | Element[], cb: (el: Element) => void, margin = 60) {
-      const pending: Element[] = [];
-      els.forEach((el) => pending.push(el));
-      if (!pending.length) return;
-      let ticking = false;
-      const run = () => {
-        ticking = false;
-        for (let i = pending.length - 1; i >= 0; i--) {
-          const el = pending[i];
-          const r = el.getBoundingClientRect();
-          if (r.top < window.innerHeight - margin) {
-            pending.splice(i, 1);
-            cb(el);
-          }
-        }
-        if (!pending.length) teardown();
-      };
-      const onScroll = () => {
-        if (ticking) return;
-        ticking = true;
-        setTimeout(run, 40);
-      };
-      const poll = setInterval(run, 350);
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll);
-      const teardown = () => {
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onScroll);
-        clearInterval(poll);
-      };
-      cleanups.push(teardown);
-      run();
-    }
-
     /* ---------- reveal on scroll ---------- */
-    watchVisible(document.querySelectorAll(".rv"), (el) => el.classList.add("in"), 40);
+    cleanups.push(
+      watchVisible(document.querySelectorAll(".rv"), (el) => el.classList.add("in"), 40)
+    );
 
     /* ---------- count-up numbers ---------- */
     const countEls = document.querySelectorAll("[data-count]");
@@ -89,7 +57,7 @@ export default function YuzuClient() {
         }, 24);
         cleanups.push(() => clearInterval(timer));
       };
-      watchVisible(countEls, animate, 30);
+      cleanups.push(watchVisible(countEls, animate, 30));
     }
 
     /* ---------- tape marquee ---------- */

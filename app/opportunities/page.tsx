@@ -1,5 +1,8 @@
 import "./styles.css";
 import OpportunitiesClient from "./OpportunitiesClient";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/opportunities");
 
 export default function Opportunities() {
   return (

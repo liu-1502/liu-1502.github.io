@@ -1,4 +1,7 @@
 import "./styles.css";
+import { pageMetadata } from "@/lib/pages";
+
+export const metadata = pageMetadata("/vault-yzcash");
 
 export default function VaultYzcash() {
   return (
