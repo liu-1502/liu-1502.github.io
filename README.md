@@ -31,9 +31,9 @@ app/
   marketplace/          "/marketplace"
   opportunities/        "/opportunities" (+ OpportunitiesClient.tsx)
   points/               "/points"        (+ PointsClient.tsx)
-  transparency/         "/transparency"  (+ TransparencyClient.tsx)
+  transparency/         "/transparency"  (data.ts + parts.tsx render thuần; TransparencyClient = reveal bar)
   whitelist/            "/whitelist"     (+ WhitelistClient.tsx)
-  bridge/               "/bridge"        (+ BridgeClient.tsx)
+  bridge/               "/bridge"        (BridgeExchange.tsx — widget bridge stateful React thuần)
   docs/                 "/docs"          (+ DocsClient.tsx)
   vault/                "/vault"       (yzSyrup)
   vault-yzcash/         "/vault-yzcash" (yzCash)

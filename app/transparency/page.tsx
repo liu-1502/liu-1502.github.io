@@ -3,6 +3,21 @@ import "./styles.css";
 import TransparencyClient from "./TransparencyClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
+import { SplitTable, WalletList, ChartLines } from "./parts";
+import {
+  ALPHA_SPLIT,
+  PRIME_SPLIT,
+  ALPHA_CHAINS,
+  PRIME_CHAINS,
+  ALPHA_WALLETS,
+  PRIME_WALLETS,
+  reserves,
+  supply,
+  ratio,
+  apy,
+  assetsMin,
+  assetsMax,
+} from "./data";
 
 export const metadata = pageMetadata("/transparency");
 
@@ -58,19 +73,32 @@ export default function Transparency() {
           <div className="card chart-card">
             <h4>Backing assets vs supply</h4>
             <div className="cv" style={{ color: "var(--alpha)" }}>$49.38M <span style={{ color: "var(--faint)", fontSize: 12 }}>vs $44.55M</span></div>
-            <svg id="chartAssets" viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="Backing assets and supply over time"></svg>
+            <svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="Backing assets and supply over time">
+              <ChartLines
+                series={[
+                  { values: reserves, color: "var(--alpha)" },
+                  { values: supply, color: "var(--faint)" },
+                ]}
+                min={assetsMin}
+                max={assetsMax}
+              />
+            </svg>
             <div className="xlab"><span>OCT 15</span><span>JAN</span><span>APR</span><span>JUL 15</span></div>
           </div>
           <div className="card chart-card">
             <h4>Collateral ratio</h4>
             <div className="cv" style={{ color: "var(--good)" }}>110.82%</div>
-            <svg id="chartRatio" viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="Collateral ratio over time"></svg>
+            <svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="Collateral ratio over time">
+              <ChartLines series={[{ values: ratio, color: "var(--good)" }]} min={100} max={116} />
+            </svg>
             <div className="xlab"><span>OCT 15</span><span>JAN</span><span>APR</span><span>JUL 15</span></div>
           </div>
           <div className="card chart-card">
             <h4>syzUSD weekly target APY</h4>
             <div className="cv" style={{ color: "var(--alpha)" }}>7.75%</div>
-            <svg id="chartApy" viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="syzUSD weekly target APY over time"></svg>
+            <svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="syzUSD weekly target APY over time">
+              <ChartLines series={[{ values: apy, color: "var(--alpha)" }]} min={5} max={17} />
+            </svg>
             <div className="xlab"><span>OCT 15</span><span>JAN</span><span>APR</span><span>JUL 15</span></div>
           </div>
         </div>
@@ -135,7 +163,7 @@ export default function Transparency() {
             <span className="chip open">Whitelist bound</span>
           </div>
           <p style={{ fontSize: "12.5px", color: "var(--muted)", lineHeight: 1.6, margin: "0 0 8px", maxWidth: "70ch" }}>Every position backing Alpha, as attested on 2026-07-16. Names map to entries on the <Link href="/whitelist" style={{ color: "var(--citrus)" }}>public whitelist</Link>; "Loop" positions are leveraged deployments in isolated markets.</p>
-          <table className="split-table" id="alphaSplit"></table>
+          <SplitTable rows={ALPHA_SPLIT} colorVar="--alpha" />
         </div>
 
         <div className="card tp-panel pro-only">
@@ -143,7 +171,7 @@ export default function Transparency() {
             <h3>Backing by chain</h3>
           </div>
           <div className="two-col">
-            <table className="split-table" id="alphaChains"></table>
+            <SplitTable rows={ALPHA_CHAINS} colorVar="--alpha" />
             <div>
               <p style={{ fontSize: "12.5px", color: "var(--muted)", lineHeight: 1.6, margin: "0 0 12px" }}>Backing assets are deployed across 8+ chains, while all yzUSD supply lives on Plasma. The verification feed reads every chain independently.</p>
               <div className="tp-grid" style={{ gridTemplateColumns: "1fr 1fr" }}>
@@ -187,10 +215,10 @@ export default function Transparency() {
 
           <div className="pro-only">
             <div className="phead" style={{ marginTop: 26 }}><h3>Strategy breakdown</h3></div>
-            <table className="split-table" id="primeSplit"></table>
+            <SplitTable rows={PRIME_SPLIT} colorVar="--prime" />
 
             <div className="phead" style={{ marginTop: 26 }}><h3>Backing by chain</h3></div>
-            <table className="split-table" id="primeChains"></table>
+            <SplitTable rows={PRIME_CHAINS} colorVar="--prime" />
           </div>
         </div>
       </section>
@@ -235,11 +263,11 @@ export default function Transparency() {
         <div className="two-col">
           <div className="card tp-panel" style={{ margin: 0 }}>
             <div className="phead"><h3>Alpha wallets</h3><span className="chip plain">15 tracked</span></div>
-            <div className="wl-list" id="alphaWallets"></div>
+            <WalletList wallets={ALPHA_WALLETS} />
           </div>
           <div className="card tp-panel" style={{ margin: 0 }}>
             <div className="phead"><h3>Prime wallets</h3><span className="chip plain">7 tracked</span></div>
-            <div className="wl-list" id="primeWallets"></div>
+            <WalletList wallets={PRIME_WALLETS} />
             <div className="phead" style={{ marginTop: 22 }}><h3>Core contracts</h3></div>
             <div className="wl-list">
               <a href="https://plasmascan.to/token/0x6695c0f8706c5ace3bdf8995073179cca47926dc" target="_blank" rel="noopener"><span className="wname">yzUSD, Plasma</span><span className="addr">0x6695...26dc ↗</span></a>
