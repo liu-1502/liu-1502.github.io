@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
@@ -50,10 +50,15 @@ const IconDocs = () => (
     <path d="M14.5 3.5V8H19M9 12h6M9 15.5h6" />
   </svg>
 );
+const IconCaret = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+    <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
 /* Điều hướng khai báo bằng dữ liệu.
    - Cấp 1: mục có icon, canh thẳng với logo.
-   - Cấp 2 (children): Alpha/Prime/Marketplace nằm dưới Dashboard, thụt vào rail. */
+   - Cấp 2 (children): Alpha/Prime/Marketplace nằm dưới Dashboard (thu gọn được). */
 const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
   {
     heading: "Products",
@@ -109,12 +114,7 @@ function SideItem({ item, active, level2 }: { item: NavItem; active: string; lev
     );
   }
   return (
-    <Link
-      className={cls}
-      href={item.href}
-      data-nav={item.nav}
-      aria-current={item.nav === active ? "page" : undefined}
-    >
+    <Link className={cls} href={item.href} data-nav={item.nav} aria-current={item.nav === active ? "page" : undefined}>
       {item.icon}
       {item.label}
       {item.meta && <span className="meta">{item.meta}</span>}
@@ -122,8 +122,54 @@ function SideItem({ item, active, level2 }: { item: NavItem; active: string; lev
   );
 }
 
+/* Mục cấp 1 có mục con: hàng gồm link (điều hướng) + nút chevron (thu gọn/mở). */
+function ParentItem({
+  item,
+  active,
+  open,
+  onToggle,
+}: {
+  item: NavItem;
+  active: string;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  const isActive = item.nav === active;
+  const subId = `side-sub-${item.nav}`;
+  return (
+    <>
+      <div className={`side-item side-parent${isActive ? " on" : ""}`} data-open={open}>
+        <Link className="side-parent-link" href={item.href} data-nav={item.nav} aria-current={isActive ? "page" : undefined}>
+          {item.icon}
+          {item.label}
+        </Link>
+        <button
+          type="button"
+          className="side-caret"
+          aria-label={`${open ? "Collapse" : "Expand"} ${item.label}`}
+          aria-expanded={open}
+          aria-controls={subId}
+          onClick={onToggle}
+        >
+          <IconCaret />
+        </button>
+      </div>
+      {open && item.children && (
+        <div className="side-sub" id={subId}>
+          {item.children.map((child) => (
+            <SideItem key={child.label} item={child} active={active} level2 />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
 export default function Sidebar() {
   const active = pageMeta(usePathname()).nav;
+  const [openMap, setOpenMap] = useState<Record<string, boolean>>({ dashboard: true });
+  const toggle = (key: string) => setOpenMap((m) => ({ ...m, [key]: !m[key] }));
+
   return (
     <aside className="side">
       <Link className="brand" href="/">
@@ -138,18 +184,21 @@ export default function Sidebar() {
       {NAV_GROUPS.map((group) => (
         <div className="side-group" key={group.heading}>
           <h6>{group.heading}</h6>
-          {group.items.map((item) => (
-            <Fragment key={item.label}>
-              <SideItem item={item} active={active} />
-              {item.children && (
-                <div className="side-sub">
-                  {item.children.map((child) => (
-                    <SideItem key={child.label} item={child} active={active} level2 />
-                  ))}
-                </div>
-              )}
-            </Fragment>
-          ))}
+          {group.items.map((item) =>
+            item.children ? (
+              <ParentItem
+                key={item.label}
+                item={item}
+                active={active}
+                open={!!openMap[item.nav ?? item.label]}
+                onToggle={() => toggle(item.nav ?? item.label)}
+              />
+            ) : (
+              <Fragment key={item.label}>
+                <SideItem item={item} active={active} />
+              </Fragment>
+            )
+          )}
         </div>
       ))}
 

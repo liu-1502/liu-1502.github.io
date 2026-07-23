@@ -1,11 +1,50 @@
 /* ================================================================
-   Sidebar · mục cấp 2 (Alpha / Prime / Marketplace) nằm dưới Dashboard.
-   Nạp SAU yuzu.css. Cấp 1 (Dashboard, Opportunities, ...) và các section
-   header (Products/Earn/...) vẫn dùng nguyên style .side-group/.side-item
-   trong yuzu.css — canh thẳng với logo Yuzu như bản trước.
-   Chỉ cấp 2 được thụt vào dưới một rail dọc.
+   Sidebar · tinh chỉnh trên nền .side-group/.side-item (yuzu.css)
+   - Bỏ divider kẻ ngang giữa các nhóm, phân tách bằng khoảng cách.
+   - Dashboard có chevron thu gọn/mở nhóm con.
+   - Cấp 2 (Alpha/Prime/Marketplace) thụt vào dưới rail dọc.
+   Nạp SAU yuzu.css.
    ================================================================ */
 
+/* ---- Bỏ divider + căn spacing (tham khảo layout gọn, tách bằng khoảng trắng) ---- */
+.side-group {
+  border-top: none;
+  margin-top: 18px;
+  padding-top: 0;
+}
+.side-group:first-of-type { margin-top: 6px; }
+.side-group h6 { margin: 0 0 8px; }
+
+/* ---- Cấp 1 có mục con: hàng link + chevron ---- */
+.side-parent { padding-right: 6px; }
+.side-parent-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+.side-caret {
+  all: unset;
+  flex: none;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  color: var(--faint);
+}
+.side-caret:hover { color: var(--text); background: color-mix(in srgb, var(--text) 8%, transparent); }
+.side-caret:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.side-caret svg { width: 14px; height: 14px; opacity: 1; transition: transform .2s ease; }
+.side-parent[data-open="true"] .side-caret svg { transform: rotate(180deg); }
+
+/* ---- Cấp 2 (Alpha/Prime/Marketplace) dưới rail ---- */
 .side-sub {
   margin: 2px 0 4px 16px;
   padding-left: 11px;
@@ -13,16 +52,14 @@
   display: flex;
   flex-direction: column;
 }
-
-/* Mục cấp 2: không icon, canh chữ đều dưới nhãn của mục cấp 1. */
 .side-item.lvl2 { padding-left: 10px; }
-
-/* Thanh chỉ báo active của cấp 2 nằm ĐÈ lên rail (không lệch ra mép trái). */
 .side-item.lvl2.on::before { left: -12px; }
 
-/* Mobile: phẳng thành thanh ngang — cho mục cấp 2 nhập vào hàng như cấp 1. */
+/* ---- Mobile: phẳng thành thanh ngang ---- */
 @media (max-width: 940px) {
-  .side-sub {
-    display: contents;
-  }
+  .side-group { margin-top: 0; }
+  .side-parent { padding-right: 10px; }
+  .side-caret { display: none; }
+  .side-parent-link { flex: 0 0 auto; }
+  .side-sub { display: contents; }
 }
