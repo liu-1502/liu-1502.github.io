@@ -139,11 +139,6 @@ export default function Sidebar() {
         <Logo />
         Yuzu <small>App</small>
       </Link>
-      <p className="side-tag">
-        Risk-curated onchain strategies, packaged as structured yield products.
-        Capital preservation first.
-      </p>
-
       {NAV_GROUPS.map((group) => (
         <div className="side-group" key={group.heading}>
           <h6>{group.heading}</h6>
