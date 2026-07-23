@@ -7,7 +7,7 @@
    ================================================================ */
 
 /* ---- Logo Yuzu (mark + wordmark) ---- */
-.side .brand svg { width: auto; height: 40px; }
+.side .brand svg { width: auto; height: 32px; }
 /* Chỉ quả chanh (mark) squeeze khi hover; chữ "Yuzu" đứng yên. */
 .brand:hover svg { animation: none; }
 .brand .logo-mark { transform-box: fill-box; transform-origin: center; }
