@@ -1,19 +1,22 @@
 /* ================================================================
-   Sidebar · tinh chỉnh trên nền .side-group/.side-item (yuzu.css)
-   - Bỏ divider kẻ ngang giữa các nhóm, phân tách bằng khoảng cách.
-   - Dashboard có chevron thu gọn/mở nhóm con.
-   - Cấp 2 (Alpha/Prime/Marketplace) thụt vào dưới rail dọc.
+   Sidebar · spacing + hỗ trợ mục cấp 2 (giữ sẵn cho tương lai)
    Nạp SAU yuzu.css.
+   - Bỏ divider kẻ ngang; tách section bằng khoảng cách.
+   - Item (feature) gọn hơn.
+   - Cấu trúc cấp 2: thêm `children` vào một NavItem là tự render chevron + rail.
    ================================================================ */
 
-/* ---- Bỏ divider + căn spacing (tham khảo layout gọn, tách bằng khoảng trắng) ---- */
+/* ---- Bỏ divider + spacing giữa các section ---- */
 .side-group {
   border-top: none;
-  margin-top: 18px;
+  margin-top: 20px;
   padding-top: 0;
 }
-.side-group:first-of-type { margin-top: 6px; }
-.side-group h6 { margin: 0 0 8px; }
+.side-group:first-of-type { margin-top: 8px; }
+.side-group h6 { margin: 0 0 6px; }
+
+/* ---- Item gọn hơn ---- */
+.side-item { padding-top: 7px; padding-bottom: 7px; margin-bottom: 1px; }
 
 /* ---- Cấp 1 có mục con: hàng link + chevron ---- */
 .side-parent { padding-right: 6px; }
@@ -41,10 +44,10 @@
 }
 .side-caret:hover { color: var(--text); background: color-mix(in srgb, var(--text) 8%, transparent); }
 .side-caret:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-.side-caret svg { width: 14px; height: 14px; opacity: 1; transition: transform .2s ease; }
+.side-caret svg { width: 14px; height: 14px; transition: transform .2s ease; }
 .side-parent[data-open="true"] .side-caret svg { transform: rotate(180deg); }
 
-/* ---- Cấp 2 (Alpha/Prime/Marketplace) dưới rail ---- */
+/* ---- Cấp 2 dưới rail dọc ---- */
 .side-sub {
   margin: 2px 0 4px 16px;
   padding-left: 11px;

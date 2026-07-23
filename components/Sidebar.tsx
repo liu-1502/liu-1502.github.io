@@ -56,24 +56,17 @@ const IconCaret = () => (
   </svg>
 );
 
-/* Điều hướng khai báo bằng dữ liệu.
-   - Cấp 1: mục có icon, canh thẳng với logo.
-   - Cấp 2 (children): Alpha/Prime/Marketplace nằm dưới Dashboard (thu gọn được). */
+/* Điều hướng khai báo bằng dữ liệu. Tất cả đang là cấp 1 (canh thẳng với logo).
+   Cấu trúc cấp 2 vẫn được hỗ trợ sẵn: chỉ cần thêm `children: [...]` vào một mục
+   thì nó tự render kiểu thu gọn/mở (chevron + rail) — xem ParentItem bên dưới. */
 const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
   {
     heading: "Products",
     items: [
-      {
-        nav: "dashboard",
-        label: "Dashboard",
-        href: "/",
-        icon: <IconDash />,
-        children: [
-          { nav: "alpha", label: "Alpha", href: "/alpha", meta: "7.75-27%" },
-          { nav: "prime", label: "Prime", href: "/prime", meta: "7.00%" },
-          { nav: "mkt", label: "Marketplace", href: "/marketplace", meta: "2 live" },
-        ],
-      },
+      { nav: "dashboard", label: "Dashboard", href: "/", icon: <IconDash /> },
+      { nav: "alpha", label: "Alpha", href: "/alpha", meta: "7.75-27%" },
+      { nav: "prime", label: "Prime", href: "/prime", meta: "7.00%" },
+      { nav: "mkt", label: "Marketplace", href: "/marketplace", meta: "2 live" },
     ],
   },
   {
@@ -167,7 +160,16 @@ function ParentItem({
 
 export default function Sidebar() {
   const active = pageMeta(usePathname()).nav;
-  const [openMap, setOpenMap] = useState<Record<string, boolean>>({ dashboard: true });
+  // Mục nào có children thì mặc định mở sẵn (hiện chưa dùng — giữ cho tính năng level-2 sau này).
+  const [openMap, setOpenMap] = useState<Record<string, boolean>>(() => {
+    const init: Record<string, boolean> = {};
+    NAV_GROUPS.forEach((g) =>
+      g.items.forEach((it) => {
+        if (it.children && it.nav) init[it.nav] = true;
+      })
+    );
+    return init;
+  });
   const toggle = (key: string) => setOpenMap((m) => ({ ...m, [key]: !m[key] }));
 
   return (
