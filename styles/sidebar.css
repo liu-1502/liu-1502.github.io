@@ -1,109 +1,28 @@
 /* ================================================================
-   Sidebar · điều hướng 2 cấp (thay cho layout .side-item phẳng)
-   Nạp SAU yuzu.css. Desktop: nhóm thu gọn được (icon + tên + chevron)
-   với mục con nằm dưới một rail dọc; Mobile (<=940px): phẳng thành
-   thanh ngang như hành vi responsive sẵn có của app.
+   Sidebar · mục cấp 2 (Alpha / Prime / Marketplace) nằm dưới Dashboard.
+   Nạp SAU yuzu.css. Cấp 1 (Dashboard, Opportunities, ...) và các section
+   header (Products/Earn/...) vẫn dùng nguyên style .side-group/.side-item
+   trong yuzu.css — canh thẳng với logo Yuzu như bản trước.
+   Chỉ cấp 2 được thụt vào dưới một rail dọc.
    ================================================================ */
 
-.side .nav { display: flex; flex-direction: column; gap: 2px; }
-
-/* ---- Cấp 1: nhóm ---- */
-.nav-parent {
-  all: unset;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: var(--r-sm);
-  cursor: pointer;
-  color: var(--muted);
-  font-family: var(--font-display);
-  font-size: 12.5px;
-  font-weight: 600;
-  transition: color .15s ease, background .15s ease;
-}
-.nav-parent:hover { color: var(--text); background: var(--surface-2); }
-.nav-parent:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-.nav-parent-icon { display: inline-flex; }
-.nav-parent-icon svg { width: 16px; height: 16px; opacity: .75; }
-.nav-parent-label { flex: 1; text-align: left; }
-.nav-caret { width: 13px; height: 13px; color: var(--faint); transition: transform .2s ease; }
-.nav-group[data-open="true"] .nav-caret { transform: rotate(180deg); }
-
-/* ---- Cấp 2: mục con dưới rail dọc ---- */
-.nav-children {
-  margin: 2px 0 6px 17px;
-  padding-left: 13px;
+.side-sub {
+  margin: 2px 0 4px 16px;
+  padding-left: 11px;
   border-left: 1px solid var(--line-solid);
   display: flex;
   flex-direction: column;
-  gap: 1px;
 }
-.nav-group[data-open="false"] .nav-children { display: none; }
 
-.nav-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 8px;
-  border-radius: var(--r-sm);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-  transition: color .15s ease, background .15s ease;
-}
-.nav-item:hover { color: var(--text); background: var(--surface-2); }
-.nav-item.on { color: var(--text); background: var(--surface-2); font-weight: 600; }
-/* thanh chỉ báo active nằm trên rail */
-.nav-item.on::before {
-  content: "";
-  position: absolute;
-  left: -13px;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  border-radius: 2px;
-  background: var(--side-accent, var(--citrus));
-}
-.nav-item .meta,
-.nav-item .ext {
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--faint);
-  font-variant-numeric: tabular-nums;
-}
-.nav-item.on .meta { color: var(--side-accent, var(--citrus)); }
+/* Mục cấp 2: không icon, canh chữ đều dưới nhãn của mục cấp 1. */
+.side-item.lvl2 { padding-left: 10px; }
 
-/* Accent theo sản phẩm (Alpha / Prime / Marketplace) */
-.nav-item[data-nav="alpha"] { --side-accent: var(--alpha); }
-.nav-item[data-nav="prime"] { --side-accent: var(--prime); }
-.nav-item[data-nav="mkt"]   { --side-accent: var(--mkt); }
-.nav-item[data-nav="alpha"]:hover, .nav-item[data-nav="alpha"].on { color: var(--alpha); }
-.nav-item[data-nav="prime"]:hover, .nav-item[data-nav="prime"].on { color: var(--prime); }
-.nav-item[data-nav="mkt"]:hover,   .nav-item[data-nav="mkt"].on   { color: var(--mkt); }
-.nav-item[data-nav="alpha"].on { background: color-mix(in srgb, var(--alpha) 12%, transparent); }
-.nav-item[data-nav="prime"].on { background: color-mix(in srgb, var(--prime) 12%, transparent); }
-.nav-item[data-nav="mkt"].on   { background: color-mix(in srgb, var(--mkt) 12%, transparent); }
+/* Thanh chỉ báo active của cấp 2 nằm ĐÈ lên rail (không lệch ra mép trái). */
+.side-item.lvl2.on::before { left: -12px; }
 
-/* ---- Mobile: phẳng thành thanh ngang ---- */
+/* Mobile: phẳng thành thanh ngang — cho mục cấp 2 nhập vào hàng như cấp 1. */
 @media (max-width: 940px) {
-  .side .nav { flex-direction: row; gap: 4px; }
-  .nav-group { display: contents; }
-  .nav-parent { display: none; }
-  .nav-children {
-    display: flex !important;
-    flex-direction: row;
-    margin: 0;
-    padding: 0;
-    border-left: none;
-    gap: 4px;
+  .side-sub {
+    display: contents;
   }
-  .nav-item { padding: 7px 10px; white-space: nowrap; }
-  .nav-item.on::before { display: none; }
-  .nav-item .meta { display: none; }
 }

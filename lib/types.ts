@@ -22,4 +22,6 @@ export type NavItem = {
   meta?: string;
   /** Link ngoài → render <a target=_blank> kèm mũi tên ↗. */
   external?: boolean;
+  /** Mục con cấp 2 (thụt vào dưới rail) — vd Alpha/Prime/Marketplace dưới Dashboard. */
+  children?: NavItem[];
 };
