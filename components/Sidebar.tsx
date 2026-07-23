@@ -137,7 +137,7 @@ export default function Sidebar() {
     <aside className="side">
       <Link className="brand" href="/">
         <Logo />
-        Yuzu <small>App</small>
+        Yuzu
       </Link>
       {NAV_GROUPS.map((group) => (
         <div className="side-group" key={group.heading}>

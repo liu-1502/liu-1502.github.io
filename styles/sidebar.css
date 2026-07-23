@@ -6,6 +6,10 @@
    - Cấu trúc cấp 2: thêm `children` vào một NavItem là tự render chevron + rail.
    ================================================================ */
 
+/* ---- Logo Yuzu: màu mặc định = gradient logo Yuzu Base (#6BCF13 → #FDD447) ---- */
+.brand .mark,
+.brand:hover .mark { fill: url(#yuzuLogoGradient); }
+
 /* ---- Bỏ divider + spacing giữa các section ---- */
 .side-group {
   border-top: none;
