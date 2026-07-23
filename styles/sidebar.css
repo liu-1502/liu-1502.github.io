@@ -6,8 +6,15 @@
    - Cấu trúc cấp 2: thêm `children` vào một NavItem là tự render chevron + rail.
    ================================================================ */
 
-/* ---- Logo Yuzu (mark + wordmark): set theo chiều cao, tự co chiều ngang ---- */
-.side .brand svg { width: auto; height: 30px; }
+/* ---- Logo Yuzu (mark + wordmark) ---- */
+.side .brand svg { width: auto; height: 40px; }
+/* Chỉ quả chanh (mark) squeeze khi hover; chữ "Yuzu" đứng yên. */
+.brand:hover svg { animation: none; }
+.brand .logo-mark { transform-box: fill-box; transform-origin: center; }
+.brand:hover .logo-mark { animation: squeeze .55s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .brand:hover .logo-mark { animation: none; }
+}
 
 /* ---- Bỏ divider + spacing giữa các section ---- */
 .side-group {
