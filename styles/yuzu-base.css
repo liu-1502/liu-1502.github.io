@@ -1,0 +1,201 @@
+/* ================================================================
+   Yuzu Base  ·  Design System #2   (nguồn: Figma "01_Yuzu Base")
+   ----------------------------------------------------------------
+   Đây là design system THỨ HAI, tách biệt hoàn toàn với design
+   system hiện hành (styles/yuzu.css = "Yuzu Money DS v1", warm-black
+   citrus). Toàn bộ token đặt tiền tố --yb-* để không đụng DS v1.
+
+   ⚠ FILE NÀY CHƯA ĐƯỢC IMPORT Ở ĐÂU → giao diện hiện tại KHÔNG đổi.
+     Khi có lệnh "áp dụng DS này", mới import ở app/layout.tsx và
+     map component sang các token/utility --yb-*.
+
+   Font: Inter (cần nạp khi áp dụng — hiện app dùng Bricolage/Instrument/Geist).
+   Xem tài liệu: docs/design-system-yuzu-base.md
+   ================================================================ */
+
+:root {
+  /* ---------------- 01_Foundation · Neutral ---------------- */
+  --yb-neutral-50: #fafafa;
+  --yb-neutral-100: #f5f5f5;
+  --yb-neutral-200: #e5e5e5;
+  --yb-neutral-300: #d4d4d4;
+  --yb-neutral-400: #a3a3a3;
+  --yb-neutral-500: #737373;
+  --yb-neutral-600: #525252;
+  --yb-neutral-700: #404040;
+  --yb-neutral-800: #262626;
+  --yb-neutral-900: #1a1a1a;
+
+  /* ---------------- 01_Foundation · Base ---------------- */
+  --yb-white: #ffffff;
+  --yb-black: #000000;
+
+  /* ---------------- 01_Foundation · Bordeaux (đỏ/nguy hiểm) ----------------
+     Lưu ý: dữ liệu Figma có 400 (#E54D50) đậm hơn 500 (#E96A6C) — giữ nguyên bản. */
+  --yb-bordeaux-100: #f8d3d3;
+  --yb-bordeaux-200: #f2a6a7;
+  --yb-bordeaux-300: #eb7a7c;
+  --yb-bordeaux-400: #e54d50;
+  --yb-bordeaux-500: #e96a6c;
+  --yb-bordeaux-600: #b21a1d;
+  --yb-bordeaux-700: #851416;
+  --yb-bordeaux-800: #590d0e;
+  --yb-bordeaux-900: #2c0707;
+
+  /* ---------------- 01_Foundation · Green_Yuzu (brand) ----------------
+     ⚠ THANG NÀY KHÔNG CÓ GIÁ TRỊ HEX trong file trích xuất; chỉ có alias
+     (Green_Yuzu/100, /500, /900). Giá trị dưới là TẠM SUY từ gradient
+     Logo/brand — CẦN THAY BẰNG HEX CHÍNH XÁC TỪ FIGMA trước khi dùng thật. */
+  --yb-green-100: #e5fdca; /* ⚠ tạm (khớp card-bg gradient start) */
+  --yb-green-500: #6bcf13; /* ⚠ tạm (khớp Logo gradient start) */
+  --yb-green-900: #1f3d06; /* ⚠ tạm */
+
+  /* ---------------- Gradients (brand) ---------------- */
+  --yb-gradient-brand-light: linear-gradient(90deg, #c2e96a 0%, #dbf2a6 100%);
+  --yb-gradient-logo: linear-gradient(90deg, #6bcf13 0%, #fdd447 100%);
+  --yb-gradient-button: linear-gradient(90deg, #a8f45d 0%, #fee36c 100%);
+  --yb-gradient-card-bg: linear-gradient(90deg, #e5fdca 0%, #f8fef0 100%);
+  /* "Only icon - Gradient" trong Figma là image-fill → không có ở đây; export riêng nếu cần. */
+
+  /* ---------------- 02_Semantic (alias → foundation) ---------------- */
+  --yb-text-dark: var(--yb-neutral-800);
+  --yb-text-neutral: var(--yb-neutral-500);
+  --yb-text-light: var(--yb-white);
+  --yb-text-brand: var(--yb-green-500);
+
+  --yb-icon-dark: var(--yb-neutral-900);
+  --yb-icon-neutral: var(--yb-neutral-500);
+  --yb-icon-light: var(--yb-white);
+  --yb-icon-brand: var(--yb-green-500);
+
+  --yb-border-neutral: var(--yb-neutral-200);
+
+  --yb-bg-light: var(--yb-white);
+  --yb-bg-dark: var(--yb-neutral-900);
+  --yb-bg-brand: var(--yb-green-500);
+  --yb-bg-brand-light: var(--yb-green-100);
+  --yb-bg-brand-dark: var(--yb-green-900);
+
+  /* ---------------- 04_Typography ---------------- */
+  --yb-font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --yb-fw-regular: 400;
+  --yb-fw-medium: 500;
+  --yb-fw-semibold: 600;
+  --yb-fw-bold: 700;
+  --yb-fw-black: 900;
+
+  /* size / line-height (px) */
+  --yb-fs-12: 12px;   --yb-lh-12: 16px;
+  --yb-fs-14: 14px;   --yb-lh-14: 24px;
+  --yb-fs-16: 16px;   --yb-lh-16: 24px;
+  --yb-fs-18: 18px;   --yb-lh-18: 32px;
+  --yb-fs-20: 20px;   --yb-lh-20: 32px;
+  --yb-fs-24: 24px;   --yb-lh-24: 32px;
+  --yb-fs-32: 32px;   --yb-lh-32: 48px;
+  --yb-fs-40: 40px;   --yb-lh-40: 64px;
+
+  /* ---------------- 03_Space · Spacing (base 4px) ---------------- */
+  --yb-space-0: 0px;
+  --yb-space-0-5: 2px;
+  --yb-space-1: 4px;
+  --yb-space-1-5: 6px;
+  --yb-space-2: 8px;
+  --yb-space-3: 12px;
+  --yb-space-4: 16px;
+  --yb-space-5: 20px;
+  --yb-space-6: 24px;
+  --yb-space-8: 32px;
+  --yb-space-10: 40px;
+  --yb-space-12: 48px;
+  --yb-space-16: 64px;
+  --yb-space-20: 80px;
+  --yb-space-24: 96px;
+  --yb-space-32: 128px;
+  --yb-space-40: 160px;
+  --yb-space-48: 192px;
+  --yb-space-56: 224px;
+  --yb-space-64: 256px;
+  --yb-space-80: 320px;
+  --yb-space-96: 384px;
+  --yb-space-120: 480px;
+  --yb-space-140: 560px;
+  --yb-space-160: 640px;
+  --yb-space-180: 720px;
+  --yb-space-192: 768px;
+  --yb-space-256: 1024px;
+  --yb-space-320: 1280px;
+  --yb-space-360: 1440px;
+  --yb-space-400: 1600px;
+  --yb-space-480: 1920px;
+
+  /* Responsive margins / container / gaps */
+  --yb-margin-mobile: var(--yb-space-6);   /* 24px */
+  --yb-margin-tablet: var(--yb-space-8);    /* 32px */
+  --yb-margin-desktop: 42px;
+  --yb-container-top-mobile: var(--yb-space-4);     /* 16px */
+  --yb-container-bottom-mobile: var(--yb-space-6);  /* 24px */
+  --yb-container-top-desktop: var(--yb-space-6);    /* 24px */
+  --yb-gap-36: var(--yb-space-140); /* 560px */
+  --yb-gap-40: var(--yb-space-160); /* 640px */
+
+  /* ---------------- 03_Space · Border radius ---------------- */
+  --yb-radius-none: 0px;
+  --yb-radius-sm: 2px;
+  --yb-radius: 4px;
+  --yb-radius-md: 6px;
+  --yb-radius-lg: 8px;
+  --yb-radius-xl: 12px;
+  --yb-radius-2xl: 16px;
+  --yb-radius-3xl: 20px;
+  --yb-radius-4xl: 24px;
+  --yb-radius-circle: 10000px; /* pill / tròn */
+
+  /* ---------------- Effect styles (shadows / blur) ----------------
+     alpha hex: 1A≈10% · 0F≈6% · 26≈15% · 40≈25% · 1C≈11% */
+  --yb-shadow-card: 0 0 8px 0 #0000001a;
+  --yb-shadow-bottom-menu: 0 -1px 8px 0 #0000000f;
+  --yb-shadow-hover: 0 0 4px 0 #00000026;
+  --yb-shadow-freeze-column: -1px 0 3px 0 #0000001a;
+  --yb-shadow-inner-button: inset 0 -2px 0 0 #0000001c;
+  --yb-shadow-transparent-blur: 0 0 12px 0 #00000040; /* kèm --yb-blur-transparent */
+  --yb-blur-transparent: 12px; /* dùng cho backdrop-filter */
+  --yb-blur-glass: 8px;        /* glass_bg */
+
+  /* ---------------- Grid (gutter) ---------------- */
+  --yb-grid-gutter-sm: 16px; /* 4 col, 6 col, 12 col-Dashboard */
+  --yb-grid-gutter-lg: 24px; /* 12 col */
+}
+
+/* ================================================================
+   Typography utilities (khớp tên style trong Figma).
+   CAP = viết hoa toàn bộ. Chưa gắn vào UI — sẵn để dùng khi áp dụng.
+   ================================================================ */
+.yb-t-12-reg      { font: var(--yb-fw-regular) var(--yb-fs-12)/var(--yb-lh-12) var(--yb-font-sans); }
+.yb-t-12-reg-cap  { font: var(--yb-fw-regular) var(--yb-fs-12)/var(--yb-lh-12) var(--yb-font-sans); text-transform: uppercase; }
+.yb-t-12-med      { font: var(--yb-fw-medium) var(--yb-fs-12)/var(--yb-lh-12) var(--yb-font-sans); }
+
+.yb-t-14-reg      { font: var(--yb-fw-regular) var(--yb-fs-14)/var(--yb-lh-14) var(--yb-font-sans); }
+.yb-t-14-reg-cap  { font: var(--yb-fw-regular) var(--yb-fs-14)/var(--yb-lh-14) var(--yb-font-sans); text-transform: uppercase; }
+.yb-t-14-semi     { font: var(--yb-fw-semibold) var(--yb-fs-14)/var(--yb-lh-14) var(--yb-font-sans); }
+
+.yb-t-16-reg      { font: var(--yb-fw-regular) var(--yb-fs-16)/var(--yb-lh-16) var(--yb-font-sans); }
+.yb-t-16-reg-cap  { font: var(--yb-fw-regular) var(--yb-fs-16)/var(--yb-lh-16) var(--yb-font-sans); text-transform: uppercase; }
+.yb-t-16-med      { font: var(--yb-fw-medium) var(--yb-fs-16)/var(--yb-lh-16) var(--yb-font-sans); }
+.yb-t-16-semi     { font: var(--yb-fw-semibold) var(--yb-fs-16)/var(--yb-lh-16) var(--yb-font-sans); }
+.yb-t-16-semi-cap { font: var(--yb-fw-semibold) var(--yb-fs-16)/var(--yb-lh-16) var(--yb-font-sans); text-transform: uppercase; }
+
+.yb-t-18-reg      { font: var(--yb-fw-regular) var(--yb-fs-18)/var(--yb-lh-18) var(--yb-font-sans); }
+.yb-t-18-reg-cap  { font: var(--yb-fw-regular) var(--yb-fs-18)/var(--yb-lh-18) var(--yb-font-sans); text-transform: uppercase; }
+.yb-t-18-semi     { font: var(--yb-fw-semibold) var(--yb-fs-18)/var(--yb-lh-18) var(--yb-font-sans); }
+.yb-t-18-semi-cap { font: var(--yb-fw-semibold) var(--yb-fs-18)/var(--yb-lh-18) var(--yb-font-sans); text-transform: uppercase; }
+
+.yb-t-20-bold     { font: var(--yb-fw-semibold) var(--yb-fs-20)/var(--yb-lh-20) var(--yb-font-sans); }
+.yb-t-24-bold     { font: var(--yb-fw-bold) var(--yb-fs-24)/var(--yb-lh-24) var(--yb-font-sans); }
+.yb-t-32-bold     { font: var(--yb-fw-bold) var(--yb-fs-32)/var(--yb-lh-32) var(--yb-font-sans); letter-spacing: -0.04em; }
+
+.yb-t-40-med      { font: var(--yb-fw-medium) var(--yb-fs-40)/var(--yb-lh-40) var(--yb-font-sans); }
+.yb-t-40-med-cap  { font: var(--yb-fw-medium) var(--yb-fs-40)/var(--yb-lh-40) var(--yb-font-sans); text-transform: uppercase; }
+.yb-t-40-bold     { font: var(--yb-fw-bold) var(--yb-fs-40)/40px var(--yb-font-sans); }
+.yb-t-40-bold-cap { font: var(--yb-fw-bold) var(--yb-fs-40)/48px var(--yb-font-sans); text-transform: uppercase; }
+.yb-t-40-black    { font: var(--yb-fw-black) var(--yb-fs-40)/var(--yb-lh-40) var(--yb-font-sans); letter-spacing: -0.03em; }
+.yb-t-40-black-cap{ font: var(--yb-fw-bold) var(--yb-fs-40)/var(--yb-lh-40) var(--yb-font-sans); text-transform: uppercase; }
