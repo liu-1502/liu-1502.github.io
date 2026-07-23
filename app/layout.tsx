@@ -3,6 +3,8 @@ import "./globals.css";
 // Design system gốc của Yuzu — giữ nguyên bản để UI y chang.
 // Import sau globals.css để thắng cascade so với Tailwind base.
 import "../styles/yuzu.css";
+// Sidebar 2 cấp — nạp sau yuzu.css để override layout .side-item cũ.
+import "../styles/sidebar.css";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import LiquidBackground from "@/components/LiquidBackground";
