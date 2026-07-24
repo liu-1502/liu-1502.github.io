@@ -48,9 +48,8 @@ export default function Dashboard() {
               </span>
             </span>
             <p className="desc">
-              Overcollateralized yzUSD with two tranches. Stake into syzUSD for weekly yield with no
-              KYC. yzPP absorbs any loss first so yzUSD stays fully backed, and earns a premium for
-              standing in front.
+              Overcollateralized yield-bearing stablecoin product with risk tranching (junior/senior
+              tranche).
             </p>
             <span className="apy">
               <span className="v">7.75-27%</span>
@@ -65,12 +64,13 @@ export default function Dashboard() {
               <TokenStrip syms={["yzPrime"]} />
               <span>
                 <b>Prime</b>
-                <small>Fixed income · Gated KYC</small>
+                <small>Structured Yield Products</small>
               </span>
             </span>
             <p className="desc">
-              Leveraged exposure to tokenized T-Bills, AAA CLOs and overcollateralized lending.
-              Continuous yield at NAV, reserved to Eligible Investors.
+              Structured institutional-grade tokenized real-world assets with{" "}
+              <span style={{ color: "var(--prime)", fontWeight: 600 }}>6.5%</span> target yield
+              through enhanced fixed-income strategies.
             </p>
             <span className="apy">
               <span className="v">7.00%</span>

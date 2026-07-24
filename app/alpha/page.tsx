@@ -20,7 +20,7 @@ export default function Alpha() {
         <Button>Verify eligibility <span className="arr">→</span></Button>
       </div>
 
-      <div className="app-layout" style={{ paddingTop: 26 }}>
+      <div className="app-layout">
 
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
