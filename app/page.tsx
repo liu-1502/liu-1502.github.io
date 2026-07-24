@@ -44,7 +44,7 @@ export default function Dashboard() {
               <TokenStrip syms={["yzUSD", "syzUSD", "yzPP"]} />
               <span>
                 <b>Alpha</b>
-                <small>Stablecoin engine · Open</small>
+                <small>Onchain Yield Products</small>
               </span>
             </span>
             <p className="desc">
