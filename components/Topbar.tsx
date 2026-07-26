@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { PanelLeft } from "lucide-react";
+import Logo from "./Logo";
 import Button from "./ui/Button";
 import ModeSwitch from "./topbar/ModeSwitch";
 import ChainSelector from "./topbar/ChainSelector";
@@ -51,6 +53,10 @@ export default function Topbar() {
       >
         <PanelLeft />
       </button>
+      <span className="tb-divider" aria-hidden="true" />
+      <Link className="brand" href="/">
+        <Logo />
+      </Link>
       <div className="right">
         <ModeSwitch />
         <ChainSelector />

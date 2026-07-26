@@ -46,9 +46,9 @@ export default function RootLayout({
       <body>
         <LiquidBackground />
         <div className="shell">
+          <Topbar />
           <Sidebar />
           <div className="maincol">
-            <Topbar />
             <main className="content">{children}</main>
           </div>
         </div>

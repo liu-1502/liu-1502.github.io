@@ -17,7 +17,6 @@ import {
   Landmark,
   Store,
 } from "lucide-react";
-import Logo from "./Logo";
 import { pageMeta } from "@/lib/pages";
 import type { NavItem } from "@/lib/types";
 
@@ -140,9 +139,6 @@ export default function Sidebar() {
 
   return (
     <aside className="side">
-      <Link className="brand" href="/">
-        <Logo />
-      </Link>
       {NAV_GROUPS.map((group) => (
         <div className="side-group" key={group.heading}>
           <h6>{group.heading}</h6>
