@@ -71,7 +71,11 @@
 
   .ref-steps { display: flex; flex-direction: column; gap: 0; margin-top: 18px; }
   .ref-steps > div { display: flex; align-items: center; gap: 16px; padding: 14px 2px; border-top: 1px solid var(--line); }
-  .ref-steps .step-ic { flex: none; width: 60px; height: 60px; color: var(--text); stroke-width: 0.8; }
+  .ref-steps .step-no {
+    flex: none; width: 26px; height: 26px; display: inline-grid; place-items: center;
+    border-radius: 999px; background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent); font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  }
   .ref-steps b { font-size: 13px; font-weight: 620; font-family: var(--font-display); display: block; }
   .ref-steps span { font-size: 12px; color: var(--muted); line-height: 1.5; display: block; margin-top: 2px; }
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Copy, Link2, UserPlus, Gift } from "lucide-react";
+import { Copy } from "lucide-react";
 import "./styles.css";
 import PointsClient from "./PointsClient";
 import { pageMetadata } from "@/lib/pages";
@@ -57,15 +57,15 @@ export default function Points() {
 
           <div className="ref-steps">
             <div>
-              <Link2 className="step-ic" />
+              <span className="step-no">1</span>
               <div><b>Share your link</b><span>Send your code or link to friends before they create an account.</span></div>
             </div>
             <div>
-              <UserPlus className="step-ic" />
+              <span className="step-no">2</span>
               <div><b>Friends register</b><span>They sign up with your code and start earning Juice on their positions.</span></div>
             </div>
             <div>
-              <Gift className="step-ic" />
+              <span className="step-no">3</span>
               <div><b>Earn together</b><span>You collect 10% of their Juice as referral rewards, they get a +5% boost. Forever.</span></div>
             </div>
           </div>
