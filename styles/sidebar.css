@@ -130,11 +130,11 @@
 .topbar .side-toggle {
   all: unset; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: var(--r-sm);
-  color: var(--faint); transition: color .15s ease, background .15s ease;
+  width: 28px; height: 28px; border-radius: var(--r-sm);
+  color: color-mix(in srgb, var(--faint) 62%, transparent); transition: color .15s ease, background .15s ease;
 }
 .topbar .side-toggle:hover { color: var(--muted); background: color-mix(in srgb, var(--text) 6%, transparent); }
-.topbar .side-toggle svg { width: 20px; height: 20px; }
+.topbar .side-toggle svg { width: 18px; height: 18px; }
 
 @media (min-width: 941px) {
   .side { transition: width .22s ease, padding .22s ease; }
