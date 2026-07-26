@@ -89,10 +89,10 @@ export default function Dashboard() {
           </Link>
           <Link className="card ticked prod-row prime" href="/prime">
             <svg className="prod-illus" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M40 14 L64 22 L40 30 L16 22 Z" />
-              <path d="M40 25 L64 33 L40 41 L16 33 Z" />
-              <path d="M40 36 L64 44 L40 52 L16 44 Z" />
-              <path d="M40 47 L64 55 L40 63 L16 55 Z" />
+              <path d="M40 12 L73 22 L40 32 L7 22 Z" />
+              <path d="M40 24 L73 34 L40 44 L7 34 Z" />
+              <path d="M40 36 L73 46 L40 56 L7 46 Z" />
+              <path d="M40 48 L73 58 L40 68 L7 58 Z" />
             </svg>
             <span className="id">
               <b>Prime</b>
