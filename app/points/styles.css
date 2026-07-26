@@ -3,7 +3,7 @@
   /* ---- Illus hộp quà góc phải, style/size/vị trí như opportunities ---- */
   .pts-illus {
     position: absolute; z-index: 0; pointer-events: none;
-    top: -20px; right: -20px; width: 340px; height: 340px;
+    top: -70px; right: -10px; width: 340px; height: 340px;
     color: #443E38;
   }
   .pts-illus * { vector-effect: non-scaling-stroke; }
@@ -29,9 +29,9 @@
   }
   .boost-pill {
     font-family: var(--font-body); font-size: 13px; color: var(--muted);
-    border: none; border-radius: var(--r-sm);
+    border: none; border-radius: 999px;
     background: color-mix(in srgb, var(--text) 5%, transparent);
-    padding: 7px 13px; cursor: default;
+    padding: 5px 11px; cursor: default;
   }
   .boost-pill b { color: var(--prime); font-weight: 600; }
   .juice-hero .right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
