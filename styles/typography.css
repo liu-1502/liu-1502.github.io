@@ -15,6 +15,8 @@ html { scroll-behavior: auto; }
 .chain-btn, .theme-btn, .mode-switch { border-color: color-mix(in srgb, var(--text) 14%, transparent); }
 /* Font topbar buttons = Instrument Sans; caret size; Connect Wallet cao 36px bằng nút kế bên */
 .chain-btn, .mode-switch button { font-family: var(--font-body); }
+/* Text "All chains" đen medium như chip (mặc định đang --muted, nhạt) */
+.chain-btn span { color: var(--text); font-weight: 500; }
 /* Accent topbar đổi theo theme trang: Alpha xanh lá, Prime nâu, Marketplace xanh dương */
 body { --topbar-accent: var(--citrus); }
 body.p-alpha { --topbar-accent: var(--alpha); }

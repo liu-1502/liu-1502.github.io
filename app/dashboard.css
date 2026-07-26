@@ -19,7 +19,9 @@
   /* POR section: khoảng cách tới hàng 3 card = 24px */
   .section:has(.por) { padding-top: 24px; }
   /* Illustration mỗi product, màu theo product (--pa) */
-  .prod-illus { width: 60px; height: 60px; display: block; margin-bottom: 0; color: var(--text); }
+  .prod-illus { width: 80px; height: 80px; display: block; margin-bottom: 0; color: var(--text); }
+  /* Giảm độ dày nét các illus product (đè attribute stroke-width=2 trong SVG) */
+  .prod-illus, .prod-illus * { stroke-width: 1.5px; }
   @media (max-width: 860px) { .prod-rows { grid-template-columns: 1fr; } }
   .prod-row {
     position: relative;
@@ -69,6 +71,12 @@
     border-radius: var(--r-md);
     text-decoration: none;
     color: inherit;
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  /* Hover: nhấc nhẹ + shadow (không thêm stroke) + mũi tên nhích */
+  .por:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 34px color-mix(in srgb, var(--accent) 8%, transparent);
   }
   .por-lead { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
   .por-shield {
