@@ -62,7 +62,7 @@
   }
   .ref-stats .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
   .ref-stats .v { font-family: var(--font-mono); font-size: 18px; font-weight: 560; margin-top: 7px; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
-  .ref-stats .v.hi { color: var(--accent); }
+  .ref-stats .v.hi { color: var(--text); }
   .ref-stats .juice-ic { width: 20px; height: 20px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
 
   .copy-row {
