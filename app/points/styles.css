@@ -29,7 +29,8 @@
   }
   .boost-pill {
     font-family: var(--font-body); font-size: 13px; color: var(--muted);
-    border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: var(--r-sm);
+    border: none; border-radius: var(--r-sm);
+    background: color-mix(in srgb, var(--text) 5%, transparent);
     padding: 7px 13px; cursor: default;
   }
   .boost-pill b { color: var(--prime); font-weight: 600; }
