@@ -22,6 +22,10 @@
   .prod-illus { width: 80px; height: 80px; display: block; margin-bottom: 0; color: var(--text); }
   /* Giảm độ dày nét các illus product (đè attribute stroke-width=2 trong SVG) */
   .prod-illus, .prod-illus * { stroke-width: 1.5px; }
+  /* Căn mép trái nội dung illus thẳng hàng với text (bù padding trong SVG khác nhau) */
+  .prod-row.alpha .prod-illus { margin-left: -13px; }
+  .prod-row.prime .prod-illus { margin-left: -7px; }
+  .prod-row.mkt   .prod-illus { margin-left: -9px; }
   @media (max-width: 860px) { .prod-rows { grid-template-columns: 1fr; } }
   .prod-row {
     position: relative;
