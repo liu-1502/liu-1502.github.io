@@ -17,7 +17,7 @@
   /* 3 sản phẩm xếp hàng ngang: grid 3 cột, mỗi card là 1 cột dọc. */
   .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: stretch; }
   /* Illustration mỗi product, màu theo product (--pa) */
-  .prod-illus { width: 60px; height: 60px; display: block; margin-bottom: 0; color: var(--pa); }
+  .prod-illus { width: 60px; height: 60px; display: block; margin-bottom: 0; color: var(--text); }
   @media (max-width: 860px) { .prod-rows { grid-template-columns: 1fr; } }
   .prod-row {
     position: relative;
