@@ -111,18 +111,19 @@ export default function Dashboard() {
           </Link>
           <Link className="card ticked prod-row mkt" href="/marketplace">
             <svg className="prod-illus" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <line x1="40" y1="40" x2="22" y2="22" strokeDasharray="2 3.5" />
-              <line x1="40" y1="40" x2="58" y2="22" strokeDasharray="2 3.5" />
-              <line x1="40" y1="40" x2="67" y2="44" strokeDasharray="2 3.5" />
-              <line x1="40" y1="40" x2="40" y2="67" strokeDasharray="2 3.5" />
-              <line x1="40" y1="40" x2="13" y2="44" strokeDasharray="2 3.5" />
+              {/* 5 nan hoa chia đều 72° quanh tâm (ngũ giác đỉnh trên) */}
+              <line x1="40" y1="40" x2="40" y2="13" strokeDasharray="2 3.5" />
+              <line x1="40" y1="40" x2="65.7" y2="31.7" strokeDasharray="2 3.5" />
+              <line x1="40" y1="40" x2="55.9" y2="61.8" strokeDasharray="2 3.5" />
+              <line x1="40" y1="40" x2="24.1" y2="61.8" strokeDasharray="2 3.5" />
+              <line x1="40" y1="40" x2="14.3" y2="31.7" strokeDasharray="2 3.5" />
               <circle cx="40" cy="40" r="11" fill="var(--surface)" />
-              <path d="M40 33 L45.5 36.25 L45.5 43.75 L40 47 L34.5 43.75 L34.5 36.25 Z" />
-              <circle cx="22" cy="22" r="5.5" />
-              <circle cx="58" cy="22" r="5.5" />
-              <circle cx="67" cy="44" r="5.5" />
-              <circle cx="40" cy="67" r="5.5" />
-              <circle cx="13" cy="44" r="5.5" />
+              <path d="M47 40 L43.5 33.9 L36.5 33.9 L33 40 L36.5 46.1 L43.5 46.1 Z" />
+              <circle cx="40" cy="13" r="5.5" />
+              <circle cx="65.7" cy="31.7" r="5.5" />
+              <circle cx="55.9" cy="61.8" r="5.5" />
+              <circle cx="24.1" cy="61.8" r="5.5" />
+              <circle cx="14.3" cy="31.7" r="5.5" />
             </svg>
             <span className="id">
               <b>Marketplace</b>
