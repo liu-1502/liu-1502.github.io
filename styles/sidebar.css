@@ -10,7 +10,7 @@
    Bọc min-width để KHÔNG đè media query mobile của yuzu.css. ---- */
 @media (min-width: 941px) {
   /* Stroke phải: xanh nhạt overlay (tông brand, bán trong suốt) */
-  .side { border-right: 1px solid color-mix(in srgb, var(--citrus) 32%, transparent); }
+  .side { border-right: 1px solid color-mix(in srgb, var(--citrus) 15%, transparent); }
   /* Dark mode: viền phải mờ như topbar (--line-solid tối), tránh trắng gắt. */
   :root[data-theme="dark"] .side { border-right-color: var(--line-solid); }
 }

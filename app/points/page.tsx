@@ -10,6 +10,19 @@ export const metadata = pageMetadata("/points");
 export default function Points() {
   return (
     <div className="pg-points">
+      <svg className="pts-illus" viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        {/* Hộp quà (dáng lucide gift, phóng to) + badge % ở góc phải dưới */}
+        <g transform="translate(2 4) scale(4)">
+          <rect x="3" y="8" width="18" height="4" rx="1" />
+          <path d="M12 8v13" />
+          <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+          <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+        </g>
+        <circle cx="98" cy="98" r="18" fill="var(--surface)" />
+        <line x1="89" y1="107" x2="107" y2="89" />
+        <circle cx="91.5" cy="91.5" r="2.6" />
+        <circle cx="104.5" cy="104.5" r="2.6" />
+      </svg>
       <div className="opp-head rv" style={{ marginBottom: 18 }}>
         <div>
           <h1>Points</h1>
