@@ -96,7 +96,6 @@ export default function Marketplace() {
 
       <div className="form-head rv">
         <h1>Marketplace</h1>
-        <p>Hand-picked vault strategies in yzCash and yzSyrup for leveraged Maple lending, curated by the Yuzu team.</p>
       </div>
 
       <div className="app-layout">

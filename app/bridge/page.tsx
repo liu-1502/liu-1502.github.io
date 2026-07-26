@@ -31,7 +31,6 @@ export default function Bridge() {
 
       <div className="form-head rv">
         <h1>Bridge</h1>
-        <p>Move Yuzu assets across supported chains in a few clicks, with live routing and fees shown upfront.</p>
       </div>
 
       <div className="app-layout">

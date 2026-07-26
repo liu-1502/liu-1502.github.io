@@ -97,7 +97,6 @@ export default function Alpha() {
 
       <div className="form-head rv">
         <h1>Alpha</h1>
-        <p>Overcollateralized yield engine with two tranches. Mint yzUSD, boost with yzPP, or stake into syzUSD for weekly yield — no KYC.</p>
       </div>
 
       <div className="app-layout">

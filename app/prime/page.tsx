@@ -97,7 +97,6 @@ export default function Prime() {
 
       <div className="form-head rv">
         <h1>Prime</h1>
-        <p>Institutional yield at NAV — tokenized T-Bills, AAA CLOs, and overcollateralized lending. No epochs, no lockups.</p>
       </div>
 
       <div className="app-layout">
