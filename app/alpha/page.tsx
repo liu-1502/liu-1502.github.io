@@ -2,275 +2,253 @@ import Link from "next/link";
 import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
-import TokenPill from "@/components/ui/TokenPill";
 import Button from "@/components/ui/Button";
-import SegmentedTabs from "@/components/ui/SegmentedTabs";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
+
+/* Ô nhập tiền (deposit / receive) theo layout Figma mới. */
+function Field({
+  label,
+  sym,
+  symLabel,
+  balance,
+  deposit = false,
+  input = {},
+}: {
+  label: string;
+  sym: string;
+  symLabel: string;
+  balance?: string;
+  deposit?: boolean;
+  input?: React.InputHTMLAttributes<HTMLInputElement>;
+}) {
+  return (
+    <div className="mfield">
+      <div className="mfield-l">
+        <span className="lbl">{label}</span>
+        <input type="text" placeholder="0" aria-label={label} {...input} />
+        <div className="xusd">≈ $0.00</div>
+        {deposit && <div className="mint-err">KYC/KYB access required to mint</div>}
+      </div>
+      <div className="mfield-r">
+        {deposit && (
+          <div className="pct-opts">
+            <button type="button" className="pct">25%</button>
+            <button type="button" className="pct">50%</button>
+            <button type="button" className="pct">75%</button>
+            <button type="button" className="pct">Max</button>
+          </div>
+        )}
+        <span className="token" data-sym={sym}>
+          <img src={sym === "usdt" ? "/assets/tokens/usdt0.png" : `/assets/tokens/${sym}.svg`} alt="" />
+          {symLabel}
+        </span>
+        {balance && (
+          <div className="bal">
+            Balance: <span className="v">{balance}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SwapCircle() {
+  return (
+    <button type="button" className="swap-circle" data-swap aria-label="Swap direction">
+      <ArrowUpDown />
+    </button>
+  );
+}
+
+function OrderItem({
+  kind,
+  label,
+  addr,
+  amount,
+  status,
+}: {
+  kind: "mint" | "redeem";
+  label: string;
+  addr: string;
+  amount: string;
+  status: "completed" | "pending";
+}) {
+  const Icon = kind === "mint" ? ArrowDownRight : ArrowUpRight;
+  return (
+    <div className="ord" role="button" tabIndex={0} data-kind={kind}>
+      <span className="oicon"><Icon /></span>
+      <div className="oleft">
+        <span className="ot">{label}</span>
+        <span className="oa">{addr}</span>
+      </div>
+      <div className="oright">
+        <span className="ov">{amount}</span>
+        {status !== "completed" && <span className={`badge ${status}`}>Pending</span>}
+      </div>
+    </div>
+  );
+}
 
 export default function Alpha() {
   return (
     <div className="pg-alpha">
 
-      <div className="gate" data-alpha-banner style={{ marginTop: 12 }}>
-        <div>
-          <div className="t">Eligibility verification required for primary mint and redeem</div>
-          <div className="d">Minting and redeeming yzUSD and yzPP is reserved to Eligible Investors after KYC and Source-of-Funds screening. Staking syzUSD needs nothing: no KYC, ever. You can also acquire any Alpha token on Curve without KYC.</div>
-        </div>
-        <Button>Verify eligibility <span className="arr">→</span></Button>
-      </div>
-
       <div className="app-layout">
 
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
+        {/* Nút About Alpha: góc phải trên content, canh phải như Connect Wallet */}
+        <div className="about-wrap">
+          <button className="about-btn" data-about-toggle aria-expanded="false"><CircleHelp className="ico" /> About</button>
+          <div className="about-menu" data-about-menu hidden>
+            <div className="aside-head">
+              <h3 className="aside-title">About yzUSD/yzPP/syzUSD</h3>
+              <button className="aside-close" data-about-close aria-label="Close details"><X /></button>
+            </div>
+            <div className="tk-strip aside-marks">
+              <img src="/assets/tokens/yzUSD.svg" alt="yzUSD" />
+              <img src="/assets/tokens/yzPP.svg" alt="yzPP" />
+              <img src="/assets/tokens/syzUSD.svg" alt="syzUSD" />
+            </div>
+            <div className="aside-card">
+              <h4>Yield cadence</h4>
+              <p>syzUSD yield is decided every Friday and covers the week that follows. yzPP earns the same base yield plus a protocol-funded premium, budgeted daily at 04:00 UTC.</p>
+              <div className="rows">
+                <div><span className="k">syzUSD weekly target</span><span className="v" style={{ color: "var(--alpha)" }}>7.75%</span></div>
+                <div><span className="k">syzUSD epoch</span><span className="v">Fri 04:00 to Fri 03:59 UTC</span></div>
+                <div><span className="k">yzPP estimated APY</span><span className="v" style={{ color: "var(--alpha)" }}>27.0%</span></div>
+                <div><span className="k">yzPP premium budget</span><span className="v">Daily, 04:00 UTC</span></div>
+              </div>
+            </div>
+            <div className="aside-card">
+              <h4>Backing, verified live</h4>
+              <p>Every yzUSD is backed by more than one dollar of onchain assets, attested every 15 minutes by Accountable.</p>
+              <div className="rows">
+                <div><span className="k">Collateral ratio</span><span className="v" style={{ color: "var(--good)" }}>110.82%</span></div>
+                <div><span className="k">First-loss buffer</span><span className="v">yzPP + Reserve Fund</span></div>
+                <div><span className="k">Proof of reserves</span><span className="v" style={{ color: "var(--good)" }}><Link href="/transparency" style={{ color: "inherit", textDecoration: "none" }}>Live →</Link></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="xchg rv">
-          <SegmentedTabs
-            className="xchg-tabs"
-            attr="data-tab"
-            id="alphaTabs"
-            items={[
-              { id: "yzusd", label: "Mint / Redeem yzUSD" },
-              { id: "yzpp", label: "Mint / Redeem yzPP" },
-              { id: "syzusd", label: "Stake / Unstake syzUSD" },
-            ]}
-          />
+          {/* Token pill tabs */}
+          <div className="tok-tabs xchg-tabs" id="alphaTabs">
+            <button className="tok-tab on" data-tab="yzusd"><img src="/assets/tokens/yzUSD.svg" alt="" /><span className="sym">yzUSD</span></button>
+            <button className="tok-tab" data-tab="yzpp"><img src="/assets/tokens/yzPP.svg" alt="" /><span className="sym">yzPP</span></button>
+            <button className="tok-tab" data-tab="syzusd"><img src="/assets/tokens/syzUSD.svg" alt="" /><span className="sym">syzUSD</span></button>
+          </div>
 
           {/* ============ yzUSD ============ */}
           <div className="xchg-body" data-panel="yzusd">
             <div className="dir-row">
-              <SegmentedTabs
-                className="dir-switch"
-                attr="data-dir"
-                items={[
-                  { id: "mint", label: "Mint" },
-                  { id: "redeem", label: "Redeem" },
-                ]}
-              />
-              <span className="chip gated">KYC gated</span>
+              <div className="dir-switch">
+                <button className="on" data-dir="mint">Mint</button>
+                <button data-dir="redeem">Redeem</button>
+              </div>
             </div>
-
             <div data-dirpanel="mint">
-              <div className="xfield">
-                <div className="xlabel"><span>You deposit</span><span>Balance 0.00 <button type="button">Max</button></span></div>
-                <div className="xrow">
-                  <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to deposit"/>
-                  <TokenPill sym="usdt" label="USDT0" />
-                </div>
-                <div className="xusd">≈ $0.00</div>
+              <div className="mfields">
+                <Field label="You deposit" sym="usdt" symLabel="USDT0" balance="$10,000.00" deposit input={{ inputMode: "decimal" }} />
+                <SwapCircle />
+                <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
-              <div className="xdivider"><span>↓</span></div>
-              <div className="xfield">
-                <div className="xlabel"><span>You receive</span></div>
-                <div className="xrow">
-                  <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <TokenPill sym="yzUSD" label="yzUSD" />
-                </div>
-              </div>
-              <div className="xmeta">
-                <div><span className="k">Rate</span><span className="v">1:1 at par</span></div>
-                <div><span className="k">Access</span><span className="v">Eligible Investors, KYC</span></div>
-                <div><span className="k">Alternative</span><span className="v hi">Swap on Curve, no KYC</span></div>
-                <div><span className="k">Network</span><span className="v">Plasma</span></div>
-              </div>
-              <Button block className="gcta" disabled>Verify eligibility to continue</Button>
+              <Button block className="gcta">Connect wallet</Button>
+              <div className="mfoot"><span>Minted Amount: 0.00 yzUSD</span><span>Minting Fee: 0.00%</span></div>
             </div>
-
             <div data-dirpanel="redeem" style={{ display: "none" }}>
-              <div className="xfield">
-                <div className="xlabel"><span>You redeem</span><span>Balance 0.00 <button type="button">Max</button></span></div>
-                <div className="xrow">
-                  <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to redeem"/>
-                  <TokenPill sym="yzUSD" label="yzUSD" />
-                </div>
-                <div className="xusd">≈ $0.00</div>
+              <div className="mfields">
+                <Field label="You redeem" sym="yzUSD" symLabel="yzUSD" balance="$0.00" deposit input={{ inputMode: "decimal" }} />
+                <SwapCircle />
+                <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
-              <div className="xdivider"><span>↓</span></div>
-              <div className="xfield">
-                <div className="xlabel"><span>You receive</span></div>
-                <div className="xrow">
-                  <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <TokenPill sym="usdt" label="USDT0" />
-                </div>
-              </div>
-              <div className="xmeta">
-                <div><span className="k">Rate</span><span className="v">1:1 at par</span></div>
-                <div><span className="k">Access</span><span className="v">Eligible Investors, KYC</span></div>
-                <div><span className="k">Alternative</span><span className="v hi">Swap on Curve, no KYC</span></div>
-              </div>
-              <Button block className="gcta" disabled>Verify eligibility to continue</Button>
+              <Button block className="gcta">Connect wallet</Button>
+              <div className="mfoot"><span>Redeemed: 0.00 USDT0</span><span>Redeem Fee: 0.00%</span></div>
             </div>
           </div>
 
           {/* ============ yzPP ============ */}
           <div className="xchg-body" data-panel="yzpp" style={{ display: "none" }}>
             <div className="dir-row">
-              <SegmentedTabs
-                className="dir-switch"
-                attr="data-dir"
-                items={[
-                  { id: "mint", label: "Mint" },
-                  { id: "redeem", label: "Redeem" },
-                ]}
-              />
-              <span className="chip gated">KYC gated</span>
+              <div className="dir-switch">
+                <button className="on" data-dir="mint">Mint</button>
+                <button data-dir="redeem">Redeem</button>
+              </div>
             </div>
-
             <div data-dirpanel="mint">
-              <div className="xfield">
-                <div className="xlabel"><span>You deposit</span><span>Balance 0.00 <button type="button">Max</button></span></div>
-                <div className="xrow">
-                  <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to deposit"/>
-                  <TokenPill sym="usdt" label="USDT0" />
-                </div>
-                <div className="xusd">≈ $0.00</div>
+              <div className="mfields">
+                <Field label="You deposit" sym="usdt" symLabel="USDT0" balance="$10,000.00" deposit input={{ inputMode: "decimal" }} />
+                <SwapCircle />
+                <Field label="You receive" sym="yzPP" symLabel="yzPP" balance="$0.00" input={{ readOnly: true }} />
               </div>
-              <div className="xdivider"><span>↓</span></div>
-              <div className="xfield">
-                <div className="xlabel"><span>You receive</span></div>
-                <div className="xrow">
-                  <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <TokenPill sym="yzPP" label="yzPP" />
-                </div>
-              </div>
-              <div className="xmeta">
-                <div><span className="k">yzPP price</span><span className="v">1 yzPP = 1.148527 USDT0</span></div>
-                <div><span className="k">Estimated APY</span><span className="v hi">27.0%</span></div>
-                <div><span className="k">Role</span><span className="v">Junior tranche, absorbs losses first</span></div>
-                <div><span className="k">Access</span><span className="v">Eligible Investors, KYC</span></div>
-              </div>
-              <Button block className="gcta" disabled>Verify eligibility to continue</Button>
+              <Button block className="gcta">Connect wallet</Button>
+              <div className="mfoot"><span>yzPP price: 1.148527 USDT0</span><span>Est. APY: 27.0%</span></div>
             </div>
-
             <div data-dirpanel="redeem" style={{ display: "none" }}>
-              <div className="xfield">
-                <div className="xlabel"><span>You redeem</span><span>Balance 0.00 <button type="button">Max</button></span></div>
-                <div className="xrow">
-                  <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to redeem"/>
-                  <TokenPill sym="yzPP" label="yzPP" />
-                </div>
-                <div className="xusd">≈ $0.00</div>
+              <div className="mfields">
+                <Field label="You redeem" sym="yzPP" symLabel="yzPP" balance="$0.00" deposit input={{ inputMode: "decimal" }} />
+                <SwapCircle />
+                <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
-              <div className="xdivider"><span>↓</span></div>
-              <div className="xfield">
-                <div className="xlabel"><span>You receive</span></div>
-                <div className="xrow">
-                  <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <TokenPill sym="usdt" label="USDT0" />
-                </div>
-              </div>
-              <div className="xmeta">
-                <div><span className="k">Redemption window</span><span className="v">30 days, yield keeps accruing</span></div>
-                <div><span className="k">Minimum order</span><span className="v">5,000 yzPP</span></div>
-                <div><span className="k">During a loss event</span><span className="v">Redemptions pause until assessed</span></div>
-                <div><span className="k">Access</span><span className="v">Eligible Investors, KYC</span></div>
-              </div>
-              <Button block className="gcta" disabled>Verify eligibility to continue</Button>
+              <Button block className="gcta">Connect wallet</Button>
+              <div className="mfoot"><span>Window: 30 days</span><span>Min order: 5,000 yzPP</span></div>
             </div>
           </div>
 
           {/* ============ syzUSD ============ */}
           <div className="xchg-body" data-panel="syzusd" style={{ display: "none" }}>
             <div className="dir-row">
-              <SegmentedTabs
-                className="dir-switch"
-                attr="data-dir"
-                items={[
-                  { id: "stake", label: "Stake" },
-                  { id: "unstake", label: "Unstake" },
-                ]}
-              />
-              <span className="chip open">No KYC</span>
+              <div className="dir-switch">
+                <button className="on" data-dir="stake">Stake</button>
+                <button data-dir="unstake">Unstake</button>
+              </div>
             </div>
-
             <div data-dirpanel="stake">
-              <div className="xfield">
-                <div className="xlabel"><span>You stake</span><span>Balance 0.00 <button type="button">Max</button></span></div>
-                <div className="xrow">
-                  <input type="text" inputMode="decimal" placeholder="0.00" data-src data-rate="0.9361" aria-label="Amount to stake"/>
-                  <TokenPill sym="yzUSD" label="yzUSD" />
-                </div>
-                <div className="xusd">≈ $0.00</div>
-              </div>
-              <div className="xdivider"><span>↓</span></div>
-              <div className="xfield">
-                <div className="xlabel"><span>You receive</span></div>
-                <div className="xrow">
-                  <input type="text" placeholder="0.00" data-dst readOnly aria-label="Amount received"/>
-                  <TokenPill sym="syzUSD" label="syzUSD" />
-                </div>
-              </div>
-              <div className="xmeta">
-                <div><span className="k">Exchange rate</span><span className="v">1 yzUSD = 0.9361 syzUSD</span></div>
-                <div><span className="k">Weekly target yield</span><span className="v hi">7.75%</span></div>
-                <div><span className="k">Unstaking</span><span className="v">One step, near instant</span></div>
-                <div><span className="k">Network</span><span className="v">Plasma</span></div>
+              <div className="mfields">
+                <Field label="You stake" sym="yzUSD" symLabel="yzUSD" balance="$0.00" deposit input={{ inputMode: "decimal", "data-src": true, "data-rate": "0.9361" } as React.InputHTMLAttributes<HTMLInputElement>} />
+                <SwapCircle />
+                <Field label="You receive" sym="syzUSD" symLabel="syzUSD" balance="$0.00" input={{ readOnly: true, "data-dst": true } as React.InputHTMLAttributes<HTMLInputElement>} />
               </div>
               <Button block>Connect Wallet</Button>
+              <div className="mfoot"><span>Rate: 1 yzUSD = 0.9361 syzUSD</span><span>Weekly target: 7.75%</span></div>
             </div>
-
             <div data-dirpanel="unstake" style={{ display: "none" }}>
-              <div className="xfield">
-                <div className="xlabel"><span>You unstake</span><span>Balance 0.00 <button type="button">Max</button></span></div>
-                <div className="xrow">
-                  <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to unstake"/>
-                  <TokenPill sym="syzUSD" label="syzUSD" />
-                </div>
-                <div className="xusd">≈ $0.00</div>
-              </div>
-              <div className="xdivider"><span>↓</span></div>
-              <div className="xfield">
-                <div className="xlabel"><span>You receive</span></div>
-                <div className="xrow">
-                  <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                  <TokenPill sym="yzUSD" label="yzUSD" />
-                </div>
-              </div>
-              <div className="xmeta">
-                <div><span className="k">Exchange rate</span><span className="v">1 syzUSD = 1.0683 yzUSD</span></div>
-                <div><span className="k">Settlement</span><span className="v">Near instant</span></div>
+              <div className="mfields">
+                <Field label="You unstake" sym="syzUSD" symLabel="syzUSD" balance="$0.00" deposit input={{ inputMode: "decimal" }} />
+                <SwapCircle />
+                <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <Button block>Connect Wallet</Button>
+              <div className="mfoot"><span>Rate: 1 syzUSD = 1.0683 yzUSD</span><span>Settlement: near instant</span></div>
             </div>
           </div>
+
+          {/* Stats ngay dưới card mint/redeem */}
+          <div className="page-stats rv">
+            <div><div className="k">Alpha TVL</div><div className="v" data-count="48470795" data-prefix="$">$0</div></div>
+            <div><div className="k">Collateral ratio</div><div className="v" style={{ color: "var(--good)" }}>110.82%</div></div>
+            <div><div className="k">syzUSD target</div><div className="v" style={{ color: "var(--alpha)" }}>7.75%</div></div>
+            <div><div className="k">yzPP target</div><div className="v" style={{ color: "var(--alpha)" }}>27.0%</div></div>
+            <div className="pro-only"><div className="k">Next epoch</div><div className="v">FRI 04:00</div></div>
+          </div>
+
+          {/* Order history */}
+          <details className="acc ohist" open>
+            <summary>Today Order</summary>
+            <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="mint">Mint</button><button className="ofilter" data-filter="redeem">Redeem</button></div>
+            <div className="olist">
+              <OrderItem kind="mint" label="Mint yzUSD" addr="0xeED43…AbbA" amount="$1,000.50" status="completed" />
+              <OrderItem kind="redeem" label="Redeem yzUSD" addr="0x9A2f1…C4dE" amount="$500.00" status="completed" />
+              <OrderItem kind="mint" label="Mint yzPP" addr="0x71bC8…9Ae0" amount="$2,000.00" status="pending" />
+            </div>
+          </details>
         </div>
 
-        <aside className="rv">
-          <div className="aside-card">
-            <h4>Yield cadence</h4>
-            <p>syzUSD yield is decided every Friday and covers the week that follows. yzPP earns the same base yield plus a protocol-funded premium, budgeted daily at 04:00 UTC.</p>
-            <div className="rows">
-              <div><span className="k">syzUSD weekly target</span><span className="v" style={{ color: "var(--alpha)" }}>7.75%</span></div>
-              <div><span className="k">syzUSD epoch</span><span className="v">Fri 04:00 to Fri 03:59 UTC</span></div>
-              <div><span className="k">yzPP estimated APY</span><span className="v" style={{ color: "var(--alpha)" }}>27.0%</span></div>
-              <div><span className="k">yzPP premium budget</span><span className="v">Daily, 04:00 UTC</span></div>
-            </div>
-          </div>
-          <div className="aside-card">
-            <h4>Backing, verified live</h4>
-            <p>Every yzUSD is backed by more than one dollar of onchain assets, attested every 15 minutes by Accountable.</p>
-            <div className="rows">
-              <div><span className="k">Collateral ratio</span><span className="v" style={{ color: "var(--good)" }}>110.82%</span></div>
-              <div><span className="k">First-loss buffer</span><span className="v">yzPP + Reserve Fund</span></div>
-              <div><span className="k">Proof of reserves</span><span className="v" style={{ color: "var(--good)" }}><Link href="/transparency" style={{ color: "inherit", textDecoration: "none" }}>Live →</Link></span></div>
-            </div>
-          </div>
-          <div className="aside-card">
-            <h4>Composability</h4>
-            <p>syzUSD is an ERC-4626 vault token. Use it as collateral, loop it, or provide liquidity on Pendle, Balancer and Curve while it keeps accruing.</p>
-          </div>
-        </aside>
-
       </div>
 
-
-      <div className="page-stats rv">
-        <div><div className="k">Alpha TVL</div><div className="v" data-count="48470795" data-prefix="$">$0</div></div>
-        <div><div className="k">Collateral ratio</div><div className="v" style={{ color: "var(--good)" }}>110.82%</div></div>
-        <div><div className="k">syzUSD target</div><div className="v" style={{ color: "var(--alpha)" }}>7.75%</div></div>
-        <div><div className="k">yzPP target</div><div className="v" style={{ color: "var(--alpha)" }}>27.0%</div></div>
-        <div className="pro-only"><div className="k">Next epoch</div><div className="v">FRI 04:00</div></div>
-      </div>
 
       <div className="wl-alert rv pro-only">
         <div>

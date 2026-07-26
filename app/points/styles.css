@@ -1,32 +1,36 @@
 .pg-points {
   /* ---- juice hero ---- */
   .juice-hero {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; flex-direction: row; align-items: center; justify-content: space-between;
     gap: 24px; flex-wrap: wrap;
-    padding: 26px 28px;
+    padding: 24px 28px;
     margin-bottom: 26px;
   }
-  .juice-hero .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-  .juice-hero .num { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  .juice-hero .num .v { font-family: var(--font-mono); font-size: clamp(30px, 4vw, 42px); font-weight: 560; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .juice-hero .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .juice-hero .num { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .juice-hero .juice-ic { width: 30px; height: 30px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
+  .juice-hero .num .v { font-family: var(--font-mono); font-size: clamp(26px, 3vw, 34px); font-weight: 560; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
   .rank-pill {
     font-family: var(--font-mono); font-size: 12px; font-weight: 560;
     color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-    background: color-mix(in srgb, var(--accent) 8%, transparent);
-    border-radius: var(--r-sm); padding: 5px 11px;
+    border: none;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border-radius: 999px; padding: 5px 12px;
   }
   .boost-pill {
-    font-family: var(--font-mono); font-size: 11px; color: var(--muted);
-    border: 1px solid var(--line-strong); border-radius: var(--r-sm);
-    padding: 8px 13px; cursor: default;
+    font-family: var(--font-body); font-size: 13px; color: var(--muted);
+    border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: var(--r-sm);
+    padding: 7px 13px; cursor: default;
   }
-  .boost-pill b { color: var(--prime); font-weight: 560; }
+  .boost-pill b { color: var(--prime); font-weight: 600; }
   .juice-hero .right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
   /* ---- two-column body ---- */
-  .pts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  .pts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; }
   @media (max-width: 940px) { .pts-grid { grid-template-columns: 1fr; } }
+  /* 2 card cao bằng nhau; leaderboard scroll trong card */
+  .pts-grid .panel { display: flex; flex-direction: column; min-height: 0; }
+  .pts-grid .lb-rows { flex: 1 1 0; min-height: 0; overflow-y: auto; }
 
   .panel { padding: 24px; }
   .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
@@ -39,41 +43,35 @@
     overflow: hidden; background: color-mix(in srgb, var(--surface-2) 40%, transparent);
     margin-bottom: 16px;
   }
-  .ref-stats > div { padding: 15px 18px; border-right: 1px solid var(--line-solid); }
+  .ref-stats > div { padding: 16px 18px; border-right: 1px solid var(--line-solid); text-align: center; }
   .ref-stats > div:last-child { border-right: none; }
   .ref-stats .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
-  .ref-stats .v { font-family: var(--font-mono); font-size: 18px; font-weight: 560; margin-top: 5px; font-variant-numeric: tabular-nums; }
+  .ref-stats .v { font-family: var(--font-mono); font-size: 18px; font-weight: 560; margin-top: 7px; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .ref-stats .v.hi { color: var(--accent); }
+  .ref-stats .juice-ic { width: 20px; height: 20px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
 
   .copy-row {
     display: flex; align-items: center; gap: 12px;
-    border: 1px solid var(--line-solid); border-radius: var(--r-sm);
-    padding: 11px 14px; margin-bottom: 9px;
-    background: var(--surface);
+    border: 1px solid transparent; border-radius: var(--r-sm);
+    padding: 12px 14px; margin-bottom: 9px;
+    background: color-mix(in srgb, var(--text) 5%, transparent);
   }
   .copy-row .k { font-size: 12.5px; color: var(--muted); flex: none; }
   .copy-row .v { font-family: var(--font-mono); font-size: 12.5px; margin-left: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-variant-numeric: tabular-nums; }
   .copy-row button {
     all: unset; cursor: pointer; flex: none;
-    font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em; font-weight: 600;
-    color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-    border-radius: 4px; padding: 5px 9px;
+    display: inline-grid; place-items: center;
+    width: 30px; height: 30px; border-radius: var(--r-sm);
+    color: var(--muted);
     transition: background .15s ease, color .15s ease;
   }
-  .copy-row button:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
-  .copy-row button.done { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
+  .copy-row button svg { width: 16px; height: 16px; }
+  .copy-row button:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }
+  .copy-row button.done { color: var(--good); }
 
   .ref-steps { display: flex; flex-direction: column; gap: 0; margin-top: 18px; }
-  .ref-steps > div { display: flex; gap: 14px; padding: 12px 2px; border-top: 1px solid var(--line); }
-  .ref-steps .n {
-    flex: none; width: 24px; height: 24px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
-    color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-    border-radius: 50%;
-  }
+  .ref-steps > div { display: flex; align-items: center; gap: 16px; padding: 14px 2px; border-top: 1px solid var(--line); }
+  .ref-steps .step-ic { flex: none; width: 60px; height: 60px; color: var(--text); stroke-width: 0.8; }
   .ref-steps b { font-size: 13px; font-weight: 620; font-family: var(--font-display); display: block; }
   .ref-steps span { font-size: 12px; color: var(--muted); line-height: 1.5; display: block; margin-top: 2px; }
 

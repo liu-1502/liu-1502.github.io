@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ShieldCheck, Info } from "lucide-react";
 import "./dashboard.css";
 import { pageMetadata } from "@/lib/pages";
 import TokenStrip from "@/components/ui/TokenStrip";
@@ -8,28 +9,53 @@ export const metadata = pageMetadata("/");
 export default function Dashboard() {
   return (
     <div className="pg-dashboard">
-      <div className="dash-head">
-        <Link className="verified" href="/transparency" title="Open the live proof-of-reserves feed">
-          <span className="pulse"></span>RESERVES VERIFIED · 15 MIN<span className="arr">→</span>
-        </Link>
-      </div>
-
       <div className="page-stats rv">
         <div>
-          <div className="k">Total TVL</div>
+          <div className="k">Total TVL
+            <span className="stat-info">
+              <Info className="stat-i" />
+              <span className="stat-pop" role="tooltip">
+                <span className="sp-title">TVL breakdown</span>
+                <span className="sp-donut">
+                  <span className="tvl-donut" aria-hidden="true" />
+                  <span className="sp-legend">
+                    <span><i style={{ background: "var(--alpha)" }} />Alpha<b>52.1%</b></span>
+                    <span><i style={{ background: "var(--prime)" }} />Prime<b>29.9%</b></span>
+                    <span><i style={{ background: "var(--mkt)" }} />Marketplace<b>11.4%</b></span>
+                    <span><i style={{ background: "var(--faint)" }} />Other<b>6.6%</b></span>
+                  </span>
+                </span>
+              </span>
+            </span>
+          </div>
           <div className="v" data-count="54612904" data-prefix="$">$0</div>
         </div>
         <div>
-          <div className="k">Yield distributed</div>
+          <div className="k">Yield distributed
+            <span className="stat-info">
+              <Info className="stat-i" />
+              <span className="stat-pop" role="tooltip">
+                <span className="sp-title">Yield distribution</span>
+                <svg className="sp-line" viewBox="0 0 240 92" fill="none" aria-hidden="true">
+                  <polyline points="10,54 47,47 83,39 120,33 157,34 193,27 230,15" stroke="var(--alpha)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <polyline points="10,67 47,64 83,58 120,52 157,56 193,50 230,48" stroke="var(--prime)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="sp-lgd">
+                  <span><i style={{ background: "var(--alpha)" }} />Yuzu Alpha</span>
+                  <span><i style={{ background: "var(--prime)" }} />Yuzu Prime</span>
+                </span>
+              </span>
+            </span>
+          </div>
           <div className="v" data-count="2559843" data-prefix="$">$0</div>
         </div>
         <div>
           <div className="k">Alpha collateral ratio</div>
-          <div className="v" style={{ color: "var(--good)" }}>110.82%</div>
+          <div className="v" style={{ color: "var(--good)" }}>110<span className="num-sep">.</span>82%</div>
         </div>
         <div>
           <div className="k">Prime backing</div>
-          <div className="v" style={{ color: "var(--good)" }}>100.28%</div>
+          <div className="v" style={{ color: "var(--good)" }}>100<span className="num-sep">.</span>28%</div>
         </div>
       </div>
 
@@ -40,108 +66,103 @@ export default function Dashboard() {
         </div>
         <div className="prod-rows">
           <Link className="card ticked prod-row alpha" href="/alpha">
+            <svg className="prod-illus" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M43.0015 39.9995C43.0015 41.6564 41.6583 42.9995 40.0015 42.9995C38.3446 42.9995 37.0015 41.6564 37.0015 39.9995C37.0015 38.3427 38.3446 36.9995 40.0015 36.9995C41.6583 36.9995 43.0015 38.3427 43.0015 39.9995ZM64.6011 64.6006C70.7211 58.5106 64.6611 42.5206 51.1011 28.9006C37.4811 15.3406 21.4911 9.28063 15.4011 15.4006C9.28112 21.4906 15.3411 37.4806 28.9011 51.1006C42.5211 64.6606 58.5111 70.7206 64.6011 64.6006ZM51.1011 51.1006C64.6611 37.4806 70.7211 21.4906 64.6011 15.4006C58.5111 9.28063 42.5211 15.3406 28.9011 28.9006C15.3411 42.5206 9.28112 58.5106 15.4011 64.6006C21.4911 70.7206 37.4811 64.6606 51.1011 51.1006Z" stroke="currentColor" strokeWidth={2} strokeLinecap="round" />
+            </svg>
             <span className="id">
-              <TokenStrip syms={["yzUSD", "syzUSD", "yzPP"]} />
-              <span>
-                <b>Alpha</b>
-                <small>Onchain Yield Products</small>
-              </span>
+              <b>Alpha</b>
+              <TokenStrip syms={["syzUSD", "yzPP", "yzUSD"]} />
             </span>
             <p className="desc">
-              Overcollateralized yield-bearing stablecoin product with risk tranching (junior/senior
-              tranche).
+              Overcollateralized yield engine with two tranches. Stake into syzUSD for weekly yield
+              with no KYC.
             </p>
-            <span className="apy">
-              <span className="v">7.75-27%</span>
-              <span className="k">Target range</span>
-            </span>
-            <span className="cta">
-              Open <span className="arr">→</span>
-            </span>
+            <div className="prod-foot">
+              <span className="apy">
+                <span className="v">7.75% – 27%</span>
+                <span className="k">Target APY</span>
+              </span>
+              <span className="cta">
+                Open <span className="arr">→</span>
+              </span>
+            </div>
           </Link>
           <Link className="card ticked prod-row prime" href="/prime">
+            <svg className="prod-illus" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M40 14 L64 22 L40 30 L16 22 Z" />
+              <path d="M40 25 L64 33 L40 41 L16 33 Z" />
+              <path d="M40 36 L64 44 L40 52 L16 44 Z" />
+              <path d="M40 47 L64 55 L40 63 L16 55 Z" />
+            </svg>
             <span className="id">
+              <b>Prime</b>
               <TokenStrip syms={["yzPrime"]} />
-              <span>
-                <b>Prime</b>
-                <small>Structured Yield Products</small>
+            </span>
+            <p className="desc">Tokenized T-Bills, AAA CLOs, and overcollateralized lending.</p>
+            <div className="prod-foot">
+              <span className="apy">
+                <span className="v">7.06%</span>
+                <span className="k">Target APY</span>
               </span>
-            </span>
-            <p className="desc">
-              Structured institutional-grade tokenized real-world assets with{" "}
-              <span style={{ color: "var(--prime)", fontWeight: 600 }}>6.5%</span> target yield
-              through enhanced fixed-income strategies.
-            </p>
-            <span className="apy">
-              <span className="v">7.00%</span>
-              <span className="k">Target APY</span>
-            </span>
-            <span className="cta">
-              Open <span className="arr">→</span>
-            </span>
+              <span className="cta">
+                Open <span className="arr">→</span>
+              </span>
+            </div>
           </Link>
           <Link className="card ticked prod-row mkt" href="/marketplace">
+            <svg className="prod-illus" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="40" y1="40" x2="22" y2="22" strokeDasharray="2 3.5" />
+              <line x1="40" y1="40" x2="58" y2="22" strokeDasharray="2 3.5" />
+              <line x1="40" y1="40" x2="67" y2="44" strokeDasharray="2 3.5" />
+              <line x1="40" y1="40" x2="40" y2="67" strokeDasharray="2 3.5" />
+              <line x1="40" y1="40" x2="13" y2="44" strokeDasharray="2 3.5" />
+              <circle cx="40" cy="40" r="11" fill="var(--surface)" />
+              <path d="M40 33 L45.5 36.25 L45.5 43.75 L40 47 L34.5 43.75 L34.5 36.25 Z" />
+              <circle cx="22" cy="22" r="5.5" />
+              <circle cx="58" cy="22" r="5.5" />
+              <circle cx="67" cy="44" r="5.5" />
+              <circle cx="40" cy="67" r="5.5" />
+              <circle cx="13" cy="44" r="5.5" />
+            </svg>
             <span className="id">
+              <b>Marketplace</b>
               <TokenStrip syms={["yzCash", "yzSyrup"]} />
-              <span>
-                <b>Marketplace</b>
-                <small>Curated strategies · Permissionless</small>
-              </span>
             </span>
             <p className="desc">
-              Hand-picked strategies packaged as single tokens: yzCash for T-Bill cash management,
-              yzSyrup for leveraged Maple lending. Diligence published pre-listing.
+              Hand-picked strategies in yzCash and yzSyrup for leveraged Maple lending.
             </p>
-            <span className="apy">
-              <span className="v">4.90 / 8.53%</span>
-              <span className="k">Current APY</span>
-            </span>
-            <span className="cta">
-              Open <span className="arr">→</span>
-            </span>
+            <div className="prod-foot">
+              <span className="apy">
+                <span className="v">4.90% – 8.53%</span>
+                <span className="k">Current APY</span>
+              </span>
+              <span className="cta">
+                Open <span className="arr">→</span>
+              </span>
+            </div>
           </Link>
         </div>
       </section>
 
       <section className="section rv">
-        <div className="section-head">
-          <h2>The security stack</h2>
-          <Link href="/docs#security">Details →</Link>
-        </div>
-        <div className="trust">
-          <div>
-            <em>Proof of reserves</em>
-            <b>Accountable</b>
-            <span>
-              Independent, near real-time attestation of assets and liabilities using secure enclaves
-              and zero-knowledge proofs.
+        <Link className="por" href="/transparency" aria-label="View proof-of-reserves details">
+          <div className="por-lead">
+            <span className="por-shield">
+              <ShieldCheck />
             </span>
+            <div>
+              <b>Proof of Reserves</b>
+              <span>Independent third-party verification of the protocol&apos;s backing assets.</span>
+            </div>
           </div>
-          <div>
-            <em>Threat response</em>
-            <b>Hypernative + Sentinel</b>
-            <span>
-              Real-time exploit detection wired to automated withdrawals. Threats flagged minutes
-              before they land onchain.
-            </span>
+          <div className="por-marks">
+            <img src="/assets/partners/accountable-fav.png" alt="Accountable" />
+            <img src="/assets/partners/hypernative-fav.png" alt="Hypernative" />
+            <img src="/assets/partners/fordefi-fav.png" alt="Fordefi" />
+            <img src="/assets/partners/chainlink-fav.png" alt="Chainlink" />
+            <span className="por-arr">→</span>
           </div>
-          <div>
-            <em>Key management</em>
-            <b>Fordefi MPC</b>
-            <span>
-              No single point of failure on protocol funds. SOC 2 certified wallet infrastructure with
-              granular policies.
-            </span>
-          </div>
-          <div>
-            <em>Cross-chain</em>
-            <b>Chainlink CCIP</b>
-            <span>
-              Issuer-owned token pools with per-lane rate limits. Burn and mint transfers, zero
-              slippage.
-            </span>
-          </div>
-        </div>
+        </Link>
       </section>
     </div>
   );

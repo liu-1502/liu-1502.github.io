@@ -6,6 +6,14 @@
    - Cấu trúc cấp 2: thêm `children` vào một NavItem là tự render chevron + rail.
    ================================================================ */
 
+/* ---- Chỉ desktop: viền phải sidebar (màu cụ thể vì --line-solid transparent).
+   Bọc min-width để KHÔNG đè media query mobile của yuzu.css. ---- */
+@media (min-width: 941px) {
+  .side { border-right: 1px solid #DBE4D5; }
+  /* Dark mode: viền phải mờ như topbar (--line-solid tối), tránh trắng gắt. */
+  :root[data-theme="dark"] .side { border-right-color: var(--line-solid); }
+}
+
 /* ---- Logo Yuzu (mark + wordmark) ---- */
 .side .brand svg { width: auto; height: 32px; }
 /* Chỉ quả chanh (mark) squeeze khi hover; chữ "Yuzu" đứng yên. */
@@ -16,17 +24,65 @@
   .brand:hover .logo-mark { animation: none; }
 }
 
-/* ---- Bỏ divider + spacing giữa các section ---- */
-.side-group {
-  border-top: none;
-  margin-top: 20px;
-  padding-top: 0;
+/* ---- Chỉ desktop: divider + spacing giữa các section (như cũ) ----
+   Màu line cụ thể vì --line-solid đang transparent (theme bỏ stroke).
+   Bọc min-width để KHÔNG đè media query mobile của yuzu.css. ---- */
+@media (min-width: 941px) {
+  /* Bỏ border-top gốc của yuzu (dùng --line-solid: trong dark mode hiện ra thành
+     divider lệch dưới logo + double với ::before). Dùng ::before làm divider duy nhất. */
+  .side-group { position: relative; margin-top: 20px; padding-top: 16px; border-top: none; }
+  /* Divider: dài bằng vùng icon+text (thụt 10px = padding item), màu adaptive theo theme. */
+  .side-group::before {
+    content: "";
+    position: absolute; top: 0; left: 10px; right: 10px; height: 1px;
+    background: color-mix(in srgb, var(--text) 12%, transparent);
+  }
+  /* Section đầu tiên không có line dưới logo. */
+  .side-group:first-of-type { margin-top: 24px; padding-top: 0; }
+  .side-group:first-of-type::before { display: none; }
 }
-.side-group:first-of-type { margin-top: 8px; }
-.side-group h6 { margin: 0 0 6px; }
+.side .side-group h6 {
+  margin: 0 0 10px;
+  font-family: var(--font-mono); font-weight: 400; font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase;   /* Geist Mono, viết hoa full, letter-spacing gốc */
+}
 
 /* ---- Item gọn hơn ---- */
 .side-item { padding-top: 7px; padding-bottom: 7px; margin-bottom: 1px; }
+
+/* ---- Hover: dùng accent của chính item (Alpha xanh, Prime nâu, Marketplace xanh dương…)
+   giống lúc selected. --side-accent do yuzu.css set theo data-nav; item ko có accent
+   thì fallback --text (neutral). Selected (.on) để yuzu.css xử lý theo per-nav. ---- */
+/* Mặc định accent = xanh brand -> item thường hover/selected đều xanh (Alpha/Prime/Mkt tự override --side-accent theo màu product) */
+.side-item { --side-accent: var(--citrus); }
+.side-item:hover {
+  color: var(--side-accent, var(--text));
+  background: color-mix(in srgb, var(--side-accent, var(--text)) 10%, transparent);
+}
+.side-item.on { color: var(--side-accent); background: color-mix(in srgb, var(--side-accent) 12%, transparent); }
+
+/* ---- Mũi tên external link (Lucide ArrowUpRight) ---- */
+.side-item .ext { width: 15px; height: 15px; color: var(--faint); }
+.side-item:hover .ext { color: var(--accent); }
+
+/* ---- Alpha/Prime/Marketplace: idle neutral; CHỈ hover + selected mới đổi màu accent riêng.
+   Giữ --side-accent = màu product để hover/.on (rule gốc) lấy màu; idle ép về --muted. ---- */
+.side-item[data-nav="alpha"] { --side-accent: var(--alpha); color: var(--muted); }
+.side-item[data-nav="prime"] { --side-accent: var(--prime); color: var(--muted); }
+.side-item[data-nav="mkt"]   { --side-accent: var(--mkt);   color: var(--muted); }
+
+/* ---- Logo link (Yuzu/Accountable/Telegram/Discord): đơn sắc + cỡ như icon, đều nhau ---- */
+.side-item img {
+  width: 15px; height: 15px;
+  border-radius: 0;
+  object-fit: contain;
+  filter: brightness(0);
+  opacity: .7;
+}
+/* yuzu-fav có nhiều padding trong suốt -> phóng lên cho visual bằng các logo khác */
+.side-item img[src*="yuzu-fav"] { width: 20px; height: 20px; margin: -2.5px -2.5px -2.5px -2px; }
+.side-item:hover img { opacity: 1; }
+:root[data-theme="dark"] .side-item img { filter: brightness(0) invert(1); opacity: .8; }
 
 /* ---- Cấp 1 có mục con: hàng link + chevron ---- */
 .side-parent { padding-right: 6px; }
@@ -67,6 +123,42 @@
 }
 .side-item.lvl2 { padding-left: 10px; }
 .side-item.lvl2.on::before { left: -12px; }
+
+/* ================================================================
+   Collapse / expand sidebar (nút ở topbar thay cho title)
+   ================================================================ */
+.topbar .side-toggle {
+  all: unset; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: var(--r-sm);
+  color: var(--muted); transition: color .15s ease, background .15s ease;
+}
+.topbar .side-toggle:hover { color: var(--text); background: color-mix(in srgb, var(--text) 6%, transparent); }
+.topbar .side-toggle svg { width: 20px; height: 20px; }
+
+@media (min-width: 941px) {
+  .side { transition: width .22s ease, padding .22s ease; }
+  .maincol { transition: margin-left .22s ease; }
+
+  :root.sidebar-collapsed .side { width: 66px; padding-left: 8px; padding-right: 8px; overflow-x: hidden; }
+  :root.sidebar-collapsed .maincol { margin-left: 66px; }
+
+  /* Ẩn chữ, chỉ giữ icon */
+  :root.sidebar-collapsed .side .lbl,
+  :root.sidebar-collapsed .side .side-item .meta,
+  :root.sidebar-collapsed .side .side-item .ext,
+  :root.sidebar-collapsed .side .side-group h6 { display: none; }
+
+  /* Item: icon canh giữa */
+  :root.sidebar-collapsed .side .side-item { justify-content: center; gap: 0; padding-left: 0; padding-right: 0; }
+  :root.sidebar-collapsed .side .side-item.on::before { display: none; }
+
+  /* Logo chỉ hiện mark (favicon), ẩn wordmark */
+  :root.sidebar-collapsed .side .brand { display: block; width: 27px; margin: 0 auto; padding: 4px 0 10px; overflow: hidden; }
+
+  /* Divider thụt cho khớp bề rộng thu gọn */
+  :root.sidebar-collapsed .side-group::before { left: 8px; right: 8px; }
+}
 
 /* ---- Mobile: phẳng thành thanh ngang ---- */
 @media (max-width: 940px) {

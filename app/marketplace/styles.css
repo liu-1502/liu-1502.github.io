@@ -1,46 +1,72 @@
-.pg-marketplace {
-  .prod-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
-  .prod-head .tk-strip img { width: 30px; height: 30px; }
-  .prod-head h1 { font-size: 22px; }
-  .prod-head p { flex-basis: 100%; margin: 2px 0 0; font-size: 13px; color: var(--muted); max-width: 74ch; line-height: 1.6; }
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 34px 0 18px; }
-  .filters button {
-    all: unset;
-    cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    letter-spacing: .05em;
-    padding: 8px 15px;
-    border-radius: var(--r-sm);
-    border: 1px solid var(--line-solid);
-    color: var(--muted);
-    transition: color .15s ease, border-color .15s ease, background .15s ease;
-  }
-  .filters button:hover { color: var(--text); border-color: var(--line-strong); }
-  .filters button.on {
-    color: var(--mkt);
-    border-color: color-mix(in srgb, var(--mkt) 45%, transparent);
-    background: color-mix(in srgb, var(--mkt) 9%, transparent);
-  }
+/* ================================================================
+   Marketplace dùng chung layout/typography của Alpha (app/alpha/styles.css),
+   nhưng GIỮ MÀU XANH DƯƠNG (--mkt) thay cho xanh citrus của Alpha.
+   Override nhân đôi class (.pg-marketplace.pg-marketplace) để specificity cao
+   hơn rule dùng chung của Alpha (:is(.pg-alpha,.pg-prime,.pg-marketplace)),
+   luôn thắng dù thứ tự load CSS đổi khi điều hướng client-side.
+   ================================================================ */
 
-  .vaults { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  @media (max-width: 980px) { .vaults { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 640px) { .vaults { grid-template-columns: 1fr; } }
+/* Page background: xanh dương rất nhạt (chỉ trang Marketplace, theo class body). */
+body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
-  .vault { padding: 22px; display: flex; flex-direction: column; gap: 13px; text-decoration: none; }
-  .vault .vhead { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-  .vault h3 { font-size: 16.5px; line-height: 1.25; }
-  .vault .venue { font-size: 12px; color: var(--faint); margin-top: 3px; font-family: var(--font-mono); }
-  .vault .strat { font-size: 12.5px; color: var(--muted); line-height: 1.55; flex: 1; margin: 0; }
-  .vault .vstats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border-top: 1px solid var(--line);
-    padding-top: 14px;
-    gap: 8px;
-  }
-  .vault .vstats .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
-  .vault .vstats .v { font-family: var(--font-mono); font-size: 14.5px; font-weight: 560; margin-top: 3px; font-variant-numeric: tabular-nums; }
-  .vault .vstats .v.apy { color: var(--mkt); }
-  .vault:hover { border-color: color-mix(in srgb, var(--mkt) 45%, var(--line-strong)); }
+.pg-marketplace.pg-marketplace {
+  --mk-ink: #23265E;                                       /* chữ đậm (thay #142F04) */
+  --mk-card: color-mix(in srgb, var(--mkt) 12%, #F6F8FE);  /* nền card (thay #E2ECD8) */
+  --mk-toggle: color-mix(in srgb, var(--mkt) 13%, #fff);   /* toggle/selected (thay #EBF0E7) */
+  --mk-token: color-mix(in srgb, var(--mkt) 7%, #fff);     /* nền token/hover (thay #ECF6F3) */
+  --mk-badge: color-mix(in srgb, var(--mkt) 15%, #fff);    /* thay #E9F5E2 */
+  --mk-ordhover: color-mix(in srgb, var(--mkt) 5%, #fff);
+  --mk-ordactive: color-mix(in srgb, var(--mkt) 10%, #fff);
+
+  /* Token tabs (Marketplace CÓ tabs: yzSyrup / yzCash) */
+  .tok-tab.on { background: var(--mk-card); }   /* border + text màu accent kế thừa từ shared */
+
+  /* Card deposit/withdraw */
+  .xchg-body { background: var(--mk-card); }
+  .dir-switch button.on { background: var(--mk-toggle); color: var(--mk-ink); }
+  .mfield-l input:not(:placeholder-shown) { color: var(--mk-ink); }
+
+  /* Token badge (nền = tông logo token nhạt) */
+  .mfield .token { background: var(--mk-token); }
+  .mfield .token[data-sym="usdc"] { background: #E6EEFB; }        /* USDC xanh dương */
+  .mfield .token[data-sym="yzSyrup"] { background: #FBEDE4; }     /* cam nhạt (logo cam) */
+  .mfield .token[data-sym="yzCash"] { background: #EEF6E0; }      /* lime nhạt (logo xanh lá) */
+
+  /* Nút swap */
+  .swap-circle { color: var(--mkt); box-shadow: 0 0 0 4px var(--mk-card); }
+  .swap-circle:hover { background: var(--mk-token); }
+
+  /* CTA */
+  .xchg-body .btn.btn-block, .xchg-body .gcta { background: var(--mkt); }
+
+  /* Nút About + dropdown */
+  .about-btn { color: var(--mk-ink); }
+  .about-menu { box-shadow: 0 14px 36px rgba(30,33,89,.16); }
+  .about-menu .aside-title { color: var(--mk-ink); }
+  .about-menu .rows .v { color: var(--mk-ink); }
+  .aside-close:hover { background: var(--mk-token); color: var(--mk-ink); }
+
+  /* Today Order */
+  .ord:hover { background: var(--mk-ordhover); }
+  .ord:active { background: var(--mk-ordactive); }
+  .ord.on { background: var(--mk-toggle); }
+  .ord:focus-visible { outline-color: var(--mkt); }
+  .ord .badge.completed { background: var(--mk-toggle); color: var(--mkt); }
+}
+
+/* ===================== DARK MODE (Marketplace) ===================== */
+:root[data-theme="dark"] body.p-mkt { --bg: color-mix(in srgb, var(--mkt) 7%, #0A0E16); }
+:root[data-theme="dark"] .pg-marketplace.pg-marketplace .mfield .token[data-sym="usdc"] { background: color-mix(in srgb, #6E86FF 16%, var(--surface)); }
+:root[data-theme="dark"] .pg-marketplace.pg-marketplace .mfield .token[data-sym="yzSyrup"] { background: color-mix(in srgb, #E8763A 20%, var(--surface)); }
+:root[data-theme="dark"] .pg-marketplace.pg-marketplace .mfield .token[data-sym="yzCash"] { background: color-mix(in srgb, #9BCC44 20%, var(--surface)); }
+
+/* Re-point các var tint sang nền tối; rule light dùng var() nên tự recompute */
+:root[data-theme="dark"] .pg-marketplace.pg-marketplace {
+  --mk-card: color-mix(in srgb, var(--mkt) 12%, var(--surface));
+  --mk-toggle: color-mix(in srgb, var(--mkt) 18%, var(--surface));
+  --mk-token: color-mix(in srgb, var(--mkt) 12%, var(--surface));
+  --mk-badge: color-mix(in srgb, var(--mkt) 18%, var(--surface));
+  --mk-ordhover: var(--surface-2);
+  --mk-ordactive: color-mix(in srgb, var(--mkt) 14%, var(--surface));
+  --mk-ink: var(--text);
 }

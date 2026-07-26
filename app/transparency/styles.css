@@ -1,6 +1,9 @@
 /* Style riêng của trang Transparency — lồng trong .pg-transparency để không loang
    sang trang khác (nhiều tên class trùng giữa các trang). */
 .pg-transparency {
+  /* Hero: cụm text bên trái canh top */
+  .hub-hero { align-items: start; }
+
   .verify-meta {
     display: flex;
     flex-direction: column;
@@ -8,18 +11,19 @@
     border-radius: var(--r-md);
     background: var(--surface);
     overflow: hidden;
+    padding: 10px 0;
   }
   .verify-meta > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 18px;
+    padding: 6px 18px;
     border-bottom: 1px solid var(--line-solid);
     font-size: 12.5px;
   }
   .verify-meta > div:last-child { border-bottom: none; }
   .verify-meta .k { color: var(--faint); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; }
-  .verify-meta .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .verify-meta .v { font-family: var(--font-mono); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
 
   .statwall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   @media (max-width: 900px) { .statwall { grid-template-columns: 1fr 1fr; } }
@@ -49,7 +53,7 @@
 
   /* strategy / chain tables with bars */
   .split-table { width: 100%; border-collapse: collapse; }
-  .split-table td { padding: 8px 10px 8px 0; font-size: 12.5px; vertical-align: middle; border-bottom: 1px solid var(--line); }
+  .split-table td { padding: 8px 10px 8px 0; font-size: 12.5px; vertical-align: middle; border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
   .split-table tr:last-child td { border-bottom: none; }
   .split-table .nm { font-weight: 600; white-space: nowrap; }
   .split-table .nm small { display: block; font-family: var(--font-mono); font-size: 9.5px; color: var(--faint); font-weight: 400; }
@@ -65,9 +69,9 @@
 
   /* APY table */
   .apy-table { width: 100%; border-collapse: collapse; }
-  .apy-table th { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); font-weight: 500; text-align: right; padding: 10px 0; border-bottom: 1px solid var(--line-solid); }
+  .apy-table th { font-family: var(--font-body); font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 500; text-align: right; padding: 11px 0; border-bottom: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
   .apy-table th:first-child { text-align: left; }
-  .apy-table td { padding: 12px 0; font-size: 13px; border-bottom: 1px solid var(--line); text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .apy-table td { padding: 13px 0; font-size: 13px; border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent); text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
   .apy-table td:first-child { text-align: left; font-family: var(--font-body); font-weight: 600; }
   .apy-table tr:last-child td { border-bottom: none; }
 

@@ -1,43 +1,66 @@
-.pg-prime {
-  .prod-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
-  .prod-head .tk-strip img { width: 30px; height: 30px; }
-  .prod-head h1 { font-size: 22px; }
-  .prod-head p { flex-basis: 100%; margin: 2px 0 0; font-size: 13px; color: var(--muted); max-width: 74ch; line-height: 1.6; }
+/* ================================================================
+   Prime dùng chung layout/typography của Alpha (app/alpha/styles.css),
+   nhưng GIỮ MÀU PRIMARY NÂU (--prime) thay cho xanh citrus của Alpha.
+   Chỉ override các chỗ Alpha hardcode màu xanh; file này load SAU
+   alpha/styles.css nên thắng cascade (cùng specificity).
+   ================================================================ */
+/* Page background: xanh lá -> nâu nhạt (chỉ trang Prime, theo class body). */
+body.p-prime { --bg: color-mix(in srgb, var(--prime) 3.5%, #FDFCF8); }
 
-  .gate-switch {
-    display: inline-flex;
-    gap: 2px;
-    border: 1px solid var(--line-solid);
-    border-radius: var(--r-sm);
-    padding: 3px;
-    background: var(--surface);
-    margin-bottom: 4px;
-  }
-  .gate-switch button {
-    all: unset;
-    cursor: pointer;
-    font-size: 11.5px;
-    font-weight: 550;
-    padding: 6px 13px;
-    border-radius: 4px;
-    color: var(--faint);
-    font-family: var(--font-mono);
-  }
-  .gate-switch button.on { background: color-mix(in srgb, var(--prime) 14%, transparent); color: var(--prime); }
+/* Nhân đôi class -> specificity cao hơn rule xanh của Alpha (:is(.pg-alpha,.pg-prime))
+   nên luôn thắng dù thứ tự load CSS đổi khi điều hướng client-side. */
+.pg-prime.pg-prime {
+  --pr-ink: #3A2A06;                                        /* thay #142F04 (chữ đậm) */
+  --pr-card: color-mix(in srgb, var(--prime) 16%, #FBFAF3); /* thay #E2ECD8 (nền card) */
+  --pr-toggle: color-mix(in srgb, var(--prime) 15%, #fff);  /* thay #EBF0E7 (toggle/selected) */
+  --pr-token: color-mix(in srgb, var(--prime) 8%, #fff);    /* thay #ECF6F3 (nền token/hover) */
+  --pr-badge: color-mix(in srgb, var(--prime) 18%, #fff);   /* thay #E9F5E2 */
+  --pr-ordhover: color-mix(in srgb, var(--prime) 6%, #fff);
+  --pr-ordactive: color-mix(in srgb, var(--prime) 12%, #fff);
 
-  /* composition */
-  .compo { padding: 24px; }
-  .compo > p { font-size: 12.5px; color: var(--muted); max-width: 66ch; line-height: 1.6; margin: 0 0 20px; }
-  .compo-rows { display: flex; flex-direction: column; gap: 14px; }
-  .compo-row { display: grid; grid-template-columns: 220px 1fr 56px; gap: 18px; align-items: center; }
-  @media (max-width: 680px) { .compo-row { grid-template-columns: 1fr 56px; } .compo-row .bar { grid-column: 1 / -1; order: 3; } }
-  .compo-row .name { font-size: 13px; font-weight: 600; }
-  .compo-row .sub { font-size: 11px; color: var(--faint); font-weight: 400; display: block; }
-  .compo-row .bar { height: 8px; border-radius: 2px; background: var(--surface-2); overflow: hidden; position: relative; }
-  .compo-row .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 2px; background: var(--prime); display: block; }
-  .compo-row:nth-child(2) .bar i { opacity: .68; }
-  .compo-row:nth-child(3) .bar i { opacity: .4; }
-  .compo-row .pct { font-family: var(--font-mono); font-size: 13.5px; text-align: right; color: var(--prime); font-variant-numeric: tabular-nums; }
+  /* Card mint/redeem */
+  .xchg-body { background: var(--pr-card); }
+  .dir-switch button.on { background: var(--pr-toggle); color: var(--pr-ink); }
+  .mfield-l input:not(:placeholder-shown) { color: var(--pr-ink); }
 
-  .prime-note { font-size: 11px; color: var(--faint); line-height: 1.7; max-width: 92ch; margin: 24px 0 0; }
+  /* Token badge (nền = tông logo token nhạt) */
+  .mfield .token { background: var(--pr-token); }
+  .mfield .token[data-sym="yzPrime"] { background: color-mix(in srgb, #D9A526 24%, #fff); }  /* amber sạch, khớp logo vàng */
+  .mfield .token[data-sym="usdc"] { background: #E6EEFB; }   /* USDC xanh dương */
+
+  /* Nút swap */
+  .swap-circle { color: var(--prime); box-shadow: 0 0 0 4px var(--pr-card); }
+  .swap-circle:hover { background: var(--pr-token); }
+
+  /* CTA */
+  .xchg-body .btn.btn-block, .xchg-body .gcta { background: var(--prime); }
+
+  /* Nút About + dropdown */
+  .about-btn { color: var(--pr-ink); }
+  .about-menu { box-shadow: 0 14px 36px rgba(60,42,6,.16); }
+  .about-menu .aside-title { color: var(--pr-ink); }
+  .about-menu .rows .v { color: var(--pr-ink); }
+  .aside-close:hover { background: var(--pr-token); color: var(--pr-ink); }
+
+  /* Today Order */
+  .ord:hover { background: var(--pr-ordhover); }
+  .ord:active { background: var(--pr-ordactive); }
+  .ord.on { background: var(--pr-toggle); }
+  .ord:focus-visible { outline-color: var(--prime); }
+  .ord .badge.completed { background: var(--pr-toggle); color: var(--prime); }
+}
+
+/* ===================== DARK MODE (Prime) ===================== */
+:root[data-theme="dark"] body.p-prime { --bg: color-mix(in srgb, var(--prime) 6%, #0C120D); }
+:root[data-theme="dark"] .pg-prime.pg-prime .mfield .token[data-sym="usdc"] { background: color-mix(in srgb, #6E86FF 16%, var(--surface)); }
+
+/* Re-point các var tint sang nền tối; rule light dùng var() nên tự recompute */
+:root[data-theme="dark"] .pg-prime.pg-prime {
+  --pr-card: color-mix(in srgb, var(--prime) 12%, var(--surface));
+  --pr-toggle: color-mix(in srgb, var(--prime) 18%, var(--surface));
+  --pr-token: color-mix(in srgb, var(--prime) 12%, var(--surface));
+  --pr-badge: color-mix(in srgb, var(--prime) 18%, var(--surface));
+  --pr-ordhover: var(--surface-2);
+  --pr-ordactive: color-mix(in srgb, var(--prime) 14%, var(--surface));
+  --pr-ink: var(--text);
 }

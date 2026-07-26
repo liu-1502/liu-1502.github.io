@@ -5,6 +5,8 @@ import "./globals.css";
 import "../styles/yuzu.css";
 // Sidebar 2 cấp — nạp sau yuzu.css để override layout .side-item cũ.
 import "../styles/sidebar.css";
+// Chỉnh weight/letter-spacing nhãn viết hoa nhỏ — nạp sau cùng.
+import "../styles/typography.css";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import LiquidBackground from "@/components/LiquidBackground";
@@ -34,9 +36,9 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* Bộ font gốc: Bricolage Grotesque + Instrument Sans + Geist Mono */}
+        {/* Bộ font gốc: Bricolage Grotesque + Instrument Sans + Geist Mono; Onest cho số liệu/mono */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400..700&family=Geist+Mono:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400..700&family=Geist+Mono:wght@400;500;600&family=Onest:wght@400..700&display=swap"
           rel="stylesheet"
         />
         <script dangerouslySetInnerHTML={{ __html: noFlash }} />

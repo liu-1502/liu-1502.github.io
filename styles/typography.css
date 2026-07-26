@@ -1,0 +1,99 @@
+/* Bấm anchor (docs nav…) nhảy tới ngay, bỏ smooth-scroll chậm của yuzu.css. */
+html { scroll-behavior: auto; }
+
+/* Padding body (.content) là padding duy nhất; bỏ top thừa của hero cho đồng bộ mọi trang */
+.hub-hero { padding-top: 0; }
+
+/* Description/lede gọn hơn 1 chút, đồng bộ mọi trang */
+.hub-hero .lede { font-size: 14px; }
+[class*="pg-"] .opp-head p { font-size: 13px; }
+
+/* Spacing body container: 24px các phía, top gấp đôi = 48px */
+.content { padding: 48px 24px 24px; }
+
+/* Stroke rõ cho button topbar (light mode, --line-solid đang trong suốt) */
+.chain-btn, .theme-btn, .mode-switch { border-color: color-mix(in srgb, var(--text) 14%, transparent); }
+/* Font topbar buttons = Instrument Sans; caret size; Connect Wallet cao 36px bằng nút kế bên */
+.chain-btn, .mode-switch button { font-family: var(--font-body); }
+.chain-btn .caret { width: 14px; height: 14px; color: var(--faint); }
+.topbar .btn-solid { min-height: 36px; padding: 6px 16px; }
+
+/* Radius nhất quán 20px cho mọi card/section */
+.card, .wl-table-wrap, .doc-table-wrap { border-radius: 20px; }
+
+/* Page title đồng bộ mọi trang: brand dark-green + size gọn hơn (theme-adaptive) */
+:root [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 {
+  color: #142F04;
+  font-size: clamp(28px, 3vw, 40px);
+}
+:root[data-theme="dark"] [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 { color: var(--text); }
+
+/* Trang Alpha: bỏ cap max-width để content rộng bằng topbar -> nút About Alpha
+   canh phải khớp Connect Wallet ở mọi bề rộng màn hình. */
+main.content:has(.pg-alpha), main.content:has(.pg-prime), main.content:has(.pg-marketplace), main.content:has(.pg-bridge) { max-width: none; }
+
+/* ================================================================
+   Font mono = Geist Mono (gốc design system, khai báo ở yuzu.css).
+   Siết khoảng cách dấu , . cho số count-up vì Geist Mono chiếm nguyên
+   ô nên dấu trông thưa.
+   ================================================================ */
+.num-sep { margin-inline: -.12em; }
+
+/* ================================================================
+   THEME (light): SURFACES TRẮNG + BỎ MỌI STROKE — toàn site.
+   - Card/section, sidebar, topbar: nền trắng.
+   - Page background giữ nguyên (--bg, xanh nhạt).
+   - Dark mode KHÔNG đổi (các token này được định nghĩa lại ở
+     :root[data-theme="dark"] với specificity cao hơn).
+   ↩ ĐỂ HOÀN TÁC: xoá nguyên block này.
+   ================================================================ */
+:root {
+  --surface: #FFFFFF;      /* card / section / sidebar / topbar: trắng thuần */
+  --line: transparent;     /* bỏ mọi hairline stroke */
+  --line-solid: transparent;
+  --line-strong: transparent;
+  /* Màu brand (citrus → accent). --alpha giữ đồng bộ vì vốn cùng giá trị. */
+  --citrus: #1E7B1E;
+  --alpha: #1E7B1E;
+}
+/* Sidebar + topbar dùng surface (trắng ở light, tự theo dark) */
+.side { background: var(--surface); }
+.topbar { background: var(--surface); }
+
+/* ================================================================
+   Label viết hoa (eyebrow) — toàn site: font Instrument Sans + đậm hơn.
+   ================================================================ */
+.side-group h6,
+.page-stats .k,
+.statline .k,
+.bigstat .k,
+.tp-grid .k,
+.prod-row .apy .k,
+.prod-row .id small,
+.kicker,
+.crumb,
+.trust em,
+.xlabel,
+.xlabel button,
+.topbar .crumb-in,
+.xtra-toggle,
+.chip { font-family: var(--font-mono); font-weight: 500; letter-spacing: -0.02em; }
+
+/* ================================================================
+   Button solid (mặc định) — spec Figma: nền #1A1A1A + inner shadow.
+   ================================================================ */
+.btn-solid {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  min-height: 40px;
+  background: #1A1A1A;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.11);
+}
+.btn-solid:hover { background: #2A2A2A; }
+/* Dark mode: nút solid (Connect Wallet) đảo sang trắng cho nổi trên nền tối */
+:root[data-theme="dark"] .btn-solid { background: #FFFFFF; color: #1A1A1A; }
+:root[data-theme="dark"] .btn-solid:hover { background: #E6E6E6; }

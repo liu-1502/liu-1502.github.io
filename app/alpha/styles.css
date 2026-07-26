@@ -1,4 +1,4 @@
-.pg-alpha {
+.pg-alpha, .pg-prime, .pg-marketplace, .pg-bridge {
   .prod-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
   .prod-head .tk-strip img { width: 30px; height: 30px; }
   .prod-head h1 { font-size: 22px; }
@@ -26,4 +26,272 @@
   .gate-switch { display: inline-flex; gap: 2px; border: 1px solid var(--line-solid); border-radius: var(--r-sm); padding: 3px; background: var(--surface); margin-bottom: 4px; }
   .gate-switch button { all: unset; cursor: pointer; font-size: 11.5px; font-weight: 550; padding: 6px 13px; border-radius: 4px; color: var(--faint); font-family: var(--font-mono); }
   .gate-switch button.on { background: color-mix(in srgb, var(--prime) 14%, transparent); color: var(--prime); }
+
+  /* khoảng cách giữa banner eligibility và section bên dưới */
+  .gate { margin-bottom: 24px; }
+
+  /* siết letter-spacing cho mọi chỗ dùng Geist Mono (giống Dashboard: -.03em) */
+  .mfield-l input, .mfield-l .xusd, .bal .v, .rate-line,
+  .ord .oright .ov, .page-stats .v, .compo-row .pct { letter-spacing: -0.03em; }
+
+  /* ================= ALPHA PANEL REDESIGN (Figma) ================= */
+  /* Body: cột 480px canh giữa, gap 24px */
+  .app-layout:not(.xtra-open) {
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+    grid-template-columns: none; padding-top: 0;
+    position: relative;   /* mốc cho nút About Alpha absolute */
+  }
+  .app-layout:not(.xtra-open) > .xtra-bar { display: none; }
+  .app-layout:not(.xtra-open) > .xchg { width: 480px; max-width: 100%; }
+  .app-layout:not(.xtra-open) > aside { display: none; }
+
+  /* ===== Nút About Alpha: góc phải trên content (canh phải như Connect Wallet) ===== */
+  .about-wrap { position: absolute; top: 0; right: 0; z-index: 30; }
+  .about-btn {
+    display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px;
+    background: #fff; border: 1px solid transparent; border-radius: 999px; cursor: pointer;
+    font-family: var(--font-body); font-weight: 500; font-size: 14px; color: #142F04;
+    transition: box-shadow .15s ease;
+  }
+  .about-btn:hover { box-shadow: 0 3px 10px rgba(20,47,4,.14); }   /* chỉ hover mới có bóng */
+  .about-btn .ico { width: 18px; height: 18px; color: #737373; }
+
+  /* Dropdown chi tiết (float dưới nút, canh phải) */
+  .about-menu {
+    position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
+    width: 380px; max-width: 92vw;
+    background: #fff; border-radius: 24px; padding: 20px;
+    box-shadow: 0 14px 36px rgba(20,47,4,.16);
+  }
+  .about-menu[hidden] { display: none; }
+  .about-menu .aside-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 6px; }
+  .aside-close {
+    flex: none; display: grid; place-items: center; width: 28px; height: 28px;
+    background: transparent; border: none; border-radius: 8px; cursor: pointer; color: #737373;  /* secondary */
+    transition: background .15s ease, color .15s ease;
+  }
+  .aside-close:hover { background: #F1F4EE; color: #142F04; }
+  .aside-close svg { width: 18px; height: 18px; }
+  .about-menu .aside-title { margin: 0; font-family: var(--font-body); font-weight: 600; font-size: 18px; color: #142F04; }
+  .about-menu .aside-marks { margin: 0 0 20px; }
+  .about-menu .aside-marks img { width: 28px; height: 28px; border: 2px solid #fff; margin-right: -8px; }
+  .about-menu .aside-card h4 { margin: 0 0 6px; }
+  .about-menu .rows { padding: 10px 12px; border-radius: 16px; border: 1px solid #E9EEE4; }
+  .about-menu .rows .v { font-weight: 500; color: #142F04; }
+  .about-menu .rows .v[style] { font-size: 16px; font-weight: 700; }  /* APY/số nổi: to + đậm hơn */
+  .about-menu .aside-card { background: transparent; border: none; padding: 0; margin: 0; }
+  .about-menu .aside-card + .aside-card { margin-top: 20px; }
+
+  /* Container xchg = 1 cột trong suốt (tabs + card + Today Order) */
+  .xchg {
+    background: transparent; border: none; box-shadow: none; padding: 0; overflow: visible;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  /* --- Token pill tabs --- */
+  .tok-tabs { display: flex; flex-direction: row; justify-content: center; gap: 12px; border: none; }
+  .tok-tab {
+    all: unset; box-sizing: border-box; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0 14px; height: 40px;   /* bằng nút About Alpha */
+    background: #fff; border: 1px solid transparent; border-radius: 999px;
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .tok-tab:hover { box-shadow: 0 3px 10px rgba(20,47,4,.14); }   /* chỉ hover mới có bóng */
+  .tok-tab img { width: 20px; height: 20px; border-radius: 50%; display: block; }
+  .tok-tab .sym { font-family: var(--font-body); font-weight: 600; font-size: 16px; line-height: 20px; color: #1C1C1C; padding-right: 4px; }
+  .tok-tab.on { border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: #E2ECD8; }  /* stroke giống chip; nền khớp card */
+  .tok-tab.on .sym { color: var(--accent); }  /* text selected = màu accent */
+
+  /* --- Card mint/redeem (xanh) --- */
+  .xchg-body {
+    box-sizing: border-box; padding: 20px;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    background: #E2ECD8; border: none; border-radius: 24px;
+  }
+
+  /* --- Segment toggle (Mint/Redeem) --- */
+  .dir-row { justify-content: center; margin: 0; }
+  .dir-row .chip { display: none; }
+  .dir-switch {
+    display: flex; flex-direction: row; justify-content: center; align-items: center;
+    padding: 4px; gap: 4px; width: 212px; height: 44px; margin: 0;
+    background: #fff; border: 1px solid #E8EEE3; border-radius: 9999px;
+  }
+  .dir-switch button {
+    all: unset; cursor: pointer; flex: 1;
+    display: flex; align-items: center; justify-content: center; height: 36px;
+    border-radius: 1000px;
+    font-family: var(--font-body); font-weight: 500; font-size: 16px; color: #737373;
+  }
+  .dir-switch button.on { background: #EBF0E7; color: #142F04; box-shadow: none; }
+
+  /* --- Fields (deposit / receive) + nút swap --- */
+  .xchg-body > [data-dirpanel] { align-self: stretch; display: flex; flex-direction: column; gap: 20px; }
+  .mfields { position: relative; align-self: stretch; display: flex; flex-direction: column; gap: 0; }
+  .mfield {
+    display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end;
+    padding: 16px; gap: 16px; background: #fff; border-radius: 16px;
+  }
+  .mfield-l { flex: 1; align-self: stretch; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 8px; min-width: 0; }  /* label top / value center / ≈$ bottom */
+  .mfield-l .lbl { font-family: var(--font-body); font-weight: 400; font-size: 14px; line-height: 18px; color: #8E8E93; }
+  .mfield-l input {
+    all: unset; width: 100%; min-width: 0;
+    font-family: var(--font-mono); font-weight: 400; font-size: 32px; line-height: 1.1; color: #737373;
+    letter-spacing: -0.03em;
+  }
+  .mfield-l input::placeholder { color: #737373; }
+  .mfield-l input:not(:placeholder-shown) { color: #142F04; }  /* đã nhập -> xanh đậm */
+  .mfield-l .xusd { font-family: var(--font-mono); font-size: 14px; color: #737373; margin: 0; }  /* align bottom qua space-between */
+  /* lỗi KYC/KYB: ẩn mặc định, chỉ hiện khi .mfield.err (JS bật khi gated & chưa verified) */
+  .mint-err { display: none; font-family: var(--font-body); font-size: 14px; line-height: 1.35; color: #E5484D; }
+  .mfield.err { box-shadow: 0 0 0 1px #E5484D; }        /* viền đỏ */
+  .mfield.err .mint-err { display: block; }
+  .mfield-r { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; flex: none; }
+  .pct-opts { display: flex; gap: 10px; }
+  .pct { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 2px 8px; height: 28px; background: #F5F5F5; border-radius: 6px; font-family: var(--font-body); font-size: 14px; color: #262626; }
+  .pct:hover { background: #ececec; }
+  .mfield .token { background: #ECF6F3; border: none; padding: 5px 12px 5px 6px; gap: 6px; font-family: var(--font-body); font-size: 14px; }
+  /* Nền badge = tông logo token nhưng nhạt */
+  .mfield .token[data-sym="yzUSD"], .mfield .token[data-sym="syzUSD"] { background: #E9F5E2; }  /* citrus xanh */
+  .mfield .token[data-sym="yzPP"] { background: #FBF4DE; }   /* citrus vàng */
+  .mfield .token[data-sym="usdt"] { background: #E3F3EC; }   /* Tether teal */
+  .mfield .token::after { display: none; }
+  .mfield .token img { width: 20px; height: 20px; }
+  .bal { display: flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 14px; color: #737373; }
+  .bal .v { font-family: var(--font-mono); }
+
+  .swap-circle {
+    position: relative; z-index: 2; margin: -22px auto;  /* giữa seam + chừa 4px hở giữa 2 card */
+    width: 48px; height: 48px; padding: 0; box-sizing: border-box;
+    display: grid; place-items: center;
+    background: #fff; border: none; border-radius: 50%; color: #1E7B1E;
+    box-shadow: 0 0 0 4px #E2ECD8;   /* ring 4px nằm ngoài */
+    cursor: pointer; transition: background .15s ease, transform .15s ease;
+  }
+  .swap-circle:hover { background: #ECF6F3; }
+  .swap-circle:active { transform: scale(.92); }
+  .swap-circle svg { width: 20px; height: 20px; }
+
+  /* --- Nút CTA + footer --- */
+  .xchg-body .btn.btn-block, .xchg-body .gcta {
+    align-self: stretch; width: 100%; height: 48px;
+    background: #207B1E; color: #fff; border: none;
+    border-radius: 12px; box-shadow: inset 0 -2px 0 rgba(0,0,0,.11);
+    font-family: var(--font-body); font-weight: 600; font-size: 18px;
+  }
+  .xchg-body .btn-block:disabled { opacity: .45; box-shadow: none; cursor: not-allowed; }
+  .xmeta { display: none; }  /* thay bằng footer */
+  .mfoot { display: flex; justify-content: space-between; align-self: stretch; gap: 18px; }
+  .mfoot span { font-family: var(--font-body); font-style: italic; font-size: 14px; color: #737373; }
+  /* dòng tỉ giá (JS thêm vào cuối mỗi panel) */
+  .rate-line { align-self: flex-start; margin-top: -12px; font-family: var(--font-mono); font-size: 14px; color: #737373; }  /* sát card: gap 20 - 12 = 8px */
+
+  /* --- FAQ + Order history (accordion native) --- */
+  .acc { background: #fff; border-radius: 16px; overflow: hidden; }
+  .acc > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 16px 12px; font-family: var(--font-body); font-weight: 500; font-size: 16px; color: #262626; }
+  .acc > summary::-webkit-details-marker { display: none; }
+  .acc > summary .ico { width: 20px; height: 20px; color: #8E8E93; flex: none; }  /* neutral giống label "You deposit" */
+  /* "Learn more →" bên phải ngoài cùng, style giống dashboard */
+  .acc > summary .fmore {
+    margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 400; color: #737373; white-space: nowrap;
+  }
+  .acc > summary .fmore .arr { font-family: var(--font-mono); font-size: 16px; display: inline-block; transition: transform .18s ease; }
+  .acc.faq:hover > summary .fmore .arr { transform: translateX(3px); }
+  .acc[open] > summary { padding-bottom: 8px; }
+  .acc .acc-body { padding: 0 12px 16px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .ohist > summary .cnt { margin-left: auto; font-size: 14px; color: #737373; font-weight: 400; }
+  .ord-filters { display: flex; gap: 8px; padding: 4px 12px 12px; flex-wrap: wrap; }
+  .ofilter {
+    all: unset; box-sizing: border-box; cursor: pointer;
+    padding: 6px 14px; border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);  /* stroke neutral như divider */
+    font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--text);  /* text đen 14px medium */
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .ofilter:hover { background: color-mix(in srgb, var(--text) 5%, transparent); }
+  .ofilter.on { background: color-mix(in srgb, var(--accent) 12%, transparent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); }
+  .ord {
+    display: flex; align-items: center; gap: 12px; padding: 12px;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .olist .ord:not(:last-child) { border-bottom: 1px solid #E9EEE4; }  /* stroke nhẹ, trừ item cuối */
+  .olist .ord.last-vis { border-bottom: none; }  /* item hiển thị cuối (kể cả khi lọc) không stroke */
+  .ord:hover { background: #F6F8F3; }
+  .ord:active { background: #EDF3E7; }
+  .ord.on { background: #E9F5E2; }
+  .ord:focus-visible { outline: 2px solid var(--alpha); outline-offset: -2px; }
+  .ord .oicon { width: 28px; height: 28px; flex: none; display: grid; place-items: center; background: #F5F5F5; border-radius: 100px; color: #737373; }
+  .ord .oicon svg { width: 16px; height: 16px; }
+  .ord .oleft { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .ord .oleft .ot { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: #262626; }
+  .ord .oleft .oa { font-family: var(--font-body); font-size: 14px; color: #737373; }
+  .ord .oright { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex: none; }
+  .ord .oright .ov { font-family: var(--font-mono); font-weight: 500; font-size: 14px; color: #262626; }
+  .ord .badge { display: inline-flex; padding: 4px 8px; border-radius: 6px; font-family: var(--font-body); font-weight: 500; font-size: 12px; }
+  .ord .badge.completed { background: #E9F5E2; color: #1E7B1E; }
+  .ord .badge.pending { background: #FFFBEB; color: #F9A006; }
+
+  /* --- Stats card (ngay dưới mint/redeem): mỗi dòng label trái / value phải --- */
+  .page-stats {
+    display: flex; flex-direction: column; grid-template-columns: none;
+    background: #fff; border: none; border-radius: 16px; overflow: visible;
+    padding: 16px; margin: 0;
+  }
+  .page-stats > div {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 5px 0; border: none;
+  }
+  .page-stats .k { margin: 0; }
+  .page-stats .v { margin: 0; font-size: 15px; }
+  /* tạm ẩn section stats (bỏ dòng này để hiện lại) */
+  .page-stats { display: none; }
+
+  @media (max-width: 520px) {
+    .mfield { flex-direction: column; align-items: flex-start; }
+    .mfield-r { align-items: flex-start; }
+  }
+}
+
+/* ===================== DARK MODE (exchange UI, cả 3 trang) ===================== */
+:root[data-theme="dark"] :is(.pg-alpha, .pg-prime, .pg-marketplace, .pg-bridge) {
+  /* Card trắng -> surface tối */
+  .mfield, .acc, .ohist, .about-menu, .about-btn, .tok-tab, .dir-switch, .swap-circle {
+    background: var(--surface);
+  }
+  .dir-switch { border-color: var(--line-solid); }
+  .tok-tab { border-color: transparent; }
+  .aside-marks img { border-color: var(--surface); }
+
+  /* Chữ đậm (#142F04) -> text sáng */
+  .about-btn, .about-menu .aside-title, .about-menu .rows .v,
+  .dir-switch button.on, .ord .oleft .ot, .ord .oright .ov,
+  .mfield-l input:not(:placeholder-shown) { color: var(--text); }
+  .tok-tab .sym { color: var(--text); }
+
+  /* Panel màu (nền card đổi tiền) + các tint -> dẫn xuất từ accent trên nền tối */
+  .xchg-body { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+  .tok-tab.on { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); }
+  .dir-switch button.on { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); color: var(--text); }
+  .mfield .token { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+  .swap-circle { color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+  .swap-circle:hover { background: var(--surface-2); }
+  .pct, .oicon { background: var(--surface-2); color: var(--muted); }
+
+  /* CTA */
+  .xchg-body .btn.btn-block, .xchg-body .gcta { background: var(--accent); color: var(--accent-ink); }
+
+  /* Divider/stroke nhạt -> line tối */
+  .about-menu .rows, .olist .ord:not(:last-child), .ofilter { border-color: var(--line-solid); }
+  .ofilter { color: var(--text); }
+
+  /* Today Order states */
+  .ord:hover { background: var(--surface-2); }
+  .ord:active, .ord.on { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
+  .ord .badge.completed { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); color: var(--accent); }
+
+  /* About dropdown close hover */
+  .aside-close:hover { background: var(--surface-2); color: var(--text); }
 }

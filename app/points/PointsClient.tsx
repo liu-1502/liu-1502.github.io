@@ -15,10 +15,8 @@ export default function PointsClient() {
 
       const handler = () => {
         const txt = b.getAttribute("data-copy") || "";
-        b.textContent = "COPIED";
         b.classList.add("done");
         timer = setTimeout(function () {
-          b.textContent = "COPY";
           b.classList.remove("done");
         }, 1600);
         if (navigator.clipboard && navigator.clipboard.writeText) {

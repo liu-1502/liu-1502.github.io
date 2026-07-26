@@ -36,10 +36,14 @@ export default function YuzuClient() {
         const dec = parseInt(el.getAttribute("data-dec") || "0", 10);
         const pre = el.getAttribute("data-prefix") || "";
         const suf = el.getAttribute("data-suffix") || "";
-        el.textContent =
+        // Bọc dấu , và . vào <span.num-sep> để có thể siết khoảng cách bằng CSS
+        // (font mono khiến dấu chiếm nguyên 1 ô, trông thưa). Giá trị là số + tiền tố
+        // do mình kiểm soát nên an toàn với innerHTML.
+        const s =
           pre +
           val.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }) +
           suf;
+        el.innerHTML = s.replace(/([.,])/g, '<span class="num-sep">$1</span>');
       };
       const animate = (el: Element) => {
         const target = parseFloat(el.getAttribute("data-count") || "");

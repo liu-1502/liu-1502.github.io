@@ -14,32 +14,154 @@
   .dash-head .verified .arr { margin-left: 8px; transition: transform .18s ease; }
   .dash-head .verified:hover .arr { transform: translateX(3px); }
 
-  .prod-rows { display: flex; flex-direction: column; gap: 12px; }
+  /* 3 sản phẩm xếp hàng ngang: grid 3 cột, mỗi card là 1 cột dọc. */
+  .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: stretch; }
+  /* Illustration mỗi product, màu theo product (--pa) */
+  .prod-illus { width: 60px; height: 60px; display: block; margin-bottom: 16px; color: var(--pa); }
+  @media (max-width: 860px) { .prod-rows { grid-template-columns: 1fr; } }
   .prod-row {
-    display: grid;
-    grid-template-columns: 250px 1fr 150px 120px;
-    gap: 24px;
-    align-items: center;
-    padding: 20px 22px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px;
     text-decoration: none;
+    transition: background .25s ease, border-color .25s ease;   /* đổi màu mượt khi hover */
   }
-  @media (max-width: 860px) { .prod-row { grid-template-columns: 1fr; gap: 10px; } }
-  .prod-row .id { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-  .prod-row .id .tk-strip img { width: 26px; height: 26px; border-width: 2px; }
-  .prod-row .id b { font-family: var(--font-display); font-weight: 640; font-size: 16px; display: block; }
+  .prod-row .id { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .prod-row .id .tk-strip img { width: 30px; height: 30px; border: 2px solid #fff; background: #fff; border-radius: 9999px; }  /* logo bọc nền trắng tròn */
+  .prod-row .id b { font-family: var(--font-display); font-weight: 640; font-size: 19px; display: block; }
   .prod-row .id small { font-family: var(--font-mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
-  .prod-row .desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; margin: 0; }
-  .prod-row .apy { text-align: right; }
-  .prod-row .apy .v { font-family: var(--font-mono); font-size: 19px; font-weight: 560; display: block; white-space: nowrap; }
+  .prod-row .desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 14px 0 0; flex: 1; transition: color .25s ease; }
+  /* Footer card: chỉ còn APY, luôn nằm đáy để 3 card thẳng hàng. */
+  .prod-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: auto; }
+  .prod-row .apy { text-align: left; }
+  .prod-row .apy .v { font-family: var(--font-mono); font-size: 19px; font-weight: 560; display: block; white-space: nowrap; letter-spacing: -.03em; }
   .prod-row .apy .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin-top: 2px; display: block; }
-  .prod-row .cta { text-align: right; font-size: 13px; font-weight: 600; }
-  .prod-row .cta .arr { font-family: var(--font-mono); transition: transform .18s ease; display: inline-block; }
-  .prod-row:hover .cta .arr { transform: translateX(4px); }
-  @media (max-width: 860px) { .prod-row .apy, .prod-row .cta { text-align: left; } }
+  /* "Open →" nằm góc trên phải, cùng hàng với logo token. */
+  .prod-row .cta {
+    position: absolute; top: 22px; right: 22px;
+    font-size: 13px; font-weight: 600; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 6px;
+    opacity: 0;
+    transition: opacity .18s ease;
+  }
+  .prod-row .cta .arr { font-family: var(--font-mono); display: inline-block; transition: transform .18s ease; }
+  /* Chỉ hiện "Open →" khi hover; mũi tên nhích nhẹ như "How they differ →" */
+  .prod-row:hover .cta { opacity: 1; }
+  .prod-row:hover .cta .arr { transform: translateX(3px); }
 
   .prod-row.alpha { --pa: var(--alpha); }
   .prod-row.prime { --pa: var(--prime); }
   .prod-row.mkt   { --pa: var(--mkt); }
   .prod-row .id small, .prod-row .apy .v, .prod-row .cta { color: var(--pa); }
   .prod-row:hover { border-color: color-mix(in srgb, var(--pa) 50%, var(--line-strong)); }
+
+  /* Thanh Proof of Reserves (thay cho security stack cũ) */
+  .por {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 18px 22px;
+    background: var(--surface);
+    border-radius: var(--r-md);
+    text-decoration: none;
+    color: inherit;
+  }
+  .por-lead { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+  .por-shield {
+    flex: none; width: 40px; height: 40px; border-radius: 10px;
+    display: grid; place-items: center;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  }
+  .por-shield svg { width: 20px; height: 20px; }
+  .por-lead b { font-family: var(--font-display); font-size: 15px; font-weight: 640; display: block; line-height: 1.25; }
+  /* Chỉ nhắm span mô tả (trong div), KHÔNG trúng .por-shield (span con trực tiếp). */
+  .por-lead div span { font-size: 12.5px; color: var(--muted); display: block; margin-top: 2px; }
+  /* Cụm favicon đối tác (bấm được), nằm bên phải thay Learn More.
+     Favicon tròn xếp chồng như token strip, nền neutral nhạt. */
+  .por-marks { display: flex; align-items: center; flex: none; text-decoration: none; }
+  .por-marks img {
+    box-sizing: border-box;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    /* stroke nhẹ để tách các logo chồng nhau (màu cụ thể vì --line-solid đang
+       transparent do theme bỏ stroke) */
+    border: 1.5px solid #DBE4D5;
+    padding: 6px;
+    object-fit: contain;
+    margin-right: -10px;
+    display: block;
+  }
+  .por-marks img:last-of-type { margin-right: 0; }
+  /* Icon → bấm được kế cụm logo — style như "How they differ →" (không nền). */
+  .por-arr {
+    margin-left: 14px;
+    font-family: var(--font-mono); font-size: 18px;
+    color: var(--muted);
+    display: inline-flex; align-items: center;
+    transition: color .15s ease, transform .18s ease;
+  }
+  /* Hover cả thanh (không chỉ mũi tên) → mũi tên nhích nhẹ */
+  .por:hover .por-arr { color: var(--text); transform: translateX(4px); }
+  @media (max-width: 900px) {
+    .por { flex-wrap: wrap; gap: 18px; }
+    .por-partners { flex-wrap: wrap; }
+  }
+
+  /* Xoá toàn bộ viền (stroke) của các section/card trên Dashboard */
+  .page-stats,
+  .page-stats > div,
+  .card,
+  .card:hover,
+  .prod-row:hover,
+  .trust > div { border: none; }
+
+  /* Màu + size + font số liệu trong khối stats; siết khoảng cách với label */
+  .page-stats .v {
+    color: var(--text);
+    font-size: 20px;
+    line-height: 30px;
+    margin-top: 1px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  /* Nhãn stat: giữ như cũ, chỉ tăng weight cho đậm hơn */
+  .page-stats .k { font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ===== Icon info + popover chart (hover) ===== */
+  .page-stats, .page-stats > div { overflow: visible; }   /* cho popover tràn ra */
+  .stat-info { position: relative; display: inline-flex; align-items: center; }
+  .stat-i { width: 13px; height: 13px; color: var(--faint); cursor: help; transition: color .15s ease; }
+  .stat-info:hover .stat-i { color: var(--text); }
+  .stat-pop {
+    display: none; position: absolute; top: calc(100% + 10px); left: -10px; z-index: 50;
+    width: 260px; padding: 14px; border-radius: 14px;
+    background: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .16);
+    text-transform: none; letter-spacing: normal; cursor: default;
+  }
+  .stat-info:hover .stat-pop { display: block; }
+  .sp-title { display: block; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--text); margin-bottom: 12px; }
+  /* Donut TVL (conic + mask) */
+  .sp-donut { display: flex; align-items: center; gap: 16px; }
+  .tvl-donut {
+    flex: none; width: 84px; height: 84px; border-radius: 50%;
+    background: conic-gradient(var(--alpha) 0 52.1%, var(--prime) 52.1% 82%, var(--mkt) 82% 93.4%, var(--faint) 93.4% 100%);
+    -webkit-mask: radial-gradient(circle, transparent 54%, #000 55%);
+    mask: radial-gradient(circle, transparent 54%, #000 55%);
+  }
+  .sp-legend { display: flex; flex-direction: column; gap: 7px; flex: 1; font-family: var(--font-body); font-size: 12px; color: var(--muted); }
+  .sp-legend > span { display: flex; align-items: center; gap: 7px; }
+  .sp-legend i { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+  .sp-legend b { margin-left: auto; color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+  /* Line chart Yield (2 màu) */
+  .sp-line { width: 100%; height: 92px; display: block; }
+  .sp-lgd { display: flex; gap: 16px; margin-top: 10px; font-family: var(--font-body); font-size: 12px; color: var(--muted); }
+  .sp-lgd > span { display: inline-flex; align-items: center; gap: 6px; }
+  .sp-lgd i { width: 12px; height: 3px; border-radius: 2px; flex: none; }
 }

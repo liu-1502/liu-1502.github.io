@@ -12,6 +12,10 @@ import {
   ArrowLeftRight,
   FileText,
   ChevronDown,
+  ArrowUpRight,
+  Coins,
+  Landmark,
+  Store,
 } from "lucide-react";
 import Logo from "./Logo";
 import { pageMeta } from "@/lib/pages";
@@ -25,9 +29,9 @@ const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
     heading: "Products",
     items: [
       { nav: "dashboard", label: "Dashboard", href: "/", icon: <LayoutDashboard /> },
-      { nav: "alpha", label: "Alpha", href: "/alpha", meta: "7.75-27%" },
-      { nav: "prime", label: "Prime", href: "/prime", meta: "7.00%" },
-      { nav: "mkt", label: "Marketplace", href: "/marketplace", meta: "2 live" },
+      { nav: "alpha", label: "Alpha", href: "/alpha", icon: <Coins />, meta: "7.75-27%" },
+      { nav: "prime", label: "Prime", href: "/prime", icon: <Landmark />, meta: "7.00%" },
+      { nav: "mkt", label: "Marketplace", href: "/marketplace", icon: <Store />, meta: "2 live" },
     ],
   },
   {
@@ -49,10 +53,10 @@ const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
   {
     heading: "Links",
     items: [
-      { label: "Research", href: "https://research.yuzu.money/", external: true },
-      { label: "Accountable", href: "https://yuzu.accountable.capital/", external: true },
-      { label: "Telegram", href: "https://t.me/yuzumoney_stats", external: true },
-      { label: "Discord", href: "https://discord.gg/gjKw4KJyu8", external: true },
+      { label: "Research", href: "https://research.yuzu.money/", external: true, icon: <img src="/assets/partners/yuzu-fav.png" alt="" /> },
+      { label: "Accountable", href: "https://yuzu.accountable.capital/", external: true, icon: <img src="/assets/partners/accountable-fav.png" alt="" /> },
+      { label: "Telegram", href: "https://t.me/yuzumoney_stats", external: true, icon: <img src="/assets/partners/telegram.svg" alt="" /> },
+      { label: "Discord", href: "https://discord.gg/gjKw4KJyu8", external: true, icon: <img src="/assets/partners/discord.svg" alt="" /> },
     ],
   },
 ];
@@ -61,16 +65,17 @@ function SideItem({ item, active, level2 }: { item: NavItem; active: string; lev
   const cls = `side-item${level2 ? " lvl2" : ""}${item.nav === active ? " on" : ""}`;
   if (item.external) {
     return (
-      <a className={cls} href={item.href} target="_blank" rel="noopener">
-        {item.label}
-        <span className="ext">↗</span>
+      <a className={cls} href={item.href} target="_blank" rel="noopener" title={item.label}>
+        {item.icon}
+        <span className="lbl">{item.label}</span>
+        <ArrowUpRight className="ext" />
       </a>
     );
   }
   return (
-    <Link className={cls} href={item.href} data-nav={item.nav} aria-current={item.nav === active ? "page" : undefined}>
+    <Link className={cls} href={item.href} data-nav={item.nav} title={item.label} aria-current={item.nav === active ? "page" : undefined}>
       {item.icon}
-      {item.label}
+      <span className="lbl">{item.label}</span>
       {item.meta && <span className="meta">{item.meta}</span>}
     </Link>
   );
@@ -159,11 +164,6 @@ export default function Sidebar() {
         </div>
       ))}
 
-      <div className="side-foot">
-        <span className="live">
-          <span className="pulse"></span>LIVE APP
-        </span>
-      </div>
     </aside>
   );
 }

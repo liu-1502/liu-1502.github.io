@@ -26,12 +26,11 @@ export default function Transparency() {
     <div className="pg-transparency">
       <section className="hub-hero">
         <div>
-          <h1>Every dollar, <span className="grad">accounted for</span>.</h1>
+          <h1>Transparency</h1>
           <p className="lede">An independent proof of solvency, live: assets and liabilities across Yuzu Alpha and Prime are attested every 15 minutes by Accountable, a verification network using secure enclaves and zero-knowledge proofs. This page renders their verified feed, position by position.</p>
           <div style={{ display: "flex", gap: 12, marginTop: 26, flexWrap: "wrap" }}>
-            <Button href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">Official Accountable dashboard <span className="arr">↗</span></Button>
+            <Button href="https://yuzu.accountable.capital/" target="_blank" rel="noopener" variant="solid"><img src="/assets/partners/accountable-fav.png" alt="" style={{ width: 18, height: 18, filter: "brightness(0) invert(1)" }} />Official Accountable dashboard <span className="arr">↗</span></Button>
           </div>
-          <p className="asof">Data snapshot: 2026-07-16 05:03 UTC</p>
         </div>
         <div className="verify-meta rv">
           <div><span className="k">Verifier</span><span className="v">Accountable DVN</span></div>
@@ -132,7 +131,6 @@ export default function Transparency() {
         <div className="card tp-panel">
           <div className="phead">
             <h3>Backing assets vs supply</h3>
-            <span className="chip open">Overcollateralized</span>
           </div>
           <div className="tp-grid">
             <div><div className="k">yzUSD TVL</div><div className="v" data-count="44554443" data-prefix="$">$0</div></div>
@@ -160,7 +158,6 @@ export default function Transparency() {
         <div className="card tp-panel pro-only">
           <div className="phead">
             <h3>Strategy breakdown, position by position</h3>
-            <span className="chip open">Whitelist bound</span>
           </div>
           <p style={{ fontSize: "12.5px", color: "var(--muted)", lineHeight: 1.6, margin: "0 0 8px", maxWidth: "70ch" }}>Every position backing Alpha, as attested on 2026-07-16. Names map to entries on the <Link href="/whitelist" style={{ color: "var(--citrus)" }}>public whitelist</Link>; "Loop" positions are leveraged deployments in isolated markets.</p>
           <SplitTable rows={ALPHA_SPLIT} colorVar="--alpha" />
@@ -192,7 +189,6 @@ export default function Transparency() {
         <div className="card tp-panel">
           <div className="phead">
             <h3>Assets against liabilities</h3>
-            <span className="chip gated">Eligible Investors product</span>
           </div>
           <div className="tp-grid">
             <div><div className="k">Assets / liabilities</div><div className="v" style={{ color: "var(--good)" }}>100.28%</div></div>
@@ -231,7 +227,7 @@ export default function Transparency() {
         </div>
         <div className="two-col">
           <div className="card tp-panel" style={{ margin: 0 }}>
-            <div className="phead"><h3>Fordefi MPC workspace</h3><span className="chip open">Attested</span></div>
+            <div className="phead"><h3>Fordefi MPC workspace</h3></div>
             <p style={{ fontSize: "12.5px", color: "var(--muted)", lineHeight: 1.6, margin: "0 0 12px" }}>The verification feed also attests the wallet policy itself: what the protocol's keys are allowed to do, and how many signers it takes.</p>
             <div className="tp-grid" style={{ gridTemplateColumns: "1fr 1fr" }}>
               <div><div className="k">Default action</div><div className="v" style={{ color: "var(--risk)" }}>BLOCK</div></div>
@@ -262,11 +258,11 @@ export default function Transparency() {
         </div>
         <div className="two-col">
           <div className="card tp-panel" style={{ margin: 0 }}>
-            <div className="phead"><h3>Alpha wallets</h3><span className="chip plain">15 tracked</span></div>
+            <div className="phead"><h3>Alpha wallets</h3></div>
             <WalletList wallets={ALPHA_WALLETS} />
           </div>
           <div className="card tp-panel" style={{ margin: 0 }}>
-            <div className="phead"><h3>Prime wallets</h3><span className="chip plain">7 tracked</span></div>
+            <div className="phead"><h3>Prime wallets</h3></div>
             <WalletList wallets={PRIME_WALLETS} />
             <div className="phead" style={{ marginTop: 22 }}><h3>Core contracts</h3></div>
             <div className="wl-list">

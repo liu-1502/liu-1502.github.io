@@ -1,22 +1,40 @@
 .pg-whitelist {
+  position: relative;
+
+  /* Illustration radar (theo Yuzu) — stroke đen 2px như opportunities */
+  .wl-top { position: relative; }
+  .wl-illus {
+    position: absolute; z-index: 0; pointer-events: none;
+    bottom: -158px; right: -80px; width: 380px; height: 380px;
+    color: #443E38;
+  }
+  /* Table đục + đè lên phần dưới illustration (illus tuck sau table) */
+  .wl-panel .wl-table-wrap { position: relative; z-index: 1; background: var(--surface); }
+  .wl-illus * { vector-effect: non-scaling-stroke; }
+  .hub-hero, .wl-tabs, .wl-panel { position: relative; z-index: 1; }
+  .hub-hero h1 { color: #142F04; }
+  :root[data-theme="dark"] & .hub-hero h1 { color: var(--text); }
+  /* Text dàn ngang rộng, chừa 32px tới illustration (illus hữu hình ~350px) */
+  .hub-hero { grid-template-columns: 1fr; gap: 0; }
+  .hub-hero > div { max-width: calc(100% - 350px - 32px); }
+  .hub-hero .lede { max-width: none; }
+  @media (max-width: 1024px) { .hub-hero > div { max-width: none; } }
+
   /* product tabs */
   .wl-tabs { display: flex; gap: 6px; margin: 34px 0 18px; flex-wrap: wrap; }
   .wl-tabs button {
     all: unset;
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 9px 18px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 16px;
     border-radius: var(--r-sm);
-    border: 1px solid var(--line-solid);
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+    color: var(--text);
     transition: color .15s ease, border-color .15s ease, background .15s ease;
   }
-  .wl-tabs button:hover { color: var(--text); border-color: var(--line-strong); }
-  .wl-tabs button .n { font-family: var(--font-mono); font-size: 10.5px; color: var(--faint); }
+  .wl-tabs button:hover { background: color-mix(in srgb, var(--text) 5%, transparent); }
   .wl-tabs button[data-t="alpha"].on { color: var(--alpha); border-color: color-mix(in srgb, var(--alpha) 50%, transparent); background: color-mix(in srgb, var(--alpha) 9%, transparent); }
   .wl-tabs button[data-t="prime"].on { color: var(--prime); border-color: color-mix(in srgb, var(--prime) 50%, transparent); background: color-mix(in srgb, var(--prime) 9%, transparent); }
   .wl-tabs button[data-t="cash"].on  { color: var(--mkt); border-color: color-mix(in srgb, var(--mkt) 50%, transparent); background: color-mix(in srgb, var(--mkt) 9%, transparent); }
@@ -24,38 +42,74 @@
   .wl-panel { display: none; }
   .wl-panel.on { display: block; }
 
-  .wl-table-wrap { overflow-x: auto; border: 1px solid var(--line-solid); border-radius: var(--r-md); background: var(--surface); }
+  /* Chuông floating: thu gọn = tròn xanh brand; hover = bung pill xanh, chữ trắng */
+  .wl-bell {
+    position: fixed; right: 26px; bottom: 26px; z-index: 60;
+    display: flex; align-items: center; white-space: nowrap;
+    height: 56px; width: 56px; border-radius: 999px;
+    background: var(--surface); color: var(--citrus);
+    border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .14);
+    overflow: hidden;
+    transition: width .34s cubic-bezier(.2, .7, .2, 1), background .25s ease, color .25s ease, border-color .25s ease, box-shadow .2s ease;
+  }
+  .wl-bell:hover {
+    width: 296px;
+    background: var(--citrus); color: #fff; border-color: var(--citrus);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, .22);
+  }
+  .wl-bell-ic { flex: none; width: 24px; height: 24px; margin: 0 16px; transform-origin: top center; animation: wl-ring 2.6s ease-in-out infinite; }
+  .wl-bell-tx { display: flex; flex-direction: column; line-height: 1.2; }
+  .wl-bell-tx b { font-family: var(--font-body); font-weight: 600; font-size: 14px; }
+  .wl-bell-tx > span { font-family: var(--font-body); font-size: 12px; opacity: .9; }
+  .wl-bell-arr { flex: none; width: 20px; height: 20px; margin: 0 18px 0 auto; }
+  @keyframes wl-ring {
+    0%, 55%, 100% { transform: rotate(0deg); }
+    8%, 24% { transform: rotate(13deg); }
+    16%, 32% { transform: rotate(-13deg); }
+    40% { transform: rotate(5deg); }
+    48% { transform: rotate(-3deg); }
+  }
+
+  .wl-table-wrap { overflow-x: auto; border: 1px solid var(--line-solid); border-radius: 20px; background: var(--surface); }
   table.wl { width: 100%; border-collapse: collapse; min-width: 860px; }
   table.wl th {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: .11em;
-    text-transform: uppercase;
-    color: var(--faint);
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--muted);
     font-weight: 500;
     text-align: left;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--line-solid);
+    padding: 13px 18px;
+    border-bottom: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
   }
-  table.wl td { padding: 16px 18px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: top; }
+  table.wl th:nth-child(4) { width: 160px; white-space: nowrap; }
+  table.wl td { padding: 15px 18px; border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent); font-size: 14px; color: var(--text); vertical-align: top; }
   table.wl tr:last-child td { border-bottom: none; }
   table.wl tbody tr { transition: background .15s ease; }
-  table.wl tbody tr:hover { background: color-mix(in srgb, var(--citrus) 3%, transparent); }
+  table.wl tbody tr:hover { background: color-mix(in srgb, var(--surface-2) 45%, transparent); }
   table.wl .proto { font-weight: 640; font-family: var(--font-display); font-size: 14.5px; white-space: nowrap; }
-  table.wl .assets { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
-  table.wl .desc { color: var(--muted); line-height: 1.55; font-size: 12.5px; max-width: 46ch; }
-  table.wl .date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  table.wl .wl-logo {
+    display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
+    margin-right: 10px; width: 30px; height: 30px; border-radius: 50%; overflow: hidden;
+    background: var(--surface); border: 1px solid rgba(10, 10, 10, .15);
+  }
+  table.wl .wl-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  table.wl .proto > span:last-child { vertical-align: middle; }
+  table.wl .assets { font-family: var(--font-body); font-size: 14px; color: var(--text); }
+  table.wl .desc { font-family: var(--font-body); color: var(--text); line-height: 1.55; font-size: 14px; }
+  table.wl .desc > span { display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; max-width: 46ch; }
+  table.wl .date { font-family: var(--font-body); font-size: 14px; color: var(--text); white-space: nowrap; }
 
-  .st { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
-  .st::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-  .st.active { color: var(--good); }
-  .st.activating { color: var(--prime); }
-  .st.activating::before { animation: pulse 2.2s ease-in-out infinite; }
-  .st.paused { color: var(--risk); }
-  .st-left { display: block; font-family: var(--font-mono); font-size: 10.5px; color: var(--faint); margin-top: 5px; letter-spacing: .04em; text-transform: none; }
+  .st { display: inline-flex; align-items: center; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; white-space: nowrap; padding: 3px 11px; border-radius: 999px; }
+  .st.active { color: var(--surface); background: var(--good); }
+  .st.activating { color: #fff; background: #D97706; }
+  .st.paused { color: var(--surface); background: var(--risk); }
+  .st-left { display: block; font-family: var(--font-body); font-size: 12px; color: #D97706; margin-top: 6px; }
 
   .wl-foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 14px; align-items: center; }
-  .wl-count { font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+  .wl-count { font-family: var(--font-body); font-size: 13.5px; color: var(--muted); }
 
   .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   @media (max-width: 760px) { .rules { grid-template-columns: 1fr; } }

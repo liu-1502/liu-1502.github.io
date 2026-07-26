@@ -1,165 +1,183 @@
 import Link from "next/link";
-import "./styles.css";
+import "../alpha/styles.css";
+import "./styles.css";   /* override màu nâu cho Prime, load sau alpha styles */
+import PrimeClient from "./PrimeClient";
 import { pageMetadata } from "@/lib/pages";
-import TokenPill from "@/components/ui/TokenPill";
-import Button from "@/components/ui/Button";
-import SegmentedTabs from "@/components/ui/SegmentedTabs";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X } from "lucide-react";
 
 export const metadata = pageMetadata("/prime");
+
+/* Ô nhập tiền (deposit / receive) theo layout Figma mới. */
+function Field({
+  label,
+  sym,
+  symLabel,
+  balance,
+  deposit = false,
+  input = {},
+}: {
+  label: string;
+  sym: string;
+  symLabel: string;
+  balance?: string;
+  deposit?: boolean;
+  input?: React.InputHTMLAttributes<HTMLInputElement>;
+}) {
+  return (
+    <div className="mfield">
+      <div className="mfield-l">
+        <span className="lbl">{label}</span>
+        <input type="text" placeholder="0" aria-label={label} {...input} />
+        <div className="xusd">≈ $0.00</div>
+        {deposit && <div className="mint-err">KYC/KYB access required to mint</div>}
+      </div>
+      <div className="mfield-r">
+        {deposit && (
+          <div className="pct-opts">
+            <button type="button" className="pct">25%</button>
+            <button type="button" className="pct">50%</button>
+            <button type="button" className="pct">75%</button>
+            <button type="button" className="pct">Max</button>
+          </div>
+        )}
+        <span className="token" data-sym={sym}>
+          <img src={sym === "usdt" ? "/assets/tokens/usdt0.png" : `/assets/tokens/${sym}.svg`} alt="" />
+          {symLabel}
+        </span>
+        {balance && (
+          <div className="bal">
+            Balance: <span className="v">{balance}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SwapCircle() {
+  return (
+    <button type="button" className="swap-circle" data-swap aria-label="Swap direction">
+      <ArrowUpDown />
+    </button>
+  );
+}
+
+function OrderItem({
+  kind,
+  label,
+  addr,
+  amount,
+  status,
+}: {
+  kind: "mint" | "redeem";
+  label: string;
+  addr: string;
+  amount: string;
+  status: "completed" | "pending";
+}) {
+  const Icon = kind === "mint" ? ArrowDownRight : ArrowUpRight;
+  return (
+    <div className="ord" role="button" tabIndex={0} data-kind={kind}>
+      <span className="oicon"><Icon /></span>
+      <div className="oleft">
+        <span className="ot">{label}</span>
+        <span className="oa">{addr}</span>
+      </div>
+      <div className="oright">
+        <span className="ov">{amount}</span>
+        {status !== "completed" && <span className={`badge ${status}`}>Pending</span>}
+      </div>
+    </div>
+  );
+}
 
 export default function Prime() {
   return (
     <div className="pg-prime">
-      <div className="gate" data-gate-banner>
-        <div>
-          <div className="t">Eligibility verification required</div>
-          <div className="d">Minting and redeeming yzPrime is reserved to Accredited, Qualified, Institutional or Sophisticated Investors. Complete identity and Source-of-Funds screening to unlock this desk.</div>
-        </div>
-        <Button>Verify eligibility <span className="arr">→</span></Button>
-      </div>
 
-      <div className="app-layout" style={{ paddingTop: 26 }}>
+      <div className="app-layout">
 
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
+        {/* Nút About Prime: góc phải trên content, canh phải như Connect Wallet */}
+        <div className="about-wrap">
+          <button className="about-btn" data-about-toggle aria-expanded="false"><CircleHelp className="ico" /> About</button>
+          <div className="about-menu" data-about-menu hidden>
+            <div className="aside-head">
+              <h3 className="aside-title">About yzPrime</h3>
+              <button className="aside-close" data-about-close aria-label="Close details"><X /></button>
+            </div>
+            <div className="tk-strip aside-marks">
+              <img src="/assets/tokens/yzPrime.svg" alt="yzPrime" />
+              <img src="/assets/tokens/usdc.svg" alt="USDC" />
+            </div>
+            <div className="aside-card">
+              <h4>Mandate & NAV</h4>
+              <p>yzPrime accrues continuously at NAV under a public asset-whitelist mandate — tokenized T-Bills, AAA CLOs and overcollateralized lending. No epochs, no lockups.</p>
+              <div className="rows">
+                <div><span className="k">Prevailing NAV</span><span className="v" style={{ color: "var(--prime)" }}>$1.01243</span></div>
+                <div><span className="k">Yield accrual</span><span className="v">Continuous, no epochs</span></div>
+                <div><span className="k">Mandate</span><span className="v">Asset whitelist, public</span></div>
+                <div><span className="k">Network</span><span className="v">Monad</span></div>
+              </div>
+            </div>
+            <div className="aside-card">
+              <h4>Backing, verified live</h4>
+              <p>Assets and liabilities are attested in near real time by Accountable. Check the backing before and after you mint.</p>
+              <div className="rows">
+                <div><span className="k">Assets / liabilities</span><span className="v" style={{ color: "var(--good)" }}>100.28%</span></div>
+                <div><span className="k">Collateral</span><span className="v">100% onchain</span></div>
+                <div><span className="k">Proof of reserves</span><span className="v" style={{ color: "var(--good)" }}><Link href="/transparency" style={{ color: "inherit", textDecoration: "none" }}>Live →</Link></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="xchg rv">
-          <SegmentedTabs
-            className="xchg-tabs"
-            attr="data-tab"
-            items={[
-              { id: "mint", label: "Mint" },
-              { id: "redeem", label: "Redeem" },
-            ]}
-          />
 
-          <div className="xchg-body" data-panel="mint">
-            <div className="xfield">
-              <div className="xlabel">
-                <span>You deposit</span>
-                <span>Balance 0.00 <button type="button">Max</button></span>
-              </div>
-              <div className="xrow">
-                <input type="text" inputMode="decimal" placeholder="0.00" data-src data-rate="0.9860" aria-label="Amount to deposit"/>
-                <TokenPill sym="usdc" label="USDC" />
-              </div>
-              <div className="xusd">≈ $0.00</div>
-            </div>
-
-            <div className="xdivider"><span>↓</span></div>
-
-            <div className="xfield">
-              <div className="xlabel"><span>You receive</span></div>
-              <div className="xrow">
-                <input type="text" placeholder="0.00" data-dst readOnly aria-label="Amount received"/>
-                <TokenPill sym="yzPrime" label="yzPrime" />
+          {/* ============ yzPrime ============ */}
+          <div className="xchg-body" data-panel="prime">
+            <div className="dir-row">
+              <div className="dir-switch">
+                <button className="on" data-dir="mint">Mint</button>
+                <button data-dir="redeem">Redeem</button>
               </div>
             </div>
-
-            <div className="xmeta">
-              <div><span className="k">Prevailing NAV</span><span className="v">1 yzPrime = $1.01243</span></div>
-              <div><span className="k">Yield accrual</span><span className="v hi">Continuous, no epochs</span></div>
-              <div><span className="k">Mandate</span><span className="v">Asset whitelist, public</span></div>
-              <div><span className="k">Network</span><span className="v">Monad</span></div>
+            <div data-dirpanel="mint">
+              <div className="mfields">
+                <Field label="You deposit" sym="usdc" symLabel="USDC" balance="$10,000.00" deposit input={{ inputMode: "decimal" }} />
+                <SwapCircle />
+                <Field label="You receive" sym="yzPrime" symLabel="yzPrime" balance="$0.00" input={{ readOnly: true }} />
+              </div>
+              <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
+              <div className="mfoot"><span>Minted Amount: 0.00 yzPrime</span><span>Minting Fee: 0.00%</span></div>
             </div>
-
-            <Button block data-gate-cta disabled>Verify eligibility to mint</Button>
+            <div data-dirpanel="redeem" style={{ display: "none" }}>
+              <div className="mfields">
+                <Field label="You redeem" sym="yzPrime" symLabel="yzPrime" balance="$0.00" deposit input={{ inputMode: "decimal" }} />
+                <SwapCircle />
+                <Field label="You receive" sym="usdc" symLabel="USDC" balance="$10,000.00" input={{ readOnly: true }} />
+              </div>
+              <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
+              <div className="mfoot"><span>Redeemed: 0.00 USDC</span><span>Redeem Fee: 0.00%</span></div>
+            </div>
           </div>
 
-          <div className="xchg-body" data-panel="redeem" style={{ display: "none" }}>
-            <div className="xfield">
-              <div className="xlabel">
-                <span>You redeem</span>
-                <span>Balance 0.00 <button type="button">Max</button></span>
-              </div>
-              <div className="xrow">
-                <input type="text" inputMode="decimal" placeholder="0.00" aria-label="Amount to redeem"/>
-                <TokenPill sym="yzPrime" label="yzPrime" />
-              </div>
-              <div className="xusd">≈ $0.00</div>
+          {/* Order history */}
+          <details className="acc ohist" open>
+            <summary>Today Order</summary>
+            <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="mint">Mint</button><button className="ofilter" data-filter="redeem">Redeem</button></div>
+            <div className="olist">
+              <OrderItem kind="mint" label="Mint yzPrime" addr="0x71bC8…9Ae0" amount="$5,000.00" status="completed" />
+              <OrderItem kind="redeem" label="Redeem yzPrime" addr="0x9A2f1…C4dE" amount="$2,500.00" status="completed" />
+              <OrderItem kind="mint" label="Mint yzPrime" addr="0xeED43…AbbA" amount="$10,000.00" status="pending" />
             </div>
-            <div className="xdivider"><span>↓</span></div>
-            <div className="xfield">
-              <div className="xlabel"><span>You receive</span></div>
-              <div className="xrow">
-                <input type="text" placeholder="0.00" readOnly aria-label="Amount received"/>
-                <TokenPill sym="usdc" label="USDC" />
-              </div>
-            </div>
-            <div className="xmeta">
-              <div><span className="k">Prevailing NAV</span><span className="v">1 yzPrime = $1.01243</span></div>
-              <div><span className="k">Settlement</span><span className="v">Per program rules</span></div>
-            </div>
-            <Button block data-gate-cta disabled>Verify eligibility to continue</Button>
-          </div>
+          </details>
         </div>
-
-        <aside className="rv">
-          <div className="aside-card">
-            <h4>Who can mint</h4>
-            <p>Accredited, Qualified, Institutional or Sophisticated Investors, depending on your jurisdiction. Screening covers KYC or KYB, sanctions, AML and Source-of-Funds. Once verified, you mint and redeem at NAV.</p>
-          </div>
-          <div className="aside-card">
-            <h4>Where your USDC goes</h4>
-            <p>Deposits enter the Collateral Pool, then deploy into tokenized T-Bills, AAA CLOs and overcollateralized lending under the public whitelist mandate. Nothing moves off-list.</p>
-          </div>
-          <div className="aside-card">
-            <h4>Verify, always</h4>
-            <p>Assets and liabilities are attested in near real time. Check the backing before and after you mint.</p>
-            <div className="rows">
-              <div><span className="k">Proof of reserves</span><span className="v" style={{ color: "var(--good)" }}><Link href="/transparency" style={{ color: "inherit", textDecoration: "none" }}>Live →</Link></span></div>
-            </div>
-          </div>
-        </aside>
 
       </div>
 
-
-      <div className="page-stats rv">
-        <div><div className="k">yzPrime TVL</div><div className="v" data-count="6142108" data-prefix="$">$0</div></div>
-        <div><div className="k">Assets / liabilities</div><div className="v" style={{ color: "var(--good)" }}>100.28%</div></div>
-        <div><div className="k">Target APY</div><div className="v" style={{ color: "var(--prime)" }}>7.00%</div></div>
-        <div className="pro-only"><div className="k">Distribution</div><div className="v">Continuous</div></div>
-        <div className="pro-only"><div className="k">Collateral</div><div className="v">100% onchain</div></div>
-      </div>
-
-
-      <section className="section rv pro-only">
-        <div className="section-head">
-          <h2>What backs yzPrime</h2>
-          <Link href="/transparency">Live breakdown →</Link>
-        </div>
-        <div className="card compo">
-          <p>Deposits are deployed into a basket of institutional-grade tokenized instruments, under a public mandate. Live exposure is published on the Accountable dashboard.</p>
-          <div className="compo-rows">
-            <div className="compo-row">
-              <span className="name">Tokenized U.S. T-Bills
-                <span className="sub">BUIDL, VBILL, WTGXX, JTRSY</span>
-              </span>
-              <span className="bar"><i style={{ width: "45%" }}></i></span>
-              <span className="pct">45%</span>
-            </div>
-            <div className="compo-row">
-              <span className="name">AAA-rated CLOs
-                <span className="sub">Zero principal loss in 30+ years, via JAAA, STAC</span>
-              </span>
-              <span className="bar"><i style={{ width: "25%" }}></i></span>
-              <span className="pct">25%</span>
-            </div>
-            <div className="compo-row">
-              <span className="name">Overcollateralized lending
-                <span className="sub">Maple Finance, KYC institutional borrowers only</span>
-              </span>
-              <span className="bar"><i style={{ width: "30%" }}></i></span>
-              <span className="pct">30%</span>
-            </div>
-          </div>
-          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
-            <Button href="/whitelist" variant="line">See all whitelisted assets and protocols <span className="arr">→</span></Button>
-          </div>
-          <p className="prime-note">Primary minting and redeeming of yzPrime are restricted to Eligible Investors. Yuzu Money may decline, pause or revoke access to remain compliant. Retail users are not eligible to mint, subscribe or redeem yzPrime. Secondary-market activity is not operated by Yuzu and remains subject to third-party venue rules and applicable law.</p>
-        </div>
-      </section>
-
+      <PrimeClient/>
     </div>
   );
 }

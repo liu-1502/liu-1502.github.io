@@ -41,20 +41,21 @@ export default function LiquidBackground() {
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseout", onOut);
 
-    const hexToRgb = (h: string): [number, number, number] => {
-      h = h.replace("#", "");
-      if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
-      const n = parseInt(h, 16);
-      return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-    };
     let accRgb: [number, number, number] = [110, 160, 60];
+    /* Resolve --accent ra RGB thật (--accent = var(--citrus)/var(--prime)... nên đọc
+       trực tiếp getPropertyValue ko ra hex). Bong bóng theo accent từng trang. */
     const refreshColor = () => {
-      const a =
-        getComputedStyle(document.body).getPropertyValue("--accent").trim() ||
-        getComputedStyle(document.documentElement).getPropertyValue("--citrus").trim();
-      if (a.indexOf("#") === 0) accRgb = hexToRgb(a);
+      const probe = document.createElement("span");
+      probe.style.cssText = "position:absolute;left:-9999px;color:var(--accent)";
+      document.body.appendChild(probe);
+      const m = getComputedStyle(probe).color.match(/\d+/g);
+      probe.remove();
+      if (m && m.length >= 3) accRgb = [+m[0], +m[1], +m[2]];
     };
     refreshColor();
+    /* Đổi trang -> body đổi class (p-alpha/p-prime...) -> cập nhật màu bong bóng. */
+    const bodyMo = new MutationObserver(refreshColor);
+    bodyMo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
     const onClick = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
       if (t.closest(".theme-btn") || t.closest(".mode-switch")) setTimeout(refreshColor, 60);
@@ -146,6 +147,7 @@ export default function LiquidBackground() {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseout", onOut);
       document.removeEventListener("click", onClick);
+      bodyMo.disconnect();
       canvas.remove();
     };
   }, []);

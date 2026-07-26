@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Globe, ChevronDown } from "lucide-react";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { readStorage, writeStorage } from "@/lib/storage";
 import { chainSrc } from "@/lib/assets";
@@ -15,13 +16,6 @@ const CHAINS: Chain[] = [
   { id: "ethereum", name: "Ethereum", img: chainSrc("ethereum") },
   { id: "sei", name: "SEI EVM", letter: "S" },
 ];
-
-const Globe = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-    <circle cx="12" cy="12" r="8.5" />
-    <path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z" />
-  </svg>
-);
 
 function ChainIcon({ c }: { c: Chain }) {
   if (c.img) return <img src={c.img} alt="" />;
@@ -69,7 +63,7 @@ export default function ChainSelector() {
       >
         <ChainIcon c={current} />
         <span>{current.name}</span>
-        <b className="caret">&#9662;</b>
+        <ChevronDown className="caret" />
       </button>
       <div className="chain-menu" role="listbox">
         {CHAINS.map((x) => (

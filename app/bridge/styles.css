@@ -1,63 +1,139 @@
 .pg-bridge {
-  .chain-select {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 12px;
-    align-items: center;
-    padding: 4px 2px 18px;
-  }
-  .chain-box {
-    border: 1px solid var(--line-strong);
-    border-radius: var(--r-md);
-    background: var(--surface-2);
-    padding: 12px 14px;
-  }
-  .chain-box .cl { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
-  .chain-box .chain-btn {
-    border: none;
-    padding: 0;
-    width: 100%;
+  /* Token+chain selector căn giữa dọc, ngang với số tiền nhập (input ở giữa mfield). */
+  .mfield-r { align-self: center; }
+
+  /* Bộ chọn kết hợp TOKEN + CHAIN */
+  .tc-wrap { position: relative; }
+  .tok-chain {
+    all: unset;
     box-sizing: border-box;
-    font-family: var(--font-display);
-    font-weight: 640;
-    font-size: 15px;
-    color: var(--text);
-    gap: 9px;
-  }
-  .chain-box .chain-btn .caret { margin-left: auto; }
-  .chain-box .chain-btn img { width: 19px; height: 19px; border-radius: 5px; }
-  .chain-box .chain-btn .ch-l { width: 19px; height: 19px; font-size: 10px; border-radius: 5px; }
-  .chain-box .chain-menu { left: -15px; right: auto; top: calc(100% + 14px); min-width: 200px; }
-  .chain-box .chain-menu button { font-size: 13px; }
-  .flip {
-    all: unset;
     cursor: pointer;
-    width: 36px; height: 36px;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--r-sm);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono);
-    color: var(--muted);
-    background: var(--surface-2);
-    transition: transform .25s ease, color .15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 8px 12px 8px 8px;
   }
-  .flip:hover { color: var(--accent); transform: rotate(180deg); }
+  .tc-icon { position: relative; flex: none; width: 36px; height: 36px; }
+  .tc-icon img { width: 36px; height: 36px; border-radius: 50%; display: block; }
+  .tc-badge {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 0 2px #fff;
+  }
+  .tc-badge img,
+  .tc-badge .ch-l { width: 16px; height: 16px; border-radius: 50%; }
+  .tc-badge .ch-l {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-style: normal;
+    background: color-mix(in srgb, var(--citrus) 18%, #fff);
+    color: #142F04;
+  }
+  .tc-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1; }
+  .tc-tok { font-family: var(--font-body); font-weight: 600; font-size: 15px; color: #142F04; }
+  .tc-chain { font-family: var(--font-body); font-size: 12px; color: #737373; margin-top: 2px; }
+  .tc-caret { margin-left: 4px; color: #737373; font-size: 11px; }
 
-  .token-select { display: flex; gap: 8px; padding: 0 2px 16px; }
-  .token-select button {
+  .chain-menu {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 200px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .16);
+    padding: 6px;
+    display: none;
+  }
+  .chx.open .chain-menu { display: block; }
+  .chain-menu button {
     all: unset;
+    box-sizing: border-box;
     cursor: pointer;
-    display: flex; align-items: center; gap: 8px;
-    font-family: var(--font-display);
-    font-weight: 640;
-    font-size: 13.5px;
-    padding: 8px 14px 8px 9px;
-    border: 1px solid var(--line-solid);
-    border-radius: 999px;
-    color: var(--muted);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: #142F04;
   }
-  .token-select button img { width: 19px; height: 19px; border-radius: 50%; display: block; }
-  .token-select button.on { border-color: color-mix(in srgb, var(--citrus) 55%, transparent); color: var(--text); background: color-mix(in srgb, var(--citrus) 8%, transparent); }
+  .chain-menu button img,
+  .chain-menu button .ch-l {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  .chain-menu button .ch-l {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-style: normal;
+    background: color-mix(in srgb, var(--citrus) 18%, #fff);
+  }
+  .chain-menu button:hover { background: rgba(20, 47, 4, .06); }
+  .chain-menu button.on { background: color-mix(in srgb, var(--citrus) 12%, #fff); }
 
-  .lane-note { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--faint); padding: 14px 2px 0; }
+  .lane-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--muted);
+    padding: 14px 2px 0;
+  }
+  .lane-note .pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--good, #1E7B1E);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--good, #1E7B1E) 60%, transparent);
+    animation: bridge-pulse 2s infinite;
+  }
+  @keyframes bridge-pulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good, #1E7B1E) 55%, transparent); }
+    70% { box-shadow: 0 0 0 6px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+}
+
+/* Meta rows trong card (Mechanism/Slippage/Estimated time/CCIP fee): label trái, value phải */
+.pg-bridge .xchg-body .rows { align-self: stretch; display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 16px; }
+.pg-bridge .xchg-body .rows > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.pg-bridge .xchg-body .rows .k { font-family: var(--font-body); font-size: 14px; color: #737373; }
+.pg-bridge .xchg-body .rows .v { font-family: var(--font-mono); font-size: 14px; color: #142F04; text-align: right; }
+
+:root[data-theme="dark"] .pg-bridge {
+  .xchg-body .rows { border-color: var(--line-solid); }
+  .xchg-body .rows .v { color: var(--text); }
+  .tok-chain { background: var(--surface); }
+  .tc-tok { color: var(--text); }
+  .tc-chain { color: var(--muted); }
+  .tc-badge {
+    background: var(--surface);
+    box-shadow: 0 0 0 2px var(--surface);
+  }
+  .chain-menu {
+    background: var(--surface);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .5);
+  }
+  .chain-menu button { color: var(--text); }
+  .chain-menu button:hover { background: rgba(255, 255, 255, .06); }
+  .chain-menu button.on { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); color: var(--accent); }
 }
