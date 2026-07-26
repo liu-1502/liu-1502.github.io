@@ -131,9 +131,9 @@
   all: unset; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; border-radius: var(--r-sm);
-  color: var(--muted); transition: color .15s ease, background .15s ease;
+  color: var(--faint); transition: color .15s ease, background .15s ease;
 }
-.topbar .side-toggle:hover { color: var(--text); background: color-mix(in srgb, var(--text) 6%, transparent); }
+.topbar .side-toggle:hover { color: var(--muted); background: color-mix(in srgb, var(--text) 6%, transparent); }
 .topbar .side-toggle svg { width: 20px; height: 20px; }
 
 @media (min-width: 941px) {

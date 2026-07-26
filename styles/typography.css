@@ -22,16 +22,11 @@ html { scroll-behavior: auto; }
 .card, .wl-table-wrap, .doc-table-wrap { border-radius: 20px; }
 
 /* Page title đồng bộ mọi trang: brand dark-green + size gọn hơn (theme-adaptive) */
-:root [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head, .form-head) h1 {
+:root [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 {
   color: #142F04;
   font-size: clamp(28px, 3vw, 40px);
 }
-:root[data-theme="dark"] [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head, .form-head) h1 { color: var(--text); }
-
-/* Trang có form (Alpha/Prime/Marketplace/Bridge): title căn giữa phía trên card */
-.form-head { text-align: center; max-width: 560px; margin: 0 auto 32px; }
-.form-head h1 { margin: 0 0 10px; }
-.form-head p { font-size: 14px; color: var(--muted); line-height: 1.6; margin: 0; }
+:root[data-theme="dark"] [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 { color: var(--text); }
 
 /* Trang Alpha: bỏ cap max-width để content rộng bằng topbar -> nút About Alpha
    canh phải khớp Connect Wallet ở mọi bề rộng màn hình. */
