@@ -43,10 +43,10 @@
     overflow: hidden; background: color-mix(in srgb, var(--surface-2) 40%, transparent);
     margin-bottom: 16px;
   }
-  .ref-stats > div { padding: 16px 18px; border-right: 1px solid var(--line-solid); text-align: center; }
+  .ref-stats > div { padding: 16px 18px; border-right: 1px solid color-mix(in srgb, var(--text) 10%, transparent); text-align: left; }
   .ref-stats > div:last-child { border-right: none; }
   .ref-stats .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
-  .ref-stats .v { font-family: var(--font-mono); font-size: 18px; font-weight: 560; margin-top: 7px; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .ref-stats .v { font-family: var(--font-mono); font-size: 18px; font-weight: 560; margin-top: 7px; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
   .ref-stats .v.hi { color: var(--accent); }
   .ref-stats .juice-ic { width: 20px; height: 20px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
 

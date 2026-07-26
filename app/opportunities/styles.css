@@ -4,7 +4,7 @@
   /* Illustration circle-dollar-sign (lucide) lấp ló sau table */
   .opp-illus {
     position: absolute; z-index: 0; pointer-events: none;
-    top: -6px; right: 40px; width: 200px; height: 200px;
+    top: -20px; right: -20px; width: 340px; height: 340px;
     color: #443E38;
   }
   /* Giữ stroke đúng 2px thật dù icon scale lớn */

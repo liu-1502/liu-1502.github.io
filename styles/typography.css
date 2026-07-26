@@ -17,6 +17,8 @@ html { scroll-behavior: auto; }
 .chain-btn, .mode-switch button { font-family: var(--font-body); }
 .chain-btn .caret { width: 14px; height: 14px; color: var(--faint); }
 .topbar .btn-solid { min-height: 36px; padding: 6px 16px; }
+/* Giảm padding trái topbar để icon collapse sát divider (viền sidebar) hơn */
+.topbar { padding-left: 14px; }
 
 /* Radius nhất quán 20px cho mọi card/section */
 .card, .wl-table-wrap, .doc-table-wrap { border-radius: 20px; }
