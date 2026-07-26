@@ -95,6 +95,11 @@ export default function Prime() {
   return (
     <div className="pg-prime">
 
+      <div className="form-head rv">
+        <h1>Prime</h1>
+        <p>Institutional yield at NAV — tokenized T-Bills, AAA CLOs, and overcollateralized lending. No epochs, no lockups.</p>
+      </div>
+
       <div className="app-layout">
 
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
