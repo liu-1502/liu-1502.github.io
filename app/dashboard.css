@@ -17,13 +17,13 @@
   /* 3 sản phẩm xếp hàng ngang: grid 3 cột, mỗi card là 1 cột dọc. */
   .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: stretch; }
   /* Illustration mỗi product, màu theo product (--pa) */
-  .prod-illus { width: 60px; height: 60px; display: block; margin-bottom: 16px; color: var(--pa); }
+  .prod-illus { width: 60px; height: 60px; display: block; margin-bottom: 0; color: var(--pa); }
   @media (max-width: 860px) { .prod-rows { grid-template-columns: 1fr; } }
   .prod-row {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
     padding: 22px;
     text-decoration: none;
     transition: background .25s ease, border-color .25s ease;   /* đổi màu mượt khi hover */

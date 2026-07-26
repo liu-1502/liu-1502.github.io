@@ -36,7 +36,11 @@ export const PAGES: Record<string, PageMeta> = {
 const FALLBACK: PageMeta = { nav: "", title: "Yuzu", metaTitle: "Yuzu Money" };
 
 export function pageMeta(pathname: string): PageMeta {
-  return PAGES[pathname] ?? FALLBACK;
+  // trailingSlash:true (static export) khiến usePathname() trả "/prime/".
+  // Chuẩn hoá bỏ "/" cuối để khớp key trong PAGES (nếu không -> FALLBACK,
+  // mất bodyClass p-prime/p-mkt -> nền accent biến mất).
+  const key = pathname !== "/" ? pathname.replace(/\/$/, "") : pathname;
+  return PAGES[key] ?? FALLBACK;
 }
 
 /** Metadata tĩnh cho từng route — dùng: `export const metadata = pageMetadata("/alpha")`. */
