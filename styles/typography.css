@@ -15,6 +15,12 @@ html { scroll-behavior: auto; }
 .chain-btn, .theme-btn, .mode-switch { border-color: color-mix(in srgb, var(--text) 14%, transparent); }
 /* Font topbar buttons = Instrument Sans; caret size; Connect Wallet cao 36px bằng nút kế bên */
 .chain-btn, .mode-switch button { font-family: var(--font-body); }
+/* Accent topbar đổi theo theme trang: Alpha xanh lá, Prime nâu, Marketplace xanh dương */
+body { --topbar-accent: var(--citrus); }
+body.p-alpha { --topbar-accent: var(--alpha); }
+body.p-prime { --topbar-accent: var(--prime); }
+body.p-mkt   { --topbar-accent: var(--mkt); }
+.mode-switch button.on { background: color-mix(in srgb, var(--topbar-accent) 14%, transparent); color: var(--topbar-accent); }
 .chain-btn .caret { width: 14px; height: 14px; color: var(--faint); }
 .topbar .btn-solid { min-height: 36px; padding: 6px 16px; }
 /* Giảm padding trái topbar để icon collapse sát divider (viền sidebar) hơn */

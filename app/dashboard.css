@@ -15,7 +15,9 @@
   .dash-head .verified:hover .arr { transform: translateX(3px); }
 
   /* 3 sản phẩm xếp hàng ngang: grid 3 cột, mỗi card là 1 cột dọc. */
-  .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: stretch; }
+  .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+  /* POR section: khoảng cách tới hàng 3 card = 24px */
+  .section:has(.por) { padding-top: 24px; }
   /* Illustration mỗi product, màu theo product (--pa) */
   .prod-illus { width: 60px; height: 60px; display: block; margin-bottom: 0; color: var(--text); }
   @media (max-width: 860px) { .prod-rows { grid-template-columns: 1fr; } }

@@ -205,7 +205,7 @@
   .ord-filters { display: flex; gap: 8px; padding: 4px 12px 12px; flex-wrap: wrap; }
   .ofilter {
     all: unset; box-sizing: border-box; cursor: pointer;
-    padding: 6px 14px; border-radius: 999px;
+    padding: 6px 14px; border-radius: var(--r-sm);
     border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);  /* stroke neutral như divider */
     font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--text);  /* text đen 14px medium */
     transition: background .15s ease, border-color .15s ease;
