@@ -1,4 +1,4 @@
-import { Copy } from "lucide-react";
+import { Copy, ArrowRight } from "lucide-react";
 import "./styles.css";
 import PointsClient from "./PointsClient";
 import { pageMetadata } from "@/lib/pages";
@@ -37,7 +37,7 @@ export default function Points() {
           </div>
         </div>
         <div className="right">
-          <Button href="/opportunities">Earn Juice <span className="arr">→</span></Button>
+          <Button href="/opportunities">Earn Juice <ArrowRight className="arr" size={16} strokeWidth={2.2} /></Button>
         </div>
       </div>
 
