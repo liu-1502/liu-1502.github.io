@@ -9,6 +9,6 @@ npm-debug.log*
 next-env.d.ts
 *.tsbuildinfo
 
-# Nguồn tạm để bung 12 trang gốc (npm run split). App đã convert xong, không cần commit.
+# Artifact migration HTML->Next.js (chỉ tham chiếu cục bộ, không commit).
 /legacy-html
 /yuzu-source-bundle.txt
