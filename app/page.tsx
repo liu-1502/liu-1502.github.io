@@ -3,6 +3,7 @@ import { ShieldCheck, Info } from "lucide-react";
 import "./dashboard.css";
 import { pageMetadata } from "@/lib/pages";
 import TokenStrip from "@/components/ui/TokenStrip";
+import DashboardHero from "@/components/DashboardHero";
 
 export const metadata = pageMetadata("/");
 
@@ -16,7 +17,7 @@ export default function Dashboard() {
             Risk-curated onchain strategies, packaged as structured yield products. Capital preservation first.
           </p>
         </div>
-        <img className="dash-hero-illus" src="/assets/dashboard-hero.svg" alt="" aria-hidden="true" />
+        <DashboardHero />
       </div>
       <div className="page-stats rv">
         <div>
