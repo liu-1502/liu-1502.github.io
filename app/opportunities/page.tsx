@@ -8,19 +8,6 @@ export const metadata = pageMetadata("/opportunities");
 export default function Opportunities() {
   return (
     <div className="pg-opportunities">
-      <svg className="opp-illus" viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        {/* Vòng ngoài (đứt nét) */}
-        <circle cx="60" cy="46" r="40" strokeDasharray="54 13" />
-        {/* Đồng xu + ký hiệu $ */}
-        <circle cx="60" cy="46" r="24" />
-        <path d="M60 32 V60" />
-        <path d="M66 39C66 35 62 34 58.5 34C54 34 51 36.5 51 40C51 43.5 54.5 44.5 60 45.5C65.5 46.5 68 48 68 51.5C68 55 64.5 57 60 57C55.5 57 52 55.5 52 52" />
-        {/* Mầm 2 lá + thân + mặt đất */}
-        <path d="M60 87C44 87 33 77 35 62C50 65 60 73 60 87Z" />
-        <path d="M60 87C76 87 87 77 85 62C70 65 60 73 60 87Z" />
-        <path d="M60 108 V75" />
-        <path d="M32 108 H88" />
-      </svg>
       <div className="opp-head rv">
         <div>
           <h1>Yield opportunities</h1>
