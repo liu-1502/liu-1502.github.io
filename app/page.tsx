@@ -14,8 +14,8 @@ export default function Dashboard() {
         <div>
           <h1>Dashboard</h1>
           <p style={{ color: "var(--muted)", margin: 0, fontSize: 13 }}>
-            Risk-curated onchain strategies, packaged as structured yield products. Capital preservation
-            first — track TVL, distributed yield, and live protocol backing across Alpha, Prime and Marketplace
+            Risk - curated onchain strategies, packaged as structured yield products. Capital preservation
+            first - track TVL, distributed yield, and live protocol backing across Alpha, Prime and Marketplace
             in one place.
           </p>
         </div>

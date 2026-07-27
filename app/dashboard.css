@@ -21,22 +21,6 @@
   @media (max-width: 700px) { .dash-hero-illus { height: 140px; } }
   @media (max-width: 480px) { .dash-hero-illus { display: none; } }
 
-  /* ===== Hero: chỉ giữ ánh sáng quét nhẹ qua quả chanh (hiệu ứng kính), mỗi ~3s ===== */
-  .dh-shine {
-    transform-box: fill-box;
-    animation: dh-shine 3s ease-in-out infinite;
-  }
-  @keyframes dh-shine {
-    0% { transform: translateX(-115px); opacity: 0; }
-    8% { opacity: 0.5; }
-    34% { opacity: 0.5; }
-    42% { transform: translateX(175px); opacity: 0; }
-    100% { transform: translateX(175px); opacity: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .dh-shine { animation: none; opacity: 0; }
-  }
-
   .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
   /* POR section: khoảng cách tới hàng 3 card = 24px */
   .section:has(.por) { padding-top: 24px; }
