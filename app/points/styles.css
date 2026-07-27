@@ -6,10 +6,10 @@
     padding: 20px;
     margin-bottom: 26px;
   }
-  .juice-hero .lbl { font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .juice-hero .lbl { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
   .juice-hero .num { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .juice-hero .juice-ic { width: 30px; height: 30px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
-  .juice-hero .num .v { font-family: var(--font-mono); font-size: clamp(22px, 2.4vw, 28px); font-weight: 560; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .juice-hero .num .v { font-family: var(--font-mono); font-size: clamp(22px, 2.4vw, 28px); font-weight: 560; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; color: #142F04; }
   .rank-pill {
     font-family: var(--font-mono); font-size: 12px; font-weight: 600;
     color: var(--accent);
@@ -54,9 +54,9 @@
     content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 1px;
     background: color-mix(in srgb, var(--text) 12%, transparent);
   }
-  .ref-stats .k { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
-  .ref-stats .v { font-family: var(--font-mono); font-size: 22px; font-weight: 560; margin-top: 7px; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
-  .ref-stats .v.hi { color: var(--text); }
+  .ref-stats .k { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--accent); }
+  .ref-stats .v { font-family: var(--font-mono); font-size: 22px; font-weight: 560; margin-top: 7px; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: flex-start; gap: 8px; color: #142F04; }
+  .ref-stats .v.hi { color: #142F04; }
   .ref-stats .juice-ic { width: 24px; height: 24px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
 
   .copy-row {
