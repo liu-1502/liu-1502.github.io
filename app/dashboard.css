@@ -16,8 +16,8 @@
 
   /* 3 sản phẩm xếp hàng ngang: grid 3 cột, mỗi card là 1 cột dọc. */
   /* Header dashboard: text trái, illus Yuzu bên phải (inline, không tuck) */
-  .dash-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .dash-hero-illus { flex: none; width: auto; height: 176px; display: block; overflow: visible; }
+  .dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+  .dash-hero-illus { flex: none; width: auto; height: 176px; display: block; overflow: visible; margin: -44px 0 -40px; }
   @media (max-width: 700px) { .dash-hero-illus { height: 140px; } }
   @media (max-width: 480px) { .dash-hero-illus { display: none; } }
 

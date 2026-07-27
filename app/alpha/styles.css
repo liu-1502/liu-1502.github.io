@@ -77,8 +77,10 @@
   .about-menu .aside-marks img { width: 28px; height: 28px; border: 2px solid #fff; margin-right: -8px; }
   .about-menu .aside-card h4 { margin: 0 0 6px; }
   .about-menu .rows { padding: 10px 12px; border-radius: 16px; border: 1px solid #E9EEE4; }
-  .about-menu .rows .v { font-weight: 500; color: #142F04; }
-  .about-menu .rows .v[style] { font-size: 16px; font-weight: 700; }  /* APY/số nổi: to + đậm hơn */
+  /* Giá trị dạng chữ: Instrument Sans, đen, medium */
+  .about-menu .rows .v { font-family: var(--font-body); font-weight: 500; color: #142F04; }
+  /* Số nổi (có màu inline): giữ mono + to/đậm hơn */
+  .about-menu .rows .v[style] { font-family: var(--font-mono); font-size: 16px; font-weight: 700; }
   .about-menu .aside-card { background: transparent; border: none; padding: 0; margin: 0; }
   .about-menu .aside-card + .aside-card { margin-top: 20px; }
 
