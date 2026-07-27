@@ -31,13 +31,12 @@ export default function Points() {
         <div>
           <div className="lbl">Your points</div>
           <div className="num">
-            <span className="v" data-count="1180">0</span>
             <span className="juice-ic" aria-hidden="true" />
+            <span className="v" data-count="1180">0</span>
             <span className="rank-pill">#95</span>
           </div>
         </div>
         <div className="right">
-          <img className="hero-star" src="/assets/points/hero-star.svg" alt="" aria-hidden="true" />
           <Button href="/opportunities">Earn Juice <ArrowRight className="arr" size={16} strokeWidth={2.2} /></Button>
         </div>
       </div>

@@ -8,7 +8,7 @@
   }
   .juice-hero .lbl { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
   .juice-hero .num { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .juice-hero .juice-ic { width: 30px; height: 30px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
+  .juice-hero .juice-ic { width: 22px; height: 22px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
   .juice-hero .num .v { font-family: var(--font-mono); font-size: clamp(22px, 2.4vw, 28px); font-weight: 560; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; color: #142F04; }
   .rank-pill {
     font-family: var(--font-mono); font-size: 12px; font-weight: 600;
@@ -24,8 +24,7 @@
     padding: 3px 11px; cursor: default;
   }
   .boost-pill b { color: var(--accent); font-weight: 600; }
-  .juice-hero .right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .juice-hero .hero-star { width: 64px; height: 64px; flex: none; display: block; }
+  .juice-hero .right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
   /* ---- two-column body ---- */
   .pts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; }
