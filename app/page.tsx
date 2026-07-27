@@ -9,14 +9,14 @@ export const metadata = pageMetadata("/");
 export default function Dashboard() {
   return (
     <div className="pg-dashboard">
-      <img className="dash-hero-illus" src="/assets/dashboard-hero.svg" alt="" aria-hidden="true" />
-      <div className="opp-head rv" style={{ marginBottom: 18 }}>
+      <div className="opp-head dash-head rv" style={{ marginBottom: 18 }}>
         <div>
           <h1>Dashboard</h1>
           <p style={{ color: "var(--muted)", margin: "6px 0 0", fontSize: 13 }}>
             Risk-curated onchain strategies, packaged as structured yield products. Capital preservation first.
           </p>
         </div>
+        <img className="dash-hero-illus" src="/assets/dashboard-hero.svg" alt="" aria-hidden="true" />
       </div>
       <div className="page-stats rv">
         <div>
