@@ -21,49 +21,19 @@
   @media (max-width: 700px) { .dash-hero-illus { height: 130px; } }
   @media (max-width: 480px) { .dash-hero-illus { display: none; } }
 
-  /* ===== Hero animations ===== */
-  /* Mặt trăng vàng bay quanh vòng (ellipse nghiêng -20°); 2 bản trước/sau để đi qua chanh */
-  .dh-moon {
-    offset-path: path("M 35.15 209 A 152 44 -20 1 1 320.85 105 A 152 44 -20 1 1 35.15 209");
-    offset-rotate: 0deg;
-    animation: dh-orbit 11s linear infinite;
-  }
-  .dh-moon-front { animation-name: dh-orbit, dh-vis-front; }
-  .dh-moon-back { animation-name: dh-orbit, dh-vis-back; }
-  @keyframes dh-orbit {
-    from { offset-distance: 0%; }
-    to { offset-distance: 100%; }
-  }
-  /* 0–50% = cung trên (sau chanh) -> hiện bản back; 50–100% = cung dưới (trước) -> bản front */
-  @keyframes dh-vis-front { 0%, 49.9% { opacity: 0; } 50%, 100% { opacity: 1; } }
-  @keyframes dh-vis-back { 0%, 49.9% { opacity: 1; } 50%, 100% { opacity: 0; } }
-
-  /* Vòng đen lượn lên xuống nhẹ (biên độ nhỏ) quanh trục ngang quả chanh */
-  .dh-ring {
-    transform-box: view-box;
-    transform-origin: 180px 176px;
-    animation: dh-bob 7s ease-in-out infinite;
-  }
-  @keyframes dh-bob {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-3px) rotate(1.4deg); }
-  }
-
-  /* Ánh sáng quét qua quả chanh, sáng 1 lần mỗi 2s */
+  /* ===== Hero: chỉ giữ ánh sáng quét nhẹ qua quả chanh (hiệu ứng kính), mỗi ~3s ===== */
   .dh-shine {
     transform-box: fill-box;
-    animation: dh-shine 2s ease-in-out infinite;
+    animation: dh-shine 3s ease-in-out infinite;
   }
   @keyframes dh-shine {
     0% { transform: translateX(-95px); opacity: 0; }
-    6% { opacity: 0.9; }
-    22% { transform: translateX(120px); opacity: 0; }
+    5% { opacity: 0.5; }
+    18% { transform: translateX(120px); opacity: 0; }
     100% { transform: translateX(120px); opacity: 0; }
   }
-
   @media (prefers-reduced-motion: reduce) {
-    .dh-moon, .dh-ring, .dh-shine { animation: none; }
-    .dh-moon-back { opacity: 0; }
+    .dh-shine { animation: none; opacity: 0; }
   }
 
   .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
