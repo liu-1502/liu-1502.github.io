@@ -61,12 +61,12 @@
 
   .copy-row {
     display: flex; align-items: center; gap: 12px;
-    border: 1px solid transparent; border-radius: var(--r-sm);
-    padding: 9px 12px; margin-bottom: 8px;
-    background: color-mix(in srgb, var(--text) 5%, transparent);
+    border: 1px solid transparent; border-radius: 12px;
+    padding: 7px 10px; margin-bottom: 8px;
+    background: color-mix(in srgb, var(--text) 3%, transparent);
   }
-  .copy-row .k { font-size: 12.5px; color: var(--muted); flex: none; }
-  .copy-row .v { font-family: var(--font-mono); font-size: 12.5px; margin-left: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .copy-row .k { font-family: var(--font-body); font-size: 13.5px; color: var(--muted); flex: none; }
+  .copy-row .v { font-family: var(--font-body); font-size: 13.5px; margin-left: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .copy-row button {
     all: unset; cursor: pointer; flex: none;
     display: inline-grid; place-items: center;
