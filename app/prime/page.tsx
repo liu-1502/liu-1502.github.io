@@ -2,6 +2,7 @@ import Link from "next/link";
 import "../alpha/styles.css";
 import "./styles.css";   /* override màu nâu cho Prime, load sau alpha styles */
 import PrimeClient from "./PrimeClient";
+import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
 import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X } from "lucide-react";
 
@@ -150,7 +151,12 @@ export default function Prime() {
                 <Field label="You receive" sym="yzPrime" symLabel="yzPrime" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
-              <div className="mfoot"><span>Minted Amount: 0.00 yzPrime</span><span>Minting Fee: 0.00%</span></div>
+              <MetaRows rows={[
+                { k: "Prevailing NAV", v: "1 yzPrime = $1.01243" },
+                { k: "Yield accrual", v: "Continuous, no epochs", hi: true },
+                { k: "Mandate", v: "Asset whitelist, public" },
+                { k: "Network", v: "Monad" },
+              ]} />
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -159,7 +165,10 @@ export default function Prime() {
                 <Field label="You receive" sym="usdc" symLabel="USDC" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
-              <div className="mfoot"><span>Redeemed: 0.00 USDC</span><span>Redeem Fee: 0.00%</span></div>
+              <MetaRows rows={[
+                { k: "Prevailing NAV", v: "1 yzPrime = $1.01243" },
+                { k: "Settlement", v: "Per program rules" },
+              ]} />
             </div>
           </div>
 

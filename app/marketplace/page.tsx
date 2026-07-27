@@ -1,6 +1,7 @@
 import "../alpha/styles.css";
 import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha styles */
 import MarketplaceClient from "./MarketplaceClient";
+import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
 import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X } from "lucide-react";
 
@@ -155,7 +156,12 @@ export default function Marketplace() {
                 <Field label="You receive" sym="yzSyrup" symLabel="yzSyrup" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
-              <div className="mfoot"><span>Deposit fee: None</span><span>Performance fee: 10%</span></div>
+              <MetaRows rows={[
+                { k: "Current APY", v: "8.53%", hi: true },
+                { k: "Token price", v: "1 yzSyrup = $1.0192" },
+                { k: "Chain", v: "Monad" },
+                { k: "Deposit fee", v: "None" },
+              ]} />
             </div>
             <div data-dirpanel="withdraw" style={{ display: "none" }}>
               <div className="mfields">
@@ -164,7 +170,11 @@ export default function Marketplace() {
                 <Field label="You receive" sym="usdc" symLabel="USDC" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
-              <div className="mfoot"><span>Withdraw fee: None</span><span>Redemption: Open</span></div>
+              <MetaRows rows={[
+                { k: "Current APY", v: "8.53%", hi: true },
+                { k: "Redemption", v: "Open" },
+                { k: "Performance fee", v: "10%" },
+              ]} />
             </div>
           </div>
 
@@ -183,7 +193,12 @@ export default function Marketplace() {
                 <Field label="You receive" sym="yzCash" symLabel="yzCash" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
-              <div className="mfoot"><span>Deposit fee: None</span><span>Liquidity: Instant</span></div>
+              <MetaRows rows={[
+                { k: "Current APY", v: "4.90%", hi: true },
+                { k: "Token price", v: "1 yzCash = $1.0000" },
+                { k: "Liquidity", v: "Instant" },
+                { k: "Deposit fee", v: "None" },
+              ]} />
             </div>
             <div data-dirpanel="withdraw" style={{ display: "none" }}>
               <div className="mfields">
@@ -192,7 +207,11 @@ export default function Marketplace() {
                 <Field label="You receive" sym="usdc" symLabel="USDC" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
-              <div className="mfoot"><span>Withdraw fee: None</span><span>Redemption: Open</span></div>
+              <MetaRows rows={[
+                { k: "Current APY", v: "4.90%", hi: true },
+                { k: "Redemption", v: "Open" },
+                { k: "Liquidity", v: "Instant" },
+              ]} />
             </div>
           </div>
 
