@@ -27,11 +27,11 @@
     animation: dh-shine 3s ease-in-out infinite;
   }
   @keyframes dh-shine {
-    0% { transform: translateX(-110px); opacity: 0; }
-    5% { opacity: 0.4; }
-    23% { opacity: 0.4; }
-    28% { transform: translateX(170px); opacity: 0; }
-    100% { transform: translateX(170px); opacity: 0; }
+    0% { transform: translateX(-115px); opacity: 0; }
+    8% { opacity: 0.5; }
+    34% { opacity: 0.5; }
+    42% { transform: translateX(175px); opacity: 0; }
+    100% { transform: translateX(175px); opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     .dh-shine { animation: none; opacity: 0; }
