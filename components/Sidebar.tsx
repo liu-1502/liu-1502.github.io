@@ -34,7 +34,7 @@ const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
       { nav: "dashboard", label: "Dashboard", href: "/", icon: <LayoutDashboard /> },
       { nav: "alpha", label: "Alpha", href: "/alpha", icon: <Coins />, meta: "7.75-27%" },
       { nav: "prime", label: "Prime", href: "/prime", icon: <Landmark />, meta: "7.00%" },
-      { nav: "mkt", label: "Marketplace", href: "/marketplace", icon: <Store />, meta: "2 live" },
+      { nav: "mkt", label: "Marketplace", href: "/marketplace", icon: <Store />, meta: "4.9-8.53%" },
     ],
   },
   {
