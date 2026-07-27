@@ -49,7 +49,6 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   /* Today Order */
   .ord:hover { background: var(--mk-ordhover); }
   .ord:active { background: var(--mk-ordactive); }
-  .ord.on { background: var(--mk-toggle); }
   .ord:focus-visible { outline-color: var(--mkt); }
   .ord .badge.completed { background: var(--mk-toggle); color: var(--mkt); }
 }

@@ -45,7 +45,6 @@ body.p-prime { --bg: color-mix(in srgb, var(--prime) 3.5%, #FDFCF8); }
   /* Today Order */
   .ord:hover { background: var(--pr-ordhover); }
   .ord:active { background: var(--pr-ordactive); }
-  .ord.on { background: var(--pr-toggle); }
   .ord:focus-visible { outline-color: var(--prime); }
   .ord .badge.completed { background: var(--pr-toggle); color: var(--prime); }
 }

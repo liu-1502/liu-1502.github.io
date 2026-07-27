@@ -221,7 +221,6 @@
   .olist .ord.last-vis { border-bottom: none; }  /* item hiển thị cuối (kể cả khi lọc) không stroke */
   .ord:hover { background: #F6F8F3; }
   .ord:active { background: #EDF3E7; }
-  .ord.on { background: #E9F5E2; }
   .ord:focus-visible { outline: 2px solid var(--alpha); outline-offset: -2px; }
   .ord .oicon { width: 28px; height: 28px; flex: none; display: grid; place-items: center; background: #F5F5F5; border-radius: 100px; color: #737373; }
   .ord .oicon svg { width: 16px; height: 16px; }
@@ -295,7 +294,7 @@
 
   /* Today Order states */
   .ord:hover { background: var(--surface-2); }
-  .ord:active, .ord.on { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
+  .ord:active { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
   .ord .badge.completed { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); color: var(--accent); }
 
   /* About dropdown close hover */

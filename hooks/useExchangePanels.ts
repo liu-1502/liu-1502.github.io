@@ -118,16 +118,6 @@ export function useExchangePanels(rates: RateMap, options: ExchangePanelOptions 
       });
     });
 
-    /* order history: click 1 item -> selected (single-select trong mỗi list) */
-    document.querySelectorAll(".olist").forEach((list) => {
-      on(list, "click", (e) => {
-        const item = (e.target as Element).closest(".ord");
-        if (!item || !list.contains(item)) return;
-        list.querySelectorAll(".ord").forEach((x) => x.classList.remove("on"));
-        item.classList.add("on");
-      });
-    });
-
     /* order history filter chips: lọc theo loại */
     document.querySelectorAll(".ord-filters").forEach((fr) => {
       on(fr, "click", (e) => {
