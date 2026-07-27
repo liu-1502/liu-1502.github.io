@@ -161,11 +161,100 @@
   :root.sidebar-collapsed .side-group::before { left: 8px; right: 8px; }
 }
 
-/* ---- Mobile: phẳng thành thanh ngang ---- */
+/* ================================================================
+   Mobile (<= 940px): sidebar + controls topbar dồn vào drawer (sheet)
+   mở bằng nút hamburger. Đè các rule "thanh ngang" của yuzu.css.
+   ================================================================ */
+
+/* Phần tử chỉ dành cho mobile -> ẩn ở desktop */
+.topbar .nav-toggle,
+.topbar .topbar-brand,
+.nav-scrim,
+.side-controls { display: none; }
+
 @media (max-width: 940px) {
-  .side-group { margin-top: 0; }
-  .side-parent { padding-right: 10px; }
-  .side-caret { display: none; }
-  .side-parent-link { flex: 0 0 auto; }
-  .side-sub { display: contents; }
+  /* --- Topbar: hamburger + logo bên trái; ẩn collapse & controls (đưa vào sheet) --- */
+  .topbar .side-toggle { display: none; }
+  .topbar .nav-toggle {
+    all: unset; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: var(--r-sm); color: var(--muted);
+  }
+  .topbar .nav-toggle:hover { background: color-mix(in srgb, var(--text) 6%, transparent); color: var(--text); }
+  .topbar .nav-toggle svg { width: 22px; height: 22px; }
+  /* Ẩn logo trên topbar mobile để đủ chỗ cho All chains + Connect Wallet (logo vẫn có trong sheet) */
+  .topbar .topbar-brand { display: none; }
+  /* mode + theme -> sheet; chain "All chains" ở lại topbar cạnh Connect Wallet */
+  .topbar .mode-switch,
+  .topbar .theme-btn { display: none; }
+  .topbar .right { margin-left: auto; gap: 8px; }
+  /* chống xuống dòng để 2 nút gọn trên 1 hàng */
+  .topbar .chain-btn { padding: 7px 10px; white-space: nowrap; }
+  .topbar .right .btn-solid { white-space: nowrap; }
+
+  /* --- Sidebar -> drawer trượt từ trái --- */
+  .side {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 284px;
+    max-width: 84vw;
+    height: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 16px 12px 20px;
+    background: var(--surface);
+    border-right: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+    border-bottom: none;
+    transform: translateX(-100%);
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200;
+  }
+  :root.mobile-nav-open .side {
+    transform: none;
+    box-shadow: 0 20px 60px rgba(12, 14, 12, 0.24);
+  }
+  .side .brand { display: inline-flex; padding: 4px 8px 14px; }
+  .side .brand svg { width: auto; height: 30px; }
+
+  /* Khôi phục layout dọc trong drawer (đè rule "row" mobile của yuzu.css) */
+  .side-group { display: block; position: relative; margin-top: 18px; padding-top: 14px; }
+  .side-group::before {
+    content: "";
+    position: absolute; top: 0; left: 10px; right: 10px; height: 1px;
+    background: color-mix(in srgb, var(--text) 10%, transparent);
+  }
+  .side-group:first-of-type { margin-top: 6px; padding-top: 0; }
+  .side-group:first-of-type::before { display: none; }
+  .side-group h6 { display: block; margin: 0 0 8px; }
+  .side-item { padding: 9px 10px; white-space: normal; margin-bottom: 1px; }
+  .side-item .meta { display: inline; }
+  .side-item.on::before { display: none; }
+
+  /* --- Scrim mờ phía sau drawer --- */
+  .nav-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 190;
+    background: rgba(12, 14, 12, 0.45);
+  }
+  :root.mobile-nav-open .nav-scrim { display: block; }
+
+  /* --- Controls (mode/chain/theme) dồn xuống đáy sheet --- */
+  .side-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  }
+  .side-controls .theme-btn { border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
+
+  /* Nội dung chiếm toàn bộ chiều ngang, không còn thanh nav ngang */
+  .shell { flex-direction: column; }
+  .maincol { margin-left: 0; }
 }

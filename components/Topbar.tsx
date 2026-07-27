@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { PanelLeft, LogOut } from "lucide-react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { PanelLeft, Menu, LogOut } from "lucide-react";
 import Button from "./ui/Button";
+import Logo from "./Logo";
 import ModeSwitch from "./topbar/ModeSwitch";
 import ChainSelector from "./topbar/ChainSelector";
 import ThemeToggle from "./topbar/ThemeToggle";
 import WalletModal from "./topbar/WalletModal";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { OPEN_WALLET_EVENT } from "@/lib/wallet";
+import { MOBILE_NAV_CLOSE_EVENT } from "@/lib/mobileNav";
 
 /* Địa chỉ ví demo hiển thị sau khi "connect" (UI clone, không có web3 thật). */
 const DEMO_ADDRESS = "0x7bd4…9e2c";
@@ -18,7 +22,9 @@ export default function Topbar() {
   const [wallet, setWallet] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const accountRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const savedCollapsed = localStorage.getItem(STORAGE_KEYS.sidebarCollapsed) === "1";
@@ -36,6 +42,25 @@ export default function Topbar() {
     document.addEventListener(OPEN_WALLET_EVENT, open);
     return () => document.removeEventListener(OPEN_WALLET_EVENT, open);
   }, []);
+
+  /* Drawer điều hướng mobile: đồng bộ class root + đóng bằng scrim/link/Esc */
+  useEffect(() => {
+    document.documentElement.classList.toggle("mobile-nav-open", mobileNavOpen);
+  }, [mobileNavOpen]);
+
+  useEffect(() => {
+    const close = () => setMobileNavOpen(false);
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMobileNavOpen(false);
+    document.addEventListener(MOBILE_NAV_CLOSE_EVENT, close);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener(MOBILE_NAV_CLOSE_EVENT, close);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+  /* đổi trang -> đóng drawer mobile */
+  useEffect(() => setMobileNavOpen(false), [pathname]);
 
   /* đóng dropdown account khi click ra ngoài */
   useEffect(() => {
@@ -77,6 +102,15 @@ export default function Topbar() {
     <header className="topbar">
       <button
         type="button"
+        className="nav-toggle"
+        onClick={() => setMobileNavOpen((o) => !o)}
+        aria-label="Open menu"
+        aria-expanded={mobileNavOpen}
+      >
+        <Menu />
+      </button>
+      <button
+        type="button"
         className="side-toggle"
         onClick={toggleSidebar}
         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
@@ -84,6 +118,9 @@ export default function Topbar() {
       >
         <PanelLeft />
       </button>
+      <Link className="brand topbar-brand" href="/" aria-label="Yuzu home">
+        <Logo />
+      </Link>
       <div className="right">
         <ModeSwitch />
         <ChainSelector />

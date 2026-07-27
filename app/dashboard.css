@@ -120,9 +120,12 @@
   }
   /* Hover cả thanh (không chỉ mũi tên) → mũi tên nhích nhẹ */
   .por:hover .por-arr { color: var(--text); transform: translateX(4px); }
-  @media (max-width: 900px) {
+  @media (max-width: 940px) {
+    /* Mobile: text chiếm trọn hàng 1, cụm logo rớt xuống hàng 2 */
     .por { flex-wrap: wrap; gap: 18px; }
-    .por-partners { flex-wrap: wrap; }
+    .por-lead { flex: 1 1 100%; }
+    .por-marks { flex: 1 1 100%; }
+    .por-arr { margin-left: auto; }
   }
 
   /* Xoá toàn bộ viền (stroke) của các section/card trên Dashboard */

@@ -18,7 +18,10 @@ import {
   Store,
 } from "lucide-react";
 import Logo from "./Logo";
+import ModeSwitch from "./topbar/ModeSwitch";
+import ThemeToggle from "./topbar/ThemeToggle";
 import { pageMeta } from "@/lib/pages";
+import { closeMobileNav } from "@/lib/mobileNav";
 import type { NavItem } from "@/lib/types";
 
 /* Điều hướng khai báo bằng dữ liệu. Tất cả đang là cấp 1 (canh thẳng với logo).
@@ -65,7 +68,7 @@ function SideItem({ item, active, level2 }: { item: NavItem; active: string; lev
   const cls = `side-item${level2 ? " lvl2" : ""}${item.nav === active ? " on" : ""}`;
   if (item.external) {
     return (
-      <a className={cls} href={item.href} target="_blank" rel="noopener" title={item.label}>
+      <a className={cls} href={item.href} target="_blank" rel="noopener" title={item.label} onClick={closeMobileNav}>
         {item.icon}
         <span className="lbl">{item.label}</span>
         <ArrowUpRight className="ext" />
@@ -73,7 +76,14 @@ function SideItem({ item, active, level2 }: { item: NavItem; active: string; lev
     );
   }
   return (
-    <Link className={cls} href={item.href} data-nav={item.nav} title={item.label} aria-current={item.nav === active ? "page" : undefined}>
+    <Link
+      className={cls}
+      href={item.href}
+      data-nav={item.nav}
+      title={item.label}
+      aria-current={item.nav === active ? "page" : undefined}
+      onClick={closeMobileNav}
+    >
       {item.icon}
       <span className="lbl">{item.label}</span>
       {item.meta && <span className="meta">{item.meta}</span>}
@@ -139,8 +149,10 @@ export default function Sidebar() {
   const toggle = (key: string) => setOpenMap((m) => ({ ...m, [key]: !m[key] }));
 
   return (
-    <aside className="side">
-      <Link className="brand" href="/">
+    <>
+      <div className="nav-scrim" onClick={closeMobileNav} aria-hidden="true" />
+      <aside className="side">
+      <Link className="brand" href="/" onClick={closeMobileNav}>
         <Logo />
       </Link>
       {NAV_GROUPS.map((group) => (
@@ -164,6 +176,12 @@ export default function Sidebar() {
         </div>
       ))}
 
-    </aside>
+        {/* Controls (mobile-only): mode + theme dồn vào sheet; chain nằm ở topbar */}
+        <div className="side-controls">
+          <ModeSwitch />
+          <ThemeToggle />
+        </div>
+      </aside>
+    </>
   );
 }
