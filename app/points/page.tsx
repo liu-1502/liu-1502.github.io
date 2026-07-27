@@ -31,7 +31,7 @@ export default function Points() {
         <div>
           <div className="lbl">Your points</div>
           <div className="num">
-            <span className="v" data-count="49092489">0</span>
+            <span className="v" data-count="1180">0</span>
             <span className="juice-ic" aria-hidden="true" />
             <span className="rank-pill">#95</span>
           </div>
@@ -50,7 +50,7 @@ export default function Points() {
           </div>
 
           <div className="ref-stats">
-            <div><div className="k">My rewards</div><div className="v hi"><span data-count="75253682">0</span><span className="juice-ic" aria-hidden="true" /></div></div>
+            <div><div className="k">My rewards</div><div className="v hi"><span data-count="340">0</span><span className="juice-ic" aria-hidden="true" /></div></div>
             <div><div className="k">My friends</div><div className="v">9</div></div>
           </div>
 
@@ -67,15 +67,15 @@ export default function Points() {
 
           <div className="ref-steps">
             <div>
-              <span className="step-no">1</span>
+              <span className="step-no"><img src="/assets/points/step-1.svg" alt="" aria-hidden="true" /></span>
               <div><b>Share your link</b><span>Send your code or link to friends before they create an account.</span></div>
             </div>
             <div>
-              <span className="step-no">2</span>
+              <span className="step-no"><img src="/assets/points/step-2.svg" alt="" aria-hidden="true" /></span>
               <div><b>Friends register</b><span>They sign up with your code and start earning Juice on their positions.</span></div>
             </div>
             <div>
-              <span className="step-no">3</span>
+              <span className="step-no"><img src="/assets/points/step-3.svg" alt="" aria-hidden="true" /></span>
               <div><b>Earn together</b><span>You collect 10% of their Juice as referral rewards, they get a +5% boost. Forever.</span></div>
             </div>
           </div>
