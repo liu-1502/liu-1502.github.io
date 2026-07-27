@@ -8,7 +8,7 @@
 
 /* ---- Chỉ desktop: viền phải sidebar (màu cụ thể vì --line-solid transparent).
    Bọc min-width để KHÔNG đè media query mobile của yuzu.css. ---- */
-@media (min-width: 941px) {
+@media (min-width: 481px) {
   /* Stroke phải: xanh nhạt overlay (tông brand, bán trong suốt) */
   .side { border-right: 1px solid color-mix(in srgb, var(--citrus) 15%, transparent); }
   /* Dark mode: viền phải mờ như topbar (--line-solid tối), tránh trắng gắt. */
@@ -28,7 +28,7 @@
 /* ---- Chỉ desktop: divider + spacing giữa các section (như cũ) ----
    Màu line cụ thể vì --line-solid đang transparent (theme bỏ stroke).
    Bọc min-width để KHÔNG đè media query mobile của yuzu.css. ---- */
-@media (min-width: 941px) {
+@media (min-width: 481px) {
   /* Bỏ border-top gốc của yuzu (dùng --line-solid: trong dark mode hiện ra thành
      divider lệch dưới logo + double với ::before). Dùng ::before làm divider duy nhất. */
   .side-group { position: relative; margin-top: 20px; padding-top: 16px; border-top: none; }
@@ -137,7 +137,7 @@
 .topbar .side-toggle:hover { color: var(--muted); background: color-mix(in srgb, var(--text) 6%, transparent); }
 .topbar .side-toggle svg { width: 18px; height: 18px; }
 
-@media (min-width: 941px) {
+@media (min-width: 481px) {
   .side { transition: width .22s ease, padding .22s ease; }
   .maincol { transition: margin-left .22s ease; }
 
@@ -172,7 +172,31 @@
 .nav-scrim,
 .side-controls { display: none; }
 
-@media (max-width: 940px) {
+/* 481–940px: giữ layout sidebar desktop (đè lại "thanh ngang" mà yuzu.css áp ở <=940px) */
+@media (min-width: 481px) and (max-width: 940px) {
+  .side {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 218px;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: hidden;
+    padding: 18px 12px 14px;
+    border-bottom: none;
+    gap: 0;
+    transform: none;
+  }
+  .side .brand { padding: 4px 10px 10px; }
+  .side-group { display: block; }
+  .side-group h6 { display: block; }
+  .side-item { white-space: normal; }
+  .side-item .meta { display: inline; }
+  .shell { flex-direction: row; }
+  .maincol { margin-left: 218px; }
+}
+
+@media (max-width: 480px) {
   /* --- Topbar: hamburger + logo bên trái; ẩn collapse & controls (đưa vào sheet) --- */
   .topbar .side-toggle { display: none; }
   .topbar .nav-toggle {
