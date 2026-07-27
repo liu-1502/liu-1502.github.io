@@ -114,7 +114,6 @@ export default function Alpha() {
             </div>
             <div className="aside-card">
               <h4>Yield cadence</h4>
-              <p>syzUSD yield is decided every Friday and covers the week that follows. yzPP earns the same base yield plus a protocol-funded premium, budgeted daily at 04:00 UTC.</p>
               <div className="rows">
                 <div><span className="k">syzUSD weekly target</span><span className="v" style={{ color: "var(--alpha)" }}>7.75%</span></div>
                 <div><span className="k">syzUSD epoch</span><span className="v">Fri 04:00 to Fri 03:59 UTC</span></div>
