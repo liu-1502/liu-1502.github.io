@@ -131,6 +131,10 @@ export default function Alpha() {
                 <div><span className="k">Proof of reserves</span><span className="v" style={{ color: "var(--good)" }}><Link href="/transparency" style={{ color: "inherit", textDecoration: "none" }}>Live →</Link></span></div>
               </div>
             </div>
+            <div className="aside-card">
+              <h4>Composability</h4>
+              <p>syzUSD is an ERC-4626 vault token. Use it as collateral, loop it, or provide liquidity on Pendle, Balancer and Curve while it keeps accruing.</p>
+            </div>
           </div>
         </div>
 
