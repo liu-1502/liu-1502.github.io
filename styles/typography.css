@@ -7,6 +7,8 @@ html { scroll-behavior: auto; }
 /* Description/lede gọn hơn 1 chút, đồng bộ mọi trang */
 .hub-hero .lede { font-size: 14px; }
 [class*="pg-"] .opp-head p { font-size: 13px; }
+/* Bỏ khoảng cách trên của description (sát tiêu đề hơn) — mọi trang */
+[class*="pg-"] :is(.opp-head, .hub-hero, .prod-head) p, .hub-hero .lede { margin-top: 0; }
 
 /* Spacing body container: 24px các phía, top gấp đôi = 48px */
 .content { padding: 48px 24px 24px; }
@@ -35,6 +37,7 @@ body.p-mkt   { --topbar-accent: var(--mkt); }
 :root [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 {
   color: #142F04;
   font-size: clamp(28px, 3vw, 40px);
+  margin: 0 0 8px;   /* khoảng cách title -> description đồng bộ mọi trang */
 }
 :root[data-theme="dark"] [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 { color: var(--text); }
 

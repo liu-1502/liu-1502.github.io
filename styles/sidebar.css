@@ -56,11 +56,14 @@
    thì fallback --text (neutral). Selected (.on) để yuzu.css xử lý theo per-nav. ---- */
 /* Mặc định accent = xanh brand -> item thường hover/selected đều xanh (Alpha/Prime/Mkt tự override --side-accent theo màu product) */
 .side-item { --side-accent: var(--citrus); }
-.side-item:hover {
-  color: var(--side-accent, var(--text));
-  background: color-mix(in srgb, var(--side-accent, var(--text)) 10%, transparent);
-}
-.side-item.on { color: var(--side-accent); background: color-mix(in srgb, var(--side-accent) 12%, transparent); }
+/* Item thường: hover/selected -> icon + text xanh đậm #142F04, nền nhạt theo accent */
+.side-item:hover { color: #142F04; background: color-mix(in srgb, var(--side-accent) 10%, transparent); }
+.side-item.on { color: #142F04; background: color-mix(in srgb, var(--side-accent) 12%, transparent); }
+:root[data-theme="dark"] .side-item:hover, :root[data-theme="dark"] .side-item.on { color: var(--text); }
+/* Alpha/Prime/Marketplace giữ màu product riêng khi hover/selected */
+.side-item[data-nav="alpha"]:hover, .side-item[data-nav="alpha"].on,
+.side-item[data-nav="prime"]:hover, .side-item[data-nav="prime"].on,
+.side-item[data-nav="mkt"]:hover, .side-item[data-nav="mkt"].on { color: var(--side-accent); }
 
 /* ---- Mũi tên external link (Lucide ArrowUpRight) ---- */
 .side-item .ext { width: 15px; height: 15px; color: var(--faint); }
@@ -79,7 +82,9 @@
   object-fit: contain;
   filter: brightness(0);
   opacity: .7;
+  display: none;   /* expand: ẩn logo Links (chỉ chừa text + arrow) */
 }
+:root.sidebar-collapsed .side-item img { display: block; }   /* collapse: hiện logo làm icon */
 /* yuzu-fav có nhiều padding trong suốt -> phóng lên cho visual bằng các logo khác */
 .side-item img[src*="yuzu-fav"] { width: 20px; height: 20px; margin: -2.5px -2.5px -2.5px -2px; }
 .side-item:hover img { opacity: 1; }

@@ -11,19 +11,19 @@
   .juice-hero .juice-ic { width: 30px; height: 30px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
   .juice-hero .num .v { font-family: var(--font-mono); font-size: clamp(22px, 2.4vw, 28px); font-weight: 560; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
   .rank-pill {
-    font-family: var(--font-mono); font-size: 12px; font-weight: 560;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
     color: var(--accent);
     border: none;
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
-    border-radius: 999px; padding: 5px 12px;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-radius: 8px; padding: 5px 9px;
   }
   .boost-pill {
-    font-family: var(--font-body); font-size: 13px; color: var(--muted);
+    font-family: var(--font-body); font-size: 13px; color: var(--text);
     border: none; border-radius: 999px;
-    background: color-mix(in srgb, var(--text) 5%, transparent);
-    padding: 5px 11px; cursor: default;
+    background: color-mix(in srgb, var(--text) 3%, transparent);
+    padding: 3px 11px; cursor: default;
   }
-  .boost-pill b { color: var(--prime); font-weight: 600; }
+  .boost-pill b { color: var(--accent); font-weight: 600; }
   .juice-hero .right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
   /* ---- two-column body ---- */
@@ -55,9 +55,9 @@
     background: color-mix(in srgb, var(--text) 12%, transparent);
   }
   .ref-stats .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
-  .ref-stats .v { font-family: var(--font-mono); font-size: 18px; font-weight: 560; margin-top: 7px; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
+  .ref-stats .v { font-family: var(--font-mono); font-size: 22px; font-weight: 560; margin-top: 7px; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
   .ref-stats .v.hi { color: var(--text); }
-  .ref-stats .juice-ic { width: 20px; height: 20px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
+  .ref-stats .juice-ic { width: 24px; height: 24px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
 
   .copy-row {
     display: flex; align-items: center; gap: 12px;
@@ -79,10 +79,11 @@
   .copy-row button.done { color: var(--good); }
 
   .ref-steps { display: flex; flex-direction: column; gap: 0; margin-top: 18px; }
-  .ref-steps > div { display: flex; align-items: center; gap: 16px; padding: 14px 2px; border-top: 1px solid var(--line); }
+  .ref-steps > div { display: flex; align-items: flex-start; gap: 16px; padding: 14px 2px; border-top: 1px solid var(--line); }
   .ref-steps .step-no {
     flex: none; width: 26px; height: 26px; display: inline-grid; place-items: center;
-    border-radius: 999px; background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border-radius: 999px; background: transparent;
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
     color: var(--accent); font-family: var(--font-mono); font-size: 12px; font-weight: 600;
   }
   .ref-steps b { font-size: 13px; font-weight: 620; font-family: var(--font-display); display: block; }
@@ -120,11 +121,11 @@
   .lb-row.you {
     border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
     background: transparent;
-    border-radius: 14px;
-    padding: 12px 14px; margin-top: 2px;
+    border-radius: 11px;
+    padding: 9px 11px; margin-top: 2px;
   }
-  .lb-row.you .rk { color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
-  .lb-row.you .addr em { font-style: normal; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-left: 8px; }
+  .lb-row.you .rk { color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .lb-row.you .addr em { font-style: normal; font-family: var(--font-body); font-size: 16px; font-weight: 500; color: var(--accent); margin-left: 8px; }
 
   /* ---- ways to earn ---- */
   .earn-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }

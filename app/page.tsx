@@ -13,8 +13,10 @@ export default function Dashboard() {
       <div className="opp-head dash-head rv" style={{ marginBottom: 18 }}>
         <div>
           <h1>Dashboard</h1>
-          <p style={{ color: "var(--muted)", margin: "6px 0 0", fontSize: 13 }}>
-            Risk-curated onchain strategies, packaged as structured yield products. Capital preservation first.
+          <p style={{ color: "var(--muted)", margin: 0, fontSize: 13 }}>
+            Risk-curated onchain strategies, packaged as structured yield products. Capital preservation
+            first — track TVL, distributed yield, and live protocol backing across Alpha, Prime and Marketplace
+            in one place.
           </p>
         </div>
         <DashboardHero />

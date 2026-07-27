@@ -39,10 +39,10 @@ export default function DashboardHero() {
         <path d="M234.304 130.339C234.37 126.041 233.255 117.548 226.078 110.588C218.903 103.707 210.605 102.942 206.466 103.029C206.31 103.032 203.817 103.397 202.63 106.39L185.202 151.054C185.202 151.054 183.646 155.071 187.594 153.348L231.258 134.153C234.121 132.843 234.302 130.261 234.302 130.261L234.304 130.339Z" fill="#D8F5A2" />
       </g>
 
-      {/* Ánh sáng quét qua quả chanh (mỗi 2s) */}
+      {/* Ánh sáng quét trái -> phải trong quả chanh (auto mỗi 3s) */}
       <g clipPath="url(#dhLemonClip)">
-        <g transform="rotate(18 178 160)">
-          <rect className="dh-shine" x="150" y="55" width="34" height="210" fill="url(#dhShineGrad)" />
+        <g transform="rotate(16 178 160)">
+          <rect className="dh-shine" x="130" y="36" width="42" height="248" fill="url(#dhShineGrad)" />
         </g>
       </g>
 

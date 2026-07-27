@@ -6,13 +6,24 @@ import Button from "@/components/ui/Button";
 
 export const metadata = pageMetadata("/points");
 
+/* Demo leaderboard top 50 (deterministic để SSR ổn định). */
+const shortAddr = (n: number) => {
+  const h = ((n * 2246822519) >>> 0).toString(16).padStart(8, "0");
+  return `0x${h.slice(0, 4)}…${h.slice(4, 8)}`;
+};
+const LEADERBOARD = Array.from({ length: 50 }, (_, i) => ({
+  rank: i + 1,
+  addr: shortAddr(i + 7),
+  pts: Math.round(9842 - (i * (9842 - 1080)) / 49),
+}));
+
 export default function Points() {
   return (
     <div className="pg-points">
       <div className="opp-head rv" style={{ marginBottom: 18 }}>
         <div>
           <h1>Points</h1>
-          <p style={{ color: "var(--muted)", margin: "6px 0 0", fontSize: 13 }}>Track your Yuzu Juice, referral rewards and leaderboard standing across the season.</p>
+          <p style={{ color: "var(--muted)", margin: 0, fontSize: 13 }}>Track your Yuzu Juice, referral rewards and leaderboard standing across the season.</p>
         </div>
       </div>
 
@@ -76,18 +87,13 @@ export default function Points() {
           </div>
           <div className="lb-row you lb-you-pin"><span className="rk">#95</span><span className="addr">0x7bd4…9e2c<em>You</em></span><span className="amt">1,180<i className="juice-ic" aria-hidden="true" /></span></div>
           <div className="lb-rows">
-            <div className="lb-row top"><span className="rk">#1</span><span className="addr">0x4352…3b4f</span><span className="amt">9,842<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row top"><span className="rk">#2</span><span className="addr">0x9f1a…bd1a</span><span className="amt">8,610<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row top"><span className="rk">#3</span><span className="addr">0x8714…1e13</span><span className="amt">7,935<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row"><span className="rk">#4</span><span className="addr">0xd1e7…0f7a</span><span className="amt">6,720<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row"><span className="rk">#5</span><span className="addr">0xd93e…e5d2</span><span className="amt">5,880<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row"><span className="rk">#6</span><span className="addr">0x02f3…9eca</span><span className="amt">5,140<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row"><span className="rk">#7</span><span className="addr">0xb00f…f58d</span><span className="amt">4,505<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row"><span className="rk">#8</span><span className="addr">0x08c6…364c</span><span className="amt">3,970<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row"><span className="rk">#9</span><span className="addr">0xec0d…ae08</span><span className="amt">3,240<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-row"><span className="rk">#10</span><span className="addr">0x10f0…9c1f</span><span className="amt">2,610<i className="juice-ic" aria-hidden="true" /></span></div>
-            <div className="lb-gap">···</div>
-            <div className="lb-row you"><span className="rk">#95</span><span className="addr">0x7bd4…9e2c<em>You</em></span><span className="amt">1,180<i className="juice-ic" aria-hidden="true" /></span></div>
+            {LEADERBOARD.map(({ rank, addr, pts }) => (
+              <div key={rank} className={`lb-row${rank <= 3 ? " top" : ""}`}>
+                <span className="rk">#{rank}</span>
+                <span className="addr">{addr}</span>
+                <span className="amt">{pts.toLocaleString("en-US")}<i className="juice-ic" aria-hidden="true" /></span>
+              </div>
+            ))}
           </div>
         </div>
 
