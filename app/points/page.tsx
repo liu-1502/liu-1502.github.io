@@ -37,6 +37,7 @@ export default function Points() {
           </div>
         </div>
         <div className="right">
+          <img className="hero-star" src="/assets/points/hero-star.svg" alt="" aria-hidden="true" />
           <Button href="/opportunities">Earn Juice <ArrowRight className="arr" size={16} strokeWidth={2.2} /></Button>
         </div>
       </div>
@@ -67,15 +68,15 @@ export default function Points() {
 
           <div className="ref-steps">
             <div>
-              <span className="step-no"><img src="/assets/points/step-1.svg" alt="" aria-hidden="true" /></span>
+              <span className="step-no">1</span>
               <div><b>Share your link</b><span>Send your code or link to friends before they create an account.</span></div>
             </div>
             <div>
-              <span className="step-no"><img src="/assets/points/step-2.svg" alt="" aria-hidden="true" /></span>
+              <span className="step-no">2</span>
               <div><b>Friends register</b><span>They sign up with your code and start earning Juice on their positions.</span></div>
             </div>
             <div>
-              <span className="step-no"><img src="/assets/points/step-3.svg" alt="" aria-hidden="true" /></span>
+              <span className="step-no">3</span>
               <div><b>Earn together</b><span>You collect 10% of their Juice as referral rewards, they get a +5% boost. Forever.</span></div>
             </div>
           </div>

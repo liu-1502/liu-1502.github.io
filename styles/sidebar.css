@@ -76,7 +76,7 @@
 .side-item[data-nav="mkt"]   { --side-accent: var(--mkt);   color: var(--muted); }
 
 /* Chỉ số Alpha/Prime/Marketplace: text màu theo product (không nền), chữ khít hơn */
-.side-item .meta { color: var(--side-accent); letter-spacing: -0.04em; align-self: center; position: relative; top: 1px; }
+.side-item .meta { color: var(--side-accent); letter-spacing: -0.04em; align-self: center; position: relative; top: 3px; }
 
 
 /* ---- Logo link (Yuzu/Accountable/Telegram/Discord): đơn sắc + cỡ như icon, đều nhau ---- */

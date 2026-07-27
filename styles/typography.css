@@ -37,7 +37,7 @@ body.p-mkt   { --topbar-accent: var(--mkt); }
 :root [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 {
   color: #142F04;
   font-size: clamp(28px, 3vw, 40px);
-  margin: 0 0 8px;   /* khoảng cách title -> description đồng bộ mọi trang */
+  margin: 0 0 4px;   /* khoảng cách title -> description đồng bộ mọi trang */
 }
 :root[data-theme="dark"] [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 { color: var(--text); }
 

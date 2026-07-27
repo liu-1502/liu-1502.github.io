@@ -24,7 +24,8 @@
     padding: 3px 11px; cursor: default;
   }
   .boost-pill b { color: var(--accent); font-weight: 600; }
-  .juice-hero .right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .juice-hero .right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .juice-hero .hero-star { width: 64px; height: 64px; flex: none; display: block; }
 
   /* ---- two-column body ---- */
   .pts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; }
@@ -85,15 +86,16 @@
   /* Dashed connector dọc nối các bước (progress 1 -> 3) — chạy sau vòng số */
   .ref-steps > div:not(:last-child)::before {
     content: ""; position: absolute; z-index: 0;
-    left: 24px; top: 58px; height: 100%;
+    left: 15px; top: 27px; height: 100%;
     border-left: 1px dashed color-mix(in srgb, var(--accent) 20%, transparent);
   }
   .ref-steps .step-no {
     position: relative; z-index: 1;
-    flex: none; width: 44px; height: 44px; display: inline-grid; place-items: center;
-    background: none; border: none;
+    flex: none; width: 26px; height: 26px; display: inline-grid; place-items: center;
+    border-radius: 999px; background: var(--surface);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    color: var(--accent); font-family: var(--font-mono); font-size: 12px; font-weight: 600;
   }
-  .ref-steps .step-no img { width: 44px; height: 44px; display: block; }
   .ref-steps b { font-size: 13px; font-weight: 620; font-family: var(--font-display); display: block; }
   .ref-steps span { font-size: 12px; color: var(--muted); line-height: 1.5; display: block; margin-top: 2px; }
 
