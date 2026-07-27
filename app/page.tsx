@@ -10,7 +10,7 @@ export const metadata = pageMetadata("/");
 export default function Dashboard() {
   return (
     <div className="pg-dashboard">
-      <div className="opp-head dash-head rv" style={{ marginBottom: 18 }}>
+      <div className="opp-head dash-head rv" style={{ marginBottom: 32 }}>
         <div>
           <h1>Dashboard</h1>
           <p style={{ color: "var(--muted)", margin: 0, fontSize: 13 }}>

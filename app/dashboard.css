@@ -17,8 +17,8 @@
   /* 3 sản phẩm xếp hàng ngang: grid 3 cột, mỗi card là 1 cột dọc. */
   /* Header dashboard: text trái, illus Yuzu bên phải (inline, không tuck) */
   .dash-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .dash-hero-illus { flex: none; width: auto; height: 160px; display: block; overflow: visible; }
-  @media (max-width: 700px) { .dash-hero-illus { height: 130px; } }
+  .dash-hero-illus { flex: none; width: auto; height: 176px; display: block; overflow: visible; }
+  @media (max-width: 700px) { .dash-hero-illus { height: 140px; } }
   @media (max-width: 480px) { .dash-hero-illus { display: none; } }
 
   /* ===== Hero: chỉ giữ ánh sáng quét nhẹ qua quả chanh (hiệu ứng kính), mỗi ~3s ===== */

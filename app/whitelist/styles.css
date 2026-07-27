@@ -5,12 +5,13 @@
   .wl-top { position: relative; }
   .wl-illus {
     position: absolute; z-index: 0; pointer-events: none;
-    bottom: -158px; right: -80px; width: 380px; height: 380px;
+    bottom: -110px; right: -50px; width: 300px; height: 300px;
     color: #443E38;
   }
   /* Table đục + đè lên phần dưới illustration (illus tuck sau table) */
   .wl-panel .wl-table-wrap { position: relative; z-index: 1; background: var(--surface); }
   .wl-illus * { vector-effect: non-scaling-stroke; }
+  .wl-illus path { stroke-width: 1.5px; }   /* weight nét mảnh hơn */
   .hub-hero, .wl-tabs, .wl-panel { position: relative; z-index: 1; }
   .hub-hero h1 { color: #142F04; }
   :root[data-theme="dark"] & .hub-hero h1 { color: var(--text); }

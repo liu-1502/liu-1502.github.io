@@ -46,7 +46,7 @@
 
   .opp-filters { display: flex; flex-direction: column; gap: 9px; margin: 0 0 20px; padding: 0 22px; }
   .frow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .frow .flbl { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); min-width: 62px; }
+  .frow .flbl { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text); min-width: 62px; }
   /* Chip pill giống filter history: viền neutral rõ, chữ đen 14px, .on theo accent */
   .frow button {
     all: unset;
