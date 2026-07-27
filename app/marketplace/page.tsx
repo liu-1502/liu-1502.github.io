@@ -158,7 +158,6 @@ export default function Marketplace() {
               <button className="btn btn-accent btn-block">Connect Wallet</button>
               <MetaRows rows={[
                 { k: "Current APY", v: "8.53%", hi: true },
-                { k: "Token price", v: "1 yzSyrup = $1.0192" },
                 { k: "Chain", v: "Monad" },
                 { k: "Deposit fee", v: "None" },
               ]} />
