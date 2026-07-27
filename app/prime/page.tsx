@@ -165,7 +165,6 @@ export default function Prime() {
               </div>
               <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
               <MetaRows rows={[
-                { k: "Prevailing NAV", v: "1 yzPrime = $1.01243" },
                 { k: "Settlement", v: "Per program rules" },
               ]} />
             </div>
