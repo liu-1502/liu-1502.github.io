@@ -27,12 +27,12 @@
 
   .statwall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   @media (max-width: 900px) { .statwall { grid-template-columns: 1fr 1fr; } }
-  .bigstat { padding: 22px; }
+  .bigstat { padding: 20px; }
   .bigstat .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; color: var(--faint); }
   .bigstat .v { font-family: var(--font-mono); font-size: clamp(21px, 2.4vw, 28px); font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; }
   .bigstat .sub { font-family: var(--font-mono); font-size: 11px; color: var(--good); margin-top: 6px; }
 
-  .tp-panel { padding: 24px; margin-bottom: 16px; }
+  .tp-panel { padding: 20px; margin-bottom: 16px; }
   .tp-panel .phead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
   .tp-panel .phead h3 { font-size: 18px; }
   .tp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -98,7 +98,7 @@
 
   .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   @media (max-width: 760px) { .how { grid-template-columns: 1fr; } }
-  .how .card { padding: 22px; }
+  .how .card { padding: 20px; }
   .how b { font-family: var(--font-display); font-weight: 620; font-size: 14.5px; display: block; margin-bottom: 6px; }
   .how span { font-size: 12.5px; color: var(--muted); line-height: 1.6; display: block; }
   .how em { font-family: var(--font-mono); font-style: normal; font-size: 10px; color: var(--citrus); letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 12px; }

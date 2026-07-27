@@ -113,7 +113,7 @@
 
   .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   @media (max-width: 760px) { .rules { grid-template-columns: 1fr; } }
-  .rules .card { padding: 22px; }
+  .rules .card { padding: 20px; }
   .rules b { font-family: var(--font-display); font-weight: 620; font-size: 14.5px; display: block; margin-bottom: 6px; }
   .rules span { font-size: 12.5px; color: var(--muted); line-height: 1.6; display: block; }
   .rules em { font-family: var(--font-mono); font-style: normal; font-size: 10px; color: var(--citrus); letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 12px; }

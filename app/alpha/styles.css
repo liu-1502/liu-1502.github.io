@@ -5,7 +5,7 @@
   .prod-head p { flex-basis: 100%; margin: 2px 0 0; font-size: 13px; color: var(--muted); max-width: 74ch; line-height: 1.6; }
 
   /* composition */
-  .compo { padding: 24px; }
+  .compo { padding: 20px; }
   .compo > p { font-size: 12.5px; color: var(--muted); max-width: 66ch; line-height: 1.6; margin: 0 0 20px; }
   .compo-rows { display: flex; flex-direction: column; gap: 14px; }
   .compo-row { display: grid; grid-template-columns: 250px 1fr 56px; gap: 18px; align-items: center; }

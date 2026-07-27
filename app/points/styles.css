@@ -3,7 +3,7 @@
   .juice-hero {
     display: flex; flex-direction: row; align-items: center; justify-content: space-between;
     gap: 24px; flex-wrap: wrap;
-    padding: 24px 28px;
+    padding: 20px;
     margin-bottom: 26px;
   }
   .juice-hero .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
@@ -33,11 +33,11 @@
   .pts-grid .panel { display: flex; flex-direction: column; min-height: 0; }
   .pts-grid .lb-rows { flex: 1 1 0; min-height: 0; overflow-y: auto; }
 
-  .panel { padding: 24px; }
+  .panel { padding: 20px; }
   .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
   /* Leaderboard: rank của user ghim đầu, cách title & danh sách đều 16px */
   .panel:has(.lb-rows) .panel-head { margin-bottom: 16px; }
-  .lb-you-pin { margin: 0 0 16px; flex: none; }
+  .lb-you-pin { margin: 0; flex: none; }
   .panel-head h2 { font-size: 17px; }
 
   /* ---- referral ---- */
