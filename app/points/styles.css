@@ -102,10 +102,10 @@
   .lb-row {
     display: flex; align-items: center; gap: 14px;
     padding: 11px 2px;
-    border-top: 1px solid var(--line);
+    border-bottom: 1px solid color-mix(in srgb, var(--text) 7%, transparent);
     font-variant-numeric: tabular-nums;
   }
-  .lb-row:first-child { border-top: none; }
+  .lb-row:last-child { border-bottom: none; }
   .lb-row .rk {
     flex: none; min-width: 30px;
     font-family: var(--font-mono); font-size: 11px; font-weight: 700;
