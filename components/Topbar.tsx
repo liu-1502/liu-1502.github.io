@@ -8,6 +8,7 @@ import ChainSelector from "./topbar/ChainSelector";
 import ThemeToggle from "./topbar/ThemeToggle";
 import WalletModal from "./topbar/WalletModal";
 import { STORAGE_KEYS } from "@/lib/constants";
+import { OPEN_WALLET_EVENT } from "@/lib/wallet";
 
 /* Địa chỉ ví demo hiển thị sau khi "connect" (UI clone, không có web3 thật). */
 const DEMO_ADDRESS = "0x7bd4…9e2c";
@@ -27,6 +28,13 @@ export default function Topbar() {
     const savedWallet = localStorage.getItem(STORAGE_KEYS.wallet) === "1";
     setWallet(savedWallet);
     document.documentElement.setAttribute("data-wallet", savedWallet ? "1" : "0");
+  }, []);
+
+  /* CTA "Connect wallet" trong các form phát event -> mở modal */
+  useEffect(() => {
+    const open = () => setModalOpen(true);
+    document.addEventListener(OPEN_WALLET_EVENT, open);
+    return () => document.removeEventListener(OPEN_WALLET_EVENT, open);
   }, []);
 
   /* đóng dropdown account khi click ra ngoài */

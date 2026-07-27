@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { chainSrc } from "@/lib/assets";
+import { requestConnectWallet } from "@/lib/wallet";
 import TokenIcon from "@/components/ui/TokenIcon";
 import { ArrowUpDown } from "lucide-react";
 
@@ -248,7 +249,7 @@ export default function BridgeExchange() {
         </div>
       </div>
 
-      <button className="btn btn-accent btn-block">Connect Wallet</button>
+      <button className="btn btn-accent btn-block" onClick={requestConnectWallet}>Connect Wallet</button>
       </div>
     </>
   );

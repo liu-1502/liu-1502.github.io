@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { requestConnectWallet } from "@/lib/wallet";
 
 /** Tỷ giá + hệ số quy đổi USD cho một chiều (mint/redeem, stake/unstake, deposit/withdraw). */
 export type RateLeg = { rate: number; dp: number; rp: number };
@@ -180,6 +181,11 @@ export function useExchangePanels(rates: RateMap, options: ExchangePanelOptions 
     };
     if (walletCta) document.addEventListener("yuzu-wallet", setCTAs);
     setCTAs();
+
+    /* CTA trong form -> mở modal Connect Wallet (khi chưa kết nối) */
+    document.querySelectorAll<HTMLButtonElement>(".xchg-body .btn-block").forEach((btn) => {
+      on(btn, "click", () => requestConnectWallet());
+    });
 
     return () => {
       handlers.forEach(({ el, type, fn }) => el.removeEventListener(type, fn));
