@@ -40,6 +40,8 @@ body.p-mkt   { --topbar-accent: var(--mkt); }
   margin: 0 0 4px;   /* khoảng cách title -> description đồng bộ mọi trang */
 }
 :root[data-theme="dark"] [class*="pg-"] :is(.hub-hero, .opp-head, .prod-head) h1 { color: var(--text); }
+/* Trang hub-hero (title lớn) cần khoảng cách title -> description rộng hơn */
+:root [class*="pg-"] .hub-hero h1 { margin-bottom: 10px; }
 
 /* Trang Alpha: bỏ cap max-width để content rộng bằng topbar -> nút About Alpha
    canh phải khớp Connect Wallet ở mọi bề rộng màn hình. */

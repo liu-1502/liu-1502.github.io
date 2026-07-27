@@ -32,8 +32,8 @@ export default function Points() {
           <div className="lbl">Your points</div>
           <div className="num">
             <span className="juice-ic" aria-hidden="true" />
-            <span className="v" data-count="1180">0</span>
-            <span className="rank-pill">#95</span>
+            <span className="v" data-count="7339">0</span>
+            <span className="rank-pill">#15</span>
           </div>
         </div>
         <div className="right">
@@ -85,7 +85,7 @@ export default function Points() {
           <div className="panel-head">
             <h2>Leaderboard</h2>
           </div>
-          <div className="lb-row you lb-you-pin"><span className="rk">#95</span><span className="addr">0x7bd4…9e2c<em>You</em></span><span className="amt">1,180<i className="juice-ic" aria-hidden="true" /></span></div>
+          <div className="lb-row you lb-you-pin"><span className="rk">#15</span><span className="addr">0x7bd4…9e2c<em>You</em></span><span className="amt">7,339<i className="juice-ic" aria-hidden="true" /></span></div>
           <div className="lb-rows">
             {LEADERBOARD.map(({ rank, addr, pts }) => (
               <div key={rank} className={`lb-row${rank <= 3 ? " top" : ""}`}>
