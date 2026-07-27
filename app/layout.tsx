@@ -7,6 +7,8 @@ import "../styles/yuzu.css";
 import "../styles/sidebar.css";
 // Chỉnh weight/letter-spacing nhãn viết hoa nhỏ — nạp sau cùng.
 import "../styles/typography.css";
+// Modal Connect Wallet + dropdown account.
+import "../styles/wallet.css";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import LiquidBackground from "@/components/LiquidBackground";

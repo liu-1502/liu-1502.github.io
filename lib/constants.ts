@@ -5,4 +5,6 @@ export const STORAGE_KEYS = {
   mode: "yuzu-mode",
   eligible: "yuzu-eligible",
   chain: "yuzu-chain",
+  sidebarCollapsed: "sidebarCollapsed",
+  wallet: "walletConnected",
 } as const;

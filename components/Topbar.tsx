@@ -1,43 +1,68 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { PanelLeft } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { PanelLeft, LogOut } from "lucide-react";
 import Button from "./ui/Button";
 import ModeSwitch from "./topbar/ModeSwitch";
 import ChainSelector from "./topbar/ChainSelector";
 import ThemeToggle from "./topbar/ThemeToggle";
+import WalletModal from "./topbar/WalletModal";
+import { STORAGE_KEYS } from "@/lib/constants";
+
+/* Địa chỉ ví demo hiển thị sau khi "connect" (UI clone, không có web3 thật). */
+const DEMO_ADDRESS = "0x7bd4…9e2c";
 
 export default function Topbar() {
   const [collapsed, setCollapsed] = useState(false);
   const [wallet, setWallet] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const accountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const savedCollapsed = localStorage.getItem("sidebarCollapsed") === "1";
+    const savedCollapsed = localStorage.getItem(STORAGE_KEYS.sidebarCollapsed) === "1";
     setCollapsed(savedCollapsed);
     document.documentElement.classList.toggle("sidebar-collapsed", savedCollapsed);
 
-    const savedWallet = localStorage.getItem("walletConnected") === "1";
+    const savedWallet = localStorage.getItem(STORAGE_KEYS.wallet) === "1";
     setWallet(savedWallet);
     document.documentElement.setAttribute("data-wallet", savedWallet ? "1" : "0");
   }, []);
+
+  /* đóng dropdown account khi click ra ngoài */
+  useEffect(() => {
+    if (!accountOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (accountRef.current && !accountRef.current.contains(e.target as Node)) setAccountOpen(false);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, [accountOpen]);
 
   const toggleSidebar = () => {
     setCollapsed((c) => {
       const next = !c;
       document.documentElement.classList.toggle("sidebar-collapsed", next);
-      localStorage.setItem("sidebarCollapsed", next ? "1" : "0");
+      localStorage.setItem(STORAGE_KEYS.sidebarCollapsed, next ? "1" : "0");
       return next;
     });
   };
 
-  const toggleWallet = () => {
-    setWallet((w) => {
-      const next = !w;
-      document.documentElement.setAttribute("data-wallet", next ? "1" : "0");
-      localStorage.setItem("walletConnected", next ? "1" : "0");
-      document.dispatchEvent(new CustomEvent("yuzu-wallet", { detail: { connected: next } }));
-      return next;
-    });
+  const setWalletState = (connected: boolean) => {
+    setWallet(connected);
+    document.documentElement.setAttribute("data-wallet", connected ? "1" : "0");
+    localStorage.setItem(STORAGE_KEYS.wallet, connected ? "1" : "0");
+    document.dispatchEvent(new CustomEvent("yuzu-wallet", { detail: { connected } }));
+  };
+
+  const handleConnect = () => {
+    setModalOpen(false);
+    setWalletState(true);
+  };
+
+  const handleDisconnect = () => {
+    setAccountOpen(false);
+    setWalletState(false);
   };
 
   return (
@@ -55,8 +80,27 @@ export default function Topbar() {
         <ModeSwitch />
         <ChainSelector />
         <ThemeToggle />
-        <Button variant="solid" onClick={toggleWallet}>{wallet ? "0x7bd4…9e2c" : "Connect Wallet"}</Button>
+        {wallet ? (
+          <div className="acct-wrap" ref={accountRef}>
+            <Button variant="solid" onClick={() => setAccountOpen((o) => !o)} aria-expanded={accountOpen}>
+              {DEMO_ADDRESS}
+            </Button>
+            {accountOpen && (
+              <div className="acct-menu" role="menu">
+                <button type="button" className="acct-disconnect" role="menuitem" onClick={handleDisconnect}>
+                  <LogOut />
+                  Disconnect
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Button variant="solid" onClick={() => setModalOpen(true)}>
+            Connect Wallet
+          </Button>
+        )}
       </div>
+      <WalletModal open={modalOpen} onClose={() => setModalOpen(false)} onConnect={handleConnect} />
     </header>
   );
 }

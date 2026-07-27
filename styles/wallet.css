@@ -1,0 +1,175 @@
+/* ================================================================
+   Connect Wallet — modal chọn ví (layout theo reown/WalletConnect)
+   + dropdown account khi đã kết nối. Dùng design tokens (light mode).
+   ================================================================ */
+
+/* ---- Modal ---- */
+.wm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(12, 14, 12, 0.45);
+  backdrop-filter: blur(3px);
+  animation: wm-fade 0.15s ease;
+}
+@keyframes wm-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.wm-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(12, 14, 12, 0.28);
+  animation: wm-pop 0.16s ease;
+}
+@keyframes wm-pop {
+  from { transform: translateY(8px) scale(0.98); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.wm-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 6px 12px;
+}
+.wm-title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-size: 16px;
+  color: var(--text);
+}
+.wm-icon-btn {
+  all: unset;
+  cursor: pointer;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: var(--faint);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.wm-icon-btn:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text);
+}
+.wm-icon-btn svg { width: 18px; height: 18px; }
+
+.wm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.wm-item {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  transition: background 0.15s ease;
+}
+.wm-item:hover { background: color-mix(in srgb, var(--text) 5%, transparent); }
+.wm-ic {
+  flex: none;
+  width: 32px;
+  height: 32px;
+}
+.wm-ic svg { width: 32px; height: 32px; display: block; }
+.wm-ic-search {
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--muted);
+}
+.wm-ic-search svg { width: 17px; height: 17px; }
+.wm-name {
+  flex: 1;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--text);
+}
+.wm-badge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 3px 7px;
+  border-radius: 6px;
+}
+.wm-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--faint);
+}
+.wm-chev {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--faint);
+}
+.wm-foot {
+  text-align: center;
+  font-size: 11px;
+  color: var(--faint);
+  padding: 14px 0 6px;
+}
+.wm-reown {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+}
+
+/* ---- Account dropdown (đã kết nối) ---- */
+.acct-wrap { position: relative; }
+.acct-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 120;
+  min-width: 180px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(12, 14, 12, 0.16);
+}
+.acct-disconnect {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.acct-disconnect:hover {
+  background: color-mix(in srgb, #dc2626 10%, transparent);
+  color: #dc2626;
+}
+.acct-disconnect svg { width: 16px; height: 16px; }
