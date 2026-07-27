@@ -75,9 +75,6 @@ export default function Dashboard() {
         </div>
         <div className="prod-rows">
           <Link className="card ticked prod-row alpha" href="/alpha">
-            <svg className="prod-illus" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M43.0015 39.9995C43.0015 41.6564 41.6583 42.9995 40.0015 42.9995C38.3446 42.9995 37.0015 41.6564 37.0015 39.9995C37.0015 38.3427 38.3446 36.9995 40.0015 36.9995C41.6583 36.9995 43.0015 38.3427 43.0015 39.9995ZM64.6011 64.6006C70.7211 58.5106 64.6611 42.5206 51.1011 28.9006C37.4811 15.3406 21.4911 9.28063 15.4011 15.4006C9.28112 21.4906 15.3411 37.4806 28.9011 51.1006C42.5211 64.6606 58.5111 70.7206 64.6011 64.6006ZM51.1011 51.1006C64.6611 37.4806 70.7211 21.4906 64.6011 15.4006C58.5111 9.28063 42.5211 15.3406 28.9011 28.9006C15.3411 42.5206 9.28112 58.5106 15.4011 64.6006C21.4911 70.7206 37.4811 64.6606 51.1011 51.1006Z" stroke="currentColor" strokeWidth={2} strokeLinecap="round" />
-            </svg>
             <span className="id">
               <b>Alpha</b>
               <TokenStrip syms={["syzUSD", "yzPP", "yzUSD"]} />
@@ -97,12 +94,6 @@ export default function Dashboard() {
             </div>
           </Link>
           <Link className="card ticked prod-row prime" href="/prime">
-            <svg className="prod-illus" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M40 12 L73 22 L40 32 L7 22 Z" />
-              <path d="M40 24 L73 34 L40 44 L7 34 Z" />
-              <path d="M40 36 L73 46 L40 56 L7 46 Z" />
-              <path d="M40 48 L73 58 L40 68 L7 58 Z" />
-            </svg>
             <span className="id">
               <b>Prime</b>
               <TokenStrip syms={["yzPrime"]} />
@@ -119,21 +110,6 @@ export default function Dashboard() {
             </div>
           </Link>
           <Link className="card ticked prod-row mkt" href="/marketplace">
-            <svg className="prod-illus" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              {/* 5 nan hoa chia đều 72° quanh tâm (ngũ giác đỉnh trên) */}
-              <line x1="40" y1="40" x2="40" y2="13" strokeDasharray="2 3.5" />
-              <line x1="40" y1="40" x2="65.7" y2="31.7" strokeDasharray="2 3.5" />
-              <line x1="40" y1="40" x2="55.9" y2="61.8" strokeDasharray="2 3.5" />
-              <line x1="40" y1="40" x2="24.1" y2="61.8" strokeDasharray="2 3.5" />
-              <line x1="40" y1="40" x2="14.3" y2="31.7" strokeDasharray="2 3.5" />
-              <circle cx="40" cy="40" r="11" fill="var(--surface)" />
-              <path d="M47 40 L43.5 33.9 L36.5 33.9 L33 40 L36.5 46.1 L43.5 46.1 Z" />
-              <circle cx="40" cy="13" r="5.5" />
-              <circle cx="65.7" cy="31.7" r="5.5" />
-              <circle cx="55.9" cy="61.8" r="5.5" />
-              <circle cx="24.1" cy="61.8" r="5.5" />
-              <circle cx="14.3" cy="31.7" r="5.5" />
-            </svg>
             <span className="id">
               <b>Marketplace</b>
               <TokenStrip syms={["yzCash", "yzSyrup"]} />
