@@ -134,6 +134,22 @@
   .prod-row:hover,
   .trust > div { border: none; }
 
+  /* Divider dọc nhẹ giữa các cột stat — cao bằng khối text, không full card */
+  .page-stats > div { position: relative; }
+  .page-stats > div:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 38px;
+    background: color-mix(in srgb, var(--text) 8%, transparent);
+  }
+  @media (max-width: 700px) {
+    .page-stats > div:not(:last-child)::after { display: none; }
+  }
+
   /* Màu + size + font số liệu trong khối stats; siết khoảng cách với label */
   .page-stats .v {
     color: var(--text);
