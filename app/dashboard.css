@@ -168,7 +168,7 @@
   .page-stats, .page-stats > div { overflow: visible; }   /* cho popover tràn ra */
   .stat-info { position: relative; display: inline-flex; align-items: center; }
   .stat-i { width: 13px; height: 13px; color: var(--faint); cursor: help; transition: color .15s ease; }
-  .stat-info:hover .stat-i { color: var(--text); }
+  .stat-info:hover .stat-i { color: var(--accent); }
   .stat-pop {
     display: none; position: absolute; top: calc(100% + 10px); left: -10px; z-index: 50;
     width: 260px; padding: 14px; border-radius: 14px;
