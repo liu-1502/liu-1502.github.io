@@ -101,7 +101,7 @@
   .lb-rows { display: flex; flex-direction: column; }
   .lb-row {
     display: flex; align-items: center; gap: 14px;
-    padding: 11px 2px;
+    padding: 13.5px 2px;
     border-bottom: 1px solid color-mix(in srgb, var(--text) 7%, transparent);
     font-variant-numeric: tabular-nums;
   }
