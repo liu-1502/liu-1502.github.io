@@ -15,10 +15,15 @@
   .dash-head .verified:hover .arr { transform: translateX(3px); }
 
   /* 3 sản phẩm xếp hàng ngang: grid 3 cột, mỗi card là 1 cột dọc. */
-  /* Header dashboard: text trái, illus Yuzu bên phải */
-  .dash-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .dash-hero-illus { flex: none; width: auto; height: 128px; display: block; }
-  @media (max-width: 700px) { .dash-hero-illus { display: none; } }
+  /* Illus Yuzu: to, tuck sau card (peek góc phải trên, ló xuống dưới) như opportunities */
+  position: relative;
+  .dash-hero-illus {
+    position: absolute; z-index: 0; pointer-events: none;
+    top: -18px; right: -24px; width: auto; height: 300px; display: block;
+  }
+  > .opp-head, > .page-stats, > .section { position: relative; z-index: 1; }
+  @media (max-width: 700px) { .dash-hero-illus { height: 220px; right: -30px; } }
+  @media (max-width: 480px) { .dash-hero-illus { display: none; } }
 
   .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
   /* POR section: khoảng cách tới hàng 3 card = 24px */
