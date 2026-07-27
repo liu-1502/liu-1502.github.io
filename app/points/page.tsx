@@ -73,8 +73,8 @@ export default function Points() {
         <div className="card panel rv">
           <div className="panel-head">
             <h2>Leaderboard</h2>
-            <span className="chip plain">SEASON 1</span>
           </div>
+          <div className="lb-row you lb-you-pin"><span className="rk">#95</span><span className="addr">0x7bd4…9e2c<em>You</em></span><span className="amt">1,180<i className="juice-ic" aria-hidden="true" /></span></div>
           <div className="lb-rows">
             <div className="lb-row top"><span className="rk">#1</span><span className="addr">0x4352…3b4f</span><span className="amt">9,842<i className="juice-ic" aria-hidden="true" /></span></div>
             <div className="lb-row top"><span className="rk">#2</span><span className="addr">0x9f1a…bd1a</span><span className="amt">8,610<i className="juice-ic" aria-hidden="true" /></span></div>
