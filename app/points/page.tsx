@@ -31,8 +31,8 @@ export default function Points() {
         <div>
           <div className="lbl">Your points</div>
           <div className="num">
-            <span className="juice-ic" aria-hidden="true" />
             <span className="v" data-count="49092489">0</span>
+            <span className="juice-ic" aria-hidden="true" />
             <span className="rank-pill">#95</span>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function Points() {
           </div>
 
           <div className="ref-stats">
-            <div><div className="k">My rewards</div><div className="v hi"><span className="juice-ic" aria-hidden="true" /><span data-count="75253682">0</span></div></div>
+            <div><div className="k">My rewards</div><div className="v hi"><span data-count="75253682">0</span><span className="juice-ic" aria-hidden="true" /></div></div>
             <div><div className="k">My friends</div><div className="v">9</div></div>
           </div>
 
