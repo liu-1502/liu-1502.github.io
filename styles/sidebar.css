@@ -75,6 +75,15 @@
 .side-item[data-nav="prime"] { --side-accent: var(--prime); color: var(--muted); }
 .side-item[data-nav="mkt"]   { --side-accent: var(--mkt);   color: var(--muted); }
 
+/* Badge chỉ số (Alpha/Prime/Marketplace): nền nhạt + chữ theo màu feature — như badge leaderboard */
+.side-item .meta {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0;
+  padding: 3px 7px; border-radius: 8px;
+  background: color-mix(in srgb, var(--side-accent) 12%, transparent);
+  color: var(--side-accent);
+}
+
 /* ---- Logo link (Yuzu/Accountable/Telegram/Discord): đơn sắc + cỡ như icon, đều nhau ---- */
 .side-item img {
   width: 15px; height: 15px;
