@@ -260,7 +260,9 @@
   /* Mobile: nút About nổi góc phải trên cùng (1 hàng riêng), token tabs xuống dưới canh giữa */
   @media (max-width: 940px) {
     .app-layout:not(.xtra-open) { padding-top: 52px; }
-    .xchg-tabs { flex-wrap: wrap; }
+    /* Giữ 3 token tab trên 1 hàng (không rớt dòng); nếu quá hẹp thì scroll ngang */
+    .xchg-tabs { flex-wrap: nowrap; gap: 8px; overflow-x: auto; }
+    .xchg-tabs .tok-tab { flex: none; }
   }
 
   @media (max-width: 520px) {
