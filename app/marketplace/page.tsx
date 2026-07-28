@@ -23,7 +23,7 @@ const VAULTS = [
     tvl: "$7.51M", tvlChg: "+0.01% · 24h", apy: "4.90%", leverage: "0×",
     risk: 1, riskLabel: "Low", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
     desc: "Yuzu Cash is an unlevered, short-duration (<24H) liquidity vault designed to deliver yields above the standard overnight rate while maintaining strict risk discipline. Backed by tokenized T-Bills from leading issuers.",
-    powered: ["/assets/protocols/openeden.svg"],
+    powered: ["/assets/protocols/wisdomtree.png", "/assets/protocols/m0.jpg"],
   },
 ];
 
@@ -130,7 +130,7 @@ export default function Marketplace() {
           <span className="mkt-trust-lbl">Audited, monitored &amp; managed with</span>
           <div className="mkt-trust-row">
             {[
-              { name: "Pashov Audit Group", logo: "/assets/partners/pashov-fav.png" },
+              { name: "Pashov Audit Group", logo: "/assets/partners/pashov.jpeg" },
               { name: "Dedaub", logo: "/assets/partners/dedaub-fav.png" },
               { name: "Hypernative", logo: "/assets/partners/hypernative-fav.png" },
               { name: "Fordefi", logo: "/assets/partners/fordefi-fav.png" },
