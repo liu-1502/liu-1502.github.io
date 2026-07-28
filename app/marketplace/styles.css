@@ -66,7 +66,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .mkt-ov { display: flex; flex-direction: column; gap: 22px; }
   .mkt-ov .opp-head { margin: 0; }
   .mkt-ov .lede { max-width: 760px; }
-  .mkt-ov .lede b { color: var(--mkt); font-weight: 600; }
+  .mkt-ov .lede b { color: var(--text); font-weight: 600; }
 
   /* Dải "Audited, monitored & managed with" */
   .mkt-trust { display: flex; flex-direction: column; gap: 10px; }
