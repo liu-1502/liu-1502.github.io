@@ -32,6 +32,8 @@
   /* 2 card cao bằng nhau; leaderboard scroll trong card */
   .pts-grid .panel { display: flex; flex-direction: column; min-height: 0; }
   .pts-grid .lb-rows { flex: 1 1 0; min-height: 0; overflow-y: auto; }
+  /* Stack 1 cột (≤940): panel hết chiều cao cố định -> bỏ flex:1 kẻo lb-rows co về 0 (mất list) */
+  @media (max-width: 940px) { .pts-grid .lb-rows { flex: none; overflow-y: visible; } }
 
   .panel { padding: 20px; }
   .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
