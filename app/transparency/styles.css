@@ -11,13 +11,13 @@
     border-radius: var(--r-md);
     background: var(--surface);
     overflow: hidden;
-    padding: 10px 0;
+    padding: 6px 0;
   }
   .verify-meta > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 18px;
+    padding: 4px 16px;
     border-bottom: 1px solid var(--line-solid);
     font-size: 12.5px;
   }
