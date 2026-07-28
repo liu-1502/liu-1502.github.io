@@ -199,11 +199,13 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vt-deposit { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; font-size: 13.5px; background: var(--mkt); }
   .vt-deposit svg { width: 15px; height: 15px; }
 
-  /* Nút back về danh sách */
+  /* Nút back về danh sách: cùng hàng với token tabs (giữa) và About (phải) */
+  .mkt-xchg { position: relative; }
   .mkt-back {
-    all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    all: unset; cursor: pointer; position: absolute; top: 0; left: 0; z-index: 30;
+    display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px 0 8px;
     font-family: var(--font-body); font-size: 13.5px; font-weight: 500; color: var(--muted);
-    padding: 6px 10px 6px 6px; border-radius: var(--r-sm); margin-bottom: 8px;
+    border-radius: var(--r-sm);
     transition: color .15s ease, background .15s ease;
   }
   .mkt-back:hover { color: var(--mkt); background: color-mix(in srgb, var(--mkt) 8%, transparent); }
