@@ -3,7 +3,7 @@ import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha s
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, LayoutGrid, Rows2 } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, LayoutGrid, Rows2 } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -149,15 +149,13 @@ export default function Marketplace() {
           <div><div className="k">Yield distributed</div><div className="v">$15.5K</div></div>
         </div>
 
-        <div className="card mkt-vaults rv">
+        <div className="card mkt-vaults view-grid rv">
           <div className="mkt-vaults-head">
             <h2>All Vaults</h2>
             <div className="mkt-tools">
-              <button type="button" className="mkt-filter">All assets <ChevronDown /></button>
-              <button type="button" className="mkt-filter">All chains <ChevronDown /></button>
               <div className="mkt-view" role="group" aria-label="View mode">
-                <button type="button" className="on" data-mview="list" aria-label="List view"><Rows2 /></button>
-                <button type="button" data-mview="grid" aria-label="Grid view"><LayoutGrid /></button>
+                <button type="button" data-mview="list" aria-label="List view"><Rows2 /></button>
+                <button type="button" className="on" data-mview="grid" aria-label="Grid view"><LayoutGrid /></button>
               </div>
             </div>
           </div>
