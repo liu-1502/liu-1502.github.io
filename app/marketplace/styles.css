@@ -53,6 +53,128 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .ord .badge.completed { background: var(--mk-toggle); color: var(--mkt); }
 }
 
+/* ================================================================
+   MARKETPLACE OVERVIEW (màn danh sách vault, trước khi vào exchange)
+   ================================================================ */
+.pg-marketplace {
+  /* Ẩn thật sự khi có [hidden] (đè display:flex của .mkt-ov) */
+  [data-mkt][hidden] { display: none; }
+
+  .mkt-ov { display: flex; flex-direction: column; gap: 22px; }
+  .mkt-ov .opp-head { margin: 0; }
+  .mkt-ov .lede { max-width: 760px; }
+
+  /* Dải "Audited, monitored & managed with" */
+  .mkt-trust { display: flex; flex-direction: column; gap: 10px; }
+  .mkt-trust-lbl { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .mkt-trust-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mkt-partner {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text);
+    padding: 6px 12px; border-radius: 999px;
+    border: 1px solid var(--line-solid); background: var(--surface);
+  }
+  .mkt-partner .ic { width: 15px; height: 15px; color: var(--mkt); }
+
+  /* Stat row ngang (đè lại kiểu dọc + display:none mà Alpha áp cho .page-stats) */
+  .mkt-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    background: var(--surface); border: 1px solid var(--line-solid); border-radius: var(--r-md);
+    overflow: hidden; padding: 0; margin: 0;
+  }
+  .mkt-stats > div { display: block; padding: 16px 20px; border-right: 1px solid var(--line-solid); border-bottom: none; }
+  .mkt-stats > div:last-child { border-right: none; }
+  .mkt-stats .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin: 0; }
+  .mkt-stats .v { font-family: var(--font-mono); font-size: 19px; font-weight: 560; margin-top: 5px; }
+  @media (max-width: 620px) { .mkt-stats { grid-template-columns: 1fr 1fr; } }
+
+  /* Card "All Vaults" */
+  .mkt-vaults { padding: 0; overflow: hidden; }
+  .mkt-vaults-head { padding: 18px 22px 4px; }
+  .mkt-vaults-head h2 { font-family: var(--font-display); font-weight: 620; font-size: 16px; letter-spacing: -.01em; margin: 0; }
+  .mkt-tbl-wrap { overflow-x: auto; }
+  table.mkt-tbl { width: 100%; border-collapse: collapse; min-width: 820px; }
+  table.mkt-tbl th {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--faint); font-weight: 500; text-align: left; padding: 12px 14px; white-space: nowrap;
+  }
+  table.mkt-tbl th:first-child, table.mkt-tbl td:first-child { padding-left: 22px; }
+  table.mkt-tbl th:last-child, table.mkt-tbl td:last-child { padding-right: 22px; }
+  table.mkt-tbl td { padding: 14px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); font-size: 14px; color: var(--text); vertical-align: middle; }
+  table.mkt-tbl tbody tr { transition: background .15s ease; }
+  table.mkt-tbl tbody tr:hover { background: color-mix(in srgb, var(--mkt) 4%, transparent); }
+
+  .vt-name { display: flex; align-items: center; gap: 12px; }
+  .vt-logo { flex: none; width: 34px; height: 34px; border-radius: 50%; overflow: hidden; background: var(--surface-2); display: grid; place-items: center; }
+  .vt-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .vt-name b { display: block; font-family: var(--font-display); font-weight: 620; font-size: 14.5px; }
+  .vt-name small { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+
+  .vt-badge { display: inline-flex; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; padding: 3px 11px; border-radius: 999px; }
+  .vt-badge.leverage { color: #A56634; background: #F7EBDD; }
+  .vt-badge.lending { color: var(--mkt); background: color-mix(in srgb, var(--mkt) 13%, #fff); }
+
+  .vt-type { color: var(--muted); }
+  .vt-chain { white-space: nowrap; }
+  .vt-chain img { width: 16px; height: 16px; border-radius: 50%; vertical-align: -3px; margin-right: 6px; }
+  .vt-tvl { font-variant-numeric: tabular-nums; }
+  .vt-tvl b { font-weight: 600; }
+  .vt-tvl small { display: block; font-size: 11.5px; color: var(--good); margin-top: 2px; }
+  .vt-apy { font-family: var(--font-mono); font-weight: 600; color: var(--mkt); }
+  .vt-asset { white-space: nowrap; }
+  .vt-asset img { width: 18px; height: 18px; border-radius: 50%; vertical-align: -4px; margin-right: 6px; }
+
+  /* Risk bars */
+  .vt-risk .risk { display: inline-flex; gap: 3px; }
+  .vt-risk .risk i { width: 13px; height: 5px; border-radius: 2px; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  .vt-risk .risk.r1 i:nth-child(-n+1),
+  .vt-risk .risk.r2 i:nth-child(-n+2),
+  .vt-risk .risk.r3 i:nth-child(-n+3),
+  .vt-risk .risk.r4 i:nth-child(-n+4) { background: #7ABA16; }
+  .vt-risk small { display: block; font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+
+  .vt-act { text-align: right; }
+  .vt-deposit { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; font-size: 13.5px; background: var(--mkt); }
+  .vt-deposit svg { width: 15px; height: 15px; }
+
+  /* Nút back về danh sách */
+  .mkt-back {
+    all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-body); font-size: 13.5px; font-weight: 500; color: var(--muted);
+    padding: 6px 10px 6px 6px; border-radius: var(--r-sm); margin-bottom: 8px;
+    transition: color .15s ease, background .15s ease;
+  }
+  .mkt-back:hover { color: var(--mkt); background: color-mix(in srgb, var(--mkt) 8%, transparent); }
+  .mkt-back .ic { width: 17px; height: 17px; }
+
+  /* Responsive: table vault -> card (mỗi field 1 hàng: label trái / value phải) */
+  @media (max-width: 1100px) {
+    .mkt-tbl-wrap { overflow-x: visible; }
+    table.mkt-tbl, table.mkt-tbl tbody, table.mkt-tbl tr, table.mkt-tbl td { display: block; }
+    table.mkt-tbl { min-width: 0; }
+    table.mkt-tbl thead { display: none; }
+    table.mkt-tbl tbody tr { padding: 18px; position: relative; }
+    table.mkt-tbl tbody tr:not(:last-child)::after {
+      content: ""; position: absolute; left: 18px; right: 18px; bottom: 0; height: 1px;
+      background: color-mix(in srgb, var(--text) 8%, transparent);
+    }
+    table.mkt-tbl tbody tr:hover { background: transparent; }
+    table.mkt-tbl td { padding: 5px 0 !important; border: none; display: flex; align-items: center; gap: 8px; }
+    table.mkt-tbl td:first-child { padding-left: 0; }
+    /* Nhãn cột (data-label) đẩy sang trái, value dồn phải */
+    table.mkt-tbl td[data-label]::before {
+      content: attr(data-label); margin-right: auto;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint);
+    }
+    .vt-name { padding-bottom: 8px !important; }
+    .vt-type { text-align: right; }
+    .vt-tvl b, .vt-tvl small { display: inline; }
+    .vt-risk small { margin: 0; }
+    .vt-act { padding-top: 12px !important; }
+    .vt-deposit { width: 100%; justify-content: center; }
+  }
+}
+
 /* ===================== DARK MODE (Marketplace) ===================== */
 :root[data-theme="dark"] body.p-mkt { --bg: color-mix(in srgb, var(--mkt) 7%, #0A0E16); }
 :root[data-theme="dark"] .pg-marketplace.pg-marketplace .mfield .token[data-sym="usdc"] { background: color-mix(in srgb, #6E86FF 16%, var(--surface)); }

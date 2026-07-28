@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useExchangePanels, type RateMap } from "@/hooks/useExchangePanels";
 
 /* Tỷ giá + hệ số USD cho các vault Marketplace. */
@@ -10,5 +11,40 @@ const RATES: RateMap = {
 
 export default function MarketplaceClient() {
   useExchangePanels(RATES);
+
+  /* Điều hướng 2 màn: Overview (danh sách vault) <-> Exchange (deposit/withdraw). */
+  useEffect(() => {
+    const ov = document.querySelector<HTMLElement>('[data-mkt="overview"]');
+    const xc = document.querySelector<HTMLElement>('[data-mkt="exchange"]');
+    if (!ov || !xc) return;
+
+    const show = (view: "overview" | "exchange") => {
+      ov.hidden = view !== "overview";
+      xc.hidden = view !== "exchange";
+      // Card exchange được ẩn lúc load nên reveal observer bỏ qua -> ép hiện khi mở.
+      if (view === "exchange") xc.querySelectorAll(".rv").forEach((e) => e.classList.add("in"));
+      window.scrollTo({ top: 0 });
+    };
+
+    const onDeposit = (e: MouseEvent) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>(".vt-deposit");
+      if (!b) return;
+      const key = b.getAttribute("data-vault");
+      // Kích hoạt đúng tab token của vault trước khi chuyển màn.
+      document.querySelector<HTMLElement>(`.tok-tab[data-tab="${key}"]`)?.click();
+      show("exchange");
+    };
+    const onBack = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest("[data-mkt-back]")) show("overview");
+    };
+
+    ov.addEventListener("click", onDeposit);
+    xc.addEventListener("click", onBack);
+    return () => {
+      ov.removeEventListener("click", onDeposit);
+      xc.removeEventListener("click", onBack);
+    };
+  }, []);
+
   return null;
 }
