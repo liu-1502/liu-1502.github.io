@@ -55,8 +55,11 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
 /* ================================================================
    MARKETPLACE OVERVIEW (màn danh sách vault, trước khi vào exchange)
+   Nhân đôi class (.pg-marketplace.pg-marketplace) để specificity luôn thắng
+   rule dùng chung của Alpha dù thứ tự load CSS đổi khi điều hướng client-side
+   (nếu không, Alpha .page-stats{display:none} sẽ ẩn mất stat row khi quay lại).
    ================================================================ */
-.pg-marketplace {
+.pg-marketplace.pg-marketplace {
   /* Ẩn thật sự khi có [hidden] (đè display:flex của .mkt-ov) */
   [data-mkt][hidden] { display: none; }
 
