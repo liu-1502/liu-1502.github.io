@@ -3,7 +3,7 @@ import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha s
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ShieldCheck, ChevronDown, LayoutGrid, Rows2 } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, LayoutGrid, Rows2 } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -130,14 +130,17 @@ export default function Marketplace() {
           <span className="mkt-trust-lbl">Audited, monitored &amp; managed with</span>
           <div className="mkt-trust-row">
             {[
-              { name: "Pashov Audit Group", logo: null },
-              { name: "Dedaub", logo: null },
-              { name: "Hypernative", logo: "/assets/partners/hypernative-fav.png" },
-              { name: "Fordefi", logo: "/assets/partners/fordefi-fav.png" },
+              { name: "Pashov Audit Group", logo: "/assets/partners/pashov.jpeg", wordmark: false },
+              { name: "Dedaub", logo: "/assets/partners/dedaub.png", wordmark: true },
+              { name: "Hypernative", logo: "/assets/partners/hypernative-fav.png", wordmark: false },
+              { name: "Fordefi", logo: "/assets/partners/fordefi-fav.png", wordmark: false },
             ].map((p) => (
               <span className="mkt-partner" key={p.name}>
-                {p.logo ? <img src={p.logo} alt="" /> : <ShieldCheck className="ic" />}
-                {p.name}
+                {p.wordmark ? (
+                  <img className="mkt-partner-wm" src={p.logo} alt={p.name} />
+                ) : (
+                  <><img src={p.logo} alt="" />{p.name}</>
+                )}
               </span>
             ))}
           </div>

@@ -76,6 +76,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   }
   .mkt-partner .ic { width: 15px; height: 15px; color: var(--mkt); }
   .mkt-partner img { width: 16px; height: 16px; border-radius: 4px; object-fit: contain; }
+  .mkt-partner img.mkt-partner-wm { width: auto; height: 14px; border-radius: 0; filter: brightness(0); opacity: .8; }
+  :root[data-theme="dark"] .mkt-partner img.mkt-partner-wm { filter: brightness(0) invert(1); opacity: .9; }
 
   /* Stat row ngang (đè lại kiểu dọc + display:none mà Alpha áp cho .page-stats) */
   .mkt-stats {
@@ -117,7 +119,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* ---- Grid card ---- */
   .mkt-grid { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; padding: 4px 22px 22px; }
-  .mkt-card { display: flex; flex-direction: column; gap: 14px; padding: 18px; border: 1px solid var(--line-solid); border-radius: var(--r-md); background: var(--surface); }
+  .mkt-card { display: flex; flex-direction: column; gap: 14px; padding: 18px; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); border-radius: var(--r-md); background: var(--surface); }
   .mc-top { display: flex; align-items: center; gap: 12px; }
   .mc-id { min-width: 0; }
   .mc-id b { display: block; font-family: var(--font-display); font-weight: 620; font-size: 15px; }
