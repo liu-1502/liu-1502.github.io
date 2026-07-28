@@ -115,17 +115,20 @@
 
   /* ===== Responsive: table -> card khi màn hẹp (thay vì scroll ngang) ===== */
   @media (max-width: 1024px) {
-    .wl-table-wrap { overflow: visible; border: none; border-radius: 0; background: transparent; }
+    .wl-table-wrap { overflow: visible; }   /* bỏ scroll ngang, giữ khung card ngoài */
     table.wl { min-width: 0; display: block; }
     table.wl thead { display: none; }
     table.wl tbody { display: block; }
     table.wl tbody tr {
       display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px;
-      padding: 16px; margin-bottom: 12px;
-      border: 1px solid var(--line-solid); border-radius: var(--r-md);
-      background: var(--surface);
+      padding: 18px; position: relative;
     }
-    table.wl tbody tr:hover { background: var(--surface); }
+    table.wl tbody tr:hover { background: transparent; }
+    /* Divider ngang giữa các item, inset bằng bề rộng text (không full khung) */
+    table.wl tbody tr:not(:last-child)::after {
+      content: ""; position: absolute; left: 18px; right: 18px; bottom: 0; height: 1px;
+      background: color-mix(in srgb, var(--text) 8%, transparent);
+    }
     table.wl td { display: block; padding: 0; border: none !important; font-size: 14px; }
     table.wl td.proto { order: 1; white-space: normal; }
     table.wl td.assets { order: 2; color: var(--muted); font-size: 13px; }
