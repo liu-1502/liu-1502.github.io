@@ -14,7 +14,7 @@ const VAULTS = [
     tvl: "$3.01M", tvlChg: "+0.02% · 24h", apy: "8.53%", leverage: "10×",
     risk: 2, riskLabel: "Low–Moderate", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
     desc: "Leveraged exposure to SyrupUSD (overcollateralized lending). SyrupUSD is a yield-bearing stablecoin issued by Maple Finance, backed by overcollateralized loans to institutional borrowers, wrapped for Monad as a single yield-bearing token.",
-    powered: ["/assets/protocols/maple.png", "/assets/protocols/morpho.svg", "/assets/protocols/euler.svg", "/assets/protocols/fluid.svg"],
+    powered: ["/assets/protocols/aave.svg", "/assets/protocols/morpho.svg", "/assets/protocols/euler.svg", "/assets/protocols/fluid.svg"],
   },
   {
     key: "yzcash", name: "yzCash", addr: "0x224e…098d", logo: "/assets/tokens/yzCash.svg",
@@ -23,7 +23,7 @@ const VAULTS = [
     tvl: "$7.51M", tvlChg: "+0.01% · 24h", apy: "4.90%", leverage: "0×",
     risk: 1, riskLabel: "Low", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
     desc: "Yuzu Cash is an unlevered, short-duration (<24H) liquidity vault designed to deliver yields above the standard overnight rate while maintaining strict risk discipline. Backed by tokenized T-Bills from leading issuers.",
-    powered: ["/assets/protocols/wisdomtree.png", "/assets/protocols/m0.jpg"],
+    powered: ["/assets/protocols/curvance.svg"],
   },
 ];
 

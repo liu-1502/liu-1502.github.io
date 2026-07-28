@@ -23,7 +23,7 @@
   }
   .verify-meta > div:last-child { border-bottom: none; }
   .verify-meta .k { color: var(--faint); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; }
-  .verify-meta .v { font-family: var(--font-mono); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+  .verify-meta .v { font-family: var(--font-body); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
 
   .statwall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   @media (max-width: 900px) { .statwall { grid-template-columns: 1fr 1fr; } }
