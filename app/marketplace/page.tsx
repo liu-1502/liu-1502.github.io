@@ -130,13 +130,13 @@ export default function Marketplace() {
           <span className="mkt-trust-lbl">Audited, monitored &amp; managed with</span>
           <div className="mkt-trust-row">
             {[
-              { name: "Pashov Audit Group", logo: "/assets/partners/pashov.jpeg" },
-              { name: "Dedaub", logo: "/assets/partners/dedaub-fav.png" },
-              { name: "Hypernative", logo: "/assets/partners/hypernative-fav.png" },
-              { name: "Fordefi", logo: "/assets/partners/fordefi-fav.png" },
+              { name: "Pashov Audit Group", wm: null },
+              { name: "Dedaub", wm: "/assets/partners/dedaub-wm.png" },
+              { name: "Hypernative", wm: "/assets/partners/hypernative-wm.png" },
+              { name: "Fordefi", wm: "/assets/partners/fordefi-wm.png" },
             ].map((p) => (
               <span className="mkt-partner" key={p.name}>
-                <img src={p.logo} alt="" />{p.name}
+                {p.wm ? <img className="mkt-wm" src={p.wm} alt={p.name} /> : p.name}
               </span>
             ))}
           </div>
@@ -155,8 +155,10 @@ export default function Marketplace() {
               <div className="mkt-card" key={v.key}>
                 <div className="mc-top">
                   <span className="vt-logo"><img src={v.logo} alt="" /></span>
-                  <div className="mc-id"><b>{v.name}</b><small>{v.addr}</small></div>
-                  <span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.strategy}</span>
+                  <div className="mc-id">
+                    <div className="mc-name"><b>{v.name}</b><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.strategy}</span></div>
+                    <small>{v.addr}</small>
+                  </div>
                   <div className="mc-apy"><span className="mc-apy-v">{v.apy}</span><span className="mc-apy-l">APY (7D)</span></div>
                 </div>
                 <div className="mc-badges">

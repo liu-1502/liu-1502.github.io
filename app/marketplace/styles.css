@@ -79,7 +79,9 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
     border: 1px solid var(--line-solid); background: var(--surface);
   }
   .mkt-partner .ic { width: 18px; height: 18px; color: var(--mkt); }
-  .mkt-partner img { width: 20px; height: 20px; border-radius: 5px; object-fit: contain; }
+  /* Logotype đen (recolor từ wordmark trắng của site) */
+  .mkt-partner .mkt-wm { height: 15px; width: auto; object-fit: contain; filter: brightness(0); opacity: .85; }
+  :root[data-theme="dark"] .mkt-partner .mkt-wm { filter: brightness(0) invert(1); opacity: .92; }
 
   /* Stat row ngang (đè lại kiểu dọc + display:none mà Alpha áp cho .page-stats) */
   .mkt-stats {
@@ -126,7 +128,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .mkt-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30, 33, 89, .10); }
   .mc-top { display: flex; align-items: center; gap: 12px; }
   .mc-id { min-width: 0; }
-  .mc-id b { display: block; font-family: var(--font-display); font-weight: 620; font-size: 15px; }
+  .mc-name { display: flex; align-items: center; gap: 8px; }
+  .mc-id b { font-family: var(--font-display); font-weight: 620; font-size: 15px; }
   .mc-id small { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
   .mc-apy { margin-left: auto; text-align: right; }
   .mc-apy-v { display: block; font-family: var(--font-mono); font-weight: 640; font-size: 18px; color: var(--mkt); }
@@ -177,7 +180,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vt-name b { display: block; font-family: var(--font-display); font-weight: 620; font-size: 14.5px; }
   .vt-name small { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
 
-  .vt-badge { flex: none; display: inline-flex; align-items: center; line-height: 1; font-family: var(--font-body); font-size: 11px; font-weight: 600; padding: 3px 7px; border-radius: 6px; }
+  .vt-badge { flex: none; display: inline-flex; align-items: center; line-height: 1; font-family: var(--font-body); font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px; }
   .vt-badge.leverage { color: #A56634; background: color-mix(in srgb, #A56634 8%, #fff); }
   .vt-badge.lending { color: var(--mkt); background: color-mix(in srgb, var(--mkt) 7%, #fff); }
 
