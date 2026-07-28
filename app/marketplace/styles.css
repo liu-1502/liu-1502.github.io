@@ -79,9 +79,9 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
     border: 1px solid var(--line-solid); background: var(--surface);
   }
   .mkt-partner .ic { width: 18px; height: 18px; color: var(--mkt); }
-  /* Logotype đen (recolor từ wordmark trắng của site) */
-  .mkt-partner .mkt-wm { height: 15px; width: auto; object-fit: contain; filter: brightness(0); opacity: .85; }
-  :root[data-theme="dark"] .mkt-partner .mkt-wm { filter: brightness(0) invert(1); opacity: .92; }
+  /* Favicon icon ép đen + text */
+  .mkt-partner img { width: 20px; height: 20px; border-radius: 5px; object-fit: contain; filter: brightness(0); opacity: .85; }
+  :root[data-theme="dark"] .mkt-partner img { filter: brightness(0) invert(1); opacity: .92; }
 
   /* Stat row ngang (đè lại kiểu dọc + display:none mà Alpha áp cho .page-stats) */
   .mkt-stats {
