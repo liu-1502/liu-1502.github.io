@@ -266,8 +266,10 @@
   }
 
   @media (max-width: 520px) {
-    .mfield { flex-direction: column; align-items: flex-start; }
-    .mfield-r { align-items: flex-start; }
+    /* Giữ token pill CÙNG HÀNG với ô nhập (không stack dọc); pct-opts wrap nếu chật */
+    .mfield { flex-direction: row; align-items: flex-end; }
+    .mfield-r { align-items: flex-end; }
+    .pct-opts { flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
   }
 }
 
