@@ -201,6 +201,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* Nút back về danh sách: cùng hàng với token tabs (giữa) và About (phải) */
   .mkt-xchg { position: relative; }
+  /* Bỏ padding-top 52px (rule ≤940 của Alpha) để token tabs lên ngang back + About */
+  .mkt-xchg .app-layout:not(.xtra-open) { padding-top: 0; }
   .mkt-back {
     all: unset; cursor: pointer; position: absolute; top: 0; left: 0; z-index: 30;
     display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px 0 8px;
