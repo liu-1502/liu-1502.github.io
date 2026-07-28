@@ -138,8 +138,10 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .mc-stats small { display: block; font-size: 11px; color: var(--good); margin-top: 2px; }
   .mc-stats .risk { display: flex; gap: 3px; margin-top: 4px; }
   .mc-stats .risk i { width: 12px; height: 5px; border-radius: 2px; background: color-mix(in srgb, var(--text) 12%, transparent); }
-  .mc-stats .risk.r1 i:nth-child(-n+1), .mc-stats .risk.r2 i:nth-child(-n+2),
-  .mc-stats .risk.r3 i:nth-child(-n+3), .mc-stats .risk.r4 i:nth-child(-n+4) { background: #7ABA16; }
+  .mc-stats .risk.r1 i:nth-child(-n+1) { background: #7ABA16; }
+  .mc-stats .risk.r2 i:nth-child(-n+2) { background: #E0930C; }
+  .mc-stats .risk.r3 i:nth-child(-n+3) { background: #E0670C; }
+  .mc-stats .risk.r4 i:nth-child(-n+4) { background: #DC2626; }
   .mc-stats .risk + small { color: var(--muted); }
   .mc-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 2px; }
   .mc-powered { display: flex; align-items: center; gap: 8px; min-width: 0; }
@@ -186,10 +188,10 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   /* Risk bars */
   .vt-risk .risk { display: inline-flex; gap: 3px; }
   .vt-risk .risk i { width: 13px; height: 5px; border-radius: 2px; background: color-mix(in srgb, var(--text) 12%, transparent); }
-  .vt-risk .risk.r1 i:nth-child(-n+1),
-  .vt-risk .risk.r2 i:nth-child(-n+2),
-  .vt-risk .risk.r3 i:nth-child(-n+3),
-  .vt-risk .risk.r4 i:nth-child(-n+4) { background: #7ABA16; }
+  .vt-risk .risk.r1 i:nth-child(-n+1) { background: #7ABA16; }
+  .vt-risk .risk.r2 i:nth-child(-n+2) { background: #E0930C; }
+  .vt-risk .risk.r3 i:nth-child(-n+3) { background: #E0670C; }
+  .vt-risk .risk.r4 i:nth-child(-n+4) { background: #DC2626; }
   .vt-risk small { display: block; font-size: 11.5px; color: var(--muted); margin-top: 4px; }
 
   .vt-act { text-align: right; }
