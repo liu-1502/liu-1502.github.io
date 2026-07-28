@@ -578,7 +578,7 @@ header.site {
 .hub-hero { padding: 64px 0 40px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: end; }
 @media (max-width: 900px) { .hub-hero { grid-template-columns: 1fr; } }
 .hub-hero h1 { font-size: clamp(34px, 4.4vw, 52px); line-height: 1.04; }
-.hub-hero .lede { font-size: 15.5px; color: var(--muted); line-height: 1.65; max-width: 54ch; margin: 18px 0 0; }
+.hub-hero .lede { font-size: 15.5px; color: var(--text); line-height: 1.65; max-width: 54ch; margin: 18px 0 0; }
 
 .statline {
   display: grid;

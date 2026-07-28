@@ -23,7 +23,7 @@ export default function Points() {
       <div className="opp-head rv" style={{ marginBottom: 18 }}>
         <div>
           <h1>Points</h1>
-          <p style={{ color: "var(--muted)", margin: 0, fontSize: 13 }}>Track your Yuzu Juice, referral rewards and leaderboard standing across the season.</p>
+          <p style={{ color: "var(--text)", margin: 0, fontSize: 13 }}>Track your Yuzu Juice, referral rewards and leaderboard standing across the season.</p>
         </div>
       </div>
 

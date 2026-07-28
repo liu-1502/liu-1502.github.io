@@ -1,4 +1,7 @@
 .pg-points {
+  /* Các card ở Points là tĩnh (không click) -> bỏ hiệu ứng hover nhấc/đổ bóng */
+  .card:hover { transform: none; box-shadow: none; }
+
   /* ---- juice hero ---- */
   .juice-hero {
     display: flex; flex-direction: row; align-items: center; justify-content: space-between;
