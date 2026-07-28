@@ -73,13 +73,13 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .mkt-trust-lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
   .mkt-trust-row { display: flex; flex-wrap: wrap; gap: 10px; }
   .mkt-partner {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-body); font-size: 16px; font-weight: 600; color: var(--text);
-    padding: 10px 14px; border-radius: var(--r-md);
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text);
+    padding: 7px 12px; border-radius: var(--r-md);
     border: 1px solid var(--line-solid); background: var(--surface);
   }
-  .mkt-partner .ic { width: 22px; height: 22px; color: var(--mkt); }
-  .mkt-partner img { width: 24px; height: 24px; border-radius: 5px; object-fit: contain; }
+  .mkt-partner .ic { width: 18px; height: 18px; color: var(--mkt); }
+  .mkt-partner img { width: 20px; height: 20px; border-radius: 5px; object-fit: contain; }
 
   /* Stat row ngang (đè lại kiểu dọc + display:none mà Alpha áp cho .page-stats) */
   .mkt-stats {
@@ -87,8 +87,12 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
     background: var(--surface); border: 1px solid var(--line-solid); border-radius: var(--r-md);
     overflow: hidden; padding: 0; margin: 0;
   }
-  .mkt-stats > div { display: block; padding: 16px 20px; border-right: 1px solid var(--line-solid); border-bottom: none; }
-  .mkt-stats > div:last-child { border-right: none; }
+  .mkt-stats > div { display: block; padding: 16px 20px; position: relative; border: none; }
+  /* Divider dọc giữa các cột (cao bằng text, như Dashboard) */
+  .mkt-stats > div:not(:last-child)::after {
+    content: ""; position: absolute; top: 50%; right: 0; transform: translateY(-50%);
+    width: 1px; height: 38px; background: color-mix(in srgb, var(--text) 8%, transparent);
+  }
   .mkt-stats .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin: 0; }
   .mkt-stats .v { font-family: var(--font-mono); font-size: 19px; font-weight: 560; margin-top: 5px; }
   @media (max-width: 620px) { .mkt-stats { grid-template-columns: 1fr 1fr; } }
@@ -174,8 +178,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vt-name small { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
 
   .vt-badge { display: inline-flex; align-items: center; line-height: 1; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; padding: 5px 12px; border-radius: 999px; }
-  .vt-badge.leverage { color: #A56634; background: #F7EBDD; }
-  .vt-badge.lending { color: var(--mkt); background: color-mix(in srgb, var(--mkt) 13%, #fff); }
+  .vt-badge.leverage { color: #A56634; background: color-mix(in srgb, #A56634 8%, #fff); }
+  .vt-badge.lending { color: var(--mkt); background: color-mix(in srgb, var(--mkt) 7%, #fff); }
 
   .vt-type { color: var(--muted); }
   .vt-chain { white-space: nowrap; }
