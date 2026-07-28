@@ -156,10 +156,10 @@ export default function Marketplace() {
                 <div className="mc-top">
                   <span className="vt-logo"><img src={v.logo} alt="" /></span>
                   <div className="mc-id"><b>{v.name}</b><small>{v.addr}</small></div>
+                  <span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.strategy}</span>
                   <div className="mc-apy"><span className="mc-apy-v">{v.apy}</span><span className="mc-apy-l">APY (7D)</span></div>
                 </div>
                 <div className="mc-badges">
-                  <span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.strategy}</span>
                   <span className="mc-chip"><img src={v.chainIcon} alt="" />{v.chain}</span>
                   <span className="mc-chip"><img src={v.assetIcon} alt="" />{v.asset}</span>
                 </div>
