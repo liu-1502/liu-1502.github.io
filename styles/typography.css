@@ -45,7 +45,7 @@ body.p-mkt   { --topbar-accent: var(--mkt); }
 
 /* Trang Alpha: bỏ cap max-width để content rộng bằng topbar -> nút About Alpha
    canh phải khớp Connect Wallet ở mọi bề rộng màn hình. */
-main.content:has(.pg-alpha), main.content:has(.pg-prime), main.content:has(.pg-marketplace), main.content:has(.pg-bridge) { max-width: none; }
+main.content:has(.pg-alpha), main.content:has(.pg-prime), main.content:has(.pg-bridge) { max-width: none; }
 
 /* ================================================================
    Font mono = Geist Mono (gốc design system, khai báo ở yuzu.css).

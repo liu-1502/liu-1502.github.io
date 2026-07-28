@@ -116,7 +116,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* List (table) mặc định; Grid ẩn cho tới khi bật */
   /* ---- Grid card (chỉ còn dạng card) ---- */
-  .mkt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; padding: 0; }
+  .mkt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 0; }
+  @media (max-width: 760px) { .mkt-grid { grid-template-columns: 1fr; } }
   .mkt-card { display: flex; flex-direction: column; gap: 14px; padding: 18px; border: none; border-radius: 20px; background: var(--surface); transition: box-shadow .18s ease, transform .18s ease; }
   .mkt-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30, 33, 89, .10); }
   .mc-top { display: flex; align-items: center; gap: 12px; }
