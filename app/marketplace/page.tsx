@@ -3,7 +3,7 @@ import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha s
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ShieldCheck } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ShieldCheck, ChevronDown, LayoutGrid, List } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -11,15 +11,19 @@ const VAULTS = [
     key: "yzsyrup", name: "yzSyrup", addr: "0xc985…09b1", logo: "/assets/tokens/yzSyrup.svg",
     strategy: "Leverage", type: "Overcollateralized Lending",
     chain: "Monad", chainIcon: "/assets/chains/monad.svg",
-    tvl: "$3.01M", tvlChg: "+0.02% · 24h", apy: "8.53%",
+    tvl: "$3.01M", tvlChg: "+0.02% · 24h", apy: "8.53%", leverage: "10×",
     risk: 2, riskLabel: "Low–Moderate", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
+    desc: "Leveraged exposure to SyrupUSD (overcollateralized lending). SyrupUSD is a yield-bearing stablecoin issued by Maple Finance, backed by overcollateralized loans to institutional borrowers, wrapped for Monad as a single yield-bearing token.",
+    powered: ["/assets/protocols/maple.png", "/assets/protocols/morpho.svg", "/assets/protocols/euler.svg", "/assets/protocols/fluid.svg"],
   },
   {
     key: "yzcash", name: "yzCash", addr: "0x224e…098d", logo: "/assets/tokens/yzCash.svg",
     strategy: "Lending", type: "Tokenized T-Bills",
     chain: "Monad", chainIcon: "/assets/chains/monad.svg",
-    tvl: "$7.51M", tvlChg: "+0.01% · 24h", apy: "4.90%",
+    tvl: "$7.51M", tvlChg: "+0.01% · 24h", apy: "4.90%", leverage: "0×",
     risk: 1, riskLabel: "Low", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
+    desc: "Yuzu Cash is an unlevered, short-duration (<24H) liquidity vault designed to deliver yields above the standard overnight rate while maintaining strict risk discipline. Backed by tokenized T-Bills from leading issuers.",
+    powered: ["/assets/protocols/openeden.svg"],
   },
 ];
 
@@ -140,7 +144,17 @@ export default function Marketplace() {
         </div>
 
         <div className="card mkt-vaults rv">
-          <div className="mkt-vaults-head"><h2>All Vaults</h2></div>
+          <div className="mkt-vaults-head">
+            <h2>All Vaults</h2>
+            <div className="mkt-tools">
+              <button type="button" className="mkt-filter">All assets <ChevronDown /></button>
+              <button type="button" className="mkt-filter">All chains <ChevronDown /></button>
+              <div className="mkt-view" role="tablist" aria-label="View">
+                <button type="button" data-mview="grid" aria-label="Grid view"><LayoutGrid /></button>
+                <button type="button" className="on" data-mview="list" aria-label="List view"><List /></button>
+              </div>
+            </div>
+          </div>
           <div className="mkt-tbl-wrap">
             <table className="mkt-tbl">
               <thead><tr><th>Vault</th><th>Strategy</th><th>Type</th><th>Chain</th><th>TVL</th><th>APY (7D)</th><th>Risk</th><th>Deposit asset</th><th aria-label="Action" /></tr></thead>
@@ -160,6 +174,34 @@ export default function Marketplace() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          <div className="mkt-grid">
+            {VAULTS.map((v) => (
+              <div className="mkt-card" key={v.key}>
+                <div className="mc-top">
+                  <span className="vt-logo"><img src={v.logo} alt="" /></span>
+                  <div className="mc-id"><b>{v.name}</b><small>{v.addr}</small></div>
+                  <div className="mc-apy"><span className="mc-apy-v">{v.apy}</span><span className="mc-apy-l">APY (7D)</span></div>
+                </div>
+                <div className="mc-badges">
+                  <span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.strategy}</span>
+                  <span className="mc-chip"><img src={v.chainIcon} alt="" />{v.chain}</span>
+                  <span className="mc-chip"><img src={v.assetIcon} alt="" />{v.asset}</span>
+                </div>
+                <p className="mc-desc">{v.desc}</p>
+                <button type="button" className="mc-more">Read More</button>
+                <div className="mc-stats">
+                  <div><span className="k">TVL</span><b>{v.tvl}</b><small>{v.tvlChg}</small></div>
+                  <div><span className="k">Leverage</span><b>{v.leverage}</b></div>
+                  <div><span className="k">Risk</span><span className={`risk r${v.risk}`}><i /><i /><i /><i /></span><small>{v.riskLabel}</small></div>
+                </div>
+                <div className="mc-foot">
+                  <div className="mc-powered"><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
+                  <button type="button" className="btn btn-accent vt-deposit" data-vault={v.key}>Deposit <ArrowRight /></button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
