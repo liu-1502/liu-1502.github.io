@@ -3,7 +3,7 @@ import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha s
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, LayoutGrid, Rows2 } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -122,7 +122,7 @@ export default function Marketplace() {
         <div className="opp-head rv">
           <div>
             <h1>Marketplace</h1>
-            <p className="lede">Single-asset, leveraged-yield strategies on best-in-class collateral across blue-chip DeFi money markets, with up to <b>8.53%</b> APY. Each vault is isolated to one type of asset exposure — e.g. yzSyrup is only exposed to Maple Finance&apos;s Syrup (overcollateralized lending).</p>
+            <p className="lede">Single-asset, leveraged-yield strategies on best-in-class collateral across blue-chip DeFi money markets, with up to <b>8.53%</b> APY. Each vault is isolated to one type of asset exposure - e.g. yzSyrup is only exposed to Maple Finance&apos;s Syrup (overcollateralized lending).</p>
           </div>
         </div>
 
@@ -149,37 +149,7 @@ export default function Marketplace() {
           <div><div className="k">Yield distributed</div><div className="v">$15.5K</div></div>
         </div>
 
-        <div className="card mkt-vaults view-grid rv">
-          <div className="mkt-vaults-head">
-            <h2>All Vaults</h2>
-            <div className="mkt-tools">
-              <div className="mkt-view" role="group" aria-label="View mode">
-                <button type="button" data-mview="list" aria-label="List view"><Rows2 /></button>
-                <button type="button" className="on" data-mview="grid" aria-label="Grid view"><LayoutGrid /></button>
-              </div>
-            </div>
-          </div>
-          <div className="mkt-tbl-wrap">
-            <table className="mkt-tbl">
-              <thead><tr><th>Vault</th><th>Strategy</th><th>Type</th><th>Chain</th><th>TVL</th><th>APY (7D)</th><th>Risk</th><th>Deposit asset</th><th aria-label="Action" /></tr></thead>
-              <tbody>
-                {VAULTS.map((v) => (
-                  <tr key={v.key}>
-                    <td className="vt-name"><span className="vt-logo"><img src={v.logo} alt="" /></span><div><b>{v.name}</b><small>{v.addr}</small></div></td>
-                    <td data-label="Strategy"><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.strategy}</span></td>
-                    <td className="vt-type" data-label="Type">{v.type}</td>
-                    <td className="vt-chain" data-label="Chain"><img src={v.chainIcon} alt="" />{v.chain}</td>
-                    <td className="vt-tvl" data-label="TVL"><b>{v.tvl}</b><small>{v.tvlChg}</small></td>
-                    <td className="vt-apy" data-label="APY (7D)">{v.apy}</td>
-                    <td className="vt-risk" data-label="Risk"><span className={`risk r${v.risk}`}><i /><i /><i /><i /></span><small>{v.riskLabel}</small></td>
-                    <td className="vt-asset" data-label="Deposit asset"><img src={v.assetIcon} alt="" />{v.asset}</td>
-                    <td className="vt-act"><button type="button" className="btn btn-accent vt-deposit" data-vault={v.key}>Deposit <ArrowRight /></button></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
+        <div className="card mkt-vaults rv">
           <div className="mkt-grid">
             {VAULTS.map((v) => (
               <div className="mkt-card" key={v.key}>

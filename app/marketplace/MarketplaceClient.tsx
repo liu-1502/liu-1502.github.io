@@ -38,18 +38,9 @@ export default function MarketplaceClient() {
       if ((e.target as HTMLElement).closest("[data-mkt-back]")) show("overview");
     };
 
-    /* Toggle List/Grid + Read More (mô tả card) — đều nằm trong overview */
-    const vaults = ov.querySelector<HTMLElement>(".mkt-vaults");
+    /* Read More: mở rộng/thu gọn mô tả card */
     const onOverviewClick = (e: MouseEvent) => {
-      const t = e.target as HTMLElement;
-      const vbtn = t.closest<HTMLElement>(".mkt-view button[data-mview]");
-      if (vbtn && vaults) {
-        vaults.classList.toggle("view-grid", vbtn.getAttribute("data-mview") === "grid");
-        vaults.querySelectorAll(".mkt-view button").forEach((b) => b.classList.remove("on"));
-        vbtn.classList.add("on");
-        return;
-      }
-      const more = t.closest<HTMLElement>(".mc-more");
+      const more = (e.target as HTMLElement).closest<HTMLElement>(".mc-more");
       if (more) {
         const card = more.closest(".mkt-card");
         const on = card?.classList.toggle("expanded");
