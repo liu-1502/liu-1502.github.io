@@ -28,6 +28,8 @@
   .view-toggle button svg { width: 17px; height: 17px; display: block; }
   .view-toggle button:hover { color: var(--text); }
   .view-toggle button.on { color: var(--accent); background: color-mix(in srgb, var(--text) 6%, transparent); }
+  /* Responsive: chỉ còn Card view -> ẩn toggle List/Card (JS ép .view-cards) */
+  @media (max-width: 760px) { .view-toggle { display: none; } }
   .opp-title { font-family: var(--font-body); font-weight: 600; font-size: 18px; color: var(--text); margin: 0; }
   .search { flex: 1 1 auto; }
   .search input {
@@ -45,8 +47,9 @@
   .search input:focus { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
 
   .opp-filters { display: flex; flex-direction: column; gap: 9px; margin: 0 0 20px; padding: 0 22px; }
-  .frow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .frow .flbl { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text); min-width: 62px; }
+  /* Label canh riêng (absolute) để khi chip rớt dòng vẫn thẳng hàng với chip đầu, không lệch dưới label */
+  .frow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; position: relative; padding-left: 70px; }
+  .frow .flbl { position: absolute; left: 0; top: 0; line-height: 28px; min-width: 62px; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text); }
   /* Chip pill giống filter history: viền neutral rõ, chữ đen 14px, .on theo accent */
   .frow button {
     all: unset;

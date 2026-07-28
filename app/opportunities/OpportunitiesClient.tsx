@@ -82,28 +82,40 @@ export default function OpportunitiesClient() {
       sortHandlers.push({ el: b, fn });
     });
 
-    /* Toggle List / Card view: bật/tắt class .view-cards trên card bảng. */
+    /* Toggle List / Card view: bật/tắt class .view-cards trên card bảng.
+       Responsive: dưới CARD_BP luôn ép Card (toggle bị ẩn), trên thì theo lựa chọn user. */
     const tableCard = document.querySelector(".opp-table");
     const viewButtons = Array.prototype.slice.call(
       document.querySelectorAll(".view-toggle button[data-view]")
     ) as HTMLElement[];
+    const CARD_BP = 760;
+    let prefersCards =
+      viewButtons.find((b) => b.classList.contains("on"))?.getAttribute("data-view") === "card";
+    const applyView = () => {
+      if (!tableCard) return;
+      const narrow = window.innerWidth <= CARD_BP;
+      tableCard.classList.toggle("view-cards", narrow || prefersCards);
+    };
     const viewHandlers: Array<{ el: HTMLElement; fn: () => void }> = [];
     viewButtons.forEach(function (b) {
       const fn = function () {
-        const v = b.getAttribute("data-view");
-        if (tableCard) tableCard.classList.toggle("view-cards", v === "card");
+        prefersCards = b.getAttribute("data-view") === "card";
         viewButtons.forEach(function (x) { x.classList.remove("on"); });
         b.classList.add("on");
+        applyView();
       };
       b.addEventListener("click", fn);
       viewHandlers.push({ el: b, fn });
     });
+    window.addEventListener("resize", applyView);
+    applyView();
 
     return () => {
       groupHandlers.forEach(({ el, fn }) => el.removeEventListener("click", fn));
       if (search) search.removeEventListener("input", searchFn);
       sortHandlers.forEach(({ el, fn }) => el.removeEventListener("click", fn));
       viewHandlers.forEach(({ el, fn }) => el.removeEventListener("click", fn));
+      window.removeEventListener("resize", applyView);
     };
   }, []);
 
