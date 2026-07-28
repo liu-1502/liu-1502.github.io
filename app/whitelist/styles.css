@@ -15,11 +15,15 @@
   .hub-hero, .wl-tabs, .wl-panel { position: relative; z-index: 1; }
   .hub-hero h1 { color: #142F04; }
   :root[data-theme="dark"] & .hub-hero h1 { color: var(--text); }
-  /* Text dàn ngang rộng, chừa 32px tới illustration (illus hữu hình ~350px) */
+  /* Text dàn ngang rộng, chừa 32px tới illustration (illus hữu hình ~250px) */
   .hub-hero { grid-template-columns: 1fr; gap: 0; }
-  .hub-hero > div { max-width: calc(100% - 350px - 32px); }
+  .hub-hero > div { max-width: calc(100% - 250px - 32px); }
   .hub-hero .lede { max-width: none; }
-  @media (max-width: 1024px) { .hub-hero > div { max-width: none; } }
+  /* Khi thu nhỏ, illus scale không còn cân -> ẩn đi, text dàn full */
+  @media (max-width: 1024px) {
+    .hub-hero > div { max-width: none; }
+    .wl-illus { display: none; }
+  }
 
   /* product tabs */
   .wl-tabs { display: flex; gap: 6px; margin: 34px 0 18px; flex-wrap: wrap; }
