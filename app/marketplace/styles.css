@@ -66,7 +66,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* Dải "Audited, monitored & managed with" */
   .mkt-trust { display: flex; flex-direction: column; gap: 10px; }
-  .mkt-trust-lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .mkt-trust-lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
   .mkt-trust-row { display: flex; flex-wrap: wrap; gap: 10px; }
   .mkt-partner {
     display: inline-flex; align-items: center; gap: 10px;
