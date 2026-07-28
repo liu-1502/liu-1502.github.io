@@ -76,8 +76,6 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   }
   .mkt-partner .ic { width: 15px; height: 15px; color: var(--mkt); }
   .mkt-partner img { width: 16px; height: 16px; border-radius: 4px; object-fit: contain; }
-  .mkt-partner img.mkt-partner-wm { width: auto; height: 14px; border-radius: 0; filter: brightness(0); opacity: .8; }
-  :root[data-theme="dark"] .mkt-partner img.mkt-partner-wm { filter: brightness(0) invert(1); opacity: .9; }
 
   /* Stat row ngang (đè lại kiểu dọc + display:none mà Alpha áp cho .page-stats) */
   .mkt-stats {

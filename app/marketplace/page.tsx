@@ -130,17 +130,13 @@ export default function Marketplace() {
           <span className="mkt-trust-lbl">Audited, monitored &amp; managed with</span>
           <div className="mkt-trust-row">
             {[
-              { name: "Pashov Audit Group", logo: "/assets/partners/pashov.jpeg", wordmark: false },
-              { name: "Dedaub", logo: "/assets/partners/dedaub.png", wordmark: true },
-              { name: "Hypernative", logo: "/assets/partners/hypernative-fav.png", wordmark: false },
-              { name: "Fordefi", logo: "/assets/partners/fordefi-fav.png", wordmark: false },
+              { name: "Pashov Audit Group", logo: "/assets/partners/pashov.jpeg" },
+              { name: "Dedaub", logo: "/assets/partners/dedaub-fav.png" },
+              { name: "Hypernative", logo: "/assets/partners/hypernative-fav.png" },
+              { name: "Fordefi", logo: "/assets/partners/fordefi-fav.png" },
             ].map((p) => (
               <span className="mkt-partner" key={p.name}>
-                {p.wordmark ? (
-                  <img className="mkt-partner-wm" src={p.logo} alt={p.name} />
-                ) : (
-                  <><img src={p.logo} alt="" />{p.name}</>
-                )}
+                <img src={p.logo} alt="" />{p.name}
               </span>
             ))}
           </div>
