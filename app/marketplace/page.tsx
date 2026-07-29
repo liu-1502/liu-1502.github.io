@@ -13,8 +13,15 @@ const VAULTS = [
     chain: "Monad", chainIcon: "/assets/chains/monad.svg",
     tvl: "$3.01M", tvlChg: "+0.02% · 24h", apy: "8.53%", leverage: "10×",
     risk: 2, riskLabel: "Low–Moderate", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
-    desc: "Leveraged exposure to SyrupUSD (overcollateralized lending). SyrupUSD is a yield-bearing stablecoin issued by Maple Finance, backed by overcollateralized loans to institutional borrowers, wrapped for Monad as a single yield-bearing token.",
+    desc: "Leveraged exposure to SyrupUSD (overcollateralized lending). SyrupUSD is a yield-bearing stablecoin issued by Maple Finance, backed by overcollateralized loans secured by liquid, blue-chip crypto assets such as BTC and ETH. It is typically >130% overcollateralized, has been operating since 2024, and is battle-tested through numerous systemic stress events.",
     powered: ["/assets/protocols/aave.svg", "/assets/protocols/morpho.svg", "/assets/protocols/euler.svg", "/assets/protocols/fluid.svg"],
+    poweredNames: "Aave · Morpho · Euler · Fluid",
+    strategyIntro: "Leveraged across blue-chip DeFi money markets — Aave, Euler, Morpho, etc.",
+    steps: ["Deposit USDC", "Mint Syrup tokens", "Supply collateral", "Borrow stablecoins", "Leverage"],
+    research: "SyrupUSD Real-Time Asset Quality Monitor",
+    trailingApy: "10.215%",
+    fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Up to 3 days" },
+    contractName: "yzSyrup Vault",
   },
   {
     key: "yzcash", name: "yzCash", addr: "0x224e…098d", logo: "/assets/tokens/yzCash.svg",
@@ -22,10 +29,106 @@ const VAULTS = [
     chain: "Monad", chainIcon: "/assets/chains/monad.svg",
     tvl: "$7.51M", tvlChg: "+0.01% · 24h", apy: "4.90%", leverage: "0×",
     risk: 1, riskLabel: "Low", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
-    desc: "Yuzu Cash is an unlevered, short-duration (<24H) liquidity vault designed to deliver yields above the standard overnight rate while maintaining strict risk discipline. Backed by tokenized T-Bills from leading issuers.",
+    desc: "Yuzu Cash is an unlevered, short-duration (<24H) liquidity vault designed to deliver yields above the standard overnight rate while maintaining strict risk discipline. Backed by tokenized T-Bills from leading issuers with near-instant liquidity and no lockups.",
     powered: ["/assets/protocols/curvance.svg"],
+    poweredNames: "Curvance",
+    strategyIntro: "Unlevered cash management backed by tokenized T-Bills, redeemable anytime.",
+    steps: ["Deposit USDC", "Allocate to tokenized T-Bills", "Accrue overnight yield", "Redeem anytime"],
+    research: "yzCash Reserve Attestation (live)",
+    trailingApy: "4.90%",
+    fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Instant" },
+    contractName: "yzCash Vault",
   },
 ];
+
+/* Đối tác bảo mật (chung cho các vault). */
+const SECURITY = [
+  { name: "Pashov", role: "Smart-contract audit ×2 · 2025", logo: "/assets/partners/pashov.jpeg" },
+  { name: "Dedaub", role: "Smart-contract audit ×2 · 2025", logo: "/assets/partners/dedaub-fav.png" },
+  { name: "Hypernative", role: "Real-time monitoring", logo: "/assets/partners/hypernative-fav.png" },
+  { name: "Fordefi", role: "MPC custody", logo: "/assets/partners/fordefi-fav.png" },
+];
+
+/* Panel chi tiết vault (cột phải màn exchange): Overview / Strategy / Research / Performance / Security. */
+function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
+  return (
+    <div className="mkt-detail" data-panel={v.key} style={v.key === VAULTS[0].key ? undefined : { display: "none" }}>
+      {/* Overview */}
+      <section className="vd-sec">
+        <div className="vd-head"><span className="vt-logo"><img src={v.logo} alt="" /></span>
+          <div><h3>{v.name}</h3><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.riskLabel} Risk</span></div>
+        </div>
+        <p className="vd-desc">{v.desc}</p>
+        <div className="vd-stats">
+          <div><span className="k">APY (7D)</span><b className="hi">{v.apy}</b></div>
+          <div><span className="k">TVL</span><b>{v.tvl}</b><small>{v.tvlChg}</small></div>
+          <div><span className="k">Leverage</span><b>{v.leverage}</b></div>
+        </div>
+      </section>
+
+      {/* Strategy */}
+      <section className="vd-sec">
+        <h4 className="vd-title">Strategy</h4>
+        <p className="vd-desc">{v.strategyIntro}</p>
+        <div className="vd-steps">
+          {v.steps.map((s, i) => (
+            <span className="vd-step" key={s}><i>{i + 1}</i>{s}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* Research */}
+      <section className="vd-sec">
+        <h4 className="vd-title">Research</h4>
+        <a className="vd-research" href="/transparency">
+          <span>{v.research}</span><ArrowUpRight />
+        </a>
+      </section>
+
+      {/* Performance */}
+      <section className="vd-sec">
+        <h4 className="vd-title">Performance</h4>
+        <div className="vd-perf"><span className="vd-perf-v">{v.trailingApy}</span><span className="vd-perf-l">7D trailing APY</span></div>
+        <div className="vd-info">
+          <div><span className="k">Performance fee</span><span className="v">{v.fees.perf}</span></div>
+          <div><span className="k">Management fee</span><span className="v">{v.fees.mgmt}</span></div>
+          <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
+          <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
+        </div>
+        <div className="vd-powered"><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span><small>{v.poweredNames}</small></div>
+      </section>
+
+      {/* Security */}
+      <section className="vd-sec">
+        <h4 className="vd-title">Security &amp; other info</h4>
+        <div className="vd-sec-list">
+          {SECURITY.map((s) => (
+            <div className="vd-partner" key={s.name}><img src={s.logo} alt="" /><div><b>{s.name}</b><small>{s.role}</small></div></div>
+          ))}
+        </div>
+        <div className="vd-contract">
+          <div><span className="k">Chain</span><span className="v">{v.chain}</span></div>
+          <div><span className="k">{v.contractName}</span><span className="v mono">{v.addr}</span></div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/* Vị thế của user (tĩnh, demo — chưa connect ví). */
+function YourPosition() {
+  return (
+    <div className="card yp-card">
+      <h4 className="yp-title">Your Position</h4>
+      <div className="yp-grid">
+        <div><span className="k">Deposited</span><b>$0.00</b></div>
+        <div><span className="k">Current value</span><b>$0.00</b></div>
+        <div><span className="k">Earned</span><b className="pos">+$0.00</b></div>
+        <div><span className="k">P&amp;L</span><b className="pos">+0.00%</b></div>
+      </div>
+    </div>
+  );
+}
 
 export const metadata = pageMetadata("/marketplace");
 
@@ -232,6 +335,8 @@ export default function Marketplace() {
             <button className="tok-tab" data-tab="yzcash"><img src="/assets/tokens/yzCash.svg" alt="" /><span className="sym">yzCash</span></button>
           </div>
 
+          <div className="mkt-vault-grid">
+          <div className="mkt-vault-left">
           {/* ============ yzSyrup ============ */}
           <div className="xchg-body" data-panel="yzsyrup">
             <div className="dir-row">
@@ -304,6 +409,8 @@ export default function Marketplace() {
             </div>
           </div>
 
+          <YourPosition />
+
           {/* Order history */}
           <details className="acc ohist" open>
             <summary>Today Order</summary>
@@ -314,6 +421,13 @@ export default function Marketplace() {
               <OrderItem kind="mint" label="Deposit yzSyrup" addr="0xeED43…AbbA" amount="$8,000.00" status="pending" />
             </div>
           </details>
+          </div>{/* .mkt-vault-left */}
+
+          <div className="mkt-vault-right">
+            <VaultDetail v={VAULTS[0]} />
+            <VaultDetail v={VAULTS[1]} />
+          </div>
+          </div>{/* .mkt-vault-grid */}
         </div>
 
       </div>

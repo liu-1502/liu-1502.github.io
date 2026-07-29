@@ -209,7 +209,68 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   /* Nút back về danh sách: cùng hàng với token tabs (giữa) và About (phải) */
   .mkt-xchg { position: relative; }
   /* Bỏ padding-top 52px (rule ≤940 của Alpha) để token tabs lên ngang back + About */
-  .mkt-xchg .app-layout:not(.xtra-open) { padding-top: 0; }
+  .mkt-xchg .app-layout:not(.xtra-open) { padding-top: 0; align-items: stretch; }
+  /* Cho .xchg full-width để chứa layout 2 cột (đè width:480px của Alpha) */
+  .mkt-xchg .app-layout:not(.xtra-open) > .xchg { width: 100%; max-width: none; }
+
+  /* ===== Layout 2 cột: trái = form/position/order (480px), phải = chi tiết ===== */
+  .mkt-vault-grid { display: grid; grid-template-columns: 480px minmax(0, 1fr); gap: 24px; align-items: start; }
+  .mkt-vault-left { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+  .mkt-vault-right { min-width: 0; }
+  @media (max-width: 980px) { .mkt-vault-grid { grid-template-columns: 1fr; } }
+
+  /* ---- Your Position ---- */
+  .yp-card { padding: 18px; border: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .yp-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 14px; }
+  .yp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .yp-grid .k { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
+  .yp-grid b { font-family: var(--font-mono); font-weight: 600; font-size: 17px; }
+  .yp-grid b.pos { color: var(--good); }
+
+  /* ---- Detail card (cột phải) ---- */
+  .mkt-detail { background: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 8%, transparent); border-radius: var(--r-md); padding: 0 22px; }
+  .vd-sec { padding: 20px 0; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .vd-sec:first-child { border-top: none; }
+  .vd-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 12px; }
+  .vd-desc { margin: 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
+
+  .vd-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .vd-head .vt-logo { width: 40px; height: 40px; }
+  .vd-head h3 { margin: 0 0 5px; font-family: var(--font-display); font-weight: 620; font-size: 18px; }
+  .vd-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
+  .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 17px; }
+  .vd-stats b.hi { color: var(--mkt); }
+  .vd-stats small { display: block; font-size: 11px; color: var(--good); margin-top: 2px; }
+
+  .vd-steps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .vd-step { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; padding: 5px 12px 5px 5px; border-radius: 999px; background: color-mix(in srgb, var(--text) 4%, transparent); }
+  .vd-step i { display: grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--mkt); color: #fff; font-style: normal; font-size: 11px; font-weight: 600; }
+
+  .vd-research { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: var(--r-md); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); text-decoration: none; color: var(--text); font-family: var(--font-body); font-weight: 500; font-size: 13.5px; transition: border-color .15s ease, background .15s ease; }
+  .vd-research:hover { border-color: color-mix(in srgb, var(--mkt) 45%, transparent); background: color-mix(in srgb, var(--mkt) 5%, transparent); }
+  .vd-research svg { width: 16px; height: 16px; color: var(--mkt); flex: none; }
+
+  .vd-perf-v { font-family: var(--font-mono); font-weight: 620; font-size: 22px; color: var(--mkt); }
+  .vd-perf-l { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin: 2px 0 14px; }
+  .vd-info { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 20px; }
+  .vd-info > div { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; }
+  .vd-info .k { color: var(--muted); font-family: var(--font-body); }
+  .vd-info .v { font-family: var(--font-mono); font-weight: 600; }
+  .vd-powered { display: flex; align-items: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .vd-powered .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+  .vd-powered small { font-family: var(--font-body); font-size: 12px; color: var(--muted); }
+
+  .vd-sec-list { display: flex; flex-direction: column; gap: 12px; }
+  .vd-partner { display: flex; align-items: center; gap: 10px; }
+  .vd-partner img { width: 26px; height: 26px; border-radius: 6px; object-fit: contain; flex: none; }
+  .vd-partner b { display: block; font-family: var(--font-body); font-size: 13.5px; font-weight: 600; }
+  .vd-partner small { display: block; font-size: 12px; color: var(--muted); }
+  .vd-contract { margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); display: flex; flex-direction: column; gap: 9px; }
+  .vd-contract > div { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; }
+  .vd-contract .k { color: var(--muted); font-family: var(--font-body); }
+  .vd-contract .v { font-family: var(--font-body); font-weight: 600; }
+  .vd-contract .v.mono { font-family: var(--font-mono); }
   .mkt-back {
     all: unset; cursor: pointer; position: absolute; top: 0; left: 0; z-index: 30;
     display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px 0 8px;
