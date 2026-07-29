@@ -225,7 +225,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .yp-grid b.pos { color: var(--good); }
 
   /* ---- Detail card (cột phải) ---- */
-  .mkt-detail { background: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 8%, transparent); border-radius: 20px; padding: 0 22px; }
+  .mkt-detail { background: var(--surface); border: none; border-radius: 20px; padding: 0 22px; }
   .vd-sec { padding: 20px 0; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
   .vd-sec:first-child { border-top: none; }
   .vd-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 12px; }
