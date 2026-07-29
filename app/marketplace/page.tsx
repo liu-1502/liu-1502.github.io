@@ -3,7 +3,7 @@ import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha s
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -331,10 +331,18 @@ export default function Marketplace() {
         <div className="xchg rv">
           <div className="mkt-vault-grid">
           <div className="mkt-vault-left">
-          {/* Token pill tabs — canh giữa theo cột form trái */}
-          <div className="tok-tabs xchg-tabs" id="mktTabs">
-            <button className="tok-tab on" data-tab="yzsyrup"><img src="/assets/tokens/yzSyrup.svg" alt="" /><span className="sym">yzSyrup</span></button>
-            <button className="tok-tab" data-tab="yzcash"><img src="/assets/tokens/yzCash.svg" alt="" /><span className="sym">yzCash</span></button>
+          {/* Dropdown chọn token — mặc định theo vault chọn từ Overview */}
+          <div className="tok-select" data-tok-select>
+            <span className="tsel-lbl">Vault</span>
+            <button type="button" className="tok-select-btn" data-tok-toggle aria-expanded="false">
+              <img src="/assets/tokens/yzSyrup.svg" alt="" />
+              <span className="tsel-name">yzSyrup</span>
+              <ChevronDown className="tsel-caret" />
+            </button>
+            <div className="tok-select-menu" data-tok-menu hidden>
+              <button type="button" className="on" data-tok-opt="yzsyrup"><img src="/assets/tokens/yzSyrup.svg" alt="" /><span>yzSyrup</span></button>
+              <button type="button" data-tok-opt="yzcash"><img src="/assets/tokens/yzCash.svg" alt="" /><span>yzCash</span></button>
+            </div>
           </div>
 
           {/* ============ yzSyrup ============ */}
