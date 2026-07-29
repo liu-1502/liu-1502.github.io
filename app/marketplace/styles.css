@@ -212,12 +212,22 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* ===== Layout 2 cột: trái = form/position/order (480px), phải = chi tiết ===== */
   .mkt-vault-grid { display: grid; grid-template-columns: 480px minmax(0, 1fr); gap: 24px; align-items: start; }
-  .mkt-vault-left { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+  /* Cột trái (form/position/order) ghim lại khi cuộn đọc chi tiết bên phải.
+     Ghim dưới topbar (64px) + 16px; cao tối đa bằng viewport, dài hơn thì cuộn trong cột. */
+  .mkt-vault-left {
+    display: flex; flex-direction: column; gap: 20px; min-width: 0;
+    position: sticky; top: 80px; align-self: start;
+    max-height: calc(100vh - 96px); overflow-y: auto; overflow-x: hidden;
+    scrollbar-width: thin;
+  }
   .mkt-vault-right { min-width: 0; }
-  @media (max-width: 980px) { .mkt-vault-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 980px) {
+    .mkt-vault-grid { grid-template-columns: 1fr; }
+    .mkt-vault-left { position: static; max-height: none; overflow: visible; }
+  }
 
   /* ---- Your Position ---- */
-  .yp-card { padding: 18px; border: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .yp-card { padding: 18px; border: none; }
   .yp-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 14px; }
   .yp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .yp-grid .k { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
