@@ -205,42 +205,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* Nút back về danh sách: cùng hàng với About (phải) */
   .mkt-xchg { position: relative; }
-  /* Chừa chỗ hàng "All vaults" (trái) + About (phải); dropdown token nằm dưới trong cột form */
+  /* Chừa chỗ hàng "All vaults" (trái) + About (phải) phía trên form */
   .mkt-xchg .app-layout:not(.xtra-open) { padding-top: 48px; align-items: stretch; }
-
-  /* ---- Dropdown chọn token (nằm trong form, trên cùng card) ---- */
-  .tok-select { position: relative; margin-bottom: 16px; }
-  .tok-select-btn {
-    all: unset; box-sizing: border-box; cursor: pointer;
-    display: flex; align-items: center; gap: 10px; width: 100%;
-    padding: 11px 14px; border-radius: var(--r-md);
-    border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
-    background: var(--surface);
-    font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--mk-ink);
-    transition: border-color .15s ease;
-  }
-  .tok-select-btn:hover, .tok-select-btn[aria-expanded="true"] { border-color: color-mix(in srgb, var(--mkt) 45%, transparent); }
-  .tok-select-btn img { width: 22px; height: 22px; border-radius: 50%; }
-  .tok-select-btn .tsel-caret { width: 16px; height: 16px; margin-left: auto; color: var(--faint); transition: transform .15s ease; }
-  .tok-select-btn[aria-expanded="true"] .tsel-caret { transform: rotate(180deg); }
-  .tok-select-menu {
-    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40;
-    background: var(--surface);
-    border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
-    border-radius: var(--r-md); padding: 6px;
-    box-shadow: 0 14px 34px rgba(20, 33, 26, .12);
-    display: flex; flex-direction: column; gap: 2px;
-  }
-  .tok-select-menu[hidden] { display: none; }
-  .tok-select-menu button {
-    all: unset; box-sizing: border-box; cursor: pointer;
-    display: flex; align-items: center; gap: 10px; width: 100%;
-    padding: 9px 12px; border-radius: var(--r-sm);
-    font-family: var(--font-body); font-weight: 500; font-size: 14.5px; color: var(--text);
-  }
-  .tok-select-menu button img { width: 20px; height: 20px; border-radius: 50%; }
-  .tok-select-menu button:hover { background: var(--mk-token); }
-  .tok-select-menu button.on { background: var(--mk-token); font-weight: 600; color: var(--mk-ink); }
   /* Cho .xchg full-width để chứa layout 2 cột (đè width:480px của Alpha) */
   .mkt-xchg .app-layout:not(.xtra-open) > .xchg { width: 100%; max-width: none; }
 

@@ -26,14 +26,8 @@ export default function MarketplaceClient() {
       window.scrollTo({ top: 0 });
     };
 
-    /* ---- Dropdown chọn token (mỗi panel có 1 dropdown tĩnh của riêng nó) ---- */
     const xchg = xc.querySelector<HTMLElement>(".xchg");
-
-    const closeMenus = () => {
-      xc.querySelectorAll<HTMLElement>("[data-tok-menu]").forEach((m) => m.setAttribute("hidden", ""));
-      xc.querySelectorAll<HTMLElement>("[data-tok-toggle]").forEach((b) => b.setAttribute("aria-expanded", "false"));
-    };
-    // Chọn vault: chuyển panel trái + chi tiết phải (dropdown mỗi panel tự hiển thị token của nó).
+    // Hiện đúng panel (form trái + chi tiết phải) của vault được chọn.
     const selectVault = (key: string) => {
       if (!xchg) return;
       xchg.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => {
@@ -41,35 +35,10 @@ export default function MarketplaceClient() {
       });
     };
 
-    const onSelClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const opt = target.closest<HTMLElement>("[data-tok-opt]");
-      if (opt) {
-        selectVault(opt.getAttribute("data-tok-opt") || "yzsyrup");
-        closeMenus();
-        return;
-      }
-      const toggle = target.closest<HTMLElement>("[data-tok-toggle]");
-      if (toggle) {
-        const menu = toggle.parentElement?.querySelector<HTMLElement>("[data-tok-menu]");
-        const willOpen = menu?.hasAttribute("hidden");
-        closeMenus();
-        if (willOpen && menu) {
-          menu.removeAttribute("hidden");
-          toggle.setAttribute("aria-expanded", "true");
-        }
-      }
-    };
-    const onDocClick = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest("[data-tok-select]")) closeMenus();
-    };
-    xc.addEventListener("click", onSelClick);
-    document.addEventListener("click", onDocClick);
-
     const onDeposit = (e: MouseEvent) => {
       const b = (e.target as HTMLElement).closest<HTMLElement>(".vt-deposit");
       if (!b) return;
-      // Đặt token mặc định theo vault chọn từ Overview rồi mới chuyển màn.
+      // Mở đúng vault chọn từ Overview rồi chuyển màn.
       selectVault(b.getAttribute("data-vault") || "yzsyrup");
       show("exchange");
     };
@@ -94,8 +63,6 @@ export default function MarketplaceClient() {
       ov.removeEventListener("click", onDeposit);
       ov.removeEventListener("click", onOverviewClick);
       xc.removeEventListener("click", onBack);
-      xc.removeEventListener("click", onSelClick);
-      document.removeEventListener("click", onDocClick);
     };
   }, []);
 
