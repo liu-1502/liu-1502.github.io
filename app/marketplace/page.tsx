@@ -95,7 +95,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
           <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
           <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
         </div>
-        <div className="vd-powered"><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span><small>{v.poweredNames}</small></div>
+        <div className="vd-powered"><span className="k">Powered by</span><span className="vd-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span><small>{v.poweredNames}</small></div>
       </section>
 
       {/* Security */}
@@ -329,14 +329,14 @@ export default function Marketplace() {
         </div>
 
         <div className="xchg rv">
-          {/* Token pill tabs */}
+          <div className="mkt-vault-grid">
+          <div className="mkt-vault-left">
+          {/* Token pill tabs — canh giữa theo cột form trái */}
           <div className="tok-tabs xchg-tabs" id="mktTabs">
             <button className="tok-tab on" data-tab="yzsyrup"><img src="/assets/tokens/yzSyrup.svg" alt="" /><span className="sym">yzSyrup</span></button>
             <button className="tok-tab" data-tab="yzcash"><img src="/assets/tokens/yzCash.svg" alt="" /><span className="sym">yzCash</span></button>
           </div>
 
-          <div className="mkt-vault-grid">
-          <div className="mkt-vault-left">
           {/* ============ yzSyrup ============ */}
           <div className="xchg-body" data-panel="yzsyrup">
             <div className="dir-row">

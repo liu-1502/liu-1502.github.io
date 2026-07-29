@@ -208,8 +208,9 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* Nút back về danh sách: cùng hàng với token tabs (giữa) và About (phải) */
   .mkt-xchg { position: relative; }
-  /* Bỏ padding-top 52px (rule ≤940 của Alpha) để token tabs lên ngang back + About */
-  .mkt-xchg .app-layout:not(.xtra-open) { padding-top: 0; align-items: stretch; }
+  /* Chừa chỗ hàng "All vaults" (trái) + About (phải); token tabs nằm dưới trong cột form */
+  .mkt-xchg .app-layout:not(.xtra-open) { padding-top: 48px; align-items: stretch; }
+  .mkt-vault-left .tok-tabs { margin-bottom: 0; }
   /* Cho .xchg full-width để chứa layout 2 cột (đè width:480px của Alpha) */
   .mkt-xchg .app-layout:not(.xtra-open) > .xchg { width: 100%; max-width: none; }
 
@@ -228,7 +229,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .yp-grid b.pos { color: var(--good); }
 
   /* ---- Detail card (cột phải) ---- */
-  .mkt-detail { background: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 8%, transparent); border-radius: var(--r-md); padding: 0 22px; }
+  .mkt-detail { background: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 8%, transparent); border-radius: 20px; padding: 0 22px; }
   .vd-sec { padding: 20px 0; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
   .vd-sec:first-child { border-top: none; }
   .vd-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 12px; }
@@ -260,6 +261,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-powered { display: flex; align-items: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
   .vd-powered .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
   .vd-powered small { font-family: var(--font-body); font-size: 12px; color: var(--muted); }
+  .vd-logos { display: inline-flex; align-items: center; gap: 8px; }
+  .vd-logos img { width: 22px; height: 22px; object-fit: contain; border-radius: 4px; }
 
   .vd-sec-list { display: flex; flex-direction: column; gap: 12px; }
   .vd-partner { display: flex; align-items: center; gap: 10px; }
