@@ -208,9 +208,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   /* Chừa chỗ hàng "All vaults" (trái) + About (phải); dropdown token nằm dưới trong cột form */
   .mkt-xchg .app-layout:not(.xtra-open) { padding-top: 48px; align-items: stretch; }
 
-  /* ---- Dropdown chọn token (thay cho tabs) — nằm trên cùng cột form ---- */
-  .tok-select { position: relative; display: flex; flex-direction: column; gap: 7px; }
-  .tok-select .tsel-lbl { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); }
+  /* ---- Dropdown chọn token (nằm trong form, trên cùng card) ---- */
+  .tok-select { position: relative; margin-bottom: 16px; }
   .tok-select-btn {
     all: unset; box-sizing: border-box; cursor: pointer;
     display: flex; align-items: center; gap: 10px; width: 100%;

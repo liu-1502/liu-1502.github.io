@@ -331,22 +331,20 @@ export default function Marketplace() {
         <div className="xchg rv">
           <div className="mkt-vault-grid">
           <div className="mkt-vault-left">
-          {/* Dropdown chọn token — mặc định theo vault chọn từ Overview */}
-          <div className="tok-select" data-tok-select>
-            <span className="tsel-lbl">Vault</span>
-            <button type="button" className="tok-select-btn" data-tok-toggle aria-expanded="false">
-              <img src="/assets/tokens/yzSyrup.svg" alt="" />
-              <span className="tsel-name">yzSyrup</span>
-              <ChevronDown className="tsel-caret" />
-            </button>
-            <div className="tok-select-menu" data-tok-menu hidden>
-              <button type="button" className="on" data-tok-opt="yzsyrup"><img src="/assets/tokens/yzSyrup.svg" alt="" /><span>yzSyrup</span></button>
-              <button type="button" data-tok-opt="yzcash"><img src="/assets/tokens/yzCash.svg" alt="" /><span>yzCash</span></button>
-            </div>
-          </div>
-
           {/* ============ yzSyrup ============ */}
           <div className="xchg-body" data-panel="yzsyrup">
+            {/* Dropdown chọn token — nằm trong form, mặc định theo vault chọn từ Overview */}
+            <div className="tok-select" data-tok-select>
+              <button type="button" className="tok-select-btn" data-tok-toggle aria-expanded="false">
+                <img src="/assets/tokens/yzSyrup.svg" alt="" />
+                <span className="tsel-name">yzSyrup</span>
+                <ChevronDown className="tsel-caret" />
+              </button>
+              <div className="tok-select-menu" data-tok-menu hidden>
+                <button type="button" className="on" data-tok-opt="yzsyrup"><img src="/assets/tokens/yzSyrup.svg" alt="" /><span>yzSyrup</span></button>
+                <button type="button" data-tok-opt="yzcash"><img src="/assets/tokens/yzCash.svg" alt="" /><span>yzCash</span></button>
+              </div>
+            </div>
             <div className="dir-row">
               <div className="dir-switch">
                 <button className="on" data-dir="deposit">Deposit</button>
@@ -383,6 +381,18 @@ export default function Marketplace() {
 
           {/* ============ yzCash ============ */}
           <div className="xchg-body" data-panel="yzcash" style={{ display: "none" }}>
+            {/* Dropdown chọn token — nằm trong form */}
+            <div className="tok-select" data-tok-select>
+              <button type="button" className="tok-select-btn" data-tok-toggle aria-expanded="false">
+                <img src="/assets/tokens/yzCash.svg" alt="" />
+                <span className="tsel-name">yzCash</span>
+                <ChevronDown className="tsel-caret" />
+              </button>
+              <div className="tok-select-menu" data-tok-menu hidden>
+                <button type="button" data-tok-opt="yzsyrup"><img src="/assets/tokens/yzSyrup.svg" alt="" /><span>yzSyrup</span></button>
+                <button type="button" className="on" data-tok-opt="yzcash"><img src="/assets/tokens/yzCash.svg" alt="" /><span>yzCash</span></button>
+              </div>
+            </div>
             <div className="dir-row">
               <div className="dir-switch">
                 <button className="on" data-dir="deposit">Deposit</button>

@@ -26,33 +26,18 @@ export default function MarketplaceClient() {
       window.scrollTo({ top: 0 });
     };
 
-    /* ---- Dropdown chọn token (thay cho tab) ---- */
-    const TOKENS: Record<string, { name: string; logo: string }> = {
-      yzsyrup: { name: "yzSyrup", logo: "/assets/tokens/yzSyrup.svg" },
-      yzcash: { name: "yzCash", logo: "/assets/tokens/yzCash.svg" },
-    };
-    const sel = xc.querySelector<HTMLElement>("[data-tok-select]");
-    const selBtn = sel?.querySelector<HTMLElement>("[data-tok-toggle]");
-    const selMenu = sel?.querySelector<HTMLElement>("[data-tok-menu]");
-    const selImg = selBtn?.querySelector<HTMLImageElement>("img");
-    const selName = selBtn?.querySelector<HTMLElement>(".tsel-name");
+    /* ---- Dropdown chọn token (mỗi panel có 1 dropdown tĩnh của riêng nó) ---- */
     const xchg = xc.querySelector<HTMLElement>(".xchg");
 
-    const closeMenu = () => {
-      selMenu?.setAttribute("hidden", "");
-      selBtn?.setAttribute("aria-expanded", "false");
+    const closeMenus = () => {
+      xc.querySelectorAll<HTMLElement>("[data-tok-menu]").forEach((m) => m.setAttribute("hidden", ""));
+      xc.querySelectorAll<HTMLElement>("[data-tok-toggle]").forEach((b) => b.setAttribute("aria-expanded", "false"));
     };
-    // Chọn vault: đồng bộ panel trái + chi tiết phải + nhãn dropdown.
+    // Chọn vault: chuyển panel trái + chi tiết phải (dropdown mỗi panel tự hiển thị token của nó).
     const selectVault = (key: string) => {
-      const t = TOKENS[key];
-      if (!t || !xchg) return;
+      if (!xchg) return;
       xchg.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => {
         p.style.display = p.getAttribute("data-panel") === key ? "" : "none";
-      });
-      if (selImg) selImg.src = t.logo;
-      if (selName) selName.textContent = t.name;
-      selMenu?.querySelectorAll<HTMLElement>("[data-tok-opt]").forEach((o) => {
-        o.classList.toggle("on", o.getAttribute("data-tok-opt") === key);
       });
     };
 
@@ -61,21 +46,24 @@ export default function MarketplaceClient() {
       const opt = target.closest<HTMLElement>("[data-tok-opt]");
       if (opt) {
         selectVault(opt.getAttribute("data-tok-opt") || "yzsyrup");
-        closeMenu();
+        closeMenus();
         return;
       }
-      if (target.closest("[data-tok-toggle]")) {
-        const open = selMenu?.hasAttribute("hidden");
-        if (open) {
-          selMenu?.removeAttribute("hidden");
-          selBtn?.setAttribute("aria-expanded", "true");
-        } else closeMenu();
+      const toggle = target.closest<HTMLElement>("[data-tok-toggle]");
+      if (toggle) {
+        const menu = toggle.parentElement?.querySelector<HTMLElement>("[data-tok-menu]");
+        const willOpen = menu?.hasAttribute("hidden");
+        closeMenus();
+        if (willOpen && menu) {
+          menu.removeAttribute("hidden");
+          toggle.setAttribute("aria-expanded", "true");
+        }
       }
     };
     const onDocClick = (e: MouseEvent) => {
-      if (sel && !sel.contains(e.target as Node)) closeMenu();
+      if (!(e.target as HTMLElement).closest("[data-tok-select]")) closeMenus();
     };
-    sel?.addEventListener("click", onSelClick);
+    xc.addEventListener("click", onSelClick);
     document.addEventListener("click", onDocClick);
 
     const onDeposit = (e: MouseEvent) => {
@@ -106,7 +94,7 @@ export default function MarketplaceClient() {
       ov.removeEventListener("click", onDeposit);
       ov.removeEventListener("click", onOverviewClick);
       xc.removeEventListener("click", onBack);
-      sel?.removeEventListener("click", onSelClick);
+      xc.removeEventListener("click", onSelClick);
       document.removeEventListener("click", onDocClick);
     };
   }, []);
