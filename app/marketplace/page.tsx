@@ -1,9 +1,10 @@
 import "../alpha/styles.css";
 import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha styles */
+import { Fragment } from "react";
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -18,7 +19,13 @@ const VAULTS = [
     powered: ["/assets/protocols/aave.svg", "/assets/protocols/morpho.svg", "/assets/protocols/euler.svg", "/assets/protocols/fluid.svg"],
     poweredNames: "Aave · Morpho · Euler · Fluid",
     strategyIntro: "Leveraged across blue-chip DeFi money markets - Aave, Euler, Morpho, etc.",
-    steps: ["Deposit USDC", "Mint Syrup tokens", "Supply collateral", "Borrow stablecoins", "Leverage"],
+    steps: [
+      { label: "Deposit USDC", title: "User deposits USDC & receives yzSyrup vault token (receipt)", detail: "Funds enter the vault contract." },
+      { label: "Mint Syrup tokens", title: "Mint syrupUSDC / syrupUSDT", detail: "USDC used to mint syrupUSDC / syrupUSDT on Ethereum." },
+      { label: "Supply collateral", title: "Supply to Money Markets", detail: "Use syrupUSDC / syrupUSDT as collateral in blue-chip money markets (Aave, Morpho, Euler, etc.)." },
+      { label: "Borrow stablecoins", title: "Borrow Stablecoins", detail: "Borrow stablecoins (USDT, USDC, etc.) up to market LTV based on available liquidity and prevailing borrow APY." },
+      { label: "Leverage", title: "Leverage", detail: "Repeat 2-4 to increase overall vault APY (via leveraged uplift)." },
+    ],
     research: "SyrupUSD Real-Time Asset Quality Monitor",
     researchUrl: "https://research.yuzu.money/syrup-monitor",
     trailingApy: "10.215%",
@@ -37,7 +44,12 @@ const VAULTS = [
     powered: ["/assets/protocols/curvance.svg"],
     poweredNames: "Curvance",
     strategyIntro: "Unlevered cash management backed by tokenized T-Bills, redeemable anytime.",
-    steps: ["Deposit USDC", "Allocate to tokenized T-Bills", "Accrue overnight yield", "Redeem anytime"],
+    steps: [
+      { label: "Deposit USDC", title: "User deposits USDC & receives yzCash vault token (receipt)", detail: "Funds enter the vault contract." },
+      { label: "Allocate to T-Bills", title: "Allocate to tokenized T-Bills", detail: "USDC allocated to short-duration tokenized T-Bills from leading issuers." },
+      { label: "Accrue yield", title: "Accrue overnight yield", detail: "Earn yields above the standard overnight rate while keeping strict risk discipline." },
+      { label: "Redeem anytime", title: "Redeem anytime", detail: "Near-instant liquidity with no lockups — redeem back to USDC at any time." },
+    ],
     research: "yzCash Reserve Attestation (live)",
     researchUrl: "https://research.yuzu.money/cash-monitor",
     trailingApy: "4.90%",
@@ -159,11 +171,25 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
       <section className="vd-sec">
         <h4 className="vd-title">Strategy</h4>
         <p className="vd-desc">{v.strategyIntro}</p>
-        <div className="vd-steps">
-          {v.steps.map((s, i) => (
-            <span className="vd-step" key={s}><i>{i + 1}</i>{s}</span>
-          ))}
-        </div>
+        <details className="vd-stepper">
+          <summary className="vd-steprow">
+            {v.steps.map((s, i) => (
+              <Fragment key={s.label}>
+                {i > 0 && <span className="vd-stepsep"><ChevronsRight /></span>}
+                <span className="vd-stepnode"><i>{i + 1}</i><em>{s.label}</em></span>
+              </Fragment>
+            ))}
+            <ChevronDown className="vd-stepcaret" />
+          </summary>
+          <div className="vd-stepdetail">
+            {v.steps.map((s, i) => (
+              <div className="vd-stepitem" key={s.label}>
+                <i>{i + 1}</i>
+                <div><b>{s.title}</b><span>{s.detail}</span></div>
+              </div>
+            ))}
+          </div>
+        </details>
       </section>
 
       {/* Research */}
