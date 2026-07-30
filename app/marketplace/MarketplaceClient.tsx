@@ -46,6 +46,19 @@ export default function MarketplaceClient() {
       if ((e.target as HTMLElement).closest("[data-mkt-back]")) show("overview");
     };
 
+    /* Toggle khoảng thời gian biểu đồ (7D/30D/90D), phạm vi trong từng section chart */
+    const onRange = (e: MouseEvent) => {
+      const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-range]");
+      if (!btn) return;
+      const sec = btn.closest<HTMLElement>(".vd-chart-sec");
+      if (!sec) return;
+      const key = btn.getAttribute("data-range");
+      sec.querySelectorAll<HTMLElement>("[data-rangepanel]").forEach((p) => {
+        p.style.display = p.getAttribute("data-rangepanel") === key ? "" : "none";
+      });
+      sec.querySelectorAll<HTMLElement>("[data-range]").forEach((b) => b.classList.toggle("on", b === btn));
+    };
+
     /* Read More: mở rộng/thu gọn mô tả card */
     const onOverviewClick = (e: MouseEvent) => {
       const more = (e.target as HTMLElement).closest<HTMLElement>(".mc-more");
@@ -59,10 +72,12 @@ export default function MarketplaceClient() {
     ov.addEventListener("click", onDeposit);
     ov.addEventListener("click", onOverviewClick);
     xc.addEventListener("click", onBack);
+    xc.addEventListener("click", onRange);
     return () => {
       ov.removeEventListener("click", onDeposit);
       ov.removeEventListener("click", onOverviewClick);
       xc.removeEventListener("click", onBack);
+      xc.removeEventListener("click", onRange);
     };
   }, []);
 

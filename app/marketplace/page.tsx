@@ -14,12 +14,14 @@ const VAULTS = [
     tvl: "$3.01M", tvlChg: "+0.02% · 24h", apy: "8.53%", leverage: "10×",
     risk: 2, riskLabel: "Low–Moderate", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
     desc: "Leveraged exposure to SyrupUSD (overcollateralized lending). SyrupUSD is a yield-bearing stablecoin issued by Maple Finance, backed by overcollateralized loans secured by liquid, blue-chip crypto assets such as BTC and ETH. It is typically >130% overcollateralized, has been operating since 2024, and is battle-tested through numerous systemic stress events.",
+    tagline: "Leveraged exposure to SyrupUSD (overcollateralized lending).",
     powered: ["/assets/protocols/aave.svg", "/assets/protocols/morpho.svg", "/assets/protocols/euler.svg", "/assets/protocols/fluid.svg"],
     poweredNames: "Aave · Morpho · Euler · Fluid",
     strategyIntro: "Leveraged across blue-chip DeFi money markets — Aave, Euler, Morpho, etc.",
     steps: ["Deposit USDC", "Mint Syrup tokens", "Supply collateral", "Borrow stablecoins", "Leverage"],
     research: "SyrupUSD Real-Time Asset Quality Monitor",
     trailingApy: "10.215%",
+    priceStart: 1.005, dailyGrowth: 0.00018,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Up to 3 days" },
     contractName: "yzSyrup Vault",
   },
@@ -30,12 +32,14 @@ const VAULTS = [
     tvl: "$7.51M", tvlChg: "+0.01% · 24h", apy: "4.90%", leverage: "0×",
     risk: 1, riskLabel: "Low", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
     desc: "Yuzu Cash is an unlevered, short-duration (<24H) liquidity vault designed to deliver yields above the standard overnight rate while maintaining strict risk discipline. Backed by tokenized T-Bills from leading issuers with near-instant liquidity and no lockups.",
+    tagline: "Unlevered short-duration (<24H) liquidity backed by tokenized T-Bills.",
     powered: ["/assets/protocols/curvance.svg"],
     poweredNames: "Curvance",
     strategyIntro: "Unlevered cash management backed by tokenized T-Bills, redeemable anytime.",
     steps: ["Deposit USDC", "Allocate to tokenized T-Bills", "Accrue overnight yield", "Redeem anytime"],
     research: "yzCash Reserve Attestation (live)",
     trailingApy: "4.90%",
+    priceStart: 1.002, dailyGrowth: 0.000131,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Instant" },
     contractName: "yzCash Vault",
   },
@@ -49,7 +53,74 @@ const SECURITY = [
   { name: "Fordefi", role: "MPC custody", logo: "/assets/partners/fordefi-fav.png" },
 ];
 
-/* Panel chi tiết vault (cột phải màn exchange): Overview / Strategy / Research / Performance / Security. */
+/* ---- Historical Performance chart (SVG dựng sẵn khi render) ---- */
+const CHART_W = 560, CHART_H = 190, C_PADT = 10, C_PADB = 8, C_PADR = 6, C_PADL = 50;
+const RANGES = [
+  { key: "7d", label: "7D", n: 7 },
+  { key: "30d", label: "30D", n: 30 },
+  { key: "90d", label: "90D", n: 90 },
+];
+
+function buildSeries(start: number, daily: number, n: number) {
+  return Array.from({ length: n }, (_, i) => start * Math.pow(1 + daily, i));
+}
+
+function Chart({ start, daily, n }: { start: number; daily: number; n: number }) {
+  const data = buildSeries(start, daily, n);
+  const min = Math.min(...data), max = Math.max(...data);
+  const pad = (max - min) * 0.18 || 0.0001;
+  const lo = min - pad, hi = max + pad;
+  const px = (i: number) => C_PADL + (i / (n - 1)) * (CHART_W - C_PADL - C_PADR);
+  const py = (val: number) => C_PADT + (1 - (val - lo) / (hi - lo)) * (CHART_H - C_PADT - C_PADB);
+  const line = data.map((d, i) => (i ? "L" : "M") + px(i).toFixed(1) + " " + py(d).toFixed(1)).join(" ");
+  const base = (CHART_H - C_PADB).toFixed(1);
+  const area = `${line} L ${px(n - 1).toFixed(1)} ${base} L ${px(0).toFixed(1)} ${base} Z`;
+  const uid = `c${Math.round(start * 1e5)}-${n}`;
+  return (
+    <svg className="vd-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} role="img" aria-label="Vault receipt token price">
+      <defs>
+        <linearGradient id={uid} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="var(--good)" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="var(--good)" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      {[0, 1, 2, 3].map((i) => {
+        const yy = C_PADT + (i * (CHART_H - C_PADT - C_PADB)) / 3;
+        const t = lo + ((hi - lo) * (3 - i)) / 3;
+        return (
+          <g key={i}>
+            <line className="vd-grid" x1={C_PADL} y1={yy} x2={CHART_W - C_PADR} y2={yy} />
+            <text className="vd-ytick" x={C_PADL - 8} y={yy + 3} textAnchor="end">{t.toFixed(4)}</text>
+          </g>
+        );
+      })}
+      <path d={area} fill={`url(#${uid})`} />
+      <path className="vd-line" d={line} fill="none" />
+      <circle className="vd-dot" cx={px(n - 1)} cy={py(data[n - 1])} r="3.5" />
+    </svg>
+  );
+}
+
+function RangeChart({ v }: { v: (typeof VAULTS)[number] }) {
+  return (
+    <>
+      <div className="vd-charts">
+        {RANGES.map((r, i) => (
+          <div className="vd-chartpanel" key={r.key} data-rangepanel={r.key} style={i === 0 ? undefined : { display: "none" }}>
+            <Chart start={v.priceStart} daily={v.dailyGrowth} n={r.n} />
+          </div>
+        ))}
+      </div>
+      <div className="vd-ranges">
+        {RANGES.map((r, i) => (
+          <button className={`vd-range${i === 0 ? " on" : ""}`} type="button" data-range={r.key} key={r.key}>{r.label}</button>
+        ))}
+      </div>
+    </>
+  );
+}
+
+/* Panel chi tiết vault (cột phải màn exchange): Overview / Strategy / Research / Historical Performance / Vault info / Security. */
 function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
   return (
     <div className="mkt-detail" data-panel={v.key} style={v.key === VAULTS[0].key ? undefined : { display: "none" }}>
@@ -58,7 +129,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         <div className="vd-head"><span className="vt-logo"><img src={v.logo} alt="" /></span>
           <div><h3>{v.name}</h3><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.riskLabel} Risk</span></div>
         </div>
-        <p className="vd-desc">{v.desc}</p>
+        <p className="vd-desc">{v.tagline}</p>
         <div className="vd-stats">
           <div><span className="k">APY (7D)</span><b className="hi">{v.apy}</b></div>
           <div><span className="k">TVL</span><b>{v.tvl}</b><small>{v.tvlChg}</small></div>
@@ -85,17 +156,28 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         </a>
       </section>
 
-      {/* Performance */}
+      {/* Historical Performance */}
+      <section className="vd-sec vd-chart-sec">
+        <div className="vd-chart-head">
+          <div>
+            <h4 className="vd-title">Historical Performance</h4>
+            <span className="vd-chart-sub">Historical vault receipt token price</span>
+          </div>
+          <div className="vd-apy-badge"><b>{v.trailingApy}</b><span>7D trailing APY</span></div>
+        </div>
+        <RangeChart v={v} />
+      </section>
+
+      {/* Vault info */}
       <section className="vd-sec">
-        <h4 className="vd-title">Performance</h4>
-        <div className="vd-perf"><span className="vd-perf-v">{v.trailingApy}</span><span className="vd-perf-l">7D trailing APY</span></div>
+        <h4 className="vd-title">Vault info</h4>
         <div className="vd-info">
           <div><span className="k">Performance fee</span><span className="v">{v.fees.perf}</span></div>
           <div><span className="k">Management fee</span><span className="v">{v.fees.mgmt}</span></div>
           <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
           <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
+          <div><span className="k">Powered by</span><span className="v vd-powered-v"><span className="vd-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span>{v.poweredNames}</span></div>
         </div>
-        <div className="vd-powered"><span className="k">Powered by</span><span className="vd-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span><small>{v.poweredNames}</small></div>
       </section>
 
       {/* Security */}
