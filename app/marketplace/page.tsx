@@ -10,7 +10,7 @@ import { ArrowUpDown, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, Ch
 const VAULTS = [
   {
     key: "yzsyrup", name: "yzSyrup", addr: "0xc985…09b1", logo: "/assets/tokens/yzSyrup.svg",
-    strategy: "Leverage", type: "Overcollateralized Lending",
+    strategy: "Leverage", type: "Overcollateralized Lending", stateBadge: "3D liquidity",
     chain: "Monad", chainIcon: "/assets/chains/monad.svg",
     tvl: "$3.01M", tvlChg: "+0.02% · 24h", apy: "8.53%", leverage: "10×",
     risk: 2, riskLabel: "Low–Moderate", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
@@ -44,7 +44,7 @@ const VAULTS = [
   },
   {
     key: "yzcash", name: "yzCash", addr: "0x224e…098d", logo: "/assets/tokens/yzCash.svg",
-    strategy: "Lending", type: "Tokenized T-Bills",
+    strategy: "Lending", type: "Tokenized T-Bills", stateBadge: "24H liquidity",
     chain: "Monad", chainIcon: "/assets/chains/monad.svg",
     tvl: "$7.51M", tvlChg: "+0.01% · 24h", apy: "4.90%", leverage: "0×",
     risk: 1, riskLabel: "Low", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
@@ -187,7 +187,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
           <a className="vd-ext" href={v.researchUrl} target="_blank" rel="noopener noreferrer" aria-label={`${v.name} research`}><ExternalLink /></a>
         </div>
         <div className="vd-stats">
-          <div><span className="k">APY (7D)</span><b className="hi">{v.apy}</b></div>
+          <div><span className="k">Net APY (7D)</span><b className="hi">{v.apy}</b></div>
           <div><span className="k">TVL</span><b>{v.tvl}</b><small>{v.tvlChg}</small></div>
           <div><span className="k">Leverage</span><b>{v.leverage}</b></div>
         </div>
@@ -198,8 +198,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         <h4 className="vd-title">Vault info</h4>
         <div className="vd-info">
           <div><span className="k">Chain</span><span className="v">{v.chain}</span></div>
-          <div><span className="k">Performance fee</span><span className="v">{v.fees.perf}</span></div>
-          <div><span className="k">Deposit / mgmt / withdrawal fee</span><span className="v">None</span></div>
+          <div><span className="k">Deposit / Withdrawal Fee</span><span className="v">None</span></div>
           <div><span className="k">Withdrawal time</span><span className="v">{v.fees.wtime}</span></div>
           <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
         </div>
@@ -443,10 +442,10 @@ export default function Marketplace() {
                 <div className="mc-top">
                   <span className="vt-logo"><img src={v.logo} alt="" /></span>
                   <div className="mc-id">
-                    <div className="mc-name"><b>{v.name}</b><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.strategy}</span></div>
+                    <div className="mc-name"><b>{v.name}</b><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.stateBadge}</span></div>
                     <small>{v.addr}</small>
                   </div>
-                  <div className="mc-apy"><span className="mc-apy-v">{v.apy}</span><span className="mc-apy-l">APY (7D)</span></div>
+                  <div className="mc-apy"><span className="mc-apy-v">{v.apy}</span><span className="mc-apy-l">Net APY (7D)</span></div>
                 </div>
                 <div className="mc-badges">
                   <span className="mc-chip"><img src={v.chainIcon} alt="" />{v.chain}</span>

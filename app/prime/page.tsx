@@ -153,7 +153,7 @@ export default function Prime() {
                   </div>
                 </div>
                 <div className="vd-stats">
-                  <div><span className="k">NAV</span><b className="hi">$1.01243</b></div>
+                  <div><span className="k">NAV</span><b>$1.01243</b></div>
                   <div><span className="k">Backing</span><b className="good">100.28%</b></div>
                   <div><span className="k">Network</span><b><img className="vd-stat-ic" src="/assets/chains/monad.svg" alt="" />Monad</b></div>
                 </div>
@@ -163,7 +163,7 @@ export default function Prime() {
               <section className="vd-sec">
                 <h4 className="vd-title">Details</h4>
                 <div className="vd-info">
-                  <div><span className="k">Prevailing NAV</span><span className="v hi">$1.01243</span></div>
+                  <div><span className="k">Prevailing NAV</span><span className="v">$1.01243</span></div>
                   <div><span className="k">Yield accrual</span><span className="v">Continuous, no epochs</span></div>
                   <div><span className="k">Mandate</span><span className="v">Asset whitelist, public</span></div>
                   <div><span className="k">Settlement</span><span className="v">Per program rules</span></div>
