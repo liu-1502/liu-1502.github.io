@@ -143,10 +143,6 @@ const TOKENS = [
       { k: "Unstaking", v: "One step, near instant" },
       { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" },
     ],
-    note: {
-      title: "Composability",
-      body: "syzUSD is an ERC-4626 vault token. Use it as collateral, loop it, or provide liquidity on Pendle, Balancer and Curve while it keeps accruing.",
-    },
   },
 ];
 
@@ -182,18 +178,20 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
         </div>
       </section>
 
-      {/* Note (backing / loss / composability) */}
-      <section className="vd-sec">
-        <h4 className="vd-title">{t.note.title}</h4>
-        <p className="vd-desc">{t.note.body}</p>
-        {t.note.rows && (
-          <div className="vd-info">
-            {t.note.rows.map((r) => (
-              <div key={r.k}><span className="k">{r.k}</span><span className="v">{r.link ? <Link href={r.link}>{r.v}</Link> : r.v}</span></div>
-            ))}
-          </div>
-        )}
-      </section>
+      {/* Note (backing / loss) — chỉ hiện khi token có */}
+      {t.note && (
+        <section className="vd-sec">
+          <h4 className="vd-title">{t.note.title}</h4>
+          <p className="vd-desc">{t.note.body}</p>
+          {t.note.rows && (
+            <div className="vd-info">
+              {t.note.rows.map((r) => (
+                <div key={r.k}><span className="k">{r.k}</span><span className="v">{r.link ? <Link href={r.link}>{r.v}</Link> : r.v}</span></div>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 }
