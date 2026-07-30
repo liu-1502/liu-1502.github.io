@@ -220,6 +220,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* ---- Your Position ---- */
   .yp-card { padding: 18px; border: none; }
+  .yp-card:hover { transform: none; box-shadow: none; }
   .yp-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 14px; }
   /* Hàng ngang: label bên trái, số liệu bên phải */
   .yp-grid { display: flex; flex-direction: column; gap: 12px; }
