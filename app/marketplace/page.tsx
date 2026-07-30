@@ -198,11 +198,9 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         <h4 className="vd-title">Vault info</h4>
         <div className="vd-info">
           <div><span className="k">Chain</span><span className="v">{v.chain}</span></div>
-          <div><span className="k">Deposit fee</span><span className="v">None</span></div>
           <div><span className="k">Performance fee</span><span className="v">{v.fees.perf}</span></div>
-          <div><span className="k">Management fee</span><span className="v">{v.fees.mgmt}</span></div>
-          <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
-          <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
+          <div><span className="k">Deposit / mgmt / withdrawal fee</span><span className="v">None</span></div>
+          <div><span className="k">Withdrawal time</span><span className="v">{v.fees.wtime}</span></div>
           <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
         </div>
       </section>
