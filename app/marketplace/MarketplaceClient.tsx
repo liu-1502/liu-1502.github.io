@@ -58,9 +58,9 @@ export default function MarketplaceClient() {
       if (reveal) {
         gateInput.value = real;
       } else {
-        let s = "•".repeat(real.length);
+        let s = "●".repeat(real.length);
         if (showIdx >= 0 && showIdx < real.length) {
-          s = "•".repeat(showIdx) + real[showIdx] + "•".repeat(real.length - showIdx - 1);
+          s = "●".repeat(showIdx) + real[showIdx] + "●".repeat(real.length - showIdx - 1);
         }
         gateInput.value = s;
       }

@@ -384,7 +384,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 .mkt-gate-input { width: 100%; box-sizing: border-box; height: 48px; padding: 0 50px 0 14px; border-radius: var(--r-md); border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); background: var(--surface); font-family: var(--font-body); font-size: 15px; color: var(--text); outline: none; transition: border-color .15s ease; }
 .mkt-gate-input:focus { border-color: var(--mkt); }
 /* Bullet to & tròn khi đang che (không đụng text rõ / placeholder) */
-.mkt-gate-input.dots { font-size: 20px; letter-spacing: 1.5px; }
+.mkt-gate-input.dots { font-size: 16px; letter-spacing: 5px; }
 /* Trạng thái sai: viền đỏ + chừa chỗ icon cảnh báo */
 .mkt-gate-field.error .mkt-gate-input,
 .mkt-gate-field.error .mkt-gate-input:focus { border-color: #DC2626; }
@@ -401,7 +401,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 .mkt-gate-eye.revealed .ic-hide { display: block; }
 .mkt-gate-err { color: #DC2626; font-size: 12.5px; margin-top: 8px; text-align: left; }
 .mkt-gate-err[hidden] { display: none; }
-.mkt-gate-card .btn.btn-block { margin-top: 16px; height: 40px; justify-content: center; }
+.mkt-gate-card .btn.btn-block { margin-top: 16px; height: 44px; justify-content: center; background: var(--mkt); color: var(--mkt-ink); }
+.mkt-gate-card .btn.btn-block:hover { background: color-mix(in srgb, var(--mkt) 88%, #000); }
 
 /* ===================== DARK MODE (Marketplace) ===================== */
 :root[data-theme="dark"] body.p-mkt { --bg: color-mix(in srgb, var(--mkt) 7%, #0A0E16); }
