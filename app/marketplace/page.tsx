@@ -447,7 +447,6 @@ export default function Marketplace() {
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
               <MetaRows rows={[
-                { k: "Current APY", v: "8.53%", hi: true },
                 { k: "Chain", v: "Monad" },
                 { k: "Deposit fee", v: "None" },
               ]} />
@@ -460,7 +459,6 @@ export default function Marketplace() {
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
               <MetaRows rows={[
-                { k: "Current APY", v: "8.53%", hi: true },
                 { k: "Redemption", v: "Open" },
                 { k: "Performance fee", v: "10%" },
               ]} />
@@ -483,7 +481,6 @@ export default function Marketplace() {
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
               <MetaRows rows={[
-                { k: "Current APY", v: "4.90%", hi: true },
                 { k: "Liquidity", v: "Instant" },
                 { k: "Deposit fee", v: "None" },
               ]} />
@@ -496,7 +493,6 @@ export default function Marketplace() {
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
               <MetaRows rows={[
-                { k: "Current APY", v: "4.90%", hi: true },
                 { k: "Redemption", v: "Open" },
                 { k: "Liquidity", v: "Instant" },
               ]} />

@@ -244,7 +244,8 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   .vd-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
   .vd-head .vt-logo { width: 40px; height: 40px; }
-  .vd-head h3 { margin: 0 0 5px; font-family: var(--font-display); font-weight: 620; font-size: 18px; }
+  .vd-head > div { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .vd-head h3 { margin: 0; font-family: var(--font-display); font-weight: 620; font-size: 18px; }
   .vd-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
   .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
   .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 22px; }
