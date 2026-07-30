@@ -197,7 +197,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
       <section className="vd-sec">
         <h4 className="vd-title">Vault info</h4>
         <div className="vd-info">
-          <div><span className="k">Chain</span><span className="v">{v.chain}</span></div>
+          <div><span className="k">Chain</span><span className="v vd-v-chain"><img src={v.chainIcon} alt="" />{v.chain}</span></div>
           <div><span className="k">Deposit / Withdrawal Fee</span><span className="v">None</span></div>
           <div><span className="k">Withdrawal time</span><span className="v">{v.fees.wtime}</span></div>
           <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
