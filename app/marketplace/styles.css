@@ -223,9 +223,9 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .yp-card { padding: 16px; border: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .yp-card:hover { transform: none; box-shadow: none; }
   .yp-title { font-family: var(--font-body); font-weight: 500; font-size: 16px; color: #262626; margin: 0; }
-  .yp-sum { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
-  .yp-sum b { font-family: var(--font-mono); font-weight: 600; font-size: 16px; letter-spacing: -0.02em; }
-  .yp-sum .pos { font-family: var(--font-mono); font-weight: 500; font-size: 13px; color: var(--good); white-space: nowrap; }
+  .yp-sum { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; min-width: 0; }
+  .yp-sum b { font-family: var(--font-mono); font-weight: 600; font-size: 15px; letter-spacing: -0.04em; }
+  .yp-sum .pos { font-family: var(--font-mono); font-weight: 500; font-size: 12.5px; letter-spacing: -0.03em; color: var(--good); white-space: nowrap; }
 
   /* ---- Detail (cột phải): mỗi section là 1 card riêng ---- */
   .mkt-detail { background: transparent; border: none; border-radius: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
