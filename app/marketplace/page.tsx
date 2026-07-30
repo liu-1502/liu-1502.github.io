@@ -29,11 +29,12 @@ const VAULTS = [
     research: "SyrupUSD Real-Time Asset Quality Monitor",
     researchUrl: "https://research.yuzu.money/syrup-monitor",
     explorerUrl: "https://explorer.monad.xyz/address/0xc985...09b1",
-    debankUrl: "https://debank.com/",
+    debankUrl: "https://debank.com/bundles/223157/accounts/",
     trailingApy: "10.215%",
     priceStart: 1.005, dailyGrowth: 0.00018,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Up to 3 days" },
     contractName: "yzSyrup Vault",
+    contractChain: "Ethereum", contractChainIcon: "/assets/chains/ethereum.svg",
   },
   {
     key: "yzcash", name: "yzCash", addr: "0x224e…098d", logo: "/assets/tokens/yzCash.svg",
@@ -55,11 +56,12 @@ const VAULTS = [
     research: "yzCash Reserve Attestation (live)",
     researchUrl: "https://research.yuzu.money/cash-monitor",
     explorerUrl: "https://explorer.monad.xyz/address/0x224e...098d",
-    debankUrl: "https://debank.com/",
+    debankUrl: "https://debank.com/bundles/223157/accounts/",
     trailingApy: "4.90%",
     priceStart: 1.002, dailyGrowth: 0.000131,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Instant" },
     contractName: "yzCash Vault",
+    contractChain: "Ethereum", contractChainIcon: "/assets/chains/ethereum.svg",
   },
 ];
 
@@ -125,8 +127,8 @@ function Chart({ start, daily, n }: { start: number; daily: number; n: number })
             <line className="vd-pt-guide" x1={cx.toFixed(1)} y1={C_PADT} x2={cx.toFixed(1)} y2={(CHART_H - C_PADB).toFixed(1)} />
             <circle className="vd-pt-dot" cx={cx.toFixed(1)} cy={cy.toFixed(1)} r="4" />
             <g className="vd-pt-tip" transform={`translate(${cx.toFixed(1)} ${cy.toFixed(1)})`}>
-              <rect x="-33" y="-31" width="66" height="21" rx="6" />
-              <text x="0" y="-16" textAnchor="middle">{d.toFixed(4)}</text>
+              <rect x="-38" y="-34" width="76" height="24" rx="6" />
+              <text x="0" y="-17" textAnchor="middle">{d.toFixed(4)}</text>
             </g>
           </g>
         );
@@ -229,7 +231,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
       <section className="vd-sec">
         <div className="vd-sc-head">
           <h4 className="vd-title">Smart Contracts</h4>
-          <span className="vd-chainbadge"><img src={v.chainIcon} alt="" />{v.chain}</span>
+          <span className="vd-chainbadge"><img src={v.contractChainIcon} alt="" />{v.contractChain}</span>
         </div>
         <div className="vd-info">
           <div>
@@ -240,7 +242,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
           </div>
           <div>
             <span className="k">Debank Bundled Wallets</span>
-            <a className="v vd-sc-view" href={v.debankUrl} target="_blank" rel="noopener noreferrer">View <ExternalLink /></a>
+            <a className="v vd-sc-ic" href={v.debankUrl} target="_blank" rel="noopener noreferrer" aria-label="View on Debank"><ExternalLink /></a>
           </div>
         </div>
       </section>
