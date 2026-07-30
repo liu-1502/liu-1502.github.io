@@ -169,17 +169,21 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
 
       {/* Strategy */}
       <section className="vd-sec">
-        <h4 className="vd-title">Strategy</h4>
-        <p className="vd-desc">{v.strategyIntro}</p>
         <details className="vd-stepper">
-          <summary className="vd-steprow">
-            {v.steps.map((s, i) => (
-              <Fragment key={s.label}>
-                {i > 0 && <span className="vd-stepsep"><ChevronsRight /></span>}
-                <span className="vd-stepnode"><i>{i + 1}</i><em>{s.label}</em></span>
-              </Fragment>
-            ))}
-            <ChevronDown className="vd-stepcaret" />
+          <summary className="vd-strat-summary">
+            <div className="vd-strat-head">
+              <h4 className="vd-title">Strategy</h4>
+              <ChevronDown className="vd-stepcaret" />
+            </div>
+            <p className="vd-desc">{v.strategyIntro}</p>
+            <div className="vd-steprow">
+              {v.steps.map((s, i) => (
+                <Fragment key={s.label}>
+                  {i > 0 && <span className="vd-stepsep"><ChevronsRight /></span>}
+                  <span className="vd-stepnode"><i>{i + 1}</i><em>{s.label}</em></span>
+                </Fragment>
+              ))}
+            </div>
           </summary>
           <div className="vd-stepdetail">
             {v.steps.map((s, i) => (
@@ -220,7 +224,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
           <div><span className="k">Management fee</span><span className="v">{v.fees.mgmt}</span></div>
           <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
           <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
-          <div><span className="k">Powered by</span><span className="v vd-powered-v"><span className="vd-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span>{v.poweredNames}</span></div>
+          <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
         </div>
       </section>
 
