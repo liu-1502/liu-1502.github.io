@@ -182,7 +182,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
           {t.note.rows && (
             <div className="vd-info">
               {t.note.rows.map((r) => (
-                <div key={r.k}><span className="k">{r.k}</span><span className="v">{r.link ? <Link href={r.link}>{r.v}</Link> : r.v}</span></div>
+                <div key={r.k}><span className="k">{r.k}</span><span className="v">{r.v}</span></div>
               ))}
             </div>
           )}
