@@ -234,16 +234,18 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 12px; }
   .vd-desc { margin: 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
 
-  .vd-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .vd-head .vt-logo { width: 40px; height: 40px; }
-  .vd-head > div { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .vd-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .vd-head .vt-logo { width: 40px; height: 40px; flex: none; }
+  .vd-head-main { flex: 1; min-width: 0; }
+  .vd-head-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .vd-head h3 { margin: 0; font-family: var(--font-display); font-weight: 620; font-size: 18px; }
+  .vd-head-main .vd-desc { margin-top: 3px; }
   .vd-ext { margin-left: auto; flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r-sm); color: var(--muted); transition: color .15s ease, background .15s ease; }
   .vd-ext:hover { color: var(--mkt); background: color-mix(in srgb, var(--mkt) 8%, transparent); }
   .vd-ext svg { width: 18px; height: 18px; }
   .vd-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
-  .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
-  .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 22px; }
+  .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: -0.2px; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
+  .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 22px; letter-spacing: -0.03em; }
   .vd-stats b.hi { color: var(--mkt); }
   .vd-stats small { display: block; font-size: 11px; color: var(--good); margin-top: 2px; }
 
@@ -294,7 +296,10 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-apy-badge span { font-family: var(--font-mono); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
   .vd-chart { width: 100%; height: auto; display: block; overflow: visible; cursor: crosshair; }
   .vd-grid { stroke: color-mix(in srgb, var(--text) 8%, transparent); stroke-width: 1; stroke-dasharray: 3 4; }
-  .vd-ytick { fill: var(--faint); font-family: var(--font-mono); font-size: 15px; }
+  /* Nhãn trục Y: HTML overlay, font cố định (không scale theo SVG) */
+  .vd-chart-wrap { position: relative; padding-left: 46px; }
+  .vd-yticks { position: absolute; left: 0; top: 0; height: 100%; width: 42px; pointer-events: none; }
+  .vd-yticks span { position: absolute; right: 4px; transform: translateY(-50%); font-family: var(--font-mono); font-size: 10px; color: var(--faint); white-space: nowrap; }
   .vd-line { stroke: var(--mkt); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
   .vd-dot { fill: var(--mkt); stroke: var(--surface); stroke-width: 2; }
   /* Hover states của chart */

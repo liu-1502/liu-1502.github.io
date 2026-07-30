@@ -74,7 +74,7 @@ const SECURITY = [
 ];
 
 /* ---- Historical Performance chart (SVG dựng sẵn khi render) ---- */
-const CHART_W = 560, CHART_H = 190, C_PADT = 10, C_PADB = 8, C_PADR = 6, C_PADL = 50;
+const CHART_W = 560, CHART_H = 190, C_PADT = 10, C_PADB = 8, C_PADR = 6, C_PADL = 8;
 const RANGES = [
   { key: "7d", label: "7D", n: 7 },
   { key: "30d", label: "30D", n: 30 },
@@ -97,43 +97,47 @@ function Chart({ start, daily, n }: { start: number; daily: number; n: number })
   const area = `${line} L ${px(n - 1).toFixed(1)} ${base} L ${px(0).toFixed(1)} ${base} Z`;
   const uid = `c${Math.round(start * 1e5)}-${n}`;
   return (
-    <svg className="vd-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} role="img" aria-label="Vault receipt token price">
-      <defs>
-        <linearGradient id={uid} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--mkt)" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="var(--mkt)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      {[0, 1, 2, 3].map((i) => {
-        const yy = C_PADT + (i * (CHART_H - C_PADT - C_PADB)) / 3;
-        const t = lo + ((hi - lo) * (3 - i)) / 3;
-        return (
-          <g key={i}>
-            <line className="vd-grid" x1={C_PADL} y1={yy} x2={CHART_W - C_PADR} y2={yy} />
-            <text className="vd-ytick" x={C_PADL - 8} y={yy + 3} textAnchor="end">{t.toFixed(4)}</text>
-          </g>
-        );
-      })}
-      <path d={area} fill={`url(#${uid})`} />
-      <path className="vd-line" d={line} fill="none" />
-      <circle className="vd-dot" cx={px(n - 1)} cy={py(data[n - 1])} r="3.5" />
-      {/* Hover states: guide line + dot + tooltip theo từng điểm (CSS-only) */}
-      {data.map((d, i) => {
-        const cx = px(i), cy = py(d);
-        const half = (CHART_W - C_PADL - C_PADR) / (n - 1) / 2;
-        return (
-          <g className="vd-pt" key={i}>
-            <rect className="vd-pt-hit" x={(cx - half).toFixed(1)} y={C_PADT} width={(half * 2).toFixed(1)} height={CHART_H - C_PADT - C_PADB} />
-            <line className="vd-pt-guide" x1={cx.toFixed(1)} y1={C_PADT} x2={cx.toFixed(1)} y2={(CHART_H - C_PADB).toFixed(1)} />
-            <circle className="vd-pt-dot" cx={cx.toFixed(1)} cy={cy.toFixed(1)} r="4" />
-            <g className="vd-pt-tip" transform={`translate(${cx.toFixed(1)} ${cy.toFixed(1)})`}>
-              <rect x="-38" y="-34" width="76" height="24" rx="6" />
-              <text x="0" y="-17" textAnchor="middle">{d.toFixed(4)}</text>
+    <div className="vd-chart-wrap">
+      {/* Nhãn trục Y bằng HTML để giữ font cố định (không scale theo SVG) */}
+      <div className="vd-yticks">
+        {[0, 1, 2, 3].map((i) => {
+          const t = lo + ((hi - lo) * (3 - i)) / 3;
+          const frac = (C_PADT + (i * (CHART_H - C_PADT - C_PADB)) / 3) / CHART_H;
+          return <span key={i} style={{ top: `${(frac * 100).toFixed(2)}%` }}>{t.toFixed(4)}</span>;
+        })}
+      </div>
+      <svg className="vd-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} role="img" aria-label="Vault receipt token price">
+        <defs>
+          <linearGradient id={uid} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--mkt)" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="var(--mkt)" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {[0, 1, 2, 3].map((i) => {
+          const yy = C_PADT + (i * (CHART_H - C_PADT - C_PADB)) / 3;
+          return <line className="vd-grid" x1={C_PADL} y1={yy} x2={CHART_W - C_PADR} y2={yy} key={i} />;
+        })}
+        <path d={area} fill={`url(#${uid})`} />
+        <path className="vd-line" d={line} fill="none" />
+        <circle className="vd-dot" cx={px(n - 1)} cy={py(data[n - 1])} r="3.5" />
+        {/* Hover states: guide line + dot + tooltip theo từng điểm (CSS-only) */}
+        {data.map((d, i) => {
+          const cx = px(i), cy = py(d);
+          const half = (CHART_W - C_PADL - C_PADR) / (n - 1) / 2;
+          return (
+            <g className="vd-pt" key={i}>
+              <rect className="vd-pt-hit" x={(cx - half).toFixed(1)} y={C_PADT} width={(half * 2).toFixed(1)} height={CHART_H - C_PADT - C_PADB} />
+              <line className="vd-pt-guide" x1={cx.toFixed(1)} y1={C_PADT} x2={cx.toFixed(1)} y2={(CHART_H - C_PADB).toFixed(1)} />
+              <circle className="vd-pt-dot" cx={cx.toFixed(1)} cy={cy.toFixed(1)} r="4" />
+              <g className="vd-pt-tip" transform={`translate(${cx.toFixed(1)} ${cy.toFixed(1)})`}>
+                <rect x="-38" y="-34" width="76" height="24" rx="6" />
+                <text x="0" y="-17" textAnchor="middle">{d.toFixed(4)}</text>
+              </g>
             </g>
-          </g>
-        );
-      })}
-    </svg>
+          );
+        })}
+      </svg>
+    </div>
   );
 }
 
@@ -163,10 +167,12 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
       {/* Overview */}
       <section className="vd-sec">
         <div className="vd-head"><span className="vt-logo"><img src={v.logo} alt="" /></span>
-          <div><h3>{v.name}</h3><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.riskLabel} Risk</span></div>
+          <div className="vd-head-main">
+            <div className="vd-head-top"><h3>{v.name}</h3><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.riskLabel} Risk</span></div>
+            <p className="vd-desc">{v.tagline}</p>
+          </div>
           <a className="vd-ext" href={v.researchUrl} target="_blank" rel="noopener noreferrer" aria-label={`${v.name} research`}><ExternalLink /></a>
         </div>
-        <p className="vd-desc">{v.tagline}</p>
         <div className="vd-stats">
           <div><span className="k">APY (7D)</span><b className="hi">{v.apy}</b></div>
           <div><span className="k">TVL</span><b>{v.tvl}</b><small>{v.tvlChg}</small></div>
