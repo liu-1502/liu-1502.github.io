@@ -126,10 +126,6 @@ const TOKENS = [
       { k: "Minimum order", v: "5,000 yzPP" },
       { k: "Access", v: "Eligible Investors, KYC" },
     ],
-    note: {
-      title: "During a loss event",
-      body: "Redemptions pause until the loss is assessed. yzPP absorbs losses before senior holders, in exchange for the leveraged premium.",
-    },
   },
   {
     key: "syzusd", name: "syzUSD", logo: "/assets/tokens/syzUSD.svg",
