@@ -20,6 +20,7 @@ const VAULTS = [
     strategyIntro: "Leveraged across blue-chip DeFi money markets - Aave, Euler, Morpho, etc.",
     steps: ["Deposit USDC", "Mint Syrup tokens", "Supply collateral", "Borrow stablecoins", "Leverage"],
     research: "SyrupUSD Real-Time Asset Quality Monitor",
+    researchUrl: "https://research.yuzu.money/syrup-monitor",
     trailingApy: "10.215%",
     priceStart: 1.005, dailyGrowth: 0.00018,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Up to 3 days" },
@@ -38,6 +39,7 @@ const VAULTS = [
     strategyIntro: "Unlevered cash management backed by tokenized T-Bills, redeemable anytime.",
     steps: ["Deposit USDC", "Allocate to tokenized T-Bills", "Accrue overnight yield", "Redeem anytime"],
     research: "yzCash Reserve Attestation (live)",
+    researchUrl: "https://research.yuzu.money/cash-monitor",
     trailingApy: "4.90%",
     priceStart: 1.002, dailyGrowth: 0.000131,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Instant" },
@@ -151,7 +153,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
       {/* Research */}
       <section className="vd-sec">
         <h4 className="vd-title">Research</h4>
-        <a className="vd-research" href="/transparency">
+        <a className="vd-research" href={v.researchUrl} target="_blank" rel="noopener noreferrer">
           <span>{v.research}</span><ArrowUpRight />
         </a>
       </section>
