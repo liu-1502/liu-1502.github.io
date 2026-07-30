@@ -271,13 +271,14 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
 }
 
 /* Vị thế của user (tĩnh, demo — chưa connect ví). */
+/* Chỉ hiển thị khi user đã connect ví — ở đây dùng dữ liệu demo (giả lập đã connect). */
 function YourPosition() {
   return (
     <div className="card yp-card">
       <h4 className="yp-title">Your Position</h4>
       <div className="yp-sum">
-        <b>$0.00</b>
-        <span className="pos">+$0.00 (+0.00%)</span>
+        <b>$10,850.00</b>
+        <span className="pos">+$850.00 (+8.50%)</span>
       </div>
     </div>
   );
