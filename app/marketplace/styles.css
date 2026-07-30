@@ -212,18 +212,10 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* ===== Layout 2 cột: trái = form/position/order (480px), phải = chi tiết ===== */
   .mkt-vault-grid { display: grid; grid-template-columns: 480px minmax(0, 1fr); gap: 24px; align-items: start; }
-  /* Cột trái (form/position/order) ghim lại khi cuộn đọc chi tiết bên phải.
-     Ghim dưới topbar (64px) + 16px; cao tối đa bằng viewport, dài hơn thì cuộn trong cột. */
-  .mkt-vault-left {
-    display: flex; flex-direction: column; gap: 20px; min-width: 0;
-    position: sticky; top: 80px; align-self: start;
-    max-height: calc(100vh - 96px); overflow-y: auto; overflow-x: hidden;
-    scrollbar-width: thin;
-  }
+  .mkt-vault-left { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
   .mkt-vault-right { min-width: 0; }
   @media (max-width: 980px) {
     .mkt-vault-grid { grid-template-columns: 1fr; }
-    .mkt-vault-left { position: static; max-height: none; overflow: visible; }
   }
 
   /* ---- Your Position ---- */
@@ -314,7 +306,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-pt-tip text { fill: #fff; font-family: var(--font-mono); font-size: 14px; font-weight: 600; }
   .vd-pt:hover .vd-pt-guide, .vd-pt:hover .vd-pt-dot, .vd-pt:hover .vd-pt-tip { opacity: 1; }
   /* Switch 7D/30D/90D — cùng style với LITE/PRO trên topbar */
-  .vd-ranges { display: inline-flex; gap: 2px; margin-top: 16px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: var(--r-sm); padding: 3px; background: var(--surface); }
+  .vd-ranges { display: flex; width: fit-content; margin: 16px auto 0; gap: 2px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: var(--r-sm); padding: 3px; background: var(--surface); }
   .vd-range { all: unset; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; font-weight: 600; padding: 6px 11px; border-radius: 4px; color: var(--faint); transition: color .15s ease, background .15s ease; }
   .vd-range:hover { color: var(--text); }
   .vd-range.on { background: color-mix(in srgb, var(--mkt) 14%, transparent); color: var(--mkt); }
@@ -329,6 +321,11 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-sc-ic { display: inline-grid; place-items: center; color: var(--muted); transition: color .15s ease; }
   .vd-sc-ic svg { width: 15px; height: 15px; }
   .vd-sc-ic:hover { color: var(--mkt); }
+  .vd-copy { background: none; border: none; padding: 0; cursor: pointer; }
+  .vd-copy .ic-check { display: none; }
+  .vd-copy.copied .ic-copy { display: none; }
+  .vd-copy.copied .ic-check { display: block; color: var(--good); }
+  .vd-copy.copied { color: var(--good); }
   .vd-sc-view { display: inline-flex; align-items: center; gap: 5px; color: var(--mkt); text-decoration: none; }
   .vd-sc-view svg { width: 14px; height: 14px; }
 

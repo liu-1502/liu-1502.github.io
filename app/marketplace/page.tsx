@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -174,6 +174,18 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         </div>
       </section>
 
+      {/* Historical Performance */}
+      <section className="vd-sec vd-chart-sec">
+        <div className="vd-chart-head">
+          <div>
+            <h4 className="vd-title">Historical Performance</h4>
+            <span className="vd-chart-sub">Historical vault receipt token price</span>
+          </div>
+          <div className="vd-apy-badge"><b>{v.trailingApy}</b><span>7D trailing APY</span></div>
+        </div>
+        <RangeChart v={v} />
+      </section>
+
       {/* Strategy */}
       <section className="vd-sec">
         <details className="vd-stepper">
@@ -203,18 +215,6 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         </details>
       </section>
 
-      {/* Historical Performance */}
-      <section className="vd-sec vd-chart-sec">
-        <div className="vd-chart-head">
-          <div>
-            <h4 className="vd-title">Historical Performance</h4>
-            <span className="vd-chart-sub">Historical vault receipt token price</span>
-          </div>
-          <div className="vd-apy-badge"><b>{v.trailingApy}</b><span>7D trailing APY</span></div>
-        </div>
-        <RangeChart v={v} />
-      </section>
-
       {/* Vault info */}
       <section className="vd-sec">
         <h4 className="vd-title">Vault info</h4>
@@ -237,6 +237,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
           <div>
             <span className="k">{v.contractName}</span>
             <span className="v vd-sc-addr"><span className="mono">{v.addr}</span>
+              <button type="button" className="vd-sc-ic vd-copy" data-copy={v.addr} aria-label="Copy address"><Copy className="ic-copy" /><Check className="ic-check" /></button>
               <a className="vd-sc-ic" href={v.explorerUrl} target="_blank" rel="noopener noreferrer" aria-label="View on explorer"><ExternalLink /></a>
             </span>
           </div>

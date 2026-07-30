@@ -46,6 +46,16 @@ export default function MarketplaceClient() {
       if ((e.target as HTMLElement).closest("[data-mkt-back]")) show("overview");
     };
 
+    /* Copy địa chỉ contract → hiện tick trong ~1.4s */
+    const onCopy = (e: MouseEvent) => {
+      const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-copy]");
+      if (!btn) return;
+      const text = btn.getAttribute("data-copy") || "";
+      navigator.clipboard?.writeText(text).catch(() => {});
+      btn.classList.add("copied");
+      window.setTimeout(() => btn.classList.remove("copied"), 1400);
+    };
+
     /* Toggle khoảng thời gian biểu đồ (7D/30D/90D), phạm vi trong từng section chart */
     const onRange = (e: MouseEvent) => {
       const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-range]");
@@ -73,11 +83,13 @@ export default function MarketplaceClient() {
     ov.addEventListener("click", onOverviewClick);
     xc.addEventListener("click", onBack);
     xc.addEventListener("click", onRange);
+    xc.addEventListener("click", onCopy);
     return () => {
       ov.removeEventListener("click", onDeposit);
       ov.removeEventListener("click", onOverviewClick);
       xc.removeEventListener("click", onBack);
       xc.removeEventListener("click", onRange);
+      xc.removeEventListener("click", onCopy);
     };
   }, []);
 
