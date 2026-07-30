@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ShieldCheck } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -108,8 +108,8 @@ const TOKENS = [
       title: "Backing, verified live",
       body: "Every yzUSD is backed by more than one dollar of onchain assets, attested every 15 minutes by Accountable.",
       rows: [
+        { k: "Collateral ratio", v: "110.82%" },
         { k: "First-loss buffer", v: "yzPP + Reserve Fund" },
-        { k: "Proof of reserves", v: "Live →", link: "/transparency" },
       ],
     },
   },
@@ -317,6 +317,20 @@ export default function Alpha() {
             <TokenDetail t={TOKENS[0]} />
             <TokenDetail t={TOKENS[1]} />
             <TokenDetail t={TOKENS[2]} />
+            {/* Proof of Reserves — dùng chung cho cả 3 token */}
+            <a className="vd-por" href="/transparency/" aria-label="Proof of Reserves">
+              <div className="vd-por-lead">
+                <span className="vd-por-shield"><ShieldCheck /></span>
+                <div><b>Proof of Reserves</b><span>Independent third-party verification of the protocol&apos;s backing assets.</span></div>
+              </div>
+              <div className="vd-por-marks">
+                <img src="/assets/partners/accountable-fav.png" alt="Accountable" />
+                <img src="/assets/partners/hypernative-fav.png" alt="Hypernative" />
+                <img src="/assets/partners/fordefi-fav.png" alt="Fordefi" />
+                <img src="/assets/partners/chainlink-fav.png" alt="Chainlink" />
+                <span className="vd-por-arr">→</span>
+              </div>
+            </a>
           </div>
           </div>{/* .av-grid */}
         </div>
