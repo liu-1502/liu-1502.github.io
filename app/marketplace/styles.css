@@ -277,11 +277,19 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-apy-badge { flex: none; text-align: right; }
   .vd-apy-badge b { display: block; font-family: var(--font-mono); font-weight: 620; font-size: 17px; color: var(--mkt); }
   .vd-apy-badge span { font-family: var(--font-mono); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
-  .vd-chart { width: 100%; height: auto; display: block; overflow: visible; }
+  .vd-chart { width: 100%; height: auto; display: block; overflow: visible; cursor: crosshair; }
   .vd-grid { stroke: color-mix(in srgb, var(--text) 8%, transparent); stroke-width: 1; stroke-dasharray: 3 4; }
-  .vd-ytick { fill: var(--faint); font-family: var(--font-mono); font-size: 9px; }
+  .vd-ytick { fill: var(--faint); font-family: var(--font-mono); font-size: 12px; }
   .vd-line { stroke: var(--mkt); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
   .vd-dot { fill: var(--mkt); stroke: var(--surface); stroke-width: 2; }
+  /* Hover states của chart */
+  .vd-pt-hit { fill: transparent; }
+  .vd-pt-guide { stroke: color-mix(in srgb, var(--mkt) 45%, transparent); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; transition: opacity .12s ease; vector-effect: non-scaling-stroke; }
+  .vd-pt-dot { fill: var(--mkt); stroke: var(--surface); stroke-width: 2; opacity: 0; transition: opacity .12s ease; }
+  .vd-pt-tip { opacity: 0; transition: opacity .12s ease; pointer-events: none; }
+  .vd-pt-tip rect { fill: var(--text); }
+  .vd-pt-tip text { fill: #fff; font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
+  .vd-pt:hover .vd-pt-guide, .vd-pt:hover .vd-pt-dot, .vd-pt:hover .vd-pt-tip { opacity: 1; }
   /* Switch 7D/30D/90D — cùng style với LITE/PRO trên topbar */
   .vd-ranges { display: inline-flex; gap: 2px; margin-top: 16px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: var(--r-sm); padding: 3px; background: var(--surface); }
   .vd-range { all: unset; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; font-weight: 600; padding: 6px 11px; border-radius: 4px; color: var(--faint); transition: color .15s ease, background .15s ease; }

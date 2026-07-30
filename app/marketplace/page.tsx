@@ -99,6 +99,22 @@ function Chart({ start, daily, n }: { start: number; daily: number; n: number })
       <path d={area} fill={`url(#${uid})`} />
       <path className="vd-line" d={line} fill="none" />
       <circle className="vd-dot" cx={px(n - 1)} cy={py(data[n - 1])} r="3.5" />
+      {/* Hover states: guide line + dot + tooltip theo từng điểm (CSS-only) */}
+      {data.map((d, i) => {
+        const cx = px(i), cy = py(d);
+        const half = (CHART_W - C_PADL - C_PADR) / (n - 1) / 2;
+        return (
+          <g className="vd-pt" key={i}>
+            <rect className="vd-pt-hit" x={(cx - half).toFixed(1)} y={C_PADT} width={(half * 2).toFixed(1)} height={CHART_H - C_PADT - C_PADB} />
+            <line className="vd-pt-guide" x1={cx.toFixed(1)} y1={C_PADT} x2={cx.toFixed(1)} y2={(CHART_H - C_PADB).toFixed(1)} />
+            <circle className="vd-pt-dot" cx={cx.toFixed(1)} cy={cy.toFixed(1)} r="4" />
+            <g className="vd-pt-tip" transform={`translate(${cx.toFixed(1)} ${cy.toFixed(1)})`}>
+              <rect x="-33" y="-31" width="66" height="21" rx="6" />
+              <text x="0" y="-16" textAnchor="middle">{d.toFixed(4)}</text>
+            </g>
+          </g>
+        );
+      })}
     </svg>
   );
 }
