@@ -17,7 +17,7 @@ const VAULTS = [
     tagline: "Leveraged exposure to SyrupUSD (overcollateralized lending).",
     powered: ["/assets/protocols/aave.svg", "/assets/protocols/morpho.svg", "/assets/protocols/euler.svg", "/assets/protocols/fluid.svg"],
     poweredNames: "Aave · Morpho · Euler · Fluid",
-    strategyIntro: "Leveraged across blue-chip DeFi money markets — Aave, Euler, Morpho, etc.",
+    strategyIntro: "Leveraged across blue-chip DeFi money markets - Aave, Euler, Morpho, etc.",
     steps: ["Deposit USDC", "Mint Syrup tokens", "Supply collateral", "Borrow stablecoins", "Leverage"],
     research: "SyrupUSD Real-Time Asset Quality Monitor",
     trailingApy: "10.215%",
@@ -80,8 +80,8 @@ function Chart({ start, daily, n }: { start: number; daily: number; n: number })
     <svg className="vd-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} role="img" aria-label="Vault receipt token price">
       <defs>
         <linearGradient id={uid} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--good)" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="var(--good)" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--mkt)" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="var(--mkt)" stopOpacity="0" />
         </linearGradient>
       </defs>
       {[0, 1, 2, 3].map((i) => {

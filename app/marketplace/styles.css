@@ -247,7 +247,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-head h3 { margin: 0 0 5px; font-family: var(--font-display); font-weight: 620; font-size: 18px; }
   .vd-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
   .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
-  .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 17px; }
+  .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 22px; }
   .vd-stats b.hi { color: var(--mkt); }
   .vd-stats small { display: block; font-size: 11px; color: var(--good); margin-top: 2px; }
 
@@ -275,16 +275,18 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-chart-head .vd-title { margin: 0 0 2px; }
   .vd-chart-sub { font-family: var(--font-body); font-size: 12.5px; color: var(--muted); }
   .vd-apy-badge { flex: none; text-align: right; }
-  .vd-apy-badge b { display: block; font-family: var(--font-mono); font-weight: 620; font-size: 17px; color: var(--good); }
+  .vd-apy-badge b { display: block; font-family: var(--font-mono); font-weight: 620; font-size: 17px; color: var(--mkt); }
   .vd-apy-badge span { font-family: var(--font-mono); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
   .vd-chart { width: 100%; height: auto; display: block; overflow: visible; }
   .vd-grid { stroke: color-mix(in srgb, var(--text) 8%, transparent); stroke-width: 1; stroke-dasharray: 3 4; }
   .vd-ytick { fill: var(--faint); font-family: var(--font-mono); font-size: 9px; }
-  .vd-line { stroke: var(--good); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-  .vd-dot { fill: var(--good); stroke: var(--surface); stroke-width: 2; }
-  .vd-ranges { display: inline-flex; gap: 4px; margin-top: 14px; padding: 4px; background: color-mix(in srgb, var(--text) 4%, transparent); border-radius: var(--r-md); }
-  .vd-range { all: unset; cursor: pointer; padding: 6px 14px; border-radius: var(--r-sm); font-family: var(--font-mono); font-weight: 600; font-size: 12px; color: var(--muted); }
-  .vd-range.on { background: color-mix(in srgb, var(--good) 18%, var(--surface)); color: var(--good); }
+  .vd-line { stroke: var(--mkt); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  .vd-dot { fill: var(--mkt); stroke: var(--surface); stroke-width: 2; }
+  /* Switch 7D/30D/90D — cùng style với LITE/PRO trên topbar */
+  .vd-ranges { display: inline-flex; gap: 2px; margin-top: 16px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: var(--r-sm); padding: 3px; background: var(--surface); }
+  .vd-range { all: unset; cursor: pointer; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; font-weight: 600; padding: 6px 11px; border-radius: 4px; color: var(--faint); transition: color .15s ease, background .15s ease; }
+  .vd-range:hover { color: var(--text); }
+  .vd-range.on { background: color-mix(in srgb, var(--mkt) 14%, transparent); color: var(--mkt); }
 
   .vd-sec-list { display: flex; flex-direction: column; gap: 12px; }
   .vd-partner { display: flex; align-items: center; gap: 10px; }
