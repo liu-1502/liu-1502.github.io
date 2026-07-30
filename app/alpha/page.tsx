@@ -4,7 +4,7 @@ import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
 import MetaRows from "@/components/ui/MetaRows";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -92,6 +92,110 @@ function OrderItem({
   );
 }
 
+/* Thông tin chi tiết từng token (cột phải, luôn hiện, đổi theo tab). */
+const TOKENS = [
+  {
+    key: "yzusd", name: "yzUSD", logo: "/assets/tokens/yzUSD.svg",
+    badge: "Senior · Par stable",
+    tagline: "Fully-backed 1:1 USD stablecoin, over-collateralized and attested live.",
+    stats: [ { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "110.82%", tone: "good" }, { k: "Network", v: "Plasma" } ],
+    info: [
+      { k: "Rate", v: "1:1 at par" },
+      { k: "Access", v: "Eligible Investors, KYC" },
+      { k: "Alternative", v: "Swap on Curve, no KYC", hi: true },
+      { k: "Network", v: "Plasma" },
+    ],
+    note: {
+      title: "Backing, verified live",
+      body: "Every yzUSD is backed by more than one dollar of onchain assets, attested every 15 minutes by Accountable.",
+      rows: [
+        { k: "First-loss buffer", v: "yzPP + Reserve Fund" },
+        { k: "Proof of reserves", v: "Live →", link: "/transparency" },
+      ],
+    },
+  },
+  {
+    key: "yzpp", name: "yzPP", logo: "/assets/tokens/yzPP.svg",
+    badge: "Junior tranche",
+    tagline: "Junior tranche that absorbs first losses and earns the leveraged premium.",
+    stats: [ { k: "Est. APY", v: "27.0%", tone: "hi" }, { k: "Price", v: "1.1485" }, { k: "Role", v: "Junior" } ],
+    info: [
+      { k: "yzPP price", v: "1 yzPP = 1.148527 USDT0" },
+      { k: "Estimated APY", v: "27.0%", hi: true },
+      { k: "Role", v: "Junior tranche, absorbs losses first" },
+      { k: "Redemption window", v: "30 days, yield accrues" },
+      { k: "Minimum order", v: "5,000 yzPP" },
+      { k: "Access", v: "Eligible Investors, KYC" },
+    ],
+    note: {
+      title: "During a loss event",
+      body: "Redemptions pause until the loss is assessed. yzPP absorbs losses before senior holders, in exchange for the leveraged premium.",
+    },
+  },
+  {
+    key: "syzusd", name: "syzUSD", logo: "/assets/tokens/syzUSD.svg",
+    badge: "Staked yield",
+    tagline: "Staked yzUSD (ERC-4626) that accrues the weekly target yield.",
+    stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma" } ],
+    info: [
+      { k: "Exchange rate", v: "1 yzUSD = 0.9361 syzUSD" },
+      { k: "Weekly target yield", v: "7.75%", hi: true },
+      { k: "Yield epoch", v: "Fri 04:00 → Fri 03:59 UTC" },
+      { k: "Unstaking", v: "One step, near instant" },
+      { k: "Network", v: "Plasma" },
+    ],
+    note: {
+      title: "Composability",
+      body: "syzUSD is an ERC-4626 vault token. Use it as collateral, loop it, or provide liquidity on Pendle, Balancer and Curve while it keeps accruing.",
+    },
+  },
+];
+
+function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
+  return (
+    <div className="av-detail" data-panel={t.key} style={t.key === TOKENS[0].key ? undefined : { display: "none" }}>
+      {/* Overview */}
+      <section className="vd-sec">
+        <div className="vd-head">
+          <span className="vt-logo"><img src={t.logo} alt="" /></span>
+          <div className="vd-head-main">
+            <div className="vd-head-top"><h3>{t.name}</h3><span className="vt-badge">{t.badge}</span></div>
+            <p className="vd-desc">{t.tagline}</p>
+          </div>
+        </div>
+        <div className="vd-stats">
+          {t.stats.map((s) => (
+            <div key={s.k}><span className="k">{s.k}</span><b className={s.tone ?? ""}>{s.v}</b></div>
+          ))}
+        </div>
+      </section>
+
+      {/* Details */}
+      <section className="vd-sec">
+        <h4 className="vd-title">Details</h4>
+        <div className="vd-info">
+          {t.info.map((r) => (
+            <div key={r.k}><span className="k">{r.k}</span><span className={`v${r.hi ? " hi" : ""}`}>{r.v}</span></div>
+          ))}
+        </div>
+      </section>
+
+      {/* Note (backing / loss / composability) */}
+      <section className="vd-sec">
+        <h4 className="vd-title">{t.note.title}</h4>
+        <p className="vd-desc">{t.note.body}</p>
+        {t.note.rows && (
+          <div className="vd-info">
+            {t.note.rows.map((r) => (
+              <div key={r.k}><span className="k">{r.k}</span><span className="v">{r.link ? <Link href={r.link}>{r.v}</Link> : r.v}</span></div>
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
 export default function Alpha() {
   return (
     <div className="pg-alpha">
@@ -100,44 +204,6 @@ export default function Alpha() {
 
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
-        {/* Nút About Alpha: góc phải trên content, canh phải như Connect Wallet */}
-        <div className="about-wrap">
-          <button className="about-btn" data-about-toggle aria-expanded="false"><CircleHelp className="ico" /> About</button>
-          <div className="about-menu" data-about-menu hidden>
-            <div className="aside-head">
-              <h3 className="aside-title">About yzUSD/yzPP/syzUSD</h3>
-              <button className="aside-close" data-about-close aria-label="Close details"><X /></button>
-            </div>
-            <div className="tk-strip aside-marks">
-              <img src="/assets/tokens/yzUSD.svg" alt="yzUSD" />
-              <img src="/assets/tokens/yzPP.svg" alt="yzPP" />
-              <img src="/assets/tokens/syzUSD.svg" alt="syzUSD" />
-            </div>
-            <div className="aside-card">
-              <h4>Yield cadence</h4>
-              <div className="rows">
-                <div><span className="k">syzUSD weekly target</span><span className="v" style={{ color: "var(--alpha)" }}>7.75%</span></div>
-                <div><span className="k">syzUSD epoch</span><span className="v">Fri 04:00 to Fri 03:59 UTC</span></div>
-                <div><span className="k">yzPP estimated APY</span><span className="v" style={{ color: "var(--alpha)" }}>27.0%</span></div>
-                <div><span className="k">yzPP premium budget</span><span className="v">Daily, 04:00 UTC</span></div>
-              </div>
-            </div>
-            <div className="aside-card">
-              <h4>Backing, verified live</h4>
-              <p>Every yzUSD is backed by more than one dollar of onchain assets, attested every 15 minutes by Accountable.</p>
-              <div className="rows">
-                <div><span className="k">Collateral ratio</span><span className="v" style={{ color: "var(--good)" }}>110.82%</span></div>
-                <div><span className="k">First-loss buffer</span><span className="v">yzPP + Reserve Fund</span></div>
-                <div><span className="k">Proof of reserves</span><span className="v" style={{ color: "var(--good)" }}><Link href="/transparency" style={{ color: "inherit", textDecoration: "none" }}>Live →</Link></span></div>
-              </div>
-            </div>
-            <div className="aside-card">
-              <h4>Composability</h4>
-              <p>syzUSD is an ERC-4626 vault token. Use it as collateral, loop it, or provide liquidity on Pendle, Balancer and Curve while it keeps accruing.</p>
-            </div>
-          </div>
-        </div>
-
         <div className="xchg rv">
           {/* Token pill tabs */}
           <div className="tok-tabs xchg-tabs" id="alphaTabs">
@@ -145,6 +211,9 @@ export default function Alpha() {
             <button className="tok-tab" data-tab="yzpp"><img src="/assets/tokens/yzPP.svg" alt="" /><span className="sym">yzPP</span></button>
             <button className="tok-tab" data-tab="syzusd"><img src="/assets/tokens/syzUSD.svg" alt="" /><span className="sym">syzUSD</span></button>
           </div>
+
+          <div className="av-grid">
+          <div className="av-left">
 
           {/* ============ yzUSD ============ */}
           <div className="xchg-body" data-panel="yzusd">
@@ -276,6 +345,14 @@ export default function Alpha() {
               <OrderItem kind="mint" label="Mint yzPP" addr="0x71bC8…9Ae0" amount="$2,000.00" status="pending" />
             </div>
           </details>
+          </div>{/* .av-left */}
+
+          <div className="av-right">
+            <TokenDetail t={TOKENS[0]} />
+            <TokenDetail t={TOKENS[1]} />
+            <TokenDetail t={TOKENS[2]} />
+          </div>
+          </div>{/* .av-grid */}
         </div>
 
       </div>

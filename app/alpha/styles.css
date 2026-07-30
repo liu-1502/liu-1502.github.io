@@ -42,8 +42,43 @@
     position: relative;   /* mốc cho nút About Alpha absolute */
   }
   .app-layout:not(.xtra-open) > .xtra-bar { display: none; }
-  .app-layout:not(.xtra-open) > .xchg { width: 480px; max-width: 100%; }
+  .app-layout:not(.xtra-open) > .xchg { width: 100%; max-width: none; }
   .app-layout:not(.xtra-open) > aside { display: none; }
+
+  /* ===== Layout 2 cột: trái = form + history (480px), phải = chi tiết token ===== */
+  .av-grid { display: grid; grid-template-columns: 480px minmax(0, 1fr); gap: 40px; align-items: start; }
+  @media (max-width: 980px) { .av-grid { grid-template-columns: 1fr; } }
+  .av-left { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .av-right { min-width: 0; }
+  .av-detail { display: flex; flex-direction: column; gap: 16px; }
+  /* Tabs canh giữa theo cột form trái (480px) */
+  #alphaTabs { width: 480px; max-width: 100%; }
+
+  /* ---- Detail sections (giống cột phải Marketplace) ---- */
+  .vd-sec { padding: 22px; background: var(--surface); border-radius: 20px; }
+  .vd-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .vd-head .vt-logo { width: 40px; height: 40px; flex: none; }
+  .vd-head .vt-logo img { width: 100%; height: 100%; border-radius: 50%; object-fit: contain; }
+  .vd-head-main { flex: 1; min-width: 0; }
+  .vd-head-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .vd-head h3 { margin: 0; font-family: var(--font-display); font-weight: 620; font-size: 18px; }
+  .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
+  .vd-desc { margin: 3px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
+  .vd-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: -0.2px; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
+  .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 20px; letter-spacing: -0.03em; }
+  .vd-stats b.hi { color: #3E7B18; }
+  .vd-stats b.good { color: var(--good); }
+  .vd-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 12px; }
+  .vd-info { display: flex; flex-direction: column; }
+  .vd-info > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid color-mix(in srgb, var(--text) 7%, transparent); font-size: 13.5px; }
+  .vd-info > div:first-child { padding-top: 0; }
+  .vd-info > div:last-child { border-bottom: none; padding-bottom: 0; }
+  .vd-info .k { color: var(--muted); font-family: var(--font-body); }
+  .vd-info .v { font-family: var(--font-mono); font-weight: 600; text-align: right; }
+  .vd-info .v.hi { color: #3E7B18; }
+  .vd-info .v a { color: var(--good); text-decoration: none; }
+  .vd-sec .vd-desc + .vd-info { margin-top: 14px; }
 
   /* ===== Nút About Alpha: góc phải trên content (canh phải như Connect Wallet) ===== */
   .about-wrap { position: absolute; top: 0; right: 0; z-index: 30; }
