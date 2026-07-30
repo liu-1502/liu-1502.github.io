@@ -275,11 +275,9 @@ function YourPosition() {
   return (
     <div className="card yp-card">
       <h4 className="yp-title">Your Position</h4>
-      <div className="yp-grid">
-        <div><span className="k">Deposited</span><b>$0.00</b></div>
-        <div><span className="k">Current value</span><b>$0.00</b></div>
-        <div><span className="k">Earned</span><b className="pos">+$0.00</b></div>
-        <div><span className="k">P&amp;L</span><b className="pos">+0.00%</b></div>
+      <div className="yp-sum">
+        <b>$0.00</b>
+        <span className="pos">+$0.00 (+0.00%)</span>
       </div>
     </div>
   );

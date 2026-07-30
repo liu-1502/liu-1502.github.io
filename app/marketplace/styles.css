@@ -219,15 +219,13 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   }
 
   /* ---- Your Position ---- */
-  .yp-card { padding: 14px 16px; border: none; }
+  /* Your Position: title trái + số liệu phải, cùng 1 hàng ngang */
+  .yp-card { padding: 16px; border: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .yp-card:hover { transform: none; box-shadow: none; }
-  .yp-title { font-family: var(--font-display); font-weight: 620; font-size: 13px; margin: 0 0 10px; }
-  /* Hàng ngang: label bên trái, số liệu bên phải */
-  .yp-grid { display: flex; flex-direction: column; gap: 7px; }
-  .yp-grid > div { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .yp-grid .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
-  .yp-grid b { font-family: var(--font-mono); font-weight: 500; font-size: 12.5px; }
-  .yp-grid b.pos { color: var(--good); }
+  .yp-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0; }
+  .yp-sum { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  .yp-sum b { font-family: var(--font-mono); font-weight: 600; font-size: 16px; letter-spacing: -0.02em; }
+  .yp-sum .pos { font-family: var(--font-mono); font-weight: 500; font-size: 13px; color: var(--good); white-space: nowrap; }
 
   /* ---- Detail (cột phải): mỗi section là 1 card riêng ---- */
   .mkt-detail { background: transparent; border: none; border-radius: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
