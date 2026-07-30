@@ -234,10 +234,9 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .yp-grid b { font-family: var(--font-mono); font-weight: 600; font-size: 17px; }
   .yp-grid b.pos { color: var(--good); }
 
-  /* ---- Detail card (cột phải) ---- */
-  .mkt-detail { background: var(--surface); border: none; border-radius: 20px; padding: 0 22px; }
-  .vd-sec { padding: 20px 0; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
-  .vd-sec:first-child { border-top: none; }
+  /* ---- Detail (cột phải): mỗi section là 1 card riêng ---- */
+  .mkt-detail { background: transparent; border: none; border-radius: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  .vd-sec { padding: 22px; border-top: none; background: var(--surface); border-radius: 20px; }
   .vd-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 12px; }
   .vd-desc { margin: 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
 
