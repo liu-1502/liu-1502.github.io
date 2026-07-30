@@ -9,6 +9,9 @@ const RATES: RateMap = {
   yzcash: { deposit: { rate: 1, dp: 1, rp: 1 }, withdraw: { rate: 1, dp: 1, rp: 1 } },
 };
 
+/* Mật khẩu cổng vào vault (demo, kiểm tra phía client). ĐỔI giá trị này khi cần. */
+const GATE_PASSWORD = "yuzu2026";
+
 export default function MarketplaceClient() {
   useExchangePanels(RATES);
 
@@ -35,12 +38,54 @@ export default function MarketplaceClient() {
       });
     };
 
+    /* ---- Cổng mật khẩu: bấm Deposit -> hiện dialog, đúng pass mới vào ---- */
+    const gate = document.querySelector<HTMLElement>("[data-gate]");
+    const gateInput = gate?.querySelector<HTMLInputElement>("[data-gate-input]");
+    const gateErr = gate?.querySelector<HTMLElement>("[data-gate-err]");
+    let pendingVault = "yzsyrup";
+
+    const openGate = (key: string) => {
+      pendingVault = key;
+      if (!gate) return;
+      gate.hidden = false;
+      gateErr?.setAttribute("hidden", "");
+      if (gateInput) gateInput.value = "";
+      document.body.style.overflow = "hidden";
+      window.setTimeout(() => gateInput?.focus(), 30);
+    };
+    const closeGate = () => {
+      if (gate) gate.hidden = true;
+      document.body.style.overflow = "";
+    };
+    const tryUnlock = () => {
+      if ((gateInput?.value || "") === GATE_PASSWORD) {
+        closeGate();
+        selectVault(pendingVault);
+        show("exchange");
+      } else {
+        gateErr?.removeAttribute("hidden");
+        gateInput?.focus();
+        gateInput?.select();
+      }
+    };
+    const onGate = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest("[data-gate-close]")) closeGate();
+      else if (t.closest("[data-gate-submit]")) tryUnlock();
+    };
+    const onGateKey = (e: KeyboardEvent) => {
+      if (!gate || gate.hidden) return;
+      if (e.key === "Enter") tryUnlock();
+      else if (e.key === "Escape") closeGate();
+    };
+    gate?.addEventListener("click", onGate);
+    document.addEventListener("keydown", onGateKey);
+
     const onDeposit = (e: MouseEvent) => {
       const b = (e.target as HTMLElement).closest<HTMLElement>(".vt-deposit");
       if (!b) return;
-      // Mở đúng vault chọn từ Overview rồi chuyển màn.
-      selectVault(b.getAttribute("data-vault") || "yzsyrup");
-      show("exchange");
+      // Yêu cầu mật khẩu trước khi mở vault details + form deposit.
+      openGate(b.getAttribute("data-vault") || "yzsyrup");
     };
     const onBack = (e: MouseEvent) => {
       if ((e.target as HTMLElement).closest("[data-mkt-back]")) show("overview");
@@ -90,6 +135,9 @@ export default function MarketplaceClient() {
       xc.removeEventListener("click", onBack);
       xc.removeEventListener("click", onRange);
       xc.removeEventListener("click", onCopy);
+      gate?.removeEventListener("click", onGate);
+      document.removeEventListener("keydown", onGateKey);
+      document.body.style.overflow = "";
     };
   }, []);
 

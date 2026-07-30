@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check, Lock } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -572,6 +572,20 @@ export default function Marketplace() {
         </div>
 
       </div>
+      </div>
+
+      {/* Dialog yêu cầu mật khẩu trước khi vào vault details + form deposit */}
+      <div className="mkt-gate" data-gate hidden>
+        <div className="mkt-gate-backdrop" data-gate-close />
+        <div className="mkt-gate-card" role="dialog" aria-modal="true" aria-label="Enter password">
+          <button type="button" className="mkt-gate-x" data-gate-close aria-label="Close"><X /></button>
+          <span className="mkt-gate-ic"><Lock /></span>
+          <h3>Password required</h3>
+          <p>This vault is access-protected. Enter the password to open the deposit form.</p>
+          <input type="password" className="mkt-gate-input" data-gate-input placeholder="Enter password" autoComplete="off" />
+          <div className="mkt-gate-err" data-gate-err hidden>Incorrect password. Please try again.</div>
+          <button type="button" className="btn btn-accent btn-block" data-gate-submit>Unlock</button>
+        </div>
       </div>
 
       <MarketplaceClient/>
