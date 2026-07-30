@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -28,6 +28,8 @@ const VAULTS = [
     ],
     research: "SyrupUSD Real-Time Asset Quality Monitor",
     researchUrl: "https://research.yuzu.money/syrup-monitor",
+    explorerUrl: "https://explorer.monad.xyz/address/0xc985...09b1",
+    debankUrl: "https://debank.com/",
     trailingApy: "10.215%",
     priceStart: 1.005, dailyGrowth: 0.00018,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Up to 3 days" },
@@ -52,6 +54,8 @@ const VAULTS = [
     ],
     research: "yzCash Reserve Attestation (live)",
     researchUrl: "https://research.yuzu.money/cash-monitor",
+    explorerUrl: "https://explorer.monad.xyz/address/0x224e...098d",
+    debankUrl: "https://debank.com/",
     trailingApy: "4.90%",
     priceStart: 1.002, dailyGrowth: 0.000131,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Instant" },
@@ -158,6 +162,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
       <section className="vd-sec">
         <div className="vd-head"><span className="vt-logo"><img src={v.logo} alt="" /></span>
           <div><h3>{v.name}</h3><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.riskLabel} Risk</span></div>
+          <a className="vd-ext" href={v.researchUrl} target="_blank" rel="noopener noreferrer" aria-label={`${v.name} research`}><ExternalLink /></a>
         </div>
         <p className="vd-desc">{v.tagline}</p>
         <div className="vd-stats">
@@ -196,14 +201,6 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         </details>
       </section>
 
-      {/* Research */}
-      <section className="vd-sec">
-        <h4 className="vd-title">Research</h4>
-        <a className="vd-research" href={v.researchUrl} target="_blank" rel="noopener noreferrer">
-          <span>{v.research}</span><ArrowUpRight />
-        </a>
-      </section>
-
       {/* Historical Performance */}
       <section className="vd-sec vd-chart-sec">
         <div className="vd-chart-head">
@@ -228,19 +225,37 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         </div>
       </section>
 
-      {/* Security */}
+      {/* Smart Contracts */}
       <section className="vd-sec">
-        <h4 className="vd-title">Security &amp; other info</h4>
-        <div className="vd-sec-list">
-          {SECURITY.map((s) => (
-            <div className="vd-partner" key={s.name}><img src={s.logo} alt="" /><div><b>{s.name}</b><small>{s.role}</small></div></div>
-          ))}
+        <div className="vd-sc-head">
+          <h4 className="vd-title">Smart Contracts</h4>
+          <span className="vd-chainbadge"><img src={v.chainIcon} alt="" />{v.chain}</span>
         </div>
-        <div className="vd-contract">
-          <div><span className="k">Chain</span><span className="v">{v.chain}</span></div>
-          <div><span className="k">{v.contractName}</span><span className="v mono">{v.addr}</span></div>
+        <div className="vd-info">
+          <div>
+            <span className="k">{v.contractName}</span>
+            <span className="v vd-sc-addr"><span className="mono">{v.addr}</span>
+              <a className="vd-sc-ic" href={v.explorerUrl} target="_blank" rel="noopener noreferrer" aria-label="View on explorer"><ExternalLink /></a>
+            </span>
+          </div>
+          <div>
+            <span className="k">Debank Bundled Wallets</span>
+            <a className="v vd-sc-view" href={v.debankUrl} target="_blank" rel="noopener noreferrer">View <ExternalLink /></a>
+          </div>
         </div>
       </section>
+
+      {/* Security — Proof of Reserves (giống Home), nằm cuối */}
+      <a className="vd-por" href="/transparency/" aria-label="Proof of Reserves">
+        <div className="vd-por-lead">
+          <span className="vd-por-shield"><ShieldCheck /></span>
+          <div><b>Proof of Reserves</b><span>Independent third-party verification of the protocol&apos;s backing assets.</span></div>
+        </div>
+        <div className="vd-por-marks">
+          {SECURITY.map((s) => <img key={s.name} src={s.logo} alt={s.name} />)}
+          <span className="vd-por-arr">→</span>
+        </div>
+      </a>
     </div>
   );
 }
