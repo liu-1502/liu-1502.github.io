@@ -10,6 +10,12 @@ body.p-prime { --bg: color-mix(in srgb, var(--prime) 3.5%, #FDFCF8); }
 /* Nhân đôi class -> specificity cao hơn rule xanh của Alpha (:is(.pg-alpha,.pg-prime))
    nên luôn thắng dù thứ tự load CSS đổi khi điều hướng client-side. */
 .pg-prime.pg-prime {
+  /* Detail panel: đổi accent xanh (Alpha) -> nâu (Prime) */
+  .vd-stats b.hi { color: var(--prime); }
+  .vd-info .v.hi { color: var(--prime); }
+  .vd-por:hover { box-shadow: 0 10px 34px color-mix(in srgb, var(--prime) 10%, transparent); }
+  .vd-por-shield { color: var(--prime); background: color-mix(in srgb, var(--prime) 16%, var(--surface)); }
+
   --pr-ink: #3A2A06;                                        /* thay #142F04 (chữ đậm) */
   --pr-card: color-mix(in srgb, var(--prime) 16%, #FBFAF3); /* thay #E2ECD8 (nền card) */
   --pr-toggle: color-mix(in srgb, var(--prime) 15%, #fff);  /* thay #EBF0E7 (toggle/selected) */

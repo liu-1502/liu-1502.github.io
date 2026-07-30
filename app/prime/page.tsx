@@ -2,9 +2,8 @@ import Link from "next/link";
 import "../alpha/styles.css";
 import "./styles.css";   /* override màu nâu cho Prime, load sau alpha styles */
 import PrimeClient from "./PrimeClient";
-import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ShieldCheck } from "lucide-react";
 
 export const metadata = pageMetadata("/prime");
 
@@ -100,41 +99,9 @@ export default function Prime() {
 
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
-        {/* Nút About Prime: góc phải trên content, canh phải như Connect Wallet */}
-        <div className="about-wrap">
-          <button className="about-btn" data-about-toggle aria-expanded="false"><CircleHelp className="ico" /> About</button>
-          <div className="about-menu" data-about-menu hidden>
-            <div className="aside-head">
-              <h3 className="aside-title">About yzPrime</h3>
-              <button className="aside-close" data-about-close aria-label="Close details"><X /></button>
-            </div>
-            <div className="tk-strip aside-marks">
-              <img src="/assets/tokens/yzPrime.svg" alt="yzPrime" />
-              <img src="/assets/tokens/usdc.svg" alt="USDC" />
-            </div>
-            <div className="aside-card">
-              <h4>Mandate & NAV</h4>
-              <p>yzPrime accrues continuously at NAV under a public asset-whitelist mandate — tokenized T-Bills, AAA CLOs and overcollateralized lending. No epochs, no lockups.</p>
-              <div className="rows">
-                <div><span className="k">Prevailing NAV</span><span className="v" style={{ color: "var(--prime)" }}>$1.01243</span></div>
-                <div><span className="k">Yield accrual</span><span className="v">Continuous, no epochs</span></div>
-                <div><span className="k">Mandate</span><span className="v">Asset whitelist, public</span></div>
-                <div><span className="k">Network</span><span className="v">Monad</span></div>
-              </div>
-            </div>
-            <div className="aside-card">
-              <h4>Backing, verified live</h4>
-              <p>Assets and liabilities are attested in near real time by Accountable. Check the backing before and after you mint.</p>
-              <div className="rows">
-                <div><span className="k">Assets / liabilities</span><span className="v" style={{ color: "var(--good)" }}>100.28%</span></div>
-                <div><span className="k">Collateral</span><span className="v">100% onchain</span></div>
-                <div><span className="k">Proof of reserves</span><span className="v" style={{ color: "var(--good)" }}><Link href="/transparency" style={{ color: "inherit", textDecoration: "none" }}>Live →</Link></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="xchg rv">
+          <div className="av-grid">
+          <div className="av-left">
 
           {/* ============ yzPrime ============ */}
           <div className="xchg-body" data-panel="prime">
@@ -151,11 +118,6 @@ export default function Prime() {
                 <Field label="You receive" sym="yzPrime" symLabel="yzPrime" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
-              <MetaRows rows={[
-                { k: "Yield accrual", v: "Continuous, no epochs", hi: true },
-                { k: "Mandate", v: "Asset whitelist, public" },
-                { k: "Network", v: "Monad" },
-              ]} />
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -164,9 +126,6 @@ export default function Prime() {
                 <Field label="You receive" sym="usdc" symLabel="USDC" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
-              <MetaRows rows={[
-                { k: "Settlement", v: "Per program rules" },
-              ]} />
             </div>
           </div>
 
@@ -180,6 +139,65 @@ export default function Prime() {
               <OrderItem kind="mint" label="Mint yzPrime" addr="0xeED43…AbbA" amount="$10,000.00" status="pending" />
             </div>
           </details>
+          </div>{/* .av-left */}
+
+          <div className="av-right">
+            <div className="av-detail">
+              {/* Overview */}
+              <section className="vd-sec">
+                <div className="vd-head">
+                  <span className="vt-logo"><img src="/assets/tokens/yzPrime.svg" alt="" /></span>
+                  <div className="vd-head-main">
+                    <div className="vd-head-top"><h3>yzPrime</h3></div>
+                    <p className="vd-desc">Continuously-accruing prime yield token at NAV, under a public asset-whitelist mandate.</p>
+                  </div>
+                </div>
+                <div className="vd-stats">
+                  <div><span className="k">NAV</span><b className="hi">$1.01243</b></div>
+                  <div><span className="k">Backing</span><b className="good">100.28%</b></div>
+                  <div><span className="k">Network</span><b><img className="vd-stat-ic" src="/assets/chains/monad.svg" alt="" />Monad</b></div>
+                </div>
+              </section>
+
+              {/* Details */}
+              <section className="vd-sec">
+                <h4 className="vd-title">Details</h4>
+                <div className="vd-info">
+                  <div><span className="k">Prevailing NAV</span><span className="v hi">$1.01243</span></div>
+                  <div><span className="k">Yield accrual</span><span className="v">Continuous, no epochs</span></div>
+                  <div><span className="k">Mandate</span><span className="v">Asset whitelist, public</span></div>
+                  <div><span className="k">Settlement</span><span className="v">Per program rules</span></div>
+                  <div><span className="k">Network</span><span className="v">Monad</span></div>
+                </div>
+              </section>
+
+              {/* Backing */}
+              <section className="vd-sec">
+                <h4 className="vd-title">Backing, verified live</h4>
+                <p className="vd-desc">Assets and liabilities are attested in near real time by Accountable. Check the backing before and after you mint.</p>
+                <div className="vd-info">
+                  <div><span className="k">Assets / liabilities</span><span className="v">100.28%</span></div>
+                  <div><span className="k">Collateral</span><span className="v">100% onchain</span></div>
+                </div>
+              </section>
+            </div>
+
+            {/* Proof of Reserves */}
+            <a className="vd-por" href="/transparency/" aria-label="Proof of Reserves">
+              <div className="vd-por-lead">
+                <span className="vd-por-shield"><ShieldCheck /></span>
+                <div><b>Proof of Reserves</b><span>Independent third-party verification of the protocol&apos;s backing assets.</span></div>
+              </div>
+              <div className="vd-por-marks">
+                <img src="/assets/partners/accountable-fav.png" alt="Accountable" />
+                <img src="/assets/partners/hypernative-fav.png" alt="Hypernative" />
+                <img src="/assets/partners/fordefi-fav.png" alt="Fordefi" />
+                <img src="/assets/partners/chainlink-fav.png" alt="Chainlink" />
+                <span className="vd-por-arr">→</span>
+              </div>
+            </a>
+          </div>
+          </div>{/* .av-grid */}
         </div>
 
       </div>
