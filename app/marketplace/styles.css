@@ -220,10 +220,10 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* ---- Your Position ---- */
   /* Your Position: title trái + số liệu phải, cùng 1 hàng ngang */
-  .yp-card { padding: 16px; border: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .yp-card { padding: 16px; border: none; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
   .yp-card:hover { transform: none; box-shadow: none; }
   .yp-title { font-family: var(--font-body); font-weight: 500; font-size: 16px; color: #262626; margin: 0; }
-  .yp-sum { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; min-width: 0; }
+  .yp-sum { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
   .yp-sum b { font-family: var(--font-mono); font-weight: 600; font-size: 15px; letter-spacing: -0.04em; }
   .yp-sum .pos { font-family: var(--font-mono); font-weight: 500; font-size: 12.5px; letter-spacing: -0.03em; color: var(--good); white-space: nowrap; }
 
