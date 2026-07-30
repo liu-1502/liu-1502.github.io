@@ -192,6 +192,20 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         <RangeChart v={v} />
       </section>
 
+      {/* Vault info */}
+      <section className="vd-sec">
+        <h4 className="vd-title">Vault info</h4>
+        <div className="vd-info">
+          <div><span className="k">Chain</span><span className="v">{v.chain}</span></div>
+          <div><span className="k">Deposit fee</span><span className="v">None</span></div>
+          <div><span className="k">Performance fee</span><span className="v">{v.fees.perf}</span></div>
+          <div><span className="k">Management fee</span><span className="v">{v.fees.mgmt}</span></div>
+          <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
+          <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
+          <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
+        </div>
+      </section>
+
       {/* Strategy */}
       <section className="vd-sec">
         <details className="vd-stepper">
@@ -219,18 +233,6 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
             ))}
           </div>
         </details>
-      </section>
-
-      {/* Vault info */}
-      <section className="vd-sec">
-        <h4 className="vd-title">Vault info</h4>
-        <div className="vd-info">
-          <div><span className="k">Performance fee</span><span className="v">{v.fees.perf}</span></div>
-          <div><span className="k">Management fee</span><span className="v">{v.fees.mgmt}</span></div>
-          <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
-          <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
-          <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
-        </div>
       </section>
 
       {/* Smart Contracts */}
@@ -500,10 +502,6 @@ export default function Marketplace() {
                 <Field label="You receive" sym="yzSyrup" symLabel="yzSyrup" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
-              <MetaRows rows={[
-                { k: "Chain", v: "Monad" },
-                { k: "Deposit fee", v: "None" },
-              ]} />
             </div>
             <div data-dirpanel="withdraw" style={{ display: "none" }}>
               <div className="mfields">
@@ -536,7 +534,6 @@ export default function Marketplace() {
               <button className="btn btn-accent btn-block">Connect Wallet</button>
               <MetaRows rows={[
                 { k: "Liquidity", v: "Instant" },
-                { k: "Deposit fee", v: "None" },
               ]} />
             </div>
             <div data-dirpanel="withdraw" style={{ display: "none" }}>
