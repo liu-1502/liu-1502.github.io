@@ -51,8 +51,8 @@
   .av-left { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
   .av-right { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
   .av-detail { display: flex; flex-direction: column; gap: 16px; }
-  /* Tabs canh giữa theo cột form trái (480px) */
-  #alphaTabs { width: 480px; max-width: 100%; }
+  /* Tabs canh giữa theo chiều ngang content */
+  #alphaTabs { justify-content: center; }
 
   /* ---- Detail sections (giống cột phải Marketplace) ---- */
   .vd-sec { padding: 22px; background: var(--surface); border-radius: 20px; }
