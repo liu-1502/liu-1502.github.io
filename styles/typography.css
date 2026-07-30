@@ -27,6 +27,11 @@ body.p-mkt   { --topbar-accent: var(--mkt); }
 .mode-switch button.on { background: color-mix(in srgb, var(--topbar-accent) 14%, transparent); color: var(--topbar-accent); }
 .chain-btn .caret { width: 14px; height: 14px; color: var(--faint); }
 .topbar .btn-solid { min-height: 36px; padding: 6px 16px; }
+/* Đồng bộ chiều cao các nút topbar = 36px */
+.topbar .chain-btn, .topbar .theme-btn, .topbar .mode-switch, .topbar .right .btn-solid { height: 36px; box-sizing: border-box; }
+.topbar .mode-switch { align-items: center; }
+.topbar .theme-btn { width: 36px; height: 36px; }
+.topbar .right .btn-solid { min-height: 0; }
 /* Giảm padding trái topbar để icon collapse sát divider (viền sidebar) hơn */
 .topbar { padding-left: 14px; }
 

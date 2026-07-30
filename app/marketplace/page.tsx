@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check, Lock } from "lucide-react";
+import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check, Lock, Eye, EyeOff, AlertTriangle } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -192,18 +192,25 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         <RangeChart v={v} />
       </section>
 
-      {/* Vault info */}
+      {/* Vault info (collapse mặc định, bấm để mở) */}
       <section className="vd-sec">
-        <h4 className="vd-title">Vault info</h4>
-        <div className="vd-info">
-          <div><span className="k">Chain</span><span className="v">{v.chain}</span></div>
-          <div><span className="k">Deposit fee</span><span className="v">None</span></div>
-          <div><span className="k">Performance fee</span><span className="v">{v.fees.perf}</span></div>
-          <div><span className="k">Management fee</span><span className="v">{v.fees.mgmt}</span></div>
-          <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
-          <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
-          <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
-        </div>
+        <details className="vd-stepper">
+          <summary className="vd-strat-summary">
+            <div className="vd-strat-head">
+              <h4 className="vd-title">Vault info</h4>
+              <ChevronDown className="vd-stepcaret" />
+            </div>
+          </summary>
+          <div className="vd-info">
+            <div><span className="k">Chain</span><span className="v">{v.chain}</span></div>
+            <div><span className="k">Deposit fee</span><span className="v">None</span></div>
+            <div><span className="k">Performance fee</span><span className="v">{v.fees.perf}</span></div>
+            <div><span className="k">Management fee</span><span className="v">{v.fees.mgmt}</span></div>
+            <div><span className="k">Withdrawal fee</span><span className="v">{v.fees.wfee}</span></div>
+            <div><span className="k">Withdrawal</span><span className="v">{v.fees.wtime}</span></div>
+            <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
+          </div>
+        </details>
       </section>
 
       {/* Strategy */}
@@ -582,9 +589,15 @@ export default function Marketplace() {
           <span className="mkt-gate-ic"><Lock /></span>
           <h3>Password required</h3>
           <p>This vault is access-protected. Enter the password to open the deposit form.</p>
-          <input type="password" className="mkt-gate-input" data-gate-input placeholder="Enter password" autoComplete="off" />
+          <div className="mkt-gate-field">
+            <input type="text" className="mkt-gate-input" data-gate-input placeholder="Enter password" autoComplete="off" autoCapitalize="off" autoCorrect="off" spellCheck={false} inputMode="text" />
+            <div className="mkt-gate-actions">
+              <span className="mkt-gate-warn" aria-hidden="true"><AlertTriangle /></span>
+              <button type="button" className="mkt-gate-eye" data-gate-eye aria-label="Show password"><Eye className="ic-show" /><EyeOff className="ic-hide" /></button>
+            </div>
+          </div>
           <div className="mkt-gate-err" data-gate-err hidden>Incorrect password. Please try again.</div>
-          <button type="button" className="btn btn-accent btn-block" data-gate-submit>Unlock</button>
+          <button type="button" className="btn btn-solid btn-block" data-gate-submit>Confirm</button>
         </div>
       </div>
 

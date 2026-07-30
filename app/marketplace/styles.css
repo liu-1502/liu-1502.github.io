@@ -278,6 +278,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-research svg { width: 16px; height: 16px; color: var(--mkt); flex: none; }
 
   /* ---- Vault info (rows label trái / value phải, có divider) ---- */
+  .vd-stepper > .vd-info { margin-top: 8px; }
   .vd-info { display: flex; flex-direction: column; }
   .vd-info > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid color-mix(in srgb, var(--text) 7%, transparent); font-size: 13.5px; }
   .vd-info > div:last-child { border-bottom: none; padding-bottom: 0; }
@@ -365,24 +366,42 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
     .mkt-grid { display: grid; }
   }
 
-  /* ---- Dialog mật khẩu (cổng vào vault) ---- */
-  .mkt-gate { position: fixed; inset: 0; z-index: 999; display: grid; place-items: center; padding: 20px; }
-  .mkt-gate[hidden] { display: none; }
-  .mkt-gate-backdrop { position: absolute; inset: 0; background: color-mix(in srgb, #14211A 50%, transparent); backdrop-filter: blur(2px); }
-  .mkt-gate-card { position: relative; z-index: 1; width: 100%; max-width: 380px; background: var(--surface); border-radius: 20px; padding: 28px 26px 24px; box-shadow: 0 24px 70px rgba(20, 33, 26, .28); text-align: center; }
-  .mkt-gate-x { all: unset; position: absolute; top: 14px; right: 14px; cursor: pointer; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; color: var(--muted); transition: background .15s ease, color .15s ease; }
-  .mkt-gate-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); color: var(--text); }
-  .mkt-gate-x svg { width: 18px; height: 18px; }
-  .mkt-gate-ic { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: color-mix(in srgb, var(--mkt) 12%, transparent); color: var(--mkt); margin-bottom: 14px; }
-  .mkt-gate-ic svg { width: 24px; height: 24px; }
-  .mkt-gate-card h3 { font-family: var(--font-display); font-weight: 640; font-size: 18px; margin: 0 0 6px; }
-  .mkt-gate-card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0 0 18px; }
-  .mkt-gate-input { width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: var(--r-md); border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); background: var(--surface); font-family: var(--font-body); font-size: 15px; color: var(--text); outline: none; transition: border-color .15s ease; }
-  .mkt-gate-input:focus { border-color: var(--mkt); }
-  .mkt-gate-err { color: #DC2626; font-size: 12.5px; margin-top: 8px; text-align: left; }
-  .mkt-gate-err[hidden] { display: none; }
-  .mkt-gate-card .btn.btn-block { margin-top: 16px; background: var(--mkt); }
 }
+
+/* ---- Dialog mật khẩu (cổng vào vault) — GLOBAL vì modal được đưa ra <body> ---- */
+.mkt-gate { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; }
+.mkt-gate[hidden] { display: none; }
+.mkt-gate-backdrop { position: absolute; inset: 0; background: color-mix(in srgb, #14211A 50%, transparent); backdrop-filter: blur(2px); }
+.mkt-gate-card { position: relative; z-index: 1; width: 100%; max-width: 380px; background: var(--surface); border-radius: 20px; padding: 28px 26px 24px; box-shadow: 0 24px 70px rgba(20, 33, 26, .28); text-align: center; }
+.mkt-gate-x { all: unset; position: absolute; top: 14px; right: 14px; cursor: pointer; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; color: var(--muted); transition: background .15s ease, color .15s ease; }
+.mkt-gate-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); color: var(--text); }
+.mkt-gate-x svg { width: 18px; height: 18px; }
+.mkt-gate-ic { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: color-mix(in srgb, var(--mkt) 12%, transparent); color: var(--mkt); margin-bottom: 14px; }
+.mkt-gate-ic svg { width: 24px; height: 24px; }
+.mkt-gate-card h3 { font-family: var(--font-display); font-weight: 640; font-size: 18px; margin: 0 0 6px; }
+.mkt-gate-card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0 0 18px; }
+.mkt-gate-field { position: relative; }
+.mkt-gate-input { width: 100%; box-sizing: border-box; height: 48px; padding: 0 50px 0 14px; border-radius: var(--r-md); border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); background: var(--surface); font-family: var(--font-body); font-size: 15px; color: var(--text); outline: none; transition: border-color .15s ease; }
+.mkt-gate-input:focus { border-color: var(--mkt); }
+/* Bullet to & tròn khi đang che (không đụng text rõ / placeholder) */
+.mkt-gate-input.dots { font-size: 20px; letter-spacing: 1.5px; }
+/* Trạng thái sai: viền đỏ + chừa chỗ icon cảnh báo */
+.mkt-gate-field.error .mkt-gate-input,
+.mkt-gate-field.error .mkt-gate-input:focus { border-color: #DC2626; }
+.mkt-gate-field.error .mkt-gate-input { padding-right: 76px; }
+.mkt-gate-actions { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 4px; }
+.mkt-gate-warn { display: none; place-items: center; width: 24px; height: 24px; color: #DC2626; }
+.mkt-gate-field.error .mkt-gate-warn { display: grid; }
+.mkt-gate-warn svg { width: 19px; height: 19px; }
+.mkt-gate-eye { all: unset; cursor: pointer; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: var(--faint); transition: color .15s ease; }
+.mkt-gate-eye:hover { color: var(--muted); }
+.mkt-gate-eye svg { width: 18px; height: 18px; }
+.mkt-gate-eye .ic-hide { display: none; }
+.mkt-gate-eye.revealed .ic-show { display: none; }
+.mkt-gate-eye.revealed .ic-hide { display: block; }
+.mkt-gate-err { color: #DC2626; font-size: 12.5px; margin-top: 8px; text-align: left; }
+.mkt-gate-err[hidden] { display: none; }
+.mkt-gate-card .btn.btn-block { margin-top: 16px; height: 40px; justify-content: center; }
 
 /* ===================== DARK MODE (Marketplace) ===================== */
 :root[data-theme="dark"] body.p-mkt { --bg: color-mix(in srgb, var(--mkt) 7%, #0A0E16); }
