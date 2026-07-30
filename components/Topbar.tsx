@@ -6,7 +6,6 @@ import Link from "next/link";
 import { PanelLeft, Menu, LogOut } from "lucide-react";
 import Button from "./ui/Button";
 import Logo from "./Logo";
-import ModeSwitch from "./topbar/ModeSwitch";
 import ChainSelector from "./topbar/ChainSelector";
 import ThemeToggle from "./topbar/ThemeToggle";
 import WalletModal from "./topbar/WalletModal";
@@ -122,7 +121,6 @@ export default function Topbar() {
         <Logo />
       </Link>
       <div className="right">
-        <ModeSwitch />
         <ChainSelector />
         <ThemeToggle />
         {wallet ? (

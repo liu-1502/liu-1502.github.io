@@ -9,10 +9,6 @@
 /* Page background: xanh dương rất nhạt (chỉ trang Marketplace, theo class body). */
 body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
-/* Marketplace: bỏ switch LITE/PRO trên topbar và nền bong bóng bay */
-body.p-mkt .mode-switch { display: none; }
-body.p-mkt #liquidBg { display: none; }
-
 .pg-marketplace.pg-marketplace {
   --mk-ink: #23265E;                                       /* chữ đậm (thay #142F04) */
   --mk-card: color-mix(in srgb, var(--mkt) 12%, #F6F8FE);  /* nền card (thay #E2ECD8) */

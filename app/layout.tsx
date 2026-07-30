@@ -11,7 +11,6 @@ import "../styles/typography.css";
 import "../styles/wallet.css";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
-import LiquidBackground from "@/components/LiquidBackground";
 import YuzuClient from "@/components/YuzuClient";
 import { STORAGE_KEYS } from "@/lib/constants";
 
@@ -46,7 +45,6 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: noFlash }} />
       </head>
       <body>
-        <LiquidBackground />
         <div className="shell">
           <Sidebar />
           <div className="maincol">

@@ -18,7 +18,6 @@ import {
   Store,
 } from "lucide-react";
 import Logo from "./Logo";
-import ModeSwitch from "./topbar/ModeSwitch";
 import ThemeToggle from "./topbar/ThemeToggle";
 import { pageMeta } from "@/lib/pages";
 import { closeMobileNav } from "@/lib/mobileNav";
@@ -178,7 +177,6 @@ export default function Sidebar() {
 
         {/* Controls (mobile-only): mode + theme dồn vào sheet; chain nằm ở topbar */}
         <div className="side-controls">
-          <ModeSwitch />
           <ThemeToggle />
         </div>
       </aside>
