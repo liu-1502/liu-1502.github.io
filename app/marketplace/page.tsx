@@ -65,7 +65,7 @@ const VAULTS = [
     debankUrl: "https://debank.com/bundles/223157/accounts/",
     trailingApy: "4.90%",
     price: 1.0000, dailyGrowth: 0.000131,
-    fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Instant" },
+    fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "24H" },
     position: { value: "$10,490.00", earned: "+$490.00", pnl: "+4.90%" },
     orders: [
       { kind: "mint", label: "Deposit yzCash", addr: "0x9A2f1…C4dE", amount: "$2,400.00", status: "completed" },
