@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import MarketplaceClient from "./MarketplaceClient";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, CircleHelp, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check, Lock, Eye, EyeOff, AlertTriangle } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check, Lock, Eye, EyeOff, AlertTriangle } from "lucide-react";
 
 /* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
 const VAULTS = [
@@ -33,6 +33,12 @@ const VAULTS = [
     trailingApy: "8.53%",
     price: 1.0192, dailyGrowth: 0.000224,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Up to 3 days" },
+    position: { value: "$10,850.00", earned: "+$850.00", pnl: "+8.50%" },
+    orders: [
+      { kind: "mint", label: "Deposit yzSyrup", addr: "0x71bC8…9Ae0", amount: "$3,000.00", status: "completed" },
+      { kind: "redeem", label: "Withdraw yzSyrup", addr: "0x3F2a1…7bC2", amount: "$1,500.00", status: "completed" },
+      { kind: "mint", label: "Deposit yzSyrup", addr: "0xeED43…AbbA", amount: "$8,000.00", status: "pending" },
+    ],
     contractName: "yzSyrup Vault",
     contractChain: "Ethereum", contractChainIcon: "/assets/chains/ethereum.svg",
   },
@@ -60,6 +66,12 @@ const VAULTS = [
     trailingApy: "4.90%",
     price: 1.0000, dailyGrowth: 0.000131,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Instant" },
+    position: { value: "$10,490.00", earned: "+$490.00", pnl: "+4.90%" },
+    orders: [
+      { kind: "mint", label: "Deposit yzCash", addr: "0x9A2f1…C4dE", amount: "$2,400.00", status: "completed" },
+      { kind: "redeem", label: "Withdraw yzCash", addr: "0x5B8e3…11Fa", amount: "$1,200.00", status: "completed" },
+      { kind: "mint", label: "Deposit yzCash", addr: "0xC7d90…4e21", amount: "$5,000.00", status: "pending" },
+    ],
     contractName: "yzCash Vault",
     contractChain: "Ethereum", contractChainIcon: "/assets/chains/ethereum.svg",
   },
@@ -181,18 +193,6 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         </div>
       </section>
 
-      {/* Historical Performance */}
-      <section className="vd-sec vd-chart-sec">
-        <div className="vd-chart-head">
-          <div>
-            <h4 className="vd-title">Historical Performance</h4>
-            <span className="vd-chart-sub">Historical vault receipt token price</span>
-          </div>
-          <div className="vd-apy-badge"><b>{v.trailingApy}</b><span>7D trailing APY</span></div>
-        </div>
-        <RangeChart v={v} />
-      </section>
-
       {/* Vault info */}
       <section className="vd-sec">
         <h4 className="vd-title">Vault info</h4>
@@ -203,6 +203,18 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
           <div><span className="k">Withdrawal time</span><span className="v">{v.fees.wtime}</span></div>
           <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
         </div>
+      </section>
+
+      {/* Historical Performance */}
+      <section className="vd-sec vd-chart-sec">
+        <div className="vd-chart-head">
+          <div>
+            <h4 className="vd-title">Historical Performance</h4>
+            <span className="vd-chart-sub">Historical vault receipt token price</span>
+          </div>
+          <div className="vd-apy-badge"><b>{v.trailingApy}</b><span>7D trailing APY</span></div>
+        </div>
+        <RangeChart v={v} />
       </section>
 
       {/* Strategy */}
@@ -272,14 +284,32 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
 
 /* Vị thế của user (tĩnh, demo — chưa connect ví). */
 /* Chỉ hiển thị khi user đã connect ví — ở đây dùng dữ liệu demo (giả lập đã connect). */
-function YourPosition() {
+function YourPosition({ v }: { v: (typeof VAULTS)[number] }) {
   return (
     <div className="card yp-card">
       <h4 className="yp-title">Your Position</h4>
       <div className="yp-sum">
-        <b>$10,850.00</b>
-        <span className="pos">+$850.00 (+8.50%)</span>
+        <b>{v.position.value}</b>
+        <span className="pos">{v.position.earned} ({v.position.pnl})</span>
       </div>
+    </div>
+  );
+}
+
+/* Cụm Position + Today Order theo từng vault (đổi cùng lúc với form/chi tiết). */
+function VaultAside({ v }: { v: (typeof VAULTS)[number] }) {
+  return (
+    <div className="vault-aside" data-panel={v.key} style={v.key === VAULTS[0].key ? undefined : { display: "none" }}>
+      <YourPosition v={v} />
+      <details className="acc ohist" open>
+        <summary>Today Order</summary>
+        <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="mint">Deposit</button><button className="ofilter" data-filter="redeem">Withdraw</button></div>
+        <div className="olist">
+          {v.orders.map((o, i) => (
+            <OrderItem key={i} kind={o.kind as "mint" | "redeem"} label={o.label} addr={o.addr} amount={o.amount} status={o.status as "completed" | "pending"} />
+          ))}
+        </div>
+      </details>
     </div>
   );
 }
@@ -447,41 +477,6 @@ export default function Marketplace() {
 
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
-        {/* Nút About Marketplace: góc phải trên content, canh phải như Connect Wallet */}
-        <div className="about-wrap">
-          <button className="about-btn" data-about-toggle aria-expanded="false"><CircleHelp className="ico" /> About</button>
-          <div className="about-menu" data-about-menu hidden>
-            <div className="aside-head">
-              <h3 className="aside-title">About yzSyrup / yzCash</h3>
-              <button className="aside-close" data-about-close aria-label="Close details"><X /></button>
-            </div>
-            <div className="tk-strip aside-marks">
-              <img src="/assets/tokens/yzSyrup.svg" alt="yzSyrup" />
-              <img src="/assets/tokens/yzCash.svg" alt="yzCash" />
-            </div>
-            <div className="aside-card">
-              <h4>yzSyrup · Maple Syrup Lending</h4>
-              <p>Overcollateralized lending to KYC institutional borrowers through Maple Syrup, wrapped for Monad as a single yield-bearing token. Loans are secured by liquid digital assets, with recourse.</p>
-              <div className="rows">
-                <div><span className="k">APY</span><span className="v" style={{ color: "var(--mkt)" }}>8.53%</span></div>
-                <div><span className="k">Token price</span><span className="v">1 yzSyrup = $1.0192</span></div>
-                <div><span className="k">Chain</span><span className="v">Monad</span></div>
-                <div><span className="k">Redeem</span><span className="v">Open</span></div>
-              </div>
-            </div>
-            <div className="aside-card">
-              <h4>yzCash · Tokenized T-Bill Cash</h4>
-              <p>The U.S. sovereign rate, onchain. A cash-management token backed by tokenized T-Bills from leading issuers, with near-instant liquidity and no lockups. Park stables, earn the risk-free rate.</p>
-              <div className="rows">
-                <div><span className="k">APY</span><span className="v" style={{ color: "var(--mkt)" }}>4.90%</span></div>
-                <div><span className="k">Token price</span><span className="v">1 yzCash = $1.0000</span></div>
-                <div><span className="k">Liquidity</span><span className="v">Instant</span></div>
-                <div><span className="k">Redeem</span><span className="v">Open</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="xchg rv">
           <div className="mkt-vault-grid">
           <div className="mkt-vault-left">
@@ -530,9 +525,6 @@ export default function Marketplace() {
                 <Field label="You receive" sym="yzCash" symLabel="yzCash" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <button className="btn btn-accent btn-block">Connect Wallet</button>
-              <MetaRows rows={[
-                { k: "Liquidity", v: "Instant" },
-              ]} />
             </div>
             <div data-dirpanel="withdraw" style={{ display: "none" }}>
               <div className="mfields">
@@ -543,23 +535,13 @@ export default function Marketplace() {
               <button className="btn btn-accent btn-block">Connect Wallet</button>
               <MetaRows rows={[
                 { k: "Redemption", v: "Open" },
-                { k: "Liquidity", v: "Instant" },
               ]} />
             </div>
           </div>
 
-          <YourPosition />
-
-          {/* Order history */}
-          <details className="acc ohist" open>
-            <summary>Today Order</summary>
-            <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="mint">Deposit</button><button className="ofilter" data-filter="redeem">Withdraw</button></div>
-            <div className="olist">
-              <OrderItem kind="mint" label="Deposit yzSyrup" addr="0x71bC8…9Ae0" amount="$3,000.00" status="completed" />
-              <OrderItem kind="redeem" label="Withdraw yzCash" addr="0x9A2f1…C4dE" amount="$1,200.00" status="completed" />
-              <OrderItem kind="mint" label="Deposit yzSyrup" addr="0xeED43…AbbA" amount="$8,000.00" status="pending" />
-            </div>
-          </details>
+          {/* Position + Today Order theo từng vault (đổi theo vault đang chọn) */}
+          <VaultAside v={VAULTS[0]} />
+          <VaultAside v={VAULTS[1]} />
           </div>{/* .mkt-vault-left */}
 
           <div className="mkt-vault-right">
