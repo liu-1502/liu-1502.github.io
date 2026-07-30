@@ -177,7 +177,13 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vt-name small { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
 
   .vt-badge { flex: none; display: inline-flex; align-items: center; line-height: 1; font-family: var(--font-body); font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px; }
-  .vt-badge.leverage, .vt-badge.lending { color: #3E7B18; background: color-mix(in srgb, #3E7B18 9%, #fff); }
+  /* Badge liquidity trên card: nhãn thông tin -> màu trung tính (không ám chỉ tốt/xấu) */
+  .vt-badge.leverage, .vt-badge.lending { color: var(--muted); background: color-mix(in srgb, var(--text) 6%, transparent); }
+  /* Badge risk: màu theo mức rủi ro (low = xanh, moderate = hổ phách, cao = cam/đỏ) */
+  .vt-badge.risk.r1 { color: #3E7B18; background: color-mix(in srgb, #3E7B18 9%, #fff); }
+  .vt-badge.risk.r2 { color: #B4770A; background: color-mix(in srgb, #E0930C 13%, #fff); }
+  .vt-badge.risk.r3 { color: #C2570A; background: color-mix(in srgb, #E0670C 13%, #fff); }
+  .vt-badge.risk.r4 { color: #DC2626; background: color-mix(in srgb, #DC2626 10%, #fff); }
 
   .vt-type { color: var(--muted); }
   .vt-chain { white-space: nowrap; }

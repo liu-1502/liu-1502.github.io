@@ -181,7 +181,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
       <section className="vd-sec">
         <div className="vd-head"><span className="vt-logo"><img src={v.logo} alt="" /></span>
           <div className="vd-head-main">
-            <div className="vd-head-top"><h3>{v.name}</h3><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.riskLabel} Risk</span></div>
+            <div className="vd-head-top"><h3>{v.name}</h3><span className={`vt-badge risk r${v.risk}`}>{v.riskLabel} Risk</span></div>
             <p className="vd-desc">{v.tagline}</p>
           </div>
           <a className="vd-ext" href={v.researchUrl} target="_blank" rel="noopener noreferrer" aria-label={`${v.name} research`}><ExternalLink /></a>
