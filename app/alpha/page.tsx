@@ -97,12 +97,12 @@ const TOKENS = [
     key: "yzusd", name: "yzUSD", logo: "/assets/tokens/yzUSD.svg",
     badge: "Senior · Par stable",
     tagline: "Fully-backed 1:1 USD stablecoin, over-collateralized and attested live.",
-    stats: [ { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "110.82%", tone: "good" }, { k: "Network", v: "Plasma" } ],
+    stats: [ { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "110.82%", tone: "good" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
     info: [
       { k: "Rate", v: "1:1 at par" },
       { k: "Access", v: "Eligible Investors, KYC" },
       { k: "Alternative", v: "Swap on Curve, no KYC", hi: true },
-      { k: "Network", v: "Plasma" },
+      { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" },
     ],
     note: {
       title: "Backing, verified live",
@@ -135,13 +135,13 @@ const TOKENS = [
     key: "syzusd", name: "syzUSD", logo: "/assets/tokens/syzUSD.svg",
     badge: "Staked yield",
     tagline: "Staked yzUSD (ERC-4626) that accrues the weekly target yield.",
-    stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma" } ],
+    stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
     info: [
       { k: "Exchange rate", v: "1 yzUSD = 0.9361 syzUSD" },
       { k: "Weekly target yield", v: "7.75%", hi: true },
       { k: "Yield epoch", v: "Fri 04:00 → Fri 03:59 UTC" },
       { k: "Unstaking", v: "One step, near instant" },
-      { k: "Network", v: "Plasma" },
+      { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" },
     ],
     note: {
       title: "Composability",
@@ -163,8 +163,11 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
           </div>
         </div>
         <div className="vd-stats">
-          {t.stats.map((s) => (
-            <div key={s.k}><span className="k">{s.k}</span><b className={s.tone ?? ""}>{s.v}</b></div>
+          {t.stats.map((s: { k: string; v: string; tone?: string; icon?: string }) => (
+            <div key={s.k}>
+              <span className="k">{s.k}</span>
+              <b className={s.tone ?? ""}>{s.icon && <img className="vd-stat-ic" src={s.icon} alt="" />}{s.v}</b>
+            </div>
           ))}
         </div>
       </section>

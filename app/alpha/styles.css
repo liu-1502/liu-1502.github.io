@@ -66,7 +66,8 @@
   .vd-desc { margin: 3px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
   .vd-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
   .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: -0.2px; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
-  .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 20px; letter-spacing: -0.03em; }
+  .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 20px; letter-spacing: -0.03em; display: inline-flex; align-items: center; gap: 6px; }
+  .vd-stat-ic { width: 18px; height: 18px; border-radius: 50%; flex: none; }
   .vd-stats b.hi { color: #3E7B18; }
   .vd-stats b.good { color: var(--good); }
   .vd-title { font-family: var(--font-display); font-weight: 620; font-size: 15px; margin: 0 0 12px; }
