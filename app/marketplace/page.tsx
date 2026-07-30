@@ -30,8 +30,8 @@ const VAULTS = [
     researchUrl: "https://research.yuzu.money/syrup-monitor",
     explorerUrl: "https://explorer.monad.xyz/address/0xc985...09b1",
     debankUrl: "https://debank.com/bundles/223157/accounts/",
-    trailingApy: "10.215%",
-    priceStart: 1.005, dailyGrowth: 0.00018,
+    trailingApy: "8.53%",
+    price: 1.0192, dailyGrowth: 0.000224,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Up to 3 days" },
     contractName: "yzSyrup Vault",
     contractChain: "Ethereum", contractChainIcon: "/assets/chains/ethereum.svg",
@@ -58,7 +58,7 @@ const VAULTS = [
     explorerUrl: "https://explorer.monad.xyz/address/0x224e...098d",
     debankUrl: "https://debank.com/bundles/223157/accounts/",
     trailingApy: "4.90%",
-    priceStart: 1.002, dailyGrowth: 0.000131,
+    price: 1.0000, dailyGrowth: 0.000131,
     fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Instant" },
     contractName: "yzCash Vault",
     contractChain: "Ethereum", contractChainIcon: "/assets/chains/ethereum.svg",
@@ -81,12 +81,13 @@ const RANGES = [
   { key: "90d", label: "90D", n: 90 },
 ];
 
-function buildSeries(start: number, daily: number, n: number) {
-  return Array.from({ length: n }, (_, i) => start * Math.pow(1 + daily, i));
+/* n điểm KẾT THÚC ở giá hiện tại `price`, lùi về trước theo lãi kép daily. */
+function buildSeries(price: number, daily: number, n: number) {
+  return Array.from({ length: n }, (_, i) => price / Math.pow(1 + daily, n - 1 - i));
 }
 
-function Chart({ start, daily, n }: { start: number; daily: number; n: number }) {
-  const data = buildSeries(start, daily, n);
+function Chart({ price, daily, n }: { price: number; daily: number; n: number }) {
+  const data = buildSeries(price, daily, n);
   const min = Math.min(...data), max = Math.max(...data);
   const pad = (max - min) * 0.18 || 0.0001;
   const lo = min - pad, hi = max + pad;
@@ -95,7 +96,7 @@ function Chart({ start, daily, n }: { start: number; daily: number; n: number })
   const line = data.map((d, i) => (i ? "L" : "M") + px(i).toFixed(1) + " " + py(d).toFixed(1)).join(" ");
   const base = (CHART_H - C_PADB).toFixed(1);
   const area = `${line} L ${px(n - 1).toFixed(1)} ${base} L ${px(0).toFixed(1)} ${base} Z`;
-  const uid = `c${Math.round(start * 1e5)}-${n}`;
+  const uid = `c${Math.round(price * 1e5)}-${n}`;
   return (
     <div className="vd-chart-wrap">
       {/* Nhãn trục Y bằng HTML để giữ font cố định (không scale theo SVG) */}
@@ -147,7 +148,7 @@ function RangeChart({ v }: { v: (typeof VAULTS)[number] }) {
       <div className="vd-charts">
         {RANGES.map((r, i) => (
           <div className="vd-chartpanel" key={r.key} data-rangepanel={r.key} style={i === 0 ? undefined : { display: "none" }}>
-            <Chart start={v.priceStart} daily={v.dailyGrowth} n={r.n} />
+            <Chart price={v.price} daily={v.dailyGrowth} n={r.n} />
           </div>
         ))}
       </div>
