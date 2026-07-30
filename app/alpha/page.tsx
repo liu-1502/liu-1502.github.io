@@ -3,7 +3,6 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import MetaRows from "@/components/ui/MetaRows";
 import { ArrowUpDown, ArrowDownRight, ArrowUpRight } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
@@ -159,7 +158,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
         <div className="vd-head">
           <span className="vt-logo"><img src={t.logo} alt="" /></span>
           <div className="vd-head-main">
-            <div className="vd-head-top"><h3>{t.name}</h3><span className="vt-badge">{t.badge}</span></div>
+            <div className="vd-head-top"><h3>{t.name}</h3></div>
             <p className="vd-desc">{t.tagline}</p>
           </div>
         </div>
@@ -230,12 +229,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <Button block className="gcta">Connect wallet</Button>
-              <MetaRows rows={[
-                { k: "Rate", v: "1:1 at par" },
-                { k: "Access", v: "Eligible Investors, KYC" },
-                { k: "Alternative", v: "Swap on Curve, no KYC", hi: true },
-                { k: "Network", v: "Plasma" },
-              ]} />
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -244,11 +237,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <Button block className="gcta">Connect wallet</Button>
-              <MetaRows rows={[
-                { k: "Rate", v: "1:1 at par" },
-                { k: "Access", v: "Eligible Investors, KYC" },
-                { k: "Alternative", v: "Swap on Curve, no KYC", hi: true },
-              ]} />
             </div>
           </div>
 
@@ -267,12 +255,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="yzPP" symLabel="yzPP" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <Button block className="gcta">Connect wallet</Button>
-              <MetaRows rows={[
-                { k: "yzPP price", v: "1 yzPP = 1.148527 USDT0" },
-                { k: "Estimated APY", v: "27.0%", hi: true },
-                { k: "Role", v: "Junior tranche, absorbs losses first" },
-                { k: "Access", v: "Eligible Investors, KYC" },
-              ]} />
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -281,12 +263,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <Button block className="gcta">Connect wallet</Button>
-              <MetaRows rows={[
-                { k: "Redemption window", v: "30 days, yield keeps accruing" },
-                { k: "Minimum order", v: "5,000 yzPP" },
-                { k: "During a loss event", v: "Redemptions pause until assessed" },
-                { k: "Access", v: "Eligible Investors, KYC" },
-              ]} />
             </div>
           </div>
 
@@ -305,12 +281,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="syzUSD" symLabel="syzUSD" balance="$0.00" input={{ readOnly: true, "data-dst": true } as React.InputHTMLAttributes<HTMLInputElement>} />
               </div>
               <Button block>Connect Wallet</Button>
-              <MetaRows rows={[
-                { k: "Exchange rate", v: "1 yzUSD = 0.9361 syzUSD" },
-                { k: "Weekly target yield", v: "7.75%", hi: true },
-                { k: "Unstaking", v: "One step, near instant" },
-                { k: "Network", v: "Plasma" },
-              ]} />
             </div>
             <div data-dirpanel="unstake" style={{ display: "none" }}>
               <div className="mfields">
@@ -319,10 +289,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <Button block>Connect Wallet</Button>
-              <MetaRows rows={[
-                { k: "Exchange rate", v: "1 syzUSD = 1.0683 yzUSD" },
-                { k: "Settlement", v: "Near instant" },
-              ]} />
             </div>
           </div>
 
