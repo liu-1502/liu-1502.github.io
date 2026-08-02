@@ -32,22 +32,20 @@ export default function TransparencyClient() {
       grad.setAttribute("data-full", full);
       grad.classList.add("typing");
       let i = 0;
-      let phase: "type" | "hold" | "wait" = "type";
+      let phase: "type" | "hold" = "type";
       let timer = 0;
       const step = () => {
         if (phase === "type") {
           i++;
           grad.textContent = full.slice(0, i);
-          if (i >= full.length) { phase = "hold"; timer = window.setTimeout(step, 3000); }
+          if (i >= full.length) { phase = "hold"; timer = window.setTimeout(step, 5000); } // giữ nguyên 5s (con trỏ nháy ở cuối)
           else { timer = window.setTimeout(step, 140); } // gõ chậm
-        } else if (phase === "hold") {
-          grad.textContent = ""; // ẩn đi
-          phase = "wait";
-          timer = window.setTimeout(step, 5000); // hiện lại sau 5s
         } else {
+          // hết 5s: xoá rồi gõ lại ngay, không để con trỏ đứng yên
           i = 0;
+          grad.textContent = "";
           phase = "type";
-          timer = window.setTimeout(step, 0);
+          timer = window.setTimeout(step, 140);
         }
       };
       step();
