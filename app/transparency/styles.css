@@ -16,6 +16,11 @@
   /* Khoảng cách giữa các section = 32px, bỏ padding-top. */
   .section { margin: 0 0 32px; padding-top: 0; }
   .section:last-child { margin-bottom: 0; }
+
+  /* 2 chart nằm ngang 1 hàng; thu nhỏ màn hình thì xuống 2 dòng. */
+  .tp-charts2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 0 0 32px; }
+  .tp-charts2 > .section { margin: 0; }
+  @media (max-width: 1000px) { .tp-charts2 { grid-template-columns: 1fr; gap: 20px; } }
   /* Section summary (đầu mỗi panel): thêm padding-top 32px. */
   [data-tp-panel] > .section:first-child { padding-top: 32px; }
 
@@ -175,12 +180,14 @@
   .tp-tabs button.on .tp-tab-apy.p { background: color-mix(in srgb, var(--prime) 16%, var(--surface)); }
 
   /* ===== summary card: 6 data chia 3 trên / 3 dưới, divider dọc + ngang ===== */
-  .tp-summary6 { display: grid; grid-template-columns: repeat(3, 1fr); padding: 22px 16px; }
+  .tp-summary6 { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0; }
   .s6 { position: relative; padding: 16px 22px; min-width: 0; }
   /* divider dọc giữa các cột */
   .s6:not(:nth-child(3n+1))::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 42px; background: color-mix(in srgb, var(--text) 12%, transparent); }
-  /* divider ngang giữa hàng trên và hàng dưới */
+  /* divider ngang giữa hàng trên và hàng dưới, chừa 24px 2 đầu */
   .s6:nth-child(n+4)::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  .s6:nth-child(4)::after { left: 24px; }
+  .s6:nth-child(6)::after { right: 24px; }
   .s6 .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .s6 .v { font-family: var(--font-mono); font-size: 22px; font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; white-space: nowrap; }
   @media (max-width: 640px) {
@@ -292,17 +299,17 @@
   .apy-series button.locked { cursor: default; }
 
   /* ===== stacked bar (top strategies) ===== */
-  .tp-stack-bar { display: flex; height: 22px; border-radius: 6px; overflow: hidden; gap: 2px; }
+  .tp-stack-bar { display: flex; height: 16px; border-radius: 5px; overflow: hidden; gap: 2px; }
   .tp-stack-seg { display: block; height: 100%; }
   /* Hàng card chiến lược (pill màu + % + tên + mô tả + số tiền). */
-  .tp-strat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
-  .tp-strat-card { border: 1px solid color-mix(in srgb, var(--text) 9%, transparent); border-radius: 12px; padding: 14px 14px 15px; }
-  .tp-strat-top { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
-  .tp-strat-pill { width: 5px; height: 18px; border-radius: 3px; flex: none; }
-  .tp-strat-top b { font-family: var(--font-mono); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .tp-strat-nm { font-weight: 600; font-size: 13.5px; }
-  .tp-strat-sub { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
-  .tp-strat-am { font-family: var(--font-mono); font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .tp-strat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 18px; }
+  .tp-strat-card { border: 1px solid color-mix(in srgb, var(--text) 9%, transparent); border-radius: 11px; padding: 12px 12px 13px; }
+  .tp-strat-top { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; }
+  .tp-strat-pill { width: 4px; height: 15px; border-radius: 3px; flex: none; }
+  .tp-strat-top b { font-family: var(--font-mono); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tp-strat-nm { font-weight: 600; font-size: 12.5px; }
+  .tp-strat-sub { font-size: 11px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+  .tp-strat-am { font-family: var(--font-mono); font-size: 11px; color: var(--faint); font-variant-numeric: tabular-nums; margin-top: 2px; }
 
   /* ===== attestation footer: 1 hàng, icon + tiêu đề + phụ đề, ngăn bởi divider ===== */
   .tp-attest { display: flex; align-items: center; padding: 20px 8px; }

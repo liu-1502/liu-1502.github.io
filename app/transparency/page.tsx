@@ -102,6 +102,7 @@ export default function Transparency() {
           </div>
         </section>
 
+        <div className="tp-charts2">
         {/* Backing assets vs supply */}
         <section className="section rv">
           <div className="card tp-panel">
@@ -178,12 +179,13 @@ export default function Transparency() {
             </div>
           </div>
         </section>
+        </div>{/* .tp-charts2 */}
 
         {/* Top strategies */}
         <section className="section rv">
           <div className="card tp-panel">
             <div className="phead"><h3>Alpha top strategies</h3><span className="tp-total-h">Total<b>{usd(ALPHA_TOTAL)}</b></span></div>
-            <StackedBar rows={ALPHA_SPLIT} topN={5} />
+            <StackedBar rows={ALPHA_SPLIT} topN={4} />
           </div>
         </section>
       </div>{/* .alpha panel */}
@@ -202,6 +204,7 @@ export default function Transparency() {
           </div>
         </section>
 
+        <div className="tp-charts2">
         {/* Assets vs Liabilities */}
         <section className="section rv">
           <div className="card tp-panel">
@@ -260,11 +263,12 @@ export default function Transparency() {
             </div>
           </div>
         </section>
+        </div>{/* .tp-charts2 */}
 
         <section className="section rv">
           <div className="card tp-panel">
             <div className="phead"><h3>Prime top strategies</h3><span className="tp-total-h">Total<b>{usd(PRIME_TOTAL)}</b></span></div>
-            <StackedBar rows={PRIME_SPLIT} topN={5} />
+            <StackedBar rows={PRIME_SPLIT} topN={4} />
           </div>
         </section>
       </div>{/* .prime panel */}

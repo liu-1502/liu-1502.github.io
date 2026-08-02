@@ -6,35 +6,22 @@
 /** [tên, mô tả, USD] cho breakdown chiến lược; [tên, USD] cho breakdown theo chain. */
 export type SplitRow = [string, string, number] | [string, number];
 
-/** Alpha strategy positions (exposure_split), USD. */
+/** Alpha strategy positions (exposure_split), USD. Top 4 + phần còn lại = Other. */
 export const ALPHA_SPLIT: SplitRow[] = [
-  ["Ethena USDe Loop", "Funding-rate carry, leveraged", 9872982],
-  ["Ethena sUSDe Loop", "Staked USDe, leveraged", 9340391],
-  ["Maple syrupUSDT Loop", "Institutional lending, leveraged", 7111549],
-  ["Maple syrupUSDC Loop", "Institutional lending, leveraged", 6214739],
-  ["Superstate USTB Loop", "Tokenized T-Bills, leveraged", 3764113],
-  ["Yuzu yzPrime", "Internal allocation to Prime", 3030078],
-  ["Sky USDS", "Overcollateralized stablecoin", 2182835],
-  ["Agora PT-AUSD", "Pendle principal token", 2079366],
-  ["Aave USDC", "Money market lending", 1500120],
-  ["Liquidity Buffer", "Curve, Balancer, Pendle pools", 1250182],
-  ["Agora PT-AUSD Loop", "PT-AUSD, leveraged", 624220],
-  ["Maple syrupUSDG Loop", "Institutional lending, leveraged", 620490],
-  ["Aave USDT", "Money market lending", 500141],
-  ["Rest of assets", "Small and transitional positions", 166360],
-  ["Securitize VBILL Loop", "Tokenized T-Bills, leveraged", 124441],
-  ["Aave AUSD", "Money market lending", 69995],
-  ["PayPal PYUSD Loop", "Stablecoin carry, leveraged", 60087],
+  ["PT aUSD Loop", "Pendle principal token, leveraged", 18409920],
+  ["SyrupUSDT Loop", "Institutional lending, leveraged", 10437120],
+  ["USTB Loop", "Tokenized T-Bills, leveraged", 8069440],
+  ["USDC Loop", "Money market, leveraged", 6088320],
+  ["Rest of positions", "Small and transitional positions", 5315200],
 ];
 
-/** Prime strategy positions (exposure_split_rwa), USD. */
+/** Prime strategy positions (exposure_split_rwa), USD. Top 4 + phần còn lại = Other. */
 export const PRIME_SPLIT: SplitRow[] = [
-  ["Sky USDS", "Overcollateralized stablecoin", 2299575],
-  ["Maple syrupUSDT Loop", "Institutional lending, leveraged", 1074519],
-  ["Superstate USTB Loop", "Tokenized T-Bills, leveraged", 1011969],
-  ["Centrifuge deJAAA Loop", "AAA CLOs, leveraged", 223189],
-  ["Centrifuge JAAA Loop", "AAA CLOs, leveraged", 83087],
-  ["Other and in transit", "Settlement and rebalancing", 1466741],
+  ["Monetary Market", "Money-market strategies", 2623140],
+  ["Blue Chip Yield", "Blue-chip DeFi yield", 1894490],
+  ["RWAs / Credit", "Tokenized RWAs & credit", 1449630],
+  ["Basis Trading", "Delta-neutral basis", 905060],
+  ["Rest of positions", "Small and transitional positions", 797680],
 ];
 
 /** Backing by chain (reserves_split), USD. */
@@ -140,7 +127,8 @@ export const primeAssets = SERIES.map((_, i) => {
   const wob = Math.sin(i * 0.8) * 1.6e5 + Math.sin(i * 2.3) * 6e4;
   return Math.round(base + wob);
 });
-export const primeLiab = primeAssets.map((v) => Math.round(v / 1.0012)); // ratio ~100.12%
+// Liabilities thấp hơn assets ~2% để 2 đường phân biệt rõ trên chart (đường current vẫn ~ngang nhau).
+export const primeLiab = primeAssets.map((v, i) => Math.round(v * (0.982 + Math.sin(i * 0.6) * 0.006)));
 /** yzPrime target APY ~5.9% -> 7.0%. */
 export const primeApy = SERIES.map((_, i) => {
   const t = i / (SERIES.length - 1);
