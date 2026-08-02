@@ -182,11 +182,11 @@ export function StackedBar({
           <div key={s.name} className="tp-strat-card">
             <div className="tp-strat-top">
               <span className="tp-strat-pill" style={{ background: color(i) }} />
-              <b style={{ color: color(i) }}>{pct(s.v).toFixed(1)}%</b>
+              <b style={{ color: color(i) }}>{usd(s.v)}</b>
             </div>
             <div className="tp-strat-nm">{s.name}</div>
             {s.sub && <div className="tp-strat-sub">{s.sub}</div>}
-            <div className="tp-strat-am">{usd(s.v)}</div>
+            <div className="tp-strat-am">{pct(s.v).toFixed(1)}%</div>
           </div>
         ))}
       </div>
