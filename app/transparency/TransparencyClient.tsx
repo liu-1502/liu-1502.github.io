@@ -51,9 +51,23 @@ export default function TransparencyClient() {
     };
     apy?.addEventListener("click", onApy);
 
+    /* ---------- backing chart range states ---------- */
+    const bk = document.querySelector<HTMLElement>("[data-bk]");
+    const onBk = (e: Event) => {
+      const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-r]");
+      if (!btn) return;
+      const r = btn.getAttribute("data-r");
+      bk?.querySelectorAll("[data-bk-range] [data-r]").forEach((b) => b.classList.toggle("on", b === btn));
+      bk?.querySelectorAll<HTMLElement>("[data-bk-svg]").forEach((s) => {
+        s.style.display = s.getAttribute("data-bk-svg") === r ? "" : "none";
+      });
+    };
+    bk?.querySelector("[data-bk-range]")?.addEventListener("click", onBk);
+
     return () => {
       tabWrap?.removeEventListener("click", onTab);
       apy?.removeEventListener("click", onApy);
+      bk?.querySelector("[data-bk-range]")?.removeEventListener("click", onBk);
     };
   }, []);
 

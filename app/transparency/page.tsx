@@ -3,19 +3,33 @@ import "./styles.css";
 import TransparencyClient from "./TransparencyClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ChartLines, Donut, StackedBar } from "./parts";
+import { ChartLines, RatioBars, StackedBar } from "./parts";
 import {
   ALPHA_SPLIT,
   PRIME_SPLIT,
+  SERIES,
   reserves,
   supply,
   apy,
   apyPP,
-  assetsMin,
-  assetsMax,
 } from "./data";
 
 export const metadata = pageMetadata("/transparency");
+
+const MON = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+const fmtDate = (d: string) => {
+  const [, m, day] = d.split("-");
+  return `${MON[+m - 1]} ${+day}`;
+};
+
+const DATES = SERIES.map((r) => r[0]);
+/** Các khoảng thời gian cho chart (giống Accountable): cắt N điểm cuối của timeline. */
+const RANGES = [
+  { k: "1m", n: 7, lab: "1M" },
+  { k: "3m", n: 18, lab: "3M" },
+  { k: "6m", n: 36, lab: "6M" },
+  { k: "all", n: reserves.length, lab: "All" },
+];
 
 export default function Transparency() {
   return (
@@ -62,14 +76,7 @@ export default function Transparency() {
         {/* Summary */}
         <section className="section rv">
           <div className="card tp-summary">
-            <div className="tp-summary-donut">
-              <Donut ratio={110.82} colorVar="--good" />
-              <div className="tp-donut-center">
-                <b>110.82%</b>
-                <span className="tp-donut-tag">Well Backed</span>
-                <small>Collateral ratio</small>
-              </div>
-            </div>
+            <RatioBars backing={49375157} supply={44554443} ratio={110.82} label="Collateral ratio" />
             <div className="tp-summary-stats">
               <div><div className="k">Backing assets</div><div className="v" data-count="49375157" data-prefix="$">$0</div></div>
               <div><div className="k">Supply</div><div className="v" data-count="44554443" data-prefix="$">$0</div></div>
@@ -83,25 +90,48 @@ export default function Transparency() {
 
         {/* Backing assets vs supply */}
         <section className="section rv">
-          <div className="card tp-panel">
-            <div className="phead"><h3>Backing assets vs supply</h3></div>
+          <div className="card tp-panel" data-bk>
+            <div className="phead">
+              <h3>Backing assets vs supply</h3>
+              <span className="tp-live"><i />Live</span>
+            </div>
             <div className="tp-chart-head">
-              <div><span className="dot" style={{ background: "var(--alpha)" }} /><span className="l">Backing assets</span><b>$49,375,157</b></div>
-              <div><span className="dot" style={{ background: "var(--prime)" }} /><span className="l">Supply</span><b>$44,554,443</b></div>
+              <div className="tp-legend">
+                <div><span className="dot" style={{ background: "var(--alpha)" }} /><span className="l">Backing assets</span><b>$49,375,157</b></div>
+                <div><span className="dot" style={{ background: "var(--prime)" }} /><span className="l">Supply</span><b>$44,554,443</b></div>
+              </div>
+              <div className="tp-range" data-bk-range>
+                {RANGES.map((r) => (
+                  <button key={r.k} className={r.k === "all" ? "on" : ""} data-r={r.k}>{r.lab}</button>
+                ))}
+              </div>
             </div>
-            <div className="tp-chart">
-              <svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="Backing assets and supply over time">
-                <ChartLines
-                  series={[
-                    { values: reserves, color: "var(--alpha)" },
-                    { values: supply, color: "var(--prime)" },
-                  ]}
-                  min={assetsMin}
-                  max={assetsMax}
-                />
-              </svg>
-              <div className="xlab"><span>OCT 16</span><span>JAN</span><span>APR</span><span>JUL 15</span></div>
-            </div>
+            {RANGES.map((r) => {
+              const rs = reserves.slice(-r.n);
+              const sp = supply.slice(-r.n);
+              const ds = DATES.slice(-r.n);
+              const mn = Math.min(...sp) * 0.985;
+              const mx = Math.max(...rs) * 1.015;
+              return (
+                <div key={r.k} className="tp-chart" data-bk-svg={r.k} style={r.k === "all" ? undefined : { display: "none" }}>
+                  <svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="Backing assets and supply over time">
+                    <ChartLines
+                      series={[
+                        { values: rs, color: "var(--alpha)" },
+                        { values: sp, color: "var(--prime)" },
+                      ]}
+                      min={mn}
+                      max={mx}
+                    />
+                  </svg>
+                  <div className="xlab">
+                    <span>{fmtDate(ds[0])}</span>
+                    <span>{fmtDate(ds[Math.floor(ds.length / 2)])}</span>
+                    <span>{fmtDate(ds[ds.length - 1])}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -109,7 +139,7 @@ export default function Transparency() {
         <section className="section rv">
           <div className="card tp-panel apy-card" data-apy>
             <div className="phead">
-              <h3>APY</h3>
+              <div className="phead-l"><h3>APY</h3><span className="tp-live"><i />Live</span></div>
               <div className="tp-subtabs" data-apy-tabs>
                 <button className="on" data-apy-token="syz">syzUSD</button>
                 <button data-apy-token="pp">yzPP</button>
@@ -150,14 +180,7 @@ export default function Transparency() {
 
         <section className="section rv">
           <div className="card tp-summary">
-            <div className="tp-summary-donut">
-              <Donut ratio={100.28} colorVar="--good" />
-              <div className="tp-donut-center">
-                <b>100.28%</b>
-                <span className="tp-donut-tag">Well Backed</span>
-                <small>Assets / liabilities</small>
-              </div>
-            </div>
+            <RatioBars backing={6159080} supply={6142108} ratio={100.28} label="Assets / liabilities" />
             <div className="tp-summary-stats">
               <div><div className="k">Assets</div><div className="v" data-count="6159080" data-prefix="$">$0</div></div>
               <div><div className="k">Liabilities</div><div className="v" data-count="6142108" data-prefix="$">$0</div></div>

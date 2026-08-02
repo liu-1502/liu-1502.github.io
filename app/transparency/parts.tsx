@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Check } from "lucide-react";
 import { usd, shortAddr, walletHref, type SplitRow } from "./data";
 
 /** Bảng breakdown (chiến lược hoặc theo chain) với thanh tỉ trọng. Thay renderSplit(). */
@@ -54,7 +55,53 @@ export function WalletList({ wallets }: { wallets: [string, string][] }) {
   );
 }
 
-/* ---------- donut tỉ lệ thế chấp ---------- */
+/* ---------- Supply vs Backing bars (theo card của Accountable) ---------- */
+/** So sánh Supply và Backing dạng cột, phần dư (surplus) nổi bật trên đỉnh Backing. */
+export function RatioBars({
+  backing,
+  supply,
+  ratio,
+  label,
+}: {
+  backing: number;
+  supply: number;
+  ratio: number; // vd 110.82
+  label: string;
+}) {
+  const supplyH = Math.min(100, (supply / backing) * 100); // chiều cao cột supply so với backing
+  const surplus = backing - supply;
+  const surplusPct = (surplus / supply) * 100;
+  return (
+    <div className="tp-ratio">
+      <div className="tp-ratio-head">
+        <div className="tp-ratio-pct">{ratio.toFixed(2)}%</div>
+        <span className="tp-ratio-badge"><Check size={12} strokeWidth={3} />Well Backed</span>
+      </div>
+      <div className="tp-ratio-lbl">{label}</div>
+      <div className="tp-ratio-bars">
+        <div className="tp-ratio-col">
+          <div className="tp-ratio-track">
+            <div className="tp-ratio-fill supply" style={{ height: `${supplyH.toFixed(1)}%` }} />
+          </div>
+          <span className="tp-ratio-cap">Supply</span>
+        </div>
+        <div className="tp-ratio-col">
+          <div className="tp-ratio-track">
+            <div className="tp-ratio-fill backing" style={{ height: "100%" }}>
+              <span className="tp-ratio-surplus">
+                +{surplusPct.toFixed(1)}%
+                <b>+{usd(surplus)}</b>
+              </span>
+            </div>
+          </div>
+          <span className="tp-ratio-cap">Backing</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- donut tỉ lệ thế chấp (giữ lại, không dùng) ---------- */
 /** Vòng donut hiển thị collateral ratio. Phần supply (được phủ) + phần surplus (đệm). */
 export function Donut({
   ratio,
@@ -114,6 +161,10 @@ export function StackedBar({
   const top = rows.slice(0, topN).map((r) => ({ name: r[0] as string, v: r[r.length - 1] as number }));
   const otherV = total - top.reduce((a, s) => a + s.v, 0);
   const segs = [...top, { name: "Other", v: otherV }];
+  // Bảng màu phân biệt: seg đầu = màu sản phẩm, các seg sau dùng màu tương phản, "Other" = xám.
+  const POOL = ["#E7B84B", "#3E86E0", "#B06BD6", "#E28743", "#2FB37E"];
+  const color = (i: number) =>
+    i === segs.length - 1 ? "var(--faint)" : i === 0 ? `var(${colorVar})` : POOL[(i - 1) % POOL.length];
   return (
     <div className="tp-stack">
       <div className="tp-stack-bar">
@@ -121,11 +172,7 @@ export function StackedBar({
           <span
             key={s.name}
             className="tp-stack-seg"
-            style={{
-              width: `${((s.v / total) * 100).toFixed(2)}%`,
-              background: `var(${colorVar})`,
-              opacity: Math.max(0.28, 1 - i * 0.17),
-            }}
+            style={{ width: `${((s.v / total) * 100).toFixed(2)}%`, background: color(i) }}
             title={`${s.name} — ${usd(s.v)}`}
           />
         ))}
@@ -133,7 +180,7 @@ export function StackedBar({
       <div className="tp-stack-legend">
         {segs.map((s, i) => (
           <div key={s.name} className="tp-stack-item">
-            <span className="dot" style={{ background: `var(${colorVar})`, opacity: Math.max(0.28, 1 - i * 0.17) }} />
+            <span className="dot" style={{ background: color(i) }} />
             <span className="nm">{s.name}</span>
             <span className="pc">{((s.v / total) * 100).toFixed(1)}%</span>
             <span className="am">{usd(s.v)}</span>
@@ -181,7 +228,6 @@ export function ChartLines({
         const g = linePoints(s.values, min, max);
         return (
           <Fragment key={si}>
-            <polygon points={g.area} style={{ fill: s.color }} opacity={0.09} />
             <polyline
               points={g.points}
               fill="none"
