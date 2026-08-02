@@ -24,15 +24,17 @@
     white-space: nowrap;
     overflow: hidden;
     border-right: 0.06em solid var(--tp-green);
-    background: linear-gradient(96deg, #2E6E12 0%, #5FB22E 52%, #9BD34E 100%);
+    background: linear-gradient(96deg, #3E8E1E 0%, #86BE3C 26%, #E6B12E 60%, #9A6B10 100%);
+    background-size: 220% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
-  .hero-grad.go { animation: hero-type 1.4s steps(19) forwards, hero-caret 0.8s step-end 1.5s infinite; }
+  .hero-grad.go { animation: hero-type 1.4s steps(19) forwards, hero-caret 0.8s step-end 1.5s infinite, hero-flow 6s ease-in-out 1.4s infinite; }
   @keyframes hero-type { from { width: 0; } to { width: var(--tw); } }
   @keyframes hero-caret { from, to { border-color: transparent; } 50% { border-color: var(--tp-green); } }
+  @keyframes hero-flow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
   @media (prefers-reduced-motion: reduce) { .hero-grad.go { animation: none; width: auto !important; } }
 
   .verify-meta {
@@ -159,7 +161,7 @@
   .tp-tabs button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
 
   /* ===== summary card (donut + stats) ===== */
-  .tp-summary { display: grid; grid-template-columns: auto 1fr; gap: 34px; align-items: center; padding: 26px 28px; }
+  .tp-summary { display: grid; grid-template-columns: auto 1fr; gap: 34px; align-items: center; padding: 32px 28px 26px; }
   @media (max-width: 720px) { .tp-summary { grid-template-columns: 1fr; gap: 24px; } }
   .tp-summary-donut { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
   .tp-donut { width: 150px; height: 150px; transform: rotate(0deg); }
