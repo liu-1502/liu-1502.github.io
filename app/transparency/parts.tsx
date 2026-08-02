@@ -226,6 +226,7 @@ export function ChartLines({
         const g = linePoints(s.values, min, max);
         return (
           <Fragment key={si}>
+            <polygon points={g.area} style={{ fill: s.color }} opacity={0.08} />
             <polyline
               points={g.points}
               fill="none"
