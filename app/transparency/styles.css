@@ -38,24 +38,25 @@
   .verify-meta .k { color: var(--faint); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; }
   .verify-meta .v { font-family: var(--font-body); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
 
-  /* 4 chỉ số trên 1 dòng, divider ngắn cao bằng text (giống stat strip ở dashboard). */
-  .statwall { display: flex; align-items: center; padding: 18px 4px; }
-  .bigstat { position: relative; flex: 1; padding: 0 26px; }
-  .bigstat:not(:first-child)::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 40px; background: color-mix(in srgb, var(--text) 14%, transparent); }
-  @media (max-width: 760px) {
-    .statwall { flex-wrap: wrap; row-gap: 22px; }
-    .bigstat { flex: 1 1 45%; }
-    .bigstat:nth-child(odd)::before { display: none; }
-  }
+  /* Hero: text bên trái, 4 stat card bên phải. */
+  .hub-hero { align-items: center; grid-template-columns: 1fr 1fr; gap: 44px; }
+  .tp-hero-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--good); text-decoration: none; }
+  .tp-hero-cta:hover { text-decoration: underline; }
+  .tp-hero-cta .arr { font-weight: 400; }
+
+  /* 4 stat card dạng lưới 2x2 (nền xám nhạt, bo góc). */
+  .statwall { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .bigstat { background: var(--surface-2); border-radius: 14px; padding: 18px 20px; }
   .bigstat .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; color: var(--faint); }
   .bigstat .v { font-family: var(--font-mono); font-size: clamp(20px, 2.2vw, 26px); font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; }
+  @media (max-width: 560px) { .statwall { grid-template-columns: 1fr; } }
 
   .tp-panel { padding: 20px; margin-bottom: 16px; }
   .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
   .tp-panel .phead h3 { font-size: 18px; }
   /* Total ở góc phải title (thay cho total dưới đáy). */
-  .tp-total-h { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
-  .tp-total-h b { font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--text); font-variant-numeric: tabular-nums; }
+  .tp-total-h { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .tp-total-h b { font-size: 22px; letter-spacing: 0; text-transform: none; color: var(--text); font-variant-numeric: tabular-nums; }
 
   /* Summary: số lớn (collateral ratio) + lưới chỉ số. */
   .tp-summary-lead { flex: none; }
@@ -182,12 +183,12 @@
   .tp-range button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
 
   /* ===== chart blocks ===== */
-  .tp-chart-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 6px; }
+  .tp-chart-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin: 0 0 20px; }
   .tp-legend { display: flex; gap: 30px; flex-wrap: wrap; }
   .tp-legend > div { display: flex; align-items: baseline; gap: 8px; }
-  .tp-chart-head .dot { width: 8px; height: 8px; border-radius: 50%; align-self: center; }
-  .tp-chart-head .l { font-size: 12px; color: var(--muted); }
-  .tp-chart-head b { font-family: var(--font-mono); font-size: 15px; font-weight: 560; font-variant-numeric: tabular-nums; }
+  .tp-chart-head .dot { width: 9px; height: 9px; border-radius: 3px; align-self: center; }
+  .tp-chart-head .l { font-size: 13.5px; color: var(--muted); }
+  .tp-chart-head b { font-family: var(--font-mono); font-size: 17px; font-weight: 560; font-variant-numeric: tabular-nums; }
   .tp-chart svg { width: 100%; height: 180px; display: block; background-image: radial-gradient(color-mix(in srgb, var(--text) 12%, transparent) 1px, transparent 1.2px); background-size: 20px 20px; background-position: center; border-radius: 6px; }
   /* Backing chart dùng lưới kẻ (grid) thay cho nền chấm. */
   .tp-plot svg { background-image: none; }
@@ -225,30 +226,36 @@
   /* Chips bật/tắt các đường APY (Weekly Target / 1D / 7D / 30D). */
   .apy-series { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
   /* Mặc định: chỉ có viền (stroke), nền trắng. Khi chọn: nền tint đầy theo màu đường, bỏ viền. */
-  .apy-series button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line-solid); background: var(--surface); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: var(--muted); transition: background .12s, border-color .12s, color .12s; }
+  .apy-series button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid color-mix(in srgb, var(--text) 13%, transparent); background: var(--surface); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: var(--muted); transition: background .12s, border-color .12s, color .12s; }
   .apy-series button i { width: 9px; height: 9px; border-radius: 3px; background: var(--c); }
-  .apy-series button.on { color: var(--text); border-color: transparent; background: color-mix(in srgb, var(--c) 18%, var(--surface)); }
+  /* Chọn: viền màu (stroke) theo màu đường + tint nhẹ, đồng bộ dạng chip. */
+  .apy-series button.on { color: var(--text); border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, var(--surface)); }
   .apy-series button.locked { cursor: default; }
 
   /* ===== stacked bar (top strategies) ===== */
-  .tp-stack-bar { display: flex; height: 22px; border-radius: 5px; overflow: hidden; gap: 2px; }
+  .tp-stack-bar { display: flex; height: 22px; border-radius: 6px; overflow: hidden; gap: 2px; }
   .tp-stack-seg { display: block; height: 100%; }
-  .tp-stack-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 28px; margin-top: 18px; }
-  @media (max-width: 620px) { .tp-stack-legend { grid-template-columns: 1fr; } }
-  .tp-stack-item { display: grid; grid-template-columns: 14px 1fr auto auto; align-items: center; gap: 8px; font-size: 12.5px; }
-  .tp-stack-item .dot { width: 9px; height: 9px; border-radius: 3px; }
-  .tp-stack-item .nm { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .tp-stack-item .pc { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .tp-stack-item .am { font-family: var(--font-mono); font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; text-align: right; }
-  .tp-stack-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
-  .tp-stack-total span { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
-  .tp-stack-total b { font-family: var(--font-mono); font-size: 16px; font-weight: 560; font-variant-numeric: tabular-nums; }
+  /* Hàng card chiến lược (pill màu + % + tên + mô tả + số tiền). */
+  .tp-strat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+  .tp-strat-card { border: 1px solid color-mix(in srgb, var(--text) 9%, transparent); border-radius: 12px; padding: 14px 14px 15px; }
+  .tp-strat-top { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+  .tp-strat-pill { width: 5px; height: 18px; border-radius: 3px; flex: none; }
+  .tp-strat-top b { font-family: var(--font-mono); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tp-strat-nm { font-weight: 600; font-size: 13.5px; }
+  .tp-strat-sub { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+  .tp-strat-am { font-family: var(--font-mono); font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; margin-top: 10px; }
 
-  /* ===== attestation footer ===== */
-  .tp-attest { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  @media (max-width: 760px) { .tp-attest { grid-template-columns: 1fr; } }
-  .tp-attest .card { padding: 22px; }
-  .tp-attest em { font-family: var(--font-mono); font-style: normal; font-size: 10px; color: var(--good); letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 12px; }
-  .tp-attest b { font-family: var(--font-display); font-weight: 620; font-size: 14.5px; display: block; margin-bottom: 6px; }
-  .tp-attest span { font-size: 12.5px; color: var(--muted); line-height: 1.6; display: block; }
+  /* ===== attestation footer: 1 hàng, icon + tiêu đề + phụ đề, ngăn bởi divider ===== */
+  .tp-attest { display: flex; align-items: center; padding: 20px 8px; }
+  .tp-attest-item { flex: 1; display: flex; align-items: center; gap: 14px; padding: 0 24px; position: relative; }
+  .tp-attest-item:not(:first-child)::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 38px; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  .tp-attest-ic { flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; color: var(--tp-green); background: color-mix(in srgb, var(--tp-green) 10%, var(--surface)); }
+  .tp-attest-ic svg { width: 20px; height: 20px; }
+  .tp-attest-txt b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+  .tp-attest-txt span { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  @media (max-width: 760px) {
+    .tp-attest { flex-direction: column; align-items: stretch; gap: 20px; padding: 22px; }
+    .tp-attest-item { padding: 0; }
+    .tp-attest-item:not(:first-child)::before { display: none; }
+  }
 }

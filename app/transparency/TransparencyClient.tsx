@@ -62,34 +62,33 @@ export default function TransparencyClient() {
       }
     });
 
-    /* ---------- backing chart: range states ---------- */
-    const bk = document.querySelector<HTMLElement>("[data-bk]");
-    on(bk?.querySelector("[data-bk-range]"), "click", (e) => {
-      const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-r]");
-      if (!btn) return;
-      const r = btn.getAttribute("data-r");
-      bk?.querySelectorAll("[data-bk-range] [data-r]").forEach((b) => b.classList.toggle("on", b === btn));
-      bk?.querySelectorAll<HTMLElement>("[data-bk-svg]").forEach((s) => {
-        s.style.display = s.getAttribute("data-bk-svg") === r ? "" : "none";
-      });
-    });
-
-    /* ---------- backing chart: hover crosshair + tooltip ---------- */
-    bk?.querySelectorAll<HTMLElement>(".tp-plot").forEach((plot) => {
-      let data: { d: string[]; b: number[]; s: number[]; mn: number; mx: number };
+    /* ---------- hover crosshair + tooltip (dùng chung mọi .tp-plot) ---------- */
+    type Ser = { k: string; label: string; color: string; v: number[] };
+    document.querySelectorAll<HTMLElement>(".pg-transparency .tp-plot").forEach((plot) => {
+      let data: { d: string[]; mn: number; mx: number; f: "money" | "pct"; s: Ser[] };
       try {
         data = JSON.parse(plot.getAttribute("data-series") || "");
       } catch {
         return;
       }
-      const n = data.b.length;
+      if (!data.s?.length) return;
+      const n = data.s[0].v.length;
       const span = data.mx - data.mn || 1;
       const guide = plot.querySelector<HTMLElement>(".tp-guide");
-      const dotB = plot.querySelector<HTMLElement>(".tp-hdot.b");
-      const dotS = plot.querySelector<HTMLElement>(".tp-hdot.s");
       const tip = plot.querySelector<HTMLElement>(".tp-tip");
-      const xPct = (i: number) => (6 + (288 * i) / (n - 1)) / 3; // % của bề rộng
+      const xPct = (i: number) => (6 + (288 * i) / (n - 1)) / 3;
       const yPct = (v: number) => ((124 - (118 * (v - data.mn)) / span) / 130) * 100;
+      const fmt = (v: number) => (data.f === "pct" ? v.toFixed(2) + "%" : money(v));
+      // 1 chấm tròn cho mỗi series
+      const dots = data.s.map((s) => {
+        const el = document.createElement("span");
+        el.className = "tp-hdot";
+        el.style.border = `2.5px solid ${s.color}`;
+        el.style.boxShadow = `0 0 0 3px color-mix(in srgb, ${s.color} 22%, transparent)`;
+        plot.appendChild(el);
+        return el;
+      });
+      cleanups.push(() => dots.forEach((d) => d.remove()));
 
       on(plot, "mousemove", (e) => {
         const rect = plot.getBoundingClientRect();
@@ -98,14 +97,23 @@ export default function TransparencyClient() {
         i = Math.min(n - 1, Math.max(0, i));
         const lx = xPct(i);
         if (guide) guide.style.left = lx + "%";
-        if (dotB) { dotB.style.left = lx + "%"; dotB.style.top = yPct(data.b[i]) + "%"; }
-        if (dotS) { dotS.style.left = lx + "%"; dotS.style.top = yPct(data.s[i]) + "%"; }
+        let rows = "";
+        data.s.forEach((s, si) => {
+          const grp = plot.querySelector<HTMLElement>(`[data-apy-line="${s.k}"]`);
+          const visible = !grp || grp.style.display !== "none";
+          const dot = dots[si];
+          if (visible) {
+            dot.style.display = "";
+            dot.style.left = lx + "%";
+            dot.style.top = yPct(s.v[i]) + "%";
+            rows += `<div class="row"><i style="background:${s.color}"></i>${s.label} <b>${fmt(s.v[i])}</b></div>`;
+          } else {
+            dot.style.display = "none";
+          }
+        });
         if (tip) {
           tip.style.left = Math.min(88, Math.max(12, lx)) + "%";
-          tip.innerHTML =
-            `<span class="d">${fmtD(data.d[i])}</span>` +
-            `<div class="row"><i style="background:var(--tp-backing)"></i>Backing <b>${money(data.b[i])}</b></div>` +
-            `<div class="row"><i style="background:var(--tp-supply)"></i>Supply <b>${money(data.s[i])}</b></div>`;
+          tip.innerHTML = `<span class="d">${fmtD(data.d[i])}</span>${rows}`;
         }
         plot.classList.add("show");
       });

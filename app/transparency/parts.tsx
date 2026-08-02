@@ -144,22 +144,27 @@ export function Donut({
   );
 }
 
-/* ---------- stacked bar: top chiến lược ---------- */
-/** Thanh xếp chồng top N chiến lược + "Other", có legend. */
+/* ---------- stacked bar + cards: top chiến lược ---------- */
+/** Thanh xếp chồng top N chiến lược + "Other", kèm hàng card (pill màu + % + tên + mô tả). */
 export function StackedBar({
   rows,
-  topN = 4,
+  topN = 5,
 }: {
   rows: SplitRow[];
   topN?: number;
 }) {
   const total = rows.reduce((a, r) => a + (r[r.length - 1] as number), 0);
-  const top = rows.slice(0, topN).map((r) => ({ name: r[0] as string, v: r[r.length - 1] as number }));
+  const top = rows.slice(0, topN).map((r) => ({
+    name: r[0] as string,
+    sub: r.length === 3 ? (r[1] as string) : "",
+    v: r[r.length - 1] as number,
+  }));
   const otherV = total - top.reduce((a, s) => a + s.v, 0);
-  const segs = [...top, { name: "Other", v: otherV }];
+  const segs = [...top, { name: "Other", sub: "Remaining positions", v: otherV }];
   // Dùng chung bộ màu chart toàn trang (xanh lá → vàng cam → xanh dương → đỏ → tím), "Other" = xám.
   const PALETTE = ["var(--tp-green)", "var(--tp-amber)", "var(--tp-blue)", "var(--tp-red)", "var(--tp-purple)"];
   const color = (i: number) => (i === segs.length - 1 ? "var(--faint)" : PALETTE[i % PALETTE.length]);
+  const pct = (v: number) => (v / total) * 100;
   return (
     <div className="tp-stack">
       <div className="tp-stack-bar">
@@ -167,18 +172,21 @@ export function StackedBar({
           <span
             key={s.name}
             className="tp-stack-seg"
-            style={{ width: `${((s.v / total) * 100).toFixed(2)}%`, background: color(i) }}
+            style={{ width: `${pct(s.v).toFixed(2)}%`, background: color(i) }}
             title={`${s.name} — ${usd(s.v)}`}
           />
         ))}
       </div>
-      <div className="tp-stack-legend">
+      <div className="tp-strat-cards">
         {segs.map((s, i) => (
-          <div key={s.name} className="tp-stack-item">
-            <span className="dot" style={{ background: color(i) }} />
-            <span className="nm">{s.name}</span>
-            <span className="pc">{((s.v / total) * 100).toFixed(1)}%</span>
-            <span className="am">{usd(s.v)}</span>
+          <div key={s.name} className="tp-strat-card">
+            <div className="tp-strat-top">
+              <span className="tp-strat-pill" style={{ background: color(i) }} />
+              <b style={{ color: color(i) }}>{pct(s.v).toFixed(1)}%</b>
+            </div>
+            <div className="tp-strat-nm">{s.name}</div>
+            {s.sub && <div className="tp-strat-sub">{s.sub}</div>}
+            <div className="tp-strat-am">{usd(s.v)}</div>
           </div>
         ))}
       </div>
@@ -206,77 +214,87 @@ function linePoints(values: number[], min: number, max: number) {
   };
 }
 
-/** Các nét vẽ bên trong <svg> biểu đồ: chỉ đường line bo góc mềm (nền chấm xám do CSS). */
-export function ChartLines({
+const MON = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+const fmtDate = (s: string) => {
+  const p = s.split("-");
+  return `${MON[+p[1] - 1]} ${+p[2]}`;
+};
+
+export type ChartSeries = { k: string; label: string; color: string; values: number[] };
+
+/**
+ * Biểu đồ đường dùng chung cho cả Backing và APY: lưới kẻ + nhãn trục Y + hover crosshair.
+ * `toggleable`: bọc mỗi đường trong <g data-apy-line> để bật/tắt (APY). `fmt`: money | pct.
+ */
+export function LineChart({
   series,
   min,
   max,
+  dates,
+  fmt,
+  toggleable = false,
 }: {
-  series: { values: number[]; color: string }[];
+  series: ChartSeries[];
   min: number;
   max: number;
+  dates: string[];
+  fmt: "money" | "pct";
+  toggleable?: boolean;
 }) {
+  const span = max === min ? 1 : max - min;
+  const yT = [0, 1, 2, 3].map((i) => {
+    const v = min + (span * i) / 3;
+    return { v, y: 124 - (118 * (v - min)) / span };
+  });
+  const xIdx = [0, 1, 2, 3, 4, 5].map((k) => Math.round((k * (dates.length - 1)) / 5));
+  const fmtY = (v: number) => (fmt === "pct" ? `${Math.round(v)}%` : usd(v));
+  const payload = JSON.stringify({
+    d: dates,
+    mn: min,
+    mx: max,
+    f: fmt,
+    s: series.map((s) => ({ k: s.k, label: s.label, color: s.color, v: s.values })),
+  });
   return (
     <>
-      {series.map((s, si) => {
-        const g = linePoints(s.values, min, max);
-        return (
-          <polyline
-            key={si}
-            points={g.points}
-            fill="none"
-            style={{ stroke: s.color }}
-            strokeWidth={1.8}
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            vectorEffect="non-scaling-stroke"
-          />
-        );
-      })}
-    </>
-  );
-}
-
-/** Các đường APY realized: Weekly Target (mặc định) + 1D/7D/30D bật/tắt được (theo Accountable). */
-export function ApyLines({
-  wt,
-  d1,
-  d7,
-  d30,
-  min,
-  max,
-}: {
-  wt: number[];
-  d1: number[];
-  d7: number[];
-  d30: number[];
-  min: number;
-  max: number;
-}) {
-  const L = [
-    { k: "wt", v: wt, c: "var(--tp-green)" },
-    { k: "1d", v: d1, c: "var(--tp-amber)" },
-    { k: "7d", v: d7, c: "var(--tp-blue)" },
-    { k: "30d", v: d30, c: "var(--tp-red)" },
-  ];
-  return (
-    <>
-      {L.map((l) => {
-        const g = linePoints(l.v, min, max);
-        return (
-          <g key={l.k} data-apy-line={l.k} style={l.k === "wt" ? undefined : { display: "none" }}>
-            <polyline
-              points={g.points}
-              fill="none"
-              style={{ stroke: l.c }}
-              strokeWidth={1.8}
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-            />
+      <div className="tp-plot" data-series={payload}>
+        <svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-hidden="true">
+          <g className="tp-grid">
+            {yT.map((t) => <line key={`h${t.y}`} x1="6" x2="294" y1={t.y} y2={t.y} />)}
+            {xIdx.map((i) => {
+              const x = 6 + (288 * i) / (dates.length - 1);
+              return <line key={`v${i}`} x1={x} x2={x} y1="6" y2="124" />;
+            })}
           </g>
-        );
-      })}
+          {series.map((s, si) => {
+            const g = linePoints(s.values, min, max);
+            const line = (
+              <polyline
+                points={g.points}
+                fill="none"
+                style={{ stroke: s.color }}
+                strokeWidth={1.8}
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                vectorEffect="non-scaling-stroke"
+              />
+            );
+            return toggleable ? (
+              <g key={s.k} data-apy-line={s.k} style={si === 0 ? undefined : { display: "none" }}>{line}</g>
+            ) : (
+              <Fragment key={s.k}>{line}</Fragment>
+            );
+          })}
+        </svg>
+        <div className="tp-yticks">
+          {yT.map((t) => <span key={t.y} style={{ top: `${(t.y / 130) * 100}%` }}>{fmtY(t.v)}</span>)}
+        </div>
+        <span className="tp-guide" />
+        <div className="tp-tip" />
+      </div>
+      <div className="xlab">
+        {xIdx.map((i) => <span key={i}>{fmtDate(dates[i])}</span>)}
+      </div>
     </>
   );
 }

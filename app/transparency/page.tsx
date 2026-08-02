@@ -1,9 +1,25 @@
-import Link from "next/link";
 import "./styles.css";
 import TransparencyClient from "./TransparencyClient";
 import { pageMetadata } from "@/lib/pages";
-import Button from "@/components/ui/Button";
-import { ChartLines, ApyLines, StackedBar } from "./parts";
+
+/* Pixel-art monogram (theo phong cách icon của Accountable). '#' = ô đặc. */
+function Pix({ rows }: { rows: string[] }) {
+  const w = rows[0].length;
+  const h = rows.length;
+  const cells: [number, number][] = [];
+  rows.forEach((r, y) => [...r].forEach((c, x) => c === "#" && cells.push([x, y])));
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} width="20" height="20" aria-hidden="true">
+      {cells.map(([x, y], i) => (
+        <rect key={i} x={x + 0.06} y={y + 0.06} width={0.88} height={0.88} rx={0.16} fill="currentColor" />
+      ))}
+    </svg>
+  );
+}
+const PIX_MERKLE = ["#...#", "##.##", "#.#.#", "#...#", "#...#"];
+const PIX_NODE = [".###.", "#...#", "#.#.#", "#...#", ".###."];
+const PIX_ZK = ["###.#.#", "..#.##.", ".#..#..", "#...##.", "###.#.#"];
+import { LineChart, StackedBar } from "./parts";
 import {
   ALPHA_SPLIT,
   PRIME_SPLIT,
@@ -27,20 +43,7 @@ const PRIME_TOTAL = sumSplit(PRIME_SPLIT);
 
 export const metadata = pageMetadata("/transparency");
 
-const MON = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-const fmtDate = (d: string) => {
-  const [, m, day] = d.split("-");
-  return `${MON[+m - 1]} ${+day}`;
-};
-
 const DATES = SERIES.map((r) => r[0]);
-/** Các khoảng thời gian cho chart (giống Accountable): cắt N điểm cuối của timeline. */
-const RANGES = [
-  { k: "1m", n: 7, lab: "1M" },
-  { k: "3m", n: 18, lab: "3M" },
-  { k: "6m", n: 36, lab: "6M" },
-  { k: "all", n: reserves.length, lab: "All" },
-];
 
 export default function Transparency() {
   return (
@@ -49,30 +52,27 @@ export default function Transparency() {
         <div>
           <h1>Independent Proof of Solvency</h1>
           <p className="lede">An independent proof of solvency, live: assets and liabilities across Yuzu Alpha and Prime are attested every 15 minutes by Accountable, a verification network using secure enclaves and zero-knowledge proofs. This page renders their verified feed, position by position.</p>
-          <div style={{ display: "flex", gap: 12, marginTop: 26, flexWrap: "wrap" }}>
-            <Button href="https://yuzu.accountable.capital/" target="_blank" rel="noopener" variant="solid"><img src="/assets/partners/accountable-fav.png" alt="" style={{ width: 18, height: 18, filter: "brightness(0) invert(1)" }} />Official Accountable dashboard <span className="arr">↗</span></Button>
+          <a className="tp-hero-cta" href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">Official Accountable dashboard <span className="arr">↗</span></a>
+        </div>
+        <div className="statwall rv">
+          <div className="bigstat">
+            <div className="k">Total TVL</div>
+            <div className="v" data-count="56.30" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
+          </div>
+          <div className="bigstat">
+            <div className="k">Total Assets / Backing</div>
+            <div className="v" data-count="55.98" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
+          </div>
+          <div className="bigstat">
+            <div className="k">Total Yield Distributed</div>
+            <div className="v" data-count="2.69" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
+          </div>
+          <div className="bigstat">
+            <div className="k">Products Verified</div>
+            <div className="v" data-count="2" data-suffix=" / 2">0</div>
           </div>
         </div>
       </section>
-
-      <div className="statwall rv card">
-        <div className="bigstat">
-          <div className="k">Total TVL</div>
-          <div className="v" data-count="56.30" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
-        </div>
-        <div className="bigstat">
-          <div className="k">Total Assets / Backing</div>
-          <div className="v" data-count="55.98" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
-        </div>
-        <div className="bigstat">
-          <div className="k">Total Yield Distributed</div>
-          <div className="v" data-count="2.69" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
-        </div>
-        <div className="bigstat">
-          <div className="k">Products Verified</div>
-          <div className="v" data-count="2" data-suffix=" / 2">0</div>
-        </div>
-      </div>
 
       {/* ==================== PRODUCT TABS ==================== */}
       <div className="tp-tabs rv" data-tp-tabs>
@@ -103,14 +103,9 @@ export default function Transparency() {
 
         {/* Backing assets vs supply */}
         <section className="section rv">
-          <div className="card tp-panel" data-bk>
+          <div className="card tp-panel">
             <div className="phead">
               <h3>Backing assets vs supply</h3>
-              <div className="tp-range" data-bk-range>
-                {RANGES.map((r) => (
-                  <button key={r.k} className={r.k === "all" ? "on" : ""} data-r={r.k}>{r.lab}</button>
-                ))}
-              </div>
             </div>
             <div className="tp-chart-head">
               <div className="tp-legend">
@@ -118,51 +113,18 @@ export default function Transparency() {
                 <div><span className="dot" style={{ background: "var(--tp-supply)" }} /><span className="l">Supply</span><b>$44,554,443</b></div>
               </div>
             </div>
-            {RANGES.map((r) => {
-              const rs = reserves.slice(-r.n);
-              const sp = supply.slice(-r.n);
-              const ds = DATES.slice(-r.n);
-              const mn = Math.min(...sp) * 0.985;
-              const mx = Math.max(...rs) * 1.015;
-              const yT = [0, 1, 2, 3].map((i) => {
-                const v = mn + ((mx - mn) * i) / 3;
-                return { v, y: 124 - (118 * (v - mn)) / (mx - mn) };
-              });
-              const xIdx = [0, 1, 2, 3, 4, 5].map((k) => Math.round((k * (ds.length - 1)) / 5));
-              return (
-                <div key={r.k} className="tp-chart" data-bk-svg={r.k} style={r.k === "all" ? undefined : { display: "none" }}>
-                  <div className="tp-plot" data-series={JSON.stringify({ d: ds, b: rs, s: sp, mn, mx })}>
-                    <svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="Backing assets and supply over time">
-                      <g className="tp-grid">
-                        {yT.map((t) => <line key={`h${t.y}`} x1="6" x2="294" y1={t.y} y2={t.y} />)}
-                        {xIdx.map((i) => {
-                          const x = 6 + (288 * i) / (ds.length - 1);
-                          return <line key={`v${i}`} x1={x} x2={x} y1="6" y2="124" />;
-                        })}
-                      </g>
-                      <ChartLines
-                        series={[
-                          { values: rs, color: "var(--tp-backing)" },
-                          { values: sp, color: "var(--tp-supply)" },
-                        ]}
-                        min={mn}
-                        max={mx}
-                      />
-                    </svg>
-                    <div className="tp-yticks">
-                      {yT.map((t) => <span key={t.y} style={{ top: `${(t.y / 130) * 100}%` }}>{usd(t.v)}</span>)}
-                    </div>
-                    <span className="tp-guide" />
-                    <span className="tp-hdot b" />
-                    <span className="tp-hdot s" />
-                    <div className="tp-tip" />
-                  </div>
-                  <div className="xlab">
-                    {xIdx.map((i) => <span key={i}>{fmtDate(ds[i])}</span>)}
-                  </div>
-                </div>
-              );
-            })}
+            <div className="tp-chart">
+              <LineChart
+                series={[
+                  { k: "b", label: "Backing", color: "var(--tp-backing)", values: reserves },
+                  { k: "s", label: "Supply", color: "var(--tp-supply)", values: supply },
+                ]}
+                min={Math.min(...supply) * 0.985}
+                max={Math.max(...reserves) * 1.015}
+                dates={DATES}
+                fmt="money"
+              />
+            </div>
           </div>
         </section>
 
@@ -180,14 +142,35 @@ export default function Transparency() {
               <div className="cv" data-apy-value style={{ color: "var(--alpha)" }}>7.75%</div>
               <span className="apy-readout-lbl">Weekly Target</span>
             </div>
-            <div className="tp-chart">
-              <svg viewBox="0 0 300 130" preserveAspectRatio="none" data-apy-svg="syz" aria-label="syzUSD APY over time">
-                <ApyLines wt={apy} d1={apy1D} d7={apy7D} d30={apy30D} min={4} max={18} />
-              </svg>
-              <svg viewBox="0 0 300 130" preserveAspectRatio="none" data-apy-svg="pp" style={{ display: "none" }} aria-label="yzPP APY over time">
-                <ApyLines wt={apyPP} d1={apyPP1D} d7={apyPP7D} d30={apyPP30D} min={12} max={64} />
-              </svg>
-              <div className="xlab"><span>OCT 16</span><span>JAN</span><span>APR</span><span>JUL 15</span></div>
+            <div className="tp-chart" data-apy-svg="syz">
+              <LineChart
+                series={[
+                  { k: "wt", label: "Weekly Target", color: "var(--tp-green)", values: apy },
+                  { k: "1d", label: "1D", color: "var(--tp-amber)", values: apy1D },
+                  { k: "7d", label: "7D", color: "var(--tp-blue)", values: apy7D },
+                  { k: "30d", label: "30D", color: "var(--tp-red)", values: apy30D },
+                ]}
+                min={4}
+                max={18}
+                dates={DATES}
+                fmt="pct"
+                toggleable
+              />
+            </div>
+            <div className="tp-chart" data-apy-svg="pp" style={{ display: "none" }}>
+              <LineChart
+                series={[
+                  { k: "wt", label: "Weekly Target", color: "var(--tp-green)", values: apyPP },
+                  { k: "1d", label: "1D", color: "var(--tp-amber)", values: apyPP1D },
+                  { k: "7d", label: "7D", color: "var(--tp-blue)", values: apyPP7D },
+                  { k: "30d", label: "30D", color: "var(--tp-red)", values: apyPP30D },
+                ]}
+                min={12}
+                max={64}
+                dates={DATES}
+                fmt="pct"
+                toggleable
+              />
             </div>
             <div className="apy-series" data-apy-series>
               <button className="on locked" data-line="wt" style={{ ["--c"]: "var(--tp-green)" } as React.CSSProperties}><i />Weekly Target</button>
@@ -202,7 +185,7 @@ export default function Transparency() {
         <section className="section rv">
           <div className="card tp-panel">
             <div className="phead"><h3>Alpha top strategies</h3><span className="tp-total-h">Total<b>{usd(ALPHA_TOTAL)}</b></span></div>
-            <StackedBar rows={ALPHA_SPLIT} topN={4} />
+            <StackedBar rows={ALPHA_SPLIT} topN={5} />
           </div>
         </section>
       </div>{/* .alpha panel */}
@@ -230,28 +213,25 @@ export default function Transparency() {
         <section className="section rv">
           <div className="card tp-panel">
             <div className="phead"><h3>Prime top strategies</h3><span className="tp-total-h">Total<b>{usd(PRIME_TOTAL)}</b></span></div>
-            <StackedBar rows={PRIME_SPLIT} topN={4} />
+            <StackedBar rows={PRIME_SPLIT} topN={5} />
           </div>
         </section>
       </div>{/* .prime panel */}
 
       {/* ==================== ATTESTATION FOOTER ==================== */}
       <section className="section rv">
-        <div className="tp-attest">
-          <div className="card">
-            <em>Merkle Root Hash</em>
-            <b>Every balance, committed</b>
-            <span>Each 15-minute cycle publishes a Merkle root of all wallet balances and positions, so the numbers above cannot be altered after the fact.</span>
+        <div className="card tp-attest">
+          <div className="tp-attest-item">
+            <span className="tp-attest-ic"><Pix rows={PIX_MERKLE} /></span>
+            <div className="tp-attest-txt"><b>Merkle Root Hash</b><span>Cryptographic data integrity</span></div>
           </div>
-          <div className="card">
-            <em>Enclave Attestation</em>
-            <b>Read inside secure hardware</b>
-            <span>Balances are read within AMD SEV enclaves and key-sealed. Nobody, including Yuzu, can tamper with what the enclave sees.</span>
+          <div className="tp-attest-item">
+            <span className="tp-attest-ic"><Pix rows={PIX_NODE} /></span>
+            <div className="tp-attest-txt"><b>Enclave Attestation</b><span>Hardware-level verification</span></div>
           </div>
-          <div className="card">
-            <em>Zero Knowledge Proofs</em>
-            <b>Solvency without exposure</b>
-            <span>zkTLS and zero-knowledge proofs verify solvency each cycle without revealing private positions or trading strategy.</span>
+          <div className="tp-attest-item">
+            <span className="tp-attest-ic"><Pix rows={PIX_ZK} /></span>
+            <div className="tp-attest-txt"><b>Zero Knowledge Proofs</b><span>Privacy-preserving validation</span></div>
           </div>
         </div>
       </section>
