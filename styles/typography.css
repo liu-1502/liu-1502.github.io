@@ -1,5 +1,7 @@
 /* Đổi toàn bộ font mono -> Instrument Sans (nạp sau yuzu.css nên thắng cascade). */
 :root { --font-mono: "Instrument Sans", "Segoe UI", sans-serif; }
+/* Bỏ các tinh chỉnh letter-spacing/margin vốn cho font mono, về mặc định. */
+.mono, .chip { letter-spacing: normal; }
 
 /* Bấm anchor (docs nav…) nhảy tới ngay, bỏ smooth-scroll chậm của yuzu.css. */
 html { scroll-behavior: auto; }
@@ -60,7 +62,7 @@ main.content:has(.pg-bridge) { max-width: none; }
    Siết khoảng cách dấu , . cho số count-up vì Geist Mono chiếm nguyên
    ô nên dấu trông thưa.
    ================================================================ */
-.num-sep { margin-inline: -.12em; }
+.num-sep { margin-inline: 0; }
 
 /* ================================================================
    THEME (light): SURFACES TRẮNG + BỎ MỌI STROKE — toàn site.
