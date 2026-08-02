@@ -25,6 +25,13 @@ export default function TransparencyClient() {
       cleanups.push(() => el.removeEventListener(ev, fn));
     };
 
+    /* ---------- hero: hiệu ứng gõ chữ "Proof of Solvency" ---------- */
+    const grad = document.querySelector<HTMLElement>(".hero-grad[data-type]");
+    if (grad && !grad.classList.contains("go")) {
+      grad.style.setProperty("--tw", grad.scrollWidth + "px");
+      grad.classList.add("go");
+    }
+
     /* ---------- product tabs ---------- */
     const tabWrap = document.querySelector("[data-tp-tabs]");
     on(tabWrap, "click", (e) => {

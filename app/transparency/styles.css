@@ -13,9 +13,27 @@
   /* Hero: cụm text bên trái canh top */
   .hub-hero { align-items: start; }
 
-  /* Khoảng cách giữa các section = 32px. */
-  .section { margin: 0 0 32px; }
+  /* Khoảng cách giữa các section = 32px, bỏ padding-top. */
+  .section { margin: 0 0 32px; padding-top: 0; }
   .section:last-child { margin-bottom: 0; }
+
+  /* "Proof of Solvency": chữ gradient xanh + hiệu ứng gõ chữ có con trỏ. */
+  .hero-grad {
+    display: inline-block;
+    vertical-align: bottom;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.06em solid var(--tp-green);
+    background: linear-gradient(96deg, #2E6E12 0%, #5FB22E 52%, #9BD34E 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .hero-grad.go { animation: hero-type 1.4s steps(19) forwards, hero-caret 0.8s step-end 1.5s infinite; }
+  @keyframes hero-type { from { width: 0; } to { width: var(--tw); } }
+  @keyframes hero-caret { from, to { border-color: transparent; } 50% { border-color: var(--tp-green); } }
+  @media (prefers-reduced-motion: reduce) { .hero-grad.go { animation: none; width: auto !important; } }
 
   .verify-meta {
     display: flex;
@@ -50,6 +68,9 @@
   .bigstat .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; color: var(--faint); }
   .bigstat .v { font-family: var(--font-mono); font-size: clamp(20px, 2.2vw, 26px); font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; }
   @media (max-width: 560px) { .statwall { grid-template-columns: 1fr; } }
+  /* Products Verified: số đầu xanh lá, "/2" đen nhạt hơn. */
+  .pv-verified b { color: var(--tp-green); }
+  .pv-verified .den { color: var(--text); font-weight: 440; }
 
   .tp-panel { padding: 20px; margin-bottom: 16px; }
   .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -219,12 +240,13 @@
   .tp-subtabs button { border: none; background: transparent; cursor: pointer; padding: 0 0 10px; font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .12s; }
   .tp-subtabs button:hover { color: var(--text); }
   .tp-subtabs button.on { color: var(--text); border-bottom-color: var(--text); }
-  .apy-readout { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .apy-readout { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+  .apy-readout-l { display: flex; align-items: baseline; gap: 10px; }
   .apy-readout .cv { font-family: var(--font-mono); font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
   .apy-readout-lbl { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--muted); }
 
-  /* Chips bật/tắt các đường APY (Weekly Target / 1D / 7D / 30D). */
-  .apy-series { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  /* Chips bật/tắt các đường APY (Weekly Target / 1D / 7D / 30D) — cùng hàng readout, bên phải. */
+  .apy-series { display: flex; gap: 8px; flex-wrap: wrap; }
   /* Mặc định: chỉ có viền (stroke), nền trắng. Khi chọn: nền tint đầy theo màu đường, bỏ viền. */
   .apy-series button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid color-mix(in srgb, var(--text) 13%, transparent); background: var(--surface); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: var(--muted); transition: background .12s, border-color .12s, color .12s; }
   .apy-series button i { width: 9px; height: 9px; border-radius: 3px; background: var(--c); }

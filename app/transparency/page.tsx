@@ -1,6 +1,7 @@
 import "./styles.css";
 import TransparencyClient from "./TransparencyClient";
 import { pageMetadata } from "@/lib/pages";
+import { ArrowUpRight } from "lucide-react";
 
 /* Pixel-art monogram (theo phong cách icon của Accountable). '#' = ô đặc. */
 function Pix({ rows }: { rows: string[] }) {
@@ -50,9 +51,9 @@ export default function Transparency() {
     <div className="pg-transparency">
       <section className="hub-hero">
         <div>
-          <h1>Independent Proof of Solvency</h1>
+          <h1>Independent <span className="hero-grad" data-type>Proof of Solvency</span></h1>
           <p className="lede">An independent proof of solvency, live: assets and liabilities across Yuzu Alpha and Prime are attested every 15 minutes by Accountable, a verification network using secure enclaves and zero-knowledge proofs. This page renders their verified feed, position by position.</p>
-          <a className="tp-hero-cta" href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">Official Accountable dashboard <span className="arr">↗</span></a>
+          <a className="tp-hero-cta" href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">Official Accountable dashboard <ArrowUpRight size={15} strokeWidth={2.2} /></a>
         </div>
         <div className="statwall rv">
           <div className="bigstat">
@@ -69,7 +70,7 @@ export default function Transparency() {
           </div>
           <div className="bigstat">
             <div className="k">Products Verified</div>
-            <div className="v" data-count="2" data-suffix=" / 2">0</div>
+            <div className="v pv-verified"><b>2</b><span className="den">/2</span></div>
           </div>
         </div>
       </section>
@@ -139,8 +140,16 @@ export default function Transparency() {
               <button data-apy-token="pp" data-wt="27.0%">yzPP</button>
             </div>
             <div className="apy-readout">
-              <div className="cv" data-apy-value style={{ color: "var(--alpha)" }}>7.75%</div>
-              <span className="apy-readout-lbl">Weekly Target</span>
+              <div className="apy-readout-l">
+                <div className="cv" data-apy-value style={{ color: "var(--alpha)" }}>7.75%</div>
+                <span className="apy-readout-lbl">Weekly Target</span>
+              </div>
+              <div className="apy-series" data-apy-series>
+                <button className="on locked" data-line="wt" style={{ ["--c"]: "var(--tp-green)" } as React.CSSProperties}><i />Weekly Target</button>
+                <button data-line="1d" style={{ ["--c"]: "var(--tp-amber)" } as React.CSSProperties}><i />1D</button>
+                <button data-line="7d" style={{ ["--c"]: "var(--tp-blue)" } as React.CSSProperties}><i />7D</button>
+                <button data-line="30d" style={{ ["--c"]: "var(--tp-red)" } as React.CSSProperties}><i />30D</button>
+              </div>
             </div>
             <div className="tp-chart" data-apy-svg="syz">
               <LineChart
@@ -171,12 +180,6 @@ export default function Transparency() {
                 fmt="pct"
                 toggleable
               />
-            </div>
-            <div className="apy-series" data-apy-series>
-              <button className="on locked" data-line="wt" style={{ ["--c"]: "var(--tp-green)" } as React.CSSProperties}><i />Weekly Target</button>
-              <button data-line="1d" style={{ ["--c"]: "var(--tp-amber)" } as React.CSSProperties}><i />1D</button>
-              <button data-line="7d" style={{ ["--c"]: "var(--tp-blue)" } as React.CSSProperties}><i />7D</button>
-              <button data-line="30d" style={{ ["--c"]: "var(--tp-red)" } as React.CSSProperties}><i />30D</button>
             </div>
           </div>
         </section>
