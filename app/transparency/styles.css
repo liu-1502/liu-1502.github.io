@@ -81,12 +81,13 @@
   .pv-verified b { color: var(--tp-green); font-weight: inherit; }
   .pv-verified .den { color: var(--text); font-weight: 440; }
 
-  .tp-panel { padding: 20px; margin-bottom: 16px; }
+  .tp-panel { padding: 20px 20px 32px; margin-bottom: 16px; }
   .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
   .tp-panel .phead h3 { font-size: 18px; }
   /* Total ở góc phải title (thay cho total dưới đáy). */
-  .tp-total-h { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
-  .tp-total-h b { font-size: 22px; letter-spacing: 0; text-transform: none; color: var(--text); font-variant-numeric: tabular-nums; }
+  /* Total: đồng bộ label + font size với APY readout (label 13.5px, value 17px mono). */
+  .tp-total-h { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--font-body); font-size: 13.5px; letter-spacing: 0; text-transform: none; color: var(--muted); }
+  .tp-total-h b { font-family: var(--font-mono); font-size: 17px; font-weight: 560; color: var(--text); font-variant-numeric: tabular-nums; }
 
   /* Summary: số lớn (collateral ratio) + lưới chỉ số. */
   .tp-summary-lead { flex: none; }
@@ -164,10 +165,33 @@
 
   /* ===== product tabs (Alpha / Prime) ===== */
   .tp-tabs { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface-2); border-radius: 999px; margin: 30px 0 4px; }
-  .tp-tabs button { border: none; background: transparent; cursor: pointer; padding: 8px 22px; border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--muted); transition: background .15s ease, color .15s ease; }
+  .tp-tabs button { display: inline-flex; align-items: center; gap: 8px; border: none; background: transparent; cursor: pointer; padding: 7px 16px; border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--muted); transition: background .15s ease, color .15s ease; }
   .tp-tabs button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  /* APY badge sau tên tab: mặc định nền trắng + chữ màu sản phẩm; khi tab được chọn thì nền tint. */
+  .tp-tab-apy { font-family: var(--font-mono); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; font-variant-numeric: tabular-nums; background: var(--surface); }
+  .tp-tab-apy.a { color: var(--alpha); }
+  .tp-tab-apy.p { color: var(--prime); }
+  .tp-tabs button.on .tp-tab-apy.a { background: color-mix(in srgb, var(--alpha) 14%, var(--surface)); }
+  .tp-tabs button.on .tp-tab-apy.p { background: color-mix(in srgb, var(--prime) 16%, var(--surface)); }
 
-  /* ===== summary card (donut + stats) ===== */
+  /* ===== summary card: 6 data chia 3 trên / 3 dưới, divider dọc + ngang ===== */
+  .tp-summary6 { display: grid; grid-template-columns: repeat(3, 1fr); padding: 22px 16px; }
+  .s6 { position: relative; padding: 16px 22px; min-width: 0; }
+  /* divider dọc giữa các cột */
+  .s6:not(:nth-child(3n+1))::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 42px; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  /* divider ngang giữa hàng trên và hàng dưới */
+  .s6:nth-child(n+4)::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  .s6 .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s6 .v { font-family: var(--font-mono); font-size: 22px; font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  @media (max-width: 640px) {
+    .tp-summary6 { grid-template-columns: 1fr 1fr; }
+    .s6::before { display: none; }
+    .s6:nth-child(even)::before { display: block; content: ""; }
+    .s6::after { display: none; }
+    .s6:nth-child(n+3)::after { display: block; content: ""; }
+  }
+
+  /* ===== summary card (donut + stats) — giữ lại cho tương thích ===== */
   .tp-summary { display: grid; grid-template-columns: auto 1fr; gap: 34px; align-items: center; padding: 32px 28px 26px; }
   @media (max-width: 720px) { .tp-summary { grid-template-columns: 1fr; gap: 24px; } }
   .tp-summary-donut { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
@@ -244,15 +268,22 @@
   .tp-plot.show .tp-guide, .tp-plot.show .tp-hdot, .tp-plot.show .tp-tip { opacity: 1; }
 
   /* ===== APY card ===== */
-  /* Tab bar (syzUSD / yzPP): underline full nhạt xám, tab active có gạch chân đậm. */
-  .tp-subtabs { display: flex; gap: 26px; border-bottom: 1px solid var(--line-solid); margin-bottom: 18px; }
-  .tp-subtabs button { border: none; background: transparent; cursor: pointer; padding: 0 0 10px; font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .12s; }
-  .tp-subtabs button:hover { color: var(--text); }
-  .tp-subtabs button.on { color: var(--text); border-bottom-color: var(--text); }
-  /* APY readout dùng chung style legend với "Backing assets" (dot + label + value). */
+  /* Toggle syzUSD / yzPP (pill switch bo tròn, nằm bên phải title APY). */
+  .tp-subtabs { display: inline-flex; gap: 2px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+  .tp-subtabs button { border: none; background: transparent; cursor: pointer; padding: 5px 14px; border-radius: 999px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; color: var(--muted); }
+  .tp-subtabs button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  /* APY readout dùng chung style legend với "Backing assets"; value màu xanh lá. */
+  .apy-readout b[data-apy-value] { color: var(--tp-green); }
 
-  /* Chips bật/tắt các đường APY (Weekly Target / 1D / 7D / 30D) — cùng hàng readout, bên phải. */
-  .apy-series { display: flex; gap: 8px; flex-wrap: wrap; }
+  /* Readout dùng chung mọi chart: dot + label + value trên 1 hàng ngang. */
+  .tp-readout { display: flex; gap: 30px; flex-wrap: wrap; align-items: baseline; margin-bottom: 20px; min-height: 24px; }
+  .tp-readout-item { display: inline-flex; align-items: baseline; gap: 8px; }
+  .tp-readout-item .rl { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--muted); }
+  .tp-readout-item .rl i { width: 9px; height: 9px; border-radius: 3px; align-self: center; }
+  .tp-readout-item .rv { font-family: var(--font-mono); font-size: 17px; font-weight: 560; font-variant-numeric: tabular-nums; }
+
+  /* Chips bật/tắt các đường APY (Weekly Target / 1D / 7D / 30D) — nằm dưới chart, canh giữa. */
+  .apy-series { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
   /* Mặc định: chỉ có viền (stroke), nền trắng. Khi chọn: nền tint đầy theo màu đường, bỏ viền. */
   .apy-series button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid color-mix(in srgb, var(--text) 13%, transparent); background: var(--surface); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: var(--muted); transition: background .12s, border-color .12s, color .12s; }
   .apy-series button i { width: 9px; height: 9px; border-radius: 3px; background: var(--c); }
@@ -271,7 +302,7 @@
   .tp-strat-top b { font-family: var(--font-mono); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
   .tp-strat-nm { font-weight: 600; font-size: 13.5px; }
   .tp-strat-sub { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
-  .tp-strat-am { font-family: var(--font-mono); font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; margin-top: 10px; }
+  .tp-strat-am { font-family: var(--font-mono); font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; margin-top: 2px; }
 
   /* ===== attestation footer: 1 hàng, icon + tiêu đề + phụ đề, ngăn bởi divider ===== */
   .tp-attest { display: flex; align-items: center; padding: 20px 8px; }

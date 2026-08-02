@@ -86,19 +86,13 @@ export default function Transparency() {
 
         {/* Summary */}
         <section className="section rv">
-          <div className="card tp-summary">
-            <div className="tp-summary-lead">
-              <div className="tp-lead-pct" style={{ color: "var(--good)" }}>110.82%</div>
-              <div className="tp-lead-lbl">Collateral ratio</div>
-            </div>
-            <div className="tp-summary-stats">
-              <div><div className="k">Backing assets</div><div className="v" data-count="49375157" data-prefix="$">$0</div></div>
-              <div><div className="k">Supply</div><div className="v" data-count="44554443" data-prefix="$">$0</div></div>
-              <div><div className="k">Yield distributed</div><div className="v" data-count="2544038" data-prefix="$">$0</div></div>
-              <div><div className="k">yzUSD staked</div><div className="v">98.29%</div></div>
-              <div><div className="k">APY (syzUSD)</div><div className="v" style={{ color: "var(--alpha)" }}>7.75%</div></div>
-              <div><div className="k">Surplus buffer</div><div className="v" style={{ color: "var(--good)" }} data-count="4820702" data-prefix="$">$0</div></div>
-            </div>
+          <div className="card tp-summary6">
+            <div className="s6"><div className="k">Collateral ratio</div><div className="v" style={{ color: "var(--good)" }}>110.82%</div></div>
+            <div className="s6"><div className="k">Backing assets</div><div className="v" data-count="49375157" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">Supply</div><div className="v" data-count="44554443" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">Yield distributed</div><div className="v" data-count="2544038" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">yzUSD staked</div><div className="v">98.29%</div></div>
+            <div className="s6"><div className="k">APY</div><div className="v" style={{ color: "var(--good)" }}>7.75–27%</div></div>
           </div>
         </section>
 
@@ -108,11 +102,9 @@ export default function Transparency() {
             <div className="phead">
               <h3>Backing assets vs supply</h3>
             </div>
-            <div className="tp-chart-head">
-              <div className="tp-legend">
-                <div><span className="dot" style={{ background: "var(--tp-backing)" }} /><span className="l">Backing assets</span><b>$49,375,157</b></div>
-                <div><span className="dot" style={{ background: "var(--tp-supply)" }} /><span className="l">Supply</span><b>$44,554,443</b></div>
-              </div>
+            <div className="tp-readout">
+              <div className="tp-readout-item"><span className="rl"><i style={{ background: "var(--tp-backing)" }} />Backing assets</span><b className="rv">$49,375,157</b></div>
+              <div className="tp-readout-item"><span className="rl"><i style={{ background: "var(--tp-supply)" }} />Supply</span><b className="rv">$44,554,443</b></div>
             </div>
             <div className="tp-chart">
               <LineChart
@@ -134,22 +126,12 @@ export default function Transparency() {
           <div className="card tp-panel apy-card" data-apy>
             <div className="phead">
               <h3>APY</h3>
-            </div>
-            <div className="tp-subtabs" data-apy-tabs>
-              <button className="on" data-apy-token="syz" data-wt="7.75%">syzUSD</button>
-              <button data-apy-token="pp" data-wt="27.0%">yzPP</button>
-            </div>
-            <div className="tp-chart-head apy-readout">
-              <div className="tp-legend">
-                <div><span className="dot" style={{ background: "var(--tp-green)" }} /><span className="l">Weekly Target</span><b data-apy-value>7.75%</b></div>
-              </div>
-              <div className="apy-series" data-apy-series>
-                <button className="on locked" data-line="wt" style={{ ["--c"]: "var(--tp-green)" } as React.CSSProperties}><i />Weekly Target</button>
-                <button data-line="1d" style={{ ["--c"]: "var(--tp-amber)" } as React.CSSProperties}><i />1D</button>
-                <button data-line="7d" style={{ ["--c"]: "var(--tp-blue)" } as React.CSSProperties}><i />7D</button>
-                <button data-line="30d" style={{ ["--c"]: "var(--tp-red)" } as React.CSSProperties}><i />30D</button>
+              <div className="tp-subtabs" data-apy-tabs>
+                <button className="on" data-apy-token="syz" data-wt="7.75%">syzUSD</button>
+                <button data-apy-token="pp" data-wt="27.0%">yzPP</button>
               </div>
             </div>
+            <div className="tp-readout" data-apy-readout />
             <div className="tp-chart" data-apy-svg="syz">
               <LineChart
                 series={[
@@ -180,6 +162,12 @@ export default function Transparency() {
                 toggleable
               />
             </div>
+            <div className="apy-series" data-apy-series>
+              <button className="on locked" data-line="wt" data-label="Weekly Target" data-syz="7.75%" data-pp="27.0%" style={{ ["--c"]: "var(--tp-green)" } as React.CSSProperties}><i />Weekly Target</button>
+              <button data-line="1d" data-label="1D" data-syz="8.05%" data-pp="27.0%" style={{ ["--c"]: "var(--tp-amber)" } as React.CSSProperties}><i />1D</button>
+              <button data-line="7d" data-label="7D" data-syz="8.02%" data-pp="27.0%" style={{ ["--c"]: "var(--tp-blue)" } as React.CSSProperties}><i />7D</button>
+              <button data-line="30d" data-label="30D" data-syz="7.78%" data-pp="26.0%" style={{ ["--c"]: "var(--tp-red)" } as React.CSSProperties}><i />30D</button>
+            </div>
           </div>
         </section>
 
@@ -196,19 +184,13 @@ export default function Transparency() {
       <div data-tp-panel="prime" style={{ display: "none" }}>
 
         <section className="section rv">
-          <div className="card tp-summary">
-            <div className="tp-summary-lead">
-              <div className="tp-lead-pct" style={{ color: "var(--good)" }}>100.28%</div>
-              <div className="tp-lead-lbl">Assets / liabilities</div>
-            </div>
-            <div className="tp-summary-stats">
-              <div><div className="k">Assets</div><div className="v" data-count="6159080" data-prefix="$">$0</div></div>
-              <div><div className="k">Liabilities</div><div className="v" data-count="6142108" data-prefix="$">$0</div></div>
-              <div><div className="k">Yield distributed</div><div className="v" data-count="15804" data-prefix="$">$0</div></div>
-              <div><div className="k">NAV</div><div className="v">$1.01243</div></div>
-              <div><div className="k">APY (yzPrime)</div><div className="v" style={{ color: "var(--prime)" }}>7.00%</div></div>
-              <div><div className="k">Surplus buffer</div><div className="v" style={{ color: "var(--good)" }} data-count="16971" data-prefix="$">$0</div></div>
-            </div>
+          <div className="card tp-summary6">
+            <div className="s6"><div className="k">Assets / liabilities</div><div className="v" style={{ color: "var(--good)" }}>100.28%</div></div>
+            <div className="s6"><div className="k">Assets</div><div className="v" data-count="6159080" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">Liabilities</div><div className="v" data-count="6142108" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">Yield distributed</div><div className="v" data-count="15804" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">NAV</div><div className="v">$1.01243</div></div>
+            <div className="s6"><div className="k">APY</div><div className="v" style={{ color: "var(--prime)" }}>7.00%</div></div>
           </div>
         </section>
 
