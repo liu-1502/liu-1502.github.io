@@ -1,3 +1,11 @@
+/* Tab Prime: đổi theme sang nâu (nền vàng nhạt + accent xanh lá -> nâu Prime). */
+body.tp-prime { --bg: color-mix(in srgb, var(--prime) 4%, #FDFCF8); }
+body.tp-prime .pg-transparency {
+  --tp-green: var(--prime);
+  --tp-backing: var(--prime);
+  --good: var(--prime);
+}
+
 /* Style riêng của trang Transparency — lồng trong .pg-transparency để không loang
    sang trang khác (nhiều tên class trùng giữa các trang). */
 .pg-transparency {

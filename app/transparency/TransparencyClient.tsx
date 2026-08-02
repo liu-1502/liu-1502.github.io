@@ -62,7 +62,10 @@ export default function TransparencyClient() {
       document.querySelectorAll<HTMLElement>("[data-tp-panel]").forEach((p) => {
         p.style.display = p.getAttribute("data-tp-panel") === key ? "" : "none";
       });
+      // Prime tab -> theme nâu (nền vàng nhạt + accent xanh lá đổi sang nâu).
+      document.body.classList.toggle("tp-prime", key === "prime");
     });
+    cleanups.push(() => document.body.classList.remove("tp-prime"));
 
     /* ---------- APY: token sub-tab + line toggles (mỗi chart APY độc lập) ---------- */
     document.querySelectorAll<HTMLElement>("[data-apy]").forEach((apy) => {
