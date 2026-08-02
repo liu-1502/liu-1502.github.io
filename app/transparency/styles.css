@@ -17,10 +17,14 @@
   .section { margin: 0 0 32px; padding-top: 0; }
   > .section:last-child { margin-bottom: 0; }
 
-  /* 2 chart nằm ngang 1 hàng, cao bằng nhau; thu nhỏ màn hình thì xuống 2 dòng. */
+  /* 2 chart nằm ngang 1 hàng, cao bằng nhau; phần dư dồn vào vùng chart chứ không
+     đẩy khoảng cách dưới chips (chips luôn cách đáy 20px). Thu nhỏ thì xuống 2 dòng. */
   .tp-charts2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 0 0 32px; align-items: stretch; }
   .tp-charts2 > .section { margin: 0; }
-  .tp-charts2 > .section > .card { height: 100%; }
+  .tp-charts2 > .section > .card { height: 100%; display: flex; flex-direction: column; }
+  .tp-charts2 .tp-chart { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 180px; }
+  .tp-charts2 .tp-chart .tp-plot { flex: 1 1 auto; min-height: 160px; }
+  .tp-charts2 .tp-chart .tp-plot svg { height: 100%; }
   @media (max-width: 1000px) { .tp-charts2 { grid-template-columns: 1fr; gap: 20px; } }
   /* Section summary (đầu mỗi panel): thêm padding-top 32px. */
   [data-tp-panel] > .section:first-child { padding-top: 32px; }
@@ -30,8 +34,8 @@
     display: inline-block;
     vertical-align: bottom;
     white-space: nowrap;
-    overflow: hidden;
-    border-right: 0.06em solid var(--tp-green);
+    min-height: 1em;
+    border-right: 0.06em solid var(--prime);
     background: linear-gradient(100deg, var(--alpha) 0%, var(--prime) 50%, var(--alpha) 100%);
     background-size: 200% 100%;
     -webkit-background-clip: text;
@@ -39,16 +43,10 @@
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
-  .hero-grad.go { animation: hero-type 6s steps(17, end) infinite, hero-caret 0.8s step-end infinite, hero-flow 6s ease-in-out infinite; }
-  @keyframes hero-type {
-    0% { width: 0; }
-    22% { width: var(--tw); }   /* gõ xong (~1.3s) */
-    92% { width: var(--tw); }   /* giữ nguyên */
-    100% { width: 0; }          /* xoá nhanh rồi gõ lại */
-  }
+  .hero-grad.typing { animation: hero-caret 0.8s step-end infinite, hero-flow 6s ease-in-out infinite; }
   @keyframes hero-caret { from, to { border-color: transparent; } 50% { border-color: var(--prime); } }
   @keyframes hero-flow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-  @media (prefers-reduced-motion: reduce) { .hero-grad.go { animation: none; width: auto !important; } }
+  @media (prefers-reduced-motion: reduce) { .hero-grad.typing { animation: hero-flow 6s ease-in-out infinite; border-color: transparent; } }
 
   .verify-meta {
     display: flex;

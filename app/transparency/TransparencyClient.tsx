@@ -25,11 +25,30 @@ export default function TransparencyClient() {
       cleanups.push(() => el.removeEventListener(ev, fn));
     };
 
-    /* ---------- hero: hiệu ứng gõ chữ "Proof of Solvency" ---------- */
+    /* ---------- hero: gõ chữ "Proof of Solvency" từng ký tự (lặp) ---------- */
     const grad = document.querySelector<HTMLElement>(".hero-grad[data-type]");
-    if (grad && !grad.classList.contains("go")) {
-      grad.style.setProperty("--tw", grad.scrollWidth + "px");
-      grad.classList.add("go");
+    if (grad) {
+      const full = grad.getAttribute("data-full") || grad.textContent || "";
+      grad.setAttribute("data-full", full);
+      grad.classList.add("typing");
+      let i = 0;
+      let phase: "type" | "hold" | "erase" = "type";
+      let timer = 0;
+      const step = () => {
+        grad.textContent = full.slice(0, i);
+        if (phase === "type") {
+          if (i < full.length) { i++; timer = window.setTimeout(step, 85); }
+          else { phase = "hold"; timer = window.setTimeout(step, 2600); }
+        } else if (phase === "hold") {
+          phase = "erase";
+          timer = window.setTimeout(step, 45);
+        } else {
+          if (i > 0) { i--; timer = window.setTimeout(step, 45); }
+          else { phase = "type"; timer = window.setTimeout(step, 450); }
+        }
+      };
+      step();
+      cleanups.push(() => window.clearTimeout(timer));
     }
 
     /* ---------- product tabs ---------- */
