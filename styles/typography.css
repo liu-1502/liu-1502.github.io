@@ -1,3 +1,6 @@
+/* Đổi toàn bộ font mono -> Instrument Sans (nạp sau yuzu.css nên thắng cascade). */
+:root { --font-mono: "Instrument Sans", "Segoe UI", sans-serif; }
+
 /* Bấm anchor (docs nav…) nhảy tới ngay, bỏ smooth-scroll chậm của yuzu.css. */
 html { scroll-behavior: auto; }
 
