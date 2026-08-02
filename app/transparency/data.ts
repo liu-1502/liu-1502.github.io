@@ -112,5 +112,23 @@ export const ratio = SERIES.map((r) => r[3] * 100);
 export const apy = SERIES.map((r) => r[4]);
 /** yzPP theo dõi cùng nhịp với syzUSD nhưng ~3.48x (27% vs 7.75%). */
 export const apyPP = SERIES.map((r) => +(r[4] * 3.48).toFixed(1));
+
+/** Realized APY suy ra tất định từ weekly target, mỗi kỳ hạn có hình dạng riêng biệt:
+ *  1D = nhiễu tần số cao (gai nhọn), 7D = mượt hơn và lệch lên, 30D = rất mượt và lệch xuống. */
+const make = (base: number[], k: number) =>
+  base.map((v, i) => {
+    const d1 = Math.sin(i * 2.1) * 1.2 * k + Math.cos(i * 0.85) * 0.7 * k; // spiky
+    const d7 = 0.6 * k + Math.sin(i * 0.55) * 0.8 * k; // offset up, wavy
+    const d30 = -0.75 * k + Math.sin(i * 0.32) * 0.35 * k; // offset down, smooth
+    return { d1, d7, d30 };
+  });
+const round = (base: number[], pick: (o: { d1: number; d7: number; d30: number }) => number, k: number, dec: number) =>
+  make(base, k).map((o, i) => +(base[i] + pick(o)).toFixed(dec));
+export const apy1D = round(apy, (o) => o.d1, 1, 2);
+export const apy7D = round(apy, (o) => o.d7, 1, 2);
+export const apy30D = round(apy, (o) => o.d30, 1, 2);
+export const apyPP1D = round(apyPP, (o) => o.d1, 3.48, 1);
+export const apyPP7D = round(apyPP, (o) => o.d7, 3.48, 1);
+export const apyPP30D = round(apyPP, (o) => o.d30, 3.48, 1);
 export const assetsMin = Math.min(...supply) * 0.9;
 export const assetsMax = Math.max(...reserves) * 1.02;

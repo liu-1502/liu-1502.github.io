@@ -149,20 +149,17 @@ export function Donut({
 export function StackedBar({
   rows,
   topN = 4,
-  colorVar,
 }: {
   rows: SplitRow[];
   topN?: number;
-  colorVar: string;
 }) {
   const total = rows.reduce((a, r) => a + (r[r.length - 1] as number), 0);
   const top = rows.slice(0, topN).map((r) => ({ name: r[0] as string, v: r[r.length - 1] as number }));
   const otherV = total - top.reduce((a, s) => a + s.v, 0);
   const segs = [...top, { name: "Other", v: otherV }];
-  // Bảng màu phân biệt: seg đầu = màu sản phẩm, các seg sau dùng màu tương phản, "Other" = xám.
-  const POOL = ["#E7B84B", "#3E86E0", "#B06BD6", "#E28743", "#2FB37E"];
-  const color = (i: number) =>
-    i === segs.length - 1 ? "var(--faint)" : i === 0 ? `var(${colorVar})` : POOL[(i - 1) % POOL.length];
+  // Dùng chung bộ màu chart toàn trang (xanh lá → vàng cam → xanh dương → đỏ → tím), "Other" = xám.
+  const PALETTE = ["var(--tp-green)", "var(--tp-amber)", "var(--tp-blue)", "var(--tp-red)", "var(--tp-purple)"];
+  const color = (i: number) => (i === segs.length - 1 ? "var(--faint)" : PALETTE[i % PALETTE.length]);
   return (
     <div className="tp-stack">
       <div className="tp-stack-bar">
@@ -185,7 +182,6 @@ export function StackedBar({
           </div>
         ))}
       </div>
-      <div className="tp-stack-total"><span>Total</span><b>{usd(total)}</b></div>
     </div>
   );
 }
@@ -210,7 +206,7 @@ function linePoints(values: number[], min: number, max: number) {
   };
 }
 
-/** Các nét vẽ bên trong <svg> biểu đồ. Thay line(). Màu dùng biến CSS nên theo theme. */
+/** Các nét vẽ bên trong <svg> biểu đồ: chỉ đường line bo góc mềm (nền chấm xám do CSS). */
 export function ChartLines({
   series,
   min,
@@ -225,17 +221,60 @@ export function ChartLines({
       {series.map((s, si) => {
         const g = linePoints(s.values, min, max);
         return (
-          <Fragment key={si}>
-            <polygon points={g.area} style={{ fill: s.color }} opacity={0.08} />
+          <polyline
+            key={si}
+            points={g.points}
+            fill="none"
+            style={{ stroke: s.color }}
+            strokeWidth={1.8}
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        );
+      })}
+    </>
+  );
+}
+
+/** Các đường APY realized: Weekly Target (mặc định) + 1D/7D/30D bật/tắt được (theo Accountable). */
+export function ApyLines({
+  wt,
+  d1,
+  d7,
+  d30,
+  min,
+  max,
+}: {
+  wt: number[];
+  d1: number[];
+  d7: number[];
+  d30: number[];
+  min: number;
+  max: number;
+}) {
+  const L = [
+    { k: "wt", v: wt, c: "var(--tp-green)" },
+    { k: "1d", v: d1, c: "var(--tp-amber)" },
+    { k: "7d", v: d7, c: "var(--tp-blue)" },
+    { k: "30d", v: d30, c: "var(--tp-red)" },
+  ];
+  return (
+    <>
+      {L.map((l) => {
+        const g = linePoints(l.v, min, max);
+        return (
+          <g key={l.k} data-apy-line={l.k} style={l.k === "wt" ? undefined : { display: "none" }}>
             <polyline
               points={g.points}
               fill="none"
-              style={{ stroke: s.color }}
-              strokeWidth={1.6}
+              style={{ stroke: l.c }}
+              strokeWidth={1.8}
+              strokeLinejoin="round"
+              strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
             />
-            <circle cx={W - PAD} cy={g.lastY} r={2.6} style={{ fill: s.color }} />
-          </Fragment>
+          </g>
         );
       })}
     </>
