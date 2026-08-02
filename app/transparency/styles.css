@@ -16,6 +16,8 @@
   /* Khoảng cách giữa các section = 32px, bỏ padding-top. */
   .section { margin: 0 0 32px; padding-top: 0; }
   .section:last-child { margin-bottom: 0; }
+  /* Section summary (đầu mỗi panel): thêm padding-top 32px. */
+  [data-tp-panel] > .section:first-child { padding-top: 32px; }
 
   /* "Proof of Solvency": chữ gradient xanh + hiệu ứng gõ chữ có con trỏ. */
   .hero-grad {
@@ -31,9 +33,14 @@
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
-  .hero-grad.go { animation: hero-type 1.4s steps(19) forwards, hero-caret 0.8s step-end 1.5s infinite, hero-flow 6s ease-in-out 1.4s infinite; }
-  @keyframes hero-type { from { width: 0; } to { width: var(--tw); } }
-  @keyframes hero-caret { from, to { border-color: transparent; } 50% { border-color: var(--tp-green); } }
+  .hero-grad.go { animation: hero-type 6s steps(17, end) infinite, hero-caret 0.8s step-end infinite, hero-flow 6s ease-in-out infinite; }
+  @keyframes hero-type {
+    0% { width: 0; }
+    22% { width: var(--tw); }   /* gõ xong (~1.3s) */
+    92% { width: var(--tw); }   /* giữ nguyên */
+    100% { width: 0; }          /* xoá nhanh rồi gõ lại */
+  }
+  @keyframes hero-caret { from, to { border-color: transparent; } 50% { border-color: var(--prime); } }
   @keyframes hero-flow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
   @media (prefers-reduced-motion: reduce) { .hero-grad.go { animation: none; width: auto !important; } }
 
@@ -242,10 +249,7 @@
   .tp-subtabs button { border: none; background: transparent; cursor: pointer; padding: 0 0 10px; font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .12s; }
   .tp-subtabs button:hover { color: var(--text); }
   .tp-subtabs button.on { color: var(--text); border-bottom-color: var(--text); }
-  .apy-readout { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
-  .apy-readout-l { display: flex; align-items: baseline; gap: 10px; }
-  .apy-readout .cv { font-family: var(--font-mono); font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .apy-readout-lbl { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--muted); }
+  /* APY readout dùng chung style legend với "Backing assets" (dot + label + value). */
 
   /* Chips bật/tắt các đường APY (Weekly Target / 1D / 7D / 30D) — cùng hàng readout, bên phải. */
   .apy-series { display: flex; gap: 8px; flex-wrap: wrap; }

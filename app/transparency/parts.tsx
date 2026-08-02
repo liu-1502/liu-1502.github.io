@@ -185,7 +185,6 @@ export function StackedBar({
               <b style={{ color: color(i) }}>{usd(s.v)}</b>
             </div>
             <div className="tp-strat-nm">{s.name}</div>
-            {s.sub && <div className="tp-strat-sub">{s.sub}</div>}
             <div className="tp-strat-am">{pct(s.v).toFixed(1)}%</div>
           </div>
         ))}

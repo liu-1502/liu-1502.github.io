@@ -139,10 +139,9 @@ export default function Transparency() {
               <button className="on" data-apy-token="syz" data-wt="7.75%">syzUSD</button>
               <button data-apy-token="pp" data-wt="27.0%">yzPP</button>
             </div>
-            <div className="apy-readout">
-              <div className="apy-readout-l">
-                <div className="cv" data-apy-value style={{ color: "var(--alpha)" }}>7.75%</div>
-                <span className="apy-readout-lbl">Weekly Target</span>
+            <div className="tp-chart-head apy-readout">
+              <div className="tp-legend">
+                <div><span className="dot" style={{ background: "var(--tp-green)" }} /><span className="l">Weekly Target</span><b data-apy-value>7.75%</b></div>
               </div>
               <div className="apy-series" data-apy-series>
                 <button className="on locked" data-line="wt" style={{ ["--c"]: "var(--tp-green)" } as React.CSSProperties}><i />Weekly Target</button>
