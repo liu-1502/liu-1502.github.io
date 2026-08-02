@@ -110,5 +110,7 @@ export const reserves = SERIES.map((r) => r[1]);
 export const supply = SERIES.map((r) => r[2]);
 export const ratio = SERIES.map((r) => r[3] * 100);
 export const apy = SERIES.map((r) => r[4]);
+/** yzPP theo dõi cùng nhịp với syzUSD nhưng ~3.48x (27% vs 7.75%). */
+export const apyPP = SERIES.map((r) => +(r[4] * 3.48).toFixed(1));
 export const assetsMin = Math.min(...supply) * 0.9;
 export const assetsMax = Math.max(...reserves) * 1.02;

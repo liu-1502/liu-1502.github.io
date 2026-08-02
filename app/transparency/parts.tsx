@@ -54,6 +54,97 @@ export function WalletList({ wallets }: { wallets: [string, string][] }) {
   );
 }
 
+/* ---------- donut tỉ lệ thế chấp ---------- */
+/** Vòng donut hiển thị collateral ratio. Phần supply (được phủ) + phần surplus (đệm). */
+export function Donut({
+  ratio,
+  colorVar = "--good",
+}: {
+  ratio: number; // vd 110.82
+  colorVar?: string;
+}) {
+  const R = 52;
+  const C = 2 * Math.PI * R;
+  // supply chiếm 1/ratio của backing; surplus là phần dư.
+  const coverage = Math.min(1, 100 / ratio); // 0..1 phần liabilities
+  const surplus = 1 - coverage; // phần đệm
+  return (
+    <svg className="tp-donut" viewBox="0 0 130 130" aria-label={`Collateral ratio ${ratio}%`}>
+      <circle cx="65" cy="65" r={R} className="tp-donut-track" />
+      {/* phần đệm (surplus) tô đậm màu good */}
+      <circle
+        cx="65"
+        cy="65"
+        r={R}
+        className="tp-donut-arc"
+        style={{ stroke: `var(${colorVar})` }}
+        strokeDasharray={`${(C * surplus).toFixed(1)} ${C.toFixed(1)}`}
+        strokeDashoffset={(C * 0.25).toFixed(1)}
+        transform="rotate(-90 65 65)"
+        data-len={(C * surplus).toFixed(1)}
+        data-c={C.toFixed(1)}
+      />
+      {/* phần liabilities tô nhạt */}
+      <circle
+        cx="65"
+        cy="65"
+        r={R}
+        className="tp-donut-cov"
+        style={{ stroke: `var(${colorVar})` }}
+        strokeDasharray={`${(C * coverage).toFixed(1)} ${C.toFixed(1)}`}
+        strokeDashoffset={(-C * surplus + C * 0.25).toFixed(1)}
+        transform="rotate(-90 65 65)"
+      />
+    </svg>
+  );
+}
+
+/* ---------- stacked bar: top chiến lược ---------- */
+/** Thanh xếp chồng top N chiến lược + "Other", có legend. */
+export function StackedBar({
+  rows,
+  topN = 4,
+  colorVar,
+}: {
+  rows: SplitRow[];
+  topN?: number;
+  colorVar: string;
+}) {
+  const total = rows.reduce((a, r) => a + (r[r.length - 1] as number), 0);
+  const top = rows.slice(0, topN).map((r) => ({ name: r[0] as string, v: r[r.length - 1] as number }));
+  const otherV = total - top.reduce((a, s) => a + s.v, 0);
+  const segs = [...top, { name: "Other", v: otherV }];
+  return (
+    <div className="tp-stack">
+      <div className="tp-stack-bar">
+        {segs.map((s, i) => (
+          <span
+            key={s.name}
+            className="tp-stack-seg"
+            style={{
+              width: `${((s.v / total) * 100).toFixed(2)}%`,
+              background: `var(${colorVar})`,
+              opacity: Math.max(0.28, 1 - i * 0.17),
+            }}
+            title={`${s.name} — ${usd(s.v)}`}
+          />
+        ))}
+      </div>
+      <div className="tp-stack-legend">
+        {segs.map((s, i) => (
+          <div key={s.name} className="tp-stack-item">
+            <span className="dot" style={{ background: `var(${colorVar})`, opacity: Math.max(0.28, 1 - i * 0.17) }} />
+            <span className="nm">{s.name}</span>
+            <span className="pc">{((s.v / total) * 100).toFixed(1)}%</span>
+            <span className="am">{usd(s.v)}</span>
+          </div>
+        ))}
+      </div>
+      <div className="tp-stack-total"><span>Total</span><b>{usd(total)}</b></div>
+    </div>
+  );
+}
+
 /* ---------- biểu đồ đường (SVG tĩnh, tính hình học thuần) ---------- */
 const W = 300;
 const H = 130;

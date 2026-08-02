@@ -104,4 +104,67 @@
   .how em { font-family: var(--font-mono); font-style: normal; font-size: 10px; color: var(--citrus); letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 12px; }
 
   .asof { font-family: var(--font-mono); font-size: 11px; color: var(--faint); margin-top: 10px; }
+
+  /* ===== product tabs (Alpha / Prime) ===== */
+  .tp-tabs { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface-2); border-radius: 999px; margin: 30px 0 4px; }
+  .tp-tabs button { border: none; background: transparent; cursor: pointer; padding: 8px 22px; border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--muted); transition: background .15s ease, color .15s ease; }
+  .tp-tabs button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+
+  /* ===== summary card (donut + stats) ===== */
+  .tp-summary { display: grid; grid-template-columns: auto 1fr; gap: 34px; align-items: center; padding: 26px 28px; }
+  @media (max-width: 720px) { .tp-summary { grid-template-columns: 1fr; gap: 24px; } }
+  .tp-summary-donut { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
+  .tp-donut { width: 150px; height: 150px; transform: rotate(0deg); }
+  .tp-donut-track { fill: none; stroke: var(--surface-2); stroke-width: 12; }
+  .tp-donut-arc { fill: none; stroke-width: 12; stroke-linecap: round; }
+  .tp-donut-cov { fill: none; stroke-width: 12; opacity: .18; }
+  .tp-donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1px; }
+  .tp-donut-center b { font-family: var(--font-mono); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tp-donut-tag { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--good); font-weight: 600; }
+  .tp-donut-center small { font-family: var(--font-mono); font-size: 9px; color: var(--faint); letter-spacing: .05em; margin-top: 2px; }
+  .tp-summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 22px; }
+  @media (max-width: 560px) { .tp-summary-stats { grid-template-columns: 1fr 1fr; } }
+  .tp-summary-stats .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .tp-summary-stats .v { font-family: var(--font-mono); font-size: 18px; font-weight: 560; margin-top: 6px; font-variant-numeric: tabular-nums; }
+
+  /* ===== chart blocks ===== */
+  .tp-chart-head { display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 6px; }
+  .tp-chart-head > div { display: flex; align-items: baseline; gap: 8px; }
+  .tp-chart-head .dot { width: 8px; height: 8px; border-radius: 50%; align-self: center; }
+  .tp-chart-head .l { font-size: 12px; color: var(--muted); }
+  .tp-chart-head b { font-family: var(--font-mono); font-size: 15px; font-weight: 560; font-variant-numeric: tabular-nums; }
+  .tp-chart svg { width: 100%; height: 180px; display: block; }
+  .tp-chart .xlab { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 9px; color: var(--faint); padding: 6px 0 0; letter-spacing: .05em; }
+
+  /* ===== APY card ===== */
+  .tp-subtabs { display: inline-flex; gap: 2px; padding: 3px; background: var(--surface-2); border-radius: 8px; }
+  .tp-subtabs button { border: none; background: transparent; cursor: pointer; padding: 5px 14px; border-radius: 6px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; color: var(--muted); }
+  .tp-subtabs button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  .apy-readout { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+  .apy-readout .cv { font-family: var(--font-mono); font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .apy-range { display: inline-flex; gap: 2px; padding: 3px; background: var(--surface-2); border-radius: 8px; }
+  .apy-range button { border: none; background: transparent; cursor: pointer; padding: 5px 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; color: var(--muted); white-space: nowrap; }
+  .apy-range button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+
+  /* ===== stacked bar (top strategies) ===== */
+  .tp-stack-bar { display: flex; height: 22px; border-radius: 5px; overflow: hidden; gap: 2px; }
+  .tp-stack-seg { display: block; height: 100%; }
+  .tp-stack-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 28px; margin-top: 18px; }
+  @media (max-width: 620px) { .tp-stack-legend { grid-template-columns: 1fr; } }
+  .tp-stack-item { display: grid; grid-template-columns: 14px 1fr auto auto; align-items: center; gap: 8px; font-size: 12.5px; }
+  .tp-stack-item .dot { width: 9px; height: 9px; border-radius: 3px; }
+  .tp-stack-item .nm { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tp-stack-item .pc { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .tp-stack-item .am { font-family: var(--font-mono); font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; text-align: right; }
+  .tp-stack-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .tp-stack-total span { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .tp-stack-total b { font-family: var(--font-mono); font-size: 16px; font-weight: 560; font-variant-numeric: tabular-nums; }
+
+  /* ===== attestation footer ===== */
+  .tp-attest { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .tp-attest { grid-template-columns: 1fr; } }
+  .tp-attest .card { padding: 22px; }
+  .tp-attest em { font-family: var(--font-mono); font-style: normal; font-size: 10px; color: var(--good); letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 12px; }
+  .tp-attest b { font-family: var(--font-display); font-weight: 620; font-size: 14.5px; display: block; margin-bottom: 6px; }
+  .tp-attest span { font-size: 12.5px; color: var(--muted); line-height: 1.6; display: block; }
 }
