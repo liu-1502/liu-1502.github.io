@@ -11,6 +11,8 @@ body.tp-prime .pg-transparency {
   /* nền/surface xanh nhạt -> nâu (đậm như card mint/redeem bên Prime = 16%) */
   --surface-2: color-mix(in srgb, var(--prime) 16%, #FBFAF3);
 }
+/* Nhãn stat card: Alpha = xanh đen đậm (--text), Prime = nâu đậm. */
+body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
 
 /* Style riêng của trang Transparency — lồng trong .pg-transparency để không loang
    sang trang khác (nhiều tên class trùng giữa các trang). */
@@ -92,7 +94,7 @@ body.tp-prime .pg-transparency {
   /* 4 stat card dạng lưới 2x2 (nền xám nhạt, bo góc). */
   .statwall { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .bigstat { background: var(--surface-2); border-radius: 14px; padding: 18px 20px; }
-  .bigstat .k { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; text-transform: none; color: var(--prime); font-weight: 600; }
+  .bigstat .k { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; text-transform: none; color: var(--text); font-weight: 600; }
   .bigstat .v { font-family: var(--font-body); font-size: clamp(20px, 2.2vw, 26px); font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; }
   @media (max-width: 560px) { .statwall { grid-template-columns: 1fr; } }
   /* Products Verified: số đầu xanh lá, "/2" đen nhạt hơn. */
