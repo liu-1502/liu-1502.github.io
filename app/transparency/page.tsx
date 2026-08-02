@@ -230,12 +230,9 @@ export default function Transparency() {
 
         {/* APY */}
         <section className="section rv">
-          <div className="card tp-panel apy-card" data-apy>
+          <div className="card tp-panel apy-card" data-apy data-apy-default="pr">
             <div className="phead">
               <h3>APY</h3>
-              <div className="tp-subtabs" data-apy-tabs>
-                <button className="on" data-apy-token="pr">yzPrime</button>
-              </div>
             </div>
             <div className="tp-readout" data-apy-readout>
               <div className="tp-readout-item"><span className="rl"><i style={{ background: "var(--tp-green)" }} />Weekly Target</span><b className="rv">7.00%</b></div>

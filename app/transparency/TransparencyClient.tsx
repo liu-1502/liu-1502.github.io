@@ -46,7 +46,10 @@ export default function TransparencyClient() {
 
     /* ---------- APY: token sub-tab + line toggles (mỗi chart APY độc lập) ---------- */
     document.querySelectorAll<HTMLElement>("[data-apy]").forEach((apy) => {
-      let apyToken = apy.querySelector("[data-apy-token].on")?.getAttribute("data-apy-token") || "syz";
+      let apyToken =
+        apy.querySelector("[data-apy-token].on")?.getAttribute("data-apy-token") ||
+        apy.getAttribute("data-apy-default") ||
+        "syz";
       // Readout (dot + label + value) cho từng đường đang bật.
       const renderApyReadout = () => {
         const cont = apy.querySelector<HTMLElement>("[data-apy-readout]");
