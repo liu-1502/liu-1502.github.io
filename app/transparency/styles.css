@@ -88,7 +88,7 @@
   .pv-verified .den { color: var(--text); font-weight: 440; }
 
   .tp-panel { padding: 20px 20px 32px; margin-bottom: 16px; }
-  .apy-card { padding-bottom: 24px; }
+  .apy-card { padding-bottom: 20px; }
   .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
   .tp-panel .phead h3 { font-size: 18px; }
   /* Total ở góc phải title (thay cho total dưới đáy). */
