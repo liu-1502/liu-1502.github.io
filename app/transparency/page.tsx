@@ -28,15 +28,6 @@ export default function Transparency() {
             <Button href="https://yuzu.accountable.capital/" target="_blank" rel="noopener" variant="solid"><img src="/assets/partners/accountable-fav.png" alt="" style={{ width: 18, height: 18, filter: "brightness(0) invert(1)" }} />Official Accountable dashboard <span className="arr">↗</span></Button>
           </div>
         </div>
-        <div className="verify-meta rv">
-          <div><span className="k">Verifier</span><span className="v">Accountable DVN</span></div>
-          <div><span className="k">Quorum</span><span className="v" style={{ color: "var(--good)" }}>Active, locked</span></div>
-          <div><span className="k">Interval</span><span className="v">15 minutes</span></div>
-          <div><span className="k">Attestation</span><span className="v">SEV enclave + Merkle root</span></div>
-          <div><span className="k">Proof</span><span className="v">zkTLS + ZK snapshot</span></div>
-          <div><span className="k">Verifiability</span><span className="v" style={{ color: "var(--good)" }}>100%</span></div>
-          <div><span className="k">Last update</span><span className="v">2026-07-16 05:03:30</span></div>
-        </div>
       </section>
 
       <div className="statwall rv">
