@@ -44,42 +44,43 @@ export default function TransparencyClient() {
       });
     });
 
-    /* ---------- APY: token sub-tab + line toggles ---------- */
-    const apy = document.querySelector<HTMLElement>("[data-apy]");
-    let apyToken = "syz";
-    // Readout (data trên, label dưới) cho từng đường đang bật — đồng bộ style với Backing.
-    const renderApyReadout = () => {
-      const cont = apy?.querySelector<HTMLElement>("[data-apy-readout]");
-      if (!cont) return;
-      const items = Array.from(apy!.querySelectorAll<HTMLElement>("[data-line].on")).map((b) => {
-        const color = b.style.getPropertyValue("--c").trim();
-        const label = b.getAttribute("data-label") || "";
-        const val = b.getAttribute(apyToken === "syz" ? "data-syz" : "data-pp") || "";
-        return `<div class="tp-readout-item"><span class="rl"><i style="background:${color}"></i>${label}</span><b class="rv">${val}</b></div>`;
+    /* ---------- APY: token sub-tab + line toggles (mỗi chart APY độc lập) ---------- */
+    document.querySelectorAll<HTMLElement>("[data-apy]").forEach((apy) => {
+      let apyToken = apy.querySelector("[data-apy-token].on")?.getAttribute("data-apy-token") || "syz";
+      // Readout (dot + label + value) cho từng đường đang bật.
+      const renderApyReadout = () => {
+        const cont = apy.querySelector<HTMLElement>("[data-apy-readout]");
+        if (!cont) return;
+        const items = Array.from(apy.querySelectorAll<HTMLElement>("[data-line].on")).map((b) => {
+          const color = b.style.getPropertyValue("--c").trim();
+          const label = b.getAttribute("data-label") || "";
+          const val = b.getAttribute("data-" + apyToken) || "";
+          return `<div class="tp-readout-item"><span class="rl"><i style="background:${color}"></i>${label}</span><b class="rv">${val}</b></div>`;
+        });
+        cont.innerHTML = items.join("");
+      };
+      renderApyReadout();
+      on(apy, "click", (e) => {
+        const t = e.target as HTMLElement;
+        const tk = t.closest<HTMLElement>("[data-apy-token]");
+        const ln = t.closest<HTMLElement>("[data-line]");
+        if (tk) {
+          apyToken = tk.getAttribute("data-apy-token") || apyToken;
+          apy.querySelectorAll("[data-apy-token]").forEach((b) => b.classList.toggle("on", b === tk));
+          apy.querySelectorAll<HTMLElement>("[data-apy-svg]").forEach((s) => {
+            s.style.display = s.getAttribute("data-apy-svg") === apyToken ? "" : "none";
+          });
+          renderApyReadout();
+        } else if (ln) {
+          if (ln.classList.contains("locked")) return; // Weekly Target: luôn bật
+          const k = ln.getAttribute("data-line");
+          const active = ln.classList.toggle("on");
+          apy.querySelectorAll<HTMLElement>(`[data-apy-line="${k}"]`).forEach((g) => {
+            g.style.display = active ? "" : "none";
+          });
+          renderApyReadout();
+        }
       });
-      cont.innerHTML = items.join("");
-    };
-    renderApyReadout();
-    on(apy, "click", (e) => {
-      const t = e.target as HTMLElement;
-      const tk = t.closest<HTMLElement>("[data-apy-token]");
-      const ln = t.closest<HTMLElement>("[data-line]");
-      if (tk) {
-        apyToken = tk.getAttribute("data-apy-token") || "syz";
-        apy?.querySelectorAll("[data-apy-token]").forEach((b) => b.classList.toggle("on", b === tk));
-        apy?.querySelectorAll<HTMLElement>("[data-apy-svg]").forEach((s) => {
-          s.style.display = s.getAttribute("data-apy-svg") === apyToken ? "" : "none";
-        });
-        renderApyReadout();
-      } else if (ln) {
-        if (ln.classList.contains("locked")) return; // Weekly Target: luôn bật, không tắt được
-        const k = ln.getAttribute("data-line");
-        const active = ln.classList.toggle("on");
-        apy?.querySelectorAll<HTMLElement>(`[data-apy-line="${k}"]`).forEach((g) => {
-          g.style.display = active ? "" : "none";
-        });
-        renderApyReadout();
-      }
     });
 
     /* ---------- hover crosshair + tooltip (dùng chung mọi .tp-plot) ---------- */

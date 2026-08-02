@@ -132,3 +132,20 @@ export const apyPP7D = round(apyPP, (o) => o.d7, 3.48, 1);
 export const apyPP30D = round(apyPP, (o) => o.d30, 3.48, 1);
 export const assetsMin = Math.min(...supply) * 0.9;
 export const assetsMax = Math.max(...reserves) * 1.02;
+
+/* ---------- Prime timeline (assets ~ liabilities, tăng dần tới ~$7.66M) ---------- */
+export const primeAssets = SERIES.map((_, i) => {
+  const t = i / (SERIES.length - 1);
+  const base = 4.5e6 + 3.16e6 * t; // 4.5M -> 7.66M
+  const wob = Math.sin(i * 0.8) * 1.6e5 + Math.sin(i * 2.3) * 6e4;
+  return Math.round(base + wob);
+});
+export const primeLiab = primeAssets.map((v) => Math.round(v / 1.0012)); // ratio ~100.12%
+/** yzPrime target APY ~5.9% -> 7.0%. */
+export const primeApy = SERIES.map((_, i) => {
+  const t = i / (SERIES.length - 1);
+  return +(5.9 + 1.1 * t + Math.sin(i * 0.5) * 0.12).toFixed(2);
+});
+export const primeApy1D = round(primeApy, (o) => o.d1, 1, 2);
+export const primeApy7D = round(primeApy, (o) => o.d7, 1, 2);
+export const primeApy30D = round(primeApy, (o) => o.d30, 1, 2);

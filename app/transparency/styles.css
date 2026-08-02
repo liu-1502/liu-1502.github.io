@@ -82,7 +82,7 @@
   .pv-verified .den { color: var(--text); font-weight: 440; }
 
   .tp-panel { padding: 20px 20px 32px; margin-bottom: 16px; }
-  .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
   .tp-panel .phead h3 { font-size: 18px; }
   /* Total ở góc phải title (thay cho total dưới đáy). */
   /* Total: đồng bộ label + font size với APY readout (label 13.5px, value 17px mono). */
@@ -276,7 +276,7 @@
   .apy-readout b[data-apy-value] { color: var(--tp-green); }
 
   /* Readout dùng chung mọi chart: dot + label + value trên 1 hàng ngang. */
-  .tp-readout { display: flex; gap: 30px; flex-wrap: wrap; align-items: baseline; margin-bottom: 20px; min-height: 24px; }
+  .tp-readout { display: flex; gap: 30px; flex-wrap: wrap; align-items: baseline; margin-bottom: 28px; min-height: 24px; }
   .tp-readout-item { display: inline-flex; align-items: baseline; gap: 8px; }
   .tp-readout-item .rl { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--muted); }
   .tp-readout-item .rl i { width: 9px; height: 9px; border-radius: 3px; align-self: center; }

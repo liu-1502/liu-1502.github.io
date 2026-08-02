@@ -35,6 +35,12 @@ import {
   apyPP1D,
   apyPP7D,
   apyPP30D,
+  primeAssets,
+  primeLiab,
+  primeApy,
+  primeApy1D,
+  primeApy7D,
+  primeApy30D,
   usd,
 } from "./data";
 
@@ -131,7 +137,9 @@ export default function Transparency() {
                 <button data-apy-token="pp" data-wt="27.0%">yzPP</button>
               </div>
             </div>
-            <div className="tp-readout" data-apy-readout />
+            <div className="tp-readout" data-apy-readout>
+              <div className="tp-readout-item"><span className="rl"><i style={{ background: "var(--tp-green)" }} />Weekly Target</span><b className="rv">7.75%</b></div>
+            </div>
             <div className="tp-chart" data-apy-svg="syz">
               <LineChart
                 series={[
@@ -185,12 +193,71 @@ export default function Transparency() {
 
         <section className="section rv">
           <div className="card tp-summary6">
-            <div className="s6"><div className="k">Assets / liabilities</div><div className="v" style={{ color: "var(--good)" }}>100.28%</div></div>
-            <div className="s6"><div className="k">Assets</div><div className="v" data-count="6159080" data-prefix="$">$0</div></div>
-            <div className="s6"><div className="k">Liabilities</div><div className="v" data-count="6142108" data-prefix="$">$0</div></div>
-            <div className="s6"><div className="k">Yield distributed</div><div className="v" data-count="15804" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">Assets / liabilities</div><div className="v" style={{ color: "var(--good)" }}>100.12%</div></div>
+            <div className="s6"><div className="k">Assets</div><div className="v" data-count="7659180" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">Liabilities</div><div className="v" data-count="7650000" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">Yield distributed</div><div className="v" data-count="18300" data-prefix="$">$0</div></div>
             <div className="s6"><div className="k">NAV</div><div className="v">$1.01243</div></div>
             <div className="s6"><div className="k">APY</div><div className="v" style={{ color: "var(--prime)" }}>7.00%</div></div>
+          </div>
+        </section>
+
+        {/* Assets vs Liabilities */}
+        <section className="section rv">
+          <div className="card tp-panel">
+            <div className="phead"><h3>Assets vs Liabilities</h3></div>
+            <div className="tp-readout">
+              <div className="tp-readout-item"><span className="rl"><i style={{ background: "var(--tp-backing)" }} />Assets</span><b className="rv">$7,659,180</b></div>
+              <div className="tp-readout-item"><span className="rl"><i style={{ background: "var(--tp-supply)" }} />Liabilities</span><b className="rv">$7,650,000</b></div>
+            </div>
+            <div className="tp-chart">
+              <LineChart
+                series={[
+                  { k: "a", label: "Assets", color: "var(--tp-backing)", values: primeAssets },
+                  { k: "l", label: "Liabilities", color: "var(--tp-supply)", values: primeLiab },
+                ]}
+                min={Math.min(...primeLiab) * 0.985}
+                max={Math.max(...primeAssets) * 1.015}
+                dates={DATES}
+                fmt="money"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* APY */}
+        <section className="section rv">
+          <div className="card tp-panel apy-card" data-apy>
+            <div className="phead">
+              <h3>APY</h3>
+              <div className="tp-subtabs" data-apy-tabs>
+                <button className="on" data-apy-token="pr">yzPrime</button>
+              </div>
+            </div>
+            <div className="tp-readout" data-apy-readout>
+              <div className="tp-readout-item"><span className="rl"><i style={{ background: "var(--tp-green)" }} />Weekly Target</span><b className="rv">7.00%</b></div>
+            </div>
+            <div className="tp-chart" data-apy-svg="pr">
+              <LineChart
+                series={[
+                  { k: "wt", label: "Weekly Target", color: "var(--tp-green)", values: primeApy },
+                  { k: "1d", label: "1D", color: "var(--tp-amber)", values: primeApy1D },
+                  { k: "7d", label: "7D", color: "var(--tp-blue)", values: primeApy7D },
+                  { k: "30d", label: "30D", color: "var(--tp-red)", values: primeApy30D },
+                ]}
+                min={5}
+                max={8}
+                dates={DATES}
+                fmt="pct"
+                toggleable
+              />
+            </div>
+            <div className="apy-series" data-apy-series>
+              <button className="on locked" data-line="wt" data-label="Weekly Target" data-pr="7.00%" style={{ ["--c"]: "var(--tp-green)" } as React.CSSProperties}><i />Weekly Target</button>
+              <button data-line="1d" data-label="1D" data-pr="7.12%" style={{ ["--c"]: "var(--tp-amber)" } as React.CSSProperties}><i />1D</button>
+              <button data-line="7d" data-label="7D" data-pr="7.05%" style={{ ["--c"]: "var(--tp-blue)" } as React.CSSProperties}><i />7D</button>
+              <button data-line="30d" data-label="30D" data-pr="6.82%" style={{ ["--c"]: "var(--tp-red)" } as React.CSSProperties}><i />30D</button>
+            </div>
           </div>
         </section>
 
