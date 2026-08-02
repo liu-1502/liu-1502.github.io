@@ -15,7 +15,7 @@
 
   /* Khoảng cách giữa các section = 32px, bỏ padding-top. */
   .section { margin: 0 0 32px; padding-top: 0; }
-  .section:last-child { margin-bottom: 0; }
+  > .section:last-child { margin-bottom: 0; }
 
   /* 2 chart nằm ngang 1 hàng (rộng bằng nhau); thu nhỏ màn hình thì xuống 2 dòng. */
   .tp-charts2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 0 0 32px; align-items: start; }
@@ -88,7 +88,7 @@
 
   .tp-panel { padding: 20px 20px 32px; margin-bottom: 16px; }
   .apy-card { padding-bottom: 20px; }
-  .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+  .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; min-height: 34px; }
   .tp-panel .phead h3 { font-size: 18px; }
   /* Total ở góc phải title (thay cho total dưới đáy). */
   /* Total: đồng bộ label + font size với APY readout (label 13.5px, value 17px mono). */
@@ -284,11 +284,11 @@
   .apy-readout b[data-apy-value] { color: var(--tp-green); }
 
   /* Readout dùng chung mọi chart: dot + label + value trên 1 hàng ngang. */
-  .tp-readout { display: flex; gap: 30px; flex-wrap: wrap; align-items: baseline; margin-bottom: 28px; min-height: 24px; }
-  .tp-readout-item { display: inline-flex; align-items: baseline; gap: 8px; }
-  .tp-readout-item .rl { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--muted); }
+  .tp-readout { display: flex; gap: 18px; flex-wrap: nowrap; align-items: baseline; margin-bottom: 28px; min-height: 24px; }
+  .tp-readout-item { display: inline-flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+  .tp-readout-item .rl { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--muted); }
   .tp-readout-item .rl i { width: 9px; height: 9px; border-radius: 3px; align-self: center; }
-  .tp-readout-item .rv { font-family: var(--font-mono); font-size: 17px; font-weight: 560; font-variant-numeric: tabular-nums; }
+  .tp-readout-item .rv { font-family: var(--font-mono); font-size: 15px; font-weight: 560; font-variant-numeric: tabular-nums; }
 
   /* Chips bật/tắt các đường APY (Weekly Target / 1D / 7D / 30D) — nằm dưới chart, canh giữa. */
   .apy-series { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
