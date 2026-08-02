@@ -8,8 +8,8 @@ body.tp-prime .pg-transparency {
   --good: var(--prime);
   --tp-green: var(--prime);
   --tp-backing: var(--prime);
-  /* nền/surface xanh nhạt -> nâu nhạt */
-  --surface-2: color-mix(in srgb, var(--prime) 8%, #FDFCF8);
+  /* nền/surface xanh nhạt -> nâu (đậm như card mint/redeem bên Prime = 16%) */
+  --surface-2: color-mix(in srgb, var(--prime) 16%, #FBFAF3);
 }
 
 /* Style riêng của trang Transparency — lồng trong .pg-transparency để không loang
