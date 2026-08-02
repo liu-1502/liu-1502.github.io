@@ -93,12 +93,11 @@ export default function Transparency() {
           <div className="card tp-panel" data-bk>
             <div className="phead">
               <h3>Backing assets vs supply</h3>
-              <span className="tp-live"><i />Live</span>
             </div>
             <div className="tp-chart-head">
               <div className="tp-legend">
-                <div><span className="dot" style={{ background: "var(--alpha)" }} /><span className="l">Backing assets</span><b>$49,375,157</b></div>
-                <div><span className="dot" style={{ background: "var(--prime)" }} /><span className="l">Supply</span><b>$44,554,443</b></div>
+                <div><span className="dot" style={{ background: "var(--tp-backing)" }} /><span className="l">Backing assets</span><b>$49,375,157</b></div>
+                <div><span className="dot" style={{ background: "var(--tp-supply)" }} /><span className="l">Supply</span><b>$44,554,443</b></div>
               </div>
               <div className="tp-range" data-bk-range>
                 {RANGES.map((r) => (
@@ -117,8 +116,8 @@ export default function Transparency() {
                   <svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-label="Backing assets and supply over time">
                     <ChartLines
                       series={[
-                        { values: rs, color: "var(--alpha)" },
-                        { values: sp, color: "var(--prime)" },
+                        { values: rs, color: "var(--tp-backing)" },
+                        { values: sp, color: "var(--tp-supply)" },
                       ]}
                       min={mn}
                       max={mx}
@@ -139,7 +138,7 @@ export default function Transparency() {
         <section className="section rv">
           <div className="card tp-panel apy-card" data-apy>
             <div className="phead">
-              <div className="phead-l"><h3>APY</h3><span className="tp-live"><i />Live</span></div>
+              <h3>APY</h3>
               <div className="tp-subtabs" data-apy-tabs>
                 <button className="on" data-apy-token="syz">syzUSD</button>
                 <button data-apy-token="pp">yzPP</button>

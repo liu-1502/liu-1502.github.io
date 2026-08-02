@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { Check } from "lucide-react";
 import { usd, shortAddr, walletHref, type SplitRow } from "./data";
 
 /** Bảng breakdown (chiến lược hoặc theo chain) với thanh tỉ trọng. Thay renderSplit(). */
@@ -75,7 +74,6 @@ export function RatioBars({
     <div className="tp-ratio">
       <div className="tp-ratio-head">
         <div className="tp-ratio-pct">{ratio.toFixed(2)}%</div>
-        <span className="tp-ratio-badge"><Check size={12} strokeWidth={3} />Well Backed</span>
       </div>
       <div className="tp-ratio-lbl">{label}</div>
       <div className="tp-ratio-bars">
