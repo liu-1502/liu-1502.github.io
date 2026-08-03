@@ -91,10 +91,15 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   .tp-hero-cta:hover { text-decoration: underline; }
   .tp-hero-cta .arr { font-weight: 400; }
 
+  /* Mobile: hero xuống 1 cột (statwall full width). */
+  @media (max-width: 720px) {
+    .hub-hero { grid-template-columns: 1fr; gap: 28px; }
+  }
+
   /* 4 stat card dạng lưới 2x2 (nền xám nhạt, bo góc). */
   .statwall { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .bigstat { background: var(--surface-2); border-radius: 14px; padding: 18px 20px; }
-  .bigstat .k { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; text-transform: none; color: var(--text); font-weight: 600; }
+  .bigstat .k { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; text-transform: none; color: #207B1E; font-weight: 600; }
   .bigstat .v { font-family: var(--font-body); font-size: clamp(20px, 2.2vw, 26px); font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; }
   @media (max-width: 560px) { .statwall { grid-template-columns: 1fr; } }
   /* Products Verified: số đầu xanh lá, "/2" đen nhạt hơn. */
@@ -304,6 +309,8 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
 
   /* Readout dùng chung mọi chart: dot + label + value trên 1 hàng ngang. */
   .tp-readout { display: flex; gap: 18px; flex-wrap: nowrap; align-items: baseline; margin-bottom: 28px; min-height: 24px; }
+  /* Mobile: chart xếp 1 cột nên readout cho wrap để không tràn ngang. */
+  @media (max-width: 1000px) { .tp-readout { flex-wrap: wrap; gap: 8px 20px; } }
   .tp-readout-item { display: inline-flex; align-items: baseline; gap: 8px; white-space: nowrap; }
   .tp-readout-item .rl { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--muted); }
   .tp-readout-item .rl i { width: 9px; height: 9px; border-radius: 3px; align-self: center; }
