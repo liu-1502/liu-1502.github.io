@@ -75,21 +75,23 @@ function OrderItem({
   amount: string;
   date: string;
   tx: string;
-  status: "pending" | "filled";
+  status: "pending" | "filled" | "finalized" | "cancelled";
 }) {
   const Icon = kind === "mint" ? ArrowDownRight : ArrowUpRight;
   const negative = kind === "redeem"; // Redeem = tiền ra (âm), Mint = tiền vào (dương)
+  const badgeLabel = status.charAt(0).toUpperCase() + status.slice(1);
   return (
     <div className="ord" role="button" tabIndex={0} data-kind={kind}>
       <span className="oicon"><Icon /></span>
       <div className="oleft">
         <span className="ot">{label}</span>
         <span className="oa">{date} · <span className="otx">{tx}<ExternalLink /></span></span>
-        <button type="button" className={`oaction${status === "pending" ? " neg" : ""}`}>{status === "pending" ? "Cancel" : "Finalize"}</button>
+        {status === "pending" && <button type="button" className="oaction neg">Cancel</button>}
+        {status === "filled" && <button type="button" className="oaction">Finalize</button>}
       </div>
       <div className="oright">
         <span className="ov">{negative ? "−" : "+"}{amount}</span>
-        <span className={`badge ${status}`}>{status === "pending" ? "Pending" : "Filled"}</span>
+        <span className={`badge ${status}`}>{badgeLabel}</span>
       </div>
     </div>
   );
@@ -315,6 +317,8 @@ export default function Alpha() {
               <OrderItem kind="redeem" label="Redeem yzUSD" amount="$2,000.00" date="03 Aug 2026, 12:59" tx="0x9ed0…7f1a" status="filled" />
               <OrderItem kind="redeem" label="Redeem yzUSD" amount="$1,000.00" date="30 Jul 2026, 23:08" tx="0xc843…3c36" status="pending" />
               <OrderItem kind="mint" label="Mint yzUSD" amount="$1,000.50" date="30 Jul 2026, 21:10" tx="0xeED43…AbbA" status="pending" />
+              <OrderItem kind="redeem" label="Redeem yzUSD" amount="$500.00" date="29 Jul 2026, 18:22" tx="0x71bC8…9Ae0" status="finalized" />
+              <OrderItem kind="mint" label="Mint yzUSD" amount="$3,200.00" date="29 Jul 2026, 09:05" tx="0x4aF0…2b1c" status="cancelled" />
             </div>
           </details>
           </div>{/* .av-left */}
