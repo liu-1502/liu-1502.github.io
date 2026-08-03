@@ -75,16 +75,26 @@ export default function DashboardHero() {
         <animateTransform {...ROCK} />
       </path>
 
-      {/* mặt trăng vàng: bám ĐÚNG vòng đen (vẽ sau vòng đen nên nằm TRƯỚC vòng đen),
-          nhưng bị CẮT theo vùng NGOÀI quả chanh (clip) => khi đi qua thân quả chanh thì ẨN
-          (như ra sau quả chanh), chỉ hiện ở mép ngoài. Lượn nhẹ cùng vòng đen theo ROCK. */}
+      {/* mặt trăng — bản SAU (nửa XA): vẽ trước vòng đen nhưng bị CẮT theo vùng NGOÀI quả chanh
+          => khi qua thân quả chanh thì ẨN (ra sau quả chanh). Lượn theo ROCK. */}
       <g clipPath="url(#outsideLemon)">
         <g>
           <animateTransform {...ROCK} />
-          <g className="dh-moon">
+          <g className="dh-moon dh-moon-back">
             <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
             <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path={ORBIT} />
+            <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.406;0.901" values="visible;hidden;visible" />
           </g>
+        </g>
+      </g>
+
+      {/* mặt trăng — bản TRƯỚC (nửa GẦN): vẽ SAU CÙNG, KHÔNG clip => nằm TRƯỚC quả chanh (như cũ). */}
+      <g>
+        <animateTransform {...ROCK} />
+        <g className="dh-moon dh-moon-front">
+          <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
+          <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path={ORBIT} />
+          <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.406;0.901" values="hidden;visible;hidden" />
         </g>
       </g>
 
