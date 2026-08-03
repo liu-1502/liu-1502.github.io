@@ -54,7 +54,7 @@
   /* Header + tabs canh trái theo mép content */
   .av-head { align-self: stretch; }
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
-  .av-head p { margin: 6px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); max-width: 72ch; }
+  .av-head p { margin: 6px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
   #alphaTabs { justify-content: flex-start; }
 
   /* ---- Detail sections (giống cột phải Marketplace) ---- */

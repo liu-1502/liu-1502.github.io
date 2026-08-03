@@ -9,8 +9,8 @@
 /* ---- Chỉ desktop: viền phải sidebar (màu cụ thể vì --line-solid transparent).
    Bọc min-width để KHÔNG đè media query mobile của yuzu.css. ---- */
 @media (min-width: 821px) {
-  /* Stroke phải: xanh nhạt overlay (tông brand, bán trong suốt) */
-  .side { border-right: 1px solid color-mix(in srgb, var(--citrus) 15%, transparent); }
+  /* Stroke phải: xám nhạt trung tính như divider (không ánh brand). */
+  .side { border-right: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
   /* Dark mode: viền phải mờ như topbar (--line-solid tối), tránh trắng gắt. */
   :root[data-theme="dark"] .side { border-right-color: var(--line-solid); }
 }
