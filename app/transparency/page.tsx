@@ -96,8 +96,8 @@ export default function Transparency() {
             <div className="s6"><div className="k">Backing Assets</div><div className="v" data-count="49375157" data-prefix="$">$0</div></div>
             <div className="s6"><div className="k">Collateral Ratio</div><div className="v" style={{ color: "var(--good)" }}>110.82%</div></div>
             <div className="s6"><div className="k">Yield Distributed</div><div className="v" data-count="2544038" data-prefix="$">$0</div></div>
-            <div className="s6"><div className="k">syzUSD APY <span className="s6-info" title="syzUSD is the senior tranche of Yuzu Alpha"><Info /></span></div><div className="v" style={{ color: "var(--good)" }}>7.75%</div></div>
-            <div className="s6"><div className="k">yzPP APY <span className="s6-info" title="yzPP is the junior / first-loss tranche of Yuzu Alpha"><Info /></span></div><div className="v" style={{ color: "var(--good)" }}>27.0%</div></div>
+            <div className="s6"><div className="k">syzUSD APY <span className="s6-info"><Info /><span className="s6-tip">syzUSD is the senior tranche of Yuzu Alpha</span></span></div><div className="v" style={{ color: "var(--good)" }}>7.75%</div></div>
+            <div className="s6"><div className="k">yzPP APY <span className="s6-info"><Info /><span className="s6-tip">yzPP is the junior / first-loss tranche of Yuzu Alpha</span></span></div><div className="v" style={{ color: "var(--good)" }}>27.0%</div></div>
             <div className="s6"><div className="k">Days since Inception</div><div className="v" data-days-since>—</div></div>
           </div>
         </section>

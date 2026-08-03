@@ -41,7 +41,7 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   .tp-charts2 .tp-chart { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 180px; }
   .tp-charts2 .tp-chart .tp-plot { flex: 1 1 auto; min-height: 160px; }
   .tp-charts2 .tp-chart .tp-plot svg { height: 100%; }
-  @media (max-width: 1000px) { .tp-charts2 { grid-template-columns: 1fr; gap: 20px; } }
+  @media (max-width: 1000px) { .tp-charts2 { grid-template-columns: 1fr; gap: 32px; } }
   /* Section summary (đầu mỗi panel): thêm padding-top 32px. */
   [data-tp-panel] > .section:first-child { padding-top: 32px; }
 
@@ -214,8 +214,18 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   .s6:nth-child(6)::after { right: 24px; }
   .s6 .k { font-family: var(--font-body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .s6 .v { font-family: var(--font-body); font-size: 22px; font-weight: 560; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .s6-info { display: inline-flex; align-items: center; color: var(--faint); margin-left: 3px; cursor: help; vertical-align: middle; }
+  .s6 .k:has(.s6-info) { overflow: visible; }
+  .s6-info { position: relative; display: inline-flex; align-items: center; color: var(--faint); margin-left: 3px; cursor: help; vertical-align: middle; }
   .s6-info svg { width: 12px; height: 12px; }
+  .s6-tip {
+    position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+    width: max-content; max-width: 220px; white-space: normal; text-align: left;
+    background: var(--text); color: var(--surface);
+    font-size: 11.5px; font-weight: 400; letter-spacing: 0; line-height: 1.45;
+    padding: 8px 10px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    opacity: 0; pointer-events: none; transition: opacity .14s ease; z-index: 30;
+  }
+  .s6-info:hover .s6-tip { opacity: 1; }
   /* 2 cột (mobile): dọc ở cột phải (even); ngang từ hàng 2 (cell >=3), full-width. */
   @media (max-width: 640px) {
     .tp-summary6 { grid-template-columns: 1fr 1fr; }
