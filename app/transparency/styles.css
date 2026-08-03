@@ -87,7 +87,9 @@ body.tp-prime .pg-transparency .s6 .k, body.tp-prime .pg-transparency .s6 .v { c
   .verify-meta .v { font-family: var(--font-body); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
 
   /* Hero: text bên trái, 4 stat card bên phải. */
-  .hub-hero { align-items: center; grid-template-columns: 1fr 1fr; gap: 44px; }
+  .hub-hero { align-items: center; grid-template-columns: 1fr; gap: 44px; }
+  /* Bỏ statwall -> mô tả fill hết bề ngang */
+  .hub-hero .lede { max-width: none; }
   .tp-hero-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--good); text-decoration: none; }
   .tp-hero-cta:hover { text-decoration: underline; }
   .tp-hero-cta .arr { font-weight: 400; }

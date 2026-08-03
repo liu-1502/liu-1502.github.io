@@ -341,9 +341,9 @@
   /* Negative (Redeem): nút đỏ — viền đỏ nhạt, chữ đỏ */
   .ord .oaction.neg { border-color: color-mix(in srgb, #DC2626 38%, transparent); color: #DC2626; }
   .ord .oaction.neg:hover { border-color: #DC2626; background: color-mix(in srgb, #DC2626 6%, transparent); }
-  /* Finalize = primary: nền đen thui, chữ trắng */
-  .ord .oaction:not(.neg) { background: #1A1A1A; color: #fff; border-color: #1A1A1A; }
-  .ord .oaction:not(.neg):hover { background: #2A2A2A; border-color: #2A2A2A; }
+  /* Finalize = primary: nền xanh lá, chữ trắng */
+  .ord .oaction:not(.neg) { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .ord .oaction:not(.neg):hover { background: color-mix(in srgb, var(--accent) 88%, #000); border-color: color-mix(in srgb, var(--accent) 88%, #000); }
   .ord .badge { display: inline-flex; padding: 4px 8px; border-radius: 6px; font-family: var(--font-body); font-weight: 500; font-size: 12px; }
   .ord .badge.pending { background: #FFFBEB; color: #F9A006; }     /* vàng: đang chờ */
   .ord .badge.filled { background: #F1F2F4; color: #5C636E; }      /* neutral: đã khớp, chờ finalize */

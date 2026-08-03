@@ -61,24 +61,6 @@ export default function Transparency() {
           <p className="lede">An independent proof of solvency, live: assets and liabilities across Yuzu Alpha and Prime are attested every 15 minutes by Accountable, a verification network using secure enclaves and zero-knowledge proofs. This page renders their verified feed, position by position.</p>
           <a className="tp-hero-cta" href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">Official Accountable dashboard <ArrowUpRight size={15} strokeWidth={2.2} /></a>
         </div>
-        <div className="statwall rv">
-          <div className="bigstat">
-            <div className="k">Total TVL</div>
-            <div className="v" data-count="56.30" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
-          </div>
-          <div className="bigstat">
-            <div className="k">Total Assets / Backing</div>
-            <div className="v" data-count="55.98" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
-          </div>
-          <div className="bigstat">
-            <div className="k">Total Yield Distributed</div>
-            <div className="v" data-count="2.69" data-dec="2" data-prefix="$" data-suffix="M">$0</div>
-          </div>
-          <div className="bigstat">
-            <div className="k">Products Verified</div>
-            <div className="v pv-verified"><b>2</b><span className="den">/2</span></div>
-          </div>
-        </div>
       </section>
 
       {/* ==================== PRODUCT TABS ==================== */}

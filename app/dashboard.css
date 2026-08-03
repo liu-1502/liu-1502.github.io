@@ -163,9 +163,12 @@
     }
   }
 
+  /* Nền xanh nhạt + chữ xanh đậm như thẻ stat bên Transparency */
+  .page-stats { background: var(--surface-2); }
+
   /* Màu + size + font số liệu trong khối stats; siết khoảng cách với label */
   .page-stats .v {
-    color: var(--text);
+    color: #142F04;
     font-size: 20px;
     line-height: 30px;
     margin-top: 1px;
@@ -174,8 +177,8 @@
     letter-spacing: 0;
   }
 
-  /* Nhãn stat: giữ như cũ, chỉ tăng weight cho đậm hơn */
-  .page-stats .k { font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+  /* Nhãn stat: xanh đậm, đậm hơn */
+  .page-stats .k { color: #142F04; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
 
   /* ===== Icon info + popover chart (hover) ===== */
   .page-stats, .page-stats > div { overflow: visible; }   /* cho popover tràn ra */
