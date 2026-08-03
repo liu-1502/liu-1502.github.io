@@ -311,7 +311,9 @@
   .ord:hover { background: #F6F8F3; }
   .ord:active { background: #EDF3E7; }
   .ord:focus-visible { outline: 2px solid var(--alpha); outline-offset: -2px; }
-  .ord .oicon { width: 28px; height: 28px; flex: none; display: grid; place-items: center; background: #F5F5F5; border-radius: 100px; color: #737373; }
+  .ord .oicon { width: 28px; height: 28px; flex: none; display: grid; place-items: center; background: #F5F5F5; border-radius: 100px; color: #737373; transition: background .15s ease, color .15s ease; }
+  /* Hover cả dòng -> icon đổi sang theme xanh lá */
+  .ord:hover .oicon { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
   .ord .oicon svg { width: 16px; height: 16px; }
   .ord .oleft { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; flex: 1; min-width: 0; }
   .ord .oleft .ot { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: #262626; }
