@@ -342,7 +342,7 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   .tp-attest-txt b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 14px; }
   .tp-attest-txt span { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
   @media (max-width: 760px) {
-    .tp-attest { flex-direction: column; align-items: stretch; gap: 20px; padding: 22px; }
+    .tp-attest { flex-direction: column; align-items: flex-start; gap: 20px; padding: 0; }
     .tp-attest-item { padding: 0; }
     .tp-attest-item:not(:first-child)::before { display: none; }
   }
