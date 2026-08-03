@@ -25,6 +25,12 @@ export default function TransparencyClient() {
       cleanups.push(() => el.removeEventListener(ev, fn));
     };
 
+    /* ---------- Days since Inception (launch 16 Oct 2025) ---------- */
+    document.querySelectorAll<HTMLElement>("[data-days-since]").forEach((el) => {
+      const days = Math.floor((Date.now() - Date.UTC(2025, 9, 16)) / 86400000);
+      el.textContent = days.toLocaleString("en-US");
+    });
+
     /* ---------- hero: gõ chữ "Proof of Solvency" từng ký tự (lặp) ---------- */
     const grad = document.querySelector<HTMLElement>(".hero-grad[data-type]");
     if (grad) {

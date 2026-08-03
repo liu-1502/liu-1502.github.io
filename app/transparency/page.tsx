@@ -1,7 +1,7 @@
 import "./styles.css";
 import TransparencyClient from "./TransparencyClient";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Info } from "lucide-react";
 
 /* Pixel-art monogram (theo phong cách icon của Accountable). '#' = ô đặc. */
 function Pix({ rows }: { rows: string[] }) {
@@ -93,12 +93,12 @@ export default function Transparency() {
         {/* Summary */}
         <section className="section rv">
           <div className="card tp-summary6">
-            <div className="s6"><div className="k">Collateral ratio</div><div className="v" style={{ color: "var(--good)" }}>110.82%</div></div>
-            <div className="s6"><div className="k">Backing assets</div><div className="v" data-count="49375157" data-prefix="$">$0</div></div>
-            <div className="s6"><div className="k">Supply</div><div className="v" data-count="44554443" data-prefix="$">$0</div></div>
-            <div className="s6"><div className="k">Yield distributed</div><div className="v" data-count="2544038" data-prefix="$">$0</div></div>
-            <div className="s6"><div className="k">yzUSD staked</div><div className="v">98.29%</div></div>
-            <div className="s6"><div className="k">APY</div><div className="v" style={{ color: "var(--good)" }}>7.75–27%</div></div>
+            <div className="s6"><div className="k">Backing Assets</div><div className="v" data-count="49375157" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">Collateral Ratio</div><div className="v" style={{ color: "var(--good)" }}>110.82%</div></div>
+            <div className="s6"><div className="k">Yield Distributed</div><div className="v" data-count="2544038" data-prefix="$">$0</div></div>
+            <div className="s6"><div className="k">syzUSD APY <span className="s6-info" title="syzUSD is the senior tranche of Yuzu Alpha"><Info /></span></div><div className="v" style={{ color: "var(--good)" }}>7.75%</div></div>
+            <div className="s6"><div className="k">yzPP APY <span className="s6-info" title="yzPP is the junior / first-loss tranche of Yuzu Alpha"><Info /></span></div><div className="v" style={{ color: "var(--good)" }}>27.0%</div></div>
+            <div className="s6"><div className="k">Days since Inception</div><div className="v" data-days-since>—</div></div>
           </div>
         </section>
 

@@ -214,6 +214,8 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   .s6:nth-child(6)::after { right: 24px; }
   .s6 .k { font-family: var(--font-body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .s6 .v { font-family: var(--font-body); font-size: 22px; font-weight: 560; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .s6-info { display: inline-flex; align-items: center; color: var(--faint); margin-left: 3px; cursor: help; vertical-align: middle; }
+  .s6-info svg { width: 12px; height: 12px; }
   /* 2 cột (mobile): dọc ở cột phải (even); ngang từ hàng 2 (cell >=3), full-width. */
   @media (max-width: 640px) {
     .tp-summary6 { grid-template-columns: 1fr 1fr; }
