@@ -184,7 +184,7 @@ export default function Transparency() {
         {/* Top strategies */}
         <section className="section rv">
           <div className="card tp-panel">
-            <div className="phead"><h3>Alpha top strategies</h3><span className="tp-total-h">Total<b>{usd(ALPHA_TOTAL)}</b></span></div>
+            <div className="phead"><h3>Yuzu Alpha Strategy Breakdown</h3><span className="tp-total-h">Total<b>{usd(ALPHA_TOTAL)}</b></span></div>
             <StackedBar rows={ALPHA_SPLIT} topN={4} />
           </div>
         </section>
@@ -264,7 +264,7 @@ export default function Transparency() {
 
         <section className="section rv">
           <div className="card tp-panel">
-            <div className="phead"><h3>Prime top strategies</h3><span className="tp-total-h">Total<b>{usd(PRIME_TOTAL)}</b></span></div>
+            <div className="phead"><h3>Yuzu Prime Strategy Breakdown</h3><span className="tp-total-h">Total<b>{usd(PRIME_TOTAL)}</b></span></div>
             <StackedBar rows={PRIME_SPLIT} topN={4} />
           </div>
         </section>
