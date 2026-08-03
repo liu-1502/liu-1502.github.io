@@ -67,7 +67,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 
   /* Dải "Audited, monitored & managed with" */
   .mkt-trust { display: flex; flex-direction: column; gap: 10px; }
-  .mkt-trust-lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .mkt-trust-lbl { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .1em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); }
   .mkt-trust-row { display: flex; flex-wrap: wrap; gap: 10px; }
   .mkt-partner {
     display: inline-flex; align-items: center; gap: 8px;
@@ -91,7 +91,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
     content: ""; position: absolute; top: 50%; right: 0; transform: translateY(-50%);
     width: 1px; height: 38px; background: color-mix(in srgb, var(--text) 8%, transparent);
   }
-  .mkt-stats .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: -0.2px; text-transform: uppercase; color: var(--faint); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin: 0; }
+  .mkt-stats .k { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: -0.2px; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin: 0; }
   .mkt-stats .v { font-family: var(--font-mono); font-size: 20px; font-weight: 600; margin-top: 5px; }
   @media (max-width: 620px) { .mkt-stats { grid-template-columns: 1fr 1fr; } }
 
@@ -129,7 +129,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .mc-id small { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
   .mc-apy { margin-left: auto; text-align: right; }
   .mc-apy-v { display: block; font-family: var(--font-mono); font-weight: 640; font-size: 18px; color: var(--mkt); }
-  .mc-apy-l { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+  .mc-apy-l { display: block; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .08em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); }
   .mc-badges { display: flex; flex-wrap: wrap; gap: 8px; }
   .mc-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: var(--text); padding: 5px 12px; border-radius: 999px; border: none; background: color-mix(in srgb, var(--text) 3%, transparent); }
   .mc-chip img { width: 15px; height: 15px; border-radius: 50%; }
@@ -138,7 +138,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .mc-more { all: unset; cursor: pointer; align-self: flex-start; margin-top: -6px; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: color-mix(in srgb, var(--mkt) 82%, #fff); }
   .mc-more:hover { color: var(--mkt); text-decoration: underline; }
   .mc-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding-top: 14px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
-  .mc-stats .k { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
+  .mc-stats .k { display: block; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); margin-bottom: 5px; }
   .mc-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 15px; }
   .mc-stats small { display: block; font-size: 11px; color: var(--good); margin-top: 2px; }
   .mc-stats .risk { display: flex; gap: 3px; margin-top: 4px; }
@@ -252,7 +252,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-ext:hover { color: var(--mkt); background: color-mix(in srgb, var(--mkt) 8%, transparent); }
   .vd-ext svg { width: 18px; height: 18px; }
   .vd-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
-  .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: -0.2px; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
+  .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: -0.2px; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); margin-bottom: 5px; }
   .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 22px; letter-spacing: -0.03em; }
   .vd-stats b.hi { color: var(--mkt); }
   .vd-stats small { display: block; font-size: 11px; color: var(--good); margin-top: 2px; }
@@ -304,7 +304,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-chart-sub { font-family: var(--font-body); font-size: 12.5px; color: var(--muted); }
   .vd-apy-badge { flex: none; text-align: right; }
   .vd-apy-badge b { display: block; font-family: var(--font-mono); font-weight: 620; font-size: 17px; color: var(--mkt); }
-  .vd-apy-badge span { font-family: var(--font-mono); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+  .vd-apy-badge span { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); }
   .vd-chart { width: 100%; height: auto; display: block; overflow: visible; cursor: crosshair; }
   .vd-grid { stroke: color-mix(in srgb, var(--text) 8%, transparent); stroke-width: 1; stroke-dasharray: 3 4; }
   /* Nhãn trục Y: HTML overlay, font cố định (không scale theo SVG) */

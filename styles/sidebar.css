@@ -45,7 +45,7 @@
 .side .side-group h6 {
   margin: 0 0 10px;
   font-family: var(--font-mono); font-weight: 400; font-size: 11px;
-  letter-spacing: .14em; text-transform: uppercase;   /* Geist Mono, viết hoa full, letter-spacing gốc */
+  letter-spacing: .14em; text-transform: none; letter-spacing: 0; font-weight: 600;   /* Geist Mono, viết hoa full, letter-spacing gốc */
 }
 
 /* ---- Item gọn hơn ---- */

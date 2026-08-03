@@ -37,13 +37,13 @@
   .prod-row .id { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
   .prod-row .id .tk-strip img { width: 30px; height: 30px; border: 2px solid #fff; background: #fff; border-radius: 9999px; }  /* logo bọc nền trắng tròn */
   .prod-row .id b { font-family: var(--font-display); font-weight: 640; font-size: 19px; display: block; }
-  .prod-row .id small { font-family: var(--font-mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
+  .prod-row .id small { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .09em; text-transform: none; letter-spacing: 0; font-weight: 600; }
   .prod-row .desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 14px 0 0; flex: 1; transition: color .25s ease; }
   /* Footer card: chỉ còn APY, luôn nằm đáy để 3 card thẳng hàng. */
   .prod-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: auto; }
   .prod-row .apy { text-align: left; }
   .prod-row .apy .v { font-family: var(--font-mono); font-size: 19px; font-weight: 560; display: block; white-space: nowrap; letter-spacing: -.03em; }
-  .prod-row .apy .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin-top: 2px; display: block; }
+  .prod-row .apy .k { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .09em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); margin-top: 2px; display: block; }
   /* "Open →" nằm góc trên phải, cùng hàng với logo token. */
   .prod-row .cta {
     position: absolute; top: 22px; right: 22px;
