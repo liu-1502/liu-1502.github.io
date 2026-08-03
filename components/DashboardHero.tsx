@@ -59,8 +59,8 @@ export default function DashboardHero() {
       <g clipPath="url(#outsideLemon)">
         <g className="dh-moon dh-moon-back">
           <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
-          <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path={ORBIT} calcMode="linear" keyPoints="0;0.406;0.901;1" keyTimes="0;0.201;0.951;1" />
-          <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.201;0.951" values="visible;hidden;visible" />
+          <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path={ORBIT} />
+          <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.406;0.901" values="visible;hidden;visible" />
         </g>
       </g>
 
@@ -68,14 +68,14 @@ export default function DashboardHero() {
           Chỉ hiện ở nửa GẦN; nửa XA nhường cho bản SAU (bị quả chanh che). */}
       <g className="dh-moon dh-moon-front">
         <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
-        <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path={ORBIT} calcMode="linear" keyPoints="0;0.406;0.901;1" keyTimes="0;0.201;0.951;1" />
-        <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.201;0.951" values="hidden;visible;hidden" />
+        <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path={ORBIT} />
+        <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.406;0.901" values="hidden;visible;hidden" />
       </g>
 
       <defs>
         {/* Vùng NGOÀI thân quả chanh (rect trừ đĩa chanh, quy tắc evenodd) để clip bản SAU. */}
         <clipPath id="outsideLemon" clipPathUnits="userSpaceOnUse">
-          <path d="M0 0H361V310H0Z M60 158A118 118 0 1 1 296 158A118 118 0 1 1 60 158Z" clipRule="evenodd" />
+          <path d="M0 0H361V310H0Z M54 161A128 128 0 1 1 310 161A128 128 0 1 1 54 161Z" clipRule="evenodd" />
         </clipPath>
         <linearGradient id="paint0_linear_455_13035" x1="268.411" y1="0.430275" x2="268.411" y2="24.3515" gradientUnits="userSpaceOnUse">
           <stop stopColor="#A9E34B" />
