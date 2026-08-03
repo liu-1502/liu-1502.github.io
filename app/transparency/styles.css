@@ -13,6 +13,7 @@ body.tp-prime .pg-transparency {
 }
 /* Nhãn stat card: Alpha = xanh đen đậm (--text), Prime = nâu đậm. */
 body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
+body.tp-prime .pg-transparency .s6 .k, body.tp-prime .pg-transparency .s6 .v { color: #3A2A06; }
 
 /* Style riêng của trang Transparency — lồng trong .pg-transparency để không loang
    sang trang khác (nhiều tên class trùng giữa các trang). */
@@ -201,7 +202,7 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   .tp-tabs button.on .tp-tab-apy.p { background: color-mix(in srgb, var(--prime) 16%, var(--surface)); }
 
   /* ===== summary card: 6 data chia 3 trên / 3 dưới, divider dọc + ngang ===== */
-  .tp-summary6 { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0; }
+  .tp-summary6 { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0; background: var(--surface-2); }
   .s6 { position: relative; padding: 16px 22px; min-width: 0; }
   /* Mọi cell đều có divider dọc (::before) + ngang (::after), mặc định ẩn — chỉ bật display theo layout. */
   .s6::before, .s6::after { content: ""; position: absolute; display: none; background: color-mix(in srgb, var(--text) 12%, transparent); }
@@ -212,8 +213,8 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   .s6:nth-child(n+4)::after { display: block; }
   .s6:nth-child(4)::after { left: 24px; }
   .s6:nth-child(6)::after { right: 24px; }
-  .s6 .k { font-family: var(--font-body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .s6 .v { font-family: var(--font-body); font-size: 22px; font-weight: 560; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .s6 .k { font-family: var(--font-body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: #142F04; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s6 .v { font-family: var(--font-body); font-size: 22px; font-weight: 560; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; color: #142F04; }
   .s6 .k:has(.s6-info) { overflow: visible; }
   .s6-info { position: relative; display: inline-flex; align-items: center; color: var(--faint); margin-left: 3px; cursor: help; vertical-align: middle; }
   .s6-info svg { width: 12px; height: 12px; }
