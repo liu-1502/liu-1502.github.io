@@ -101,7 +101,8 @@ export default function DashboardHero() {
       <defs>
         {/* Vùng NGOÀI thân quả chanh (rect trừ đĩa chanh, quy tắc evenodd) để clip bản SAU. */}
         <clipPath id="outsideLemon" clipPathUnits="userSpaceOnUse">
-          <path d="M0 0H361V310H0Z M54 161A128 128 0 1 1 310 161A128 128 0 1 1 54 161Z" clipRule="evenodd" />
+          {/* Khung ngoài rộng hơn viewBox nhiều để KHÔNG bao giờ cắt quả cầu ở mép; chỉ trừ đĩa chanh. */}
+          <path d="M-300 -300H661V610H-300Z M54 161A128 128 0 1 1 310 161A128 128 0 1 1 54 161Z" clipRule="evenodd" />
         </clipPath>
         <linearGradient id="paint0_linear_455_13035" x1="268.411" y1="0.430275" x2="268.411" y2="24.3515" gradientUnits="userSpaceOnUse">
           <stop stopColor="#A9E34B" />
