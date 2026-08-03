@@ -21,6 +21,26 @@
   @media (max-width: 700px) { .dash-hero-illus { height: 140px; } }
   @media (max-width: 480px) { .dash-hero-illus { display: none; } }
 
+  /* Mặt trăng vàng quay quanh quả chanh — bám đúng đường vòng đen (offset-path).
+     Ellipse nghiêng khớp tâm vòng đen: tâm ≈ (180,168), bán trục 178×62, xoay -15°.
+     Origin của <g> = tâm circle (r=18 tại 0,0) nên tâm luôn nằm trên đường vòng. */
+  .dh-moon {
+    offset-path: path("M 353 125 A 179 35 -15 1 1 7 217 A 179 35 -15 1 1 353 125");
+    offset-rotate: 0deg;
+    will-change: offset-distance;
+  }
+  /* Nửa 0–50% = cung TRƯỚC (bám vòng đen, phía trước chanh); 50–100% = cung SAU (khuất sau chanh).
+     Hai bản dùng chung dh-orbit (đồng bộ vị trí) + keyframe ẩn/hiện đổi vai đúng ranh giới cung. */
+  .dh-moon-front { animation: dh-orbit 16s linear infinite, dh-show-front 16s step-end infinite; }
+  .dh-moon-back  { animation: dh-orbit 16s linear infinite, dh-show-back  16s step-end infinite; }
+  @keyframes dh-orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+  @keyframes dh-show-front { 0% { visibility: visible; } 50% { visibility: hidden; } 100% { visibility: visible; } }
+  @keyframes dh-show-back  { 0% { visibility: hidden; } 50% { visibility: visible; } 100% { visibility: hidden; } }
+  @media (prefers-reduced-motion: reduce) {
+    .dh-moon-front { animation: none; offset-distance: 25%; visibility: visible; }
+    .dh-moon-back  { animation: none; visibility: hidden; }
+  }
+
   .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
   /* POR section: khoảng cách tới hàng 3 card = 24px */
   .section:has(.por) { padding-top: 24px; }
