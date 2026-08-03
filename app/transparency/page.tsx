@@ -272,7 +272,9 @@ export default function Transparency() {
 
       {/* ==================== ATTESTATION FOOTER ==================== */}
       <section className="section rv">
-        <div className="card tp-attest">
+        <div className="card tp-panel">
+          <div className="phead"><h3>Verification methods</h3></div>
+          <div className="tp-attest">
           <div className="tp-attest-item">
             <span className="tp-attest-ic"><Pix rows={PIX_MERKLE} /></span>
             <div className="tp-attest-txt"><b>Merkle Root Hash</b><span>Cryptographic data integrity</span></div>
@@ -284,6 +286,7 @@ export default function Transparency() {
           <div className="tp-attest-item">
             <span className="tp-attest-ic"><Pix rows={PIX_ZK} /></span>
             <div className="tp-attest-txt"><b>Zero Knowledge Proofs</b><span>Privacy-preserving validation</span></div>
+          </div>
           </div>
         </div>
       </section>

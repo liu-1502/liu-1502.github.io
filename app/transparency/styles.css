@@ -198,20 +198,24 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   /* ===== summary card: 6 data chia 3 trên / 3 dưới, divider dọc + ngang ===== */
   .tp-summary6 { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0; }
   .s6 { position: relative; padding: 16px 22px; min-width: 0; }
-  /* divider dọc giữa các cột */
-  .s6:not(:nth-child(3n+1))::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 42px; background: color-mix(in srgb, var(--text) 12%, transparent); }
-  /* divider ngang giữa hàng trên và hàng dưới, chừa 24px 2 đầu */
-  .s6:nth-child(n+4)::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  /* Mọi cell đều có divider dọc (::before) + ngang (::after), mặc định ẩn — chỉ bật display theo layout. */
+  .s6::before, .s6::after { content: ""; position: absolute; display: none; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  .s6::before { left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 42px; }
+  .s6::after { top: 0; left: 0; right: 0; height: 1px; }
+  /* 3 cột: dọc ở cột 2 & 3; ngang ở hàng dưới (chừa 24px 2 đầu). */
+  .s6:not(:nth-child(3n+1))::before { display: block; }
+  .s6:nth-child(n+4)::after { display: block; }
   .s6:nth-child(4)::after { left: 24px; }
   .s6:nth-child(6)::after { right: 24px; }
   .s6 .k { font-family: var(--font-body); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .s6 .v { font-family: var(--font-body); font-size: 22px; font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  /* 2 cột (mobile): dọc ở cột phải (even); ngang từ hàng 2 (cell >=3), full-width. */
   @media (max-width: 640px) {
     .tp-summary6 { grid-template-columns: 1fr 1fr; }
-    .s6::before { display: none; }
-    .s6:nth-child(even)::before { display: block; content: ""; }
-    .s6::after { display: none; }
-    .s6:nth-child(n+3)::after { display: block; content: ""; }
+    .s6:not(:nth-child(3n+1))::before { display: none; }
+    .s6:nth-child(even)::before { display: block; }
+    .s6:nth-child(n+4)::after { display: none; left: 0; right: 0; }
+    .s6:nth-child(n+3)::after { display: block; }
   }
 
   /* ===== summary card (donut + stats) — giữ lại cho tương thích ===== */
@@ -328,8 +332,10 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   .tp-strat-am { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; margin-top: 3px; }
 
   /* ===== attestation footer: 1 hàng, icon + tiêu đề + phụ đề, ngăn bởi divider ===== */
-  .tp-attest { display: flex; align-items: center; padding: 20px 8px; }
+  .tp-attest { display: flex; align-items: center; padding: 0; }
   .tp-attest-item { flex: 1; display: flex; align-items: center; gap: 14px; padding: 0 24px; position: relative; }
+  .tp-attest-item:first-child { padding-left: 0; }
+  .tp-attest-item:last-child { padding-right: 0; }
   .tp-attest-item:not(:first-child)::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 38px; background: color-mix(in srgb, var(--text) 12%, transparent); }
   .tp-attest-ic { flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; color: var(--tp-green); background: color-mix(in srgb, var(--tp-green) 10%, var(--surface)); }
   .tp-attest-ic svg { width: 20px; height: 20px; }
