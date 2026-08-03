@@ -146,8 +146,17 @@
     height: 38px;
     background: color-mix(in srgb, var(--text) 8%, transparent);
   }
+  /* Mobile: stats xuống lưới 2 cột — giữ divider dọc (giữa 2 cột) + thêm divider ngang (giữa 2 hàng). */
   @media (max-width: 700px) {
+    .page-stats { grid-template-columns: 1fr 1fr; }
+    /* divider dọc: chỉ ở cột trái (cell lẻ) */
     .page-stats > div:not(:last-child)::after { display: none; }
+    .page-stats > div:nth-child(odd)::after { display: block; }
+    /* divider ngang giữa hàng trên và dưới (top của cell hàng 2) */
+    .page-stats > div:nth-child(n+3)::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: color-mix(in srgb, var(--text) 8%, transparent);
+    }
   }
 
   /* Màu + size + font số liệu trong khối stats; siết khoảng cách với label */
