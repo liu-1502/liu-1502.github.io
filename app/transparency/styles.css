@@ -87,8 +87,8 @@ body.tp-prime .pg-transparency .s6 .k, body.tp-prime .pg-transparency .s6 .v { c
   .verify-meta .v { font-family: var(--font-body); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
 
   /* Hero: text bên trái, 4 stat card bên phải. */
-  /* Illus bên trái (như hero Dashboard), nội dung fill phần còn lại */
-  .hub-hero { align-items: center; grid-template-columns: auto 1fr; gap: 28px; }
+  /* Illus bên PHẢI (như hero Dashboard), nội dung fill phần còn lại bên trái */
+  .hub-hero { align-items: center; grid-template-columns: 1fr auto; gap: 28px; }
   .hub-hero .lede { max-width: none; }
   .tp-hero-illus { width: 176px; height: 176px; display: block; flex: none; margin: -24px 0; }
   @media (max-width: 720px) { .tp-hero-illus { width: 120px; height: 120px; margin: 0; } }

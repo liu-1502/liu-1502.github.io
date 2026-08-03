@@ -56,12 +56,12 @@ export default function Transparency() {
   return (
     <div className="pg-transparency">
       <section className="hub-hero">
-        <img className="tp-hero-illus" src="/assets/illus/proof-of-solvency.svg" alt="" aria-hidden="true" />
         <div>
           <h1>Independent<br /><span className="hero-grad" data-type>Proof of Solvency</span></h1>
           <p className="lede">An independent proof of solvency, live: assets and liabilities across Yuzu Alpha and Prime are attested every 15 minutes by Accountable, a verification network using secure enclaves and zero-knowledge proofs. This page renders their verified feed, position by position.</p>
           <a className="tp-hero-cta" href="https://yuzu.accountable.capital/" target="_blank" rel="noopener">Official Accountable dashboard <ArrowUpRight size={15} strokeWidth={2.2} /></a>
         </div>
+        <img className="tp-hero-illus" src="/assets/illus/proof-of-solvency.svg" alt="" aria-hidden="true" />
       </section>
 
       {/* ==================== PRODUCT TABS ==================== */}
