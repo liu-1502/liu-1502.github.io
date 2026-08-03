@@ -64,14 +64,14 @@ function SwapCircle() {
 
 function OrderItem({
   kind,
-  action,
+  label,
   amount,
   date,
   tx,
   status,
 }: {
   kind: "mint" | "redeem";
-  action: string;
+  label: string;
   amount: string;
   date: string;
   tx: string;
@@ -82,12 +82,13 @@ function OrderItem({
     <div className="ord" role="button" tabIndex={0} data-kind={kind}>
       <span className="oicon"><Icon /></span>
       <div className="oleft">
-        <span className="ot">{action} · <b>{amount}</b></span>
+        <span className="ot">{label}</span>
         <span className="oa">{date} · <span className="otx">{tx}<ExternalLink /></span></span>
+        <button type="button" className="oaction">{status === "pending" ? "Cancel" : "Finalize"}</button>
       </div>
       <div className="oright">
+        <span className="ov">{amount}</span>
         <span className={`badge ${status}`}>{status === "pending" ? "Pending" : "Filled"}</span>
-        <button type="button" className="oaction">{status === "pending" ? "Cancel" : "Finalize"}</button>
       </div>
     </div>
   );
@@ -309,9 +310,9 @@ export default function Alpha() {
           <details className="acc ohist" open>
             <summary>Orders</summary>
             <div className="olist">
-              <OrderItem kind="redeem" action="Redeem" amount="0.2" date="03 Aug 2026, 12:59" tx="0x9ed0…7f1a" status="filled" />
-              <OrderItem kind="redeem" action="Redeem" amount="0.1" date="30 Jul 2026, 23:08" tx="0xc843…3c36" status="pending" />
-              <OrderItem kind="mint" action="Mint" amount="1,000.50" date="30 Jul 2026, 21:10" tx="0xeED43…AbbA" status="pending" />
+              <OrderItem kind="redeem" label="Redeem yzUSD" amount="$2,000.00" date="03 Aug 2026, 12:59" tx="0x9ed0…7f1a" status="filled" />
+              <OrderItem kind="redeem" label="Redeem yzUSD" amount="$1,000.00" date="30 Jul 2026, 23:08" tx="0xc843…3c36" status="pending" />
+              <OrderItem kind="mint" label="Mint yzUSD" amount="$1,000.50" date="30 Jul 2026, 21:10" tx="0xeED43…AbbA" status="pending" />
             </div>
           </details>
           </div>{/* .av-left */}
