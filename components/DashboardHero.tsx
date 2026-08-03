@@ -70,6 +70,15 @@ export default function DashboardHero() {
         <path d="M227.92 40.3536L137.623 277.829C145.132 280.446 152.973 282.363 160.884 283.497L249.127 51.4386C242.449 47.071 235.349 43.3188 227.918 40.267L227.92 40.3536Z" fill="#FEFFE6" />
       </g>
 
+      {/* Ánh sáng lướt qua "lớp kính" phủ mặt chanh — loá 1 lần mỗi 5s (tham khảo sheen nút Connect).
+          Dải trắng chéo, bị cắt trong mặt chanh; lướt trái->phải rồi nghỉ tới hết chu kỳ 5s. */}
+      <g clipPath="url(#lemonFaceClip)">
+        <g>
+          <animateTransform attributeName="transform" type="translate" dur="5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.13;1" keySplines="0.4 0 0.3 1;0 0 1 1" values="-155 0;155 0;155 0" />
+          <rect x="160" y="48" width="34" height="224" fill="url(#shineGrad)" transform="rotate(15 178 160)" />
+        </g>
+      </g>
+
       {/* vòng quỹ đạo đen — vẽ trên quả chanh (vị trí gốc), lượn nhẹ ±4° theo ROCK */}
       <path className="dh-ring" d="M43.5721 231.949C19.4863 232.452 6.40346 228.565 4.58535 220.368C1.60809 206.476 25.6027 192.071 52.9892 179.451L53.4948 182.907C11.2555 202.339 6.50902 212.874 7.94618 219.431C8.71351 222.969 14.0564 225.631 23.0129 227.004C32.491 228.453 45.7523 228.436 62.2769 226.964C96.4525 223.996 140.905 215.093 187.437 201.986C233.969 188.879 276.893 173.161 308.468 157.766C323.74 150.253 335.468 143.247 343.311 136.929C350.727 130.966 354.346 125.777 353.578 122.239C352.139 115.595 348.289 108.446 301.513 114.017L300.323 111.008C330.586 107.429 353.783 107.153 356.853 121.304C359.059 131.486 343.217 144.905 309.842 161.291C278.184 176.861 235 192.585 188.295 205.696C141.59 218.806 96.9635 227.713 62.6165 230.771C55.6944 231.349 49.3751 231.741 43.6569 231.86L43.5721 231.949Z" fill="black">
         <animateTransform {...ROCK} />
@@ -99,6 +108,15 @@ export default function DashboardHero() {
       </g>
 
       <defs>
+        {/* Vệt sáng lướt (sheen) + vùng mặt chanh để cắt vệt sáng trong mặt chanh */}
+        <linearGradient id="shineGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#fff" stopOpacity="0.75" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <clipPath id="lemonFaceClip" clipPathUnits="userSpaceOnUse">
+          <path d="M179.948 240.507C224.004 239.586 258.91 203.124 257.991 159.133C257.072 115.143 220.608 80.1711 176.617 81.0902C132.626 82.0093 97.6548 118.473 98.5739 162.464C99.493 206.455 135.957 241.426 179.948 240.507Z" />
+        </clipPath>
         {/* Vùng NGOÀI thân quả chanh (rect trừ đĩa chanh, quy tắc evenodd) để clip bản SAU. */}
         <clipPath id="outsideLemon" clipPathUnits="userSpaceOnUse">
           {/* Khung ngoài rộng hơn viewBox nhiều để KHÔNG bao giờ cắt quả cầu ở mép; chỉ trừ đĩa chanh. */}
