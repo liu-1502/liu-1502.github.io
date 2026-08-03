@@ -99,7 +99,7 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   /* 4 stat card dạng lưới 2x2 (nền xám nhạt, bo góc). */
   .statwall { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .bigstat { background: var(--surface-2); border-radius: 14px; padding: 18px 20px; }
-  .bigstat .k { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; text-transform: none; color: #207B1E; font-weight: 600; }
+  .bigstat .k { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; text-transform: none; color: #142F04; font-weight: 600; }
   .bigstat .v { font-family: var(--font-body); font-size: clamp(20px, 2.2vw, 26px); font-weight: 560; margin-top: 10px; font-variant-numeric: tabular-nums; }
   @media (max-width: 560px) { .statwall { grid-template-columns: 1fr; } }
   /* Products Verified: số đầu xanh lá, "/2" đen nhạt hơn. */
@@ -324,6 +324,12 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
   /* Chọn: viền màu (stroke) theo màu đường + tint nhẹ, đồng bộ dạng chip. */
   .apy-series button.on { color: var(--text); border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, var(--surface)); }
   .apy-series button.locked { cursor: default; }
+  /* Mobile: giữ 4 chip trên 1 hàng (không rớt hàng) bằng cách thu nhỏ. */
+  @media (max-width: 720px) {
+    .apy-series { flex-wrap: nowrap; gap: 5px; justify-content: flex-start; }
+    .apy-series button { padding: 3px 8px; font-size: 11px; gap: 5px; }
+    .apy-series button i { width: 8px; height: 8px; }
+  }
 
   /* ===== stacked bar (top strategies) ===== */
   .tp-stack-bar { display: flex; height: 16px; border-radius: 5px; overflow: hidden; gap: 2px; }
