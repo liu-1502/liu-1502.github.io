@@ -51,7 +51,7 @@ export default function DashboardHero() {
           tâm hình tròn — không bị hình tròn che, cũng không bị dải đen nuốt mất. */}
       <g className="dh-moon">
         <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
-        <animateMotion dur="16s" repeatCount="indefinite" rotate="0" path="M 353 125 A 179 35 -15 1 1 7 217 A 179 35 -15 1 1 353 125" />
+        <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path="M 348.9 126.9 A 178 31 -15 1 1 5.1 219.1 A 178 31 -15 1 1 348.9 126.9" />
       </g>
 
       {/* vòng quỹ đạo đen — vẽ SAU CÙNG nên luôn nằm trên hình tròn vàng (dải đen xuyên qua tâm) */}
