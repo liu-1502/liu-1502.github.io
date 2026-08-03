@@ -1,9 +1,13 @@
 /**
  * Illustration Yuzu (lát chanh + quỹ đạo) cho hero Dashboard.
- * Inline SVG để chạy animation CSS: mặt trăng vàng bay quanh vòng (trước -> sau),
- * vòng đen lượn nhẹ, và ánh sáng quét qua quả chanh mỗi 2s.
- * Animations khai báo trong app/dashboard.css.
+ * Mặt trăng vàng (trái đất) bay quanh quả chanh (mặt trời) bằng SMIL animateMotion:
+ *  - Quỹ đạo ORBIT bám đúng centreline của vòng đen (dh-ring) nên dải đen xuyên qua tâm hình tròn.
+ *  - Nửa GẦN (frac 0.406–0.901): vẽ trước quả chanh, dưới vòng đen -> nhìn thấy, dải đen cắt qua tâm.
+ *  - Nửa XA: vẽ sau quả chanh -> khuất sau "mặt trời".
  */
+const ORBIT =
+  "M 72 175 C 81.2 171.0 90.2 168.5 97 166 C 103.8 163.5 108.5 161.7 113 160 C 117.5 158.3 120.8 157.0 124 156 C 127.2 155.0 129.5 154.7 132 154 C 134.5 153.3 136.8 152.7 139 152 C 141.2 151.3 143.2 150.5 145 150 C 146.8 149.5 148.5 149.5 150 149 C 151.5 148.5 152.8 147.5 154 147 C 155.2 146.5 155.8 146.3 157 146 C 158.2 145.7 159.8 145.3 161 145 C 162.2 144.7 163.0 144.3 164 144 C 165.0 143.7 165.8 143.3 167 143 C 168.2 142.7 169.8 142.2 171 142 C 172.2 141.8 173.0 142.2 174 142 C 175.0 141.8 175.8 141.3 177 141 C 178.2 140.7 179.8 140.3 181 140 C 182.2 139.7 182.8 139.3 184 139 C 185.2 138.7 186.5 138.3 188 138 C 189.5 137.7 191.2 137.3 193 137 C 194.8 136.7 196.8 136.5 199 136 C 201.2 135.5 203.3 134.7 206 134 C 208.7 133.3 211.7 132.7 215 132 C 218.3 131.3 221.3 130.8 226 130 C 230.7 129.2 235.2 128.7 243 127 C 250.8 125.3 261.7 121.7 273 120 C 284.3 118.3 300.2 116.8 311 117 C 321.8 117.2 333.8 117.7 338 121 C 342.2 124.3 340.5 131.2 336 137 C 331.5 142.8 320.0 150.3 311 156 C 302.0 161.7 290.7 167.0 282 171 C 273.3 175.0 265.3 177.5 259 180 C 252.7 182.5 248.5 184.3 244 186 C 239.5 187.7 235.3 188.8 232 190 C 228.7 191.2 226.7 192.2 224 193 C 221.3 193.8 218.3 194.5 216 195 C 213.7 195.5 212.0 195.7 210 196 C 208.0 196.3 205.7 196.5 204 197 C 202.3 197.5 201.2 198.5 200 199 C 198.8 199.5 198.2 199.7 197 200 C 195.8 200.3 194.2 200.7 193 201 C 191.8 201.3 191.0 201.7 190 202 C 189.0 202.3 188.2 202.7 187 203 C 185.8 203.3 184.2 203.8 183 204 C 181.8 204.2 181.0 203.8 180 204 C 179.0 204.2 178.2 204.7 177 205 C 175.8 205.3 174.2 205.7 173 206 C 171.8 206.3 171.2 206.7 170 207 C 168.8 207.3 167.7 207.5 166 208 C 164.3 208.5 162.0 209.3 160 210 C 158.0 210.7 156.3 211.2 154 212 C 151.7 212.8 148.8 214.2 146 215 C 143.2 215.8 140.7 216.3 137 217 C 133.3 217.7 129.0 218.0 124 219 C 119.0 220.0 114.2 221.8 107 223 C 99.8 224.2 90.7 225.3 81 226 C 71.3 226.7 58.5 227.7 49 227 C 39.5 226.3 28.7 225.3 24 222 C 19.3 218.7 18.0 212.3 21 207 C 24.0 201.7 33.5 195.3 42 190 C 50.5 184.7 62.8 179.0 72 175 Z";
+
 export default function DashboardHero() {
   return (
     <svg
@@ -17,6 +21,13 @@ export default function DashboardHero() {
       {/* sparkles */}
       <path d="M268.411 24.3515C275.347 24.3515 280.97 18.9966 280.97 12.3909C280.97 5.78522 275.347 0.430275 268.411 0.430275C261.475 0.430275 255.853 5.78522 255.853 12.3909C255.853 18.9966 261.475 24.3515 268.411 24.3515Z" fill="url(#paint0_linear_455_13035)" />
       <path d="M304.293 309.014C294.754 309.014 286.95 301.479 286.95 292.269C286.95 283.06 294.754 275.525 304.293 275.525C313.832 275.525 321.636 283.06 321.636 292.269C321.636 301.479 313.832 309.014 304.293 309.014ZM304.293 281.106C297.934 281.106 292.731 286.13 292.731 292.269C292.731 298.409 297.934 303.433 304.293 303.433C310.652 303.433 315.855 298.409 315.855 292.269C315.855 286.13 310.652 281.106 304.293 281.106Z" fill="url(#paint1_linear_455_13035)" />
+
+      {/* mặt trăng — bản SAU quả chanh: chỉ hiện ở nửa XA (khuất sau "mặt trời") */}
+      <g className="dh-moon dh-moon-back">
+        <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
+        <animateMotion dur="24s" repeatCount="indefinite" rotate="0"><mpath href="#dhOrbit" /></animateMotion>
+        <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.406;0.901" values="visible;hidden;visible" />
+      </g>
 
       {/* concentric rings */}
       <path d="M275.775 251.974C324.382 201.292 322.702 120.89 272.02 72.2831C221.339 23.6758 140.937 25.3557 92.3299 76.0373C43.7226 126.719 45.4024 207.121 96.0841 255.728C146.766 304.335 227.167 302.655 275.775 251.974Z" fill="#DDDDDD" stroke="black" strokeWidth="1.18363" />
@@ -46,18 +57,19 @@ export default function DashboardHero() {
         <path d="M227.92 40.3536L137.623 277.829C145.132 280.446 152.973 282.363 160.884 283.497L249.127 51.4386C242.449 47.071 235.349 43.3188 227.918 40.267L227.92 40.3536Z" fill="#FEFFE6" />
       </g>
 
-      {/* mặt trăng vàng: bay quanh quả chanh theo đúng vòng đen (SMIL animateMotion).
-          Vẽ TRƯỚC dh-ring (nằm trên quả chanh, dưới vòng đen) để dải đen luôn XUYÊN QUA
-          tâm hình tròn — không bị hình tròn che, cũng không bị dải đen nuốt mất. */}
-      <g className="dh-moon">
+      {/* mặt trăng — bản TRƯỚC quả chanh: chỉ hiện ở nửa GẦN. Vẽ trên quả chanh nhưng
+          DƯỚI vòng đen (dh-ring) nên dải đen xuyên qua tâm hình tròn. */}
+      <g className="dh-moon dh-moon-front">
         <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
-        <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path="M 348.9 126.9 A 178 31 -15 1 1 5.1 219.1 A 178 31 -15 1 1 348.9 126.9" />
+        <animateMotion dur="24s" repeatCount="indefinite" rotate="0"><mpath href="#dhOrbit" /></animateMotion>
+        <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.406;0.901" values="hidden;visible;hidden" />
       </g>
 
       {/* vòng quỹ đạo đen — vẽ SAU CÙNG nên luôn nằm trên hình tròn vàng (dải đen xuyên qua tâm) */}
       <path className="dh-ring" d="M43.5721 231.949C19.4863 232.452 6.40346 228.565 4.58535 220.368C1.60809 206.476 25.6027 192.071 52.9892 179.451L53.4948 182.907C11.2555 202.339 6.50902 212.874 7.94618 219.431C8.71351 222.969 14.0564 225.631 23.0129 227.004C32.491 228.453 45.7523 228.436 62.2769 226.964C96.4525 223.996 140.905 215.093 187.437 201.986C233.969 188.879 276.893 173.161 308.468 157.766C323.74 150.253 335.468 143.247 343.311 136.929C350.727 130.966 354.346 125.777 353.578 122.239C352.139 115.595 348.289 108.446 301.513 114.017L300.323 111.008C330.586 107.429 353.783 107.153 356.853 121.304C359.059 131.486 343.217 144.905 309.842 161.291C278.184 176.861 235 192.585 188.295 205.696C141.59 218.806 96.9635 227.713 62.6165 230.771C55.6944 231.349 49.3751 231.741 43.6569 231.86L43.5721 231.949Z" fill="black" />
 
       <defs>
+        <path id="dhOrbit" d={ORBIT} fill="none" />
         <linearGradient id="paint0_linear_455_13035" x1="268.411" y1="0.430275" x2="268.411" y2="24.3515" gradientUnits="userSpaceOnUse">
           <stop stopColor="#A9E34B" />
           <stop offset="1" stopColor="#D8F5A2" />
