@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ShieldCheck, ExternalLink } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -64,15 +64,17 @@ function SwapCircle() {
 
 function OrderItem({
   kind,
-  label,
-  addr,
+  action,
   amount,
+  date,
+  tx,
   status,
 }: {
   kind: "mint" | "redeem";
-  label: string;
-  addr: string;
+  action: string;
   amount: string;
+  date: string;
+  tx: string;
   status: "completed" | "pending";
 }) {
   const Icon = kind === "mint" ? ArrowDownRight : ArrowUpRight;
@@ -80,12 +82,12 @@ function OrderItem({
     <div className="ord" role="button" tabIndex={0} data-kind={kind}>
       <span className="oicon"><Icon /></span>
       <div className="oleft">
-        <span className="ot">{label}</span>
-        <span className="oa">{addr}</span>
+        <span className="ot">{action} · <b>{amount}</b></span>
+        <span className="oa">{date} · <span className="otx">{tx}<ExternalLink /></span></span>
       </div>
       <div className="oright">
-        <span className="ov">{amount}</span>
-        {status !== "completed" && <span className={`badge ${status}`}>Pending</span>}
+        <span className={`badge ${status}`}>{status === "pending" ? "Pending" : "Completed"}</span>
+        {status === "pending" && <button type="button" className="ocancel">Cancel</button>}
       </div>
     </div>
   );
@@ -305,12 +307,11 @@ export default function Alpha() {
 
           {/* Order history */}
           <details className="acc ohist" open>
-            <summary>Today Order</summary>
-            <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="mint">Mint</button><button className="ofilter" data-filter="redeem">Redeem</button></div>
+            <summary>Orders<a className="oviewall" href="#">View all 25</a></summary>
             <div className="olist">
-              <OrderItem kind="mint" label="Mint yzUSD" addr="0xeED43…AbbA" amount="$1,000.50" status="completed" />
-              <OrderItem kind="redeem" label="Redeem yzUSD" addr="0x9A2f1…C4dE" amount="$500.00" status="completed" />
-              <OrderItem kind="mint" label="Mint yzPP" addr="0x71bC8…9Ae0" amount="$2,000.00" status="pending" />
+              <OrderItem kind="redeem" action="Redeem" amount="0.1" date="30 Jul 2026, 23:08" tx="0xc843…3c36" status="pending" />
+              <OrderItem kind="redeem" action="Redeem" amount="0.01" date="30 Jul 2026, 22:35" tx="0x993d…bd06" status="pending" />
+              <OrderItem kind="mint" action="Mint" amount="1,000.50" date="30 Jul 2026, 21:10" tx="0xeED43…AbbA" status="completed" />
             </div>
           </details>
           </div>{/* .av-left */}

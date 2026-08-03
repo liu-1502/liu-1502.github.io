@@ -51,11 +51,11 @@
   .av-left { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
   .av-right { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
   .av-detail { display: flex; flex-direction: column; gap: 16px; }
-  /* Header + tabs canh trái theo mép content */
-  .av-head { align-self: stretch; }
+  /* Header + tabs canh GIỮA theo chiều ngang content */
+  .av-head { align-self: stretch; text-align: center; }
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
-  .av-head p { margin: 6px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
-  #alphaTabs { justify-content: flex-start; }
+  .av-head p { margin: 6px auto 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
+  #alphaTabs { justify-content: center; }
 
   /* ---- Detail sections (giống cột phải Marketplace) ---- */
   .vd-sec { padding: 22px; background: var(--surface); border-radius: 20px; }
@@ -286,14 +286,30 @@
   .ord:focus-visible { outline: 2px solid var(--alpha); outline-offset: -2px; }
   .ord .oicon { width: 28px; height: 28px; flex: none; display: grid; place-items: center; background: #F5F5F5; border-radius: 100px; color: #737373; }
   .ord .oicon svg { width: 16px; height: 16px; }
-  .ord .oleft { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .ord .oleft { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
   .ord .oleft .ot { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: #262626; }
-  .ord .oleft .oa { font-family: var(--font-body); font-size: 14px; color: #737373; }
-  .ord .oright { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex: none; }
+  .ord .oleft .ot b { font-family: var(--font-mono); font-weight: 600; letter-spacing: -0.02em; }
+  .ord .oleft .oa { font-family: var(--font-body); font-size: 13px; color: #737373; display: inline-flex; align-items: center; gap: 5px; }
+  /* Tx hash + icon mở explorer */
+  .ord .oleft .oa .otx { display: inline-flex; align-items: center; gap: 3px; color: #737373; cursor: pointer; transition: color .15s ease; }
+  .ord .oleft .oa .otx:hover { color: var(--accent); }
+  .ord .oleft .oa .otx svg { width: 12px; height: 12px; }
+  .ord .oright { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex: none; }
   .ord .oright .ov { font-family: var(--font-mono); font-weight: 500; font-size: 14px; color: #262626; }
+  /* Nút Cancel: chữ thường, hover mới hiện viền xanh (giống hình mẫu) */
+  .ord .ocancel {
+    all: unset; box-sizing: border-box; cursor: pointer;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; color: #262626;
+    padding: 6px 14px; border: 1px solid transparent; border-radius: 8px;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .ord .ocancel:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); color: var(--accent); }
   .ord .badge { display: inline-flex; padding: 4px 8px; border-radius: 6px; font-family: var(--font-body); font-weight: 500; font-size: 12px; }
   .ord .badge.completed { background: #E9F5E2; color: #1E7B1E; }
   .ord .badge.pending { background: #FFFBEB; color: #F9A006; }
+  /* Header "Orders" + "View all 25" */
+  .ohist > summary .oviewall { margin-left: auto; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0; text-transform: uppercase; font-weight: 600; color: #737373; text-decoration: none; transition: color .15s ease; }
+  .ohist > summary .oviewall:hover { color: var(--accent); }
 
   /* --- Stats card (ngay dưới mint/redeem): mỗi dòng label trái / value phải --- */
   .page-stats {
