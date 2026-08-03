@@ -312,8 +312,8 @@
   .ord .badge { display: inline-flex; padding: 4px 8px; border-radius: 6px; font-family: var(--font-body); font-weight: 500; font-size: 12px; }
   .ord .badge.pending { background: #FFFBEB; color: #F9A006; }     /* vàng: đang chờ */
   .ord .badge.filled { background: #F1F2F4; color: #5C636E; }      /* neutral: đã khớp, chờ finalize */
-  .ord .badge.finalized { background: #E9F5E2; color: #1E7B1E; }   /* xanh lá: đã hoàn tất */
-  .ord .badge.cancelled { background: #FDECEC; color: #DC2626; }   /* đỏ nhạt: đã huỷ */
+  .ord .badge.finalized { background: #F2F9EC; color: #1E7B1E; }   /* xanh lá nền nhạt hơn: đã hoàn tất */
+  .ord .badge.cancelled { background: #FDF4F4; color: #DC2626; }   /* đỏ nền nhạt hơn: đã huỷ */
 
   /* --- Stats card (ngay dưới mint/redeem): mỗi dòng label trái / value phải --- */
   .page-stats {
