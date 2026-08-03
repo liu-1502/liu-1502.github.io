@@ -22,13 +22,6 @@ export default function DashboardHero() {
       <path d="M268.411 24.3515C275.347 24.3515 280.97 18.9966 280.97 12.3909C280.97 5.78522 275.347 0.430275 268.411 0.430275C261.475 0.430275 255.853 5.78522 255.853 12.3909C255.853 18.9966 261.475 24.3515 268.411 24.3515Z" fill="url(#paint0_linear_455_13035)" />
       <path d="M304.293 309.014C294.754 309.014 286.95 301.479 286.95 292.269C286.95 283.06 294.754 275.525 304.293 275.525C313.832 275.525 321.636 283.06 321.636 292.269C321.636 301.479 313.832 309.014 304.293 309.014ZM304.293 281.106C297.934 281.106 292.731 286.13 292.731 292.269C292.731 298.409 297.934 303.433 304.293 303.433C310.652 303.433 315.855 298.409 315.855 292.269C315.855 286.13 310.652 281.106 304.293 281.106Z" fill="url(#paint1_linear_455_13035)" />
 
-      {/* mặt trăng — bản SAU quả chanh: chỉ hiện ở nửa XA (khuất sau "mặt trời") */}
-      <g className="dh-moon dh-moon-back">
-        <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
-        <animateMotion dur="24s" repeatCount="indefinite" rotate="0"><mpath href="#dhOrbit" /></animateMotion>
-        <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.406;0.901" values="visible;hidden;visible" />
-      </g>
-
       {/* concentric rings */}
       <path d="M275.775 251.974C324.382 201.292 322.702 120.89 272.02 72.2831C221.339 23.6758 140.937 25.3557 92.3299 76.0373C43.7226 126.719 45.4024 207.121 96.0841 255.728C146.766 304.335 227.167 302.655 275.775 251.974Z" fill="#DDDDDD" stroke="black" strokeWidth="1.18363" />
       <path d="M270.264 245.415C318.871 194.733 317.191 114.332 266.51 65.7245C215.828 17.1173 135.426 18.7971 86.8191 69.4788C38.2119 120.16 39.8917 200.562 90.5734 249.169C141.255 297.776 221.657 296.097 270.264 245.415Z" fill="white" stroke="black" strokeWidth="1.18363" />
@@ -60,12 +53,11 @@ export default function DashboardHero() {
       {/* vòng quỹ đạo đen — vẽ trên quả chanh; ở nửa GẦN quả cầu sẽ đè LÊN vòng này */}
       <path className="dh-ring" d="M43.5721 231.949C19.4863 232.452 6.40346 228.565 4.58535 220.368C1.60809 206.476 25.6027 192.071 52.9892 179.451L53.4948 182.907C11.2555 202.339 6.50902 212.874 7.94618 219.431C8.71351 222.969 14.0564 225.631 23.0129 227.004C32.491 228.453 45.7523 228.436 62.2769 226.964C96.4525 223.996 140.905 215.093 187.437 201.986C233.969 188.879 276.893 173.161 308.468 157.766C323.74 150.253 335.468 143.247 343.311 136.929C350.727 130.966 354.346 125.777 353.578 122.239C352.139 115.595 348.289 108.446 301.513 114.017L300.323 111.008C330.586 107.429 353.783 107.153 356.853 121.304C359.059 131.486 343.217 144.905 309.842 161.291C278.184 176.861 235 192.585 188.295 205.696C141.59 218.806 96.9635 227.713 62.6165 230.771C55.6944 231.349 49.3751 231.741 43.6569 231.86L43.5721 231.949Z" fill="black" />
 
-      {/* mặt trăng — bản TRƯỚC (nửa GẦN): vẽ SAU CÙNG nên nằm TRƯỚC cả quả chanh và vòng đen
-          (như hạt cườm xỏ trên dây — mặt trước thì quả cầu ở trước, dây luồn ra sau). */}
-      <g className="dh-moon dh-moon-front">
+      {/* mặt trăng vàng: luôn hiện, vẽ SAU CÙNG nên nằm TRƯỚC quả chanh và vòng đen
+          (như hạt cườm xỏ trên dây — dây luồn ra sau quả cầu). Bay 1 vòng 24s. */}
+      <g className="dh-moon">
         <circle r="18" fill="#FFE066" stroke="#DAB218" strokeWidth="2" />
         <animateMotion dur="24s" repeatCount="indefinite" rotate="0"><mpath href="#dhOrbit" /></animateMotion>
-        <animate attributeName="visibility" dur="24s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.406;0.901" values="hidden;visible;hidden" />
       </g>
 
       <defs>
