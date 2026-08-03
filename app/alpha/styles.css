@@ -300,13 +300,14 @@
   .ord .oaction {
     all: unset; box-sizing: border-box; cursor: pointer;
     font-family: var(--font-body); font-weight: 600; font-size: 13px; color: #262626;
-    padding: 6px 14px; border: 1px solid transparent; border-radius: 8px;
+    padding: 6px 14px; border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);   /* secondary: outline xám nhạt */
     transition: border-color .15s ease, color .15s ease, background .15s ease;
   }
-  .ord .oaction:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); color: var(--accent); }
+  .ord .oaction:hover { border-color: color-mix(in srgb, var(--text) 28%, transparent); background: color-mix(in srgb, var(--text) 4%, transparent); }
   .ord .badge { display: inline-flex; padding: 4px 8px; border-radius: 6px; font-family: var(--font-body); font-weight: 500; font-size: 12px; }
   .ord .badge.pending { background: #FFFBEB; color: #F9A006; }   /* vàng */
-  .ord .badge.filled { background: #EEECFB; color: #6D5AE6; }    /* tím: đã khớp, chờ finalize */
+  .ord .badge.filled { background: #E9F5E2; color: #1E7B1E; }    /* xanh lá nền nhạt: đã khớp, chờ finalize */
 
   /* --- Stats card (ngay dưới mint/redeem): mỗi dòng label trái / value phải --- */
   .page-stats {
