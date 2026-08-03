@@ -75,7 +75,7 @@ function OrderItem({
   amount: string;
   date: string;
   tx: string;
-  status: "completed" | "pending";
+  status: "pending" | "filled";
 }) {
   const Icon = kind === "mint" ? ArrowDownRight : ArrowUpRight;
   return (
@@ -86,8 +86,8 @@ function OrderItem({
         <span className="oa">{date} · <span className="otx">{tx}<ExternalLink /></span></span>
       </div>
       <div className="oright">
-        <span className={`badge ${status}`}>{status === "pending" ? "Pending" : "Completed"}</span>
-        {status === "pending" && <button type="button" className="ocancel">Cancel</button>}
+        <span className={`badge ${status}`}>{status === "pending" ? "Pending" : "Filled"}</span>
+        <button type="button" className="oaction">{status === "pending" ? "Cancel" : "Finalize"}</button>
       </div>
     </div>
   );
@@ -307,11 +307,11 @@ export default function Alpha() {
 
           {/* Order history */}
           <details className="acc ohist" open>
-            <summary>Orders<a className="oviewall" href="#">View all 25</a></summary>
+            <summary>Orders</summary>
             <div className="olist">
+              <OrderItem kind="redeem" action="Redeem" amount="0.2" date="03 Aug 2026, 12:59" tx="0x9ed0…7f1a" status="filled" />
               <OrderItem kind="redeem" action="Redeem" amount="0.1" date="30 Jul 2026, 23:08" tx="0xc843…3c36" status="pending" />
-              <OrderItem kind="redeem" action="Redeem" amount="0.01" date="30 Jul 2026, 22:35" tx="0x993d…bd06" status="pending" />
-              <OrderItem kind="mint" action="Mint" amount="1,000.50" date="30 Jul 2026, 21:10" tx="0xeED43…AbbA" status="completed" />
+              <OrderItem kind="mint" action="Mint" amount="1,000.50" date="30 Jul 2026, 21:10" tx="0xeED43…AbbA" status="pending" />
             </div>
           </details>
           </div>{/* .av-left */}
