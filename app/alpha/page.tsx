@@ -85,7 +85,7 @@ function OrderItem({
       <div className="oleft">
         <span className="ot">{label}</span>
         <span className="oa">{date} · <span className="otx">{tx}<ExternalLink /></span></span>
-        <button type="button" className={`oaction${negative && status === "pending" ? " neg" : ""}`}>{status === "pending" ? "Cancel" : "Finalize"}</button>
+        <button type="button" className={`oaction${status === "pending" ? " neg" : ""}`}>{status === "pending" ? "Cancel" : "Finalize"}</button>
       </div>
       <div className="oright">
         <span className={`ov${negative && status === "filled" ? " neg" : ""}`}>{negative ? "−" : "+"}{amount}</span>

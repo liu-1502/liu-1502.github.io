@@ -313,7 +313,7 @@
   .ord .oright .ov.neg { color: #DC2626; }
   .ord .badge { display: inline-flex; padding: 4px 8px; border-radius: 6px; font-family: var(--font-body); font-weight: 500; font-size: 12px; }
   .ord .badge.pending { background: #FFFBEB; color: #F9A006; }   /* vàng */
-  .ord .badge.filled { background: #E9F5E2; color: #1E7B1E; }    /* xanh lá nền nhạt: đã khớp, chờ finalize */
+  .ord .badge.filled { background: #F1F2F4; color: #5C636E; }    /* neutral: đã khớp, chờ finalize */
 
   /* --- Stats card (ngay dưới mint/redeem): mỗi dòng label trái / value phải --- */
   .page-stats {
