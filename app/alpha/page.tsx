@@ -116,7 +116,7 @@ const TOKENS = [
   {
     key: "yzpp", name: "yzPP", logo: "/assets/tokens/yzPP.svg",
     badge: "Junior tranche",
-    tagline: "Junior tranche that absorbs first losses and earns the leveraged premium.",
+    tagline: "Junior tranche that absorbs first loss in exchange for a higher yield.",
     stats: [ { k: "Est. APY", v: "27.0%", tone: "hi" }, { k: "Price", v: "1.1485" }, { k: "Role", v: "Junior" } ],
     info: [
       { k: "yzPP price", v: "1 yzPP = 1.148527 USDT0" },
@@ -130,7 +130,7 @@ const TOKENS = [
   {
     key: "syzusd", name: "syzUSD", logo: "/assets/tokens/syzUSD.svg",
     badge: "Staked yield",
-    tagline: "Staked yzUSD (ERC-4626) that accrues the weekly target yield.",
+    tagline: "Staked yzUSD, the senior tranche, that accrues the weekly yield target.",
     stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
     info: [
       { k: "Exchange rate", v: "1 yzUSD = 0.9361 syzUSD" },
@@ -201,6 +201,11 @@ export default function Alpha() {
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
         <div className="xchg rv">
+          {/* Page header */}
+          <div className="av-head">
+            <h1>Yuzu Alpha</h1>
+            <p>Yuzu Alpha is an actively managed portfolio of leveraged DeFi yield-bearing assets, with syzUSD as the senior tranche and yzPP as the junior tranche.</p>
+          </div>
           {/* Token pill tabs */}
           <div className="tok-tabs xchg-tabs" id="alphaTabs">
             <button className="tok-tab on" data-tab="yzusd"><img src="/assets/tokens/yzUSD.svg" alt="" /><span className="sym">yzUSD</span></button>

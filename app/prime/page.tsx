@@ -149,7 +149,7 @@ export default function Prime() {
                   <span className="vt-logo"><img src="/assets/tokens/yzPrime.svg" alt="" /></span>
                   <div className="vd-head-main">
                     <div className="vd-head-top"><h3>yzPrime</h3></div>
-                    <p className="vd-desc">Continuously-accruing prime yield token at NAV, under a public asset-whitelist mandate.</p>
+                    <p className="vd-desc">yzPrime is an actively managed portfolio of leveraged RWA positions on DeFi. Its universe of RWAs include i) T-Bills, ii) overcollateralized loans (e.g. Syrup) and iii) A-grade investment credit (e.g. AAA CLOs).</p>
                   </div>
                 </div>
                 <div className="vd-stats">
