@@ -88,7 +88,7 @@ function OrderItem({
         <button type="button" className={`oaction${status === "pending" ? " neg" : ""}`}>{status === "pending" ? "Cancel" : "Finalize"}</button>
       </div>
       <div className="oright">
-        <span className={`ov${negative && status === "filled" ? " neg" : ""}`}>{negative ? "−" : "+"}{amount}</span>
+        <span className="ov">{negative ? "−" : "+"}{amount}</span>
         <span className={`badge ${status}`}>{status === "pending" ? "Pending" : "Filled"}</span>
       </div>
     </div>

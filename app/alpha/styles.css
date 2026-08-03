@@ -309,8 +309,6 @@
   /* Negative (Redeem): nút đỏ — viền đỏ nhạt, chữ đỏ */
   .ord .oaction.neg { border-color: color-mix(in srgb, #DC2626 38%, transparent); color: #DC2626; }
   .ord .oaction.neg:hover { border-color: #DC2626; background: color-mix(in srgb, #DC2626 6%, transparent); }
-  /* Số tiền âm (Redeem) hiển thị đỏ; dương (Mint) giữ đen */
-  .ord .oright .ov.neg { color: #DC2626; }
   .ord .badge { display: inline-flex; padding: 4px 8px; border-radius: 6px; font-family: var(--font-body); font-weight: 500; font-size: 12px; }
   .ord .badge.pending { background: #FFFBEB; color: #F9A006; }   /* vàng */
   .ord .badge.filled { background: #F1F2F4; color: #5C636E; }    /* neutral: đã khớp, chờ finalize */
