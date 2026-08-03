@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { PanelLeft, Menu, LogOut } from "lucide-react";
+import { PanelLeft, Menu, LogOut, Wallet } from "lucide-react";
 import Button from "./ui/Button";
 import Logo from "./Logo";
 import ChainSelector from "./topbar/ChainSelector";
@@ -139,6 +139,7 @@ export default function Topbar() {
           </div>
         ) : (
           <Button variant="solid" onClick={() => setModalOpen(true)}>
+            <Wallet size={17} strokeWidth={2.1} />
             Connect Wallet
           </Button>
         )}
