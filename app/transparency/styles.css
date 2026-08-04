@@ -92,7 +92,7 @@ body.tp-prime .pg-transparency .tp-summary6 { background: color-mix(in srgb, var
   /* Illus bên PHẢI (như hero Dashboard), nội dung fill phần còn lại bên trái */
   .hub-hero { align-items: center; grid-template-columns: 1fr auto; gap: 28px; }
   .hub-hero .lede { max-width: none; }
-  .tp-hero-illus { width: 176px; height: 176px; display: block; flex: none; margin: -24px 0; }
+  .tp-hero-illus { width: 240px; height: 240px; display: block; flex: none; margin: -24px 0; }
   @media (max-width: 720px) { .tp-hero-illus { width: 120px; height: 120px; margin: 0; } }
   .tp-hero-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--good); text-decoration: none; }
   .tp-hero-cta:hover { text-decoration: underline; }
