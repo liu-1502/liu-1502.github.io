@@ -57,7 +57,7 @@
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
   .av-head p { margin: 6px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
   /* Token tabs Alpha: kiểu selection như Whitelist (không logo), canh trái, cách form 32px. */
-  #alphaTabs { justify-content: flex-start; margin-bottom: 12px; gap: 6px; }
+  #alphaTabs { justify-content: flex-end; margin-bottom: 12px; gap: 6px; }
   #alphaTabs .tok-tab {
     height: auto; padding: 6px 16px; gap: 0;
     background: transparent;
