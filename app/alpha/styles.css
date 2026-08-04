@@ -56,9 +56,18 @@
   .av-head { align-self: stretch; text-align: left; }
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
   .av-head p { margin: 6px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
-  /* Token tabs Alpha: canh trái, bo góc vuông (r-sm), cách form 32px (12 + gap 20 của .xchg). */
-  #alphaTabs { justify-content: flex-start; margin-bottom: 12px; }
-  #alphaTabs .tok-tab { border-radius: var(--r-sm); }
+  /* Token tabs Alpha: kiểu selection như Whitelist (không logo), canh trái, cách form 32px. */
+  #alphaTabs { justify-content: flex-start; margin-bottom: 12px; gap: 6px; }
+  #alphaTabs .tok-tab {
+    height: auto; padding: 6px 16px; gap: 0;
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+    border-radius: var(--r-sm);
+  }
+  #alphaTabs .tok-tab .sym { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--text); padding-right: 0; }
+  #alphaTabs .tok-tab:hover { background: color-mix(in srgb, var(--text) 5%, transparent); box-shadow: none; }
+  #alphaTabs .tok-tab.on { border-color: color-mix(in srgb, var(--accent) 50%, transparent); background: color-mix(in srgb, var(--accent) 9%, transparent); }
+  #alphaTabs .tok-tab.on .sym { color: var(--accent); }
 
   /* ---- Detail sections (giống cột phải Marketplace) ---- */
   .vd-sec { padding: 22px; background: var(--surface); border-radius: 20px; }
