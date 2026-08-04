@@ -86,17 +86,33 @@ export default function Bridge() {
 
           <div className="av-right">
             <div className="av-detail">
-              {/* Header: supported tokens */}
-              <section className="vd-sec">
+              {/* Token đang chọn: syzUSD (đồng bộ với tab token của BridgeExchange) */}
+              <section className="vd-sec" data-tokenpanel="syzusd">
                 <div className="vd-head">
-                  <span className="tk-strip aside-marks">
-                    <img src="/assets/tokens/syzUSD.svg" alt="syzUSD" />
-                    <img src="/assets/tokens/yzPrime.svg" alt="yzPrime" />
-                  </span>
+                  <span className="vt-logo"><img src="/assets/tokens/syzUSD.svg" alt="" /></span>
                   <div className="vd-head-main">
-                    <div className="vd-head-top"><h3>About the bridge</h3></div>
-                    <p className="vd-desc">Supported tokens: syzUSD and yzPrime.</p>
+                    <div className="vd-head-top"><h3>syzUSD</h3></div>
+                    <p className="vd-desc">Staked yzUSD, bridged natively across every supported chain.</p>
                   </div>
+                </div>
+                <div className="vd-info">
+                  <div><span className="k">Supported chains</span><span className="v">Plasma, Monad, Ethereum, HyperEVM, Sei, Pharos</span></div>
+                  <div><span className="k">Live lanes</span><span className="v">6 chains</span></div>
+                </div>
+              </section>
+
+              {/* Token đang chọn: yzPrime */}
+              <section className="vd-sec" data-tokenpanel="yzprime" style={{ display: "none" }}>
+                <div className="vd-head">
+                  <span className="vt-logo"><img src="/assets/tokens/yzPrime.svg" alt="" /></span>
+                  <div className="vd-head-main">
+                    <div className="vd-head-top"><h3>yzPrime</h3></div>
+                    <p className="vd-desc">The Yuzu Prime RWA token, bridged natively between its live chains.</p>
+                  </div>
+                </div>
+                <div className="vd-info">
+                  <div><span className="k">Supported chains</span><span className="v">Monad, Ethereum</span></div>
+                  <div><span className="k">Live lanes</span><span className="v">2 chains</span></div>
                 </div>
               </section>
 
@@ -110,10 +126,6 @@ export default function Bridge() {
               <section className="vd-sec">
                 <h4 className="vd-title">Issuer-owned, rate limited</h4>
                 <p className="vd-desc">Yuzu owns its token pools and bridge configuration outright. Each lane enforces a hard capacity ceiling and refill rate, capping the blast radius of any anomaly independent of the transport layer.</p>
-                <div className="vd-info">
-                  <div><span className="k">syzUSD lanes</span><span className="v">Plasma, Monad, Ethereum, HyperEVM, Sei, Pharos</span></div>
-                  <div><span className="k">yzPrime lanes</span><span className="v">Monad, Ethereum</span></div>
-                </div>
               </section>
 
               {/* Defense in depth */}

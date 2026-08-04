@@ -103,6 +103,13 @@ export default function BridgeExchange() {
     return () => document.removeEventListener("click", onDoc);
   }, []);
 
+  // Đồng bộ panel chi tiết bên phải (syzUSD / yzPrime) theo token đang chọn.
+  useEffect(() => {
+    document.querySelectorAll<HTMLElement>(".pg-bridge [data-tokenpanel]").forEach((p) => {
+      p.style.display = p.getAttribute("data-tokenpanel") === token ? "" : "none";
+    });
+  }, [token]);
+
   // Orders: lọc theo trạng thái + tìm theo tx hash; mặc định hiện 3, "Show more" +10.
   useEffect(() => {
     const root = document.querySelector<HTMLElement>(".pg-bridge .ohist");
