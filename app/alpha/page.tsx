@@ -229,18 +229,16 @@ export default function Alpha() {
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
         <div className="xchg rv">
-          {/* Page header: title/description trái, token tabs phải (ngang hàng description) */}
-          <div className="av-header-row">
-            <div className="av-head">
-              <h1>Yuzu Alpha</h1>
-              <p>Yuzu Alpha is an actively managed portfolio of leveraged DeFi yield-bearing assets, with syzUSD as the senior tranche and yzPP as the junior tranche.</p>
-            </div>
-            {/* Token pill tabs */}
-            <div className="tok-tabs xchg-tabs" id="alphaTabs">
-              <button className="tok-tab on" data-tab="yzusd"><img src="/assets/tokens/yzUSD.svg" alt="" /><span className="sym">yzUSD</span></button>
-              <button className="tok-tab" data-tab="yzpp"><img src="/assets/tokens/yzPP.svg" alt="" /><span className="sym">yzPP</span></button>
-              <button className="tok-tab" data-tab="syzusd"><img src="/assets/tokens/syzUSD.svg" alt="" /><span className="sym">syzUSD</span></button>
-            </div>
+          {/* Page header */}
+          <div className="av-head">
+            <h1>Yuzu Alpha</h1>
+            <p>Yuzu Alpha is an actively managed portfolio of leveraged DeFi yield-bearing assets, with syzUSD as the senior tranche and yzPP as the junior tranche.</p>
+          </div>
+          {/* Token pill tabs */}
+          <div className="tok-tabs xchg-tabs" id="alphaTabs">
+            <button className="tok-tab on" data-tab="yzusd"><img src="/assets/tokens/yzUSD.svg" alt="" /><span className="sym">yzUSD</span></button>
+            <button className="tok-tab" data-tab="yzpp"><img src="/assets/tokens/yzPP.svg" alt="" /><span className="sym">yzPP</span></button>
+            <button className="tok-tab" data-tab="syzusd"><img src="/assets/tokens/syzUSD.svg" alt="" /><span className="sym">syzUSD</span></button>
           </div>
 
           <div className="av-grid">

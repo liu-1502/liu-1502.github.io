@@ -52,16 +52,13 @@
   .av-right { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
   .av-detail { display: flex; flex-direction: column; gap: 16px; }
   /* Header + tabs canh GIỮA theo chiều ngang content */
-  .av-head { align-self: stretch; text-align: center; }
+  /* Header canh trái (Alpha, Prime, ...) */
+  .av-head { align-self: stretch; text-align: left; }
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
-  .av-head p { margin: 6px auto 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
-  /* Header Alpha: title/description canh trái, token tabs canh phải (đáy ngang description). */
-  .av-header-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 12px; }
-  .av-header-row .av-head { flex: 1; min-width: 0; text-align: left; }
-  .av-header-row .av-head p { margin: 6px 0 0; max-width: 64ch; }
-  .av-header-row .tok-tabs { flex: none; margin: 0; }
-  @media (max-width: 760px) { .av-header-row { flex-direction: column; align-items: stretch; } .av-header-row .tok-tabs { justify-content: flex-start; } }
-  #alphaTabs { justify-content: center; }
+  .av-head p { margin: 6px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
+  /* Token tabs Alpha: canh trái, bo góc vuông (r-sm), cách form 32px (12 + gap 20 của .xchg). */
+  #alphaTabs { justify-content: flex-start; margin-bottom: 12px; }
+  #alphaTabs .tok-tab { border-radius: var(--r-sm); }
 
   /* ---- Detail sections (giống cột phải Marketplace) ---- */
   .vd-sec { padding: 22px; background: var(--surface); border-radius: 20px; }
