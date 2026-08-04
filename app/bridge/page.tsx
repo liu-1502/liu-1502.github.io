@@ -6,6 +6,24 @@ import { CircleHelp, X, ArrowUpRight, ExternalLink, ChevronDown, Search } from "
 
 export const metadata = pageMetadata("/bridge");
 
+/* Logo các chain hỗ trợ (thay danh sách text). Chain chưa có logo → badge chữ cái. */
+const CHAIN_LOGOS: Record<string, string> = {
+  Plasma: "/assets/chains/plasma.svg",
+  Monad: "/assets/chains/monad.svg",
+  Ethereum: "/assets/chains/ethereum.svg",
+};
+function ChainLogos({ chains }: { chains: string[] }) {
+  return (
+    <span className="chain-logos">
+      {chains.map((c) =>
+        CHAIN_LOGOS[c]
+          ? <img key={c} src={CHAIN_LOGOS[c]} alt={c} title={c} />
+          : <i key={c} className="chl" title={c}>{c.charAt(0)}</i>
+      )}
+    </span>
+  );
+}
+
 /* Một dòng lịch sử bridge (route + tx hash thay cho địa chỉ ví). */
 function BridgeOrder({ tok, sym, route, amount, tx, status }: {
   tok: "syzusd" | "yzprime"; sym: string; route: string; amount: string; tx: string;
@@ -79,8 +97,8 @@ export default function Bridge() {
               <h4>Issuer-owned, rate limited</h4>
               <p>Yuzu owns its token pools and bridge configuration outright. Each lane enforces a hard capacity ceiling and refill rate, capping the blast radius of any anomaly independent of the transport layer.</p>
               <div className="rows">
-                <div><span className="k">syzUSD lanes</span><span className="v">Plasma, Monad, Ethereum, HyperEVM, Sei, Pharos</span></div>
-                <div><span className="k">yzPrime lanes</span><span className="v">Monad, Ethereum</span></div>
+                <div><span className="k">syzUSD lanes</span><ChainLogos chains={["Plasma", "Monad", "Ethereum", "HyperEVM", "Sei", "Pharos"]} /></div>
+                <div><span className="k">yzPrime lanes</span><ChainLogos chains={["Monad", "Ethereum"]} /></div>
               </div>
             </div>
             <div className="aside-card">

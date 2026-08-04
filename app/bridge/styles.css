@@ -3,11 +3,10 @@
      Thêm .rv để đủ specificity thắng rule dùng chung max-width:none của alpha/styles.css. */
   .app-layout:not(.xtra-open) > .xchg.rv { max-width: 480px; margin-inline: auto; }
 
-  /* 2 card You send / You receive luôn bằng chiều cao: hàng phụ (Balance+Max & ≈$) cùng cao. */
-  .mfield-l .xusd, .mfield-l .bmax { min-height: 28px; display: flex; align-items: center; }
-
   /* Token+chain selector căn giữa dọc, ngang với số tiền nhập (input ở giữa mfield). */
   .mfield-r { align-self: center; }
+  /* Card "You send": có Max (trên) + token + Balance (dưới) → xếp dọc như Alpha, không center. */
+  .mfield-r:has(.pct-opts) { align-self: stretch; }
 
   /* Bộ chọn kết hợp TOKEN + CHAIN */
   .tc-wrap { position: relative; }
@@ -121,7 +120,10 @@
 }
 
 /* Hàng Balance + Max dưới ô "You send" */
-.pg-bridge .bmax { display: flex; align-items: center; gap: 10px; }
+/* Logo chuỗi (thay text) trong popover About */
+.pg-bridge .about-menu .chain-logos { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.pg-bridge .about-menu .chain-logos img { width: 22px; height: 22px; border-radius: 50%; display: block; }
+.pg-bridge .about-menu .chain-logos .chl { width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-style: normal; font-weight: 600; background: color-mix(in srgb, var(--citrus) 20%, #fff); color: var(--text); }
 
 /* Meta rows trong card (Mechanism/Slippage/Estimated time/CCIP fee): label trái, value phải */
 .pg-bridge .xchg-body .rows { align-self: stretch; display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 16px; }

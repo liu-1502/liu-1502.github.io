@@ -233,12 +233,10 @@ export default function BridgeExchange() {
           <div className="mfield-l">
             <span className="lbl">You send</span>
             <input type="text" inputMode="decimal" placeholder="0" data-src data-rate="1" aria-label="Amount to bridge" />
-            <div className="bmax">
-              <span className="bal">Balance <span className="v">0</span></span>
-              <button type="button" className="pct" data-max>Max</button>
-            </div>
+            <div className="xusd">≈ $0.00</div>
           </div>
           <div className="mfield-r">
+            <div className="pct-opts"><button type="button" className="pct" data-max>Max</button></div>
             <TokenChainSelect
               tokenSym={tokenSym}
               chain={from}
@@ -247,6 +245,7 @@ export default function BridgeExchange() {
               onToggle={() => setOpenSel((o) => (o === "from" ? null : "from"))}
               onPick={pickFrom}
             />
+            <div className="bal">Balance <span className="v">0</span></div>
           </div>
         </div>
 
@@ -273,15 +272,15 @@ export default function BridgeExchange() {
         </div>
       </div>
 
-      {/* Chi tiết chuyển khoản ngay trong form (giống staging) */}
+      <button className="btn btn-accent btn-block" onClick={requestConnectWallet}>Connect Wallet</button>
+
+      {/* Chi tiết chuyển khoản — nằm dưới nút Connect Wallet */}
       <div className="rows">
         <div><span className="k">Mechanism</span><span className="v">Burn on source, mint on destination</span></div>
         <div><span className="k">Slippage</span><span className="v" style={{ color: "var(--accent)" }}>Zero, exact amount arrives</span></div>
         <div><span className="k">Estimated time</span><span className="v">~20 minutes</span></div>
         <div><span className="k">CCIP fee</span><span className="v">Paid in native gas</span></div>
       </div>
-
-      <button className="btn btn-accent btn-block" onClick={requestConnectWallet}>Connect Wallet</button>
       </div>
     </>
   );
