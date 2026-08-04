@@ -16,8 +16,6 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
 body.tp-prime .pg-transparency .s6 .k, body.tp-prime .pg-transparency .s6 .v { color: #3A2A06; }
 /* Nền nâu thẻ summary6 nhạt hơn 1 chút */
 body.tp-prime .pg-transparency .tp-summary6 { background: color-mix(in srgb, var(--prime) 9%, #FBFAF3); }
-/* Illustration bên phải: ngả tông nâu/vàng Prime khi ở tab Prime */
-body.tp-prime .pg-transparency .tp-hero-illus { filter: sepia(0.55) saturate(1.55) hue-rotate(2deg) brightness(0.98); }
 
 /* Style riêng của trang Transparency — lồng trong .pg-transparency để không loang
    sang trang khác (nhiều tên class trùng giữa các trang). */
