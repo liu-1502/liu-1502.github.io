@@ -205,8 +205,8 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
 
         <div className="vd-sec-div" />
 
-        {/* Historical Performance — collapse/expand để hiện/ẩn chart */}
-        <details className="vd-collapse vd-chart-collapse" open>
+        {/* Historical Performance — mặc định ẩn chart, click để hiện */}
+        <details className="vd-collapse vd-chart-collapse">
           <summary className="vd-collapse-sum">
             <div className="vd-chart-head">
               <div>

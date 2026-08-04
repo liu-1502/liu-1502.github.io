@@ -299,11 +299,19 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-logos img { width: 20px; height: 20px; object-fit: contain; border-radius: 4px; }
 
   /* ---- Historical Performance collapse/expand (hiện/ẩn chart) ---- */
-  .vd-collapse-sum { list-style: none; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
+  .vd-collapse-sum { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; }
   .vd-collapse-sum::-webkit-details-marker { display: none; }
   .vd-collapse-sum .vd-chart-head { flex: 1; margin-bottom: 0; }
-  .vd-collapse-ico { width: 18px; height: 18px; color: var(--muted); flex: none; margin-top: 3px; transition: transform .2s ease; }
+  .vd-collapse-ico { width: 18px; height: 18px; color: var(--muted); flex: none; transition: transform .2s ease; }
   .vd-collapse[open] .vd-collapse-ico { transform: rotate(180deg); }
+  /* Khi mở: title + mô tả bên trái, APY xếp dọc bên phải (canh theo top) */
+  .vd-collapse[open] .vd-collapse-sum { align-items: flex-start; }
+  .vd-collapse[open] .vd-collapse-ico { margin-top: 3px; }
+  /* Khi collapse: chỉ Title + APY, mô tả ẩn, label APY nằm ngang cạnh số */
+  .vd-chart-collapse:not([open]) .vd-chart-sub { display: none; }
+  .vd-chart-collapse:not([open]) .vd-chart-head .vd-title { margin: 0; }
+  .vd-chart-collapse:not([open]) .vd-apy-badge { display: flex; align-items: baseline; gap: 8px; }
+  .vd-chart-collapse:not([open]) .vd-apy-badge b { display: inline; }
   /* Chừa khoảng cho chart khi mở */
   .vd-collapse[open] > .vd-charts { margin-top: 16px; }
   /* Divider ngăn Vault info với Historical Performance trong cùng section */
