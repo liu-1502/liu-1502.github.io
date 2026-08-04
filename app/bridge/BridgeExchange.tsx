@@ -258,6 +258,7 @@ export default function BridgeExchange() {
           <div className="mfield-l">
             <span className="lbl">You receive on destination</span>
             <input type="text" placeholder="0" data-dst readOnly aria-label="Amount received" />
+            <div className="xusd">≈ $0.00</div>
           </div>
           <div className="mfield-r">
             <TokenChainSelect

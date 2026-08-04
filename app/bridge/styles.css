@@ -1,6 +1,10 @@
 .pg-bridge {
-  /* Form bridge: giới hạn bề rộng & canh giữa như Alpha/Prime (không fill full-width). */
-  .app-layout:not(.xtra-open) > .xchg { max-width: 560px; margin-inline: auto; }
+  /* Form bridge: bề rộng bằng form Alpha (480px) & canh giữa, không fill full-width.
+     Thêm .rv để đủ specificity thắng rule dùng chung max-width:none của alpha/styles.css. */
+  .app-layout:not(.xtra-open) > .xchg.rv { max-width: 480px; margin-inline: auto; }
+
+  /* 2 card You send / You receive luôn bằng chiều cao: hàng phụ (Balance+Max & ≈$) cùng cao. */
+  .mfield-l .xusd, .mfield-l .bmax { min-height: 28px; display: flex; align-items: center; }
 
   /* Token+chain selector căn giữa dọc, ngang với số tiền nhập (input ở giữa mfield). */
   .mfield-r { align-self: center; }
