@@ -193,19 +193,24 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         </div>
       </section>
 
-      {/* Vault info */}
-      <section className="vd-sec">
-        <h4 className="vd-title">Vault info</h4>
-        <div className="vd-info">
-          <div><span className="k">Chain</span><span className="v vd-v-chain"><img src={v.chainIcon} alt="" />{v.chain}</span></div>
-          <div><span className="k">Deposit / Withdrawal Fee</span><span className="v">None</span></div>
-          <div><span className="k">Withdrawal time</span><span className="v">{v.fees.wtime}</span></div>
-          <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
-        </div>
-      </section>
-
-      {/* Historical Performance */}
+      {/* Vault info (collapse/expand) + Historical Performance — cùng 1 section */}
       <section className="vd-sec vd-chart-sec">
+        <details className="vd-collapse" open>
+          <summary className="vd-collapse-sum">
+            <h4 className="vd-title">Vault info</h4>
+            <ChevronDown className="vd-collapse-ico" />
+          </summary>
+          <div className="vd-info">
+            <div><span className="k">Chain</span><span className="v vd-v-chain"><img src={v.chainIcon} alt="" />{v.chain}</span></div>
+            <div><span className="k">Deposit / Withdrawal Fee</span><span className="v">None</span></div>
+            <div><span className="k">Withdrawal time</span><span className="v">{v.fees.wtime}</span></div>
+            <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
+          </div>
+        </details>
+
+        <div className="vd-sec-div" />
+
+        {/* Historical Performance */}
         <div className="vd-chart-head">
           <div>
             <h4 className="vd-title">Historical Performance</h4>
