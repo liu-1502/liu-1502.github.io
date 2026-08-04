@@ -304,12 +304,12 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-collapse-sum .vd-chart-head { flex: 1; margin-bottom: 0; }
   .vd-collapse-ico { width: 18px; height: 18px; color: var(--muted); flex: none; transition: transform .2s ease; }
   .vd-collapse[open] .vd-collapse-ico { transform: rotate(180deg); }
-  /* Khi mở: title + mô tả bên trái, APY xếp dọc bên phải (canh theo top) */
+  /* Title "Historical Performance": ngang cấp & cùng style với label vault info (vd. "Powered by") */
+  .vd-chart-collapse .vd-chart-head .vd-title { font-family: var(--font-body); font-weight: 400; font-size: 13.5px; color: var(--muted); margin: 0; }
+  /* Khi mở: canh theo top (APY xếp dọc cao hơn title) */
   .vd-collapse[open] .vd-collapse-sum { align-items: flex-start; }
   .vd-collapse[open] .vd-collapse-ico { margin-top: 3px; }
-  /* Khi collapse: chỉ Title + APY, mô tả ẩn, label APY nằm ngang cạnh số */
-  .vd-chart-collapse:not([open]) .vd-chart-sub { display: none; }
-  .vd-chart-collapse:not([open]) .vd-chart-head .vd-title { margin: 0; }
+  /* Khi collapse: label APY nằm ngang cạnh số */
   .vd-chart-collapse:not([open]) .vd-apy-badge { display: flex; align-items: baseline; gap: 8px; }
   .vd-chart-collapse:not([open]) .vd-apy-badge b { display: inline; }
   /* Chừa khoảng cho chart khi mở */
@@ -318,9 +318,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-sec-div { height: 1px; background: color-mix(in srgb, var(--text) 8%, transparent); margin: 20px 0; }
 
   /* ---- Historical Performance chart ---- */
-  .vd-chart-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
-  .vd-chart-head .vd-title { margin: 0 0 2px; }
-  .vd-chart-sub { font-family: var(--font-body); font-size: 12.5px; color: var(--muted); }
+  .vd-chart-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 0; }
   .vd-apy-badge { flex: none; text-align: right; }
   .vd-apy-badge b { display: block; font-family: var(--font-mono); font-weight: 620; font-size: 17px; color: var(--mkt); }
   .vd-apy-badge span { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); }

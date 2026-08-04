@@ -209,10 +209,7 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         <details className="vd-collapse vd-chart-collapse">
           <summary className="vd-collapse-sum">
             <div className="vd-chart-head">
-              <div>
-                <h4 className="vd-title">Historical Performance</h4>
-                <span className="vd-chart-sub">Historical vault receipt token price</span>
-              </div>
+              <h4 className="vd-title">Historical Performance</h4>
               <div className="vd-apy-badge"><b>{v.trailingApy}</b><span>7D trailing APY</span></div>
             </div>
             <ChevronDown className="vd-collapse-ico" />
