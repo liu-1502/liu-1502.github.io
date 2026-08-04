@@ -135,34 +135,53 @@ export default function BridgeExchange() {
     };
   }, []);
 
-  // Today Order: chọn item + lọc theo token qua chips.
+  // Orders: lọc theo trạng thái + tìm theo tx hash; mặc định hiện 3, "Show more" +10.
   useEffect(() => {
-    const hs: Array<{ el: Element; fn: (e: Event) => void }> = [];
-    document.querySelectorAll(".pg-bridge .olist").forEach((list) => {
-      const fn = (e: Event) => {
-        const item = (e.target as Element).closest(".ord");
-        if (!item || !list.contains(item)) return;
-        list.querySelectorAll(".ord").forEach((x) => x.classList.remove("on"));
-        item.classList.add("on");
-      };
-      list.addEventListener("click", fn);
-      hs.push({ el: list, fn });
-    });
-    document.querySelectorAll(".pg-bridge .ord-filters").forEach((fr) => {
-      const fn = (e: Event) => {
-        const b = (e.target as Element).closest(".ofilter");
-        if (!b || !fr.contains(b)) return;
-        fr.querySelectorAll(".ofilter").forEach((x) => x.classList.remove("on"));
-        b.classList.add("on");
-        const f = b.getAttribute("data-filter");
-        fr.parentElement?.querySelector(".olist")?.querySelectorAll<HTMLElement>(".ord").forEach((o) => {
-          o.style.display = f === "all" || o.getAttribute("data-kind") === f ? "" : "none";
-        });
-      };
-      fr.addEventListener("click", fn);
-      hs.push({ el: fr, fn });
-    });
-    return () => hs.forEach(({ el, fn }) => el.removeEventListener("click", fn));
+    const root = document.querySelector<HTMLElement>(".pg-bridge .ohist");
+    if (!root) return;
+    const list = root.querySelector<HTMLElement>(".olist");
+    const btn = root.querySelector<HTMLElement>("[data-omore]");
+    const filters = root.querySelector<HTMLElement>(".ord-filters");
+    const search = root.querySelector<HTMLInputElement>(".osearch input");
+    if (!list || !btn) return;
+    const rows = Array.from(list.querySelectorAll<HTMLElement>(".ord"));
+    let statusFilter = "all";
+    let query = "";
+    let shown = 3;
+
+    const matches = (r: HTMLElement) => {
+      const okStatus = statusFilter === "all" || r.getAttribute("data-status") === statusFilter;
+      const okQuery = !query || (r.querySelector(".otx")?.textContent || "").toLowerCase().includes(query);
+      return okStatus && okQuery;
+    };
+    const apply = () => {
+      let matched = 0;
+      rows.forEach((r) => {
+        if (matches(r)) { r.style.display = matched < shown ? "" : "none"; matched++; }
+        else r.style.display = "none";
+      });
+      btn.style.display = matched > shown ? "" : "none";
+    };
+    apply();
+
+    const onFilter = (e: Event) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>(".ofilter");
+      if (!b) return;
+      filters?.querySelectorAll(".ofilter").forEach((x) => x.classList.toggle("on", x === b));
+      statusFilter = b.getAttribute("data-filter") || "all";
+      shown = 3;
+      apply();
+    };
+    const onSearch = () => { query = (search?.value || "").trim().toLowerCase(); shown = 3; apply(); };
+    const onMore = () => { shown += 10; apply(); };
+    filters?.addEventListener("click", onFilter);
+    search?.addEventListener("input", onSearch);
+    btn.addEventListener("click", onMore);
+    return () => {
+      filters?.removeEventListener("click", onFilter);
+      search?.removeEventListener("input", onSearch);
+      btn.removeEventListener("click", onMore);
+    };
   }, []);
 
 
