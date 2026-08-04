@@ -7,14 +7,16 @@ import TokenIcon from "@/components/ui/TokenIcon";
 import { ArrowUpDown } from "lucide-react";
 
 /* Cấu hình bridge — trước đây là các biến trong BridgeClient (innerHTML). */
-type TokenId = "syzusd" | "yzprime";
+type TokenId = "syzusd" | "yzprime" | "yzcash";
 const TOKENS: { id: TokenId; sym: string }[] = [
   { id: "syzusd", sym: "syzUSD" },
   { id: "yzprime", sym: "yzPrime" },
+  { id: "yzcash", sym: "yzCash" },
 ];
 const LANES: Record<TokenId, string[]> = {
   syzusd: ["Plasma", "Monad", "Ethereum", "HyperEVM", "Sei", "Pharos"],
   yzprime: ["Monad", "Ethereum"],
+  yzcash: ["Plasma", "Monad", "Ethereum"],
 };
 const CHAIN_IMG: Record<string, string> = {
   Plasma: chainSrc("plasma"),
@@ -87,7 +89,7 @@ const next = (lanes: string[], v: string) => lanes[(lanes.indexOf(v) + 1) % lane
 export default function BridgeExchange() {
   const [token, setToken] = useState<TokenId>("syzusd");
   const [from, setFrom] = useState("Plasma");
-  const [to, setTo] = useState("Monad");
+  const [to, setTo] = useState("Ethereum");
   const [openSel, setOpenSel] = useState<"from" | "to" | null>(null);
   const selectsRef = useRef<HTMLDivElement>(null);
 
@@ -231,7 +233,10 @@ export default function BridgeExchange() {
           <div className="mfield-l">
             <span className="lbl">You send</span>
             <input type="text" inputMode="decimal" placeholder="0" data-src data-rate="1" aria-label="Amount to bridge" />
-            <div className="xusd">≈ $0.00</div>
+            <div className="bmax">
+              <span className="bal">Balance <span className="v">0</span></span>
+              <button type="button" className="pct" data-max>Max</button>
+            </div>
           </div>
           <div className="mfield-r">
             <TokenChainSelect
@@ -253,7 +258,6 @@ export default function BridgeExchange() {
           <div className="mfield-l">
             <span className="lbl">You receive on destination</span>
             <input type="text" placeholder="0" data-dst readOnly aria-label="Amount received" />
-            <div className="xusd">≈ $0.00</div>
           </div>
           <div className="mfield-r">
             <TokenChainSelect
@@ -268,7 +272,17 @@ export default function BridgeExchange() {
         </div>
       </div>
 
+      {/* Chi tiết chuyển khoản ngay trong form (giống staging) */}
+      <div className="rows">
+        <div><span className="k">Mechanism</span><span className="v">Burn on source, mint on destination</span></div>
+        <div><span className="k">Slippage</span><span className="v" style={{ color: "var(--accent)" }}>Zero, exact amount arrives</span></div>
+        <div><span className="k">Estimated time</span><span className="v">~20 minutes</span></div>
+        <div><span className="k">CCIP fee</span><span className="v">Paid in native gas</span></div>
+      </div>
+
       <button className="btn btn-accent btn-block" onClick={requestConnectWallet}>Connect Wallet</button>
+
+      <div className="lanes-ok"><span className="dot" />All lanes healthy. Per-lane rate limits enforced onchain.</div>
       </div>
     </>
   );

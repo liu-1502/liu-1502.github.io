@@ -116,6 +116,13 @@
   }
 }
 
+/* Hàng Balance + Max dưới ô "You send" */
+.pg-bridge .bmax { display: flex; align-items: center; gap: 10px; }
+
+/* Trạng thái lanes dưới nút Connect Wallet */
+.pg-bridge .lanes-ok { display: flex; align-items: center; gap: 8px; margin-top: 2px; font-family: var(--font-body); font-size: 13px; color: var(--muted); }
+.pg-bridge .lanes-ok .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+
 /* Meta rows trong card (Mechanism/Slippage/Estimated time/CCIP fee): label trái, value phải */
 .pg-bridge .xchg-body .rows { align-self: stretch; display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 16px; }
 .pg-bridge .xchg-body .rows > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
