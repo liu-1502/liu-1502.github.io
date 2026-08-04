@@ -1,5 +1,5 @@
 <svg width="176" height="176" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-<style>.mag{animation:magscan 2.8s ease-in-out infinite}@keyframes magscan{0%,100%{transform:translateY(-1.6px)}50%{transform:translateY(1.6px)}}.flap{transform-box:fill-box;transform-origin:12% 82%;animation:flapsway 4.5s ease-in-out infinite}@keyframes flapsway{0%,100%{transform:rotate(-2.6deg)}50%{transform:rotate(1.6deg)}}@media(prefers-reduced-motion:reduce){.mag,.flap{animation:none}}</style>
+<style>.mag{animation:magscan 2.8s ease-in-out infinite}@keyframes magscan{0%,100%{transform:translateY(-1.6px)}50%{transform:translateY(1.6px)}}@media(prefers-reduced-motion:reduce){.mag{animation:none}}</style>
 <mask id="mask0_474_2439" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="16" y="16" width="88" height="88">
 <path d="M104 16.25H16.5V103.75H104V16.25Z" fill="white"/>
 </mask>
