@@ -1,4 +1,7 @@
 .pg-bridge {
+  /* Form bridge: giới hạn bề rộng & canh giữa như Alpha/Prime (không fill full-width). */
+  .app-layout:not(.xtra-open) > .xchg { max-width: 560px; margin-inline: auto; }
+
   /* Token+chain selector căn giữa dọc, ngang với số tiền nhập (input ở giữa mfield). */
   .mfield-r { align-self: center; }
 

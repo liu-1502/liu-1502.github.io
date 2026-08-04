@@ -2,7 +2,7 @@ import "../alpha/styles.css";   /* shared Alpha exchange style */
 import "./styles.css";           /* bridge overrides, load sau */
 import { pageMetadata } from "@/lib/pages";
 import BridgeExchange from "./BridgeExchange";
-import { ArrowUpRight, ExternalLink, ChevronDown, Search } from "lucide-react";
+import { CircleHelp, X, ArrowUpRight, ExternalLink, ChevronDown, Search } from "lucide-react";
 
 export const metadata = pageMetadata("/bridge");
 
@@ -59,98 +59,65 @@ export default function Bridge() {
 
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
+        {/* Nút About the bridge: canh phải trên content như trang Alpha */}
+        <div className="about-wrap">
+          <button className="about-btn" data-about-toggle aria-expanded="false"><CircleHelp className="ico" /> About</button>
+          <div className="about-menu" data-about-menu hidden>
+            <div className="aside-head">
+              <h3 className="aside-title">About the bridge</h3>
+              <button className="aside-close" data-about-close aria-label="Close details"><X /></button>
+            </div>
+            <div className="tk-strip aside-marks">
+              <img src="/assets/tokens/syzUSD.svg" alt="syzUSD" />
+              <img src="/assets/tokens/yzPrime.svg" alt="yzPrime" />
+            </div>
+            <div className="aside-card">
+              <h4>Why this bridge is different</h4>
+              <p>No liquidity pools, no wrapped IOUs. Tokens are burned on the source chain and minted on the destination under the Cross-Chain Token standard, so the exact amount you send is the exact amount you receive.</p>
+            </div>
+            <div className="aside-card">
+              <h4>Issuer-owned, rate limited</h4>
+              <p>Yuzu owns its token pools and bridge configuration outright. Each lane enforces a hard capacity ceiling and refill rate, capping the blast radius of any anomaly independent of the transport layer.</p>
+              <div className="rows">
+                <div><span className="k">syzUSD lanes</span><span className="v">Plasma, Monad, Ethereum, HyperEVM, Sei, Pharos</span></div>
+                <div><span className="k">yzPrime lanes</span><span className="v">Monad, Ethereum</span></div>
+              </div>
+            </div>
+            <div className="aside-card">
+              <h4>Defense in depth</h4>
+              <p>Transfers require agreement across Chainlink&apos;s committing and executing oracle networks, with an independent onchain risk-management contract able to halt activity as a circuit breaker.</p>
+              <div className="rows">
+                <div><span className="k">Token manager</span><span className="v" style={{ color: "var(--citrus)" }}>Chainlink dashboard</span></div>
+                <div><span className="k">Alt route</span><span className="v">transporter.io</span></div>
+              </div>
+            </div>
+            <div className="aside-card">
+              <h4>Transfer details</h4>
+              <div className="rows">
+                <div><span className="k">Mechanism</span><span className="v">Burn on source, mint on destination</span></div>
+                <div><span className="k">Slippage</span><span className="v" style={{ color: "var(--accent)" }}>Zero, exact amount arrives</span></div>
+                <div><span className="k">Estimated time</span><span className="v">~20 minutes</span></div>
+                <div><span className="k">CCIP fee</span><span className="v">Paid in native gas</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="xchg rv">
-          {/* Page header */}
-          <div className="av-head">
-            <h1>Yuzu Bridge</h1>
-            <p>Move syzUSD and yzPrime across chains with a native burn-and-mint bridge secured by Chainlink CCIP — no liquidity pools, no wrapped IOUs, exact amount in equals exact amount out.</p>
-          </div>
+          <BridgeExchange />
 
-          <div className="av-grid">
-          <div className="av-left">
-            <BridgeExchange />
-
-            {/* Order history */}
-            <div className="acc ohist">
-              <div className="ohead">
-                <span className="otitle">Orders</span>
-              </div>
-              <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="pending">Pending</button><button className="ofilter" data-filter="filled">Filled</button><button className="ofilter" data-filter="finalized">Finalized</button><button className="ofilter" data-filter="cancelled">Cancelled</button></div>
-              <div className="osearch"><Search className="osearch-ico" /><input type="text" placeholder="Search by transaction hash" aria-label="Search by transaction hash" /></div>
-              <div className="olist">
-                {ORDERS.map((o, i) => <BridgeOrder key={i} {...o} />)}
-              </div>
-              <button type="button" className="omore" data-omore>Show more <ChevronDown /></button>
+          {/* Order history */}
+          <div className="acc ohist">
+            <div className="ohead">
+              <span className="otitle">Orders</span>
             </div>
-          </div>{/* .av-left */}
-
-          <div className="av-right">
-            <div className="av-detail">
-              {/* Token đang chọn: syzUSD (đồng bộ với tab token của BridgeExchange) */}
-              <section className="vd-sec" data-tokenpanel="syzusd">
-                <div className="vd-head">
-                  <span className="vt-logo"><img src="/assets/tokens/syzUSD.svg" alt="" /></span>
-                  <div className="vd-head-main">
-                    <div className="vd-head-top"><h3>syzUSD</h3></div>
-                    <p className="vd-desc">Staked yzUSD, bridged natively across every supported chain.</p>
-                  </div>
-                </div>
-                <div className="vd-info">
-                  <div><span className="k">Supported chains</span><span className="v">Plasma, Monad, Ethereum, HyperEVM, Sei, Pharos</span></div>
-                  <div><span className="k">Live lanes</span><span className="v">6 chains</span></div>
-                </div>
-              </section>
-
-              {/* Token đang chọn: yzPrime */}
-              <section className="vd-sec" data-tokenpanel="yzprime" style={{ display: "none" }}>
-                <div className="vd-head">
-                  <span className="vt-logo"><img src="/assets/tokens/yzPrime.svg" alt="" /></span>
-                  <div className="vd-head-main">
-                    <div className="vd-head-top"><h3>yzPrime</h3></div>
-                    <p className="vd-desc">The Yuzu Prime RWA token, bridged natively between its live chains.</p>
-                  </div>
-                </div>
-                <div className="vd-info">
-                  <div><span className="k">Supported chains</span><span className="v">Monad, Ethereum</span></div>
-                  <div><span className="k">Live lanes</span><span className="v">2 chains</span></div>
-                </div>
-              </section>
-
-              {/* Why this bridge is different */}
-              <section className="vd-sec">
-                <h4 className="vd-title">Why this bridge is different</h4>
-                <p className="vd-desc">No liquidity pools, no wrapped IOUs. Tokens are burned on the source chain and minted on the destination under the Cross-Chain Token standard, so the exact amount you send is the exact amount you receive.</p>
-              </section>
-
-              {/* Issuer-owned, rate limited */}
-              <section className="vd-sec">
-                <h4 className="vd-title">Issuer-owned, rate limited</h4>
-                <p className="vd-desc">Yuzu owns its token pools and bridge configuration outright. Each lane enforces a hard capacity ceiling and refill rate, capping the blast radius of any anomaly independent of the transport layer.</p>
-              </section>
-
-              {/* Defense in depth */}
-              <section className="vd-sec">
-                <h4 className="vd-title">Defense in depth</h4>
-                <p className="vd-desc">Transfers require agreement across Chainlink&apos;s committing and executing oracle networks, with an independent onchain risk-management contract able to halt activity as a circuit breaker.</p>
-                <div className="vd-info">
-                  <div><span className="k">Token manager</span><span className="v" style={{ color: "var(--citrus)" }}>Chainlink dashboard</span></div>
-                  <div><span className="k">Alt route</span><span className="v">transporter.io</span></div>
-                </div>
-              </section>
-
-              {/* Transfer details */}
-              <section className="vd-sec">
-                <h4 className="vd-title">Transfer details</h4>
-                <div className="vd-info">
-                  <div><span className="k">Mechanism</span><span className="v">Burn on source, mint on destination</span></div>
-                  <div><span className="k">Slippage</span><span className="v" style={{ color: "var(--accent)" }}>Zero, exact amount arrives</span></div>
-                  <div><span className="k">Estimated time</span><span className="v">~20 minutes</span></div>
-                  <div><span className="k">CCIP fee</span><span className="v">Paid in native gas</span></div>
-                </div>
-              </section>
+            <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="pending">Pending</button><button className="ofilter" data-filter="filled">Filled</button><button className="ofilter" data-filter="finalized">Finalized</button><button className="ofilter" data-filter="cancelled">Cancelled</button></div>
+            <div className="osearch"><Search className="osearch-ico" /><input type="text" placeholder="Search by transaction hash" aria-label="Search by transaction hash" /></div>
+            <div className="olist">
+              {ORDERS.map((o, i) => <BridgeOrder key={i} {...o} />)}
             </div>
+            <button type="button" className="omore" data-omore>Show more <ChevronDown /></button>
           </div>
-          </div>{/* .av-grid */}
         </div>
 
       </div>
