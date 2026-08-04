@@ -298,15 +298,14 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vd-logos { display: inline-flex; align-items: center; gap: 6px; }
   .vd-logos img { width: 20px; height: 20px; object-fit: contain; border-radius: 4px; }
 
-  /* ---- Vault info collapse/expand ---- */
-  .vd-collapse { }
-  .vd-collapse-sum { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  /* ---- Historical Performance collapse/expand (hiện/ẩn chart) ---- */
+  .vd-collapse-sum { list-style: none; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
   .vd-collapse-sum::-webkit-details-marker { display: none; }
-  .vd-collapse-sum .vd-title { margin: 0; }
-  .vd-collapse-ico { width: 18px; height: 18px; color: var(--muted); flex: none; transition: transform .2s ease; }
+  .vd-collapse-sum .vd-chart-head { flex: 1; margin-bottom: 0; }
+  .vd-collapse-ico { width: 18px; height: 18px; color: var(--muted); flex: none; margin-top: 3px; transition: transform .2s ease; }
   .vd-collapse[open] .vd-collapse-ico { transform: rotate(180deg); }
-  /* Chừa khoảng khi mở panel thông tin */
-  .vd-collapse[open] .vd-info { margin-top: 12px; }
+  /* Chừa khoảng cho chart khi mở */
+  .vd-collapse[open] > .vd-charts { margin-top: 16px; }
   /* Divider ngăn Vault info với Historical Performance trong cùng section */
   .vd-sec-div { height: 1px; background: color-mix(in srgb, var(--text) 8%, transparent); margin: 20px 0; }
 

@@ -193,32 +193,32 @@ function VaultDetail({ v }: { v: (typeof VAULTS)[number] }) {
         </div>
       </section>
 
-      {/* Vault info (collapse/expand) + Historical Performance — cùng 1 section */}
+      {/* Vault info + Historical Performance (hiện/ẩn chart) — cùng 1 section */}
       <section className="vd-sec vd-chart-sec">
-        <details className="vd-collapse" open>
-          <summary className="vd-collapse-sum">
-            <h4 className="vd-title">Vault info</h4>
-            <ChevronDown className="vd-collapse-ico" />
-          </summary>
-          <div className="vd-info">
-            <div><span className="k">Chain</span><span className="v vd-v-chain"><img src={v.chainIcon} alt="" />{v.chain}</span></div>
-            <div><span className="k">Deposit / Withdrawal Fee</span><span className="v">None</span></div>
-            <div><span className="k">Withdrawal time</span><span className="v">{v.fees.wtime}</span></div>
-            <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
-          </div>
-        </details>
+        <h4 className="vd-title">Vault info</h4>
+        <div className="vd-info">
+          <div><span className="k">Chain</span><span className="v vd-v-chain"><img src={v.chainIcon} alt="" />{v.chain}</span></div>
+          <div><span className="k">Deposit / Withdrawal Fee</span><span className="v">None</span></div>
+          <div><span className="k">Withdrawal time</span><span className="v">{v.fees.wtime}</span></div>
+          <div><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
+        </div>
 
         <div className="vd-sec-div" />
 
-        {/* Historical Performance */}
-        <div className="vd-chart-head">
-          <div>
-            <h4 className="vd-title">Historical Performance</h4>
-            <span className="vd-chart-sub">Historical vault receipt token price</span>
-          </div>
-          <div className="vd-apy-badge"><b>{v.trailingApy}</b><span>7D trailing APY</span></div>
-        </div>
-        <RangeChart v={v} />
+        {/* Historical Performance — collapse/expand để hiện/ẩn chart */}
+        <details className="vd-collapse vd-chart-collapse" open>
+          <summary className="vd-collapse-sum">
+            <div className="vd-chart-head">
+              <div>
+                <h4 className="vd-title">Historical Performance</h4>
+                <span className="vd-chart-sub">Historical vault receipt token price</span>
+              </div>
+              <div className="vd-apy-badge"><b>{v.trailingApy}</b><span>7D trailing APY</span></div>
+            </div>
+            <ChevronDown className="vd-collapse-ico" />
+          </summary>
+          <RangeChart v={v} />
+        </details>
       </section>
 
       {/* Strategy */}
