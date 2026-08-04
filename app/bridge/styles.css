@@ -126,7 +126,7 @@
 .pg-bridge .about-menu .chain-logos .chl { width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-style: normal; font-weight: 600; background: color-mix(in srgb, var(--citrus) 20%, #fff); color: var(--text); }
 
 /* Meta rows trong card (Mechanism/Slippage/Estimated time/CCIP fee): label trái, value phải */
-.pg-bridge .xchg-body .rows { align-self: stretch; display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: none; background: rgba(255, 255, 255, 0.15); border-radius: 16px; }
+.pg-bridge .xchg-body .rows { align-self: stretch; display: flex; flex-direction: column; gap: 10px; padding: 0; border: none; background: none; }
 .pg-bridge .xchg-body .rows > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
 .pg-bridge .xchg-body .rows .k { font-family: var(--font-body); font-size: 14px; color: #737373; }
 .pg-bridge .xchg-body .rows .v { font-family: var(--font-mono); font-size: 14px; color: #142F04; text-align: right; }
