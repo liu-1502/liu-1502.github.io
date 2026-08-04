@@ -281,8 +281,6 @@ export default function BridgeExchange() {
       </div>
 
       <button className="btn btn-accent btn-block" onClick={requestConnectWallet}>Connect Wallet</button>
-
-      <div className="lanes-ok"><span className="dot" />All lanes healthy. Per-lane rate limits enforced onchain.</div>
       </div>
     </>
   );
