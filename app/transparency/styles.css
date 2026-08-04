@@ -16,6 +16,8 @@ body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
 body.tp-prime .pg-transparency .s6 .k, body.tp-prime .pg-transparency .s6 .v { color: #3A2A06; }
 /* Nền nâu thẻ summary6 nhạt hơn 1 chút */
 body.tp-prime .pg-transparency .tp-summary6 { background: color-mix(in srgb, var(--prime) 9%, #FBFAF3); }
+/* Chỉ đổi màu blob nền phía sau illustration: xanh lá -> nâu khi ở tab Prime. */
+body.tp-prime .pg-transparency .tp-illus-wrap::before { background-color: #C79A3A; opacity: 0.5; }
 
 /* Style riêng của trang Transparency — lồng trong .pg-transparency để không loang
    sang trang khác (nhiều tên class trùng giữa các trang). */
@@ -92,8 +94,17 @@ body.tp-prime .pg-transparency .tp-summary6 { background: color-mix(in srgb, var
   /* Illus bên PHẢI (như hero Dashboard), nội dung fill phần còn lại bên trái */
   .hub-hero { align-items: center; grid-template-columns: 1fr auto; gap: 28px; }
   .hub-hero .lede { max-width: none; }
-  .tp-hero-illus { width: 240px; height: 240px; display: block; flex: none; margin: -24px 0; }
-  @media (max-width: 720px) { .tp-hero-illus { width: 120px; height: 120px; margin: 0; } }
+  /* Wrap để đặt "nền blob" phía sau ảnh (blob tách khỏi SVG để đổi màu theo tab). */
+  .tp-illus-wrap { position: relative; display: block; flex: none; width: 240px; height: 240px; margin: -24px 0; }
+  .tp-illus-wrap .tp-hero-illus { position: relative; z-index: 1; width: 100%; height: 100%; display: block; }
+  /* Blob nền: mặc định xanh lá; đổi sang nâu khi ở tab Prime. */
+  .tp-illus-wrap::before {
+    content: ""; position: absolute; inset: 0; z-index: 0; opacity: 0.4;
+    background-color: #EAFFC4;
+    -webkit-mask: url(/assets/illus/pos-blob.svg) center / contain no-repeat;
+    mask: url(/assets/illus/pos-blob.svg) center / contain no-repeat;
+  }
+  @media (max-width: 720px) { .tp-illus-wrap { width: 120px; height: 120px; margin: 0; } }
   .tp-hero-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--good); text-decoration: none; }
   .tp-hero-cta:hover { text-decoration: underline; }
   .tp-hero-cta .arr { font-weight: 400; }

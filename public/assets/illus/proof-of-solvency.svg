@@ -1,6 +1,5 @@
 <svg width="176" height="176" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>.mag{animation:magscan 2.8s ease-in-out infinite}@keyframes magscan{0%,100%{transform:translateY(-1.6px)}50%{transform:translateY(1.6px)}}.flap{transform-box:fill-box;transform-origin:12% 82%;animation:flapsway 4.5s ease-in-out infinite}@keyframes flapsway{0%,100%{transform:rotate(-2.6deg)}50%{transform:rotate(1.6deg)}}@media(prefers-reduced-motion:reduce){.mag,.flap{animation:none}}</style>
-<path d="M47.762 46.3185C33.1602 54.8863 18.5539 63.4542 3.95198 72.0176C-1.31733 75.109 -1.31733 80.1235 3.95198 83.2149C18.5539 91.7827 33.1602 100.351 47.762 108.914C53.0313 112.005 61.5806 112.005 66.8499 108.914C81.4518 100.346 96.0581 91.7783 110.66 83.2149C115.929 80.1235 115.929 75.109 110.66 72.0176C96.0581 63.4497 130.95 54.8819 116.349 46.3185C111.079 43.2271 53.0313 43.2271 47.762 46.3185Z" fill="#EAFFC4" fill-opacity="0.4"/>
 <mask id="mask0_474_2439" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="16" y="16" width="88" height="88">
 <path d="M104 16.25H16.5V103.75H104V16.25Z" fill="white"/>
 </mask>
