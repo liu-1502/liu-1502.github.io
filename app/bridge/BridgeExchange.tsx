@@ -103,38 +103,6 @@ export default function BridgeExchange() {
     return () => document.removeEventListener("click", onDoc);
   }, []);
 
-  // Mở/đóng dropdown "About the bridge" (nút nằm trong page.tsx là Server Component).
-  useEffect(() => {
-    const btn = document.querySelector("[data-about-toggle]") as HTMLElement | null;
-    const menu = document.querySelector("[data-about-menu]") as HTMLElement | null;
-    const close = document.querySelector("[data-about-close]") as HTMLElement | null;
-    const setOpen = (o: boolean) => {
-      if (menu) {
-        menu.hidden = !o;
-        btn?.setAttribute("aria-expanded", o ? "true" : "false");
-      }
-    };
-    const onBtn = (e: Event) => {
-      e.stopPropagation();
-      if (menu) setOpen(menu.hidden);
-    };
-    const onClose = (e: Event) => {
-      e.stopPropagation();
-      setOpen(false);
-    };
-    const onOut = (e: MouseEvent) => {
-      if (menu && !menu.hidden && !menu.contains(e.target as Node) && !btn?.contains(e.target as Node)) setOpen(false);
-    };
-    btn?.addEventListener("click", onBtn);
-    close?.addEventListener("click", onClose);
-    document.addEventListener("click", onOut);
-    return () => {
-      btn?.removeEventListener("click", onBtn);
-      close?.removeEventListener("click", onClose);
-      document.removeEventListener("click", onOut);
-    };
-  }, []);
-
   // Orders: lọc theo trạng thái + tìm theo tx hash; mặc định hiện 3, "Show more" +10.
   useEffect(() => {
     const root = document.querySelector<HTMLElement>(".pg-bridge .ohist");
