@@ -121,8 +121,8 @@ export default function Bridge() {
                 <h4 className="vd-title">Defense in depth</h4>
                 <p className="vd-desc">Transfers require agreement across Chainlink&apos;s committing and executing oracle networks, with an independent onchain risk-management contract able to halt activity as a circuit breaker.</p>
                 <div className="vd-info">
-                  <div><span className="k">Token manager</span><span className="v" style={{ color: "var(--citrus)" }}>Chainlink dashboard ↗</span></div>
-                  <div><span className="k">Alt route</span><span className="v">transporter.io ↗</span></div>
+                  <div><span className="k">Token manager</span><span className="v" style={{ color: "var(--citrus)" }}>Chainlink dashboard</span></div>
+                  <div><span className="k">Alt route</span><span className="v">transporter.io</span></div>
                 </div>
               </section>
 
