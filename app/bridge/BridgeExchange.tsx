@@ -233,10 +233,9 @@ export default function BridgeExchange() {
           <div className="mfield-l">
             <span className="lbl">You send</span>
             <input type="text" inputMode="decimal" placeholder="0" data-src data-rate="1" aria-label="Amount to bridge" />
-            <div className="xusd">≈ $0.00</div>
+            <span className="bal">Balance <span className="v">0</span></span>
           </div>
           <div className="mfield-r">
-            <div className="pct-opts"><button type="button" className="pct" data-max>Max</button></div>
             <TokenChainSelect
               tokenSym={tokenSym}
               chain={from}
@@ -245,7 +244,6 @@ export default function BridgeExchange() {
               onToggle={() => setOpenSel((o) => (o === "from" ? null : "from"))}
               onPick={pickFrom}
             />
-            <div className="bal">Balance <span className="v">0</span></div>
           </div>
         </div>
 

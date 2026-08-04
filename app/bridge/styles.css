@@ -5,8 +5,8 @@
 
   /* Token+chain selector căn giữa dọc, ngang với số tiền nhập (input ở giữa mfield). */
   .mfield-r { align-self: center; }
-  /* Card "You send": có Max (trên) + token + Balance (dưới) → xếp dọc như Alpha, không center. */
-  .mfield-r:has(.pct-opts) { align-self: stretch; }
+  /* 2 card You send / You receive bằng chiều cao: hàng phụ (Balance & ≈$) cùng cao. */
+  .mfield-l .bal, .mfield-l .xusd { min-height: 20px; display: flex; align-items: center; }
 
   /* Bộ chọn kết hợp TOKEN + CHAIN */
   .tc-wrap { position: relative; }
