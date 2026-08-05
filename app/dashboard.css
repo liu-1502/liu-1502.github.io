@@ -212,13 +212,19 @@
   .sp-lgd > span { display: inline-flex; align-items: center; gap: 6px; }
   .sp-lgd i { width: 12px; height: 3px; border-radius: 2px; flex: none; }
 
-  /* Vault card Deposit trên Dashboard: secondary (viền xám, chữ đen) thay vì filled */
-  .mkt-embed.pg-marketplace .vt-deposit {
-    background: #fff;
-    color: var(--text);
-    border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-    box-shadow: none;
+  /* Vault card trên Dashboard: cả card click được; hover hiện "Open →" như card Product */
+  .mkt-embed .mkt-card-link { text-decoration: none; color: inherit; cursor: pointer; }
+  .mkt-embed .mc-open {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--mkt);
+    opacity: 0; transition: opacity .18s ease;
   }
-  .mkt-embed.pg-marketplace .vt-deposit:hover { background: color-mix(in srgb, var(--text) 4%, #fff); box-shadow: none; }
-  .mkt-embed.pg-marketplace .vt-deposit::after { display: none; }
+  .mkt-embed .mc-open .arr { font-family: var(--font-mono); transition: transform .18s ease; }
+  .mkt-embed .mkt-card-link:hover .mc-open { opacity: 1; }
+  .mkt-embed .mkt-card-link:hover .mc-open .arr { transform: translateX(3px); }
+  /* State badge (vd "3D liquidity") trên Dashboard: neutral thay vì xanh dương */
+  .mkt-embed.pg-marketplace .vt-badge.leverage,
+  .mkt-embed.pg-marketplace .vt-badge.lending {
+    color: var(--muted); background: color-mix(in srgb, var(--text) 6%, transparent);
+  }
 }

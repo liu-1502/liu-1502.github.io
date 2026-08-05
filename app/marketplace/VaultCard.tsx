@@ -3,11 +3,11 @@ import { ArrowRight } from "lucide-react";
 import { VAULTS } from "./data";
 
 /* Card vault ở màn Overview (Marketplace) — dùng lại được trên Dashboard.
-   Khi có `href`, nút Deposit là <Link> điều hướng (Dashboard không có JS wiring);
-   khi không có, giữ nguyên <button data-vault> như marketplace overview. */
+   Khi có `href`: cả card là <Link>, foot hiện "Open →" khi hover (giống card Product);
+   khi không có: giữ nguyên <div> + <button data-vault> như marketplace overview. */
 export default function VaultCard({ v, href, compact }: { v: (typeof VAULTS)[number]; href?: string; compact?: boolean }) {
-  return (
-    <div className="mkt-card">
+  const inner = (
+    <>
       <div className="mc-top">
         <span className="vt-logo"><img src={v.logo} alt="" /></span>
         <div className="mc-id">
@@ -30,11 +30,17 @@ export default function VaultCard({ v, href, compact }: { v: (typeof VAULTS)[num
       <div className="mc-foot">
         <div className="mc-powered"><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
         {href ? (
-          <Link href={href} className="btn btn-accent vt-deposit">Deposit <ArrowRight /></Link>
+          <span className="mc-open">Open <span className="arr">→</span></span>
         ) : (
           <button type="button" className="btn btn-accent vt-deposit" data-vault={v.key}>Deposit <ArrowRight /></button>
         )}
       </div>
-    </div>
+    </>
+  );
+
+  return href ? (
+    <Link href={href} className="mkt-card mkt-card-link">{inner}</Link>
+  ) : (
+    <div className="mkt-card">{inner}</div>
   );
 }
