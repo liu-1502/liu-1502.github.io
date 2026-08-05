@@ -232,7 +232,10 @@ export default function BridgeExchange() {
           <div className="mfield-l">
             <span className="lbl">You send</span>
             <input type="text" inputMode="decimal" placeholder="0" data-src data-rate="1" aria-label="Amount to bridge" />
-            <span className="bal">Balance <span className="v">0</span></span>
+            <div className="bal-row">
+              <button type="button" className="max-btn">Max</button>
+              <span className="bal">Balance <span className="v">0</span></span>
+            </div>
           </div>
           <div className="mfield-r">
             <TokenChainSelect

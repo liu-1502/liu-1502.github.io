@@ -7,6 +7,10 @@
   .mfield-r { align-self: center; }
   /* 2 card You send / You receive bằng chiều cao: hàng phụ (Balance & ≈$) cùng cao. */
   .mfield-l .bal, .mfield-l .xusd { min-height: 20px; display: flex; align-items: center; }
+  /* Hàng balance: Max bên trái, Balance đẩy sang phải */
+  .mfield-l .bal-row { align-self: stretch; width: 100%; min-height: 20px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .mfield-l .max-btn { all: unset; cursor: pointer; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--accent); padding: 2px 9px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 11%, transparent); }
+  .mfield-l .max-btn:hover { background: color-mix(in srgb, var(--accent) 18%, transparent); }
 
   /* Bộ chọn kết hợp TOKEN + CHAIN */
   .tc-wrap { position: relative; }
