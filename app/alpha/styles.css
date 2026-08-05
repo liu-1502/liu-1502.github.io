@@ -312,7 +312,7 @@
     transition: background .15s ease, border-color .15s ease;
   }
   .ofilter:hover { background: color-mix(in srgb, var(--text) 5%, transparent); }
-  .ofilter.on { background: color-mix(in srgb, var(--accent) 12%, transparent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); }
+  .ofilter.on { background: color-mix(in srgb, var(--accent) 7%, transparent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); }
   .ord {
     display: flex; align-items: flex-start; gap: 12px; padding: 12px;
     cursor: pointer;
