@@ -127,7 +127,7 @@ export default function Dashboard() {
         <div className="pg-marketplace mkt-embed">
           <div className="mkt-grid">
             {VAULTS.map((v) => (
-              <VaultCard key={v.key} v={v} href="/marketplace" />
+              <VaultCard key={v.key} v={v} href="/marketplace" compact />
             ))}
           </div>
         </div>

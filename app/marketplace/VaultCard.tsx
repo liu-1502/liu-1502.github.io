@@ -5,7 +5,7 @@ import { VAULTS } from "./data";
 /* Card vault ở màn Overview (Marketplace) — dùng lại được trên Dashboard.
    Khi có `href`, nút Deposit là <Link> điều hướng (Dashboard không có JS wiring);
    khi không có, giữ nguyên <button data-vault> như marketplace overview. */
-export default function VaultCard({ v, href }: { v: (typeof VAULTS)[number]; href?: string }) {
+export default function VaultCard({ v, href, compact }: { v: (typeof VAULTS)[number]; href?: string; compact?: boolean }) {
   return (
     <div className="mkt-card">
       <div className="mc-top">
@@ -20,8 +20,8 @@ export default function VaultCard({ v, href }: { v: (typeof VAULTS)[number]; hre
         <span className="mc-chip"><img src={v.chainIcon} alt="" />{v.chain}</span>
         <span className="mc-chip"><img src={v.assetIcon} alt="" />{v.asset}</span>
       </div>
-      <p className="mc-desc">{v.desc}</p>
-      <button type="button" className="mc-more">Read More</button>
+      {!compact && <p className="mc-desc">{v.desc}</p>}
+      {!compact && <button type="button" className="mc-more">Read More</button>}
       <div className="mc-stats">
         <div><span className="k">TVL</span><b>{v.tvl}</b><small>{v.tvlChg}</small></div>
         <div><span className="k">Leverage</span><b>{v.leverage}</b></div>
