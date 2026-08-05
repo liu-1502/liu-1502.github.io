@@ -62,7 +62,7 @@
     height: auto; padding: 6px 16px; gap: 0;
     background: transparent;
     border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
-    border-radius: var(--r-sm);
+    border-radius: 999px;   /* bo tròn (pill) để phân biệt với button */
   }
   #alphaTabs .tok-tab .sym { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--text); padding-right: 0; }
   #alphaTabs .tok-tab:hover { background: color-mix(in srgb, var(--text) 5%, transparent); box-shadow: none; }
