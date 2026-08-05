@@ -131,6 +131,19 @@
 .pg-bridge .xchg-body .rows .k { font-family: var(--font-body); font-size: 14px; color: #737373; }
 .pg-bridge .xchg-body .rows .v { font-family: var(--font-mono); font-size: 14px; color: #142F04; text-align: right; }
 
+/* Token tabs: kiểu pill selection giống Alpha (#alphaTabs), không logo */
+.pg-bridge #bridgeTabs { justify-content: center; gap: 6px; }
+.pg-bridge #bridgeTabs .tok-tab {
+  height: auto; padding: 6px 16px; gap: 0;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: 999px;
+}
+.pg-bridge #bridgeTabs .tok-tab .sym { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--text); padding-right: 0; }
+.pg-bridge #bridgeTabs .tok-tab:hover { background: color-mix(in srgb, var(--text) 5%, transparent); box-shadow: none; }
+.pg-bridge #bridgeTabs .tok-tab.on { border-color: color-mix(in srgb, var(--accent) 50%, transparent); background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.pg-bridge #bridgeTabs .tok-tab.on .sym { color: var(--accent); }
+
 :root[data-theme="dark"] .pg-bridge {
   .xchg-body .rows { border-color: var(--line-solid); }
   .xchg-body .rows .v { color: var(--text); }

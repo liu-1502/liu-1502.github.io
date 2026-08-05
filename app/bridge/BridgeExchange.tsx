@@ -214,14 +214,13 @@ export default function BridgeExchange() {
 
   return (
     <>
-      <div className="tok-tabs">
+      <div className="tok-tabs" id="bridgeTabs">
         {TOKENS.map((tk) => (
           <button
             key={tk.id}
             className={"tok-tab" + (token === tk.id ? " on" : "")}
             onClick={() => pickToken(tk.id)}
           >
-            <TokenIcon sym={tk.sym} />
             <span className="sym">{tk.sym}</span>
           </button>
         ))}
