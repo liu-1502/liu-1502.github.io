@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { ShieldCheck, Info } from "lucide-react";
 import "./dashboard.css";
+import "./alpha/styles.css";
+import "./marketplace/styles.css";
 import { pageMetadata } from "@/lib/pages";
 import TokenStrip from "@/components/ui/TokenStrip";
 import DashboardHero from "@/components/DashboardHero";
+import { VAULTS } from "./marketplace/data";
+import VaultCard from "./marketplace/VaultCard";
 
 export const metadata = pageMetadata("/");
 
@@ -112,24 +116,20 @@ export default function Dashboard() {
               </span>
             </div>
           </Link>
-          <Link className="card ticked prod-row mkt" href="/marketplace">
-            <span className="id">
-              <b>Marketplace</b>
-              <TokenStrip syms={["yzCash", "yzSyrup"]} />
-            </span>
-            <p className="desc">
-              Hand-picked strategies in yzCash and yzSyrup for leveraged Maple lending.
-            </p>
-            <div className="prod-foot">
-              <span className="apy">
-                <span className="v">4.90% – 8.53%</span>
-                <span className="k">Current APY</span>
-              </span>
-              <span className="cta">
-                Open <span className="arr">→</span>
-              </span>
-            </div>
-          </Link>
+        </div>
+      </section>
+
+      <section className="section rv">
+        <div className="section-head">
+          <h2>Marketplace</h2>
+          <Link href="/marketplace">View all →</Link>
+        </div>
+        <div className="pg-marketplace mkt-embed">
+          <div className="mkt-grid">
+            {VAULTS.map((v) => (
+              <VaultCard key={v.key} v={v} href="/marketplace" />
+            ))}
+          </div>
         </div>
       </section>
 

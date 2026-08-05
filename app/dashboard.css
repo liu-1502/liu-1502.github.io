@@ -25,7 +25,7 @@
      (ổn định hơn CSS offset-distance vốn không interpolate trên <g> SVG). */
   .dh-moon { will-change: transform; }
 
-  .prod-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+  .prod-rows { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; align-items: stretch; }
   /* POR section: khoảng cách tới hàng 3 card = 24px */
   .section:has(.por) { padding-top: 24px; }
   @media (max-width: 860px) { .prod-rows { grid-template-columns: 1fr; } }

@@ -2,80 +2,11 @@ import "../alpha/styles.css";
 import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha styles */
 import { Fragment } from "react";
 import MarketplaceClient from "./MarketplaceClient";
+import VaultCard from "./VaultCard";
+import { VAULTS } from "./data";
 import MetaRows from "@/components/ui/MetaRows";
 import { pageMetadata } from "@/lib/pages";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, X, ArrowRight, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check, Lock, Eye, EyeOff, AlertTriangle } from "lucide-react";
-
-/* Danh sách vault hiển thị ở màn Overview; key khớp data-panel của card exchange. */
-const VAULTS = [
-  {
-    key: "yzsyrup", name: "yzSyrup", addr: "0xc985…09b1", logo: "/assets/tokens/yzSyrup.svg",
-    strategy: "Leverage", type: "Overcollateralized Lending", stateBadge: "3D liquidity",
-    chain: "Monad", chainIcon: "/assets/chains/monad.svg",
-    tvl: "$3.01M", tvlChg: "+0.02% · 24h", apy: "8.53%", leverage: "10×",
-    risk: 2, riskLabel: "Low–Moderate", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
-    desc: "Leveraged exposure to SyrupUSD (overcollateralized lending). SyrupUSD is a yield-bearing stablecoin issued by Maple Finance, backed by overcollateralized loans secured by liquid, blue-chip crypto assets such as BTC and ETH. It is typically >130% overcollateralized, has been operating since 2024, and is battle-tested through numerous systemic stress events.",
-    tagline: "Leveraged exposure to SyrupUSD (overcollateralized lending).",
-    powered: ["/assets/protocols/aave.svg", "/assets/protocols/morpho.svg", "/assets/protocols/euler.svg", "/assets/protocols/fluid.svg"],
-    poweredNames: "Aave · Morpho · Euler · Fluid",
-    strategyIntro: "Leveraged across blue-chip DeFi money markets - Aave, Euler, Morpho, etc.",
-    steps: [
-      { label: "Deposit USDC", title: "User deposits USDC & receives yzSyrup vault token (receipt)", detail: "Funds enter the vault contract." },
-      { label: "Mint Syrup tokens", title: "Mint syrupUSDC / syrupUSDT", detail: "USDC used to mint syrupUSDC / syrupUSDT on Ethereum." },
-      { label: "Supply collateral", title: "Supply to Money Markets", detail: "Use syrupUSDC / syrupUSDT as collateral in blue-chip money markets (Aave, Morpho, Euler, etc.)." },
-      { label: "Borrow stablecoins", title: "Borrow Stablecoins", detail: "Borrow stablecoins (USDT, USDC, etc.) up to market LTV based on available liquidity and prevailing borrow APY." },
-      { label: "Leverage", title: "Leverage", detail: "Repeat 2-4 to increase overall vault APY (via leveraged uplift)." },
-    ],
-    research: "SyrupUSD Real-Time Asset Quality Monitor",
-    researchUrl: "https://research.yuzu.money/syrup-monitor",
-    explorerUrl: "https://explorer.monad.xyz/address/0xc985...09b1",
-    debankUrl: "https://debank.com/bundles/223157/accounts/",
-    trailingApy: "8.53%",
-    price: 1.0192, dailyGrowth: 0.000224,
-    fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "Up to 3 days" },
-    position: { value: "$10,850.00", earned: "+$850.00", pnl: "+8.50%" },
-    orders: [
-      { kind: "mint", label: "Deposit yzSyrup", addr: "0x71bC8…9Ae0", amount: "$3,000.00", status: "completed" },
-      { kind: "redeem", label: "Withdraw yzSyrup", addr: "0x3F2a1…7bC2", amount: "$1,500.00", status: "completed" },
-      { kind: "mint", label: "Deposit yzSyrup", addr: "0xeED43…AbbA", amount: "$8,000.00", status: "pending" },
-    ],
-    contractName: "yzSyrup Vault",
-    contractChain: "Ethereum", contractChainIcon: "/assets/chains/ethereum.svg",
-  },
-  {
-    key: "yzcash", name: "yzCash", addr: "0x224e…098d", logo: "/assets/tokens/yzCash.svg",
-    strategy: "Lending", type: "Tokenized T-Bills", stateBadge: "24H liquidity",
-    chain: "Monad", chainIcon: "/assets/chains/monad.svg",
-    tvl: "$7.51M", tvlChg: "+0.01% · 24h", apy: "4.90%", leverage: "0×",
-    risk: 1, riskLabel: "Low", asset: "USDC", assetIcon: "/assets/tokens/usdc.svg",
-    desc: "Yuzu Cash is an unlevered, short-duration (<24H) liquidity vault designed to deliver yields above the standard overnight rate while maintaining strict risk discipline. Backed by tokenized T-Bills from leading issuers with near-instant liquidity and no lockups.",
-    tagline: "Unlevered short-duration (<24H) liquidity backed by tokenized T-Bills.",
-    powered: ["/assets/protocols/curvance.svg"],
-    poweredNames: "Curvance",
-    strategyIntro: "Unlevered cash management backed by tokenized T-Bills, redeemable anytime.",
-    steps: [
-      { label: "Deposit USDC", title: "User deposits USDC & receives yzCash vault token (receipt)", detail: "Funds enter the vault contract." },
-      { label: "Allocate to T-Bills", title: "Allocate to tokenized T-Bills", detail: "USDC allocated to short-duration tokenized T-Bills from leading issuers." },
-      { label: "Accrue yield", title: "Accrue overnight yield", detail: "Earn yields above the standard overnight rate while keeping strict risk discipline." },
-      { label: "Redeem anytime", title: "Redeem anytime", detail: "Near-instant liquidity with no lockups — redeem back to USDC at any time." },
-    ],
-    research: "yzCash Reserve Attestation (live)",
-    researchUrl: "https://research.yuzu.money/cash-monitor",
-    explorerUrl: "https://explorer.monad.xyz/address/0x224e...098d",
-    debankUrl: "https://debank.com/bundles/223157/accounts/",
-    trailingApy: "4.90%",
-    price: 1.0000, dailyGrowth: 0.000131,
-    fees: { perf: "10%", mgmt: "0%", wfee: "0%", wtime: "24H" },
-    position: { value: "$10,490.00", earned: "+$490.00", pnl: "+4.90%" },
-    orders: [
-      { kind: "mint", label: "Deposit yzCash", addr: "0x9A2f1…C4dE", amount: "$2,400.00", status: "completed" },
-      { kind: "redeem", label: "Withdraw yzCash", addr: "0x5B8e3…11Fa", amount: "$1,200.00", status: "completed" },
-      { kind: "mint", label: "Deposit yzCash", addr: "0xC7d90…4e21", amount: "$5,000.00", status: "pending" },
-    ],
-    contractName: "yzCash Vault",
-    contractChain: "Ethereum", contractChainIcon: "/assets/chains/ethereum.svg",
-  },
-];
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, X, ArrowLeft, ChevronDown, ChevronsRight, ExternalLink, ShieldCheck, Copy, Check, Lock, Eye, EyeOff, AlertTriangle } from "lucide-react";
 
 /* Đối tác bảo mật (chung cho các vault). */
 const SECURITY = [
@@ -440,31 +371,7 @@ export default function Marketplace() {
         <div className="card mkt-vaults rv">
           <div className="mkt-grid">
             {VAULTS.map((v) => (
-              <div className="mkt-card" key={v.key}>
-                <div className="mc-top">
-                  <span className="vt-logo"><img src={v.logo} alt="" /></span>
-                  <div className="mc-id">
-                    <div className="mc-name"><b>{v.name}</b><span className={`vt-badge ${v.strategy.toLowerCase()}`}>{v.stateBadge}</span></div>
-                    <small>{v.addr}</small>
-                  </div>
-                  <div className="mc-apy"><span className="mc-apy-v">{v.apy}</span><span className="mc-apy-l">Net APY (7D)</span></div>
-                </div>
-                <div className="mc-badges">
-                  <span className="mc-chip"><img src={v.chainIcon} alt="" />{v.chain}</span>
-                  <span className="mc-chip"><img src={v.assetIcon} alt="" />{v.asset}</span>
-                </div>
-                <p className="mc-desc">{v.desc}</p>
-                <button type="button" className="mc-more">Read More</button>
-                <div className="mc-stats">
-                  <div><span className="k">TVL</span><b>{v.tvl}</b><small>{v.tvlChg}</small></div>
-                  <div><span className="k">Leverage</span><b>{v.leverage}</b></div>
-                  <div><span className="k">Risk</span><span className={`risk r${v.risk}`}><i /><i /><i /><i /></span><small>{v.riskLabel}</small></div>
-                </div>
-                <div className="mc-foot">
-                  <div className="mc-powered"><span className="k">Powered by</span><span className="mc-logos">{v.powered.map((p) => <img key={p} src={p} alt="" />)}</span></div>
-                  <button type="button" className="btn btn-accent vt-deposit" data-vault={v.key}>Deposit <ArrowRight /></button>
-                </div>
-              </div>
+              <VaultCard v={v} key={v.key} />
             ))}
           </div>
         </div>
