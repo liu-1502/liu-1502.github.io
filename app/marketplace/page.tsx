@@ -363,7 +363,7 @@ export default function Marketplace() {
 
         <div className="page-stats mkt-stats rv">
           <div><div className="k">Total TVL</div><div className="v" data-count="10.52" data-prefix="$" data-suffix="M" data-dec="2">$10.52M</div></div>
-          <div><div className="k">7D APY (up to)</div><div className="v" style={{ color: "color-mix(in srgb, var(--mkt) 68%, #000)" }} data-count="8.53" data-suffix="%" data-dec="2">8.53%</div></div>
+          <div><div className="k">7D APY (up to)</div><div className="v" data-count="8.53" data-suffix="%" data-dec="2">8.53%</div></div>
           <div><div className="k">Active vaults</div><div className="v" data-count="2">2</div></div>
           <div><div className="k">Yield distributed</div><div className="v" data-count="15.5" data-prefix="$" data-suffix="K" data-dec="1">$15.5K</div></div>
         </div>
