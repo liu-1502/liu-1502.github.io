@@ -234,15 +234,15 @@ export default function Alpha() {
             <h1>Yuzu Alpha</h1>
             <p>Yuzu Alpha is an actively managed portfolio of leveraged DeFi yield-bearing assets, with syzUSD as the senior tranche and yzPP as the junior tranche.</p>
           </div>
-          <div className="av-grid">
-          <div className="av-left">
-
-          {/* Token tabs — nằm trên cùng trong form */}
+          {/* Token pill tabs */}
           <div className="tok-tabs xchg-tabs" id="alphaTabs">
             <button className="tok-tab on" data-tab="yzusd"><span className="sym">yzUSD</span></button>
             <button className="tok-tab" data-tab="yzpp"><span className="sym">yzPP</span></button>
             <button className="tok-tab" data-tab="syzusd"><span className="sym">syzUSD</span></button>
           </div>
+
+          <div className="av-grid">
+          <div className="av-left">
 
           {/* ============ yzUSD ============ */}
           <div className="xchg-body" data-panel="yzusd">
