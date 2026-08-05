@@ -92,6 +92,15 @@ export default function BridgeExchange() {
   const [to, setTo] = useState("Ethereum");
   const [openSel, setOpenSel] = useState<"from" | "to" | null>(null);
   const selectsRef = useRef<HTMLDivElement>(null);
+  const sendRef = useRef<HTMLInputElement>(null);
+
+  // Số dư khả dụng (chưa nối ví -> 0). Bấm Max để đổ hết số dư vào ô "You send".
+  const BALANCE = "0";
+  const fillMax = () => {
+    if (sendRef.current) sendRef.current.value = BALANCE;
+    const dst = document.querySelector<HTMLInputElement>(".pg-bridge input[data-dst]");
+    if (dst) dst.value = BALANCE; // tỉ lệ 1:1
+  };
 
   const lanes = LANES[token];
   const tokenSym = TOKENS.find((t) => t.id === token)!.sym;
@@ -231,13 +240,12 @@ export default function BridgeExchange() {
         <div className="mfield">
           <div className="mfield-l">
             <span className="lbl">You send</span>
-            <input type="text" inputMode="decimal" placeholder="0" data-src data-rate="1" aria-label="Amount to bridge" />
-            <div className="bal-row">
-              <button type="button" className="max-btn">Max</button>
-              <span className="bal">Balance <span className="v">0</span></span>
-            </div>
+            <input ref={sendRef} type="text" inputMode="decimal" placeholder="0" data-src data-rate="1" aria-label="Amount to bridge" />
           </div>
           <div className="mfield-r">
+            <div className="pct-opts">
+              <button type="button" className="pct" onClick={fillMax}>Max</button>
+            </div>
             <TokenChainSelect
               tokenSym={tokenSym}
               chain={from}
@@ -246,6 +254,7 @@ export default function BridgeExchange() {
               onToggle={() => setOpenSel((o) => (o === "from" ? null : "from"))}
               onPick={pickFrom}
             />
+            <div className="bal">Balance: <span className="v">{BALANCE}</span></div>
           </div>
         </div>
 
