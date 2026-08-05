@@ -211,4 +211,14 @@
   .sp-lgd { display: flex; gap: 16px; margin-top: 10px; font-family: var(--font-body); font-size: 12px; color: var(--muted); }
   .sp-lgd > span { display: inline-flex; align-items: center; gap: 6px; }
   .sp-lgd i { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+
+  /* Vault card Deposit trên Dashboard: secondary (viền xám, chữ đen) thay vì filled */
+  .mkt-embed.pg-marketplace .vt-deposit {
+    background: #fff;
+    color: var(--text);
+    border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+    box-shadow: none;
+  }
+  .mkt-embed.pg-marketplace .vt-deposit:hover { background: color-mix(in srgb, var(--text) 4%, #fff); box-shadow: none; }
+  .mkt-embed.pg-marketplace .vt-deposit::after { display: none; }
 }
