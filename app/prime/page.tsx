@@ -128,11 +128,6 @@ export default function Prime() {
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
         <div className="xchg rv">
-          {/* Page header */}
-          <div className="av-head">
-            <h1>Yuzu Prime</h1>
-            <p>yzPrime is an actively managed portfolio of leveraged RWA positions on DeFi. Its universe of RWAs include i) T-Bills, ii) overcollateralized loans (e.g. Syrup) and iii) A-grade investment credit (e.g. AAA CLOs).</p>
-          </div>
           <div className="av-grid">
           <div className="av-left">
 
