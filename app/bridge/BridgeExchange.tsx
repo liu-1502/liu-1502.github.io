@@ -241,6 +241,7 @@ export default function BridgeExchange() {
           <div className="mfield-l">
             <span className="lbl">You send</span>
             <input ref={sendRef} type="text" inputMode="decimal" placeholder="0" data-src data-rate="1" aria-label="Amount to bridge" />
+            <div className="xusd">≈ $0.00</div>
           </div>
           <div className="mfield-r">
             <div className="pct-opts">
