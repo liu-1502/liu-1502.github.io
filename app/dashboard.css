@@ -217,13 +217,13 @@
   /* Dashboard hiển thị tất cả vault dạng scroll ngang (thay vì grid 2 cột).
      Dùng .mkt-embed.pg-marketplace để thắng specificity của rule grid dùng chung. */
   .mkt-embed.pg-marketplace .mkt-grid {
-    display: flex; flex-wrap: nowrap; gap: 16px; overflow-x: auto; padding-bottom: 6px;
-    scroll-snap-type: x proximity; scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, var(--text) 20%, transparent) transparent;
+    display: flex; flex-wrap: nowrap; gap: 16px; overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;              /* Firefox: ẩn thanh cuộn */
+    -ms-overflow-style: none;           /* IE/Edge cũ */
   }
   .mkt-embed.pg-marketplace .mkt-grid > .mkt-card { flex: 0 0 360px; scroll-snap-align: start; }
-  .mkt-embed.pg-marketplace .mkt-grid::-webkit-scrollbar { height: 8px; }
-  .mkt-embed.pg-marketplace .mkt-grid::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--text) 18%, transparent); border-radius: 999px; }
+  .mkt-embed.pg-marketplace .mkt-grid::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
   @media (max-width: 760px) { .mkt-embed.pg-marketplace .mkt-grid > .mkt-card { flex-basis: 300px; } }
   /* Vault card trên Dashboard: cả card click được; hover hiện "Open →" như card Product */
   .mkt-embed .mkt-card-link { text-decoration: none; color: inherit; cursor: pointer; }
