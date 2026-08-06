@@ -1,0 +1,15 @@
+/* ================================================================
+   Global overrides (nạp sau cùng trong layout.tsx để thắng cascade).
+   Giữ styles/yuzu.css nguyên bản — mọi tinh chỉnh toàn cục để ở đây.
+   ================================================================ */
+
+/* Bỏ đổ bóng khi hover ở TẤT CẢ các card trên toàn web (giữ nguyên nhấc nhẹ).
+   Dùng !important vì nhiều rule card:hover được scope theo trang
+   (vd .pg-marketplace .mkt-card:hover, .pg-alpha .vd-por:hover) có specificity cao. */
+.card:hover,
+.mkt-card:hover,
+.prod-row:hover,
+.por:hover,
+.vd-por:hover {
+  box-shadow: none !important;
+}

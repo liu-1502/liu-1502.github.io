@@ -9,6 +9,8 @@ import "../styles/sidebar.css";
 import "../styles/typography.css";
 // Modal Connect Wallet + dropdown account.
 import "../styles/wallet.css";
+// Override toàn cục (bỏ đổ bóng hover ở card, ...) — nạp sau cùng.
+import "../styles/overrides.css";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import YuzuClient from "@/components/YuzuClient";
