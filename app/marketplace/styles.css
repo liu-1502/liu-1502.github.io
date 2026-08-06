@@ -1,17 +1,24 @@
 /* ================================================================
-   Marketplace dùng chung layout/typography của Alpha (app/alpha/styles.css),
-   nhưng GIỮ MÀU XANH DƯƠNG (--mkt) thay cho xanh citrus của Alpha.
+   Marketplace dùng chung layout/typography của Alpha (app/alpha/styles.css).
+   Marketplace giờ là 1 page bình thường -> dùng THEME XANH LÁ (citrus) như
+   toàn app: remap --mkt/--accent về citrus ở cấp body.p-mkt để mọi chỗ dùng
+   var(--mkt) trong file này tự chuyển sang xanh lá.
    Override nhân đôi class (.pg-marketplace.pg-marketplace) để specificity cao
    hơn rule dùng chung của Alpha (:is(.pg-alpha,.pg-prime,.pg-marketplace)),
    luôn thắng dù thứ tự load CSS đổi khi điều hướng client-side.
    ================================================================ */
 
-/* Page background: xanh dương rất nhạt (chỉ trang Marketplace, theo class body). */
-body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
+/* Theme xanh lá cho trang Marketplace: remap accent/mkt về citrus + nền xanh lá nhạt. */
+body.p-mkt {
+  --bg: color-mix(in srgb, #3E7B18 2.5%, #FCFDFF);
+  --mkt: var(--citrus);
+  --accent: var(--citrus);
+  --accent-ink: var(--alpha-ink);
+}
 
 .pg-marketplace.pg-marketplace {
-  --mk-ink: #23265E;                                       /* chữ đậm (thay #142F04) */
-  --mk-card: color-mix(in srgb, var(--mkt) 12%, #F6F8FE);  /* nền card (thay #E2ECD8) */
+  --mk-ink: #142F04;                                       /* chữ đậm (xanh lá đậm) */
+  --mk-card: color-mix(in srgb, var(--mkt) 12%, #F4F8EF);  /* nền card (xanh lá nhạt) */
   --mk-toggle: color-mix(in srgb, var(--mkt) 13%, #fff);   /* toggle/selected (thay #EBF0E7) */
   --mk-token: color-mix(in srgb, var(--mkt) 7%, #fff);     /* nền token/hover (thay #ECF6F3) */
   --mk-badge: color-mix(in srgb, var(--mkt) 15%, #fff);    /* thay #E9F5E2 */
