@@ -8,15 +8,15 @@
    luôn thắng dù thứ tự load CSS đổi khi điều hướng client-side.
    ================================================================ */
 
-/* Theme xanh lá cho trang Marketplace: remap accent/mkt về citrus + nền xanh lá nhạt. */
-body.p-mkt {
-  --bg: color-mix(in srgb, #3E7B18 2.5%, #FCFDFF);
+/* Nền xanh lá nhạt cho trang Marketplace (chỉ đổi --bg ở body). */
+body.p-mkt { --bg: color-mix(in srgb, #3E7B18 2.5%, #FCFDFF); }
+
+/* Theme xanh lá: remap accent/mkt về citrus — CHỈ trong vùng content (.pg-marketplace),
+   KHÔNG áp lên body để sidebar/menu giữ màu default như các trang khác. */
+.pg-marketplace.pg-marketplace {
   --mkt: var(--citrus);
   --accent: var(--citrus);
   --accent-ink: var(--alpha-ink);
-}
-
-.pg-marketplace.pg-marketplace {
   --mk-ink: #142F04;                                       /* chữ đậm (xanh lá đậm) */
   --mk-card: color-mix(in srgb, var(--mkt) 12%, #F4F8EF);  /* nền card (xanh lá nhạt) */
   --mk-toggle: color-mix(in srgb, var(--mkt) 13%, #fff);   /* toggle/selected (thay #EBF0E7) */
