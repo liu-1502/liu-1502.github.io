@@ -212,8 +212,6 @@
   .sp-lgd > span { display: inline-flex; align-items: center; gap: 6px; }
   .sp-lgd i { width: 12px; height: 3px; border-radius: 2px; flex: none; }
 
-  /* Vault card trên Dashboard: theme xanh lá như toàn app (remap --mkt về citrus). */
-  .mkt-embed { --mkt: var(--citrus); }
   /* Dashboard hiển thị tất cả vault dạng scroll ngang (thay vì grid 2 cột).
      Dùng .mkt-embed.pg-marketplace để thắng specificity của rule grid dùng chung. */
   .mkt-embed.pg-marketplace .mkt-grid {

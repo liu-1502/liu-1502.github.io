@@ -292,9 +292,3 @@
   .maincol { margin-left: 0; }
 }
 
-/* Marketplace giờ là page thường theo theme xanh lá: nav item "mkt" dùng citrus
-   thay cho --mkt (xanh dương). Đặt ở đây (load sau yuzu.css) để giữ yuzu.css pristine.
-   Label idle vẫn --muted (giống Alpha/Prime), chỉ hover/.on mới lên màu citrus. */
-.side-item[data-nav="mkt"] { --side-accent: var(--citrus); color: var(--muted); }
-.side-item[data-nav="mkt"]:hover, .side-item[data-nav="mkt"].on { color: var(--citrus); }
-.side-item[data-nav="mkt"].on { background: color-mix(in srgb, var(--citrus) 12%, transparent); }
