@@ -341,7 +341,7 @@ export default function Marketplace() {
         <div className="opp-head rv">
           <div>
             <h1>Marketplace</h1>
-            <p className="lede">Single-asset, leveraged-yield strategies on best-in-class collateral across blue-chip DeFi money markets, with up to <b>8.53%</b> APY. Each vault is isolated to one type of asset exposure - e.g. yzSyrup is only exposed to Maple Finance&apos;s Syrup (overcollateralized lending).</p>
+            <p className="lede">Single-asset, leveraged-yield strategies on best-in-class collateral across blue-chip DeFi money markets, with up to <b>11.86%</b> APY. Each vault is isolated to one type of asset exposure - e.g. yzSyrup is only exposed to Maple Finance&apos;s Syrup (overcollateralized lending).</p>
           </div>
         </div>
 
@@ -362,9 +362,9 @@ export default function Marketplace() {
         </div>
 
         <div className="page-stats mkt-stats rv">
-          <div><div className="k">Total TVL</div><div className="v" data-count="10.52" data-prefix="$" data-suffix="M" data-dec="2">$10.52M</div></div>
-          <div><div className="k">7D APY (up to)</div><div className="v" data-count="8.53" data-suffix="%" data-dec="2">8.53%</div></div>
-          <div><div className="k">Active vaults</div><div className="v" data-count="2">2</div></div>
+          <div><div className="k">Total TVL</div><div className="v" data-count="11.97" data-prefix="$" data-suffix="M" data-dec="2">$11.97M</div></div>
+          <div><div className="k">7D APY (up to)</div><div className="v" data-count="11.86" data-suffix="%" data-dec="2">11.86%</div></div>
+          <div><div className="k">Active vaults</div><div className="v" data-count="6">6</div></div>
           <div><div className="k">Yield distributed</div><div className="v" data-count="15.5" data-prefix="$" data-suffix="K" data-dec="1">$15.5K</div></div>
         </div>
 

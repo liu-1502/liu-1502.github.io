@@ -125,8 +125,13 @@ body.p-mkt {
 
   /* List (table) mặc định; Grid ẩn cho tới khi bật */
   /* ---- Grid card (chỉ còn dạng card) ---- */
-  .mkt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 0; }
+  .mkt-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 0; }
+  @media (max-width: 1080px) { .mkt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 760px) { .mkt-grid { grid-template-columns: 1fr; } }
+  /* Icon khoá cho vault chưa mở (locked) */
+  .vt-lock { width: 13px; height: 13px; color: var(--faint); flex: none; }
+  .vt-unlock { gap: 7px; }
+  .vt-unlock svg { width: 15px; height: 15px; }
   .mkt-card { display: flex; flex-direction: column; gap: 14px; padding: 18px; border: none; border-radius: 20px; background: var(--surface); transition: box-shadow .18s ease, transform .18s ease; }
   .mkt-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30, 33, 89, .10); }
   .mc-top { display: flex; align-items: center; gap: 12px; }
