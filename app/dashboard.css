@@ -212,6 +212,8 @@
   .sp-lgd > span { display: inline-flex; align-items: center; gap: 6px; }
   .sp-lgd i { width: 12px; height: 3px; border-radius: 2px; flex: none; }
 
+  /* Vault card trên Dashboard: theme xanh lá như toàn app (remap --mkt về citrus). */
+  .mkt-embed { --mkt: var(--citrus); }
   /* Vault card trên Dashboard: cả card click được; hover hiện "Open →" như card Product */
   .mkt-embed .mkt-card-link { text-decoration: none; color: inherit; cursor: pointer; }
   .mkt-embed .mc-open {
