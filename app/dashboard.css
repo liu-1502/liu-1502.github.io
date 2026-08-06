@@ -224,6 +224,8 @@
   }
   .mkt-embed.pg-marketplace .mkt-grid > .mkt-card { flex: 0 0 360px; scroll-snap-align: start; }
   .mkt-embed.pg-marketplace .mkt-grid::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
+  /* Bỏ đổ bóng khi hover card trên Dashboard */
+  .mkt-embed.pg-marketplace .mkt-card:hover { box-shadow: none; }
   @media (max-width: 760px) { .mkt-embed.pg-marketplace .mkt-grid > .mkt-card { flex-basis: 300px; } }
   /* Vault card trên Dashboard: cả card click được; hover hiện "Open →" như card Product */
   .mkt-embed .mkt-card-link { text-decoration: none; color: inherit; cursor: pointer; }
