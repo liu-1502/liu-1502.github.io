@@ -149,10 +149,16 @@ export default function MarketplaceClient() {
     document.addEventListener("keydown", onGateKey);
 
     const onDeposit = (e: MouseEvent) => {
-      const b = (e.target as HTMLElement).closest<HTMLElement>(".vt-deposit");
-      if (!b) return;
+      const t = e.target as HTMLElement;
+      // "Read More" chỉ mở rộng mô tả — để onOverviewClick xử lý, không mở vault.
+      if (t.closest(".mc-more")) return;
+      // Bấm nút Deposit/Unlock HOẶC bất kỳ đâu trên card đều mở vault.
+      const btn = t.closest<HTMLElement>(".vt-deposit");
+      const card = t.closest<HTMLElement>(".mkt-card-click[data-vault]");
+      const key = btn?.getAttribute("data-vault") || card?.getAttribute("data-vault");
+      if (!key) return;
       // Yêu cầu mật khẩu trước khi mở vault details + form deposit.
-      openGate(b.getAttribute("data-vault") || "yzsyrup");
+      openGate(key);
     };
     const onBack = (e: MouseEvent) => {
       if ((e.target as HTMLElement).closest("[data-mkt-back]")) show("overview");

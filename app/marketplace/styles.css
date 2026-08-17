@@ -126,6 +126,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .vt-unlock { gap: 7px; }
   .vt-unlock svg { width: 15px; height: 15px; }
   .mkt-card { display: flex; flex-direction: column; gap: 14px; padding: 18px; border: none; border-radius: 20px; background: var(--surface); transition: box-shadow .18s ease, transform .18s ease; }
+  .mkt-card-click { cursor: pointer; }
   .mkt-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30, 33, 89, .10); }
   .mc-top { display: flex; align-items: center; gap: 12px; }
   .mc-id { min-width: 0; }

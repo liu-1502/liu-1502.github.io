@@ -43,6 +43,6 @@ export default function VaultCard({ v, href, compact }: { v: (typeof VAULTS)[num
   return href ? (
     <Link href={href} className="mkt-card mkt-card-link">{inner}</Link>
   ) : (
-    <div className="mkt-card">{inner}</div>
+    <div className="mkt-card mkt-card-click" data-vault={v.key}>{inner}</div>
   );
 }
