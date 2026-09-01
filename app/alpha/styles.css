@@ -176,7 +176,7 @@
   }
 
   /* --- Segment toggle (Mint/Redeem) --- */
-  .dir-row { align-self: flex-start; justify-content: flex-start; margin: 0; }
+  .dir-row { justify-content: center; margin: 0; }
   .dir-row .chip { display: none; }
   .dir-switch {
     display: flex; flex-direction: row; justify-content: center; align-items: center;
