@@ -226,7 +226,7 @@
   .swapx-gear { all: unset; cursor: pointer; color: var(--text); display: inline-flex; }
   .swapx-gear svg { width: 20px; height: 20px; }
   .swapx-io { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 8px; }
-  .swapx-box { background: color-mix(in srgb, var(--text) 4%, transparent); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .swapx-box { background: color-mix(in srgb, var(--text) 4%, transparent); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; min-width: 0; text-align: left; }
   .swapx-lbl { font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--text); }
   .swapx-tok { display: flex; align-items: center; gap: 10px; min-width: 0; }
   .swapx-ic { width: 32px; height: 32px; border-radius: 50%; flex: none; object-fit: contain; }
