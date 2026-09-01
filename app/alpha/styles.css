@@ -46,8 +46,11 @@
   .app-layout:not(.xtra-open) > aside { display: none; }
 
   /* ===== Layout 2 cột: trái = form + history (480px), phải = chi tiết token ===== */
-  .av-grid { display: grid; grid-template-columns: minmax(0, 480px) minmax(0, 1fr); gap: 16px; align-items: start; }
-  @media (max-width: 980px) { .av-grid { grid-template-columns: 1fr; } }
+  /* Detail (1fr) bên trái, form (max 480px) bên phải — đảo bằng order. */
+  .av-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px); gap: 16px; align-items: start; }
+  .av-left { order: 2; }
+  .av-right { order: 1; }
+  @media (max-width: 980px) { .av-grid { grid-template-columns: 1fr; } .av-left { order: 1; } .av-right { order: 2; } }
   .av-left { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
   .av-right { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
   .av-detail { display: flex; flex-direction: column; gap: 16px; }
