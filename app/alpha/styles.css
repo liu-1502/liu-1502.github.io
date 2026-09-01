@@ -55,17 +55,17 @@
   .av-right { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
   .av-detail { display: flex; flex-direction: column; gap: 12px; }
   /* Alert nhắc stake sau khi mint (chưa stake) */
-  .vd-alert { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 18px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+  .vd-alert { margin-top: 16px; display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
   .vd-alert[hidden] { display: none; }
   .vd-alert-ic { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, var(--surface)); }
   .vd-alert-ic img { width: 30px; height: 30px; }
   .vd-alert-ic svg { width: 26px; height: 26px; color: var(--accent); }
-  /* How it works: 3 bước ngang */
-  .vd-how { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .vd-how-step { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--text); }
-  .vd-how-ic { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: var(--accent); }
-  .vd-how-ic svg { width: 18px; height: 18px; }
-  .vd-how-arrow { flex: none; width: 18px; height: 18px; color: var(--muted); }
+  /* How it works: 3 bước trên 1 hàng */
+  .vd-how { display: flex; align-items: center; justify-content: space-between; gap: 4px; flex-wrap: nowrap; }
+  .vd-how-step { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--text); white-space: nowrap; }
+  .vd-how-ic { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: var(--accent); }
+  .vd-how-ic svg { width: 16px; height: 16px; }
+  .vd-how-arrow { flex: none; width: 15px; height: 15px; color: var(--muted); }
   .vd-alert-txt > b { display: block; font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); }
   .vd-alert-txt > p { margin: 4px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.45; color: var(--muted); }
   .vd-alert-txt > p b { color: var(--accent); font-weight: 640; }

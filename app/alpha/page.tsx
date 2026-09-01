@@ -204,18 +204,17 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
             </div>
           ))}
         </div>
-      </section>
-
-      {t.key === "yzusd" && (
-        <div className="vd-alert" data-mint-alert hidden>
-          <span className="vd-alert-ic"><Sprout /></span>
-          <div className="vd-alert-txt">
-            <b>Your yzUSD is ready to earn</b>
-            <p><span data-alert-amt>0</span> yzUSD unstaked · Stake now to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
-            <button type="button" className="vd-alert-cta" data-alert-stake>Stake now <ArrowRight /></button>
+        {t.key === "yzusd" && (
+          <div className="vd-alert" data-mint-alert hidden>
+            <span className="vd-alert-ic"><Sprout /></span>
+            <div className="vd-alert-txt">
+              <b>Your yzUSD is ready to earn</b>
+              <p><span data-alert-amt>0</span> yzUSD unstaked · Stake now to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
+              <button type="button" className="vd-alert-cta" data-alert-stake>Stake now <ArrowRight /></button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </section>
 
       {/* How it works (chỉ yzUSD) */}
       {t.key === "yzusd" && (
