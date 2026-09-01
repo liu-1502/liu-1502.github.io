@@ -533,8 +533,8 @@ export default function Alpha() {
             </div>
             <div className="mrev-leg">
               <div className="mrev-leg-info">
-                <span className="mrev-chain"><img src="/assets/chains/plasma.svg" alt="" />Plasma</span>
-                <div className="mrev-amt"><span data-rev-pay>0</span> USDT0</div>
+                <span className="mrev-chain"><img src="/assets/tokens/usdt0.png" alt="" />USDT0</span>
+                <div className="mrev-amt"><span data-rev-pay>0</span></div>
                 <div className="mrev-usd" data-rev-pay-usd>$0.00</div>
               </div>
               <span className="mrev-avatar"><img className="mrev-tok" src="/assets/tokens/usdt0.png" alt="" /><img className="mrev-badge" src="/assets/chains/plasma.svg" alt="" /></span>
@@ -542,8 +542,8 @@ export default function Alpha() {
             <div className="mrev-arrow"><ArrowDown /></div>
             <div className="mrev-leg">
               <div className="mrev-leg-info">
-                <span className="mrev-chain"><img src="/assets/chains/plasma.svg" alt="" />Plasma</span>
-                <div className="mrev-amt"><span data-rev-recv>0</span> yzUSD</div>
+                <span className="mrev-chain"><img src="/assets/tokens/yzUSD.svg" alt="" />yzUSD</span>
+                <div className="mrev-amt"><span data-rev-recv>0</span></div>
                 <div className="mrev-usd" data-rev-recv-usd>$0.00</div>
               </div>
               <span className="mrev-avatar"><img className="mrev-tok" src="/assets/tokens/yzUSD.svg" alt="" /><img className="mrev-badge" src="/assets/chains/plasma.svg" alt="" /></span>
