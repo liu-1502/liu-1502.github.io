@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check, Info } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, ChevronsRight, Check, Info } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -208,8 +208,8 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
           <div className="vd-alert" data-mint-alert hidden>
             <span className="vd-alert-ic"><Info /></span>
             <div className="vd-alert-txt">
-              <b>Your yzUSD is ready to earn</b>
-              <p><span data-alert-amt>0</span> yzUSD unstaked · Stake now to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
+              <b><span data-alert-amt>0</span> yzUSD unstaked</b>
+              <p>Stake now to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
               <button type="button" className="vd-alert-cta" data-alert-stake>Stake now <ArrowRight /></button>
             </div>
           </div>
@@ -228,7 +228,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
               </svg></span>
               <em>Mint yzUSD</em>
             </span>
-            <ArrowRight className="vd-steparrow" />
+            <ChevronsRight className="vd-steparrow" />
             <span className="vd-stepnode">
               <span className="vd-stepic"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
                 <path d="M7 9v14c0 1.8 4 3.3 9 3.3s9-1.5 9-3.3V9" className="ill-fill" />
@@ -239,7 +239,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
               </svg></span>
               <em>Stake yzUSD</em>
             </span>
-            <ArrowRight className="vd-steparrow" />
+            <ChevronsRight className="vd-steparrow" />
             <span className="vd-stepnode">
               <span className="vd-stepic"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
                 <rect x="5.5" y="18" width="5" height="9" rx="1.6" className="ill-fill" />
