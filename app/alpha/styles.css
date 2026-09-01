@@ -97,11 +97,11 @@
   .mok { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 24px; }
   .mok[hidden] { display: none; }
   .mok-backdrop { position: absolute; inset: 0; background: color-mix(in srgb, #14211A 45%, transparent); backdrop-filter: blur(2px); }
-  .mok-card { position: relative; width: 100%; max-width: 430px; background: var(--surface); border-radius: 24px; padding: 30px 24px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 24px 64px rgba(0,0,0,.20); }
+  .mok-card { position: relative; width: 100%; max-width: 430px; background: var(--surface); border-radius: 24px; padding: 46px 24px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 24px 64px rgba(0,0,0,.20); }
   .mok-x { all: unset; box-sizing: border-box; position: absolute; top: 16px; right: 16px; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
   .mok-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
   .mok-x svg { width: 20px; height: 20px; }
-  .mok-check { position: relative; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 17%, var(--surface)); color: var(--accent); margin: 8px 0 28px;
+  .mok-check { position: absolute; top: -32px; left: 50%; transform: translateX(-50%); width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 17%, var(--surface)); color: var(--accent);
     box-shadow:
       0 0 0 8px color-mix(in srgb, var(--accent) 9%, var(--surface)),
       0 0 0 16px color-mix(in srgb, var(--accent) 4%, var(--surface)); }
