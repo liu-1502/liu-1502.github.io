@@ -134,10 +134,14 @@ export default function AlphaClient() {
         return;
       }
       if (t.closest("[data-mint-review-confirm]")) {
-        // Xác nhận -> đóng review, mở dialog thành công với số yzUSD nhận.
+        // Xác nhận -> đóng review, mở dialog thành công (số nhận / số trả / phí).
         const inputs = mintPanel()?.querySelectorAll<HTMLInputElement>(".mfield-l input");
-        const amt = (inputs?.[1]?.value || inputs?.[0]?.value || "0").trim() || "0";
+        const pay = (inputs?.[0]?.value || "0").trim() || "0";
+        const amt = (inputs?.[1]?.value || pay).trim() || "0";
+        const dep = parseFloat(pay.replace(/,/g, "")) || 0;
         dlg.querySelectorAll("[data-ok-amt]").forEach((el) => (el.textContent = amt));
+        dlg.querySelectorAll("[data-ok-pay]").forEach((el) => (el.textContent = pay));
+        dlg.querySelectorAll("[data-ok-fee]").forEach((el) => (el.textContent = money(dep * 0.001)));
         open(review, false);
         open(dlg, true);
         return;

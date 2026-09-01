@@ -101,15 +101,29 @@
   .mok-x { all: unset; box-sizing: border-box; position: absolute; top: 16px; right: 16px; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
   .mok-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
   .mok-x svg { width: 20px; height: 20px; }
-  .mok-check { position: relative; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--accent); margin-bottom: 16px; }
-  .mok-check > svg { width: 34px; height: 34px; stroke-width: 2.5; }
+  .mok-check { position: relative; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; margin-bottom: 18px; box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 15%, transparent); }
+  .mok-check > svg { width: 40px; height: 40px; stroke-width: 3; }
   .mok-check .s { position: absolute; color: var(--accent); }
-  .mok-check .s1 { width: 16px; height: 16px; top: -3px; right: -5px; }
-  .mok-check .s2 { width: 12px; height: 12px; bottom: 3px; left: -7px; opacity: .65; }
+  .mok-check .s1 { width: 18px; height: 18px; top: -4px; right: -8px; }
+  .mok-check .s2 { width: 13px; height: 13px; bottom: 4px; left: -10px; opacity: .7; }
   .mok-title { font-family: var(--font-display); font-weight: 680; font-size: 22px; color: var(--text); margin: 0; }
   .mok-title-tick { display: inline; width: 19px; height: 19px; vertical-align: -2px; stroke-width: 3; }
   .mok-sub { font-family: var(--font-body); font-size: 15px; color: var(--muted); margin: 8px 0 0; }
   .mok-sub b { color: var(--accent); font-weight: 640; }
+  /* 2 token cards (giá trị đổi) + info (tx id / fee) */
+  .mok-exch { align-self: stretch; margin-top: 22px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+  .mok-exch-card { background: color-mix(in srgb, var(--accent) 7%, var(--surface)); border-radius: 16px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+  .mok-exch-card img { width: 34px; height: 34px; border-radius: 50%; object-fit: contain; }
+  .mok-exch-card b { font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); white-space: nowrap; }
+  .mok-exch-ic { width: 34px; height: 34px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--surface); color: var(--muted); box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent); }
+  .mok-exch-ic svg { width: 17px; height: 17px; }
+  .mok-info { align-self: stretch; margin-top: 16px; display: flex; flex-direction: column; gap: 11px; }
+  .mok-info-row { display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 14px; }
+  .mok-info-row.mok-info-between { justify-content: space-between; }
+  .mok-info-row > span:first-child { color: var(--muted); flex: none; }
+  .mok-dots { flex: 1; border-bottom: 1px dashed color-mix(in srgb, var(--text) 22%, transparent); }
+  .mok-info-row > b { color: var(--text); font-family: var(--font-mono); font-weight: 600; flex: none; }
+  .mok-txid { background: color-mix(in srgb, var(--text) 6%, transparent); padding: 3px 10px; border-radius: 999px; font-size: 13px; }
   .mok-earn { align-self: stretch; margin-top: 22px; padding: 16px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 7%, var(--surface)); text-align: left; display: flex; flex-direction: column; gap: 14px; }
   .mok-earn-main { display: flex; gap: 12px; align-items: flex-start; }
   .mok-earn-ic { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); color: var(--accent); }

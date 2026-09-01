@@ -563,18 +563,20 @@ export default function Alpha() {
             <div className="mok-check"><Sparkles className="s s1" /><Sparkles className="s s2" /><Check /></div>
             <h3 className="mok-title">yzUSD minted successfully <Check className="mok-title-tick" /></h3>
             <p className="mok-sub">You received <b><span data-ok-amt>0</span> yzUSD</b>.</p>
-            <div className="mok-earn">
-              <div className="mok-earn-main">
-                <div className="mok-earn-txt">
-                  <b>Start earning with your yzUSD</b>
-                  <p>Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
-                </div>
+            <div className="mok-exch">
+              <div className="mok-exch-card">
+                <img src="/assets/tokens/usdt0.png" alt="" />
+                <b><span data-ok-pay>0</span> USDT0</b>
               </div>
-              <div className="mok-flow">
-                <span className="mok-chip"><img src="/assets/tokens/yzUSD.svg" alt="" /><span data-ok-amt>0</span>&nbsp;yzUSD</span>
-                <ArrowRight />
-                <span className="mok-chip"><img src="/assets/tokens/syzUSD.svg" alt="" />syzUSD</span>
+              <span className="mok-exch-ic"><ArrowLeftRight /></span>
+              <div className="mok-exch-card">
+                <img src="/assets/tokens/yzUSD.svg" alt="" />
+                <b><span data-ok-amt>0</span> yzUSD</b>
               </div>
+            </div>
+            <div className="mok-info">
+              <div className="mok-info-row"><span>Transaction ID</span><span className="mok-dots" /><b className="mok-txid">VKN-8993J244</b></div>
+              <div className="mok-info-row mok-info-between"><span>Mint fee</span><b data-ok-fee>$0.00</b></div>
             </div>
             <div className="mok-actions">
               <button type="button" className="btn btn-accent btn-block">Stake now</button>
