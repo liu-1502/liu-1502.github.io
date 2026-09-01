@@ -60,7 +60,19 @@
   .vd-alert-ic { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, var(--surface)); }
   .vd-alert-ic img { width: 30px; height: 30px; }
   .vd-alert-ic svg { width: 26px; height: 26px; color: var(--accent); }
-  /* How it works: stepper numbered (theo style Marketplace) */
+  /* How it works: stepper collapse (theo style Marketplace) */
+  .vd-strat-summary { list-style: none; cursor: pointer; }
+  .vd-strat-summary::-webkit-details-marker { display: none; }
+  .vd-strat-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .vd-strat-head .vd-title { margin: 0; }
+  .vd-stepcaret { flex: none; width: 18px; height: 18px; color: var(--muted); transition: transform .15s ease; }
+  .vd-stepper[open] .vd-stepcaret { transform: rotate(180deg); }
+  .vd-stepdetail { margin-top: 14px; }
+  .vd-stepitem { position: relative; display: flex; gap: 14px; padding: 12px 0; }
+  .vd-stepitem:not(:last-child)::before { content: ""; position: absolute; left: 12px; top: 32px; bottom: -12px; border-left: 1px dashed color-mix(in srgb, var(--accent) 25%, transparent); }
+  .vd-stepitem > i { position: relative; z-index: 1; flex: none; font-style: normal; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); font-family: var(--font-mono); font-weight: 700; font-size: 11px; }
+  .vd-stepitem b { display: block; font-family: var(--font-display); font-weight: 620; font-size: 13.5px; margin-bottom: 3px; }
+  .vd-stepitem span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
   .vd-steprow { display: flex; align-items: flex-start; gap: 2px; margin-top: 14px; padding: 16px 12px; border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius: var(--r-md); }
   .vd-stepnode { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
   .vd-stepnode i { font-style: normal; flex: none; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); font-family: var(--font-mono); font-weight: 700; font-size: 12px; }
