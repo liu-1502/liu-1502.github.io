@@ -421,7 +421,8 @@
   }
   .xchg-body .btn-block:disabled { opacity: .45; box-shadow: none; cursor: not-allowed; }
   /* 2 nút xếp dọc: "Mint & Stake" (primary) trên, "Mint" (secondary/outline) dưới */
-  .gcta-stack { align-self: stretch; display: flex; flex-direction: column; gap: 10px; }
+  .gcta-stack { align-self: stretch; display: flex; flex-direction: row; gap: 10px; }
+  .gcta-stack .btn.btn-block { flex: 1; }
   .xchg-body .btn.btn-block.gcta-2nd {
     background: var(--surface); color: var(--accent);
     border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); box-shadow: none;
