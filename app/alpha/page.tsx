@@ -180,6 +180,16 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
   const switchTok = switchKey ? TOKENS.find((x) => x.key === switchKey) : undefined;
   return (
     <div className="av-detail" data-panel={t.key} style={t.key === TOKENS[0].key ? undefined : { display: "none" }}>
+      {t.key === "yzusd" && (
+        <div className="vd-alert" data-mint-alert hidden>
+          <span className="vd-alert-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
+          <div className="vd-alert-txt">
+            <b>Your yzUSD is ready to earn</b>
+            <p><span data-alert-amt>0</span> yzUSD unstaked · Stake now to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
+            <button type="button" className="vd-alert-cta" data-alert-stake>Stake now <ArrowRight /></button>
+          </div>
+        </div>
+      )}
       {/* Overview */}
       <section className="vd-sec">
         <div className="vd-head">
@@ -533,8 +543,8 @@ export default function Alpha() {
             </div>
             <div className="mok-exch">
               <div className="mok-exch-card">
-                <img src="/assets/tokens/usdt0.png" alt="" />
-                <b><span data-rev-pay>0</span> USDT0</b>
+                <img data-rev-pay-icon src="/assets/tokens/usdt0.png" alt="" />
+                <b><span data-rev-pay>0</span> <span data-rev-pay-sym>USDT0</span></b>
               </div>
               <span className="mok-exch-ic"><ArrowRight /></span>
               <div className="mok-exch-card">
@@ -543,7 +553,7 @@ export default function Alpha() {
               </div>
             </div>
             <div className="mrev-cost"><span>Rate</span><b data-rev-rate>1 USDT0 = 1 yzUSD</b></div>
-            <div className="mrev-cost"><span>Mint fee <i>0.10%</i></span><b data-rev-fee>$0.00</b></div>
+            <div className="mrev-cost" data-rev-mintfee-row><span>Mint fee <i>0.10%</i></span><b data-rev-fee>$0.00</b></div>
             <div className="mrev-cost" data-rev-stakefee-row hidden><span>Stake fee <i>0.50%</i></span><b data-rev-stakefee>$0.00</b></div>
             <div className="mrev-cost"><span>Network fee</span><b>&lt;$0.01</b></div>
             <div className="mrev-cost"><span>Estimated time</span><b>~30 seconds</b></div>
@@ -562,12 +572,12 @@ export default function Alpha() {
             <p className="mok-sub" data-ok-sub>Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
             <div className="mok-info">
               <div className="mok-info-row mok-info-between"><span>Transaction ID</span><b className="mok-txid">VKN-8993J244</b></div>
-              <div className="mok-info-row mok-info-between"><span>Mint fee</span><b data-ok-fee>$0.00</b></div>
+              <div className="mok-info-row mok-info-between" data-ok-mintfee-row><span>Mint fee</span><b data-ok-fee>$0.00</b></div>
               <div className="mok-info-row mok-info-between" data-ok-stakefee-row hidden><span>Stake fee</span><b data-ok-stakefee>$0.00</b></div>
             </div>
             <div className="mok-actions">
               <button type="button" className="btn btn-accent btn-block" data-ok-primary>Stake now</button>
-              <button type="button" className="btn btn-line btn-block" data-mint-ok-close>Back to portfolio</button>
+              <button type="button" className="btn btn-line btn-block" data-mint-ok-close>Close</button>
             </div>
           </div>
         </div>

@@ -101,35 +101,77 @@ export default function AlphaClient() {
     const mintPanel = () => document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
     const MINT_FEE = 0.001;
 
-    // Hai luồng dùng chung 2 dialog; nội dung đổi theo flow.
+    // 3 luồng dùng chung 2 dialog (review + success); nội dung đổi theo flow.
+    const USDT0 = "/assets/tokens/usdt0.png", YZ = "/assets/tokens/yzUSD.svg", SYZ = "/assets/tokens/syzUSD.svg";
     type Flow = {
-      recvSym: string; recvIcon: string; recvMul: number; stakeFee: number; showStake: boolean;
-      rate: string; revTitle: string; revCta: string; okTitle: string; okSub: string; okPrimary: string; okPay: string;
+      paySym: string; payIcon: string; recvSym: string; recvIcon: string; recvMul: number;
+      showMint: boolean; stakeFee: number; showStake: boolean; rate: string;
+      revTitle: string; revCta: string; okTitle: string; okSub: string; okPrimary: string;
     };
     const FLOWS: Record<string, Flow> = {
       mint: {
-        recvSym: "yzUSD", recvIcon: "/assets/tokens/yzUSD.svg", recvMul: 1, stakeFee: 0, showStake: false,
-        rate: "1 USDT0 = 1 yzUSD", revTitle: "You’re minting", revCta: "Confirm mint",
-        okTitle: "yzUSD minted successfully",
-        okSub: "Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.",
-        okPrimary: "Stake now", okPay: "USDT0",
+        paySym: "USDT0", payIcon: USDT0, recvSym: "yzUSD", recvIcon: YZ, recvMul: 1,
+        showMint: true, stakeFee: 0, showStake: false, rate: "1 USDT0 = 1 yzUSD",
+        revTitle: "You’re minting", revCta: "Confirm mint", okTitle: "yzUSD minted successfully",
+        okSub: "Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.", okPrimary: "Stake now",
       },
       mintstake: {
-        recvSym: "syzUSD", recvIcon: "/assets/tokens/syzUSD.svg", recvMul: (1 - 0.001) * 0.9361, stakeFee: 0.005, showStake: true,
-        rate: "1 USDT0 = 0.9361 syzUSD", revTitle: "You’re minting & staking", revCta: "Confirm mint & stake",
-        okTitle: "Minted & staked successfully",
-        okSub: "You’re now earning <b>7.75%</b> weekly yield on syzUSD.",
-        okPrimary: "View position", okPay: "USDT0",
+        paySym: "USDT0", payIcon: USDT0, recvSym: "syzUSD", recvIcon: SYZ, recvMul: (1 - 0.001) * 0.9361,
+        showMint: true, stakeFee: 0.005, showStake: true, rate: "1 USDT0 = 0.9361 syzUSD",
+        revTitle: "You’re minting & staking", revCta: "Confirm mint & stake", okTitle: "Minted & staked successfully",
+        okSub: "You’re now earning <b>7.75%</b> weekly yield on syzUSD.", okPrimary: "View position",
+      },
+      stake: {
+        paySym: "yzUSD", payIcon: YZ, recvSym: "syzUSD", recvIcon: SYZ, recvMul: 0.9361,
+        showMint: false, stakeFee: 0.005, showStake: true, rate: "1 yzUSD = 0.9361 syzUSD",
+        revTitle: "You’re staking", revCta: "Confirm stake", okTitle: "Staked successfully",
+        okSub: "You’re now earning <b>7.75%</b> weekly yield on syzUSD.", okPrimary: "View position",
       },
     };
     let current: Flow = FLOWS.mint;
+    let lastDep = 0;
+    const stakeFeeUsd = (cfg: Flow) => lastDep * (cfg.showMint ? (1 - MINT_FEE) : 1) * cfg.stakeFee;
+
+    const alertEl = document.querySelector<HTMLElement>(".pg-alpha [data-mint-alert]");
+    const showAlert = (show: boolean) => {
+      if (!alertEl) return;
+      if (show) { const a = alertEl.querySelector("[data-alert-amt]"); if (a) a.textContent = num(lastDep); }
+      alertEl.hidden = !show;
+    };
+    // Đóng dialog thành công; nếu chỉ vừa mint (chưa stake) -> hiện alert nhắc stake.
+    const closeSuccess = () => {
+      open(dlg, false);
+      showAlert(current === FLOWS.mint && lastDep > 0);
+    };
 
     const depValue = () => {
       const inputs = mintPanel()?.querySelectorAll<HTMLInputElement>(".mfield-l input");
-      return { inputs, pay: (inputs?.[0]?.value || "0").trim() || "0", dep: parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0 };
+      return { inputs, dep: parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0 };
     };
-    const startFlow = (cfg: Flow) => {
-      const { inputs, pay, dep } = depValue();
+    // Điền review theo cfg (pay = lastDep vì mint 1:1).
+    const populateReview = (cfg: Flow) => {
+      current = cfg;
+      const set = (sel: string, v: string) => { const el = review.querySelector(sel); if (el) el.textContent = v; };
+      set("[data-rev-title]", cfg.revTitle);
+      set("[data-rev-pay]", num(lastDep));
+      set("[data-rev-pay-sym]", cfg.paySym);
+      review.querySelector("[data-rev-pay-icon]")?.setAttribute("src", cfg.payIcon);
+      set("[data-rev-recv]", num(lastDep * cfg.recvMul));
+      set("[data-rev-recv-sym]", cfg.recvSym);
+      review.querySelector("[data-rev-recv-icon]")?.setAttribute("src", cfg.recvIcon);
+      set("[data-rev-rate]", cfg.rate);
+      const mfr = review.querySelector<HTMLElement>("[data-rev-mintfee-row]");
+      if (mfr) mfr.hidden = !cfg.showMint;
+      set("[data-rev-fee]", money(lastDep * MINT_FEE));
+      const sfr = review.querySelector<HTMLElement>("[data-rev-stakefee-row]");
+      if (sfr) sfr.hidden = !cfg.showStake;
+      set("[data-rev-stakefee]", money(stakeFeeUsd(cfg)));
+      set("[data-rev-cta]", cfg.revCta);
+      showAlert(false);
+      open(review, true);
+    };
+    const startMintFlow = (cfg: Flow) => {
+      const { inputs, dep } = depValue();
       const xusd = mintPanel()?.querySelector<HTMLElement>(".mfield-l .xusd");
       if (dep <= 0) {
         if (xusd) { xusd.textContent = "Enter an amount first"; xusd.classList.add("xusd-err"); }
@@ -137,36 +179,26 @@ export default function AlphaClient() {
         return;
       }
       if (xusd) xusd.classList.remove("xusd-err");
-      current = cfg;
-      const recv = num(dep * cfg.recvMul);
-      const set = (sel: string, v: string) => { const el = review.querySelector(sel); if (el) el.textContent = v; };
-      set("[data-rev-title]", cfg.revTitle);
-      set("[data-rev-pay]", pay);
-      set("[data-rev-recv]", recv);
-      set("[data-rev-recv-sym]", cfg.recvSym);
-      review.querySelector("[data-rev-recv-icon]")?.setAttribute("src", cfg.recvIcon);
-      set("[data-rev-rate]", cfg.rate);
-      set("[data-rev-fee]", money(dep * MINT_FEE));
-      set("[data-rev-stakefee]", money(dep * (1 - MINT_FEE) * cfg.stakeFee));
-      const srow = review.querySelector<HTMLElement>("[data-rev-stakefee-row]");
-      if (srow) srow.hidden = !cfg.showStake;
-      set("[data-rev-cta]", cfg.revCta);
-      open(review, true);
+      lastDep = dep;
+      populateReview(cfg);
     };
+    const startStakeFlow = () => { if (lastDep > 0) populateReview(FLOWS.stake); };
+
+    // Confirm ở review -> dialog thành công theo flow hiện tại.
     const finishFlow = () => {
       const cfg = current;
-      const { dep } = depValue();
-      const recv = num(dep * cfg.recvMul);
       const oset = (sel: string, v: string) => dlg.querySelectorAll(sel).forEach((el) => (el.textContent = v));
-      oset("[data-ok-amt]", recv);
+      oset("[data-ok-amt]", num(lastDep * cfg.recvMul));
       oset("[data-ok-sym]", cfg.recvSym);
       oset("[data-ok-title]", cfg.okTitle);
       const osub = dlg.querySelector<HTMLElement>("[data-ok-sub]");
       if (osub) osub.innerHTML = cfg.okSub;
-      oset("[data-ok-fee]", money(dep * MINT_FEE));
-      oset("[data-ok-stakefee]", money(dep * (1 - MINT_FEE) * cfg.stakeFee));
-      const osrow = dlg.querySelector<HTMLElement>("[data-ok-stakefee-row]");
-      if (osrow) osrow.hidden = !cfg.showStake;
+      oset("[data-ok-fee]", money(lastDep * MINT_FEE));
+      oset("[data-ok-stakefee]", money(stakeFeeUsd(cfg)));
+      const mfRow = dlg.querySelector<HTMLElement>("[data-ok-mintfee-row]");
+      if (mfRow) mfRow.hidden = !cfg.showMint;
+      const sfRow = dlg.querySelector<HTMLElement>("[data-ok-stakefee-row]");
+      if (sfRow) sfRow.hidden = !cfg.showStake;
       const oprim = dlg.querySelector<HTMLElement>("[data-ok-primary]");
       if (oprim) oprim.textContent = cfg.okPrimary;
       open(review, false);
@@ -186,11 +218,17 @@ export default function AlphaClient() {
         }
         return;
       }
-      if (t.closest("[data-mint-confirm]")) { startFlow(FLOWS.mint); return; }
-      if (t.closest("[data-mintstake-confirm]")) { startFlow(FLOWS.mintstake); return; }
+      if (t.closest("[data-mint-confirm]")) { startMintFlow(FLOWS.mint); return; }
+      if (t.closest("[data-mintstake-confirm]")) { startMintFlow(FLOWS.mintstake); return; }
+      if (t.closest("[data-alert-stake]")) { startStakeFlow(); return; }
       if (t.closest("[data-mint-review-confirm]")) { finishFlow(); return; }
+      if (t.closest("[data-ok-primary]")) {
+        // "Stake now" (mint) -> mở review stake; "View position" (đã stake) -> đóng.
+        if (current === FLOWS.mint) { open(dlg, false); startStakeFlow(); } else closeSuccess();
+        return;
+      }
       if (t.closest("[data-mint-review-close]")) open(review, false);
-      if (t.closest("[data-mint-ok-close]")) open(dlg, false);
+      if (t.closest("[data-mint-ok-close]")) closeSuccess();
     };
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { open(review, false); open(dlg, false); } };
     // Gõ vào ô deposit -> xoá lỗi (hook tự set lại text ≈$; ở đây bỏ màu đỏ).

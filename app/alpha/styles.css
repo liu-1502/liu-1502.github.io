@@ -54,6 +54,16 @@
   .av-left { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
   .av-right { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
   .av-detail { display: flex; flex-direction: column; gap: 12px; }
+  /* Alert nhắc stake sau khi mint (chưa stake) */
+  .vd-alert { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 18px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+  .vd-alert[hidden] { display: none; }
+  .vd-alert-ic { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, var(--surface)); }
+  .vd-alert-ic img { width: 30px; height: 30px; }
+  .vd-alert-txt > b { display: block; font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); }
+  .vd-alert-txt > p { margin: 4px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+  .vd-alert-txt > p b { color: var(--accent); font-weight: 640; }
+  .vd-alert-cta { all: unset; box-sizing: border-box; cursor: pointer; margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 640; font-size: 14px; color: var(--accent); }
+  .vd-alert-cta svg { width: 16px; height: 16px; }
   /* Header + tabs canh GIỮA theo chiều ngang content */
   /* Header canh giữa (Alpha, Prime, ...) */
   .av-head { align-self: stretch; text-align: center; }
@@ -116,7 +126,7 @@
   .mok-sub b { color: var(--accent); font-weight: 640; }
   /* 2 token cards (giá trị đổi) + info (tx id / fee) */
   .mok-exch { position: relative; align-self: stretch; margin: 6px 0 16px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 8px; }
-  .mok-exch-card { background: color-mix(in srgb, var(--text) 5%, var(--surface)); border-radius: 16px; padding: 12px 12px 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+  .mok-exch-card { background: color-mix(in srgb, var(--text) 3.5%, var(--surface)); border-radius: 16px; padding: 12px 12px 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
   .mok-exch-card img { width: 34px; height: 34px; border-radius: 50%; object-fit: contain; }
   .mok-exch-card b { font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); white-space: nowrap; }
   .mok-exch-ic { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--muted); box-shadow: 0 0 0 4px var(--surface); }
@@ -150,6 +160,7 @@
   .mok-chip img { width: 20px; height: 20px; border-radius: 50%; }
   .mok-actions { align-self: stretch; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
   .mok-actions .btn { width: 100%; height: 50px; border-radius: 14px; font-family: var(--font-body); font-weight: 640; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; }
+  .mok-actions .btn[hidden] { display: none; }
 
   /* Review order (layout from -> to như Uniswap) */
   .mrev-card { text-align: left; align-items: stretch; padding: 22px; }
