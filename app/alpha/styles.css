@@ -424,7 +424,7 @@
   .gcta-stack { align-self: stretch; display: flex; flex-direction: row; gap: 10px; }
   .gcta-stack .btn.btn-block { flex: 1; }
   /* Bảng tóm tắt khi đã nhập số (mint/stake amount + phí) */
-  .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; background: var(--surface); border-radius: var(--r-md); }
+  .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 2px; padding: 14px 2px 2px; border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .mint-sum[hidden] { display: none; }
   .msum-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 5px 0; font-family: var(--font-body); font-size: 14px; }
   .msum-row > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
