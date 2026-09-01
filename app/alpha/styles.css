@@ -123,7 +123,7 @@
   .mok-info-row > span:first-child { color: var(--muted); flex: none; }
   .mok-dots { flex: 1; border-bottom: 1px dashed color-mix(in srgb, var(--text) 22%, transparent); }
   .mok-info-row > b { color: var(--text); font-family: var(--font-mono); font-weight: 600; flex: none; }
-  .mok-txid { background: color-mix(in srgb, var(--text) 6%, transparent); padding: 3px 10px; border-radius: 999px; font-size: 13px; }
+  .mok-txid { font-size: 13px; }
   .mok-earn { align-self: stretch; margin-top: 22px; padding: 16px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 7%, var(--surface)); text-align: left; display: flex; flex-direction: column; gap: 14px; }
   .mok-earn-main { display: flex; gap: 12px; align-items: flex-start; }
   .mok-earn-ic { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); color: var(--accent); }
