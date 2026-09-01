@@ -133,15 +133,18 @@ export default function AlphaClient() {
     const stakeFeeUsd = (cfg: Flow) => lastDep * (cfg.showMint ? (1 - MINT_FEE) : 1) * cfg.stakeFee;
 
     const alertEl = document.querySelector<HTMLElement>(".pg-alpha [data-mint-alert]");
+    const earnEl = document.querySelector<HTMLElement>(".pg-alpha [data-earn-alert]");
     const showAlert = (show: boolean) => {
       if (!alertEl) return;
       if (show) { const a = alertEl.querySelector("[data-alert-amt]"); if (a) a.textContent = num(lastDep); }
       alertEl.hidden = !show;
     };
-    // Đóng dialog thành công; nếu chỉ vừa mint (chưa stake) -> hiện alert nhắc stake.
+    // Đóng dialog thành công. Default (chưa mint) -> earn alert; vừa mint chưa stake -> mint alert.
     const closeSuccess = () => {
       open(dlg, false);
-      showAlert(current === FLOWS.mint && lastDep > 0);
+      const showMint = current === FLOWS.mint && lastDep > 0;
+      showAlert(showMint);
+      if (earnEl) earnEl.hidden = lastDep > 0; // đã mint -> ẩn earn default
     };
 
     const depValue = () => {
