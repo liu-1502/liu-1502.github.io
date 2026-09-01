@@ -124,18 +124,19 @@ const TOKENS = [
     key: "yzusd", name: "yzUSD", logo: "/assets/tokens/yzUSD.svg",
     badge: "Senior · Par stable",
     tagline: "Fully-backed 1:1 USD stablecoin, over-collateralized and attested live.",
-    stats: [ { k: "Your Balance", v: "$12,480.00" }, { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "110.82%", tone: "good" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
+    stats: [ { k: "Your Balance", v: "$12,480.00" }, { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "108.92%", tone: "good" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
     info: [
       { k: "Rate", v: "1:1 at par" },
       { k: "Access", v: "Eligible Investors, KYC" },
       { k: "Alternative", v: "Swap on Curve, no KYC", hi: true },
+      { k: "Redemption window", v: "Up to 3 days" },
       { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" },
     ],
     note: {
       title: "Backing, verified live",
       body: "Every yzUSD is backed by more than one dollar of onchain assets, attested every 15 minutes by Accountable.",
       rows: [
-        { k: "Collateral ratio", v: "110.82%" },
+        { k: "Collateral ratio", v: "108.92%" },
         { k: "First-loss buffer", v: "yzPP + Reserve Fund" },
       ],
     },
@@ -327,7 +328,7 @@ export default function Alpha() {
           {/* Stats ngay dưới card mint/redeem */}
           <div className="page-stats rv">
             <div><div className="k">Alpha TVL</div><div className="v" data-count="48470795" data-prefix="$">$0</div></div>
-            <div><div className="k">Collateral ratio</div><div className="v" style={{ color: "var(--good)" }}>110.82%</div></div>
+            <div><div className="k">Collateral ratio</div><div className="v" style={{ color: "var(--good)" }}>108.92%</div></div>
             <div><div className="k">syzUSD target</div><div className="v" style={{ color: "var(--alpha)" }}>7.75%</div></div>
             <div><div className="k">yzPP target</div><div className="v" style={{ color: "var(--alpha)" }}>27.0%</div></div>
             <div className="pro-only"><div className="k">Next epoch</div><div className="v">FRI 04:00</div></div>
