@@ -75,48 +75,47 @@ function OrderItem({
   amount: string;
   date: string;
   tx: string;
-  status: "pending" | "filled" | "finalized" | "cancelled";
+  status: "success" | "failed";
 }) {
   const Icon = kind === "mint" ? ArrowDownRight : ArrowUpRight;
   const negative = kind === "redeem"; // Redeem = tiền ra (âm), Mint = tiền vào (dương)
-  const badgeLabel = status.charAt(0).toUpperCase() + status.slice(1);
+  const badgeLabel = status === "success" ? "Success" : "Failed";
   return (
     <div className="ord" role="button" tabIndex={0} data-kind={kind} data-status={status}>
       <span className="oicon"><Icon /></span>
       <div className="oleft">
         <span className="ot">{label}</span>
         <span className="oa">{date}<span className="odot" /><span className="otx">{tx}<ExternalLink /></span></span>
-        {status === "pending" && <button type="button" className="oaction neg">Cancel</button>}
-        {status === "filled" && <button type="button" className="oaction">Finalize</button>}
       </div>
       <div className="oright">
-        <span className={`ov${status === "finalized" ? (negative ? " ov-red" : " ov-green") : ""}`}>{negative ? "−" : "+"}{amount}</span>
-        {status !== "finalized" && <span className={`badge ${status}`}>{badgeLabel}</span>}
+        <span className="ov">{negative ? "−" : "+"}{amount}</span>
+        <span className={`badge ${status}`}>{badgeLabel}</span>
       </div>
     </div>
   );
 }
 
-/* Lịch sử order (demo). Mặc định hiện 3, "Show more" sổ thêm 10 mỗi lần. */
-const ORDERS: {
+/* Lịch sử activity (demo). Mint/Redeem yzUSD chỉ có 2 trạng thái: success / failed.
+   Mặc định hiện 3, "Show more" sổ thêm 10 mỗi lần. */
+const ACTIVITIES: {
   kind: "mint" | "redeem"; label: string; amount: string; date: string; tx: string;
-  status: "pending" | "filled" | "finalized" | "cancelled";
+  status: "success" | "failed";
 }[] = [
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$2,000.00", date: "03 Aug 2026, 12:59", tx: "0x9ed0…7f1a", status: "filled" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$1,000.00", date: "30 Jul 2026, 23:08", tx: "0xc843…3c36", status: "pending" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$1,000.50", date: "30 Jul 2026, 21:10", tx: "0xeED43…AbbA", status: "pending" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$500.00", date: "29 Jul 2026, 18:22", tx: "0x71bC8…9Ae0", status: "finalized" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$3,200.00", date: "29 Jul 2026, 09:05", tx: "0x4aF0…2b1c", status: "cancelled" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$750.00", date: "28 Jul 2026, 20:41", tx: "0x1b7E…9c02", status: "finalized" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$4,120.00", date: "28 Jul 2026, 14:30", tx: "0x88aa…3d1f", status: "finalized" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$960.00", date: "27 Jul 2026, 11:12", tx: "0x2fc9…7ab4", status: "cancelled" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$12,000.00", date: "27 Jul 2026, 08:03", tx: "0x5e10…b2c8", status: "finalized" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$300.00", date: "26 Jul 2026, 22:57", tx: "0x9d44…1e6a", status: "finalized" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$2,500.00", date: "26 Jul 2026, 16:19", tx: "0x77bd…4f90", status: "finalized" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$1,800.00", date: "25 Jul 2026, 13:44", tx: "0x0ac1…8d33", status: "cancelled" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$640.00", date: "25 Jul 2026, 10:05", tx: "0x3ee2…5b71", status: "finalized" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$5,000.00", date: "24 Jul 2026, 19:26", tx: "0xa190…c7e2", status: "finalized" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$980.00", date: "24 Jul 2026, 09:51", tx: "0x6bf3…2a08", status: "finalized" },
+  { kind: "redeem", label: "Redeem yzUSD", amount: "$2,000.00", date: "03 Aug 2026, 12:59", tx: "0x9ed0…7f1a", status: "success" },
+  { kind: "redeem", label: "Redeem yzUSD", amount: "$1,000.00", date: "30 Jul 2026, 23:08", tx: "0xc843…3c36", status: "success" },
+  { kind: "mint", label: "Mint yzUSD", amount: "$1,000.50", date: "30 Jul 2026, 21:10", tx: "0xeED43…AbbA", status: "failed" },
+  { kind: "redeem", label: "Redeem yzUSD", amount: "$500.00", date: "29 Jul 2026, 18:22", tx: "0x71bC8…9Ae0", status: "success" },
+  { kind: "mint", label: "Mint yzUSD", amount: "$3,200.00", date: "29 Jul 2026, 09:05", tx: "0x4aF0…2b1c", status: "failed" },
+  { kind: "mint", label: "Mint yzUSD", amount: "$750.00", date: "28 Jul 2026, 20:41", tx: "0x1b7E…9c02", status: "success" },
+  { kind: "redeem", label: "Redeem yzUSD", amount: "$4,120.00", date: "28 Jul 2026, 14:30", tx: "0x88aa…3d1f", status: "success" },
+  { kind: "mint", label: "Mint yzUSD", amount: "$960.00", date: "27 Jul 2026, 11:12", tx: "0x2fc9…7ab4", status: "failed" },
+  { kind: "mint", label: "Mint yzUSD", amount: "$12,000.00", date: "27 Jul 2026, 08:03", tx: "0x5e10…b2c8", status: "success" },
+  { kind: "redeem", label: "Redeem yzUSD", amount: "$300.00", date: "26 Jul 2026, 22:57", tx: "0x9d44…1e6a", status: "success" },
+  { kind: "mint", label: "Mint yzUSD", amount: "$2,500.00", date: "26 Jul 2026, 16:19", tx: "0x77bd…4f90", status: "success" },
+  { kind: "redeem", label: "Redeem yzUSD", amount: "$1,800.00", date: "25 Jul 2026, 13:44", tx: "0x0ac1…8d33", status: "failed" },
+  { kind: "mint", label: "Mint yzUSD", amount: "$640.00", date: "25 Jul 2026, 10:05", tx: "0x3ee2…5b71", status: "success" },
+  { kind: "redeem", label: "Redeem yzUSD", amount: "$5,000.00", date: "24 Jul 2026, 19:26", tx: "0xa190…c7e2", status: "success" },
+  { kind: "mint", label: "Mint yzUSD", amount: "$980.00", date: "24 Jul 2026, 09:51", tx: "0x6bf3…2a08", status: "success" },
 ];
 
 /* Thông tin chi tiết từng token (cột phải, luôn hiện, đổi theo tab). */
@@ -334,12 +333,12 @@ export default function Alpha() {
           {/* Order history */}
           <div className="acc ohist">
             <div className="ohead">
-              <span className="otitle">Orders</span>
+              <span className="otitle">Activities</span>
             </div>
-            <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="pending">Pending</button><button className="ofilter" data-filter="filled">Filled</button><button className="ofilter" data-filter="finalized">Finalized</button><button className="ofilter" data-filter="cancelled">Cancelled</button></div>
+            <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="success">Success</button><button className="ofilter" data-filter="failed">Failed</button></div>
             <div className="osearch"><Search className="osearch-ico" /><input type="text" placeholder="Search by transaction hash" aria-label="Search by transaction hash" /></div>
             <div className="olist">
-              {ORDERS.map((o, i) => <OrderItem key={i} {...o} />)}
+              {ACTIVITIES.map((o, i) => <OrderItem key={i} {...o} />)}
             </div>
             <button type="button" className="omore" data-omore>Show more <ChevronDown /></button>
           </div>

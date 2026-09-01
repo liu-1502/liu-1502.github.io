@@ -354,6 +354,8 @@
   .ord .badge.filled { background: #F1F2F4; color: #5C636E; }      /* neutral: đã khớp, chờ finalize */
   .ord .badge.finalized { background: #F2F9EC; color: #1E7B1E; }   /* xanh lá nền nhạt hơn: đã hoàn tất */
   .ord .badge.cancelled { background: #FDF4F4; color: #DC2626; }   /* đỏ nền nhạt hơn: đã huỷ */
+  .ord .badge.success { background: #F2F9EC; color: #1E7B1E; }     /* xanh lá: thành công */
+  .ord .badge.failed { background: #FDF4F4; color: #DC2626; }      /* đỏ: thất bại */
 
   /* --- Stats card (ngay dưới mint/redeem): mỗi dòng label trái / value phải --- */
   .page-stats {
