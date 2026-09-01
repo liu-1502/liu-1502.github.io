@@ -101,8 +101,12 @@
   .mok-x { all: unset; box-sizing: border-box; position: absolute; top: 16px; right: 16px; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
   .mok-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
   .mok-x svg { width: 20px; height: 20px; }
-  .mok-check { position: relative; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; margin-bottom: 18px; box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 15%, transparent); }
-  .mok-check > svg { width: 40px; height: 40px; stroke-width: 3; }
+  .mok-check { position: relative; width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; margin: 8px 0 30px;
+    box-shadow:
+      0 0 0 7px color-mix(in srgb, var(--accent) 22%, transparent),
+      0 0 0 14px color-mix(in srgb, var(--accent) 12%, transparent),
+      0 0 0 21px color-mix(in srgb, var(--accent) 6%, transparent); }
+  .mok-check > svg { width: 38px; height: 38px; stroke-width: 3; }
   .mok-check .s { position: absolute; color: var(--accent); }
   .mok-check .s1 { width: 18px; height: 18px; top: -4px; right: -8px; }
   .mok-check .s2 { width: 13px; height: 13px; bottom: 4px; left: -10px; opacity: .7; }
@@ -115,7 +119,7 @@
   .mok-exch-card { background: color-mix(in srgb, var(--text) 5%, var(--surface)); border-radius: 16px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
   .mok-exch-card img { width: 34px; height: 34px; border-radius: 50%; object-fit: contain; }
   .mok-exch-card b { font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); white-space: nowrap; }
-  .mok-exch-ic { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); color: var(--muted); box-shadow: 0 0 0 3px var(--surface), 0 0 0 4px color-mix(in srgb, var(--text) 8%, transparent); }
+  .mok-exch-ic { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--muted); box-shadow: 0 0 0 4px var(--surface); }
   .mok-exch-ic svg { width: 17px; height: 17px; }
   .mok-info { align-self: stretch; margin-top: 16px; display: flex; flex-direction: column; gap: 11px; }
   .mok-info-row { display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 14px; }

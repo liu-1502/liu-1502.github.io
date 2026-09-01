@@ -562,7 +562,7 @@ export default function Alpha() {
             <button type="button" className="mok-x" data-mint-ok-close aria-label="Close"><X /></button>
             <div className="mok-check"><Check /></div>
             <h3 className="mok-title">yzUSD minted successfully</h3>
-            <p className="mok-sub">You received <b><span data-ok-amt>0</span> yzUSD</b>.</p>
+            <p className="mok-sub">You received <b><span data-ok-amt>0</span> yzUSD</b>. Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
             <div className="mok-exch">
               <div className="mok-exch-card">
                 <img src="/assets/tokens/usdt0.png" alt="" />
