@@ -212,7 +212,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
         <h4 className="vd-title">Details</h4>
         <div className="vd-info">
           {t.info.map((r) => (
-            <div key={r.k}><span className="k">{r.k}</span><span className={`v${r.hi ? " hi" : ""}`}>{r.v}</span></div>
+            <div key={r.k}><span className="k">{r.k}</span><span className={`v${r.hi ? " hi" : ""}`}>{r.icon && <img className="v-ic" src={r.icon} alt="" />}{r.v}</span></div>
           ))}
         </div>
       </section>
@@ -287,17 +287,23 @@ export default function Alpha() {
                 <div className="swapx-io">
                   <button type="button" className="swapx-box swapx-from" data-swap-open="from" aria-haspopup="dialog">
                     <span className="swapx-lbl">From</span>
-                    <span className="swapx-tok"><span className="swapx-ic swapx-ic-empty" data-from-ic /><span className="swapx-name muted" data-from-name>Select…</span></span>
+                    <span className="swapx-tok">
+                      <span className="swapx-avatar"><span className="swapx-ic swapx-ic-empty" data-from-ic /><img className="swapx-badge" src="/assets/chains/plasma.svg" alt="" /></span>
+                      <span className="swapx-name muted" data-from-name>Select…</span>
+                    </span>
                   </button>
                   <span className="swapx-arrow"><ArrowRight /></span>
                   <div className="swapx-box">
                     <span className="swapx-lbl">To</span>
-                    <span className="swapx-tok"><img className="swapx-ic" src="/assets/tokens/yzUSD.svg" alt="" /><span className="swapx-name"><b>yzUSD</b><small>Plasma</small></span></span>
+                    <span className="swapx-tok">
+                      <span className="swapx-avatar"><img className="swapx-ic" src="/assets/tokens/yzUSD.svg" alt="" /><img className="swapx-badge" src="/assets/chains/plasma.svg" alt="" /></span>
+                      <span className="swapx-name"><b>yzUSD</b><small>Plasma</small></span>
+                    </span>
                   </div>
                 </div>
                 <div className="swapx-box swapx-send">
                   <span className="swapx-lbl">Send</span>
-                  <div className="swapx-send-main"><span className="swapx-ic swapx-ic-empty" /><span className="swapx-amt">0</span></div>
+                  <div className="swapx-send-main"><span className="swapx-avatar"><span className="swapx-ic swapx-ic-empty" data-from-ic /><img className="swapx-badge" src="/assets/chains/plasma.svg" alt="" /></span><span className="swapx-amt">0</span></div>
                   <span className="swapx-usd">$0.00</span>
                 </div>
                 <div className="swapx-cta">

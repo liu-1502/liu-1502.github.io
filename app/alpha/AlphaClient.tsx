@@ -61,8 +61,9 @@ export default function AlphaClient() {
     if (!dlg || !openBtn) return;
     const content = document.querySelector<HTMLElement>("main.content");
     const setOpen = (o: boolean) => {
-      // Canh giữa theo vùng content (không tính sidebar) -> dialog không bị lệch trái.
-      if (o) dlg.style.left = (content ? Math.round(content.getBoundingClientRect().left) : 0) + "px";
+      // Backdrop phủ full viewport (inset:0); chỉ đẩy card (đã canh giữa) sang phải bằng
+      // padding-left = mép trái content, để dialog canh giữa theo vùng content mà nền vẫn bao hết.
+      if (o) dlg.style.paddingLeft = (content ? Math.round(content.getBoundingClientRect().left) : 0) + "px";
       dlg.hidden = !o;
       openBtn.setAttribute("aria-expanded", o ? "true" : "false");
       document.body.style.overflow = o ? "hidden" : "";
@@ -113,17 +114,27 @@ export default function AlphaClient() {
         const name = open.getAttribute("data-swap-open");
         closeSheets();
         const s = sheets.find((x) => x.getAttribute("data-swap-sheet") === name);
-        if (s) s.hidden = false;
+        if (s) {
+          s.hidden = false;
+          const inp = s.querySelector<HTMLInputElement>("input");
+          if (inp) setTimeout(() => inp.focus(), 0);
+        }
         return;
       }
       if (t.closest("[data-swap-back]")) { closeSheets(); return; }
+      const toggle = t.closest<HTMLElement>(".swapx-toggle");
+      if (toggle) {
+        toggle.setAttribute("aria-checked", toggle.getAttribute("aria-checked") === "true" ? "false" : "true");
+        return;
+      }
       const item = t.closest<HTMLElement>("[data-swap-token]");
       if (item) {
         const sym = item.getAttribute("data-swap-token") || "";
         const icon = item.getAttribute("data-token-icon") || "";
-        const fromIc = document.querySelector<HTMLElement>(".pg-alpha [data-from-ic]");
+        document.querySelectorAll<HTMLElement>(".pg-alpha [data-from-ic]").forEach((ic) => {
+          ic.style.backgroundImage = `url(${icon})`; ic.style.backgroundSize = "cover"; ic.style.backgroundPosition = "center"; ic.classList.remove("swapx-ic-empty");
+        });
         const fromName = document.querySelector<HTMLElement>(".pg-alpha [data-from-name]");
-        if (fromIc) { fromIc.style.backgroundImage = `url(${icon})`; fromIc.style.backgroundSize = "cover"; fromIc.style.backgroundPosition = "center"; fromIc.classList.remove("swapx-ic-empty"); }
         if (fromName) { fromName.textContent = sym; fromName.classList.remove("muted"); }
         closeSheets();
       }
