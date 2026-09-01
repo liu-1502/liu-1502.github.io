@@ -93,6 +93,22 @@ export default function YuzuClient() {
     });
     cleanups.push(() => tabHandlers.forEach(({ el, fn }) => el.removeEventListener("click", fn)));
 
+    /* ---------- "Switch to …" buttons: đổi panel (form + detail) mà không đổi tab ---------- */
+    const switchHandlers: Array<{ el: Element; fn: EventListener }> = [];
+    document.querySelectorAll(".xchg").forEach((host) => {
+      const fn: EventListener = (e) => {
+        const b = (e.target as HTMLElement).closest<HTMLElement>("[data-switch-panel]");
+        if (!b || !host.contains(b)) return;
+        const name = b.getAttribute("data-switch-panel");
+        host.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => {
+          p.style.display = p.getAttribute("data-panel") === name ? "" : "none";
+        });
+      };
+      host.addEventListener("click", fn);
+      switchHandlers.push({ el: host, fn });
+    });
+    cleanups.push(() => switchHandlers.forEach(({ el, fn }) => el.removeEventListener("click", fn)));
+
     /* ---------- amount inputs: mirror + fake USD ---------- */
     const amtHandlers: Array<{ el: Element; fn: EventListener }> = [];
     document.querySelectorAll(".xchg").forEach((panel) => {

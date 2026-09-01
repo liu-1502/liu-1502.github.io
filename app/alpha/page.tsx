@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ShieldCheck, ExternalLink, ChevronDown, Search } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowRight, ShieldCheck, ExternalLink, ChevronDown, Search } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -169,7 +169,12 @@ const TOKENS = [
   },
 ];
 
+/* Cặp token cho phép đổi qua lại trong cùng tab gộp (yzUSD ⇄ syzUSD). */
+const SWITCH_PAIR: Record<string, string> = { yzusd: "syzusd", syzusd: "yzusd" };
+
 function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
+  const switchKey = SWITCH_PAIR[t.key];
+  const switchName = switchKey ? TOKENS.find((x) => x.key === switchKey)?.name : undefined;
   return (
     <div className="av-detail" data-panel={t.key} style={t.key === TOKENS[0].key ? undefined : { display: "none" }}>
       {/* Overview */}
@@ -177,7 +182,14 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
         <div className="vd-head">
           <span className="vt-logo"><img src={t.logo} alt="" /></span>
           <div className="vd-head-main">
-            <div className="vd-head-top"><h3>{t.name}</h3></div>
+            <div className="vd-head-top">
+              <h3>{t.name}</h3>
+              {switchKey && (
+                <button type="button" className="vd-switch" data-switch-panel={switchKey}>
+                  Switch to {switchName} <ArrowRight />
+                </button>
+              )}
+            </div>
             <p className="vd-desc">{t.tagline}</p>
           </div>
         </div>
