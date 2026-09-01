@@ -187,7 +187,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
             <span className="vt-logo"><img src={t.logo} alt="" /></span>
             {switchTok && (
               <button type="button" className="vd-switch" data-switch-panel={switchTok.key}>
-                <img src={switchTok.logo} alt="" /> Switch to {switchTok.name} <ArrowLeftRight />
+                <img src={switchTok.logo} alt="" /> Switch to {switchTok.name}
               </button>
             )}
           </div>
