@@ -62,8 +62,9 @@
   /* Token tabs Alpha: bản gốc — chip trắng có logo phía trước, selected nền xanh
      (dùng style .tok-tab mặc định), canh giữa. */
   #alphaTabs { justify-content: center; }
-  /* Form (av-left) dính khi scroll; cũng là mốc cho icon history absolute bên trong. */
-  .av-left { position: sticky; top: 24px; }
+  /* Form (av-left) đứng yên hoàn toàn khi scroll: top = đúng vị trí ban đầu (topbar 64 + padding 48). */
+  .av-left { position: sticky; top: 112px; }
+  @media (max-width: 980px) { .av-left { position: static; top: auto; } }
   .hist-btn {
     all: unset; box-sizing: border-box; cursor: pointer; position: absolute; top: 24px; right: 20px; z-index: 2;
     display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px;
@@ -121,7 +122,7 @@
   .vd-switch svg { width: 14px; height: 14px; }
   .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
   .vd-desc { margin: 3px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
-  .vd-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .vd-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
   .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: -0.2px; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); margin-bottom: 5px; }
   .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 20px; letter-spacing: -0.03em; display: inline-flex; align-items: center; gap: 6px; }
   .vd-stat-ic { width: 18px; height: 18px; border-radius: 50%; flex: none; }

@@ -124,7 +124,7 @@ const TOKENS = [
     key: "yzusd", name: "yzUSD", logo: "/assets/tokens/yzUSD.svg",
     badge: "Senior · Par stable",
     tagline: "Fully-backed 1:1 USD stablecoin, over-collateralized and attested live.",
-    stats: [ { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "110.82%", tone: "good" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" }, { k: "Your Balance", v: "$0.00" } ],
+    stats: [ { k: "Your Balance", v: "$0.00" }, { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "110.82%", tone: "good" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
     info: [
       { k: "Rate", v: "1:1 at par" },
       { k: "Access", v: "Eligible Investors, KYC" },
@@ -144,7 +144,7 @@ const TOKENS = [
     key: "yzpp", name: "yzPP", logo: "/assets/tokens/yzPP.svg",
     badge: "Junior tranche",
     tagline: "Junior tranche that absorbs first loss in exchange for a higher yield.",
-    stats: [ { k: "Est. APY", v: "27.0%", tone: "hi" }, { k: "Price", v: "1.1485" }, { k: "Role", v: "Junior" }, { k: "Your Balance", v: "$0.00" } ],
+    stats: [ { k: "Your Balance", v: "$0.00" }, { k: "Est. APY", v: "27.0%", tone: "hi" }, { k: "Price", v: "1.1485" }, { k: "Role", v: "Junior" } ],
     info: [
       { k: "yzPP price", v: "1 yzPP = 1.148527 USDT0" },
       { k: "Estimated APY", v: "27.0%", hi: true },
@@ -158,7 +158,7 @@ const TOKENS = [
     key: "syzusd", name: "syzUSD", logo: "/assets/tokens/syzUSD.svg",
     badge: "Staked yield",
     tagline: "Staked yzUSD, the senior tranche, that accrues the weekly yield target.",
-    stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" }, { k: "Your Balance", v: "$0.00" } ],
+    stats: [ { k: "Your Balance", v: "$0.00" }, { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
     info: [
       { k: "Exchange rate", v: "1 yzUSD = 0.9361 syzUSD" },
       { k: "Weekly target yield", v: "7.75%", hi: true },
