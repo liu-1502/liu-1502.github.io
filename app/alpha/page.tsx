@@ -570,7 +570,7 @@ export default function Alpha() {
             <div className="mrev-cost" data-rev-stakefee-row hidden><span>Stake fee <i>0.50%</i></span><b data-rev-stakefee>$0.00</b></div>
             <div className="mrev-cost"><span>Network fee</span><b>&lt;$0.01</b></div>
             <div className="mrev-cost"><span>Estimated time</span><b>~30 seconds</b></div>
-            <button type="button" className="btn btn-accent btn-block mrev-cta" data-mint-review-confirm><span data-rev-cta>Confirm mint</span></button>
+            <button type="button" className="btn btn-accent btn-block mrev-cta" data-mint-review-confirm><span data-rev-cta>Confirm mint</span><span className="mrev-spinner" aria-hidden="true" /></button>
           </div>
         </div>
 

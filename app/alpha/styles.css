@@ -120,15 +120,23 @@
   /* --- Dialog Mint thành công --- */
   .mok { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 24px; }
   .mok[hidden] { display: none; }
-  .mok-backdrop { position: absolute; inset: 0; background: color-mix(in srgb, #14211A 45%, transparent); backdrop-filter: blur(2px); }
-  .mok-card { position: relative; width: 100%; max-width: 430px; background: var(--surface); border-radius: 24px; padding: 60px 24px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 24px 64px rgba(0,0,0,.20); }
+  .mok-backdrop { position: absolute; inset: 0; background: color-mix(in srgb, #14211A 45%, transparent); backdrop-filter: blur(2px); animation: mok-fade .22s ease both; }
+  .mok-card { position: relative; width: 100%; max-width: 430px; background: var(--surface); border-radius: 24px; padding: 60px 24px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 24px 64px rgba(0,0,0,.20); animation: mok-pop .3s cubic-bezier(.2,.9,.25,1.08) both; }
+  @keyframes mok-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes mok-pop { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  @keyframes mok-check-in { 0% { transform: translateX(-50%) scale(.2); opacity: 0; } 55% { transform: translateX(-50%) scale(1.14); opacity: 1; } 100% { transform: translateX(-50%) scale(1); } }
+  @keyframes mok-draw { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .mok-backdrop, .mok-card, .mok-check, .mok-check > svg, .mrev-spinner { animation: none !important; } }
   .mok-x { all: unset; box-sizing: border-box; position: absolute; top: 16px; right: 16px; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
   .mok-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
   .mok-x svg { width: 20px; height: 20px; }
   .mok-check { position: absolute; top: -32px; left: 50%; transform: translateX(-50%); width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 17%, var(--surface)); color: var(--accent);
     box-shadow:
       0 0 0 8px color-mix(in srgb, var(--accent) 9%, var(--surface)),
-      0 0 0 16px color-mix(in srgb, var(--accent) 4%, var(--surface)); }
+      0 0 0 16px color-mix(in srgb, var(--accent) 4%, var(--surface));
+    animation: mok-check-in .55s cubic-bezier(.2,.9,.25,1.12) .06s both; }
+  .mok-check > svg { animation: mok-check-mark .4s ease .28s both; }
+  @keyframes mok-check-mark { 0% { transform: scale(.3); opacity: 0; } 70% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
   .mok-check > svg { width: 32px; height: 32px; stroke-width: 3.2; }
   .mok-check .s { position: absolute; color: var(--accent); }
   .mok-check .s1 { width: 18px; height: 18px; top: -4px; right: -8px; }
@@ -198,7 +206,12 @@
   .mrev-cost > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
   .mrev-cost > span i { font-style: normal; font-size: 11.5px; font-weight: 600; color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); padding: 1px 6px; border-radius: 999px; }
   .mrev-cost > b { font-family: var(--font-mono); font-weight: 600; color: var(--text); }
-  .mrev-cta { width: 100%; height: 52px; border-radius: 14px; margin-top: 20px; font-family: var(--font-body); font-weight: 640; font-size: 17px; display: inline-flex; align-items: center; justify-content: center; }
+  .mrev-cta { position: relative; width: 100%; height: 52px; border-radius: 14px; margin-top: 20px; font-family: var(--font-body); font-weight: 640; font-size: 17px; display: inline-flex; align-items: center; justify-content: center; }
+  .mrev-cta.is-loading { pointer-events: none; }
+  .mrev-cta.is-loading [data-rev-cta] { visibility: hidden; }
+  .mrev-spinner { display: none; position: absolute; width: 20px; height: 20px; border-radius: 50%; border: 2.5px solid rgba(255,255,255,.4); border-top-color: #fff; animation: mok-spin .7s linear infinite; }
+  .mrev-cta.is-loading .mrev-spinner { display: block; }
+  @keyframes mok-spin { to { transform: rotate(360deg); } }
   /* Tab gộp yzUSD/syzUSD: 2 logo token kề nhau (chồng nhẹ như 1 cặp). */
   #alphaTabs .tok-logos { display: inline-flex; align-items: center; }
   #alphaTabs .tok-logos img { width: 20px; height: 20px; border-radius: 50%; display: block; }

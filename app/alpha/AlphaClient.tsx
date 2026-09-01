@@ -137,6 +137,7 @@ export default function AlphaClient() {
     // kể cả khi mở màn stake rồi huỷ. Chỉ ẩn khi đã stake xong hoặc đang mở dialog.
     let minted = false;
     let staked = false;
+    let confirmTimer: ReturnType<typeof setTimeout> | null = null;
     const setAlert = (show: boolean) => {
       if (!alertEl) return;
       if (show) {
@@ -245,7 +246,14 @@ export default function AlphaClient() {
       if (t.closest("[data-mint-confirm]")) { startMintFlow(FLOWS.mint); return; }
       if (t.closest("[data-mintstake-confirm]")) { startMintFlow(FLOWS.mintstake); return; }
       if (t.closest("[data-alert-stake]")) { startStakeFlow(); return; }
-      if (t.closest("[data-mint-review-confirm]")) { finishFlow(); return; }
+      if (t.closest("[data-mint-review-confirm]")) {
+        // Giả lập xử lý ~1.2s (spinner) rồi mới sang màn success.
+        const btn = t.closest<HTMLElement>("[data-mint-review-confirm]");
+        if (btn?.classList.contains("is-loading")) return;
+        btn?.classList.add("is-loading");
+        confirmTimer = setTimeout(() => { confirmTimer = null; btn?.classList.remove("is-loading"); finishFlow(); }, 1200);
+        return;
+      }
       if (t.closest("[data-ok-primary]")) {
         // "Stake now" (mint) -> mở review stake; "View position" (đã stake) -> qua panel syzUSD.
         if (current === FLOWS.mint) { open(dlg, false); startStakeFlow(); }
@@ -259,10 +267,20 @@ export default function AlphaClient() {
         return;
       }
       // Huỷ màn review (kể cả stake review) -> nếu đã mint mà chưa stake, alert hiện lại.
-      if (t.closest("[data-mint-review-close]")) { open(review, false); refreshAlert(); return; }
+      if (t.closest("[data-mint-review-close]")) {
+        if (confirmTimer) { clearTimeout(confirmTimer); confirmTimer = null; }
+        review.querySelector(".mrev-cta")?.classList.remove("is-loading");
+        open(review, false); refreshAlert(); return;
+      }
       if (t.closest("[data-mint-ok-close]")) closeSuccess();
     };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { open(review, false); open(dlg, false); refreshAlert(); } };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (confirmTimer) { clearTimeout(confirmTimer); confirmTimer = null; }
+        review.querySelector(".mrev-cta")?.classList.remove("is-loading");
+        open(review, false); open(dlg, false); refreshAlert();
+      }
+    };
     // Gõ vào ô deposit -> xoá lỗi (hook tự set lại text ≈$; ở đây bỏ màu đỏ).
     const depInput = document.querySelector<HTMLInputElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l input');
     const xusd = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l .xusd');
@@ -276,6 +294,7 @@ export default function AlphaClient() {
       document.removeEventListener("keydown", onKey);
       yzForm?.querySelector(".dir-switch")?.removeEventListener("click", onDirClick);
       yzForm?.querySelector("[data-swap]")?.removeEventListener("click", onDirClick);
+      if (confirmTimer) clearTimeout(confirmTimer);
       document.body.style.overflow = "";
     };
   }, []);
