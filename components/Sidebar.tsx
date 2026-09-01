@@ -86,6 +86,7 @@ function SideItem({ item, active, level2 }: { item: NavItem; active: string; lev
       data-nav={item.nav}
       title={item.label}
       aria-current={item.nav === active ? "page" : undefined}
+      scroll={item.href?.includes("#") ? false : undefined}
       onClick={closeMobileNav}
     >
       {item.icon}

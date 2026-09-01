@@ -93,11 +93,28 @@ export default function AlphaClient() {
       host.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => {
         p.style.display = p.getAttribute("data-panel") === name ? "" : "none";
       });
+      // Đồng bộ highlight sub-menu sidebar: chỉ token đang chọn được .on.
+      // (Next render href có thể là "/alpha/#yzusd" -> match theo "#" cho chắc.)
+      document.querySelectorAll<HTMLAnchorElement>('.side-sub a[href*="#"]').forEach((a) => {
+        const t = (a.getAttribute("href")?.split("#")[1] || "").toLowerCase();
+        a.classList.toggle("on", t === name);
+      });
     };
-    const fromHash = () => { const h = location.hash.slice(1).toLowerCase(); if (h) show(h); };
+    const fromHash = () => { show(location.hash.slice(1).toLowerCase() || "yzusd"); };
     fromHash();
     window.addEventListener("hashchange", fromHash);
-    return () => window.removeEventListener("hashchange", fromHash);
+    // Next.js Link dùng pushState -> KHÔNG fire hashchange, nên bắt click trực tiếp trên sub-menu link.
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href*="#"]');
+      if (!a) return;
+      const name = (a.getAttribute("href")?.split("#")[1] || "").toLowerCase();
+      if (VALID.includes(name)) { show(name); window.scrollTo(0, 0); }
+    };
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("hashchange", fromHash);
+      document.removeEventListener("click", onClick);
+    };
   }, []);
 
   return null;

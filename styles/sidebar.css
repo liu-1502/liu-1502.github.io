@@ -129,7 +129,7 @@
 .side-caret svg { width: 14px; height: 14px; transition: transform .2s ease; }
 .side-parent[data-open="true"] .side-caret svg { transform: rotate(180deg); }
 
-/* ---- Cấp 2 dưới rail dọc ---- */
+/* ---- Cấp 2 dưới rail dọc (giữ màu selected/hover xanh như các menu khác) ---- */
 .side-sub {
   margin: 2px 0 4px 16px;
   padding-left: 11px;
@@ -138,6 +138,9 @@
   flex-direction: column;
 }
 .side-item.lvl2 { padding-left: 10px; }
+/* Parent (Alpha) active: bỏ box xanh — token con mới là cái đang được chọn */
+.side-item.side-parent.on { background: transparent; }
+/* Token đang chọn: style selected xanh mặc định + đoạn chỉ báo nằm trên rail */
 .side-item.lvl2.on::before { left: -12px; }
 
 /* ================================================================
