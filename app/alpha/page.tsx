@@ -311,7 +311,7 @@ export default function Alpha() {
               <div className="mfields">
                 <Field label="You deposit" sym="usdt" symLabel="USDT0" balance="$10,000.00" deposit input={{ inputMode: "decimal" }} />
                 <SwapCircle />
-                <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
+                <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$12,480.00" input={{ readOnly: true }} />
               </div>
               <div className="mint-sum" data-sum data-mint-fee="0.001" data-stake-fee="0.005" data-stake-rate="0.9361" data-stake-sym="syzUSD" hidden>
                 <button type="button" className="msum-bar" data-sum-toggle aria-expanded="false">
@@ -331,7 +331,7 @@ export default function Alpha() {
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
-                <Field label="You redeem" sym="yzUSD" symLabel="yzUSD" balance="$0.00" deposit input={{ inputMode: "decimal" }} />
+                <Field label="You redeem" sym="yzUSD" symLabel="yzUSD" balance="$12,480.00" deposit input={{ inputMode: "decimal" }} />
                 <SwapCircle />
                 <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
@@ -505,7 +505,7 @@ export default function Alpha() {
             </div>
             <div data-dirpanel="stake">
               <div className="mfields">
-                <Field label="You stake" sym="yzUSD" symLabel="yzUSD" balance="$0.00" deposit input={{ inputMode: "decimal", "data-src": true, "data-rate": "0.9361" } as React.InputHTMLAttributes<HTMLInputElement>} />
+                <Field label="You stake" sym="yzUSD" symLabel="yzUSD" balance="$12,480.00" deposit input={{ inputMode: "decimal", "data-src": true, "data-rate": "0.9361" } as React.InputHTMLAttributes<HTMLInputElement>} />
                 <SwapCircle />
                 <Field label="You receive" sym="syzUSD" symLabel="syzUSD" balance="$0.00" input={{ readOnly: true, "data-dst": true } as React.InputHTMLAttributes<HTMLInputElement>} />
               </div>
@@ -515,7 +515,7 @@ export default function Alpha() {
               <div className="mfields">
                 <Field label="You unstake" sym="syzUSD" symLabel="syzUSD" balance="$0.00" deposit input={{ inputMode: "decimal" }} />
                 <SwapCircle />
-                <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
+                <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$12,480.00" input={{ readOnly: true }} />
               </div>
               <Button block>Connect Wallet</Button>
             </div>
