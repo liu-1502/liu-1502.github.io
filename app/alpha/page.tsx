@@ -29,7 +29,6 @@ function Field({
         <span className="lbl">{label}</span>
         <input type="text" placeholder="0" aria-label={label} {...input} />
         <div className="xusd">≈ $0.00</div>
-        {deposit && <div className="mint-err">KYC/KYB access required to mint</div>}
       </div>
       <div className="mfield-r">
         {deposit && (
@@ -266,7 +265,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <Button block className="gcta">Connect wallet</Button>
-              <p className="mint-note"><b>KYC / KYB</b> now to mint/redeem yzUSD or buy on <b>DEX</b>.</p>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -275,7 +273,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <Button block className="gcta">Connect wallet</Button>
-              <p className="mint-note"><b>KYC / KYB</b> now to mint/redeem yzUSD or buy on <b>DEX</b>.</p>
             </div>
             {/* Swap (Exchange) — powered by LI.FI */}
             <div data-dirpanel="swap" style={{ display: "none" }}>
@@ -423,7 +420,6 @@ export default function Alpha() {
               </div>
               <Button block className="gcta">Connect wallet</Button>
             </div>
-            <p className="mint-note"><b>KYC / KYB</b> now to mint/redeem yzPP or buy on <b>DEX</b>.</p>
           </div>
 
           {/* ============ syzUSD ============ */}
@@ -450,7 +446,6 @@ export default function Alpha() {
               </div>
               <Button block>Connect Wallet</Button>
             </div>
-            <p className="mint-note"><b>KYC / KYB</b> now to stake/unstake syzUSD or buy on <b>DEX</b>.</p>
           </div>
 
           {/* Stats ngay dưới card mint/redeem */}

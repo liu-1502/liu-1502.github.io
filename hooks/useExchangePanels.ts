@@ -161,12 +161,17 @@ export function useExchangePanels(rates: RateMap, options: ExchangePanelOptions 
       document.addEventListener("click", aboutOutside);
     }
 
-    /* CTA: luôn active. Nếu walletCta -> chữ theo trạng thái ví (Alpha/Prime). */
+    /* CTA: luôn active. Nếu walletCta -> chữ theo trạng thái ví (Alpha/Prime).
+       Demo: user đã có ví + eKYC/eKYB xong -> nút hiện thẳng hành động của chiều hiện tại
+       (Mint/Redeem/Swap/Stake/…); chưa connect -> "Connect wallet". */
     const setCTAs = () => {
       const connected = document.documentElement.getAttribute("data-wallet") === "1";
       document.querySelectorAll<HTMLButtonElement>(".xchg-body .btn-block").forEach((btn) => {
         btn.disabled = false;
-        if (walletCta) btn.textContent = connected ? "Verify eligibility to continue" : "Connect wallet";
+        if (!walletCta) return;
+        if (!connected) { btn.textContent = "Connect wallet"; return; }
+        const dk = btn.closest("[data-dirpanel]")?.getAttribute("data-dirpanel") || "";
+        btn.textContent = dk ? dk.charAt(0).toUpperCase() + dk.slice(1) : "Continue";
       });
     };
     if (walletCta) document.addEventListener("yuzu-wallet", setCTAs);

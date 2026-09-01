@@ -18,7 +18,7 @@ const DEMO_ADDRESS = "0x7bd4…9e2c";
 
 export default function Topbar() {
   const [collapsed, setCollapsed] = useState(false);
-  const [wallet, setWallet] = useState(false);
+  const [wallet, setWallet] = useState(true); // demo: mặc định đã có ví
   const [modalOpen, setModalOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -30,9 +30,11 @@ export default function Topbar() {
     setCollapsed(savedCollapsed);
     document.documentElement.classList.toggle("sidebar-collapsed", savedCollapsed);
 
-    const savedWallet = localStorage.getItem(STORAGE_KEYS.wallet) === "1";
-    setWallet(savedWallet);
-    document.documentElement.setAttribute("data-wallet", savedWallet ? "1" : "0");
+    // Demo: chưa có lựa chọn lưu nào -> coi như đã kết nối ví; chỉ ngắt khi user tự disconnect.
+    const saved = localStorage.getItem(STORAGE_KEYS.wallet);
+    const connected = saved === null ? true : saved === "1";
+    setWallet(connected);
+    document.documentElement.setAttribute("data-wallet", connected ? "1" : "0");
   }, []);
 
   /* CTA "Connect wallet" trong các form phát event -> mở modal */
@@ -126,6 +128,7 @@ export default function Topbar() {
         {wallet ? (
           <div className="acct-wrap" ref={accountRef}>
             <Button variant="solid" onClick={() => setAccountOpen((o) => !o)} aria-expanded={accountOpen}>
+              <Wallet size={17} strokeWidth={2.1} />
               {DEMO_ADDRESS}
             </Button>
             {accountOpen && (
