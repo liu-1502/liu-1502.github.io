@@ -568,7 +568,7 @@ export default function Alpha() {
                 <img src="/assets/tokens/usdt0.png" alt="" />
                 <b><span data-ok-pay>0</span> USDT0</b>
               </div>
-              <span className="mok-exch-ic"><ArrowLeftRight /></span>
+              <span className="mok-exch-ic"><ArrowRight /></span>
               <div className="mok-exch-card">
                 <img src="/assets/tokens/yzUSD.svg" alt="" />
                 <b><span data-ok-amt>0</span> yzUSD</b>
