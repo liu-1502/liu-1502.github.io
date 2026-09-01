@@ -561,7 +561,7 @@ export default function Alpha() {
           <div className="mok-card" role="dialog" aria-modal="true" aria-label="Mint successful">
             <button type="button" className="mok-x" data-mint-ok-close aria-label="Close"><X /></button>
             <div className="mok-check"><Check /></div>
-            <h3 className="mok-title">yzUSD minted successfully <Check className="mok-title-tick" /></h3>
+            <h3 className="mok-title">yzUSD minted successfully</h3>
             <p className="mok-sub">You received <b><span data-ok-amt>0</span> yzUSD</b>.</p>
             <div className="mok-exch">
               <div className="mok-exch-card">
