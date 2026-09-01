@@ -149,16 +149,8 @@ function ParentItem({
 
 export default function Sidebar() {
   const active = pageMeta(usePathname()).nav;
-  // Mục nào có children thì mặc định mở sẵn (hiện chưa dùng — giữ cho tính năng level-2 sau này).
-  const [openMap, setOpenMap] = useState<Record<string, boolean>>(() => {
-    const init: Record<string, boolean> = {};
-    NAV_GROUPS.forEach((g) =>
-      g.items.forEach((it) => {
-        if (it.children && it.nav) init[it.nav] = true;
-      })
-    );
-    return init;
-  });
+  // Mục có children mặc định thu gọn; user bấm để mở.
+  const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
   const toggle = (key: string) => setOpenMap((m) => ({ ...m, [key]: !m[key] }));
 
   return (
