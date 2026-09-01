@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check, CirclePlus, Database, TrendingUp, Sprout } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -180,16 +180,6 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
   const switchTok = switchKey ? TOKENS.find((x) => x.key === switchKey) : undefined;
   return (
     <div className="av-detail" data-panel={t.key} style={t.key === TOKENS[0].key ? undefined : { display: "none" }}>
-      {t.key === "yzusd" && (
-        <div className="vd-alert" data-mint-alert hidden>
-          <span className="vd-alert-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
-          <div className="vd-alert-txt">
-            <b>Your yzUSD is ready to earn</b>
-            <p><span data-alert-amt>0</span> yzUSD unstaked · Stake now to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
-            <button type="button" className="vd-alert-cta" data-alert-stake>Stake now <ArrowRight /></button>
-          </div>
-        </div>
-      )}
       {/* Overview */}
       <section className="vd-sec">
         <div className="vd-head">
@@ -215,6 +205,31 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
           ))}
         </div>
       </section>
+
+      {t.key === "yzusd" && (
+        <div className="vd-alert" data-mint-alert hidden>
+          <span className="vd-alert-ic"><Sprout /></span>
+          <div className="vd-alert-txt">
+            <b>Your yzUSD is ready to earn</b>
+            <p><span data-alert-amt>0</span> yzUSD unstaked · Stake now to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
+            <button type="button" className="vd-alert-cta" data-alert-stake>Stake now <ArrowRight /></button>
+          </div>
+        </div>
+      )}
+
+      {/* How it works (chỉ yzUSD) */}
+      {t.key === "yzusd" && (
+        <section className="vd-sec">
+          <h4 className="vd-title">How it works</h4>
+          <div className="vd-how">
+            <div className="vd-how-step"><span className="vd-how-ic"><CirclePlus /></span>Mint yzUSD</div>
+            <ArrowRight className="vd-how-arrow" />
+            <div className="vd-how-step"><span className="vd-how-ic"><Database /></span>Stake yzUSD</div>
+            <ArrowRight className="vd-how-arrow" />
+            <div className="vd-how-step"><span className="vd-how-ic"><TrendingUp /></span>Earn with syzUSD</div>
+          </div>
+        </section>
+      )}
 
       {/* Details */}
       <section className="vd-sec">

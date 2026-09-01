@@ -223,8 +223,15 @@ export default function AlphaClient() {
       if (t.closest("[data-alert-stake]")) { startStakeFlow(); return; }
       if (t.closest("[data-mint-review-confirm]")) { finishFlow(); return; }
       if (t.closest("[data-ok-primary]")) {
-        // "Stake now" (mint) -> mở review stake; "View position" (đã stake) -> đóng.
-        if (current === FLOWS.mint) { open(dlg, false); startStakeFlow(); } else closeSuccess();
+        // "Stake now" (mint) -> mở review stake; "View position" (đã stake) -> qua panel syzUSD.
+        if (current === FLOWS.mint) { open(dlg, false); startStakeFlow(); }
+        else {
+          open(dlg, false);
+          showAlert(false);
+          if (location.hash.slice(1).toLowerCase() === "syzusd") window.dispatchEvent(new HashChangeEvent("hashchange"));
+          else location.hash = "syzusd";
+          window.scrollTo(0, 0);
+        }
         return;
       }
       if (t.closest("[data-mint-review-close]")) open(review, false);
