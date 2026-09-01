@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check, Sparkles } from "lucide-react";
+import { ArrowUpDown, ArrowDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -560,7 +560,7 @@ export default function Alpha() {
           <div className="mok-backdrop" data-mint-ok-close />
           <div className="mok-card" role="dialog" aria-modal="true" aria-label="Mint successful">
             <button type="button" className="mok-x" data-mint-ok-close aria-label="Close"><X /></button>
-            <div className="mok-check"><Sparkles className="s s1" /><Sparkles className="s s2" /><Check /></div>
+            <div className="mok-check"><Check /></div>
             <h3 className="mok-title">yzUSD minted successfully <Check className="mok-title-tick" /></h3>
             <p className="mok-sub">You received <b><span data-ok-amt>0</span> yzUSD</b>.</p>
             <div className="mok-exch">
@@ -575,7 +575,7 @@ export default function Alpha() {
               </div>
             </div>
             <div className="mok-info">
-              <div className="mok-info-row"><span>Transaction ID</span><span className="mok-dots" /><b className="mok-txid">VKN-8993J244</b></div>
+              <div className="mok-info-row mok-info-between"><span>Transaction ID</span><b className="mok-txid">VKN-8993J244</b></div>
               <div className="mok-info-row mok-info-between"><span>Mint fee</span><b data-ok-fee>$0.00</b></div>
             </div>
             <div className="mok-actions">
