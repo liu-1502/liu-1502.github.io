@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ShieldCheck, ExternalLink, ChevronDown, Search } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -249,6 +249,9 @@ export default function Alpha() {
           <div className="av-grid">
           <div className="av-left">
 
+          {/* Icon history (bo tròn) — góc trên phải form, ngang hàng Mint/Redeem; mở dialog lịch sử */}
+          <button type="button" className="hist-btn" data-history-open aria-label="Transaction history" aria-expanded="false"><HistoryIcon /></button>
+
           {/* ============ yzUSD ============ */}
           <div className="xchg-body" data-panel="yzusd">
             <div className="dir-row">
@@ -336,18 +339,6 @@ export default function Alpha() {
             <div className="pro-only"><div className="k">Next epoch</div><div className="v">FRI 04:00</div></div>
           </div>
 
-          {/* Order history */}
-          <div className="acc ohist">
-            <div className="ohead">
-              <span className="otitle">Activities</span>
-            </div>
-            <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="success">Success</button><button className="ofilter" data-filter="failed">Failed</button></div>
-            <div className="osearch"><Search className="osearch-ico" /><input type="text" placeholder="Search by transaction hash" aria-label="Search by transaction hash" /></div>
-            <div className="olist">
-              {ACTIVITIES.map((o, i) => <OrderItem key={i} {...o} />)}
-            </div>
-            <button type="button" className="omore" data-omore>Show more <ChevronDown /></button>
-          </div>
           </div>{/* .av-left */}
 
           <div className="av-right">
@@ -370,6 +361,24 @@ export default function Alpha() {
             </a>
           </div>
           </div>{/* .av-grid */}
+        </div>
+
+        {/* Dialog lịch sử — mở từ icon history ở thanh tab, hiện full Activities */}
+        <div className="hist-dialog" data-history-dialog hidden>
+          <div className="hist-backdrop" data-history-close />
+          <div className="hist-panel" role="dialog" aria-modal="true" aria-label="Activities history">
+            <div className="hist-head">
+              <span className="otitle">Activities</span>
+              <button type="button" className="hist-x" data-history-close aria-label="Close"><X /></button>
+            </div>
+            <div className="acc ohist">
+              <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="success">Success</button><button className="ofilter" data-filter="failed">Failed</button></div>
+              <div className="osearch"><Search className="osearch-ico" /><input type="text" placeholder="Search by transaction hash" aria-label="Search by transaction hash" /></div>
+              <div className="olist">
+                {ACTIVITIES.map((o, i) => <OrderItem key={i} {...o} />)}
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>

@@ -21,24 +21,20 @@ export default function AlphaClient() {
     const btn = root.querySelector<HTMLElement>("[data-omore]");
     const filters = root.querySelector<HTMLElement>(".ord-filters");
     const search = root.querySelector<HTMLInputElement>(".osearch input");
-    if (!list || !btn) return;
+    if (!list) return;
     const rows = Array.from(list.querySelectorAll<HTMLElement>(".ord"));
     let statusFilter = "all";
     let query = "";
-    let shown = 3;
 
     const matches = (r: HTMLElement) => {
       const okStatus = statusFilter === "all" || r.getAttribute("data-status") === statusFilter;
       const okQuery = !query || (r.querySelector(".otx")?.textContent || "").toLowerCase().includes(query);
       return okStatus && okQuery;
     };
+    // Dialog history: hiện FULL lịch sử (chỉ lọc theo status + tìm theo tx, không phân trang).
     const apply = () => {
-      let matched = 0;
-      rows.forEach((r) => {
-        if (matches(r)) { r.style.display = matched < shown ? "" : "none"; matched++; }
-        else r.style.display = "none";
-      });
-      btn.style.display = matched > shown ? "" : "none";
+      rows.forEach((r) => { r.style.display = matches(r) ? "" : "none"; });
+      if (btn) btn.style.display = "none";
     };
     apply();
 
@@ -47,18 +43,43 @@ export default function AlphaClient() {
       if (!b) return;
       filters?.querySelectorAll(".ofilter").forEach((x) => x.classList.toggle("on", x === b));
       statusFilter = b.getAttribute("data-filter") || "all";
-      shown = 3;
       apply();
     };
-    const onSearch = () => { query = (search?.value || "").trim().toLowerCase(); shown = 3; apply(); };
-    const onMore = () => { shown += 10; apply(); };
+    const onSearch = () => { query = (search?.value || "").trim().toLowerCase(); apply(); };
     filters?.addEventListener("click", onFilter);
     search?.addEventListener("input", onSearch);
-    btn.addEventListener("click", onMore);
     return () => {
       filters?.removeEventListener("click", onFilter);
       search?.removeEventListener("input", onSearch);
-      btn.removeEventListener("click", onMore);
+    };
+  }, []);
+
+  // Dialog history: mở khi bấm icon history, đóng khi bấm backdrop / nút X / Esc.
+  useEffect(() => {
+    const dlg = document.querySelector<HTMLElement>(".pg-alpha [data-history-dialog]");
+    const openBtn = document.querySelector<HTMLElement>(".pg-alpha [data-history-open]");
+    if (!dlg || !openBtn) return;
+    const content = document.querySelector<HTMLElement>("main.content");
+    const setOpen = (o: boolean) => {
+      // Canh giữa theo vùng content (không tính sidebar) -> dialog không bị lệch trái.
+      if (o) dlg.style.left = (content ? Math.round(content.getBoundingClientRect().left) : 0) + "px";
+      dlg.hidden = !o;
+      openBtn.setAttribute("aria-expanded", o ? "true" : "false");
+      document.body.style.overflow = o ? "hidden" : "";
+    };
+    const onOpen = () => setOpen(true);
+    const onClick = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest("[data-history-close]")) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    openBtn.addEventListener("click", onOpen);
+    dlg.addEventListener("click", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      openBtn.removeEventListener("click", onOpen);
+      dlg.removeEventListener("click", onClick);
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
     };
   }, []);
 
