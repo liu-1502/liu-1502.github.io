@@ -97,9 +97,18 @@ export default function AlphaClient() {
     const onClick = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
       if (t.closest("[data-mint-confirm]")) {
-        // số yzUSD nhận = ô "You receive" của panel Mint (fallback ô deposit).
         const mint = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
         const inputs = mint?.querySelectorAll<HTMLInputElement>(".mfield-l input");
+        const err = mint?.querySelector<HTMLElement>("[data-mint-err]");
+        const dep = parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0;
+        if (dep <= 0) {
+          // Chưa nhập số -> báo lỗi, không mở dialog thành công.
+          if (err) err.hidden = false;
+          inputs?.[0]?.focus();
+          return;
+        }
+        if (err) err.hidden = true;
+        // số yzUSD nhận = ô "You receive" của panel Mint (fallback ô deposit).
         const amt = (inputs?.[1]?.value || inputs?.[0]?.value || "0").trim() || "0";
         dlg.querySelectorAll("[data-ok-amt]").forEach((el) => (el.textContent = amt));
         setOpen(true);
@@ -108,9 +117,15 @@ export default function AlphaClient() {
       if (t.closest("[data-mint-ok-close]")) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    // Gõ vào ô deposit -> xoá lỗi.
+    const depInput = document.querySelector<HTMLInputElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l input');
+    const err = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] [data-mint-err]');
+    const onInput = () => { if (err) err.hidden = true; };
+    depInput?.addEventListener("input", onInput);
     document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);
     return () => {
+      depInput?.removeEventListener("input", onInput);
       document.removeEventListener("click", onClick);
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";

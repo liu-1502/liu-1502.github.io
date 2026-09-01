@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, Check, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, Check, Sparkles } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -273,6 +273,7 @@ export default function Alpha() {
                 <Button block variant="line" className="gcta gcta-2nd" data-mint-confirm>Connect wallet</Button>
                 <Button block className="gcta" data-cta-fixed>Mint &amp; Stake</Button>
               </div>
+              <p className="mint-warn" data-mint-err hidden>Enter an amount to mint first.</p>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -517,11 +518,10 @@ export default function Alpha() {
           <div className="mok-card" role="dialog" aria-modal="true" aria-label="Mint successful">
             <button type="button" className="mok-x" data-mint-ok-close aria-label="Close"><X /></button>
             <div className="mok-check"><Sparkles className="s s1" /><Sparkles className="s s2" /><Check /></div>
-            <h3 className="mok-title">yzUSD minted successfully</h3>
+            <h3 className="mok-title">yzUSD minted successfully <Check className="mok-title-tick" /></h3>
             <p className="mok-sub">You received <b><span data-ok-amt>0</span> yzUSD</b>.</p>
             <div className="mok-earn">
               <div className="mok-earn-main">
-                <span className="mok-earn-ic"><TrendingUp /></span>
                 <div className="mok-earn-txt">
                   <b>Start earning with your yzUSD</b>
                   <p>Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
@@ -534,7 +534,7 @@ export default function Alpha() {
               </div>
             </div>
             <div className="mok-actions">
-              <button type="button" className="btn btn-accent btn-block">Stake <span data-ok-amt>0</span>&nbsp;yzUSD</button>
+              <button type="button" className="btn btn-accent btn-block">Stake now</button>
               <button type="button" className="btn btn-line btn-block" data-mint-ok-close>Back to portfolio</button>
             </div>
           </div>

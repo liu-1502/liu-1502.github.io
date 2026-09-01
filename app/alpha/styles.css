@@ -107,6 +107,7 @@
   .mok-check .s1 { width: 16px; height: 16px; top: -3px; right: -5px; }
   .mok-check .s2 { width: 12px; height: 12px; bottom: 3px; left: -7px; opacity: .65; }
   .mok-title { font-family: var(--font-display); font-weight: 680; font-size: 22px; color: var(--text); margin: 0; }
+  .mok-title-tick { display: inline; width: 19px; height: 19px; vertical-align: -2px; stroke-width: 3; }
   .mok-sub { font-family: var(--font-body); font-size: 15px; color: var(--muted); margin: 8px 0 0; }
   .mok-sub b { color: var(--accent); font-weight: 640; }
   .mok-earn { align-self: stretch; margin-top: 22px; padding: 16px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 7%, var(--surface)); text-align: left; display: flex; flex-direction: column; gap: 14px; }
@@ -453,6 +454,8 @@
   /* 2 nút xếp dọc: "Mint & Stake" (primary) trên, "Mint" (secondary/outline) dưới */
   .gcta-stack { align-self: stretch; display: flex; flex-direction: row; gap: 10px; }
   .gcta-stack .btn.btn-block { flex: 1; }
+  .mint-warn { align-self: stretch; margin: 0; text-align: center; font-family: var(--font-body); font-size: 13px; color: #C0392B; }
+  .mint-warn[hidden] { display: none; }
   /* Bảng tóm tắt khi đã nhập số (mint/stake amount + phí) */
   .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 2px; padding: 14px 2px 2px; border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .mint-sum[hidden] { display: none; }
