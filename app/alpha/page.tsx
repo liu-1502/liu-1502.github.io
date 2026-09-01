@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, Check, Sparkles } from "lucide-react";
+import { ArrowUpDown, ArrowDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, Check, Sparkles } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -516,21 +516,30 @@ export default function Alpha() {
           <div className="mok-backdrop" data-mint-review-close />
           <div className="mok-card mrev-card" role="dialog" aria-modal="true" aria-label="Review order">
             <div className="mrev-head">
-              <b>Review order</b>
+              <b>You&rsquo;re minting</b>
               <button type="button" className="mok-x mrev-x" data-mint-review-close aria-label="Close"><X /></button>
             </div>
-            <div className="mrev-rows">
-              <div className="mrev-row"><span>You pay</span><b><img src="/assets/tokens/usdt0.png" alt="" /><span data-rev-pay>0</span>&nbsp;USDT0</b></div>
-              <div className="mrev-row"><span>You receive</span><b><img src="/assets/tokens/yzUSD.svg" alt="" /><span data-rev-recv>0</span>&nbsp;yzUSD</b></div>
-              <div className="mrev-sep" />
-              <div className="mrev-row"><span>Rate</span><b>1 USDT0 = 1 yzUSD</b></div>
-              <div className="mrev-row"><span>Mint fee <i>0.10%</i></span><b data-rev-fee>$0.00</b></div>
-              <div className="mrev-row"><span>Network</span><b className="mrev-net"><img src="/assets/chains/plasma.svg" alt="" />Plasma</b></div>
+            <div className="mrev-leg">
+              <div className="mrev-leg-info">
+                <span className="mrev-chain"><img src="/assets/chains/plasma.svg" alt="" />Plasma</span>
+                <div className="mrev-amt"><span data-rev-pay>0</span> USDT0</div>
+                <div className="mrev-usd" data-rev-pay-usd>$0.00</div>
+              </div>
+              <span className="mrev-avatar"><img className="mrev-tok" src="/assets/tokens/usdt0.png" alt="" /><img className="mrev-badge" src="/assets/chains/plasma.svg" alt="" /></span>
             </div>
-            <div className="mok-actions">
-              <button type="button" className="btn btn-accent btn-block" data-mint-review-confirm>Confirm mint</button>
-              <button type="button" className="btn btn-line btn-block" data-mint-review-close>Cancel</button>
+            <div className="mrev-arrow"><ArrowDown /></div>
+            <div className="mrev-leg">
+              <div className="mrev-leg-info">
+                <span className="mrev-chain"><img src="/assets/chains/plasma.svg" alt="" />Plasma</span>
+                <div className="mrev-amt"><span data-rev-recv>0</span> yzUSD</div>
+                <div className="mrev-usd" data-rev-recv-usd>$0.00</div>
+              </div>
+              <span className="mrev-avatar"><img className="mrev-tok" src="/assets/tokens/yzUSD.svg" alt="" /><img className="mrev-badge" src="/assets/chains/plasma.svg" alt="" /></span>
             </div>
+            <div className="mrev-sep2" />
+            <div className="mrev-cost"><span>Mint fee <i>0.10%</i></span><b data-rev-fee>$0.00</b></div>
+            <div className="mrev-cost"><span>Network cost</span><b>&lt;$0.01</b></div>
+            <button type="button" className="btn btn-accent btn-block mrev-cta" data-mint-review-confirm>Confirm mint</button>
           </div>
         </div>
 

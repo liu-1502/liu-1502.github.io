@@ -116,6 +116,8 @@ export default function AlphaClient() {
         const set = (sel: string, v: string) => { const el = review.querySelector(sel); if (el) el.textContent = v; };
         set("[data-rev-pay]", pay);
         set("[data-rev-recv]", recv);
+        set("[data-rev-pay-usd]", money(dep));   // USDT0 ~ $1
+        set("[data-rev-recv-usd]", money(dep));  // yzUSD 1:1 ~ $1
         set("[data-rev-fee]", money(dep * 0.001));
         open(review, true);
         return;

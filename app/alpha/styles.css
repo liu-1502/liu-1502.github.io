@@ -124,19 +124,28 @@
   .mok-actions { align-self: stretch; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
   .mok-actions .btn { width: 100%; height: 50px; border-radius: 14px; font-family: var(--font-body); font-weight: 640; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; }
 
-  /* Review order (bước xác nhận trước khi mint) */
-  .mrev-card { text-align: left; align-items: stretch; padding: 22px 22px 22px; }
-  .mrev-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  /* Review order (layout from -> to như Uniswap) */
+  .mrev-card { text-align: left; align-items: stretch; padding: 22px; }
+  .mrev-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
   .mrev-head b { font-family: var(--font-display); font-weight: 680; font-size: 20px; color: var(--text); }
   .mrev-x { position: static; }
-  .mrev-rows { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; }
-  .mrev-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; font-family: var(--font-body); font-size: 14.5px; }
-  .mrev-row > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
-  .mrev-row > span i { font-style: normal; font-size: 11.5px; font-weight: 600; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 1px 6px; border-radius: 999px; }
-  .mrev-row > b { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-weight: 600; color: var(--text); }
-  .mrev-row > b img { width: 20px; height: 20px; border-radius: 50%; object-fit: contain; background: #fff; }
-  .mrev-net { font-family: var(--font-body) !important; }
-  .mrev-sep { height: 1px; background: color-mix(in srgb, var(--text) 10%, transparent); margin: 6px 0; }
+  .mrev-leg { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; }
+  .mrev-leg-info { min-width: 0; }
+  .mrev-chain { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; color: var(--muted); }
+  .mrev-chain img { width: 15px; height: 15px; border-radius: 50%; object-fit: contain; background: #fff; }
+  .mrev-amt { font-family: var(--font-display); font-weight: 680; font-size: 27px; line-height: 1.15; color: var(--text); margin-top: 3px; }
+  .mrev-usd { font-family: var(--font-body); font-size: 14px; color: var(--muted); margin-top: 3px; }
+  .mrev-avatar { position: relative; width: 46px; height: 46px; flex: none; }
+  .mrev-tok { width: 46px; height: 46px; border-radius: 50%; object-fit: contain; background: #fff; }
+  .mrev-badge { position: absolute; right: -2px; bottom: -2px; width: 19px; height: 19px; border-radius: 50%; object-fit: contain; background: var(--surface); border: 2px solid var(--surface); box-sizing: border-box; }
+  .mrev-arrow { display: flex; color: var(--muted); margin: 2px 0; }
+  .mrev-arrow svg { width: 20px; height: 20px; }
+  .mrev-sep2 { height: 1px; background: color-mix(in srgb, var(--text) 10%, transparent); margin: 12px 0 4px; }
+  .mrev-cost { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; font-family: var(--font-body); font-size: 14px; }
+  .mrev-cost > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+  .mrev-cost > span i { font-style: normal; font-size: 11.5px; font-weight: 600; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 1px 6px; border-radius: 999px; }
+  .mrev-cost > b { font-family: var(--font-mono); font-weight: 600; color: var(--text); }
+  .mrev-cta { width: 100%; height: 52px; border-radius: 14px; margin-top: 16px; font-family: var(--font-body); font-weight: 640; font-size: 17px; display: inline-flex; align-items: center; justify-content: center; }
   /* Tab gộp yzUSD/syzUSD: 2 logo token kề nhau (chồng nhẹ như 1 cặp). */
   #alphaTabs .tok-logos { display: inline-flex; align-items: center; }
   #alphaTabs .tok-logos img { width: 20px; height: 20px; border-radius: 50%; display: block; }
