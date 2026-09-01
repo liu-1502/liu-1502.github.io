@@ -209,7 +209,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
             <span className="vd-alert-ic"><Info /></span>
             <div className="vd-alert-txt">
               <b>Earn with syzUSD</b>
-              <p>Stake your yzUSD and target <b>7.75%</b> weekly yield.</p>
+              <p>Mint yzUSD and stake it to earn <b>7.75%</b> weekly yield.</p>
               <Link className="vd-alert-cta" href="/docs">Learn more <ArrowRight /></Link>
             </div>
           </div>
