@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -124,7 +124,7 @@ const TOKENS = [
     key: "yzusd", name: "yzUSD", logo: "/assets/tokens/yzUSD.svg",
     badge: "Senior · Par stable",
     tagline: "Fully-backed 1:1 USD stablecoin, over-collateralized and attested live.",
-    stats: [ { k: "Your Balance", v: "$12,480.00" }, { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "108.92%", tone: "good" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
+    stats: [ { k: "Your Balance", v: "$12,480.00" }, { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "108.92%", tone: "good" } ],
     info: [
       { k: "Rate", v: "1:1 at par" },
       { k: "Access", v: "Eligible Investors, KYC" },
@@ -145,13 +145,16 @@ const TOKENS = [
     key: "yzpp", name: "yzPP", logo: "/assets/tokens/yzPP.svg",
     badge: "Junior tranche",
     tagline: "Junior tranche that absorbs first loss in exchange for a higher yield.",
-    stats: [ { k: "Your Balance", v: "$3,250.00" }, { k: "Est. APY", v: "27.0%", tone: "hi" }, { k: "Price", v: "1.1485" }, { k: "Role", v: "Junior" } ],
+    stats: [ { k: "Your Balance", v: "$3,250.00" }, { k: "Est. APY", v: "29.0%", tone: "hi" }, { k: "Price", v: "1.1867" }, { k: "Role", v: "Junior" } ],
     info: [
-      { k: "yzPP price", v: "1 yzPP = 1.148527 USDT0" },
-      { k: "Estimated APY", v: "27.0%", hi: true },
+      { k: "yzPP price", v: "1 yzPP = 1.186682 USDT0" },
+      { k: "Estimated APY", v: "29.0%", hi: true },
       { k: "Role", v: "Junior tranche, absorbs losses first" },
       { k: "Redemption window", v: "30 days, yield accrues" },
       { k: "Minimum order", v: "5,000 yzPP" },
+      { k: "Deposit fee", v: "0%" },
+      { k: "Management fee", v: "0% / yr" },
+      { k: "Performance fee", v: "0%" },
       { k: "Access", v: "Eligible Investors, KYC" },
     ],
   },
@@ -253,6 +256,7 @@ export default function Alpha() {
               <div className="dir-switch">
                 <button className="on" data-dir="mint">Mint</button>
                 <button data-dir="redeem">Redeem</button>
+                <button data-dir="swap">Swap</button>
               </div>
             </div>
             <div data-dirpanel="mint">
@@ -262,6 +266,7 @@ export default function Alpha() {
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <Button block className="gcta">Connect wallet</Button>
+              <p className="mint-note"><b>KYC / KYB</b> now to mint/redeem yzUSD or buy on <b>DEX</b>.</p>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -270,6 +275,37 @@ export default function Alpha() {
                 <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <Button block className="gcta">Connect wallet</Button>
+              <p className="mint-note"><b>KYC / KYB</b> now to mint/redeem yzUSD or buy on <b>DEX</b>.</p>
+            </div>
+            {/* Swap (Exchange) — powered by LI.FI */}
+            <div data-dirpanel="swap" style={{ display: "none" }}>
+              <div className="swapx">
+                <div className="swapx-head">
+                  <b className="swapx-title">Exchange</b>
+                  <button type="button" className="swapx-gear" aria-label="Settings"><Settings /></button>
+                </div>
+                <div className="swapx-io">
+                  <div className="swapx-box">
+                    <span className="swapx-lbl">From</span>
+                    <span className="swapx-tok"><span className="swapx-ic swapx-ic-empty" /><span className="swapx-name muted">Select…</span></span>
+                  </div>
+                  <span className="swapx-arrow"><ArrowRight /></span>
+                  <div className="swapx-box">
+                    <span className="swapx-lbl">To</span>
+                    <span className="swapx-tok"><img className="swapx-ic" src="/assets/tokens/yzUSD.svg" alt="" /><span className="swapx-name"><b>yzUSD</b><small>Plasma</small></span></span>
+                  </div>
+                </div>
+                <div className="swapx-box swapx-send">
+                  <span className="swapx-lbl">Send</span>
+                  <div className="swapx-send-main"><span className="swapx-ic swapx-ic-empty" /><span className="swapx-amt">0</span></div>
+                  <span className="swapx-usd">$0.00</span>
+                </div>
+                <div className="swapx-cta">
+                  <Button block className="gcta">Connect wallet</Button>
+                  <button type="button" className="swapx-wallet" aria-label="Wallet"><Wallet /></button>
+                </div>
+                <div className="swapx-powered">Powered by <b>LI.FI</b></div>
+              </div>
             </div>
           </div>
 
@@ -297,6 +333,7 @@ export default function Alpha() {
               </div>
               <Button block className="gcta">Connect wallet</Button>
             </div>
+            <p className="mint-note"><b>KYC / KYB</b> now to mint/redeem yzPP or buy on <b>DEX</b>.</p>
           </div>
 
           {/* ============ syzUSD ============ */}
@@ -323,6 +360,7 @@ export default function Alpha() {
               </div>
               <Button block>Connect Wallet</Button>
             </div>
+            <p className="mint-note"><b>KYC / KYB</b> now to stake/unstake syzUSD or buy on <b>DEX</b>.</p>
           </div>
 
           {/* Stats ngay dưới card mint/redeem */}

@@ -122,7 +122,8 @@
   .vd-switch svg { width: 14px; height: 14px; }
   .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
   .vd-desc { margin: 3px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
-  .vd-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .vd-stats { display: flex; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .vd-stats > div { flex: 1; min-width: 0; }
   .vd-stats .k { display: block; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: -0.2px; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); margin-bottom: 5px; }
   .vd-stats b { font-family: var(--font-mono); font-weight: 600; font-size: 17px; letter-spacing: -0.03em; display: inline-flex; align-items: center; gap: 6px; }
   .vd-stat-ic { width: 18px; height: 18px; border-radius: 50%; flex: none; }
@@ -214,6 +215,38 @@
   .tok-tab.on .sym { color: var(--accent); }  /* text selected = màu accent */
 
   /* --- Card mint/redeem (xanh) --- */
+  /* Note dưới nút Connect wallet — canh giữa, chữ muted, từ nhấn màu accent. */
+  .mint-note { align-self: stretch; text-align: center; margin: 2px 0 0; font-family: var(--font-body); font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .mint-note b { color: var(--accent); font-weight: 600; }
+
+  /* ---- Swap (Exchange, powered by LI.FI) ---- */
+  .swapx { align-self: stretch; background: var(--surface); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .swapx-head { display: flex; align-items: center; justify-content: space-between; }
+  .swapx-title { font-family: var(--font-display); font-weight: 640; font-size: 20px; }
+  .swapx-gear { all: unset; cursor: pointer; color: var(--text); display: inline-flex; }
+  .swapx-gear svg { width: 20px; height: 20px; }
+  .swapx-io { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 8px; }
+  .swapx-box { background: color-mix(in srgb, var(--text) 4%, transparent); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .swapx-lbl { font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--text); }
+  .swapx-tok { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .swapx-ic { width: 32px; height: 32px; border-radius: 50%; flex: none; object-fit: contain; }
+  .swapx-ic-empty { background: color-mix(in srgb, var(--text) 10%, transparent); }
+  .swapx-name { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+  .swapx-name b { font-family: var(--font-body); font-weight: 640; font-size: 15px; }
+  .swapx-name small { font-size: 12px; color: var(--muted); }
+  .swapx-name.muted { color: var(--muted); font-weight: 500; font-size: 15px; }
+  .swapx-arrow { align-self: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); display: grid; place-items: center; color: var(--muted); flex: none; }
+  .swapx-arrow svg { width: 14px; height: 14px; }
+  .swapx-send-main { display: flex; align-items: center; gap: 10px; }
+  .swapx-amt { font-family: var(--font-mono); font-size: 28px; font-weight: 500; color: var(--text); }
+  .swapx-usd { font-size: 13px; color: var(--muted); }
+  .swapx-cta { display: flex; gap: 10px; align-items: stretch; }
+  .swapx-cta .gcta { flex: 1; }
+  .swapx-wallet { all: unset; box-sizing: border-box; cursor: pointer; width: 56px; border-radius: 12px; background: color-mix(in srgb, var(--text) 5%, transparent); display: grid; place-items: center; color: var(--text); }
+  .swapx-wallet svg { width: 20px; height: 20px; }
+  .swapx-powered { text-align: right; font-family: var(--font-body); font-size: 12px; color: var(--muted); }
+  .swapx-powered b { color: var(--text); font-weight: 700; }
+
   /* Card xanh lá cho mỗi form panel (header + tabs nằm NGOÀI card). */
   .xchg-body {
     box-sizing: border-box; padding: 20px;
@@ -226,9 +259,10 @@
   .dir-row .chip { display: none; }
   .dir-switch {
     display: flex; flex-direction: row; justify-content: center; align-items: center;
-    padding: 4px; gap: 4px; width: 212px; height: 44px; margin: 0;
+    padding: 4px; gap: 4px; width: fit-content; height: 44px; margin: 0;
     background: #fff; border: 1px solid #E8EEE3; border-radius: 9999px;
   }
+  .dir-switch button { padding: 0 18px; }
   .dir-switch button {
     all: unset; cursor: pointer; flex: 1;
     display: flex; align-items: center; justify-content: center; height: 36px;
