@@ -265,7 +265,6 @@ export default function Alpha() {
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <div className="mint-sum" data-sum data-mint-fee="0.001" data-stake-fee="0.005" data-stake-rate="0.9361" data-stake-sym="syzUSD" hidden>
-                <div className="msum-row"><span>Mint amount</span><b data-sum-mint>0 yzUSD</b></div>
                 <div className="msum-row"><span>Stake amount</span><b data-sum-stake>0 syzUSD</b></div>
                 <div className="msum-row"><span>Mint fee <i>0.10%</i></span><b data-sum-mintfee>$0.00</b></div>
                 <div className="msum-row"><span>Stake fee <i>0.50%</i></span><b data-sum-stakefee>$0.00</b></div>
@@ -280,6 +279,10 @@ export default function Alpha() {
                 <Field label="You redeem" sym="yzUSD" symLabel="yzUSD" balance="$0.00" deposit input={{ inputMode: "decimal" }} />
                 <SwapCircle />
                 <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
+              </div>
+              <div className="mint-sum" data-sum data-redeem-fee="0.001" hidden>
+                <div className="msum-row"><span>Redeem amount</span><b data-sum-redeem>0 USDT0</b></div>
+                <div className="msum-row"><span>Redeem fee <i>0.10%</i></span><b data-sum-redeemfee>$0.00</b></div>
               </div>
               <Button block className="gcta">Connect wallet</Button>
             </div>

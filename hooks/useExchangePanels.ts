@@ -118,18 +118,19 @@ export function useExchangePanels(rates: RateMap, options: ExchangePanelOptions 
             const stakeFeeR = parseFloat(sum.getAttribute("data-stake-fee") || "0");
             const stakeRate = parseFloat(sum.getAttribute("data-stake-rate") || "1");
             const stakeSym = sum.getAttribute("data-stake-sym") || "";
-            const mintFeeUsd = recvAmt * cfg.rp * mintFeeR;
+            const redeemFeeR = parseFloat(sum.getAttribute("data-redeem-fee") || "0");
+            const recvUsd = recvAmt * cfg.rp;
             const mintNet = recvAmt * (1 - mintFeeR);
-            const stakeAmt = mintNet * stakeRate;
-            const stakeFeeUsd = mintNet * cfg.rp * stakeFeeR;
             const set = (sel: string, val: string) => {
               const el = sum.querySelector(sel);
               if (el) el.textContent = val;
             };
             set("[data-sum-mint]", num(recvAmt, 2) + " " + recvSym);
-            set("[data-sum-stake]", num(stakeAmt, 2) + " " + stakeSym);
-            set("[data-sum-mintfee]", money(mintFeeUsd));
-            set("[data-sum-stakefee]", money(stakeFeeUsd));
+            set("[data-sum-redeem]", num(recvAmt, 2) + " " + recvSym);
+            set("[data-sum-stake]", num(mintNet * stakeRate, 2) + " " + stakeSym);
+            set("[data-sum-mintfee]", money(recvUsd * mintFeeR));
+            set("[data-sum-stakefee]", money(mintNet * cfg.rp * stakeFeeR));
+            set("[data-sum-redeemfee]", money(recvUsd * redeemFeeR));
           }
         }
       };
