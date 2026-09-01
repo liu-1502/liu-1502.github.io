@@ -159,7 +159,7 @@
     all: unset; box-sizing: border-box; cursor: pointer;
     display: inline-flex; align-items: center; gap: 8px;
     padding: 0 14px; height: 40px;   /* bằng nút About Alpha */
-    background: transparent; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 999px;
+    background: transparent; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 6px;
     transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
   }
   .tok-tab:hover { background: color-mix(in srgb, var(--text) 4%, transparent); box-shadow: none; }
