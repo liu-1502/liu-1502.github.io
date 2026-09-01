@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check, CirclePlus, Database, TrendingUp, Sprout } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, ChevronsRight, Check, Sprout } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -220,12 +220,12 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
       {t.key === "yzusd" && (
         <section className="vd-sec">
           <h4 className="vd-title">How it works</h4>
-          <div className="vd-how">
-            <div className="vd-how-step"><span className="vd-how-ic"><CirclePlus /></span>Mint yzUSD</div>
-            <ArrowRight className="vd-how-arrow" />
-            <div className="vd-how-step"><span className="vd-how-ic"><Database /></span>Stake yzUSD</div>
-            <ArrowRight className="vd-how-arrow" />
-            <div className="vd-how-step"><span className="vd-how-ic"><TrendingUp /></span>Earn with syzUSD</div>
+          <div className="vd-steprow">
+            <span className="vd-stepnode"><i>1</i><em>Mint yzUSD</em></span>
+            <span className="vd-stepsep"><ChevronsRight /></span>
+            <span className="vd-stepnode"><i>2</i><em>Stake yzUSD</em></span>
+            <span className="vd-stepsep"><ChevronsRight /></span>
+            <span className="vd-stepnode"><i>3</i><em>Earn with syzUSD</em></span>
           </div>
         </section>
       )}
