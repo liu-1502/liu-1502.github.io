@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, ChevronsRight, Check, Sprout } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check, Sprout, CirclePlus, Database, TrendingUp } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -219,26 +219,14 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
       {/* How it works (chỉ yzUSD) */}
       {t.key === "yzusd" && (
         <section className="vd-sec">
-          <details className="vd-stepper">
-            <summary className="vd-strat-summary">
-              <div className="vd-strat-head">
-                <h4 className="vd-title">How it works</h4>
-                <ChevronDown className="vd-stepcaret" />
-              </div>
-              <div className="vd-steprow">
-                <span className="vd-stepnode"><i>1</i><em>Mint yzUSD</em></span>
-                <span className="vd-stepsep"><ChevronsRight /></span>
-                <span className="vd-stepnode"><i>2</i><em>Stake yzUSD</em></span>
-                <span className="vd-stepsep"><ChevronsRight /></span>
-                <span className="vd-stepnode"><i>3</i><em>Earn with syzUSD</em></span>
-              </div>
-            </summary>
-            <div className="vd-stepdetail">
-              <div className="vd-stepitem"><i>1</i><div><b>Mint yzUSD</b><span>Deposit USDT0 to mint yzUSD at 1:1 — a fully-backed, over-collateralized stablecoin, redeemable anytime.</span></div></div>
-              <div className="vd-stepitem"><i>2</i><div><b>Stake yzUSD</b><span>Stake your yzUSD to receive syzUSD, the yield-bearing staked version of yzUSD.</span></div></div>
-              <div className="vd-stepitem"><i>3</i><div><b>Earn with syzUSD</b><span>syzUSD accrues the weekly target yield (7.75%) automatically — simply hold it to earn.</span></div></div>
-            </div>
-          </details>
+          <h4 className="vd-title">How it works</h4>
+          <div className="vd-steprow">
+            <span className="vd-stepnode"><span className="vd-stepic"><CirclePlus /></span><em>Mint yzUSD</em></span>
+            <ArrowRight className="vd-steparrow" />
+            <span className="vd-stepnode"><span className="vd-stepic"><Database /></span><em>Stake yzUSD</em></span>
+            <ArrowRight className="vd-steparrow" />
+            <span className="vd-stepnode"><span className="vd-stepic"><TrendingUp /></span><em>Earn with syzUSD</em></span>
+          </div>
         </section>
       )}
 
