@@ -53,13 +53,12 @@
   .av-detail { display: flex; flex-direction: column; gap: 16px; }
   /* Header + tabs canh GIỮA theo chiều ngang content */
   /* Header canh giữa (Alpha, Prime, ...) */
-  .av-header { align-self: stretch; }
-  .av-titlerow { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .av-titlerow h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: 26px; color: #142F04; white-space: nowrap; }
-  .av-desc { margin: 8px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); }
+  .av-head { align-self: stretch; text-align: center; }
+  .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
+  .av-head p { margin: 6px auto 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
   /* Token tabs Alpha: bản gốc — chip trắng có logo phía trước, selected nền xanh
      (dùng style .tok-tab mặc định), canh giữa. */
-  #alphaTabs { justify-content: flex-end; flex: none; }
+  #alphaTabs { justify-content: center; }
   /* Tab gộp yzUSD/syzUSD: 2 logo token kề nhau (chồng nhẹ như 1 cặp). */
   #alphaTabs .tok-logos { display: inline-flex; align-items: center; }
   #alphaTabs .tok-logos img { width: 20px; height: 20px; border-radius: 50%; display: block; }
@@ -169,17 +168,11 @@
   .tok-tab.on .sym { color: var(--accent); }  /* text selected = màu accent */
 
   /* --- Card mint/redeem (xanh) --- */
-  /* Card xanh lá bọc header + tabs + form (thay vì mỗi xchg-body tự có nền xanh). */
-  .av-formcard {
-    box-sizing: border-box; align-self: stretch; padding: 20px;
-    display: flex; flex-direction: column; align-items: stretch; gap: 16px;
-    background: #E1EBD8; border: none; border-radius: 24px;
-  }
-  .av-formcard .av-header { margin-bottom: 2px; }
+  /* Card xanh lá cho mỗi form panel (header + tabs nằm NGOÀI card). */
   .xchg-body {
-    box-sizing: border-box; padding: 0;
+    box-sizing: border-box; padding: 20px;
     display: flex; flex-direction: column; align-items: center; gap: 20px;
-    background: transparent; border: none; border-radius: 0;
+    background: #E1EBD8; border: none; border-radius: 24px;
   }
 
   /* --- Segment toggle (Mint/Redeem) --- */
@@ -419,8 +412,7 @@
   .tok-tab .sym { color: var(--text); }
 
   /* Panel màu (nền card đổi tiền) + các tint -> dẫn xuất từ accent trên nền tối */
-  .av-formcard { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
-  .xchg-body { background: transparent; }
+  .xchg-body { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
   .tok-tab.on { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); }
   .dir-switch button.on { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); color: var(--text); }
   .mfield .token { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }

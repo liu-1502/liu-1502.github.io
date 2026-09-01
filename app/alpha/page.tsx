@@ -228,22 +228,19 @@ export default function Alpha() {
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
         <div className="xchg rv">
+          {/* Page header — nằm NGOÀI card (như cũ) */}
+          <div className="av-head">
+            <h1>Yuzu Alpha</h1>
+            <p>Yuzu Alpha is an actively managed portfolio of leveraged DeFi yield-bearing assets, with syzUSD as the senior tranche and yzPP as the junior tranche.</p>
+          </div>
+          {/* Token tabs — nằm NGOÀI card (như cũ) */}
+          <div className="tok-tabs xchg-tabs" id="alphaTabs">
+            <button className="tok-tab on" data-tab="yzusd"><span className="tok-logos"><img src="/assets/tokens/yzUSD.svg" alt="" /><img src="/assets/tokens/syzUSD.svg" alt="" /></span><span className="sym">yzUSD</span></button>
+            <button className="tok-tab" data-tab="yzpp"><img src="/assets/tokens/yzPP.svg" alt="" /><span className="sym">yzPP</span></button>
+          </div>
+
           <div className="av-grid">
           <div className="av-left">
-
-          {/* Card xanh lá bọc header + tabs + form panels */}
-          <div className="av-formcard">
-          {/* Header: title trái + token tabs phải cùng 1 hàng, mô tả full-width bên dưới */}
-          <div className="av-header">
-            <div className="av-titlerow">
-              <h1>Yuzu Alpha</h1>
-              <div className="tok-tabs xchg-tabs" id="alphaTabs">
-                <button className="tok-tab on" data-tab="yzusd"><span className="tok-logos"><img src="/assets/tokens/yzUSD.svg" alt="" /><img src="/assets/tokens/syzUSD.svg" alt="" /></span><span className="sym">yzUSD</span></button>
-                <button className="tok-tab" data-tab="yzpp"><img src="/assets/tokens/yzPP.svg" alt="" /><span className="sym">yzPP</span></button>
-              </div>
-            </div>
-            <p className="av-desc">Yuzu Alpha is an actively managed portfolio of leveraged DeFi yield-bearing assets, with syzUSD as the senior tranche and yzPP as the junior tranche.</p>
-          </div>
 
           {/* ============ yzUSD ============ */}
           <div className="xchg-body" data-panel="yzusd">
@@ -331,7 +328,6 @@ export default function Alpha() {
             <div><div className="k">yzPP target</div><div className="v" style={{ color: "var(--alpha)" }}>27.0%</div></div>
             <div className="pro-only"><div className="k">Next epoch</div><div className="v">FRI 04:00</div></div>
           </div>
-          </div>{/* .av-formcard */}
 
           {/* Order history */}
           <div className="acc ohist">
