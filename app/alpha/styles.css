@@ -478,19 +478,19 @@
   .gcta-stack { align-self: stretch; display: flex; flex-direction: row; gap: 10px; }
   .gcta-stack .btn.btn-block { flex: 1; }
   .xusd-err { color: #C0392B !important; }
-  /* Bảng tóm tắt: mặc định 1 dòng (rate | tổng phí + chevron), mở ra mới full */
-  .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 2px; padding: 12px 2px 2px; border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+  /* Bảng tóm tắt: dòng thu gọn nằm ngay dưới form, divider ở DƯỚI dòng đó */
+  .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 0; padding: 0 2px; }
   .mint-sum[hidden] { display: none; }
   /* panel có breakdown -> ẩn dòng rate rời (đã gộp vào bar) */
   [data-dirpanel]:has([data-sum]) .rate-line { display: none !important; }
-  .msum-bar { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 2px 0; }
+  .msum-bar { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 0 0 12px; border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .msum-rate { font-family: var(--font-body); font-size: 14px; color: var(--muted); }
   .msum-bar-r { display: inline-flex; align-items: center; gap: 8px; }
   .msum-feeval { font-family: var(--font-mono); font-weight: 600; font-size: 14px; color: var(--text); }
   .msum-bar[aria-expanded="true"] .msum-feeval { display: none; } /* mở rồi thì ẩn phí bên phải */
   .msum-chev { width: 18px; height: 18px; color: var(--muted); transition: transform .15s; }
   .msum-bar[aria-expanded="true"] .msum-chev { transform: rotate(180deg); }
-  .msum-detail { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; }
+  .msum-detail { display: flex; flex-direction: column; gap: 2px; margin-top: 12px; }
   .msum-detail[hidden] { display: none; }
   .msum-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 5px 0; font-family: var(--font-body); font-size: 14px; }
   .msum-row > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
