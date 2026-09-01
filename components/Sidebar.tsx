@@ -112,8 +112,16 @@ function ParentItem({
   const subId = `side-sub-${item.nav}`;
   return (
     <>
-      <div className={`side-item side-parent${isActive ? " on" : ""}`} data-open={open}>
-        <Link className="side-parent-link" href={item.href} data-nav={item.nav} aria-current={isActive ? "page" : undefined}>
+      <div className="side-item side-parent" data-open={open}>
+        {/* Bấm vào Alpha để mở/ẩn sub-menu (không điều hướng — token con mới điều hướng). */}
+        <Link
+          className="side-parent-link"
+          href={item.href}
+          data-nav={item.nav}
+          aria-current={isActive ? "page" : undefined}
+          aria-expanded={open}
+          onClick={(e) => { e.preventDefault(); onToggle(); }}
+        >
           {item.icon}
           {item.label}
         </Link>

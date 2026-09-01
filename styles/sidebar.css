@@ -133,15 +133,13 @@
 .side-sub {
   margin: 2px 0 4px 16px;
   padding-left: 11px;
-  border-left: 1px solid var(--line-solid);
+  border-left: 1px solid color-mix(in srgb, var(--text) 12%, transparent);   /* rail xám nhạt, full-height */
   display: flex;
   flex-direction: column;
 }
 .side-item.lvl2 { padding-left: 10px; }
-/* Parent (Alpha) active: bỏ box xanh — token con mới là cái đang được chọn */
-.side-item.side-parent.on { background: transparent; }
-/* Token đang chọn: style selected xanh mặc định + đoạn chỉ báo nằm trên rail */
-.side-item.lvl2.on::before { left: -12px; }
+/* Token đang chọn: style selected xanh mặc định + đoạn chỉ báo canh giữa trên rail xám */
+.side-item.lvl2.on::before { left: -12.5px; width: 2px; }
 
 /* ================================================================
    Collapse / expand sidebar (nút ở topbar thay cho title)
