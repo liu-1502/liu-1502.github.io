@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowRight, ShieldCheck, ExternalLink, ChevronDown, Search } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ShieldCheck, ExternalLink, ChevronDown, Search } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -174,7 +174,7 @@ const SWITCH_PAIR: Record<string, string> = { yzusd: "syzusd", syzusd: "yzusd" }
 
 function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
   const switchKey = SWITCH_PAIR[t.key];
-  const switchName = switchKey ? TOKENS.find((x) => x.key === switchKey)?.name : undefined;
+  const switchTok = switchKey ? TOKENS.find((x) => x.key === switchKey) : undefined;
   return (
     <div className="av-detail" data-panel={t.key} style={t.key === TOKENS[0].key ? undefined : { display: "none" }}>
       {/* Overview */}
@@ -182,9 +182,9 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
         <div className="vd-head">
           <div className="vd-head-row">
             <span className="vt-logo"><img src={t.logo} alt="" /></span>
-            {switchKey && (
-              <button type="button" className="vd-switch" data-switch-panel={switchKey}>
-                Switch to {switchName} <ArrowRight />
+            {switchTok && (
+              <button type="button" className="vd-switch" data-switch-panel={switchTok.key}>
+                <img src={switchTok.logo} alt="" /> Switch to {switchTok.name} <ArrowLeftRight />
               </button>
             )}
           </div>

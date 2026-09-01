@@ -85,6 +85,7 @@
     transition: background .15s ease, border-color .15s ease;
   }
   .vd-switch:hover { background: color-mix(in srgb, var(--text) 5%, transparent); border-color: color-mix(in srgb, var(--text) 24%, transparent); }
+  .vd-switch img { width: 18px; height: 18px; border-radius: 50%; display: block; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); }
   .vd-switch svg { width: 14px; height: 14px; }
   .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
   .vd-desc { margin: 3px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
@@ -170,10 +171,10 @@
     all: unset; box-sizing: border-box; cursor: pointer;
     display: inline-flex; align-items: center; gap: 8px;
     padding: 0 14px; height: 40px;   /* bằng nút About Alpha */
-    background: transparent; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 6px;
+    background: #fff; border: 1px solid transparent; border-radius: 999px;
     transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
   }
-  .tok-tab:hover { background: color-mix(in srgb, var(--text) 4%, transparent); box-shadow: none; }
+  .tok-tab:hover { box-shadow: 0 3px 10px rgba(20, 47, 4, .14); }
   .tok-tab img { width: 20px; height: 20px; border-radius: 50%; display: block; }
   .tok-tab .sym { font-family: var(--font-body); font-weight: 600; font-size: 16px; line-height: 20px; color: #1C1C1C; padding-right: 4px; }
   .tok-tab.on { border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: #E2ECD8; }  /* stroke giống chip; nền khớp card */
