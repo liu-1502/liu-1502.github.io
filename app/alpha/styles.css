@@ -69,6 +69,8 @@
   /* ---- Detail sections (giống cột phải Marketplace) ---- */
   .vd-sec { padding: 22px; background: var(--surface); border-radius: 20px; }
   .vd-head { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
+  /* Hàng trên cùng: logo trái (canh top), nút "Switch to …" phải */
+  .vd-head-row { align-self: stretch; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
   .vd-head .vt-logo { width: 40px; height: 40px; flex: none; }
   .vd-head .vt-logo img { width: 100%; height: 100%; border-radius: 50%; object-fit: contain; }
   .vd-head-main { align-self: stretch; min-width: 0; }
