@@ -169,6 +169,7 @@ export function useExchangePanels(rates: RateMap, options: ExchangePanelOptions 
       document.querySelectorAll<HTMLButtonElement>(".xchg-body .btn-block").forEach((btn) => {
         btn.disabled = false;
         if (!walletCta) return;
+        if (btn.hasAttribute("data-cta-fixed")) return; // nút có chữ cố định (vd "Mint & Stake")
         if (!connected) { btn.textContent = "Connect wallet"; return; }
         const dk = btn.closest("[data-dirpanel]")?.getAttribute("data-dirpanel") || "";
         btn.textContent = dk ? dk.charAt(0).toUpperCase() + dk.slice(1) : "Continue";

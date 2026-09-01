@@ -420,6 +420,13 @@
     font-family: var(--font-body); font-weight: 600; font-size: 18px;
   }
   .xchg-body .btn-block:disabled { opacity: .45; box-shadow: none; cursor: not-allowed; }
+  /* 2 nút xếp dọc: "Mint & Stake" (primary) trên, "Mint" (secondary/outline) dưới */
+  .gcta-stack { align-self: stretch; display: flex; flex-direction: column; gap: 10px; }
+  .xchg-body .btn.btn-block.gcta-2nd {
+    background: var(--surface); color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); box-shadow: none;
+  }
+  .xchg-body .btn.btn-block.gcta-2nd:hover { border-color: var(--accent); background: var(--surface); }
   .xmeta { display: none; }  /* thay bằng footer */
   .mfoot { display: flex; justify-content: space-between; align-self: stretch; gap: 18px; }
   .mfoot span { font-family: var(--font-body); font-style: italic; font-size: 14px; color: #737373; }

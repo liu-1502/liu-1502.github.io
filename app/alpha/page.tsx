@@ -264,7 +264,10 @@ export default function Alpha() {
                 <SwapCircle />
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
-              <Button block className="gcta">Connect wallet</Button>
+              <div className="gcta-stack">
+                <Button block className="gcta" data-cta-fixed>Mint &amp; Stake</Button>
+                <Button block variant="line" className="gcta gcta-2nd">Connect wallet</Button>
+              </div>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
