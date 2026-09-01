@@ -135,7 +135,13 @@ export default function AlphaClient() {
     const alertEl = document.querySelector<HTMLElement>(".pg-alpha [data-mint-alert]");
     const showAlert = (show: boolean) => {
       if (!alertEl) return;
-      if (show) { const a = alertEl.querySelector("[data-alert-amt]"); if (a) a.textContent = num(lastDep); }
+      if (show) {
+        // Tổng yzUSD chưa stake = số dư yzUSD đang giữ + số vừa mint.
+        const balB = document.querySelector('.pg-alpha [data-panel="yzusd"] .vd-stats b');
+        const bal = parseFloat((balB?.textContent || "").replace(/[^0-9.]/g, "")) || 0;
+        const a = alertEl.querySelector("[data-alert-amt]");
+        if (a) a.textContent = num(bal + lastDep);
+      }
       alertEl.hidden = !show;
     };
     // Đóng dialog thành công; nếu chỉ vừa mint (chưa stake) -> hiện alert nhắc stake.
