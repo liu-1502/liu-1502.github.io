@@ -94,6 +94,12 @@
 .side-item:hover img { opacity: 1; }
 :root[data-theme="dark"] .side-item img { filter: brightness(0) invert(1); opacity: .8; }
 
+/* Logo token trong sub-menu (yzUSD/syzUSD, yzPP): luôn hiện, giữ màu, chồng nhẹ khi 2 cái. */
+.side-logos { display: inline-flex; align-items: center; flex: none; }
+.side-logos img { display: block; width: 20px; height: 20px; border-radius: 50%; object-fit: contain; filter: none; opacity: 1; margin: 0; }
+.side-logos img + img { margin-left: -6px; }
+.side-item:hover .side-logos img, :root[data-theme="dark"] .side-logos img { filter: none; opacity: 1; }
+
 /* ---- Cấp 1 có mục con: hàng link + chevron ---- */
 .side-parent { padding-right: 6px; }
 .side-parent-link {

@@ -32,8 +32,10 @@ const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
     items: [
       { nav: "dashboard", label: "Dashboard", href: "/", icon: <LayoutDashboard /> },
       { nav: "alpha", label: "Alpha", href: "/alpha", icon: <Coins />, meta: "7.75-27%", children: [
-        { label: "yzUSD", href: "/alpha#yzusd", icon: <img src="/assets/tokens/yzUSD.svg" alt="" /> },
-        { label: "yzPP", href: "/alpha#yzpp", icon: <img src="/assets/tokens/yzPP.svg" alt="" /> },
+        { label: "yzUSD/syzUSD", href: "/alpha#yzusd", icon: (
+          <span className="side-logos"><img src="/assets/tokens/yzUSD.svg" alt="" /><img src="/assets/tokens/syzUSD.svg" alt="" /></span>
+        ) },
+        { label: "yzPP", href: "/alpha#yzpp", icon: <span className="side-logos"><img src="/assets/tokens/yzPP.svg" alt="" /></span> },
       ] },
       { nav: "prime", label: "Prime", href: "/prime", icon: <Landmark />, meta: "7.00%" },
       { nav: "mkt", label: "Marketplace", href: "/marketplace", icon: <Store />, meta: "6-11.86%" },
