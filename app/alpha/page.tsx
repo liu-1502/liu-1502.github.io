@@ -270,7 +270,7 @@ export default function Alpha() {
                   <span className="msum-bar-r"><b className="msum-feeval" data-sum-totalfee>$0.00</b><ChevronDown className="msum-chev" /></span>
                 </button>
                 <div className="msum-detail" data-sum-detail hidden>
-                  <div className="msum-row"><span>You&rsquo;ll receive</span><b data-sum-stake>0 syzUSD</b></div>
+                  <div className="msum-row"><span>Stake amount</span><b data-sum-stake>0 syzUSD</b></div>
                   <div className="msum-row"><span>Mint fee <i>0.10%</i></span><b data-sum-mintfee>$0.00</b></div>
                   <div className="msum-row"><span>Stake fee <i>0.50%</i></span><b data-sum-stakefee>$0.00</b></div>
                 </div>
