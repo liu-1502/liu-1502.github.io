@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -531,26 +531,21 @@ export default function Alpha() {
               <b>You&rsquo;re minting</b>
               <button type="button" className="mok-x mrev-x" data-mint-review-close aria-label="Close"><X /></button>
             </div>
-            <div className="mrev-leg">
-              <div className="mrev-leg-info">
-                <span className="mrev-chain"><img src="/assets/tokens/usdt0.png" alt="" />USDT0</span>
-                <div className="mrev-amt"><span data-rev-pay>0</span></div>
-                <div className="mrev-usd" data-rev-pay-usd>$0.00</div>
+            <div className="mok-exch">
+              <div className="mok-exch-card">
+                <img src="/assets/tokens/usdt0.png" alt="" />
+                <b><span data-rev-pay>0</span> USDT0</b>
               </div>
-              <span className="mrev-avatar"><img className="mrev-tok" src="/assets/tokens/usdt0.png" alt="" /><img className="mrev-badge" src="/assets/chains/plasma.svg" alt="" /></span>
-            </div>
-            <div className="mrev-arrow"><ArrowDown /></div>
-            <div className="mrev-leg">
-              <div className="mrev-leg-info">
-                <span className="mrev-chain"><img src="/assets/tokens/yzUSD.svg" alt="" />yzUSD</span>
-                <div className="mrev-amt"><span data-rev-recv>0</span></div>
-                <div className="mrev-usd" data-rev-recv-usd>$0.00</div>
+              <span className="mok-exch-ic"><ArrowRight /></span>
+              <div className="mok-exch-card">
+                <img src="/assets/tokens/yzUSD.svg" alt="" />
+                <b><span data-rev-recv>0</span> yzUSD</b>
               </div>
-              <span className="mrev-avatar"><img className="mrev-tok" src="/assets/tokens/yzUSD.svg" alt="" /><img className="mrev-badge" src="/assets/chains/plasma.svg" alt="" /></span>
             </div>
-            <div className="mrev-sep2" />
+            <div className="mrev-cost"><span>Rate</span><b>1 USDT0 = 1 yzUSD</b></div>
             <div className="mrev-cost"><span>Mint fee <i>0.10%</i></span><b data-rev-fee>$0.00</b></div>
-            <div className="mrev-cost"><span>Network cost</span><b>&lt;$0.01</b></div>
+            <div className="mrev-cost"><span>Network fee</span><b>&lt;$0.01</b></div>
+            <div className="mrev-cost"><span>Estimated time</span><b>~30 seconds</b></div>
             <button type="button" className="btn btn-accent btn-block mrev-cta" data-mint-review-confirm>Confirm mint</button>
           </div>
         </div>
@@ -563,16 +558,13 @@ export default function Alpha() {
             <div className="mok-check"><Check /></div>
             <h3 className="mok-title">yzUSD minted successfully</h3>
             <p className="mok-sub">You received <b><span data-ok-amt>0</span> yzUSD</b>. Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
-            <div className="mok-exch">
-              <div className="mok-exch-card">
+            <div className="mok-mini">
+              <div className="mok-mini-icons">
                 <img src="/assets/tokens/usdt0.png" alt="" />
-                <b><span data-ok-pay>0</span> USDT0</b>
-              </div>
-              <span className="mok-exch-ic"><ArrowRight /></span>
-              <div className="mok-exch-card">
+                <span className="mok-mini-arrow"><ArrowRight /></span>
                 <img src="/assets/tokens/yzUSD.svg" alt="" />
-                <b><span data-ok-amt>0</span> yzUSD</b>
               </div>
+              <div className="mok-mini-amts"><b><span data-ok-pay>0</span> USDT0</b><ArrowRight className="sep" /><b><span data-ok-amt>0</span> yzUSD</b></div>
             </div>
             <div className="mok-info">
               <div className="mok-info-row mok-info-between"><span>Transaction ID</span><b className="mok-txid">VKN-8993J244</b></div>
