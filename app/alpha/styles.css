@@ -55,21 +55,22 @@
   .av-right { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
   .av-detail { display: flex; flex-direction: column; gap: 12px; }
   /* Alert nhắc stake sau khi mint (chưa stake) */
-  .vd-alert { margin-top: 16px; display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+  .vd-alert { margin-top: 14px; display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
   .vd-alert[hidden] { display: none; }
-  .vd-alert-ic { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, var(--surface)); }
-  .vd-alert-ic img { width: 30px; height: 30px; }
-  .vd-alert-ic svg { width: 26px; height: 26px; color: var(--accent); }
-  /* How it works: icon trên / text dưới, mũi tên ngăn cách (không viền) */
-  .vd-steprow { display: flex; align-items: flex-start; justify-content: space-between; gap: 4px; margin-top: 12px; }
-  .vd-stepnode { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 9px; text-align: center; }
+  .vd-alert-ic { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, var(--surface)); }
+  .vd-alert-ic img { width: 22px; height: 22px; }
+  .vd-alert-ic svg { width: 18px; height: 18px; color: var(--accent); }
+  /* How it works: section riêng, illus + text dàn ngang, mũi tên ngăn cách */
+  .vd-how-sec { padding: 14px 18px; }
+  .vd-steprow { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 16px; }
+  .vd-stepnode { flex: 0 1 auto; min-width: 0; display: flex; flex-direction: row; align-items: center; gap: 10px; }
   .vd-stepic { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
   .vd-stepic svg { width: 24px; height: 24px; }
   /* Illustration duotone: mảng fill nhạt + nét line xanh */
   .vd-stepic .ill-fill { fill: color-mix(in srgb, var(--accent) 24%, var(--surface)); stroke: none; }
   .vd-stepic .ill-line { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-  .vd-stepnode em { font-style: normal; font-family: var(--font-body); font-weight: 500; font-size: 12px; color: var(--text); line-height: 1.3; }
-  .vd-steparrow { flex: none; width: 16px; height: 16px; color: var(--muted); margin-top: 10px; }
+  .vd-stepnode em { font-style: normal; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--text); line-height: 1.25; white-space: nowrap; }
+  .vd-steparrow { flex: none; width: 16px; height: 16px; color: var(--muted); }
   .vd-alert-txt > b { display: block; font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); }
   .vd-alert-txt > p { margin: 4px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.45; color: var(--muted); }
   .vd-alert-txt > p b { color: var(--accent); font-weight: 640; }

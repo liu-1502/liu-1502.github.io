@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check, Sprout } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check, Info } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -206,7 +206,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
         </div>
         {t.key === "yzusd" && (
           <div className="vd-alert" data-mint-alert hidden>
-            <span className="vd-alert-ic"><Sprout /></span>
+            <span className="vd-alert-ic"><Info /></span>
             <div className="vd-alert-txt">
               <b>Your yzUSD is ready to earn</b>
               <p><span data-alert-amt>0</span> yzUSD unstaked · Stake now to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
@@ -218,8 +218,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
 
       {/* How it works (chỉ yzUSD) */}
       {t.key === "yzusd" && (
-        <section className="vd-sec">
-          <h4 className="vd-title">How it works</h4>
+        <section className="vd-sec vd-how-sec">
           <div className="vd-steprow">
             <span className="vd-stepnode">
               <span className="vd-stepic"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
