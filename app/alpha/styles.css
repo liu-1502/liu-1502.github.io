@@ -64,8 +64,9 @@
   .vd-sec.vd-how-sec { padding: 16px 18px; }
   .vd-steprow { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 16px; }
   .vd-stepnode { flex: 0 1 auto; min-width: 0; display: flex; flex-direction: row; align-items: center; gap: 10px; }
-  .vd-stepic { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+  .vd-stepic { flex: none; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
   .vd-stepic svg { width: 24px; height: 24px; }
+  .vd-stepic i { font-style: normal; font-family: var(--font-mono); font-weight: 700; font-size: 13px; color: var(--accent); }
   /* Illustration duotone: mảng fill nhạt + nét line xanh (dùng chung) */
   .ill-fill { fill: color-mix(in srgb, var(--accent) 24%, var(--surface)); stroke: none; }
   .ill-line { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }

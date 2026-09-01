@@ -220,37 +220,11 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
       {t.key === "yzusd" && (
         <section className="vd-sec vd-how-sec">
           <div className="vd-steprow">
-            <span className="vd-stepnode">
-              <span className="vd-stepic"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <circle cx="16" cy="16" r="11" className="ill-fill" />
-                <circle cx="16" cy="16" r="11" className="ill-line" />
-                <path d="M16 11.5v9M11.5 16h9" className="ill-line" />
-              </svg></span>
-              <em>Mint yzUSD</em>
-            </span>
+            <span className="vd-stepnode"><span className="vd-stepic"><i>1</i></span><em>Mint yzUSD</em></span>
             <ChevronsRight className="vd-steparrow" />
-            <span className="vd-stepnode">
-              <span className="vd-stepic"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <path d="M7 9v14c0 1.8 4 3.3 9 3.3s9-1.5 9-3.3V9" className="ill-fill" />
-                <ellipse cx="16" cy="9" rx="9" ry="3.3" className="ill-fill" />
-                <ellipse cx="16" cy="9" rx="9" ry="3.3" className="ill-line" />
-                <path d="M7 9v14c0 1.8 4 3.3 9 3.3s9-1.5 9-3.3V9" className="ill-line" />
-                <path d="M7 16c0 1.8 4 3.3 9 3.3s9-1.5 9-3.3" className="ill-line" />
-              </svg></span>
-              <em>Stake yzUSD</em>
-            </span>
+            <span className="vd-stepnode"><span className="vd-stepic"><i>2</i></span><em>Stake yzUSD</em></span>
             <ChevronsRight className="vd-steparrow" />
-            <span className="vd-stepnode">
-              <span className="vd-stepic"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <rect x="5.5" y="18" width="5" height="9" rx="1.6" className="ill-fill" />
-                <rect x="5.5" y="18" width="5" height="9" rx="1.6" className="ill-line" />
-                <rect x="13.5" y="13" width="5" height="14" rx="1.6" className="ill-fill" />
-                <rect x="13.5" y="13" width="5" height="14" rx="1.6" className="ill-line" />
-                <rect x="21.5" y="8" width="5" height="19" rx="1.6" className="ill-fill" />
-                <rect x="21.5" y="8" width="5" height="19" rx="1.6" className="ill-line" />
-              </svg></span>
-              <em>Earn with syzUSD</em>
-            </span>
+            <span className="vd-stepnode"><span className="vd-stepic"><i>3</i></span><em>Earn with syzUSD</em></span>
           </div>
         </section>
       )}

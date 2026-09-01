@@ -133,7 +133,11 @@ export default function AlphaClient() {
     const stakeFeeUsd = (cfg: Flow) => lastDep * (cfg.showMint ? (1 - MINT_FEE) : 1) * cfg.stakeFee;
 
     const alertEl = document.querySelector<HTMLElement>(".pg-alpha [data-mint-alert]");
-    const showAlert = (show: boolean) => {
+    // Đã mint (session này) nhưng CHƯA hoàn tất stake -> luôn hiện alert nhắc stake,
+    // kể cả khi mở màn stake rồi huỷ. Chỉ ẩn khi đã stake xong hoặc đang mở dialog.
+    let minted = false;
+    let staked = false;
+    const setAlert = (show: boolean) => {
       if (!alertEl) return;
       if (show) {
         // Tổng yzUSD chưa stake = số dư yzUSD đang giữ + số vừa mint.
@@ -144,11 +148,8 @@ export default function AlphaClient() {
       }
       alertEl.hidden = !show;
     };
-    // Đóng dialog thành công; nếu chỉ vừa mint (chưa stake) -> hiện alert nhắc stake.
-    const closeSuccess = () => {
-      open(dlg, false);
-      showAlert(current === FLOWS.mint && lastDep > 0);
-    };
+    const refreshAlert = () => setAlert(minted && !staked);
+    const closeSuccess = () => { open(dlg, false); refreshAlert(); };
 
     const depValue = () => {
       const inputs = mintPanel()?.querySelectorAll<HTMLInputElement>(".mfield-l input");
@@ -173,7 +174,7 @@ export default function AlphaClient() {
       if (sfr) sfr.hidden = !cfg.showStake;
       set("[data-rev-stakefee]", money(stakeFeeUsd(cfg)));
       set("[data-rev-cta]", cfg.revCta);
-      showAlert(false);
+      setAlert(false); // ẩn alert khi đang mở review
       open(review, true);
     };
     const startMintFlow = (cfg: Flow) => {
@@ -207,6 +208,10 @@ export default function AlphaClient() {
       if (sfRow) sfRow.hidden = !cfg.showStake;
       const oprim = dlg.querySelector<HTMLElement>("[data-ok-primary]");
       if (oprim) oprim.textContent = cfg.okPrimary;
+      // Cập nhật trạng thái: mint xong (chưa stake) / mint&stake / stake xong.
+      if (cfg === FLOWS.mint) { minted = true; staked = false; }
+      else if (cfg === FLOWS.mintstake) { minted = true; staked = true; }
+      else if (cfg === FLOWS.stake) { staked = true; }
       open(review, false);
       open(dlg, true);
     };
@@ -233,17 +238,18 @@ export default function AlphaClient() {
         if (current === FLOWS.mint) { open(dlg, false); startStakeFlow(); }
         else {
           open(dlg, false);
-          showAlert(false);
+          refreshAlert();
           if (location.hash.slice(1).toLowerCase() === "syzusd") window.dispatchEvent(new HashChangeEvent("hashchange"));
           else location.hash = "syzusd";
           window.scrollTo(0, 0);
         }
         return;
       }
-      if (t.closest("[data-mint-review-close]")) open(review, false);
+      // Huỷ màn review (kể cả stake review) -> nếu đã mint mà chưa stake, alert hiện lại.
+      if (t.closest("[data-mint-review-close]")) { open(review, false); refreshAlert(); return; }
       if (t.closest("[data-mint-ok-close]")) closeSuccess();
     };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { open(review, false); open(dlg, false); } };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { open(review, false); open(dlg, false); refreshAlert(); } };
     // Gõ vào ô deposit -> xoá lỗi (hook tự set lại text ≈$; ở đây bỏ màu đỏ).
     const depInput = document.querySelector<HTMLInputElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l input');
     const xusd = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l .xusd');
