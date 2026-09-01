@@ -65,7 +65,7 @@
   /* Form (av-left) dính khi scroll; cũng là mốc cho icon history absolute bên trong. */
   .av-left { position: sticky; top: 24px; }
   .hist-btn {
-    all: unset; box-sizing: border-box; cursor: pointer; position: absolute; top: 20px; right: 20px; z-index: 2;
+    all: unset; box-sizing: border-box; cursor: pointer; position: absolute; top: 24px; right: 20px; z-index: 2;
     display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px;
     border-radius: 50%; color: var(--muted);
     border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); background: #fff;
@@ -111,7 +111,7 @@
   /* Nút secondary "Switch to …" — canh phải trên hàng tên */
   .vd-switch {
     all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto;
-    display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px;
+    display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 999px;
     border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
     font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--text);
     transition: background .15s ease, border-color .15s ease;

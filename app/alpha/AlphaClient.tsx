@@ -83,5 +83,22 @@ export default function AlphaClient() {
     };
   }, []);
 
+  // Chuyển token panel theo hash URL (sidebar sub-menu: /alpha#yzusd, /alpha#yzpp, /alpha#syzusd).
+  useEffect(() => {
+    const host = document.querySelector<HTMLElement>(".pg-alpha .xchg");
+    if (!host) return;
+    const VALID = ["yzusd", "yzpp", "syzusd"];
+    const show = (name: string) => {
+      if (!VALID.includes(name)) return;
+      host.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => {
+        p.style.display = p.getAttribute("data-panel") === name ? "" : "none";
+      });
+    };
+    const fromHash = () => { const h = location.hash.slice(1).toLowerCase(); if (h) show(h); };
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+    return () => window.removeEventListener("hashchange", fromHash);
+  }, []);
+
   return null;
 }

@@ -124,7 +124,7 @@ const TOKENS = [
     key: "yzusd", name: "yzUSD", logo: "/assets/tokens/yzUSD.svg",
     badge: "Senior · Par stable",
     tagline: "Fully-backed 1:1 USD stablecoin, over-collateralized and attested live.",
-    stats: [ { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "110.82%", tone: "good" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
+    stats: [ { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "110.82%", tone: "good" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" }, { k: "Your Balance", v: "$0.00" } ],
     info: [
       { k: "Rate", v: "1:1 at par" },
       { k: "Access", v: "Eligible Investors, KYC" },
@@ -144,7 +144,7 @@ const TOKENS = [
     key: "yzpp", name: "yzPP", logo: "/assets/tokens/yzPP.svg",
     badge: "Junior tranche",
     tagline: "Junior tranche that absorbs first loss in exchange for a higher yield.",
-    stats: [ { k: "Est. APY", v: "27.0%", tone: "hi" }, { k: "Price", v: "1.1485" }, { k: "Role", v: "Junior" } ],
+    stats: [ { k: "Est. APY", v: "27.0%", tone: "hi" }, { k: "Price", v: "1.1485" }, { k: "Role", v: "Junior" }, { k: "Your Balance", v: "$0.00" } ],
     info: [
       { k: "yzPP price", v: "1 yzPP = 1.148527 USDT0" },
       { k: "Estimated APY", v: "27.0%", hi: true },
@@ -158,7 +158,7 @@ const TOKENS = [
     key: "syzusd", name: "syzUSD", logo: "/assets/tokens/syzUSD.svg",
     badge: "Staked yield",
     tagline: "Staked yzUSD, the senior tranche, that accrues the weekly yield target.",
-    stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
+    stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" }, { k: "Your Balance", v: "$0.00" } ],
     info: [
       { k: "Exchange rate", v: "1 yzUSD = 0.9361 syzUSD" },
       { k: "Weekly target yield", v: "7.75%", hi: true },
@@ -240,12 +240,6 @@ export default function Alpha() {
         <div className="xtra-bar"><button className="xtra-toggle" data-xtra aria-expanded="false" title="Show the details panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M14.5 4.5v15"/></svg><span className="lbl">Details</span></button></div>
 
         <div className="xchg rv">
-          {/* Token tabs — nằm NGOÀI card */}
-          <div className="tok-tabs xchg-tabs" id="alphaTabs">
-            <button className="tok-tab on" data-tab="yzusd"><span className="tok-logos"><img src="/assets/tokens/yzUSD.svg" alt="" /><img src="/assets/tokens/syzUSD.svg" alt="" /></span><span className="sym">yzUSD</span></button>
-            <button className="tok-tab" data-tab="yzpp"><img src="/assets/tokens/yzPP.svg" alt="" /><span className="sym">yzPP</span></button>
-          </div>
-
           <div className="av-grid">
           <div className="av-left">
 
