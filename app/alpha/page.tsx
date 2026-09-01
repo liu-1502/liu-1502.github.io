@@ -264,6 +264,12 @@ export default function Alpha() {
                 <SwapCircle />
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
+              <div className="mint-sum" data-sum data-mint-fee="0.001" data-stake-fee="0.005" data-stake-rate="0.9361" data-stake-sym="syzUSD" hidden>
+                <div className="msum-row"><span>Mint amount</span><b data-sum-mint>0 yzUSD</b></div>
+                <div className="msum-row"><span>Stake amount</span><b data-sum-stake>0 syzUSD</b></div>
+                <div className="msum-row"><span>Mint fee <i>0.10%</i></span><b data-sum-mintfee>$0.00</b></div>
+                <div className="msum-row"><span>Stake fee <i>0.50%</i></span><b data-sum-stakefee>$0.00</b></div>
+              </div>
               <div className="gcta-stack">
                 <Button block variant="line" className="gcta gcta-2nd">Connect wallet</Button>
                 <Button block className="gcta" data-cta-fixed>Mint &amp; Stake</Button>

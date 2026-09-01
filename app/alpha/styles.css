@@ -423,6 +423,13 @@
   /* 2 nút xếp dọc: "Mint & Stake" (primary) trên, "Mint" (secondary/outline) dưới */
   .gcta-stack { align-self: stretch; display: flex; flex-direction: row; gap: 10px; }
   .gcta-stack .btn.btn-block { flex: 1; }
+  /* Bảng tóm tắt khi đã nhập số (mint/stake amount + phí) */
+  .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; background: var(--surface); border-radius: var(--r-md); }
+  .mint-sum[hidden] { display: none; }
+  .msum-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 5px 0; font-family: var(--font-body); font-size: 14px; }
+  .msum-row > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+  .msum-row > span i { font-style: normal; font-size: 11.5px; font-weight: 600; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 1px 6px; border-radius: 999px; }
+  .msum-row > b { font-family: var(--font-mono); font-weight: 600; color: var(--text); }
   .xchg-body .btn.btn-block.gcta-2nd {
     background: var(--surface); color: var(--accent);
     border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); box-shadow: none;

@@ -64,6 +64,8 @@ export function useExchangePanels(rates: RateMap, options: ExchangePanelOptions 
     const num = (n: number, max = 6) => n.toLocaleString("en-US", { maximumFractionDigits: max });
     const usd = (n: number) =>
       "≈ $" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const money = (n: number) =>
+      "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const fmtInt = (s: string) => s.replace(/^0+(?=\d)/, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     document.querySelectorAll<HTMLElement>("[data-dirpanel]").forEach((panel) => {
@@ -104,6 +106,32 @@ export function useExchangePanels(rates: RateMap, options: ExchangePanelOptions 
         if (xusds[0]) xusds[0].textContent = usd(amt * cfg.dp);
         if (xusds[1]) xusds[1].textContent = usd(recvAmt * cfg.rp);
         if (rl) rl.style.display = amt > 0 ? "" : "none";
+
+        /* Bảng tóm tắt (vd Mint & Stake): mint amount / stake amount / 2 mức phí.
+           Tham số phí + tỷ giá stake đọc từ data-* trên [data-sum]. */
+        const sum = panel.querySelector<HTMLElement>("[data-sum]");
+        if (sum) {
+          const show = amt > 0;
+          sum.hidden = !show;
+          if (show) {
+            const mintFeeR = parseFloat(sum.getAttribute("data-mint-fee") || "0");
+            const stakeFeeR = parseFloat(sum.getAttribute("data-stake-fee") || "0");
+            const stakeRate = parseFloat(sum.getAttribute("data-stake-rate") || "1");
+            const stakeSym = sum.getAttribute("data-stake-sym") || "";
+            const mintFeeUsd = recvAmt * cfg.rp * mintFeeR;
+            const mintNet = recvAmt * (1 - mintFeeR);
+            const stakeAmt = mintNet * stakeRate;
+            const stakeFeeUsd = mintNet * cfg.rp * stakeFeeR;
+            const set = (sel: string, val: string) => {
+              const el = sum.querySelector(sel);
+              if (el) el.textContent = val;
+            };
+            set("[data-sum-mint]", num(recvAmt, 2) + " " + recvSym);
+            set("[data-sum-stake]", num(stakeAmt, 2) + " " + stakeSym);
+            set("[data-sum-mintfee]", money(mintFeeUsd));
+            set("[data-sum-stakefee]", money(stakeFeeUsd));
+          }
+        }
       };
       on(dep, "input", update);
       update(); /* trạng thái ban đầu */
