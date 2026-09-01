@@ -151,6 +151,19 @@ export default function AlphaClient() {
     const refreshAlert = () => setAlert(minted && !staked);
     const closeSuccess = () => { open(dlg, false); refreshAlert(); };
 
+    // "How it works" chỉ hiện khi form đang ở tab Mint.
+    const howEl = document.querySelector<HTMLElement>(".pg-alpha [data-how-works]");
+    const yzForm = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"]');
+    const syncHow = () => {
+      if (!howEl || !yzForm) return;
+      const active = yzForm.querySelector(".dir-switch button.on")?.getAttribute("data-dir");
+      howEl.hidden = active !== "mint";
+    };
+    const onDirClick = () => setTimeout(syncHow, 0);
+    yzForm?.querySelector(".dir-switch")?.addEventListener("click", onDirClick);
+    yzForm?.querySelector("[data-swap]")?.addEventListener("click", onDirClick);
+    syncHow();
+
     const depValue = () => {
       const inputs = mintPanel()?.querySelectorAll<HTMLInputElement>(".mfield-l input");
       return { inputs, dep: parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0 };
@@ -261,6 +274,8 @@ export default function AlphaClient() {
       depInput?.removeEventListener("input", onInput);
       document.removeEventListener("click", onClick);
       document.removeEventListener("keydown", onKey);
+      yzForm?.querySelector(".dir-switch")?.removeEventListener("click", onDirClick);
+      yzForm?.querySelector("[data-swap]")?.removeEventListener("click", onDirClick);
       document.body.style.overflow = "";
     };
   }, []);

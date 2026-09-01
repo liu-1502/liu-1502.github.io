@@ -218,7 +218,7 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
 
       {/* How it works (chỉ yzUSD) */}
       {t.key === "yzusd" && (
-        <section className="vd-sec vd-how-sec">
+        <section className="vd-sec vd-how-sec" data-how-works>
           <div className="vd-steprow">
             <span className="vd-stepnode"><span className="vd-stepic"><i>1</i></span><em>Mint yzUSD</em></span>
             <ChevronsRight className="vd-steparrow" />
