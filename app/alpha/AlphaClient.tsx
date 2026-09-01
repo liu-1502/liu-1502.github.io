@@ -84,6 +84,39 @@ export default function AlphaClient() {
     };
   }, []);
 
+  // Dialog "Mint thành công": mở khi bấm nút Mint, đóng khi backdrop / X / Back / Esc.
+  useEffect(() => {
+    const dlg = document.querySelector<HTMLElement>(".pg-alpha [data-mint-ok]");
+    if (!dlg) return;
+    const content = document.querySelector<HTMLElement>("main.content");
+    const setOpen = (o: boolean) => {
+      if (o) dlg.style.paddingLeft = (content ? Math.round(content.getBoundingClientRect().left) : 0) + "px";
+      dlg.hidden = !o;
+      document.body.style.overflow = o ? "hidden" : "";
+    };
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest("[data-mint-confirm]")) {
+        // số yzUSD nhận = ô "You receive" của panel Mint (fallback ô deposit).
+        const mint = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
+        const inputs = mint?.querySelectorAll<HTMLInputElement>(".mfield-l input");
+        const amt = (inputs?.[1]?.value || inputs?.[0]?.value || "0").trim() || "0";
+        dlg.querySelectorAll("[data-ok-amt]").forEach((el) => (el.textContent = amt));
+        setOpen(true);
+        return;
+      }
+      if (t.closest("[data-mint-ok-close]")) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("click", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("click", onClick);
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   // Chuyển token panel theo hash URL (sidebar sub-menu: /alpha#yzusd, /alpha#yzpp, /alpha#syzusd).
   useEffect(() => {
     const host = document.querySelector<HTMLElement>(".pg-alpha .xchg");

@@ -51,7 +51,7 @@
   .av-left { order: 2; }
   .av-right { order: 1; }
   @media (max-width: 980px) { .av-grid { grid-template-columns: 1fr; } .av-left { order: 1; } .av-right { order: 2; } }
-  .av-left { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .av-left { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
   .av-right { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
   .av-detail { display: flex; flex-direction: column; gap: 12px; }
   /* Header + tabs canh GIỮA theo chiều ngang content */
@@ -92,6 +92,36 @@
   /* Trong dialog: list cuộn, filters/search cố định trên đầu */
   .hist-panel .ohist { display: flex; flex-direction: column; min-height: 0; flex: 1; }
   .hist-panel .olist { overflow-y: auto; min-height: 0; padding-bottom: 8px; }
+
+  /* --- Dialog Mint thành công --- */
+  .mok { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 24px; }
+  .mok[hidden] { display: none; }
+  .mok-backdrop { position: absolute; inset: 0; background: color-mix(in srgb, #14211A 45%, transparent); backdrop-filter: blur(2px); }
+  .mok-card { position: relative; width: 100%; max-width: 430px; background: var(--surface); border-radius: 24px; padding: 30px 24px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 24px 64px rgba(0,0,0,.20); }
+  .mok-x { position: absolute; top: 16px; right: 16px; all: unset; box-sizing: border-box; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
+  .mok-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+  .mok-x svg { width: 20px; height: 20px; }
+  .mok-check { position: relative; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--accent); margin-bottom: 16px; }
+  .mok-check > svg { width: 34px; height: 34px; stroke-width: 2.5; }
+  .mok-check .s { position: absolute; color: var(--accent); }
+  .mok-check .s1 { width: 16px; height: 16px; top: -3px; right: -5px; }
+  .mok-check .s2 { width: 12px; height: 12px; bottom: 3px; left: -7px; opacity: .65; }
+  .mok-title { font-family: var(--font-display); font-weight: 680; font-size: 22px; color: var(--text); margin: 0; }
+  .mok-sub { font-family: var(--font-body); font-size: 15px; color: var(--muted); margin: 8px 0 0; }
+  .mok-sub b { color: var(--accent); font-weight: 640; }
+  .mok-earn { align-self: stretch; margin-top: 22px; padding: 16px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 7%, var(--surface)); text-align: left; display: flex; flex-direction: column; gap: 14px; }
+  .mok-earn-main { display: flex; gap: 12px; align-items: flex-start; }
+  .mok-earn-ic { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); color: var(--accent); }
+  .mok-earn-ic svg { width: 20px; height: 20px; }
+  .mok-earn-txt > b { display: block; font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); }
+  .mok-earn-txt > p { margin: 3px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+  .mok-earn-txt > p b { display: inline; color: var(--accent); font-weight: 640; }
+  .mok-flow { display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .mok-flow > svg { width: 18px; height: 18px; color: var(--muted); flex: none; }
+  .mok-chip { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; background: var(--surface); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--text); white-space: nowrap; }
+  .mok-chip img { width: 20px; height: 20px; border-radius: 50%; }
+  .mok-actions { align-self: stretch; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .mok-actions .btn { width: 100%; height: 50px; border-radius: 14px; font-family: var(--font-body); font-weight: 640; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; }
   /* Tab gộp yzUSD/syzUSD: 2 logo token kề nhau (chồng nhẹ như 1 cặp). */
   #alphaTabs .tok-logos { display: inline-flex; align-items: center; }
   #alphaTabs .tok-logos img { width: 20px; height: 20px; border-radius: 50%; display: block; }
