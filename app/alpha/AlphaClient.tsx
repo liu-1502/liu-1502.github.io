@@ -99,15 +99,15 @@ export default function AlphaClient() {
       if (t.closest("[data-mint-confirm]")) {
         const mint = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
         const inputs = mint?.querySelectorAll<HTMLInputElement>(".mfield-l input");
-        const err = mint?.querySelector<HTMLElement>("[data-mint-err]");
+        const xusd = mint?.querySelector<HTMLElement>(".mfield-l .xusd"); // dòng ≈$ dưới ô deposit
         const dep = parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0;
         if (dep <= 0) {
-          // Chưa nhập số -> báo lỗi, không mở dialog thành công.
-          if (err) err.hidden = false;
+          // Chưa nhập số -> báo lỗi ngay chỗ ≈$, không mở dialog thành công.
+          if (xusd) { xusd.textContent = "Enter an amount to mint first."; xusd.classList.add("xusd-err"); }
           inputs?.[0]?.focus();
           return;
         }
-        if (err) err.hidden = true;
+        if (xusd) xusd.classList.remove("xusd-err");
         // số yzUSD nhận = ô "You receive" của panel Mint (fallback ô deposit).
         const amt = (inputs?.[1]?.value || inputs?.[0]?.value || "0").trim() || "0";
         dlg.querySelectorAll("[data-ok-amt]").forEach((el) => (el.textContent = amt));
@@ -117,10 +117,10 @@ export default function AlphaClient() {
       if (t.closest("[data-mint-ok-close]")) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    // Gõ vào ô deposit -> xoá lỗi.
+    // Gõ vào ô deposit -> xoá lỗi (hook tự set lại text ≈$; ở đây bỏ màu đỏ).
     const depInput = document.querySelector<HTMLInputElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l input');
-    const err = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] [data-mint-err]');
-    const onInput = () => { if (err) err.hidden = true; };
+    const xusd = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l .xusd');
+    const onInput = () => { xusd?.classList.remove("xusd-err"); };
     depInput?.addEventListener("input", onInput);
     document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);

@@ -273,7 +273,6 @@ export default function Alpha() {
                 <Button block variant="line" className="gcta gcta-2nd" data-mint-confirm>Connect wallet</Button>
                 <Button block className="gcta" data-cta-fixed>Mint &amp; Stake</Button>
               </div>
-              <p className="mint-warn" data-mint-err hidden>Enter an amount to mint first.</p>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">

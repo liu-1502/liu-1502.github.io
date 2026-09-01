@@ -98,7 +98,7 @@
   .mok[hidden] { display: none; }
   .mok-backdrop { position: absolute; inset: 0; background: color-mix(in srgb, #14211A 45%, transparent); backdrop-filter: blur(2px); }
   .mok-card { position: relative; width: 100%; max-width: 430px; background: var(--surface); border-radius: 24px; padding: 30px 24px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 24px 64px rgba(0,0,0,.20); }
-  .mok-x { position: absolute; top: 16px; right: 16px; all: unset; box-sizing: border-box; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
+  .mok-x { all: unset; box-sizing: border-box; position: absolute; top: 16px; right: 16px; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
   .mok-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
   .mok-x svg { width: 20px; height: 20px; }
   .mok-check { position: relative; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--accent); margin-bottom: 16px; }
@@ -454,8 +454,7 @@
   /* 2 nút xếp dọc: "Mint & Stake" (primary) trên, "Mint" (secondary/outline) dưới */
   .gcta-stack { align-self: stretch; display: flex; flex-direction: row; gap: 10px; }
   .gcta-stack .btn.btn-block { flex: 1; }
-  .mint-warn { align-self: stretch; margin: 0; text-align: center; font-family: var(--font-body); font-size: 13px; color: #C0392B; }
-  .mint-warn[hidden] { display: none; }
+  .xusd-err { color: #C0392B !important; }
   /* Bảng tóm tắt khi đã nhập số (mint/stake amount + phí) */
   .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 2px; padding: 14px 2px 2px; border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .mint-sum[hidden] { display: none; }
