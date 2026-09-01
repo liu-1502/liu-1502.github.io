@@ -479,7 +479,7 @@
   .gcta-stack .btn.btn-block { flex: 1; }
   .xusd-err { color: #C0392B !important; }
   /* Bảng tóm tắt: dòng thu gọn nằm ngay dưới form, divider ở DƯỚI dòng đó */
-  .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 0; padding: 0 2px; }
+  .mint-sum { align-self: stretch; display: flex; flex-direction: column; gap: 0; padding: 0 2px; margin-top: -10px; }
   .mint-sum[hidden] { display: none; }
   /* panel có breakdown -> ẩn dòng rate rời (đã gộp vào bar) */
   [data-dirpanel]:has([data-sum]) .rate-line { display: none !important; }
