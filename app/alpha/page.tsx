@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, Check, Sparkles } from "lucide-react";
+import { ArrowUpDown, ArrowDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, Check, Sparkles } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -265,9 +265,15 @@ export default function Alpha() {
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$0.00" input={{ readOnly: true }} />
               </div>
               <div className="mint-sum" data-sum data-mint-fee="0.001" data-stake-fee="0.005" data-stake-rate="0.9361" data-stake-sym="syzUSD" hidden>
-                <div className="msum-row"><span>You&rsquo;ll receive</span><b data-sum-stake>0 syzUSD</b></div>
-                <div className="msum-row"><span>Mint fee <i>0.10%</i></span><b data-sum-mintfee>$0.00</b></div>
-                <div className="msum-row"><span>Stake fee <i>0.50%</i></span><b data-sum-stakefee>$0.00</b></div>
+                <button type="button" className="msum-bar" data-sum-toggle aria-expanded="false">
+                  <span className="msum-rate" data-sum-rate />
+                  <span className="msum-bar-r"><b className="msum-feeval" data-sum-totalfee>$0.00</b><ChevronDown className="msum-chev" /></span>
+                </button>
+                <div className="msum-detail" data-sum-detail hidden>
+                  <div className="msum-row"><span>You&rsquo;ll receive</span><b data-sum-stake>0 syzUSD</b></div>
+                  <div className="msum-row"><span>Mint fee <i>0.10%</i></span><b data-sum-mintfee>$0.00</b></div>
+                  <div className="msum-row"><span>Stake fee <i>0.50%</i></span><b data-sum-stakefee>$0.00</b></div>
+                </div>
               </div>
               <div className="gcta-stack">
                 <Button block variant="line" className="gcta gcta-2nd" data-mint-confirm>Connect wallet</Button>
@@ -281,8 +287,14 @@ export default function Alpha() {
                 <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
               <div className="mint-sum" data-sum data-redeem-fee="0.001" hidden>
-                <div className="msum-row"><span>Redeem amount</span><b data-sum-redeem>0 USDT0</b></div>
-                <div className="msum-row"><span>Redeem fee <i>0.10%</i></span><b data-sum-redeemfee>$0.00</b></div>
+                <button type="button" className="msum-bar" data-sum-toggle aria-expanded="false">
+                  <span className="msum-rate" data-sum-rate />
+                  <span className="msum-bar-r"><b className="msum-feeval" data-sum-totalfee>$0.00</b><ChevronDown className="msum-chev" /></span>
+                </button>
+                <div className="msum-detail" data-sum-detail hidden>
+                  <div className="msum-row"><span>Redeem amount</span><b data-sum-redeem>0 USDT0</b></div>
+                  <div className="msum-row"><span>Redeem fee <i>0.10%</i></span><b data-sum-redeemfee>$0.00</b></div>
+                </div>
               </div>
               <Button block className="gcta">Connect wallet</Button>
             </div>

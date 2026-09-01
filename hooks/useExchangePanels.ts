@@ -125,12 +125,18 @@ export function useExchangePanels(rates: RateMap, options: ExchangePanelOptions 
               const el = sum.querySelector(sel);
               if (el) el.textContent = val;
             };
+            const mintFeeUsd = recvUsd * mintFeeR;
+            const stakeFeeUsd = mintNet * cfg.rp * stakeFeeR;
+            const redeemFeeUsd = recvUsd * redeemFeeR;
             set("[data-sum-mint]", num(recvAmt, 2) + " " + recvSym);
             set("[data-sum-redeem]", num(recvAmt, 2) + " " + recvSym);
             set("[data-sum-stake]", num(mintNet * stakeRate, 2) + " " + stakeSym);
-            set("[data-sum-mintfee]", money(recvUsd * mintFeeR));
-            set("[data-sum-stakefee]", money(mintNet * cfg.rp * stakeFeeR));
-            set("[data-sum-redeemfee]", money(recvUsd * redeemFeeR));
+            set("[data-sum-mintfee]", money(mintFeeUsd));
+            set("[data-sum-stakefee]", money(stakeFeeUsd));
+            set("[data-sum-redeemfee]", money(redeemFeeUsd));
+            // Dòng thu gọn: rate (trái) + phí mint/redeem (phải, KHÔNG gồm stake fee).
+            set("[data-sum-rate]", "1 " + depSym + " = " + num(cfg.rate) + " " + recvSym);
+            set("[data-sum-totalfee]", money(mintFeeUsd + redeemFeeUsd));
           }
         }
       };

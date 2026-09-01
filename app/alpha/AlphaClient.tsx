@@ -100,6 +100,17 @@ export default function AlphaClient() {
     const mintPanel = () => document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
     const onClick = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
+      // Thu gọn/mở breakdown (dòng tóm tắt <-> full).
+      const toggle = t.closest<HTMLElement>("[data-sum-toggle]");
+      if (toggle) {
+        const detail = toggle.closest("[data-sum]")?.querySelector<HTMLElement>("[data-sum-detail]");
+        if (detail) {
+          const willOpen = detail.hidden;
+          detail.hidden = !willOpen;
+          toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        }
+        return;
+      }
       if (t.closest("[data-mint-confirm]")) {
         const mint = mintPanel();
         const inputs = mint?.querySelectorAll<HTMLInputElement>(".mfield-l input");
