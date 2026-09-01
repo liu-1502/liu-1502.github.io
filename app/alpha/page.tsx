@@ -235,9 +235,8 @@ export default function Alpha() {
           </div>
           {/* Token pill tabs */}
           <div className="tok-tabs xchg-tabs" id="alphaTabs">
-            <button className="tok-tab on" data-tab="yzusd"><img src="/assets/tokens/yzUSD.svg" alt="" /><span className="sym">yzUSD</span></button>
+            <button className="tok-tab on" data-tab="yzusd"><span className="tok-logos"><img src="/assets/tokens/yzUSD.svg" alt="" /><img src="/assets/tokens/syzUSD.svg" alt="" /></span><span className="sym">yzUSD/syzUSD</span></button>
             <button className="tok-tab" data-tab="yzpp"><img src="/assets/tokens/yzPP.svg" alt="" /><span className="sym">yzPP</span></button>
-            <button className="tok-tab" data-tab="syzusd"><img src="/assets/tokens/syzUSD.svg" alt="" /><span className="sym">syzUSD</span></button>
           </div>
 
           <div className="av-grid">

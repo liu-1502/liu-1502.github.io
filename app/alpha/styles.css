@@ -59,6 +59,10 @@
   /* Token tabs Alpha: bản gốc — chip trắng có logo phía trước, selected nền xanh
      (dùng style .tok-tab mặc định), canh giữa. */
   #alphaTabs { justify-content: center; }
+  /* Tab gộp yzUSD/syzUSD: 2 logo token kề nhau (chồng nhẹ như 1 cặp). */
+  #alphaTabs .tok-logos { display: inline-flex; align-items: center; }
+  #alphaTabs .tok-logos img { width: 20px; height: 20px; border-radius: 50%; display: block; }
+  #alphaTabs .tok-logos img + img { margin-left: -5px; }
 
   /* ---- Detail sections (giống cột phải Marketplace) ---- */
   .vd-sec { padding: 22px; background: var(--surface); border-radius: 20px; }
