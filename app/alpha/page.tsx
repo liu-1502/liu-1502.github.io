@@ -556,16 +556,9 @@ export default function Alpha() {
           <div className="mok-card" role="dialog" aria-modal="true" aria-label="Mint successful">
             <button type="button" className="mok-x" data-mint-ok-close aria-label="Close"><X /></button>
             <div className="mok-check"><Check /></div>
+            <div className="mok-amt"><span data-ok-amt>0</span> yzUSD</div>
             <h3 className="mok-title">yzUSD minted successfully</h3>
-            <p className="mok-sub">You received <b><span data-ok-amt>0</span> yzUSD</b>. Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
-            <div className="mok-mini">
-              <div className="mok-mini-icons">
-                <img src="/assets/tokens/usdt0.png" alt="" />
-                <span className="mok-mini-arrow"><ArrowRight /></span>
-                <img src="/assets/tokens/yzUSD.svg" alt="" />
-              </div>
-              <div className="mok-mini-amts"><b><span data-ok-pay>0</span> USDT0</b><ArrowRight className="sep" /><b><span data-ok-amt>0</span> yzUSD</b></div>
-            </div>
+            <p className="mok-sub">Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
             <div className="mok-info">
               <div className="mok-info-row mok-info-between"><span>Transaction ID</span><b className="mok-txid">VKN-8993J244</b></div>
               <div className="mok-info-row mok-info-between"><span>Mint fee</span><b data-ok-fee>$0.00</b></div>

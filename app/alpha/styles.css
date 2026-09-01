@@ -109,13 +109,14 @@
   .mok-check .s { position: absolute; color: var(--accent); }
   .mok-check .s1 { width: 18px; height: 18px; top: -4px; right: -8px; }
   .mok-check .s2 { width: 13px; height: 13px; bottom: 4px; left: -10px; opacity: .7; }
-  .mok-title { font-family: var(--font-display); font-weight: 680; font-size: 22px; color: var(--text); margin: 0; }
+  .mok-amt { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1.1; color: var(--accent); margin: 0 0 14px; }
+  .mok-title { font-family: var(--font-display); font-weight: 660; font-size: 18px; color: var(--text); margin: 0; }
   .mok-title-tick { display: inline; width: 19px; height: 19px; vertical-align: -2px; stroke-width: 3; }
-  .mok-sub { font-family: var(--font-body); font-size: 15px; color: var(--muted); margin: 8px 0 0; }
+  .mok-sub { font-family: var(--font-body); font-size: 15px; color: var(--muted); margin: 4px 0 0; }
   .mok-sub b { color: var(--accent); font-weight: 640; }
   /* 2 token cards (giá trị đổi) + info (tx id / fee) */
   .mok-exch { position: relative; align-self: stretch; margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 8px; }
-  .mok-exch-card { background: color-mix(in srgb, var(--text) 5%, var(--surface)); border-radius: 16px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+  .mok-exch-card { background: color-mix(in srgb, var(--text) 5%, var(--surface)); border-radius: 16px; padding: 12px 12px 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
   .mok-exch-card img { width: 34px; height: 34px; border-radius: 50%; object-fit: contain; }
   .mok-exch-card b { font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); white-space: nowrap; }
   .mok-exch-ic { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--muted); box-shadow: 0 0 0 4px var(--surface); }
@@ -128,7 +129,7 @@
   .mok-mini-arrow svg { width: 14px; height: 14px; }
   .mok-mini-amts { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); }
   .mok-mini-amts .sep { width: 15px; height: 15px; color: var(--muted); }
-  .mok-info { align-self: stretch; margin-top: 16px; display: flex; flex-direction: column; gap: 11px; }
+  .mok-info { align-self: stretch; margin-top: 24px; padding: 14px 16px; border-radius: 14px; background: color-mix(in srgb, var(--text) 4%, var(--surface)); display: flex; flex-direction: column; gap: 11px; }
   .mok-info-row { display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 14px; }
   .mok-info-row.mok-info-between { justify-content: space-between; }
   .mok-info-row > span:first-child { color: var(--muted); flex: none; }
@@ -508,8 +509,8 @@
   .mint-sum[hidden] { display: none; }
   /* panel có breakdown -> ẩn dòng rate rời (đã gộp vào bar) */
   [data-dirpanel]:has([data-sum]) .rate-line { display: none !important; }
-  .msum-bar { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 0 0 12px; border-bottom: 1px solid transparent; }
-  .msum-bar[aria-expanded="true"] { border-bottom-color: color-mix(in srgb, var(--text) 12%, transparent); }
+  .msum-bar { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 0; border-bottom: 1px solid transparent; }
+  .msum-bar[aria-expanded="true"] { padding-bottom: 12px; border-bottom-color: color-mix(in srgb, var(--text) 12%, transparent); }
   .msum-rate { font-family: var(--font-body); font-size: 14px; color: var(--muted); }
   .msum-bar-r { display: inline-flex; align-items: center; gap: 8px; }
   .msum-feeval { font-family: var(--font-mono); font-weight: 600; font-size: 14px; color: var(--text); }
