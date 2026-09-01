@@ -84,39 +84,55 @@ export default function AlphaClient() {
     };
   }, []);
 
-  // Dialog "Mint thành công": mở khi bấm nút Mint, đóng khi backdrop / X / Back / Esc.
+  // Flow Mint: bấm "Mint" -> dialog Review order -> Confirm -> dialog thành công.
   useEffect(() => {
+    const review = document.querySelector<HTMLElement>(".pg-alpha [data-mint-review]");
     const dlg = document.querySelector<HTMLElement>(".pg-alpha [data-mint-ok]");
-    if (!dlg) return;
+    if (!review || !dlg) return;
     const content = document.querySelector<HTMLElement>("main.content");
-    const setOpen = (o: boolean) => {
-      if (o) dlg.style.paddingLeft = (content ? Math.round(content.getBoundingClientRect().left) : 0) + "px";
-      dlg.hidden = !o;
-      document.body.style.overflow = o ? "hidden" : "";
+    const padLeft = () => (content ? Math.round(content.getBoundingClientRect().left) : 0) + "px";
+    const open = (el: HTMLElement, o: boolean) => {
+      if (o) el.style.paddingLeft = padLeft();
+      el.hidden = !o;
+      document.body.style.overflow = review.hidden && dlg.hidden ? "" : "hidden";
     };
+    const money = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const mintPanel = () => document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
     const onClick = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
       if (t.closest("[data-mint-confirm]")) {
-        const mint = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
+        const mint = mintPanel();
         const inputs = mint?.querySelectorAll<HTMLInputElement>(".mfield-l input");
         const xusd = mint?.querySelector<HTMLElement>(".mfield-l .xusd"); // dòng ≈$ dưới ô deposit
         const dep = parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0;
         if (dep <= 0) {
-          // Chưa nhập số -> báo lỗi ngay chỗ ≈$, không mở dialog thành công.
-          if (xusd) { xusd.textContent = "Enter an amount to mint first."; xusd.classList.add("xusd-err"); }
+          if (xusd) { xusd.textContent = "Enter an amount first"; xusd.classList.add("xusd-err"); }
           inputs?.[0]?.focus();
           return;
         }
         if (xusd) xusd.classList.remove("xusd-err");
-        // số yzUSD nhận = ô "You receive" của panel Mint (fallback ô deposit).
-        const amt = (inputs?.[1]?.value || inputs?.[0]?.value || "0").trim() || "0";
-        dlg.querySelectorAll("[data-ok-amt]").forEach((el) => (el.textContent = amt));
-        setOpen(true);
+        const pay = (inputs?.[0]?.value || "0").trim() || "0";
+        const recv = (inputs?.[1]?.value || pay).trim() || "0";
+        const set = (sel: string, v: string) => { const el = review.querySelector(sel); if (el) el.textContent = v; };
+        set("[data-rev-pay]", pay);
+        set("[data-rev-recv]", recv);
+        set("[data-rev-fee]", money(dep * 0.001));
+        open(review, true);
         return;
       }
-      if (t.closest("[data-mint-ok-close]")) setOpen(false);
+      if (t.closest("[data-mint-review-confirm]")) {
+        // Xác nhận -> đóng review, mở dialog thành công với số yzUSD nhận.
+        const inputs = mintPanel()?.querySelectorAll<HTMLInputElement>(".mfield-l input");
+        const amt = (inputs?.[1]?.value || inputs?.[0]?.value || "0").trim() || "0";
+        dlg.querySelectorAll("[data-ok-amt]").forEach((el) => (el.textContent = amt));
+        open(review, false);
+        open(dlg, true);
+        return;
+      }
+      if (t.closest("[data-mint-review-close]")) open(review, false);
+      if (t.closest("[data-mint-ok-close]")) open(dlg, false);
     };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { open(review, false); open(dlg, false); } };
     // Gõ vào ô deposit -> xoá lỗi (hook tự set lại text ≈$; ở đây bỏ màu đỏ).
     const depInput = document.querySelector<HTMLInputElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l input');
     const xusd = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l .xusd');

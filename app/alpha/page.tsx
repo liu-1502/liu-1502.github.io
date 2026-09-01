@@ -511,6 +511,29 @@ export default function Alpha() {
           </div>
         </div>
 
+        {/* Dialog: Review order (bấm "Mint" -> review -> Confirm -> thành công) */}
+        <div className="mok" data-mint-review hidden>
+          <div className="mok-backdrop" data-mint-review-close />
+          <div className="mok-card mrev-card" role="dialog" aria-modal="true" aria-label="Review order">
+            <div className="mrev-head">
+              <b>Review order</b>
+              <button type="button" className="mok-x mrev-x" data-mint-review-close aria-label="Close"><X /></button>
+            </div>
+            <div className="mrev-rows">
+              <div className="mrev-row"><span>You pay</span><b><img src="/assets/tokens/usdt0.png" alt="" /><span data-rev-pay>0</span>&nbsp;USDT0</b></div>
+              <div className="mrev-row"><span>You receive</span><b><img src="/assets/tokens/yzUSD.svg" alt="" /><span data-rev-recv>0</span>&nbsp;yzUSD</b></div>
+              <div className="mrev-sep" />
+              <div className="mrev-row"><span>Rate</span><b>1 USDT0 = 1 yzUSD</b></div>
+              <div className="mrev-row"><span>Mint fee <i>0.10%</i></span><b data-rev-fee>$0.00</b></div>
+              <div className="mrev-row"><span>Network</span><b className="mrev-net"><img src="/assets/chains/plasma.svg" alt="" />Plasma</b></div>
+            </div>
+            <div className="mok-actions">
+              <button type="button" className="btn btn-accent btn-block" data-mint-review-confirm>Confirm mint</button>
+              <button type="button" className="btn btn-line btn-block" data-mint-review-close>Cancel</button>
+            </div>
+          </div>
+        </div>
+
         {/* Dialog: Mint thành công (bấm nút "Mint") */}
         <div className="mok" data-mint-ok hidden>
           <div className="mok-backdrop" data-mint-ok-close />
