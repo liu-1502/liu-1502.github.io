@@ -513,7 +513,9 @@
   .msum-bar[aria-expanded="true"] { padding-bottom: 12px; border-bottom-color: color-mix(in srgb, var(--text) 12%, transparent); }
   .msum-rate { font-family: var(--font-body); font-size: 14px; color: var(--muted); }
   .msum-bar-r { display: inline-flex; align-items: center; gap: 8px; }
-  .msum-feeval { font-family: var(--font-mono); font-weight: 600; font-size: 14px; color: var(--text); }
+  .msum-feeval { display: inline-flex; align-items: baseline; gap: 5px; }
+  .msum-feelabel { font-family: var(--font-body); font-size: 14px; color: var(--muted); }
+  .msum-feeval b { font-family: var(--font-mono); font-weight: 600; font-size: 14px; color: var(--text); }
   .msum-bar[aria-expanded="true"] .msum-feeval { display: none; } /* mở rồi thì ẩn phí bên phải */
   .msum-chev { width: 18px; height: 18px; color: var(--muted); transition: transform .15s; }
   .msum-bar[aria-expanded="true"] .msum-chev { transform: rotate(180deg); }

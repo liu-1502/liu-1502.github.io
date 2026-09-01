@@ -97,7 +97,82 @@ export default function AlphaClient() {
       document.body.style.overflow = review.hidden && dlg.hidden ? "" : "hidden";
     };
     const money = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const num = (n: number) => n.toLocaleString("en-US", { maximumFractionDigits: 2 });
     const mintPanel = () => document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
+    const MINT_FEE = 0.001;
+
+    // Hai luồng dùng chung 2 dialog; nội dung đổi theo flow.
+    type Flow = {
+      recvSym: string; recvIcon: string; recvMul: number; stakeFee: number; showStake: boolean;
+      rate: string; revTitle: string; revCta: string; okTitle: string; okSub: string; okPrimary: string; okPay: string;
+    };
+    const FLOWS: Record<string, Flow> = {
+      mint: {
+        recvSym: "yzUSD", recvIcon: "/assets/tokens/yzUSD.svg", recvMul: 1, stakeFee: 0, showStake: false,
+        rate: "1 USDT0 = 1 yzUSD", revTitle: "You’re minting", revCta: "Confirm mint",
+        okTitle: "yzUSD minted successfully",
+        okSub: "Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.",
+        okPrimary: "Stake now", okPay: "USDT0",
+      },
+      mintstake: {
+        recvSym: "syzUSD", recvIcon: "/assets/tokens/syzUSD.svg", recvMul: (1 - 0.001) * 0.9361, stakeFee: 0.005, showStake: true,
+        rate: "1 USDT0 = 0.9361 syzUSD", revTitle: "You’re minting & staking", revCta: "Confirm mint & stake",
+        okTitle: "Minted & staked successfully",
+        okSub: "You’re now earning <b>7.75%</b> weekly yield on syzUSD.",
+        okPrimary: "View position", okPay: "USDT0",
+      },
+    };
+    let current: Flow = FLOWS.mint;
+
+    const depValue = () => {
+      const inputs = mintPanel()?.querySelectorAll<HTMLInputElement>(".mfield-l input");
+      return { inputs, pay: (inputs?.[0]?.value || "0").trim() || "0", dep: parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0 };
+    };
+    const startFlow = (cfg: Flow) => {
+      const { inputs, pay, dep } = depValue();
+      const xusd = mintPanel()?.querySelector<HTMLElement>(".mfield-l .xusd");
+      if (dep <= 0) {
+        if (xusd) { xusd.textContent = "Enter an amount first"; xusd.classList.add("xusd-err"); }
+        inputs?.[0]?.focus();
+        return;
+      }
+      if (xusd) xusd.classList.remove("xusd-err");
+      current = cfg;
+      const recv = num(dep * cfg.recvMul);
+      const set = (sel: string, v: string) => { const el = review.querySelector(sel); if (el) el.textContent = v; };
+      set("[data-rev-title]", cfg.revTitle);
+      set("[data-rev-pay]", pay);
+      set("[data-rev-recv]", recv);
+      set("[data-rev-recv-sym]", cfg.recvSym);
+      review.querySelector("[data-rev-recv-icon]")?.setAttribute("src", cfg.recvIcon);
+      set("[data-rev-rate]", cfg.rate);
+      set("[data-rev-fee]", money(dep * MINT_FEE));
+      set("[data-rev-stakefee]", money(dep * (1 - MINT_FEE) * cfg.stakeFee));
+      const srow = review.querySelector<HTMLElement>("[data-rev-stakefee-row]");
+      if (srow) srow.hidden = !cfg.showStake;
+      set("[data-rev-cta]", cfg.revCta);
+      open(review, true);
+    };
+    const finishFlow = () => {
+      const cfg = current;
+      const { dep } = depValue();
+      const recv = num(dep * cfg.recvMul);
+      const oset = (sel: string, v: string) => dlg.querySelectorAll(sel).forEach((el) => (el.textContent = v));
+      oset("[data-ok-amt]", recv);
+      oset("[data-ok-sym]", cfg.recvSym);
+      oset("[data-ok-title]", cfg.okTitle);
+      const osub = dlg.querySelector<HTMLElement>("[data-ok-sub]");
+      if (osub) osub.innerHTML = cfg.okSub;
+      oset("[data-ok-fee]", money(dep * MINT_FEE));
+      oset("[data-ok-stakefee]", money(dep * (1 - MINT_FEE) * cfg.stakeFee));
+      const osrow = dlg.querySelector<HTMLElement>("[data-ok-stakefee-row]");
+      if (osrow) osrow.hidden = !cfg.showStake;
+      const oprim = dlg.querySelector<HTMLElement>("[data-ok-primary]");
+      if (oprim) oprim.textContent = cfg.okPrimary;
+      open(review, false);
+      open(dlg, true);
+    };
+
     const onClick = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
       // Thu gọn/mở breakdown (dòng tóm tắt <-> full).
@@ -111,41 +186,9 @@ export default function AlphaClient() {
         }
         return;
       }
-      if (t.closest("[data-mint-confirm]")) {
-        const mint = mintPanel();
-        const inputs = mint?.querySelectorAll<HTMLInputElement>(".mfield-l input");
-        const xusd = mint?.querySelector<HTMLElement>(".mfield-l .xusd"); // dòng ≈$ dưới ô deposit
-        const dep = parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0;
-        if (dep <= 0) {
-          if (xusd) { xusd.textContent = "Enter an amount first"; xusd.classList.add("xusd-err"); }
-          inputs?.[0]?.focus();
-          return;
-        }
-        if (xusd) xusd.classList.remove("xusd-err");
-        const pay = (inputs?.[0]?.value || "0").trim() || "0";
-        const recv = (inputs?.[1]?.value || pay).trim() || "0";
-        const set = (sel: string, v: string) => { const el = review.querySelector(sel); if (el) el.textContent = v; };
-        set("[data-rev-pay]", pay);
-        set("[data-rev-recv]", recv);
-        set("[data-rev-pay-usd]", money(dep));   // USDT0 ~ $1
-        set("[data-rev-recv-usd]", money(dep));  // yzUSD 1:1 ~ $1
-        set("[data-rev-fee]", money(dep * 0.001));
-        open(review, true);
-        return;
-      }
-      if (t.closest("[data-mint-review-confirm]")) {
-        // Xác nhận -> đóng review, mở dialog thành công (số nhận / số trả / phí).
-        const inputs = mintPanel()?.querySelectorAll<HTMLInputElement>(".mfield-l input");
-        const pay = (inputs?.[0]?.value || "0").trim() || "0";
-        const amt = (inputs?.[1]?.value || pay).trim() || "0";
-        const dep = parseFloat(pay.replace(/,/g, "")) || 0;
-        dlg.querySelectorAll("[data-ok-amt]").forEach((el) => (el.textContent = amt));
-        dlg.querySelectorAll("[data-ok-pay]").forEach((el) => (el.textContent = pay));
-        dlg.querySelectorAll("[data-ok-fee]").forEach((el) => (el.textContent = money(dep * 0.001)));
-        open(review, false);
-        open(dlg, true);
-        return;
-      }
+      if (t.closest("[data-mint-confirm]")) { startFlow(FLOWS.mint); return; }
+      if (t.closest("[data-mintstake-confirm]")) { startFlow(FLOWS.mintstake); return; }
+      if (t.closest("[data-mint-review-confirm]")) { finishFlow(); return; }
       if (t.closest("[data-mint-review-close]")) open(review, false);
       if (t.closest("[data-mint-ok-close]")) open(dlg, false);
     };

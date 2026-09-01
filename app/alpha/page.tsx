@@ -267,7 +267,7 @@ export default function Alpha() {
               <div className="mint-sum" data-sum data-mint-fee="0.001" data-stake-fee="0.005" data-stake-rate="0.9361" data-stake-sym="syzUSD" hidden>
                 <button type="button" className="msum-bar" data-sum-toggle aria-expanded="false">
                   <span className="msum-rate" data-sum-rate />
-                  <span className="msum-bar-r"><b className="msum-feeval" data-sum-totalfee>$0.00</b><ChevronDown className="msum-chev" /></span>
+                  <span className="msum-bar-r"><span className="msum-feeval"><span className="msum-feelabel">Fee</span> <b data-sum-totalfee>$0.00</b></span><ChevronDown className="msum-chev" /></span>
                 </button>
                 <div className="msum-detail" data-sum-detail hidden>
                   <div className="msum-row"><span>Stake amount</span><b data-sum-stake>0 syzUSD</b></div>
@@ -277,7 +277,7 @@ export default function Alpha() {
               </div>
               <div className="gcta-stack">
                 <Button block variant="line" className="gcta gcta-2nd" data-mint-confirm>Connect wallet</Button>
-                <Button block className="gcta" data-cta-fixed>Mint &amp; Stake</Button>
+                <Button block className="gcta" data-cta-fixed data-mintstake-confirm>Mint &amp; Stake</Button>
               </div>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
@@ -289,7 +289,7 @@ export default function Alpha() {
               <div className="mint-sum" data-sum data-redeem-fee="0.001" hidden>
                 <button type="button" className="msum-bar" data-sum-toggle aria-expanded="false">
                   <span className="msum-rate" data-sum-rate />
-                  <span className="msum-bar-r"><b className="msum-feeval" data-sum-totalfee>$0.00</b><ChevronDown className="msum-chev" /></span>
+                  <span className="msum-bar-r"><span className="msum-feeval"><span className="msum-feelabel">Fee</span> <b data-sum-totalfee>$0.00</b></span><ChevronDown className="msum-chev" /></span>
                 </button>
                 <div className="msum-detail" data-sum-detail hidden>
                   <div className="msum-row"><span>Redeem amount</span><b data-sum-redeem>0 USDT0</b></div>
@@ -528,7 +528,7 @@ export default function Alpha() {
           <div className="mok-backdrop" data-mint-review-close />
           <div className="mok-card mrev-card" role="dialog" aria-modal="true" aria-label="Review order">
             <div className="mrev-head">
-              <b>You&rsquo;re minting</b>
+              <b data-rev-title>You&rsquo;re minting</b>
               <button type="button" className="mok-x mrev-x" data-mint-review-close aria-label="Close"><X /></button>
             </div>
             <div className="mok-exch">
@@ -538,15 +538,16 @@ export default function Alpha() {
               </div>
               <span className="mok-exch-ic"><ArrowRight /></span>
               <div className="mok-exch-card">
-                <img src="/assets/tokens/yzUSD.svg" alt="" />
-                <b><span data-rev-recv>0</span> yzUSD</b>
+                <img data-rev-recv-icon src="/assets/tokens/yzUSD.svg" alt="" />
+                <b><span data-rev-recv>0</span> <span data-rev-recv-sym>yzUSD</span></b>
               </div>
             </div>
-            <div className="mrev-cost"><span>Rate</span><b>1 USDT0 = 1 yzUSD</b></div>
+            <div className="mrev-cost"><span>Rate</span><b data-rev-rate>1 USDT0 = 1 yzUSD</b></div>
             <div className="mrev-cost"><span>Mint fee <i>0.10%</i></span><b data-rev-fee>$0.00</b></div>
+            <div className="mrev-cost" data-rev-stakefee-row hidden><span>Stake fee <i>0.50%</i></span><b data-rev-stakefee>$0.00</b></div>
             <div className="mrev-cost"><span>Network fee</span><b>&lt;$0.01</b></div>
             <div className="mrev-cost"><span>Estimated time</span><b>~30 seconds</b></div>
-            <button type="button" className="btn btn-accent btn-block mrev-cta" data-mint-review-confirm>Confirm mint</button>
+            <button type="button" className="btn btn-accent btn-block mrev-cta" data-mint-review-confirm><span data-rev-cta>Confirm mint</span></button>
           </div>
         </div>
 
@@ -556,15 +557,16 @@ export default function Alpha() {
           <div className="mok-card" role="dialog" aria-modal="true" aria-label="Mint successful">
             <button type="button" className="mok-x" data-mint-ok-close aria-label="Close"><X /></button>
             <div className="mok-check"><Check /></div>
-            <div className="mok-amt"><span data-ok-amt>0</span> yzUSD</div>
-            <h3 className="mok-title">yzUSD minted successfully</h3>
-            <p className="mok-sub">Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
+            <div className="mok-amt"><span data-ok-amt>0</span> <span data-ok-sym>yzUSD</span></div>
+            <h3 className="mok-title" data-ok-title>yzUSD minted successfully</h3>
+            <p className="mok-sub" data-ok-sub>Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
             <div className="mok-info">
               <div className="mok-info-row mok-info-between"><span>Transaction ID</span><b className="mok-txid">VKN-8993J244</b></div>
               <div className="mok-info-row mok-info-between"><span>Mint fee</span><b data-ok-fee>$0.00</b></div>
+              <div className="mok-info-row mok-info-between" data-ok-stakefee-row hidden><span>Stake fee</span><b data-ok-stakefee>$0.00</b></div>
             </div>
             <div className="mok-actions">
-              <button type="button" className="btn btn-accent btn-block">Stake now</button>
+              <button type="button" className="btn btn-accent btn-block" data-ok-primary>Stake now</button>
               <button type="button" className="btn btn-line btn-block" data-mint-ok-close>Back to portfolio</button>
             </div>
           </div>
