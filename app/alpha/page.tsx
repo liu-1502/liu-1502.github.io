@@ -3,7 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, History as HistoryIcon, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -282,13 +282,13 @@ export default function Alpha() {
               <div className="swapx">
                 <div className="swapx-head">
                   <b className="swapx-title">Exchange</b>
-                  <button type="button" className="swapx-gear" aria-label="Settings"><Settings /></button>
+                  <button type="button" className="swapx-gear" data-swap-open="settings" aria-label="Settings"><Settings /></button>
                 </div>
                 <div className="swapx-io">
-                  <div className="swapx-box">
+                  <button type="button" className="swapx-box swapx-from" data-swap-open="from" aria-haspopup="dialog">
                     <span className="swapx-lbl">From</span>
-                    <span className="swapx-tok"><span className="swapx-ic swapx-ic-empty" /><span className="swapx-name muted">Select…</span></span>
-                  </div>
+                    <span className="swapx-tok"><span className="swapx-ic swapx-ic-empty" data-from-ic /><span className="swapx-name muted" data-from-name>Select…</span></span>
+                  </button>
                   <span className="swapx-arrow"><ArrowRight /></span>
                   <div className="swapx-box">
                     <span className="swapx-lbl">To</span>
@@ -302,9 +302,93 @@ export default function Alpha() {
                 </div>
                 <div className="swapx-cta">
                   <Button block className="gcta">Connect wallet</Button>
-                  <button type="button" className="swapx-wallet" aria-label="Wallet"><Wallet /></button>
+                  <button type="button" className="swapx-wallet" data-swap-open="wallet" aria-label="Wallet"><Wallet /></button>
                 </div>
                 <div className="swapx-powered">Powered by <b>LI.FI</b></div>
+
+                {/* ---- Sheet: Exchange from (chọn token nguồn) ---- */}
+                <div className="swapx-sheet" data-swap-sheet="from" hidden>
+                  <div className="swapx-sheet-head">
+                    <button type="button" className="swapx-back" data-swap-back aria-label="Back"><ArrowLeft /></button>
+                    <b>Exchange from</b>
+                  </div>
+                  <div className="swapx-chains">
+                    {[
+                      { k: "all", label: "All chains", multi: true },
+                      { k: "eth", label: "Ethereum", icon: "/assets/chains/ethereum.svg" },
+                      { k: "monad", label: "Monad", icon: "/assets/chains/monad.svg" },
+                      { k: "plasma", label: "Plasma", icon: "/assets/chains/plasma.svg", on: true },
+                      { k: "pharos", label: "Pharos", icon: "/assets/chains/pharos.svg" },
+                    ].map((c) => (
+                      <button type="button" key={c.k} className={`swapx-chain${c.on ? " on" : ""}`} aria-label={c.label} title={c.label}>
+                        {c.multi ? (
+                          <span className="swapx-chain-multi">
+                            <img src="/assets/chains/ethereum.svg" alt="" />
+                            <img src="/assets/chains/plasma.svg" alt="" />
+                            <img src="/assets/chains/monad.svg" alt="" />
+                            <img src="/assets/chains/pharos.svg" alt="" />
+                          </span>
+                        ) : (
+                          <img src={c.icon} alt="" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="swapx-search"><Search className="ic" /><input type="text" placeholder="Search by token or address" aria-label="Search token" /></div>
+                  <div className="swapx-list">
+                    {[
+                      { sym: "XPL", name: "Plasma", icon: "/assets/chains/plasma.svg", bal: "1,204.5" },
+                      { sym: "USDT0", name: "USD₮0", icon: "/assets/tokens/usdt0.png", bal: "10,000.00" },
+                      { sym: "yzUSD", name: "Yuzu USD", icon: "/assets/tokens/yzUSD.svg", bal: "12,480.20" },
+                      { sym: "yzPP", name: "Yuzu Protection Pool", icon: "/assets/tokens/yzPP.svg", bal: "3,150.00" },
+                      { sym: "syzUSD", name: "Staked Yuzu USD", icon: "/assets/tokens/syzUSD.svg", bal: "8,900.00" },
+                    ].map((t) => (
+                      <button type="button" key={t.sym} className="swapx-item" data-swap-token={t.sym} data-token-icon={t.icon}>
+                        <img src={t.icon} alt="" />
+                        <span className="nm"><b>{t.sym}</b><small>{t.name}</small></span>
+                        <span className="bal">{t.bal}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* ---- Sheet: Send to wallet ---- */}
+                <div className="swapx-sheet" data-swap-sheet="wallet" hidden>
+                  <div className="swapx-sheet-head">
+                    <button type="button" className="swapx-back" data-swap-back aria-label="Back"><ArrowLeft /></button>
+                    <b>Send to wallet</b>
+                  </div>
+                  <div className="swapx-addr">
+                    <input type="text" placeholder="Enter address or wallet domain" aria-label="Wallet address" />
+                    <div className="swapx-addr-row">
+                      <button type="button" className="swapx-done">Done</button>
+                      <button type="button" className="swapx-bookmark" aria-label="Bookmark"><Bookmark /></button>
+                    </div>
+                  </div>
+                  <div className="swapx-list">
+                    <button type="button" className="swapx-item swapx-item-nav"><WalletCards /><span className="nm"><b>Recent wallets</b></span><ChevronRight className="chev" /></button>
+                    <button type="button" className="swapx-item swapx-item-nav"><Wallet /><span className="nm"><b>Connected wallets</b></span><ChevronRight className="chev" /></button>
+                    <button type="button" className="swapx-item swapx-item-nav"><Bookmark /><span className="nm"><b>Bookmarked wallets</b></span><ChevronRight className="chev" /></button>
+                  </div>
+                </div>
+
+                {/* ---- Sheet: Settings ---- */}
+                <div className="swapx-sheet" data-swap-sheet="settings" hidden>
+                  <div className="swapx-sheet-head">
+                    <button type="button" className="swapx-back" data-swap-back aria-label="Back"><ArrowLeft /></button>
+                    <b>Settings</b>
+                  </div>
+                  <div className="swapx-set">
+                    <button type="button" className="swapx-set-row"><Sun /><span className="nm">Appearance</span><span className="val">Light</span></button>
+                    <button type="button" className="swapx-set-row"><Globe /><span className="nm">Language</span><span className="val">English</span></button>
+                    <button type="button" className="swapx-set-row"><Route /><span className="nm">Route priority</span><span className="val">Best Return</span></button>
+                    <button type="button" className="swapx-set-row"><Fuel /><span className="nm">Gas price</span><span className="val">Normal</span></button>
+                    <button type="button" className="swapx-set-row"><Percent /><span className="nm">Max. slippage</span><span className="val">Auto</span></button>
+                    <div className="swapx-set-row"><DollarSign /><span className="nm">Hide small balances</span><span className="swapx-toggle" role="switch" aria-checked="false" tabIndex={0}><i /></span></div>
+                    <button type="button" className="swapx-set-row"><Split /><span className="nm">Bridges</span><span className="val">35/35</span></button>
+                    <button type="button" className="swapx-set-row"><ArrowLeftRight /><span className="nm">Exchanges</span><span className="val">36/36</span></button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

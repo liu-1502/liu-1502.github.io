@@ -102,6 +102,34 @@ export default function AlphaClient() {
     };
     const fromHash = () => { show(location.hash.slice(1).toLowerCase() || "yzusd"); };
     fromHash();
+
+    // Swap sheets: From / Wallet / Settings mở đè lên card; back để đóng; chọn token -> điền vào From.
+    const sheets = Array.from(document.querySelectorAll<HTMLElement>(".pg-alpha [data-swap-sheet]"));
+    const closeSheets = () => sheets.forEach((s) => (s.hidden = true));
+    const onSheet = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      const open = t.closest<HTMLElement>("[data-swap-open]");
+      if (open) {
+        const name = open.getAttribute("data-swap-open");
+        closeSheets();
+        const s = sheets.find((x) => x.getAttribute("data-swap-sheet") === name);
+        if (s) s.hidden = false;
+        return;
+      }
+      if (t.closest("[data-swap-back]")) { closeSheets(); return; }
+      const item = t.closest<HTMLElement>("[data-swap-token]");
+      if (item) {
+        const sym = item.getAttribute("data-swap-token") || "";
+        const icon = item.getAttribute("data-token-icon") || "";
+        const fromIc = document.querySelector<HTMLElement>(".pg-alpha [data-from-ic]");
+        const fromName = document.querySelector<HTMLElement>(".pg-alpha [data-from-name]");
+        if (fromIc) { fromIc.style.backgroundImage = `url(${icon})`; fromIc.style.backgroundSize = "cover"; fromIc.style.backgroundPosition = "center"; fromIc.classList.remove("swapx-ic-empty"); }
+        if (fromName) { fromName.textContent = sym; fromName.classList.remove("muted"); }
+        closeSheets();
+      }
+    };
+    document.addEventListener("click", onSheet);
+
     window.addEventListener("hashchange", fromHash);
     // Next.js Link dùng pushState -> KHÔNG fire hashchange, nên bắt click trực tiếp trên sub-menu link.
     const onClick = (e: MouseEvent) => {
@@ -114,6 +142,7 @@ export default function AlphaClient() {
     return () => {
       window.removeEventListener("hashchange", fromHash);
       document.removeEventListener("click", onClick);
+      document.removeEventListener("click", onSheet);
     };
   }, []);
 
