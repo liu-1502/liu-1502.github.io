@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { chainSrc } from "@/lib/assets";
 import { requestConnectWallet } from "@/lib/wallet";
 import TokenIcon from "@/components/ui/TokenIcon";
+import ReviewDialogs from "@/components/ReviewDialogs";
+import { useReviewFlow, type ReviewFlow } from "@/hooks/useReviewFlow";
 import { ArrowUpDown } from "lucide-react";
 
 /* Cấu hình bridge — trước đây là các biến trong BridgeClient (innerHTML). */
@@ -104,6 +106,18 @@ export default function BridgeExchange() {
 
   const lanes = LANES[token];
   const tokenSym = TOKENS.find((t) => t.id === token)!.sym;
+
+  // Review order cho bridge: cùng token, đổi chain nguồn -> đích (1:1).
+  const tokenIcon = `/assets/tokens/${tokenSym}.svg`;
+  const FLOWS = useMemo<Record<string, ReviewFlow>>(() => ({
+    bridge: {
+      paySym: tokenSym, payIcon: tokenIcon, recvSym: tokenSym, recvIcon: tokenIcon,
+      recvMul: 1, payUsd: 1, rate: `${from} → ${to}`, rateLabel: "Route", fees: [],
+      revTitle: "You’re bridging", revCta: "Confirm bridge", okTitle: "Bridge submitted",
+      okSub: `Your ${tokenSym} is on its way from <b>${from}</b> to <b>${to}</b>.`, okPrimary: "Done",
+    },
+  }), [tokenSym, tokenIcon, from, to]);
+  useReviewFlow(FLOWS, ".pg-bridge");
 
   // Đóng dropdown khi click ra ngoài vùng chọn chain.
   useEffect(() => {
@@ -282,7 +296,7 @@ export default function BridgeExchange() {
         </div>
       </div>
 
-      <button className="btn btn-accent btn-block" onClick={requestConnectWallet}>Connect Wallet</button>
+      <button className="btn btn-accent btn-block" data-flow="bridge" onClick={requestConnectWallet}>Connect Wallet</button>
 
       {/* Chi tiết chuyển khoản — nằm dưới nút Connect Wallet */}
       <div className="rows">
@@ -292,6 +306,7 @@ export default function BridgeExchange() {
         <div><span className="k">CCIP fee</span><span className="v">Paid in native gas</span></div>
       </div>
       </div>
+      <ReviewDialogs/>
     </>
   );
 }

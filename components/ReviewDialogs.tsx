@@ -27,7 +27,7 @@ export default function ReviewDialogs() {
               <b><span data-rev-recv>0</span> <span data-rev-recv-sym>USDC</span></b>
             </div>
           </div>
-          <div className="mrev-cost"><span>Rate</span><b data-rev-rate>&mdash;</b></div>
+          <div className="mrev-cost"><span data-rev-rate-label>Rate</span><b data-rev-rate>&mdash;</b></div>
           <div className="mrev-cost" data-rev-fee1-row><span data-rev-fee1-label>Fee</span><b data-rev-fee1>$0.00</b></div>
           <div className="mrev-cost" data-rev-fee2-row hidden><span data-rev-fee2-label>Fee</span><b data-rev-fee2>$0.00</b></div>
           <div className="mrev-cost"><span>Network fee</span><b>&lt;$0.01</b></div>

@@ -8,7 +8,7 @@ export type ReviewFee = { label: string; pct: string; rate: number };
 /** Cấu hình 1 luồng (mint/redeem · deposit/withdraw · stake/unstake · bridge…). */
 export type ReviewFlow = {
   paySym: string; payIcon: string; recvSym: string; recvIcon: string;
-  recvMul: number; payUsd: number; rate: string; fees: ReviewFee[];
+  recvMul: number; payUsd: number; rate: string; rateLabel?: string; fees: ReviewFee[];
   revTitle: string; revCta: string;
   okTitle: string; okSub: string; okPrimary: string;
 };
@@ -67,6 +67,7 @@ export function useReviewFlow(flows: Record<string, ReviewFlow>, scopeSel = "mai
       set("[data-rev-recv]", num(lastDep * cfg.recvMul));
       set("[data-rev-recv-sym]", cfg.recvSym);
       review.querySelector("[data-rev-recv-icon]")?.setAttribute("src", cfg.recvIcon);
+      set("[data-rev-rate-label]", cfg.rateLabel || "Rate");
       set("[data-rev-rate]", cfg.rate);
       fillFees(review, "rev", cfg, true);
       set("[data-rev-cta]", cfg.revCta);
