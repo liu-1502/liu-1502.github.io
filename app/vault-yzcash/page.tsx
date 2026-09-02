@@ -3,8 +3,23 @@ import { pageMetadata } from "@/lib/pages";
 import TokenPill from "@/components/ui/TokenPill";
 import Button from "@/components/ui/Button";
 import SegmentedTabs from "@/components/ui/SegmentedTabs";
+import ReviewDialogs from "@/components/ReviewDialogs";
+import ReviewFlowClient from "@/components/ReviewFlowClient";
+import type { ReviewFlow } from "@/hooks/useReviewFlow";
 
 export const metadata = pageMetadata("/vault-yzcash");
+
+const USDC = "/assets/tokens/usdc.svg", YCA = "/assets/tokens/yzCash.svg";
+const FLOWS: Record<string, ReviewFlow> = {
+  deposit: { paySym: "USDC", payIcon: USDC, recvSym: "yzCash", recvIcon: YCA, recvMul: 0.9945, payUsd: 1,
+    rate: "1 USDC = 0.9945 yzCash", fees: [],
+    revTitle: "You’re depositing", revCta: "Confirm deposit", okTitle: "Deposited successfully",
+    okSub: "Your yzCash is now earning yield.", okPrimary: "Done" },
+  withdraw: { paySym: "yzCash", payIcon: YCA, recvSym: "USDC", recvIcon: USDC, recvMul: 1.0055, payUsd: 1.0055,
+    rate: "1 yzCash = 1.0055 USDC", fees: [],
+    revTitle: "You’re withdrawing", revCta: "Confirm withdraw", okTitle: "Withdrawn successfully",
+    okSub: "USDC is on its way to your wallet.", okPrimary: "Done" },
+};
 
 export default function VaultYzcash() {
   return (
@@ -51,7 +66,7 @@ export default function VaultYzcash() {
               <div><span className="k">Custody</span><span className="v hi">Your wallet, always</span></div>
             </div>
 
-            <Button block>Connect Wallet</Button>
+            <Button block data-flow="deposit">Deposit</Button>
           </div>
 
           <div className="xchg-body" data-panel="withdraw" style={{ display: "none" }}>
@@ -78,7 +93,7 @@ export default function VaultYzcash() {
               <div><span className="k">Token price</span><span className="v">1 yzCash = $1.0055</span></div>
               <div><span className="k">Withdrawal</span><span className="v">Near instant, no lockup</span></div>
             </div>
-            <Button block>Connect Wallet</Button>
+            <Button block data-flow="withdraw">Withdraw</Button>
           </div>
         </div>
 
@@ -91,6 +106,8 @@ export default function VaultYzcash() {
         <div><div className="k">Lockups</div><div className="v">None</div></div>
       </div>
 
+      <ReviewFlowClient flows={FLOWS} scope=".pg-vault-yzcash" />
+      <ReviewDialogs />
     </div>
   );
 }

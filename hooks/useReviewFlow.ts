@@ -79,7 +79,7 @@ export function useReviewFlow(flows: Record<string, ReviewFlow>, scopeSel = "mai
       const form = btn.closest<HTMLElement>("[data-dirpanel]") || btn.closest<HTMLElement>(".xchg-body") || btn.parentElement;
       const inp = form?.querySelector<HTMLInputElement>("input:not([readonly])");
       const dep = parseFloat((inp?.value || "").replace(/,/g, "")) || 0;
-      const xusd = form?.querySelector<HTMLElement>(".mfield-l .xusd");
+      const xusd = form?.querySelector<HTMLElement>(".xusd");
       if (dep <= 0) {
         if (xusd) { xusd.textContent = "Enter an amount first"; xusd.classList.add("xusd-err"); }
         inp?.focus();

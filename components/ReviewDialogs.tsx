@@ -1,4 +1,5 @@
 import { X, ArrowRight, Check } from "lucide-react";
+import "./ReviewDialogs.css";
 
 /**
  * 2 dialog dùng chung cho luồng review order + success (điều khiển bởi useReviewFlow).

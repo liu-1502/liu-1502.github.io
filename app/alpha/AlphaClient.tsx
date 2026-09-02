@@ -247,6 +247,24 @@ export default function AlphaClient() {
       populateReview(cfg);
     };
     const startStakeFlow = () => { if (lastDep > 0) populateReview(FLOWS.stake); };
+    // Swap (LI.FI): token nguồn động (đã chọn ở sheet) -> yzUSD, đọc số ở ô [data-swap-amt].
+    const startSwapFlow = (btn: HTMLElement) => {
+      const panel = btn.closest<HTMLElement>("[data-dirpanel]");
+      const fromName = panel?.querySelector<HTMLElement>("[data-from-name]");
+      const sym = fromName?.getAttribute("data-from-sym") || "";
+      const icon = fromName?.getAttribute("data-from-icon") || "";
+      if (!sym) { panel?.querySelector<HTMLElement>('[data-swap-open="from"]')?.click(); return; }
+      const amtInp = panel?.querySelector<HTMLInputElement>("[data-swap-amt]");
+      const dep = parseFloat((amtInp?.value || "").replace(/,/g, "")) || 0;
+      if (dep <= 0) { amtInp?.focus(); return; }
+      lastDep = dep;
+      populateReview({
+        paySym: sym, payIcon: icon, recvSym: "yzUSD", recvIcon: YZ, recvMul: 1, payUsd: 1,
+        rate: `1 ${sym} = 1 yzUSD`, fees: [],
+        revTitle: "You’re swapping", revCta: "Confirm swap", okTitle: "Swap complete",
+        okSub: "yzUSD is now in your wallet.", okPrimary: "Done", okAction: "close",
+      });
+    };
 
     // Confirm ở review -> dialog thành công theo flow hiện tại.
     const finishFlow = () => {
@@ -286,7 +304,9 @@ export default function AlphaClient() {
       // Nút CTA của form bất kỳ (data-flow) -> mở review order theo flow tương ứng.
       const flowBtn = t.closest<HTMLElement>("[data-flow]");
       if (flowBtn) {
-        const cfg = FLOWS[flowBtn.getAttribute("data-flow") || ""];
+        const key = flowBtn.getAttribute("data-flow") || "";
+        if (key === "swap") { startSwapFlow(flowBtn); return; }
+        const cfg = FLOWS[key];
         if (cfg) startFlow(cfg, flowBtn.closest<HTMLElement>("[data-dirpanel]"));
         return;
       }
@@ -426,7 +446,7 @@ export default function AlphaClient() {
           ic.style.backgroundImage = `url(${icon})`; ic.style.backgroundSize = "cover"; ic.style.backgroundPosition = "center"; ic.classList.remove("swapx-ic-empty");
         });
         const fromName = document.querySelector<HTMLElement>(".pg-alpha [data-from-name]");
-        if (fromName) { fromName.textContent = sym; fromName.classList.remove("muted"); }
+        if (fromName) { fromName.textContent = sym; fromName.classList.remove("muted"); fromName.setAttribute("data-from-sym", sym); fromName.setAttribute("data-from-icon", icon); }
         closeSheets();
       }
     };

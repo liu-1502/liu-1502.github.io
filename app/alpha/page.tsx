@@ -368,11 +368,11 @@ export default function Alpha() {
                 </div>
                 <div className="swapx-box swapx-send">
                   <span className="swapx-lbl">Send</span>
-                  <div className="swapx-send-main"><span className="swapx-avatar"><span className="swapx-ic swapx-ic-empty" data-from-ic /><img className="swapx-badge" src="/assets/chains/plasma.svg" alt="" /></span><span className="swapx-amt">0</span></div>
+                  <div className="swapx-send-main"><span className="swapx-avatar"><span className="swapx-ic swapx-ic-empty" data-from-ic /><img className="swapx-badge" src="/assets/chains/plasma.svg" alt="" /></span><input className="swapx-amt" data-swap-amt inputMode="decimal" placeholder="0" aria-label="Amount to swap" /></div>
                   <span className="swapx-usd">$0.00</span>
                 </div>
                 <div className="swapx-cta">
-                  <Button block className="gcta">Connect wallet</Button>
+                  <Button block className="gcta" data-flow="swap">Connect wallet</Button>
                   <button type="button" className="swapx-wallet" data-swap-open="wallet" aria-label="Wallet"><Wallet /></button>
                 </div>
                 <div className="swapx-powered">Powered by <b>LI.FI</b></div>
