@@ -166,6 +166,14 @@ export default function AlphaClient() {
     };
     let current: Flow = FLOWS.mint;
     let lastDep = 0;
+    // Ô nhập của form đang chạy flow (để reset về mặc định sau khi thành công). null nếu flow không từ form.
+    let lastInput: HTMLInputElement | null = null;
+    const resetForm = () => {
+      if (!lastInput) return;
+      lastInput.value = "";
+      lastInput.dispatchEvent(new Event("input", { bubbles: true })); // để useExchangePanels xoá recv/USD/rate/summary
+      lastInput = null;
+    };
     // Phí (USD) = số vào × giá USD của token vào × tỉ lệ phí. Điền 2 hàng phí generic của dialog.
     const feeUsd = (cfg: Flow, i: number) => lastDep * cfg.payUsd * (cfg.fees[i]?.rate || 0);
     const fillFees = (root: HTMLElement, pfx: string, cfg: Flow, withPct: boolean) => {
@@ -244,9 +252,10 @@ export default function AlphaClient() {
       }
       if (xusd) xusd.classList.remove("xusd-err");
       lastDep = dep;
+      lastInput = inp || null;
       populateReview(cfg);
     };
-    const startStakeFlow = () => { if (lastDep > 0) populateReview(FLOWS.stake); };
+    const startStakeFlow = () => { lastInput = null; if (lastDep > 0) populateReview(FLOWS.stake); };
     // Swap (LI.FI): token nguồn động (đã chọn ở sheet) -> yzUSD, đọc số ở ô [data-swap-amt].
     const startSwapFlow = (btn: HTMLElement) => {
       const panel = btn.closest<HTMLElement>("[data-dirpanel]");
@@ -258,6 +267,7 @@ export default function AlphaClient() {
       const dep = parseFloat((amtInp?.value || "").replace(/,/g, "")) || 0;
       if (dep <= 0) { amtInp?.focus(); return; }
       lastDep = dep;
+      lastInput = amtInp || null;
       populateReview({
         paySym: sym, payIcon: icon, recvSym: "yzUSD", recvIcon: YZ, recvMul: 1, payUsd: 1,
         rate: `1 ${sym} = 1 yzUSD`, fees: [],
@@ -284,6 +294,7 @@ export default function AlphaClient() {
       // Cập nhật trạng thái mint/stake (điều khiển alert nhắc stake nếu còn).
       if (cfg.setMinted) { minted = true; staked = false; }
       if (cfg.setStaked) { staked = true; }
+      resetForm(); // thành công -> form về mặc định
       open(review, false);
       open(dlg, true);
     };
@@ -315,7 +326,7 @@ export default function AlphaClient() {
       if (t.closest("[data-bal-stake]")) {
         const balB = document.querySelector(".pg-alpha [data-user-bal]");
         const bal = parseFloat((balB?.textContent || "").replace(/[^0-9.]/g, "")) || 0;
-        if (bal > 0) { lastDep = bal; populateReview(FLOWS.stake); }
+        if (bal > 0) { lastDep = bal; lastInput = null; populateReview(FLOWS.stake); }
         return;
       }
       if (t.closest("[data-mint-review-confirm]")) {
@@ -345,6 +356,7 @@ export default function AlphaClient() {
       if (t.closest("[data-mint-review-close]")) {
         if (confirmTimer) { clearTimeout(confirmTimer); confirmTimer = null; }
         review.querySelector(".mrev-cta")?.classList.remove("is-loading");
+        lastInput = null; // huỷ review -> không reset form nữa
         open(review, false); refreshAlert(); return;
       }
       if (t.closest("[data-mint-ok-close]")) closeSuccess();
@@ -353,6 +365,7 @@ export default function AlphaClient() {
       if (e.key === "Escape") {
         if (confirmTimer) { clearTimeout(confirmTimer); confirmTimer = null; }
         review.querySelector(".mrev-cta")?.classList.remove("is-loading");
+        lastInput = null;
         open(review, false); open(dlg, false); refreshAlert();
       }
     };

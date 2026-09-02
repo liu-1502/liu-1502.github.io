@@ -40,7 +40,15 @@ export function useReviewFlow(flows: Record<string, ReviewFlow>, scopeSel = "mai
 
     let current: ReviewFlow | null = null;
     let lastDep = 0;
+    let lastInput: HTMLInputElement | null = null;
     let confirmTimer: ReturnType<typeof setTimeout> | null = null;
+    // Reset ô nhập của form về mặc định sau khi thành công.
+    const resetForm = () => {
+      if (!lastInput) return;
+      lastInput.value = "";
+      lastInput.dispatchEvent(new Event("input", { bubbles: true }));
+      lastInput = null;
+    };
 
     const feeUsd = (cfg: ReviewFlow, i: number) => lastDep * cfg.payUsd * (cfg.fees[i]?.rate || 0);
     const fillFees = (root: HTMLElement, pfx: string, cfg: ReviewFlow, withPct: boolean) => {
@@ -87,6 +95,7 @@ export function useReviewFlow(flows: Record<string, ReviewFlow>, scopeSel = "mai
       }
       if (xusd) xusd.classList.remove("xusd-err");
       lastDep = dep;
+      lastInput = inp || null;
       populateReview(cfg);
     };
 
@@ -105,6 +114,7 @@ export function useReviewFlow(flows: Record<string, ReviewFlow>, scopeSel = "mai
       // Các flow này kết thúc = đóng -> chỉ cần 1 nút, ẩn nút Close phụ.
       const sec = dlg.querySelector<HTMLElement>("[data-ok-close-btn]");
       if (sec) sec.hidden = true;
+      resetForm(); // thành công -> form về mặc định
       open(review, false);
       open(dlg, true);
     };
@@ -129,11 +139,11 @@ export function useReviewFlow(flows: Record<string, ReviewFlow>, scopeSel = "mai
         confirmTimer = setTimeout(() => { confirmTimer = null; btn?.classList.remove("is-loading"); finishFlow(); }, 1200);
         return;
       }
-      if (t.closest("[data-mint-review-close]")) { clearLoading(); open(review, false); return; }
+      if (t.closest("[data-mint-review-close]")) { clearLoading(); lastInput = null; open(review, false); return; }
       if (t.closest("[data-ok-primary]") || t.closest("[data-mint-ok-close]")) { open(dlg, false); return; }
     };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { clearLoading(); open(review, false); open(dlg, false); }
+      if (e.key === "Escape") { clearLoading(); lastInput = null; open(review, false); open(dlg, false); }
     };
     document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);
