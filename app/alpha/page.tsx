@@ -140,7 +140,7 @@ const TOKENS = [
   {
     key: "yzusd", name: "yzUSD", logo: "/assets/tokens/yzUSD.svg",
     badge: "Senior · Par stable",
-    tagline: "Fully-backed 1:1 USD stablecoin, over-collateralized and attested live.",
+    tagline: "yzUSD is the senior tranche of Yuzu Alpha, an actively managed portfolio of leveraged DeFi yield-bearing assets. It is a fully backed 1:1 USD stablecoin, overcollateralized and live-attested.",
     stats: [ { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "108.92%", tone: "good" }, { k: "Redeemable", v: "Anytime" } ],
     info: [
       { k: "Rate", v: "1:1 at par" },
@@ -178,7 +178,7 @@ const TOKENS = [
   {
     key: "syzusd", name: "syzUSD", logo: "/assets/tokens/syzUSD.svg",
     badge: "Staked yield",
-    tagline: "Staked yzUSD, the senior tranche, that accrues the weekly yield target.",
+    tagline: "syzUSD is the staked form of yzUSD, the senior tranche of Yuzu Alpha, an actively managed portfolio of leveraged DeFi yield-bearing assets. It accrues the weekly yield target while staying overcollateralized and live-attested.",
     stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Redeemable", v: "Anytime" } ],
     info: [
       { k: "Exchange rate", v: "1 yzUSD = 0.9361 syzUSD" },
