@@ -1,3 +1,6 @@
+/* Giảm padding-top của content chỉ trên trang Alpha (giữ yuzu.css nguyên vẹn). */
+.content:has(> .pg-alpha) { padding-top: 28px; }
+
 .pg-alpha, .pg-prime, .pg-marketplace, .pg-bridge {
   .prod-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
   .prod-head .tk-strip img { width: 30px; height: 30px; }
