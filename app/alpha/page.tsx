@@ -62,6 +62,7 @@ function SwapCircle() {
 }
 
 function OrderItem({
+  token,
   kind,
   label,
   amount,
@@ -69,18 +70,19 @@ function OrderItem({
   tx,
   status,
 }: {
-  kind: "mint" | "redeem";
+  token: "yzusd" | "syzusd" | "yzpp";
+  kind: "mint" | "redeem" | "stake" | "unstake";
   label: string;
   amount: string;
   date: string;
   tx: string;
   status: "success" | "failed";
 }) {
-  const Icon = kind === "mint" ? ArrowDownRight : ArrowUpRight;
-  const negative = kind === "redeem"; // Redeem = tiền ra (âm), Mint = tiền vào (dương)
+  const negative = kind === "redeem" || kind === "unstake"; // tiền ra (âm) vs tiền vào (dương)
+  const Icon = negative ? ArrowUpRight : ArrowDownRight;
   const badgeLabel = status === "success" ? "Success" : "Failed";
   return (
-    <div className="ord" role="button" tabIndex={0} data-kind={kind} data-status={status}>
+    <div className="ord" role="button" tabIndex={0} data-token={token} data-kind={kind} data-status={status}>
       <span className="oicon"><Icon /></span>
       <div className="oleft">
         <span className="ot">{label}</span>
@@ -97,24 +99,40 @@ function OrderItem({
 /* Lịch sử activity (demo). Mint/Redeem yzUSD chỉ có 2 trạng thái: success / failed.
    Mặc định hiện 3, "Show more" sổ thêm 10 mỗi lần. */
 const ACTIVITIES: {
-  kind: "mint" | "redeem"; label: string; amount: string; date: string; tx: string;
-  status: "success" | "failed";
+  token: "yzusd" | "syzusd" | "yzpp"; kind: "mint" | "redeem" | "stake" | "unstake";
+  label: string; amount: string; date: string; tx: string; status: "success" | "failed";
 }[] = [
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$2,000.00", date: "03 Aug 2026, 12:59", tx: "0x9ed0…7f1a", status: "success" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$1,000.00", date: "30 Jul 2026, 23:08", tx: "0xc843…3c36", status: "success" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$1,000.50", date: "30 Jul 2026, 21:10", tx: "0xeED43…AbbA", status: "failed" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$500.00", date: "29 Jul 2026, 18:22", tx: "0x71bC8…9Ae0", status: "success" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$3,200.00", date: "29 Jul 2026, 09:05", tx: "0x4aF0…2b1c", status: "failed" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$750.00", date: "28 Jul 2026, 20:41", tx: "0x1b7E…9c02", status: "success" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$4,120.00", date: "28 Jul 2026, 14:30", tx: "0x88aa…3d1f", status: "success" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$960.00", date: "27 Jul 2026, 11:12", tx: "0x2fc9…7ab4", status: "failed" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$12,000.00", date: "27 Jul 2026, 08:03", tx: "0x5e10…b2c8", status: "success" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$300.00", date: "26 Jul 2026, 22:57", tx: "0x9d44…1e6a", status: "success" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$2,500.00", date: "26 Jul 2026, 16:19", tx: "0x77bd…4f90", status: "success" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$1,800.00", date: "25 Jul 2026, 13:44", tx: "0x0ac1…8d33", status: "failed" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$640.00", date: "25 Jul 2026, 10:05", tx: "0x3ee2…5b71", status: "success" },
-  { kind: "redeem", label: "Redeem yzUSD", amount: "$5,000.00", date: "24 Jul 2026, 19:26", tx: "0xa190…c7e2", status: "success" },
-  { kind: "mint", label: "Mint yzUSD", amount: "$980.00", date: "24 Jul 2026, 09:51", tx: "0x6bf3…2a08", status: "success" },
+  // yzUSD — Mint / Redeem
+  { token: "yzusd", kind: "redeem", label: "Redeem yzUSD", amount: "$2,000.00", date: "03 Aug 2026, 12:59", tx: "0x9ed0…7f1a", status: "success" },
+  { token: "yzusd", kind: "redeem", label: "Redeem yzUSD", amount: "$1,000.00", date: "30 Jul 2026, 23:08", tx: "0xc843…3c36", status: "success" },
+  { token: "yzusd", kind: "mint", label: "Mint yzUSD", amount: "$1,000.50", date: "30 Jul 2026, 21:10", tx: "0xeED43…AbbA", status: "failed" },
+  { token: "yzusd", kind: "redeem", label: "Redeem yzUSD", amount: "$500.00", date: "29 Jul 2026, 18:22", tx: "0x71bC8…9Ae0", status: "success" },
+  { token: "yzusd", kind: "mint", label: "Mint yzUSD", amount: "$3,200.00", date: "29 Jul 2026, 09:05", tx: "0x4aF0…2b1c", status: "failed" },
+  { token: "yzusd", kind: "mint", label: "Mint yzUSD", amount: "$750.00", date: "28 Jul 2026, 20:41", tx: "0x1b7E…9c02", status: "success" },
+  { token: "yzusd", kind: "redeem", label: "Redeem yzUSD", amount: "$4,120.00", date: "28 Jul 2026, 14:30", tx: "0x88aa…3d1f", status: "success" },
+  { token: "yzusd", kind: "mint", label: "Mint yzUSD", amount: "$960.00", date: "27 Jul 2026, 11:12", tx: "0x2fc9…7ab4", status: "failed" },
+  { token: "yzusd", kind: "mint", label: "Mint yzUSD", amount: "$12,000.00", date: "27 Jul 2026, 08:03", tx: "0x5e10…b2c8", status: "success" },
+  { token: "yzusd", kind: "redeem", label: "Redeem yzUSD", amount: "$300.00", date: "26 Jul 2026, 22:57", tx: "0x9d44…1e6a", status: "success" },
+  { token: "yzusd", kind: "mint", label: "Mint yzUSD", amount: "$2,500.00", date: "26 Jul 2026, 16:19", tx: "0x77bd…4f90", status: "success" },
+  { token: "yzusd", kind: "redeem", label: "Redeem yzUSD", amount: "$1,800.00", date: "25 Jul 2026, 13:44", tx: "0x0ac1…8d33", status: "failed" },
+  { token: "yzusd", kind: "mint", label: "Mint yzUSD", amount: "$640.00", date: "25 Jul 2026, 10:05", tx: "0x3ee2…5b71", status: "success" },
+  { token: "yzusd", kind: "redeem", label: "Redeem yzUSD", amount: "$5,000.00", date: "24 Jul 2026, 19:26", tx: "0xa190…c7e2", status: "success" },
+  { token: "yzusd", kind: "mint", label: "Mint yzUSD", amount: "$980.00", date: "24 Jul 2026, 09:51", tx: "0x6bf3…2a08", status: "success" },
+  // syzUSD — Stake / Unstake
+  { token: "syzusd", kind: "stake", label: "Stake yzUSD", amount: "$6,000.00", date: "03 Aug 2026, 10:22", tx: "0x2a11…9f0c", status: "success" },
+  { token: "syzusd", kind: "unstake", label: "Unstake syzUSD", amount: "$1,500.00", date: "01 Aug 2026, 16:47", tx: "0x77de…1b34", status: "success" },
+  { token: "syzusd", kind: "stake", label: "Stake yzUSD", amount: "$2,400.00", date: "31 Jul 2026, 08:15", tx: "0x9c02…4ee1", status: "success" },
+  { token: "syzusd", kind: "stake", label: "Stake yzUSD", amount: "$900.00", date: "29 Jul 2026, 12:03", tx: "0x51ab…7c9d", status: "failed" },
+  { token: "syzusd", kind: "unstake", label: "Unstake syzUSD", amount: "$3,200.00", date: "27 Jul 2026, 19:38", tx: "0x0bf4…22a7", status: "success" },
+  { token: "syzusd", kind: "stake", label: "Stake yzUSD", amount: "$500.00", date: "25 Jul 2026, 09:11", tx: "0xa3d9…6e10", status: "success" },
+  { token: "syzusd", kind: "unstake", label: "Unstake syzUSD", amount: "$1,050.00", date: "24 Jul 2026, 14:29", tx: "0xe7c1…8b52", status: "failed" },
+  // yzPP — Mint / Redeem
+  { token: "yzpp", kind: "mint", label: "Mint yzPP", amount: "$4,000.00", date: "02 Aug 2026, 11:05", tx: "0x8f21…3d0a", status: "success" },
+  { token: "yzpp", kind: "redeem", label: "Redeem yzPP", amount: "$1,200.00", date: "31 Jul 2026, 20:41", tx: "0x1c93…7fa2", status: "success" },
+  { token: "yzpp", kind: "mint", label: "Mint yzPP", amount: "$750.00", date: "30 Jul 2026, 09:52", tx: "0x44b0…2e19", status: "failed" },
+  { token: "yzpp", kind: "mint", label: "Mint yzPP", amount: "$2,600.00", date: "28 Jul 2026, 13:16", tx: "0xb7e5…9c04", status: "success" },
+  { token: "yzpp", kind: "redeem", label: "Redeem yzPP", amount: "$880.00", date: "26 Jul 2026, 18:30", tx: "0x3ad8…5f71", status: "success" },
+  { token: "yzpp", kind: "mint", label: "Mint yzPP", amount: "$1,340.00", date: "24 Jul 2026, 10:47", tx: "0x9e02…1a6b", status: "success" },
 ];
 
 /* Thông tin chi tiết từng token (cột phải, luôn hiện, đổi theo tab). */

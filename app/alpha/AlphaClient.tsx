@@ -27,11 +27,16 @@ export default function AlphaClient() {
     let query = "";
     const PAGE = 3;
     let limit = PAGE;
+    // Orders lọc theo token đang xem (đồng bộ với panel qua event "alpha-token").
+    const VALID_TOK = ["yzusd", "syzusd", "yzpp"];
+    let tokenFilter = location.hash.slice(1).toLowerCase();
+    if (!VALID_TOK.includes(tokenFilter)) tokenFilter = "yzusd";
 
     const matches = (r: HTMLElement) => {
+      const okToken = r.getAttribute("data-token") === tokenFilter;
       const okStatus = statusFilter === "all" || r.getAttribute("data-status") === statusFilter;
       const okQuery = !query || (r.querySelector(".otx")?.textContent || "").toLowerCase().includes(query);
-      return okStatus && okQuery;
+      return okToken && okStatus && okQuery;
     };
     // Mặc định hiện 3; "Show more" sổ thêm 10 mỗi lần. Đổi filter/search -> reset về 3.
     const apply = () => {
@@ -52,13 +57,23 @@ export default function AlphaClient() {
     };
     const onSearch = () => { query = (search?.value || "").trim().toLowerCase(); limit = PAGE; apply(); };
     const onMore = () => { limit += 10; apply(); };
+    // Đổi token (panel) -> lọc lại orders theo token đó, reset về 3 dòng.
+    const onToken = (e: Event) => {
+      const tk = (e as CustomEvent<string>).detail;
+      if (!tk || !VALID_TOK.includes(tk)) return;
+      tokenFilter = tk;
+      limit = PAGE;
+      apply();
+    };
     filters?.addEventListener("click", onFilter);
     search?.addEventListener("input", onSearch);
     btn?.addEventListener("click", onMore);
+    document.addEventListener("alpha-token", onToken);
     return () => {
       filters?.removeEventListener("click", onFilter);
       search?.removeEventListener("input", onSearch);
       btn?.removeEventListener("click", onMore);
+      document.removeEventListener("alpha-token", onToken);
     };
   }, []);
 
@@ -374,6 +389,8 @@ export default function AlphaClient() {
         const t = c.getAttribute("data-tab");
         c.classList.toggle("on", t === name || (t === "yzusd" && name === "syzusd"));
       });
+      // Báo cho Orders lọc lại theo token đang xem.
+      document.dispatchEvent(new CustomEvent("alpha-token", { detail: name }));
     };
     const fromHash = () => { show(location.hash.slice(1).toLowerCase() || "yzusd"); };
     fromHash();
