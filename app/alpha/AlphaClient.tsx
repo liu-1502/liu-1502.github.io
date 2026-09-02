@@ -150,7 +150,7 @@ export default function AlphaClient() {
       if (!alertEl) return;
       if (show) {
         // Tổng yzUSD chưa stake = số dư yzUSD đang giữ + số vừa mint.
-        const balB = document.querySelector('.pg-alpha [data-panel="yzusd"] .vd-stats b');
+        const balB = document.querySelector(".pg-alpha [data-user-bal]");
         const bal = parseFloat((balB?.textContent || "").replace(/[^0-9.]/g, "")) || 0;
         const a = alertEl.querySelector("[data-alert-amt]");
         if (a) a.textContent = num(bal + lastDep);

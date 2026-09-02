@@ -123,7 +123,7 @@ const TOKENS = [
     key: "yzusd", name: "yzUSD", logo: "/assets/tokens/yzUSD.svg",
     badge: "Senior · Par stable",
     tagline: "Fully-backed 1:1 USD stablecoin, over-collateralized and attested live.",
-    stats: [ { k: "Your Balance", v: "$12,480.00" }, { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "108.92%", tone: "good" } ],
+    stats: [ { k: "Peg", v: "1:1" }, { k: "Collateral ratio", v: "108.92%", tone: "good" }, { k: "Redeemable", v: "Anytime" } ],
     info: [
       { k: "Rate", v: "1:1 at par" },
       { k: "Access", v: "Eligible Investors, KYC" },
@@ -492,6 +492,15 @@ export default function Alpha() {
             </div>
           </div>
 
+          {/* Your Balance — ngay dưới form */}
+          <div className="bal-card">
+            <div className="bal-card-l">
+              <span className="bal-card-k">Your yzUSD balance</span>
+              <b className="bal-card-v" data-user-bal>$12,480.00</b>
+            </div>
+            <span className="bal-card-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
+          </div>
+
           {/* Stats ngay dưới card mint/redeem */}
           <div className="page-stats rv">
             <div><div className="k">Alpha TVL</div><div className="v" data-count="48470795" data-prefix="$">$0</div></div>
@@ -503,7 +512,7 @@ export default function Alpha() {
 
           {/* Activities — nằm dưới form */}
           <div className="hist-inline">
-            <div className="hist-head"><span className="otitle">Activities</span></div>
+            <div className="hist-head"><span className="otitle">Orders</span></div>
             <div className="acc ohist">
               <div className="ord-filters"><button className="ofilter on" data-filter="all">All</button><button className="ofilter" data-filter="success">Success</button><button className="ofilter" data-filter="failed">Failed</button></div>
               <div className="osearch"><Search className="osearch-ico" /><input type="text" placeholder="Search by transaction hash" aria-label="Search by transaction hash" /></div>
