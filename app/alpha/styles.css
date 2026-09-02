@@ -80,7 +80,7 @@
   .vd-alert-cta svg { width: 16px; height: 16px; }
   /* Header + tabs canh GIỮA theo chiều ngang content */
   /* Header canh giữa (Alpha, Prime, ...) */
-  .av-head { align-self: stretch; text-align: center; margin: 0 0 18px; }
+  .av-head { align-self: stretch; text-align: center; margin: 0 0 10px; }
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
   .av-head p { margin: 6px auto 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
   /* 2 chip token dưới title (thay cho sub-menu sidebar). */
@@ -132,6 +132,7 @@
   .bal-card-ic { flex: none; display: inline-flex; }
   .bal-card-ic img { width: 28px; height: 28px; }
   .bal-card-stakerow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 18px 14px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .bal-card-stakerow[hidden] { display: none; }
   .bal-card-note { margin: 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.5; color: var(--muted); }
   .bal-card-note b { color: var(--accent); font-weight: 640; }
   .bal-card-stake { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 640; font-size: 14px; color: var(--accent); }

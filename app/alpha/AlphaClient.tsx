@@ -319,11 +319,25 @@ export default function AlphaClient() {
     const host = document.querySelector<HTMLElement>(".pg-alpha .xchg");
     if (!host) return;
     const VALID = ["yzusd", "yzpp", "syzusd"];
+    // Thẻ "Your balance" đổi theo token đang chọn (chỉ yzUSD mới có hàng stake).
+    const BAL: Record<string, { sym: string; icon: string; val: string; stake: boolean }> = {
+      yzusd: { sym: "yzUSD", icon: "/assets/tokens/yzUSD.svg", val: "$12,480.00", stake: true },
+      syzusd: { sym: "syzUSD", icon: "/assets/tokens/syzUSD.svg", val: "$8,900.00", stake: false },
+      yzpp: { sym: "yzPP", icon: "/assets/tokens/yzPP.svg", val: "$3,250.00", stake: false },
+    };
     const show = (name: string) => {
       if (!VALID.includes(name)) return;
       host.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => {
         p.style.display = p.getAttribute("data-panel") === name ? "" : "none";
       });
+      const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
+      const info = BAL[name];
+      if (bc && info) {
+        bc.querySelector<HTMLImageElement>(".bal-card-ic img")?.setAttribute("src", info.icon);
+        const k = bc.querySelector(".bal-card-k"); if (k) k.textContent = `Your ${info.sym} balance`;
+        const v = bc.querySelector("[data-user-bal]"); if (v) v.textContent = info.val;
+        const sr = bc.querySelector<HTMLElement>(".bal-card-stakerow"); if (sr) sr.hidden = !info.stake;
+      }
       // Đồng bộ highlight sub-menu sidebar: chỉ token đang chọn được .on.
       // (Next render href có thể là "/alpha/#yzusd" -> match theo "#" cho chắc.)
       document.querySelectorAll<HTMLAnchorElement>('.side-sub a[href*="#"]').forEach((a) => {
