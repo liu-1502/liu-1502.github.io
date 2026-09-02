@@ -161,7 +161,7 @@ const TOKENS = [
     key: "syzusd", name: "syzUSD", logo: "/assets/tokens/syzUSD.svg",
     badge: "Staked yield",
     tagline: "Staked yzUSD, the senior tranche, that accrues the weekly yield target.",
-    stats: [ { k: "Your Balance", v: "$8,900.00" }, { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Network", v: "Plasma", icon: "/assets/chains/plasma.svg" } ],
+    stats: [ { k: "Weekly target", v: "7.75%", tone: "hi" }, { k: "Rate", v: "0.9361" }, { k: "Redeemable", v: "Anytime" } ],
     info: [
       { k: "Exchange rate", v: "1 yzUSD = 0.9361 syzUSD" },
       { k: "Weekly target yield", v: "7.75%", hi: true },
