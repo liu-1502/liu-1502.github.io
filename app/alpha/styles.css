@@ -265,13 +265,13 @@
   /* Nút secondary "Switch to …" — canh phải trên hàng tên */
   .vd-switch {
     all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto;
-    display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 8px; padding: 0 16px; height: 40px; border-radius: 999px;
     border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
-    font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--text);
+    font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--text);
     transition: background .15s ease, border-color .15s ease;
   }
   .vd-switch:hover { background: color-mix(in srgb, var(--text) 5%, transparent); border-color: color-mix(in srgb, var(--text) 24%, transparent); }
-  .vd-switch img { width: 18px; height: 18px; border-radius: 50%; display: block; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); }
+  .vd-switch img { width: 20px; height: 20px; border-radius: 50%; display: block; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); }
   .vd-switch svg { width: 14px; height: 14px; }
   .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
   .vd-desc { margin: 3px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
