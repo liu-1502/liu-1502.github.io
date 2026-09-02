@@ -489,10 +489,15 @@ export default function Alpha() {
 
           {/* Your Balance — ngay dưới form */}
           <div className="bal-card">
-            <span className="bal-card-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
-            <span className="bal-card-k">Your yzUSD balance</span>
-            <b className="bal-card-v" data-user-bal>$12,480.00</b>
-            <button type="button" className="bal-card-stake" data-bal-stake>Stake now <ArrowRight /></button>
+            <div className="bal-card-top">
+              <span className="bal-card-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
+              <span className="bal-card-k">Your yzUSD balance</span>
+              <b className="bal-card-v" data-user-bal>$12,480.00</b>
+            </div>
+            <div className="bal-card-stakerow">
+              <p className="bal-card-note">Stake it to receive syzUSD and earn <b>7.75%</b> weekly yield.</p>
+              <button type="button" className="bal-card-stake" data-bal-stake>Stake now <ArrowRight /></button>
+            </div>
           </div>
 
           {/* Stats ngay dưới card mint/redeem */}

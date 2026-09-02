@@ -117,14 +117,17 @@
   .hist-panel .ohist { display: flex; flex-direction: column; min-height: 0; flex: 1; }
   .hist-panel .olist { overflow-y: auto; min-height: 0; padding-bottom: 8px; }
   /* Your Balance card (dưới form) */
-  .bal-card { align-self: stretch; display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: var(--surface); border-radius: 16px; }
+  .bal-card { align-self: stretch; display: flex; flex-direction: column; background: var(--surface); border-radius: 16px; }
+  .bal-card-top { display: flex; align-items: center; gap: 12px; padding: 12px 18px; }
   .bal-card-k { font-family: var(--font-body); font-size: 14px; color: var(--muted); }
   .bal-card-v { margin-left: auto; font-family: var(--font-display); font-weight: 620; font-size: 19px; color: var(--text); }
   .bal-card-ic { flex: none; display: inline-flex; }
   .bal-card-ic img { width: 28px; height: 28px; }
-  .bal-card-stake { all: unset; box-sizing: border-box; cursor: pointer; flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 12px; font-family: var(--font-body); font-weight: 600; font-size: 13.5px; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); transition: background .15s ease; }
-  .bal-card-stake svg { width: 15px; height: 15px; }
-  .bal-card-stake:hover { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
+  .bal-card-stakerow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 18px 14px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .bal-card-note { margin: 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+  .bal-card-note b { color: var(--accent); font-weight: 640; }
+  .bal-card-stake { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 640; font-size: 14px; color: var(--accent); }
+  .bal-card-stake svg { width: 16px; height: 16px; }
 
   /* Activities inline (dưới form) */
   .hist-inline { align-self: stretch; background: var(--surface); border-radius: 20px; overflow: hidden; padding-bottom: 8px; }
