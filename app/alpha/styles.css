@@ -80,9 +80,17 @@
   .vd-alert-cta svg { width: 16px; height: 16px; }
   /* Header + tabs canh GIỮA theo chiều ngang content */
   /* Header canh giữa (Alpha, Prime, ...) */
-  .av-head { align-self: stretch; text-align: center; margin: 0 0 24px; }
+  .av-head { align-self: stretch; text-align: center; margin: 0 0 18px; }
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
   .av-head p { margin: 6px auto 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
+  /* 2 chip token dưới title (thay cho sub-menu sidebar). */
+  .av-chips { align-self: stretch; display: flex; justify-content: center; gap: 12px; margin: 0 0 24px; }
+  .av-chip { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 0 16px; height: 40px; background: #fff; border: 1px solid transparent; border-radius: 999px; font-family: var(--font-body); font-weight: 600; font-size: 15px; color: #1C1C1C; transition: border-color .15s ease, background .15s ease, box-shadow .15s ease; }
+  .av-chip:hover { box-shadow: 0 3px 10px rgba(20, 47, 4, .14); }
+  .av-chip.on { border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: #E2ECD8; color: var(--accent); }
+  .av-chip-logos { display: inline-flex; align-items: center; }
+  .av-chip-logos img { width: 20px; height: 20px; border-radius: 50%; display: block; box-shadow: 0 0 0 1px rgba(0, 0, 0, .1); }
+  .av-chip-logos img + img { margin-left: -5px; }
   /* Token tabs Alpha: bản gốc — chip trắng có logo phía trước, selected nền xanh
      (dùng style .tok-tab mặc định), canh giữa. */
   #alphaTabs { justify-content: center; }

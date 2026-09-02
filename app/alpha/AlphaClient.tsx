@@ -330,6 +330,11 @@ export default function AlphaClient() {
         const t = (a.getAttribute("href")?.split("#")[1] || "").toLowerCase();
         a.classList.toggle("on", t === name);
       });
+      // Đồng bộ 2 chip dưới title (syzusd vẫn thuộc chip yzUSD/syzUSD).
+      document.querySelectorAll<HTMLElement>(".pg-alpha .av-chip").forEach((c) => {
+        const t = c.getAttribute("data-tab");
+        c.classList.toggle("on", t === name || (t === "yzusd" && name === "syzusd"));
+      });
     };
     const fromHash = () => { show(location.hash.slice(1).toLowerCase() || "yzusd"); };
     fromHash();
@@ -374,6 +379,13 @@ export default function AlphaClient() {
     window.addEventListener("hashchange", fromHash);
     // Next.js Link dùng pushState -> KHÔNG fire hashchange, nên bắt click trực tiếp trên sub-menu link.
     const onClick = (e: MouseEvent) => {
+      // Chip dưới title (button[data-tab]) -> chuyển panel + cập nhật hash.
+      const chip = (e.target as HTMLElement).closest<HTMLElement>(".av-chip[data-tab]");
+      if (chip) {
+        const name = (chip.getAttribute("data-tab") || "").toLowerCase();
+        if (VALID.includes(name)) { location.hash = name; show(name); window.scrollTo(0, 0); }
+        return;
+      }
       const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href*="#"]');
       if (!a) return;
       const name = (a.getAttribute("href")?.split("#")[1] || "").toLowerCase();
