@@ -106,39 +106,66 @@ export default function AlphaClient() {
     };
     const money = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const num = (n: number) => n.toLocaleString("en-US", { maximumFractionDigits: 2 });
-    const mintPanel = () => document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"]');
     const MINT_FEE = 0.001;
 
-    // 3 luồng dùng chung 2 dialog (review + success); nội dung đổi theo flow.
-    const USDT0 = "/assets/tokens/usdt0.png", YZ = "/assets/tokens/yzUSD.svg", SYZ = "/assets/tokens/syzUSD.svg";
+    // Mọi form (mint/redeem · stake/unstake · yzPP) dùng chung 2 dialog (review + success);
+    // nội dung đổi theo flow. Mỗi flow khai báo pay→recv, tỷ giá, danh sách phí, và hành động success.
+    const USDT0 = "/assets/tokens/usdt0.png", YZ = "/assets/tokens/yzUSD.svg", SYZ = "/assets/tokens/syzUSD.svg", YPP = "/assets/tokens/yzPP.svg";
+    const STAKE_FEE = 0.005, REDEEM_FEE = 0.001, UNSTAKE_FEE = 0.001;
+    type Fee = { label: string; pct: string; rate: number };
     type Flow = {
-      paySym: string; payIcon: string; recvSym: string; recvIcon: string; recvMul: number;
-      showMint: boolean; stakeFee: number; showStake: boolean; rate: string;
+      paySym: string; payIcon: string; recvSym: string; recvIcon: string; recvMul: number; payUsd: number;
+      rate: string; fees: Fee[];
       revTitle: string; revCta: string; okTitle: string; okSub: string; okPrimary: string;
+      okAction: "stake" | "position" | "close"; setMinted?: boolean; setStaked?: boolean;
     };
     const FLOWS: Record<string, Flow> = {
-      mint: {
-        paySym: "USDT0", payIcon: USDT0, recvSym: "yzUSD", recvIcon: YZ, recvMul: 1,
-        showMint: true, stakeFee: 0, showStake: false, rate: "1 USDT0 = 1 yzUSD",
+      mint: { paySym: "USDT0", payIcon: USDT0, recvSym: "yzUSD", recvIcon: YZ, recvMul: 1, payUsd: 1,
+        rate: "1 USDT0 = 1 yzUSD", fees: [{ label: "Mint fee", pct: "0.10%", rate: MINT_FEE }],
         revTitle: "You’re minting", revCta: "Confirm mint", okTitle: "yzUSD minted successfully",
-        okSub: "Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.", okPrimary: "Stake now",
-      },
-      mintstake: {
-        paySym: "USDT0", payIcon: USDT0, recvSym: "syzUSD", recvIcon: SYZ, recvMul: (1 - 0.001) * 0.9361,
-        showMint: true, stakeFee: 0.005, showStake: true, rate: "1 USDT0 = 0.9361 syzUSD",
+        okSub: "Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.", okPrimary: "Stake now", okAction: "stake", setMinted: true },
+      mintstake: { paySym: "USDT0", payIcon: USDT0, recvSym: "syzUSD", recvIcon: SYZ, recvMul: (1 - MINT_FEE) * 0.9361, payUsd: 1,
+        rate: "1 USDT0 = 0.9361 syzUSD", fees: [{ label: "Mint fee", pct: "0.10%", rate: MINT_FEE }, { label: "Stake fee", pct: "0.50%", rate: STAKE_FEE }],
         revTitle: "You’re minting & staking", revCta: "Confirm mint & stake", okTitle: "Minted & staked successfully",
-        okSub: "You’re now earning <b>7.75%</b> weekly yield on syzUSD.", okPrimary: "View position",
-      },
-      stake: {
-        paySym: "yzUSD", payIcon: YZ, recvSym: "syzUSD", recvIcon: SYZ, recvMul: 0.9361,
-        showMint: false, stakeFee: 0.005, showStake: true, rate: "1 yzUSD = 0.9361 syzUSD",
+        okSub: "You’re now earning <b>7.75%</b> weekly yield on syzUSD.", okPrimary: "View position", okAction: "position", setStaked: true },
+      stake: { paySym: "yzUSD", payIcon: YZ, recvSym: "syzUSD", recvIcon: SYZ, recvMul: 0.9361, payUsd: 1,
+        rate: "1 yzUSD = 0.9361 syzUSD", fees: [{ label: "Stake fee", pct: "0.50%", rate: STAKE_FEE }],
         revTitle: "You’re staking", revCta: "Confirm stake", okTitle: "Staked successfully",
-        okSub: "You’re now earning <b>7.75%</b> weekly yield on syzUSD.", okPrimary: "View position",
-      },
+        okSub: "You’re now earning <b>7.75%</b> weekly yield on syzUSD.", okPrimary: "View position", okAction: "position", setStaked: true },
+      redeem: { paySym: "yzUSD", payIcon: YZ, recvSym: "USDT0", recvIcon: USDT0, recvMul: 1, payUsd: 1,
+        rate: "1 yzUSD = 1 USDT0", fees: [{ label: "Redeem fee", pct: "0.10%", rate: REDEEM_FEE }],
+        revTitle: "You’re redeeming", revCta: "Confirm redeem", okTitle: "Redeemed successfully",
+        okSub: "USDT0 is on its way to your wallet.", okPrimary: "Done", okAction: "close" },
+      yzppmint: { paySym: "USDT0", payIcon: USDT0, recvSym: "yzPP", recvIcon: YPP, recvMul: 1 / 1.148527, payUsd: 1,
+        rate: "1 USDT0 = 0.87068 yzPP", fees: [{ label: "Mint fee", pct: "0.10%", rate: MINT_FEE }],
+        revTitle: "You’re minting", revCta: "Confirm mint", okTitle: "yzPP minted successfully",
+        okSub: "yzPP is the junior tranche — higher yield with first-loss risk.", okPrimary: "Done", okAction: "close" },
+      yzppredeem: { paySym: "yzPP", payIcon: YPP, recvSym: "USDT0", recvIcon: USDT0, recvMul: 1.148527, payUsd: 1.148527,
+        rate: "1 yzPP = 1.148527 USDT0", fees: [{ label: "Redeem fee", pct: "0.10%", rate: REDEEM_FEE }],
+        revTitle: "You’re redeeming", revCta: "Confirm redeem", okTitle: "Redeemed successfully",
+        okSub: "USDT0 is on its way to your wallet.", okPrimary: "Done", okAction: "close" },
+      unstake: { paySym: "syzUSD", payIcon: SYZ, recvSym: "yzUSD", recvIcon: YZ, recvMul: 1.0683, payUsd: 1.0683,
+        rate: "1 syzUSD = 1.0683 yzUSD", fees: [{ label: "Unstake fee", pct: "0.10%", rate: UNSTAKE_FEE }],
+        revTitle: "You’re unstaking", revCta: "Confirm unstake", okTitle: "Unstaked successfully",
+        okSub: "yzUSD is now in your wallet.", okPrimary: "Done", okAction: "close" },
     };
     let current: Flow = FLOWS.mint;
     let lastDep = 0;
-    const stakeFeeUsd = (cfg: Flow) => lastDep * (cfg.showMint ? (1 - MINT_FEE) : 1) * cfg.stakeFee;
+    // Phí (USD) = số vào × giá USD của token vào × tỉ lệ phí. Điền 2 hàng phí generic của dialog.
+    const feeUsd = (cfg: Flow, i: number) => lastDep * cfg.payUsd * (cfg.fees[i]?.rate || 0);
+    const fillFees = (root: HTMLElement, pfx: string, cfg: Flow, withPct: boolean) => {
+      for (let i = 0; i < 2; i++) {
+        const row = root.querySelector<HTMLElement>(`[data-${pfx}-fee${i + 1}-row]`);
+        if (!row) continue;
+        const f = cfg.fees[i];
+        row.hidden = !f;
+        if (!f) continue;
+        const lab = row.querySelector(`[data-${pfx}-fee${i + 1}-label]`);
+        if (lab) lab.innerHTML = withPct && f.pct ? `${f.label} <i>${f.pct}</i>` : f.label;
+        const val = row.querySelector(`[data-${pfx}-fee${i + 1}]`);
+        if (val) val.textContent = money(feeUsd(cfg, i));
+      }
+    };
 
     const alertEl = document.querySelector<HTMLElement>(".pg-alpha [data-mint-alert]");
     // Đã mint (session này) nhưng CHƯA hoàn tất stake -> luôn hiện alert nhắc stake,
@@ -173,11 +200,7 @@ export default function AlphaClient() {
     yzForm?.querySelector("[data-swap]")?.addEventListener("click", onDirClick);
     syncHow();
 
-    const depValue = () => {
-      const inputs = mintPanel()?.querySelectorAll<HTMLInputElement>(".mfield-l input");
-      return { inputs, dep: parseFloat((inputs?.[0]?.value || "").replace(/,/g, "")) || 0 };
-    };
-    // Điền review theo cfg (pay = lastDep vì mint 1:1).
+    // Điền review theo cfg (pay = số vào của form, recv = pay × recvMul).
     const populateReview = (cfg: Flow) => {
       current = cfg;
       const set = (sel: string, v: string) => { const el = review.querySelector(sel); if (el) el.textContent = v; };
@@ -189,22 +212,19 @@ export default function AlphaClient() {
       set("[data-rev-recv-sym]", cfg.recvSym);
       review.querySelector("[data-rev-recv-icon]")?.setAttribute("src", cfg.recvIcon);
       set("[data-rev-rate]", cfg.rate);
-      const mfr = review.querySelector<HTMLElement>("[data-rev-mintfee-row]");
-      if (mfr) mfr.hidden = !cfg.showMint;
-      set("[data-rev-fee]", money(lastDep * MINT_FEE));
-      const sfr = review.querySelector<HTMLElement>("[data-rev-stakefee-row]");
-      if (sfr) sfr.hidden = !cfg.showStake;
-      set("[data-rev-stakefee]", money(stakeFeeUsd(cfg)));
+      fillFees(review, "rev", cfg, true);
       set("[data-rev-cta]", cfg.revCta);
       setAlert(false); // ẩn alert khi đang mở review
       open(review, true);
     };
-    const startMintFlow = (cfg: Flow) => {
-      const { inputs, dep } = depValue();
-      const xusd = mintPanel()?.querySelector<HTMLElement>(".mfield-l .xusd");
+    // Mở review cho 1 form bất kỳ: đọc số vào từ ô deposit của [data-dirpanel] tương ứng.
+    const startFlow = (cfg: Flow, dp: HTMLElement | null) => {
+      const inp = dp?.querySelector<HTMLInputElement>(".mfield-l input:not([readonly])");
+      const dep = parseFloat((inp?.value || "").replace(/,/g, "")) || 0;
+      const xusd = dp?.querySelector<HTMLElement>(".mfield-l .xusd");
       if (dep <= 0) {
         if (xusd) { xusd.textContent = "Enter an amount first"; xusd.classList.add("xusd-err"); }
-        inputs?.[0]?.focus();
+        inp?.focus();
         return;
       }
       if (xusd) xusd.classList.remove("xusd-err");
@@ -222,18 +242,15 @@ export default function AlphaClient() {
       oset("[data-ok-title]", cfg.okTitle);
       const osub = dlg.querySelector<HTMLElement>("[data-ok-sub]");
       if (osub) osub.innerHTML = cfg.okSub;
-      oset("[data-ok-fee]", money(lastDep * MINT_FEE));
-      oset("[data-ok-stakefee]", money(stakeFeeUsd(cfg)));
-      const mfRow = dlg.querySelector<HTMLElement>("[data-ok-mintfee-row]");
-      if (mfRow) mfRow.hidden = !cfg.showMint;
-      const sfRow = dlg.querySelector<HTMLElement>("[data-ok-stakefee-row]");
-      if (sfRow) sfRow.hidden = !cfg.showStake;
+      fillFees(dlg, "ok", cfg, false);
       const oprim = dlg.querySelector<HTMLElement>("[data-ok-primary]");
       if (oprim) oprim.textContent = cfg.okPrimary;
-      // Cập nhật trạng thái: mint xong (chưa stake) / mint&stake / stake xong.
-      if (cfg === FLOWS.mint) { minted = true; staked = false; }
-      else if (cfg === FLOWS.mintstake) { minted = true; staked = true; }
-      else if (cfg === FLOWS.stake) { staked = true; }
+      // Flow "close" chỉ cần 1 nút (nút primary tự đóng) -> ẩn nút Close phụ.
+      const sec = dlg.querySelector<HTMLElement>("[data-ok-close-btn]");
+      if (sec) sec.hidden = cfg.okAction === "close";
+      // Cập nhật trạng thái mint/stake (điều khiển alert nhắc stake nếu còn).
+      if (cfg.setMinted) { minted = true; staked = false; }
+      if (cfg.setStaked) { staked = true; }
       open(review, false);
       open(dlg, true);
     };
@@ -251,8 +268,13 @@ export default function AlphaClient() {
         }
         return;
       }
-      if (t.closest("[data-mint-confirm]")) { startMintFlow(FLOWS.mint); return; }
-      if (t.closest("[data-mintstake-confirm]")) { startMintFlow(FLOWS.mintstake); return; }
+      // Nút CTA của form bất kỳ (data-flow) -> mở review order theo flow tương ứng.
+      const flowBtn = t.closest<HTMLElement>("[data-flow]");
+      if (flowBtn) {
+        const cfg = FLOWS[flowBtn.getAttribute("data-flow") || ""];
+        if (cfg) startFlow(cfg, flowBtn.closest<HTMLElement>("[data-dirpanel]"));
+        return;
+      }
       if (t.closest("[data-alert-stake]")) { startStakeFlow(); return; }
       // "Stake now" trên thẻ balance -> stake toàn bộ số dư yzUSD hiện có.
       if (t.closest("[data-bal-stake]")) {
@@ -270,14 +292,17 @@ export default function AlphaClient() {
         return;
       }
       if (t.closest("[data-ok-primary]")) {
-        // "Stake now" (mint) -> mở review stake; "View position" (đã stake) -> qua panel syzUSD.
-        if (current === FLOWS.mint) { open(dlg, false); startStakeFlow(); }
+        // Hành động nút primary theo flow: stake -> mở review stake; position -> qua panel syzUSD; close -> chỉ đóng.
+        const act = current.okAction;
+        open(dlg, false);
+        if (act === "stake") { startStakeFlow(); }
         else {
-          open(dlg, false);
           refreshAlert();
-          if (location.hash.slice(1).toLowerCase() === "syzusd") window.dispatchEvent(new HashChangeEvent("hashchange"));
-          else location.hash = "syzusd";
-          window.scrollTo(0, 0);
+          if (act === "position") {
+            if (location.hash.slice(1).toLowerCase() === "syzusd") window.dispatchEvent(new HashChangeEvent("hashchange"));
+            else location.hash = "syzusd";
+            window.scrollTo(0, 0);
+          }
         }
         return;
       }

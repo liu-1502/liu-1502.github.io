@@ -144,7 +144,7 @@ const TOKENS = [
     key: "yzpp", name: "yzPP", logo: "/assets/tokens/yzPP.svg",
     badge: "Junior tranche",
     tagline: "Junior tranche that absorbs first loss in exchange for a higher yield.",
-    stats: [ { k: "Your Balance", v: "$3,250.00" }, { k: "Est. APY", v: "29.0%", tone: "hi" }, { k: "Price", v: "1.1867" }, { k: "Role", v: "Junior" } ],
+    stats: [ { k: "Est. APY", v: "29.0%", tone: "hi" }, { k: "Price", v: "1.1867" }, { k: "Role", v: "Junior" } ],
     info: [
       { k: "yzPP price", v: "1 yzPP = 1.186682 USDT0" },
       { k: "Estimated APY", v: "29.0%", hi: true },
@@ -302,8 +302,8 @@ export default function Alpha() {
                 </div>
               </div>
               <div className="gcta-stack">
-                <Button block variant="line" className="gcta gcta-2nd" data-mint-confirm>Connect wallet</Button>
-                <Button block className="gcta" data-cta-fixed data-mintstake-confirm>Mint &amp; Stake</Button>
+                <Button block variant="line" className="gcta gcta-2nd" data-flow="mint">Connect wallet</Button>
+                <Button block className="gcta" data-cta-fixed data-flow="mintstake">Mint &amp; Stake</Button>
               </div>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
@@ -322,7 +322,7 @@ export default function Alpha() {
                   <div className="msum-row"><span>Redeem fee <i>0.10%</i></span><b data-sum-redeemfee>$0.00</b></div>
                 </div>
               </div>
-              <Button block className="gcta">Connect wallet</Button>
+              <Button block className="gcta" data-flow="redeem">Connect wallet</Button>
             </div>
             {/* Swap (Exchange) — powered by LI.FI */}
             <div data-dirpanel="swap" style={{ display: "none" }}>
@@ -460,7 +460,7 @@ export default function Alpha() {
                 <SwapCircle />
                 <Field label="You receive" sym="yzPP" symLabel="yzPP" balance="$0.00" input={{ readOnly: true }} />
               </div>
-              <Button block className="gcta">Connect wallet</Button>
+              <Button block className="gcta" data-flow="yzppmint">Connect wallet</Button>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -468,7 +468,7 @@ export default function Alpha() {
                 <SwapCircle />
                 <Field label="You receive" sym="usdt" symLabel="USDT0" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
-              <Button block className="gcta">Connect wallet</Button>
+              <Button block className="gcta" data-flow="yzppredeem">Connect wallet</Button>
             </div>
           </div>
 
@@ -486,7 +486,7 @@ export default function Alpha() {
                 <SwapCircle />
                 <Field label="You receive" sym="syzUSD" symLabel="syzUSD" balance="$0.00" input={{ readOnly: true, "data-dst": true } as React.InputHTMLAttributes<HTMLInputElement>} />
               </div>
-              <Button block>Connect Wallet</Button>
+              <Button block data-flow="stake">Connect Wallet</Button>
             </div>
             <div data-dirpanel="unstake" style={{ display: "none" }}>
               <div className="mfields">
@@ -494,7 +494,7 @@ export default function Alpha() {
                 <SwapCircle />
                 <Field label="You receive" sym="yzUSD" symLabel="yzUSD" balance="$12,480.00" input={{ readOnly: true }} />
               </div>
-              <Button block>Connect Wallet</Button>
+              <Button block data-flow="unstake">Connect Wallet</Button>
             </div>
           </div>
 
@@ -577,8 +577,8 @@ export default function Alpha() {
               </div>
             </div>
             <div className="mrev-cost"><span>Rate</span><b data-rev-rate>1 USDT0 = 1 yzUSD</b></div>
-            <div className="mrev-cost" data-rev-mintfee-row><span>Mint fee <i>0.10%</i></span><b data-rev-fee>$0.00</b></div>
-            <div className="mrev-cost" data-rev-stakefee-row hidden><span>Stake fee <i>0.50%</i></span><b data-rev-stakefee>$0.00</b></div>
+            <div className="mrev-cost" data-rev-fee1-row><span data-rev-fee1-label>Mint fee <i>0.10%</i></span><b data-rev-fee1>$0.00</b></div>
+            <div className="mrev-cost" data-rev-fee2-row hidden><span data-rev-fee2-label>Stake fee <i>0.50%</i></span><b data-rev-fee2>$0.00</b></div>
             <div className="mrev-cost"><span>Network fee</span><b>&lt;$0.01</b></div>
             <div className="mrev-cost"><span>Estimated time</span><b>~30 seconds</b></div>
             <button type="button" className="btn btn-accent btn-block mrev-cta" data-mint-review-confirm><span data-rev-cta>Confirm mint</span><span className="mrev-spinner" aria-hidden="true" /></button>
@@ -596,12 +596,12 @@ export default function Alpha() {
             <p className="mok-sub" data-ok-sub>Stake it to receive syzUSD and target <b>7.75%</b> weekly yield.</p>
             <div className="mok-info">
               <div className="mok-info-row mok-info-between"><span>Transaction ID</span><b className="mok-txid">VKN-8993J244</b></div>
-              <div className="mok-info-row mok-info-between" data-ok-mintfee-row><span>Mint fee</span><b data-ok-fee>$0.00</b></div>
-              <div className="mok-info-row mok-info-between" data-ok-stakefee-row hidden><span>Stake fee</span><b data-ok-stakefee>$0.00</b></div>
+              <div className="mok-info-row mok-info-between" data-ok-fee1-row><span data-ok-fee1-label>Mint fee</span><b data-ok-fee1>$0.00</b></div>
+              <div className="mok-info-row mok-info-between" data-ok-fee2-row hidden><span data-ok-fee2-label>Stake fee</span><b data-ok-fee2>$0.00</b></div>
             </div>
             <div className="mok-actions">
               <button type="button" className="btn btn-accent btn-block" data-ok-primary>Stake now</button>
-              <button type="button" className="btn btn-line btn-block" data-mint-ok-close>Close</button>
+              <button type="button" className="btn btn-line btn-block" data-mint-ok-close data-ok-close-btn>Close</button>
             </div>
           </div>
         </div>
