@@ -80,7 +80,7 @@
   .vd-alert-cta svg { width: 16px; height: 16px; }
   /* Header + tabs canh GIỮA theo chiều ngang content */
   /* Header canh giữa (Alpha, Prime, ...) */
-  .av-head { align-self: stretch; text-align: center; }
+  .av-head { align-self: stretch; text-align: center; margin: 0 0 24px; }
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
   .av-head p { margin: 6px auto 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--text); max-width: 72ch; }
   /* Token tabs Alpha: bản gốc — chip trắng có logo phía trước, selected nền xanh
