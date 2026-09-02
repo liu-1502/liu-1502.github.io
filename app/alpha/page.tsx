@@ -494,11 +494,9 @@ export default function Alpha() {
 
           {/* Your Balance — ngay dưới form */}
           <div className="bal-card">
-            <div className="bal-card-l">
-              <span className="bal-card-k">Your yzUSD balance</span>
-              <b className="bal-card-v" data-user-bal>$12,480.00</b>
-            </div>
             <span className="bal-card-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
+            <span className="bal-card-k">Your yzUSD balance</span>
+            <b className="bal-card-v" data-user-bal>$12,480.00</b>
           </div>
 
           {/* Stats ngay dưới card mint/redeem */}
