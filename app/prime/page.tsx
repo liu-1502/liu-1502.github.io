@@ -2,6 +2,7 @@ import Link from "next/link";
 import "../alpha/styles.css";
 import "./styles.css";   /* override màu nâu cho Prime, load sau alpha styles */
 import PrimeClient from "./PrimeClient";
+import ReviewDialogs from "@/components/ReviewDialogs";
 import { pageMetadata } from "@/lib/pages";
 import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ShieldCheck, ExternalLink, ChevronDown, Search } from "lucide-react";
 
@@ -145,7 +146,7 @@ export default function Prime() {
                 <SwapCircle />
                 <Field label="You receive" sym="yzPrime" symLabel="yzPrime" balance="$0.00" input={{ readOnly: true }} />
               </div>
-              <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
+              <button className="btn btn-accent btn-block gcta" data-flow="mint">Connect Wallet</button>
             </div>
             <div data-dirpanel="redeem" style={{ display: "none" }}>
               <div className="mfields">
@@ -153,7 +154,7 @@ export default function Prime() {
                 <SwapCircle />
                 <Field label="You receive" sym="usdc" symLabel="USDC" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
-              <button className="btn btn-accent btn-block gcta">Connect Wallet</button>
+              <button className="btn btn-accent btn-block gcta" data-flow="redeem">Connect Wallet</button>
             </div>
           </div>
 
@@ -233,6 +234,7 @@ export default function Prime() {
       </div>
 
       <PrimeClient/>
+      <ReviewDialogs/>
     </div>
   );
 }

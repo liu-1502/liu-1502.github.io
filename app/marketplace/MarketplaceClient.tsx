@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useExchangePanels, type RateMap } from "@/hooks/useExchangePanels";
+import { useReviewFlow, type ReviewFlow } from "@/hooks/useReviewFlow";
 
 /* Tỷ giá + hệ số USD cho các vault Marketplace. */
 const RATES: RateMap = {
@@ -9,11 +10,30 @@ const RATES: RateMap = {
   yzcash: { deposit: { rate: 1, dp: 1, rp: 1 }, withdraw: { rate: 1, dp: 1, rp: 1 } },
 };
 
+const USDC = "/assets/tokens/usdc.svg", YSY = "/assets/tokens/yzSyrup.svg", YCA = "/assets/tokens/yzCash.svg";
+const dep = (recvSym: string, recvIcon: string, recvMul: number, rate: string): ReviewFlow => ({
+  paySym: "USDC", payIcon: USDC, recvSym, recvIcon, recvMul, payUsd: 1, rate, fees: [],
+  revTitle: "You’re depositing", revCta: "Confirm deposit", okTitle: "Deposited successfully",
+  okSub: `Your ${recvSym} is now earning yield.`, okPrimary: "Done",
+});
+const wd = (paySym: string, payIcon: string, recvMul: number, payUsd: number, rate: string): ReviewFlow => ({
+  paySym, payIcon, recvSym: "USDC", recvIcon: USDC, recvMul, payUsd, rate, fees: [],
+  revTitle: "You’re withdrawing", revCta: "Confirm withdraw", okTitle: "Withdrawn successfully",
+  okSub: "USDC is on its way to your wallet.", okPrimary: "Done",
+});
+const FLOWS: Record<string, ReviewFlow> = {
+  "yzsyrup-deposit": dep("yzSyrup", YSY, 1 / 1.0192, "1 USDC = 0.98116 yzSyrup"),
+  "yzsyrup-withdraw": wd("yzSyrup", YSY, 1.0192, 1.0192, "1 yzSyrup = 1.0192 USDC"),
+  "yzcash-deposit": dep("yzCash", YCA, 1, "1 USDC = 1 yzCash"),
+  "yzcash-withdraw": wd("yzCash", YCA, 1, 1, "1 yzCash = 1 USDC"),
+};
+
 /* Mật khẩu cổng vào vault (demo, kiểm tra phía client). ĐỔI giá trị này khi cần. */
 const GATE_PASSWORD = "123456";
 
 export default function MarketplaceClient() {
-  useExchangePanels(RATES);
+  useExchangePanels(RATES, { walletCta: true });
+  useReviewFlow(FLOWS);
 
   /* Điều hướng 2 màn: Overview (danh sách vault) <-> Exchange (deposit/withdraw). */
   useEffect(() => {

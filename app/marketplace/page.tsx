@@ -2,6 +2,7 @@ import "../alpha/styles.css";
 import "./styles.css";   /* override màu xanh cho Marketplace, load sau alpha styles */
 import { Fragment } from "react";
 import MarketplaceClient from "./MarketplaceClient";
+import ReviewDialogs from "@/components/ReviewDialogs";
 import VaultCard from "./VaultCard";
 import { VAULTS } from "./data";
 import MetaRows from "@/components/ui/MetaRows";
@@ -402,7 +403,7 @@ export default function Marketplace() {
                 <SwapCircle />
                 <Field label="You receive" sym="yzSyrup" symLabel="yzSyrup" balance="$0.00" input={{ readOnly: true }} />
               </div>
-              <button className="btn btn-accent btn-block">Connect Wallet</button>
+              <button className="btn btn-accent btn-block" data-flow="yzsyrup-deposit">Connect Wallet</button>
             </div>
             <div data-dirpanel="withdraw" style={{ display: "none" }}>
               <div className="mfields">
@@ -410,7 +411,7 @@ export default function Marketplace() {
                 <SwapCircle />
                 <Field label="You receive" sym="usdc" symLabel="USDC" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
-              <button className="btn btn-accent btn-block">Connect Wallet</button>
+              <button className="btn btn-accent btn-block" data-flow="yzsyrup-withdraw">Connect Wallet</button>
               <MetaRows rows={[
                 { k: "Redemption", v: "Open" },
                 { k: "Performance fee", v: "10%" },
@@ -432,7 +433,7 @@ export default function Marketplace() {
                 <SwapCircle />
                 <Field label="You receive" sym="yzCash" symLabel="yzCash" balance="$0.00" input={{ readOnly: true }} />
               </div>
-              <button className="btn btn-accent btn-block">Connect Wallet</button>
+              <button className="btn btn-accent btn-block" data-flow="yzcash-deposit">Connect Wallet</button>
             </div>
             <div data-dirpanel="withdraw" style={{ display: "none" }}>
               <div className="mfields">
@@ -440,7 +441,7 @@ export default function Marketplace() {
                 <SwapCircle />
                 <Field label="You receive" sym="usdc" symLabel="USDC" balance="$10,000.00" input={{ readOnly: true }} />
               </div>
-              <button className="btn btn-accent btn-block">Connect Wallet</button>
+              <button className="btn btn-accent btn-block" data-flow="yzcash-withdraw">Connect Wallet</button>
               <MetaRows rows={[
                 { k: "Redemption", v: "Open" },
               ]} />
@@ -483,6 +484,7 @@ export default function Marketplace() {
       </div>
 
       <MarketplaceClient/>
+      <ReviewDialogs/>
     </div>
   );
 }
