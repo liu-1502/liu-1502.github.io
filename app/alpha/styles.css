@@ -84,7 +84,7 @@
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
   .av-head p { margin: 2px auto 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.5; color: var(--text); max-width: 72ch; }
   /* 2 chip token dưới title (thay cho sub-menu sidebar). */
-  .av-chips { align-self: stretch; display: flex; justify-content: center; gap: 8px; margin: 0 0 24px; }
+  .av-chips { align-self: stretch; display: flex; justify-content: center; gap: 8px; margin: 0 0 8px; }
   .av-chip { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 0 16px; height: 40px; background: #fff; border: 1px solid transparent; border-radius: 999px; font-family: var(--font-body); font-weight: 600; font-size: 15px; color: #1C1C1C; transition: border-color .15s ease, background .15s ease, box-shadow .15s ease; }
   .av-chip:hover { box-shadow: 0 3px 10px rgba(20, 47, 4, .14); }
   .av-chip.on { border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: #E2ECD8; color: var(--accent); }
