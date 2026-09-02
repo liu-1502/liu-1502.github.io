@@ -180,6 +180,13 @@
   /* Nhãn stat: xanh đậm, đậm hơn */
   .page-stats .k { color: #142F04; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
 
+  /* Dark mode: #142F04 (xanh đậm) chìm trên nền tối -> đổi sang màu sáng.
+     (Các số có tone dùng inline color:var(--good) nên vẫn giữ xanh, không bị ghi đè.) */
+  :root[data-theme="dark"] & {
+    .page-stats .v { color: var(--text); }
+    .page-stats .k { color: var(--muted); }
+  }
+
   /* ===== Icon info + popover chart (hover) ===== */
   .page-stats, .page-stats > div { overflow: visible; }   /* cho popover tràn ra */
   .stat-info { position: relative; display: inline-flex; align-items: center; }
