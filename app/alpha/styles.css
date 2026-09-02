@@ -117,9 +117,11 @@
   .hist-panel .ohist { display: flex; flex-direction: column; min-height: 0; flex: 1; }
   .hist-panel .olist { overflow-y: auto; min-height: 0; padding-bottom: 8px; }
   /* Activities inline (dưới form) */
-  .hist-inline { align-self: stretch; background: var(--surface); border-radius: 20px; overflow: hidden; }
+  .hist-inline { align-self: stretch; background: var(--surface); border-radius: 20px; overflow: hidden; padding-bottom: 8px; }
   .hist-inline .ohist { display: flex; flex-direction: column; }
-  .hist-inline .olist { max-height: 520px; overflow-y: auto; padding-bottom: 8px; }
+  .omore { all: unset; box-sizing: border-box; cursor: pointer; align-self: stretch; margin: 8px 12px 4px; padding: 11px; text-align: center; border-radius: 12px; background: color-mix(in srgb, var(--text) 5%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--text); }
+  .omore:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
+  .omore[style*="display: none"], .omore[style*="display:none"] { display: none; }
 
   /* --- Dialog Mint thành công --- */
   .mok { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 24px; }

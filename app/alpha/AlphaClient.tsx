@@ -25,16 +25,20 @@ export default function AlphaClient() {
     const rows = Array.from(list.querySelectorAll<HTMLElement>(".ord"));
     let statusFilter = "all";
     let query = "";
+    const PAGE = 3;
+    let limit = PAGE;
 
     const matches = (r: HTMLElement) => {
       const okStatus = statusFilter === "all" || r.getAttribute("data-status") === statusFilter;
       const okQuery = !query || (r.querySelector(".otx")?.textContent || "").toLowerCase().includes(query);
       return okStatus && okQuery;
     };
-    // Dialog history: hiện FULL lịch sử (chỉ lọc theo status + tìm theo tx, không phân trang).
+    // Mặc định hiện 3; "Show more" sổ thêm 10 mỗi lần. Đổi filter/search -> reset về 3.
     const apply = () => {
-      rows.forEach((r) => { r.style.display = matches(r) ? "" : "none"; });
-      if (btn) btn.style.display = "none";
+      const matched = rows.filter(matches);
+      rows.forEach((r) => (r.style.display = "none"));
+      matched.slice(0, limit).forEach((r) => (r.style.display = ""));
+      if (btn) btn.style.display = matched.length > limit ? "" : "none";
     };
     apply();
 
@@ -43,14 +47,18 @@ export default function AlphaClient() {
       if (!b) return;
       filters?.querySelectorAll(".ofilter").forEach((x) => x.classList.toggle("on", x === b));
       statusFilter = b.getAttribute("data-filter") || "all";
+      limit = PAGE;
       apply();
     };
-    const onSearch = () => { query = (search?.value || "").trim().toLowerCase(); apply(); };
+    const onSearch = () => { query = (search?.value || "").trim().toLowerCase(); limit = PAGE; apply(); };
+    const onMore = () => { limit += 10; apply(); };
     filters?.addEventListener("click", onFilter);
     search?.addEventListener("input", onSearch);
+    btn?.addEventListener("click", onMore);
     return () => {
       filters?.removeEventListener("click", onFilter);
       search?.removeEventListener("input", onSearch);
+      btn?.removeEventListener("click", onMore);
     };
   }, []);
 

@@ -510,6 +510,7 @@ export default function Alpha() {
               <div className="olist">
                 {ACTIVITIES.map((o, i) => <OrderItem key={i} {...o} />)}
               </div>
+              <button type="button" className="omore" data-omore>Show more</button>
             </div>
           </div>
 
