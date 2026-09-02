@@ -80,7 +80,7 @@
   .vd-alert-cta svg { width: 16px; height: 16px; }
   /* Header + tabs canh GIỮA theo chiều ngang content */
   /* Header canh giữa (Alpha, Prime, ...) */
-  .av-head { align-self: stretch; text-align: center; margin: 0 0 4px; }
+  .av-head { align-self: stretch; text-align: center; margin: 0 0 -6px; }
   .av-head h1 { margin: 0; font-family: var(--font-display); font-weight: 640; font-size: clamp(28px, 3vw, 40px); color: #142F04; }
   .av-head p { margin: 2px auto 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.5; color: var(--text); max-width: 72ch; }
   /* 2 chip token dưới title (thay cho sub-menu sidebar). */

@@ -393,6 +393,13 @@ export default function AlphaClient() {
     window.addEventListener("hashchange", fromHash);
     // Next.js Link dùng pushState -> KHÔNG fire hashchange, nên bắt click trực tiếp trên sub-menu link.
     const onClick = (e: MouseEvent) => {
+      // Nút "Switch to …" trong panel chi tiết -> chuyển panel + cập nhật hash.
+      const sw = (e.target as HTMLElement).closest<HTMLElement>("[data-switch-panel]");
+      if (sw) {
+        const name = (sw.getAttribute("data-switch-panel") || "").toLowerCase();
+        if (VALID.includes(name)) { location.hash = name; show(name); window.scrollTo(0, 0); }
+        return;
+      }
       // Chip dưới title (button[data-tab]) -> chuyển panel + cập nhật hash.
       const chip = (e.target as HTMLElement).closest<HTMLElement>(".av-chip[data-tab]");
       if (chip) {
