@@ -254,6 +254,13 @@ export default function AlphaClient() {
       if (t.closest("[data-mint-confirm]")) { startMintFlow(FLOWS.mint); return; }
       if (t.closest("[data-mintstake-confirm]")) { startMintFlow(FLOWS.mintstake); return; }
       if (t.closest("[data-alert-stake]")) { startStakeFlow(); return; }
+      // "Stake now" trên thẻ balance -> stake toàn bộ số dư yzUSD hiện có.
+      if (t.closest("[data-bal-stake]")) {
+        const balB = document.querySelector(".pg-alpha [data-user-bal]");
+        const bal = parseFloat((balB?.textContent || "").replace(/[^0-9.]/g, "")) || 0;
+        if (bal > 0) { lastDep = bal; populateReview(FLOWS.stake); }
+        return;
+      }
       if (t.closest("[data-mint-review-confirm]")) {
         // Giả lập xử lý ~1.2s (spinner) rồi mới sang màn success.
         const btn = t.closest<HTMLElement>("[data-mint-review-confirm]");

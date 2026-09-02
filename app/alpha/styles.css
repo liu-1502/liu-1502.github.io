@@ -122,6 +122,9 @@
   .bal-card-v { margin-left: auto; font-family: var(--font-display); font-weight: 620; font-size: 19px; color: var(--text); }
   .bal-card-ic { flex: none; display: inline-flex; }
   .bal-card-ic img { width: 28px; height: 28px; }
+  .bal-card-stake { all: unset; box-sizing: border-box; cursor: pointer; flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 12px; font-family: var(--font-body); font-weight: 600; font-size: 13.5px; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); transition: background .15s ease; }
+  .bal-card-stake svg { width: 15px; height: 15px; }
+  .bal-card-stake:hover { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
 
   /* Activities inline (dưới form) */
   .hist-inline { align-self: stretch; background: var(--surface); border-radius: 20px; overflow: hidden; padding-bottom: 8px; }

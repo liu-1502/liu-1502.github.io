@@ -204,16 +204,6 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
             </div>
           ))}
         </div>
-        {t.key === "yzusd" && (
-          <div className="vd-alert" data-mint-alert hidden>
-            <span className="vd-alert-ic"><Info /></span>
-            <div className="vd-alert-txt">
-              <b><span data-alert-amt>0</span> yzUSD unstaked</b>
-              <p>Stake it to receive syzUSD and earn <b>7.75%</b> weekly yield.</p>
-              <button type="button" className="vd-alert-cta" data-alert-stake>Stake now <ArrowRight /></button>
-            </div>
-          </div>
-        )}
       </section>
 
       {/* How it works (chỉ yzUSD) */}
@@ -502,6 +492,7 @@ export default function Alpha() {
             <span className="bal-card-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
             <span className="bal-card-k">Your yzUSD balance</span>
             <b className="bal-card-v" data-user-bal>$12,480.00</b>
+            <button type="button" className="bal-card-stake" data-bal-stake>Stake now <ArrowRight /></button>
           </div>
 
           {/* Stats ngay dưới card mint/redeem */}
