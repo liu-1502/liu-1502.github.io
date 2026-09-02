@@ -65,6 +65,12 @@
   .ref-stats .k { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; letter-spacing: .05em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); }
   .ref-stats .v { font-family: var(--font-mono); font-size: 22px; font-weight: 560; margin-top: 0; font-variant-numeric: tabular-nums; display: flex; align-items: center; justify-content: flex-start; gap: 8px; color: #142F04; }
   .ref-stats .v.hi { color: #142F04; }
+
+  /* Dark mode: các màu xanh đậm #142F04 chìm trên nền tối -> đổi sang màu sáng. */
+  :root[data-theme="dark"] & {
+    .juice-hero .lbl { color: var(--muted); }
+    .ref-stats .v, .ref-stats .v.hi { color: var(--text); }
+  }
   .ref-stats .juice-ic { width: 24px; height: 24px; flex: none; background: url("/assets/juice.svg") center / contain no-repeat; }
 
   .copy-row {

@@ -757,6 +757,8 @@
 :root[data-theme="dark"] :is(.pg-alpha, .pg-prime, .pg-marketplace, .pg-bridge) {
   /* Dark mode: nền tối sẵn -> overlay đậm hơn + blur mạnh hơn để tách hẳn dialog. */
   .mok-backdrop { background: color-mix(in srgb, #05080A 74%, transparent); backdrop-filter: blur(4px); }
+  /* Tiêu đề "Orders" (#262626) chìm trên nền tối -> màu text sáng. */
+  .otitle { color: var(--text); }
 
   /* Card trắng -> surface tối */
   .mfield, .acc, .ohist, .about-menu, .about-btn, .tok-tab, .dir-switch, .swap-circle {

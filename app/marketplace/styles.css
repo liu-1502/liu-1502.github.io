@@ -441,6 +441,7 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
 :root[data-theme="dark"] .pg-marketplace.pg-marketplace .mfield .token[data-sym="usdc"] { background: color-mix(in srgb, #6E86FF 16%, var(--surface)); }
 :root[data-theme="dark"] .pg-marketplace.pg-marketplace .mfield .token[data-sym="yzSyrup"] { background: color-mix(in srgb, #E8763A 20%, var(--surface)); }
 :root[data-theme="dark"] .pg-marketplace.pg-marketplace .mfield .token[data-sym="yzCash"] { background: color-mix(in srgb, #9BCC44 20%, var(--surface)); }
+:root[data-theme="dark"] .pg-marketplace.pg-marketplace .mkt-stats { background: var(--surface); }
 
 /* Re-point các var tint sang nền tối; rule light dùng var() nên tự recompute */
 :root[data-theme="dark"] .pg-marketplace.pg-marketplace {

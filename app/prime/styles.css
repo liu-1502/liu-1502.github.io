@@ -58,6 +58,7 @@ body.p-prime { --bg: color-mix(in srgb, var(--prime) 3.5%, #FDFCF8); }
 /* ===================== DARK MODE (Prime) ===================== */
 :root[data-theme="dark"] body.p-prime { --bg: color-mix(in srgb, var(--prime) 6%, #0C120D); }
 :root[data-theme="dark"] .pg-prime.pg-prime .mfield .token[data-sym="usdc"] { background: color-mix(in srgb, #6E86FF 16%, var(--surface)); }
+:root[data-theme="dark"] .pg-prime.pg-prime .mfield .token[data-sym="yzPrime"] { background: color-mix(in srgb, #D9A526 20%, var(--surface)); }
 
 /* Re-point các var tint sang nền tối; rule light dùng var() nên tự recompute */
 :root[data-theme="dark"] .pg-prime.pg-prime {

@@ -231,6 +231,12 @@ body.tp-prime .pg-transparency .tp-summary6 { background: color-mix(in srgb, var
   .s6 .k { font-family: var(--font-body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: #142F04; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .s6 .v { font-family: var(--font-body); font-size: 22px; font-weight: 560; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; color: #142F04; }
   .s6 .k:has(.s6-info) { overflow: visible; }
+
+  /* Dark mode: #142F04 (xanh đậm) chìm trên nền tối. Số có tone dùng inline color:var(--good) nên giữ nguyên. */
+  :root[data-theme="dark"] & {
+    .bigstat .k, .s6 .k { color: var(--muted); }
+    .s6 .v { color: var(--text); }
+  }
   .s6-info { position: relative; display: inline-flex; align-items: center; color: var(--faint); margin-left: 3px; cursor: help; vertical-align: middle; }
   .s6-info svg { width: 12px; height: 12px; }
   .s6-tip {
