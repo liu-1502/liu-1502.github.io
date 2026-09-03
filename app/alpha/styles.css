@@ -263,11 +263,11 @@
   .vd-head-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .vd-head h3 { margin: 0; font-family: var(--font-display); font-weight: 620; font-size: 18px; }
   /* Nút secondary "Switch to …" — canh phải trên hàng tên */
-  /* 2 tab yzUSD | syzUSD (segmented pill) — thay cho nút "Switch to …". */
-  .vd-switch-tabs { margin-left: auto; display: inline-flex; align-items: center; gap: 3px; padding: 3px; border-radius: 999px; border: 1px solid var(--line-solid); background: var(--surface-2); }
-  .vd-stab { all: unset; box-sizing: border-box; cursor: pointer; height: 34px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 999px; font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--muted); transition: background .15s ease, color .15s ease; }
+  /* 2 chip yzUSD | syzUSD — không nền, chỉ stroke xám nhạt; active = chữ + viền xanh. */
+  .vd-switch-tabs { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; }
+  .vd-stab { all: unset; box-sizing: border-box; cursor: pointer; height: 34px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line-solid); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--muted); transition: color .15s ease, border-color .15s ease; }
   .vd-stab:hover:not(.on) { color: var(--text); }
-  .vd-stab.on { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--accent); }
+  .vd-stab.on { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
   .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
   .vd-desc { margin: 3px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
   .vd-stats { display: flex; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
