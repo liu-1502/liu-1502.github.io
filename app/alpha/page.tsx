@@ -204,9 +204,10 @@ function TokenDetail({ t }: { t: (typeof TOKENS)[number] }) {
           <div className="vd-head-row">
             <span className="vt-logo"><img src={t.logo} alt="" /></span>
             {switchTok && (
-              <button type="button" className="vd-switch" data-switch-panel={switchTok.key}>
-                <img src={switchTok.logo} alt="" /> Switch to {switchTok.name}
-              </button>
+              <div className="vd-switch-tabs">
+                <button type="button" className={`vd-stab${t.key === "yzusd" ? " on" : ""}`} data-switch-panel="yzusd">yzUSD</button>
+                <button type="button" className={`vd-stab${t.key === "syzusd" ? " on" : ""}`} data-switch-panel="syzusd">syzUSD</button>
+              </div>
             )}
           </div>
           <div className="vd-head-main">
