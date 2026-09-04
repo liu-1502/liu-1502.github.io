@@ -265,7 +265,7 @@
   /* Nút secondary "Switch to …" — canh phải trên hàng tên */
   /* 2 chip yzUSD | syzUSD — không nền, chỉ stroke xám nhạt; active = chữ + viền xanh. */
   .vd-switch-tabs { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; }
-  .vd-stab { all: unset; box-sizing: border-box; cursor: pointer; height: 34px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line-solid); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--muted); transition: color .15s ease, border-color .15s ease; }
+  .vd-stab { all: unset; box-sizing: border-box; cursor: pointer; height: 34px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--muted); transition: color .15s ease, border-color .15s ease; }
   .vd-stab:hover:not(.on) { color: var(--text); }
   .vd-stab.on { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
   .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
