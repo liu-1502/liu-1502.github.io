@@ -263,11 +263,11 @@
   .vd-head-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .vd-head h3 { margin: 0; font-family: var(--font-display); font-weight: 620; font-size: 18px; }
   /* Nút secondary "Switch to …" — canh phải trên hàng tên */
-  /* 2 chip yzUSD | syzUSD — không nền, chỉ stroke xám nhạt; active = chữ + viền xanh. */
+  /* 2 chip yzUSD | syzUSD — style giống chip Orders (bo vuông, stroke xám, active viền + nền xanh nhạt). */
   .vd-switch-tabs { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; }
-  .vd-stab { all: unset; box-sizing: border-box; cursor: pointer; height: 34px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--muted); transition: color .15s ease, border-color .15s ease; }
-  .vd-stab:hover:not(.on) { color: var(--text); }
-  .vd-stab.on { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+  .vd-stab { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; padding: 7px 14px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--muted); transition: background .15s ease, border-color .15s ease, color .15s ease; }
+  .vd-stab:hover:not(.on) { background: color-mix(in srgb, var(--text) 5%, transparent); color: var(--text); }
+  .vd-stab.on { background: color-mix(in srgb, var(--accent) 7%, transparent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); }
   .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
   .vd-desc { margin: 3px 0 0; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--muted); }
   .vd-stats { display: flex; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
