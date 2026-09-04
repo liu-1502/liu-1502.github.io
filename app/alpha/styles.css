@@ -98,7 +98,7 @@
      (dùng style .tok-tab mặc định), canh giữa. */
   #alphaTabs { justify-content: center; }
   /* Form (av-left) đứng yên hoàn toàn khi scroll: top = đúng vị trí ban đầu (topbar 64 + padding 48). */
-  .av-left { position: sticky; top: 112px; }
+  .av-left { position: sticky; top: 80px; }   /* 80 < mép content (~92) -> ko bị đẩy lệch lúc chưa cuộn; vẫn dính dưới topbar (64) khi cuộn */
   @media (max-width: 980px) { .av-left { position: static; top: auto; } }
   .hist-btn {
     all: unset; box-sizing: border-box; cursor: pointer; position: absolute; top: 24px; right: 20px; z-index: 2;
@@ -265,7 +265,7 @@
   /* Nút secondary "Switch to …" — canh phải trên hàng tên */
   /* 2 chip yzUSD | syzUSD — style giống chip Orders (bo vuông, stroke xám, active viền + nền xanh nhạt). */
   .vd-switch-tabs { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; }
-  .vd-stab { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; padding: 7px 14px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--muted); transition: background .15s ease, border-color .15s ease, color .15s ease; }
+  .vd-stab { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; padding: 5px 11px; border-radius: 7px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--muted); transition: background .15s ease, border-color .15s ease, color .15s ease; }
   .vd-stab:hover:not(.on) { background: color-mix(in srgb, var(--text) 5%, transparent); color: var(--text); }
   .vd-stab.on { background: color-mix(in srgb, var(--accent) 7%, transparent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); }
   .vt-badge { font-family: var(--font-body); font-weight: 600; font-size: 11px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--alpha) 15%, #fff); color: #3E7B18; }
