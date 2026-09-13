@@ -3,6 +3,7 @@ import "./styles.css";
 import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
+import OpenCoverLogo from "@/components/OpenCoverLogo";
 import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, ChevronsRight, Check, Info } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
@@ -492,7 +493,7 @@ export default function Alpha() {
               {/* Tuỳ chọn bảo hiểm — bật toggle -> expand + nút "Stake & cover" (cần tick xác nhận). */}
               <div className="cover-sec" data-cover>
                 <div className="cover-head">
-                  <span className="cover-title"><ShieldCheck /> Cover with OpenCover</span>
+                  <span className="cover-title"><OpenCoverLogo className="cover-logo" /> Cover with OpenCover</span>
                   <span className="cover-apr">2.06% APR</span>
                   <button type="button" className="cover-toggle" role="switch" aria-checked="false" aria-label="Toggle cover" data-cover-toggle><i /></button>
                 </div>
