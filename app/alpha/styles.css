@@ -372,7 +372,7 @@
   .mint-note b { color: var(--accent); font-weight: 600; }
 
   /* ---- Cover with OpenCover (tuỳ chọn bảo hiểm ở form Stake) ---- */
-  .cover-sec { align-self: stretch; margin-top: 4px; padding: 14px 16px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 16px; background: transparent; }
+  .cover-sec { align-self: stretch; margin-top: 4px; padding: 14px 16px; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); border-radius: 16px; background: transparent; }
   .cover-head { display: flex; align-items: center; gap: 10px; }
   .cover-title { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 640; font-size: 14.5px; color: var(--text); }
   .cover-title svg { width: 18px; height: 18px; color: var(--accent); }
@@ -396,7 +396,8 @@
   .cover-links a { display: inline-flex; align-items: center; gap: 3px; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--accent); text-decoration: none; }
   .cover-links a svg { width: 13px; height: 13px; }
   .cover-ack { display: flex; align-items: flex-start; gap: 9px; margin-top: 12px; padding-top: 12px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); cursor: pointer; }
-  .cover-ack input { flex: none; width: 16px; height: 16px; margin-top: 1px; accent-color: var(--accent); cursor: pointer; }
+  .cover-ack input { appearance: none; -webkit-appearance: none; flex: none; width: 18px; height: 18px; margin-top: 1px; border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 6px; background: transparent; cursor: pointer; transition: background .15s ease, border-color .15s ease; }
+  .cover-ack input:checked { border-color: var(--accent); background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.2 5 8.4 9.4 3.6' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px 12px no-repeat; }
   .cover-ack span { font-family: var(--font-body); font-size: 12.5px; line-height: 1.5; color: var(--muted); }
 
   /* ---- Swap (Exchange, powered by LI.FI) ---- */
