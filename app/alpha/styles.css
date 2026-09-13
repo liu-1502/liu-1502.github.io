@@ -372,7 +372,7 @@
   .mint-note b { color: var(--accent); font-weight: 600; }
 
   /* ---- Cover with OpenCover (tuỳ chọn bảo hiểm ở form Stake) ---- */
-  .cover-sec { align-self: stretch; margin-top: 4px; padding: 14px 16px; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); border-radius: 16px; background: var(--surface); }
+  .cover-sec { align-self: stretch; margin-top: 4px; padding: 14px 16px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 16px; background: transparent; }
   .cover-head { display: flex; align-items: center; gap: 10px; }
   .cover-title { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 640; font-size: 14.5px; color: var(--text); }
   .cover-title svg { width: 18px; height: 18px; color: var(--accent); }
