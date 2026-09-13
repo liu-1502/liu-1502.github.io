@@ -210,6 +210,18 @@ export default function AlphaClient() {
     const refreshAlert = () => setAlert(minted && !staked);
     const closeSuccess = () => { open(dlg, false); refreshAlert(); };
 
+    // Cover with OpenCover: bật toggle -> expand + nút "Stake & cover" (khoá tới khi tick xác nhận).
+    const syncCover = () => {
+      const sec = document.querySelector<HTMLElement>(".pg-alpha [data-cover]");
+      if (!sec) return;
+      const on = sec.querySelector("[data-cover-toggle]")?.getAttribute("aria-checked") === "true";
+      const body = sec.querySelector<HTMLElement>("[data-cover-body]");
+      const ack = sec.querySelector<HTMLInputElement>("[data-cover-ack]");
+      const btn = document.querySelector<HTMLButtonElement>('.pg-alpha [data-panel="syzusd"] [data-dirpanel="stake"] [data-flow="stake"]');
+      if (body) body.hidden = !on;
+      if (btn) { btn.textContent = on ? "Stake & cover" : "Stake"; btn.disabled = on && !ack?.checked; }
+    };
+
     // "How it works" chỉ hiện khi form đang ở tab Mint.
     const howEl = document.querySelector<HTMLElement>(".pg-alpha [data-how-works]");
     const yzForm = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"]');
@@ -312,6 +324,13 @@ export default function AlphaClient() {
         }
         return;
       }
+      // Toggle "Cover with OpenCover".
+      const covTg = t.closest<HTMLElement>("[data-cover-toggle]");
+      if (covTg) {
+        covTg.setAttribute("aria-checked", covTg.getAttribute("aria-checked") === "true" ? "false" : "true");
+        syncCover();
+        return;
+      }
       // Nút CTA của form bất kỳ (data-flow) -> mở review order theo flow tương ứng.
       const flowBtn = t.closest<HTMLElement>("[data-flow]");
       if (flowBtn) {
@@ -373,13 +392,18 @@ export default function AlphaClient() {
     const depInput = document.querySelector<HTMLInputElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l input');
     const xusd = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l .xusd');
     const onInput = () => { xusd?.classList.remove("xusd-err"); };
+    // Tick xác nhận cover -> mở/khoá nút "Stake & cover".
+    const onChange = (e: Event) => { if ((e.target as HTMLElement).closest("[data-cover-ack]")) syncCover(); };
     depInput?.addEventListener("input", onInput);
     document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);
+    document.addEventListener("change", onChange);
+    syncCover();
     return () => {
       depInput?.removeEventListener("input", onInput);
       document.removeEventListener("click", onClick);
       document.removeEventListener("keydown", onKey);
+      document.removeEventListener("change", onChange);
       yzForm?.querySelector(".dir-switch")?.removeEventListener("click", onDirClick);
       yzForm?.querySelector("[data-swap]")?.removeEventListener("click", onDirClick);
       if (confirmTimer) clearTimeout(confirmTimer);

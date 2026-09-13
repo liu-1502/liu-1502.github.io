@@ -489,6 +489,32 @@ export default function Alpha() {
                 <SwapCircle />
                 <Field label="You receive" sym="syzUSD" symLabel="syzUSD" balance="$0.00" input={{ readOnly: true, "data-dst": true } as React.InputHTMLAttributes<HTMLInputElement>} />
               </div>
+              {/* Tuỳ chọn bảo hiểm — bật toggle -> expand + nút "Stake & cover" (cần tick xác nhận). */}
+              <div className="cover-sec" data-cover>
+                <div className="cover-head">
+                  <span className="cover-title"><ShieldCheck /> Cover with OpenCover</span>
+                  <span className="cover-apr">2.06% APR</span>
+                  <button type="button" className="cover-toggle" role="switch" aria-checked="false" aria-label="Toggle cover" data-cover-toggle><i /></button>
+                </div>
+                <div className="cover-body" data-cover-body hidden>
+                  <div className="cover-row"><span>Staking yield <em>VARIABLE</em></span><b>7.50%</b></div>
+                  <div className="cover-row"><span>Cover fee <em>FIXED</em> <Info className="cover-i" /></span><b className="cover-neg">&minus;2.06% APR</b></div>
+                  <div className="cover-div" />
+                  <div className="cover-row cover-net"><span>Net covered APY</span><b>5.44%</b></div>
+                  <div className="cover-row"><span>Provider</span><b>Nexus Mutual, via OpenCover</b></div>
+                  <div className="cover-row"><span>Loss covered</span><b>10&ndash;100%</b></div>
+                  <div className="cover-row"><span>Deductible</span><b>5%</b></div>
+                  <div className="cover-row"><span>Minimum to cover</span><b>1.0001 yzUSD</b></div>
+                  <div className="cover-row"><span>Cover capacity</span><b>1.25M / 50M yzUSD</b></div>
+                  <div className="cover-row"><span>Coverage starts</span><b>At settlement, usually under a minute</b></div>
+                  <div className="cover-links">
+                    <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Policy <ArrowUpRight /></a>
+                    <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Annex <ArrowUpRight /></a>
+                    <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Proof of cover <ArrowUpRight /></a>
+                  </div>
+                  <label className="cover-ack"><input type="checkbox" data-cover-ack /><span>I understand cover activates at settlement, the premium is charged against my covered position, and removing cover takes a separate request.</span></label>
+                </div>
+              </div>
               <Button block data-flow="stake">Connect Wallet</Button>
             </div>
             <div data-dirpanel="unstake" style={{ display: "none" }}>
