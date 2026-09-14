@@ -507,20 +507,22 @@ export default function Alpha() {
                     <div className="cover-amt-fee" data-cover-fee-wrap hidden><span>Fee</span><b data-cover-fee>$0.00</b></div>
                   </div>
                   <div className="cover-div" />
-                  <div className="cover-row"><span>Staking yield</span><b>7.50%</b></div>
-                  <div className="cover-row"><span>Cover fee <Info className="cover-i" /></span><b className="cover-neg">&minus;2.06% APR</b></div>
-                  <div className="cover-div" />
                   <div className="cover-row cover-net"><span>Net covered APY</span><b>5.44%</b></div>
-                  <div className="cover-row"><span>Provider</span><b>Nexus Mutual, via OpenCover</b></div>
-                  <div className="cover-row"><span>Loss covered</span><b>10&ndash;100%</b></div>
-                  <div className="cover-row"><span>Deductible</span><b>5%</b></div>
-                  <div className="cover-row"><span>Minimum to cover</span><b>1.0001 yzUSD</b></div>
-                  <div className="cover-row"><span>Cover capacity</span><b>1.25M / 50M yzUSD</b></div>
-                  <div className="cover-row"><span>Coverage starts</span><b>At settlement, usually under a minute</b></div>
-                  <div className="cover-links">
-                    <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Policy <ArrowUpRight /></a>
-                    <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Annex <ArrowUpRight /></a>
-                    <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Proof of cover <ArrowUpRight /></a>
+                  <button type="button" className="cover-more" data-cover-more aria-expanded="false"><span data-cover-more-lbl>View more</span> <ChevronDown /></button>
+                  <div className="cover-more-body" data-cover-more-body hidden>
+                    <div className="cover-row"><span>Staking yield</span><b>7.50%</b></div>
+                    <div className="cover-row"><span>Cover fee <Info className="cover-i" /></span><b className="cover-neg">&minus;2.06% APR</b></div>
+                    <div className="cover-row"><span>Provider</span><b>Nexus Mutual, via OpenCover</b></div>
+                    <div className="cover-row"><span>Loss covered</span><b>10&ndash;100%</b></div>
+                    <div className="cover-row"><span>Deductible</span><b>5%</b></div>
+                    <div className="cover-row"><span>Minimum to cover</span><b>1.0001 yzUSD</b></div>
+                    <div className="cover-row"><span>Cover capacity</span><b>1.25M / 50M yzUSD</b></div>
+                    <div className="cover-row"><span>Coverage starts</span><b>At settlement, usually under a minute</b></div>
+                    <div className="cover-links">
+                      <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Policy <ArrowUpRight /></a>
+                      <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Annex <ArrowUpRight /></a>
+                      <a href="https://research.yuzu.money/opencover" target="_blank" rel="noopener noreferrer">Proof of cover <ArrowUpRight /></a>
+                    </div>
                   </div>
                   <label className="cover-ack"><input type="checkbox" data-cover-ack /><span>I understand cover activates at settlement, the premium is charged against my covered position, and removing cover takes a separate request.</span></label>
                 </div>

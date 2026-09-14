@@ -406,6 +406,12 @@
   .cover-div { height: 1px; background: color-mix(in srgb, var(--text) 10%, transparent); margin: 8px 0; }
   .cover-net > span { color: var(--text); font-weight: 640; }
   .cover-net > b { color: var(--accent); font-weight: 700; }
+  /* View more -> mở nhóm thông tin phụ */
+  .cover-more { all: unset; box-sizing: border-box; cursor: pointer; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--accent); }
+  .cover-more svg { width: 15px; height: 15px; transition: transform .15s ease; }
+  .cover-more[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .cover-more-body { display: flex; flex-direction: column; margin-top: 8px; padding-top: 8px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .cover-more-body[hidden] { display: none; }
   .cover-links { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0 4px; }
   .cover-links a { display: inline-flex; align-items: center; gap: 3px; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--accent); text-decoration: none; }
   .cover-links a svg { width: 13px; height: 13px; }
