@@ -392,11 +392,10 @@
   .cover-amt-row input::placeholder { color: var(--faint); }
   .cover-amt-tok { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 6px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 12%, var(--surface)); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--text); }
   .cover-amt-tok img { width: 22px; height: 22px; border-radius: 50%; }
-  .cover-amt-fee { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: var(--font-body); font-size: 13px; }
+  .cover-amt-fee { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; padding: 6px 0; font-family: var(--font-body); font-size: 13px; }
   .cover-amt-fee[hidden] { display: none; }
   .cover-amt-fee > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
-  .cover-amt-fee > span em { font-style: normal; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); }
-  .cover-amt-fee > b { color: var(--accent); font-family: var(--font-mono); font-weight: 700; }
+  .cover-amt-fee > b { color: var(--accent); font-family: var(--font-mono); font-weight: 600; }
   .cover-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 6px 0; font-family: var(--font-body); font-size: 13px; }
   .cover-row > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
   .cover-row > span em { font-style: normal; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); }
@@ -404,8 +403,8 @@
   .cover-i { width: 14px; height: 14px; color: var(--faint); }
   .cover-neg { color: var(--text); }
   .cover-div { height: 1px; background: color-mix(in srgb, var(--text) 10%, transparent); margin: 8px 0; }
-  .cover-net > span { color: var(--text); font-weight: 640; }
-  .cover-net > b { color: var(--accent); font-weight: 700; }
+  .cover-net > span { color: var(--muted); }
+  .cover-net > b { color: var(--accent); font-weight: 600; }
   /* View more -> mở nhóm thông tin phụ */
   .cover-more { all: unset; box-sizing: border-box; cursor: pointer; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--accent); }
   .cover-more svg { width: 15px; height: 15px; transition: transform .15s ease; }
