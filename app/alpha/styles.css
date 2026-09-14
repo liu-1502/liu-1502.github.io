@@ -396,6 +396,13 @@
   .cover-amt-fee[hidden] { display: none; }
   .cover-amt-fee > span { color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
   .cover-amt-fee > b { color: var(--accent); font-family: var(--font-mono); font-weight: 600; }
+  /* APY với cover: base -> covered (đánh đổi) */
+  .cover-apy { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; font-family: var(--font-body); font-size: 13px; }
+  .cover-apy > span:first-child { color: var(--text); font-weight: 600; }
+  .cover-apy-nums { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); }
+  .cover-apy-base { color: var(--muted); }
+  .cover-apy-arr { width: 14px; height: 14px; color: var(--muted); flex: none; }
+  .cover-apy-nums b { color: var(--accent); font-weight: 700; font-size: 14.5px; }
   .cover-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 6px 0; font-family: var(--font-body); font-size: 13px; }
   .cover-row > span { color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
   .cover-row > span em { font-style: normal; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); }
