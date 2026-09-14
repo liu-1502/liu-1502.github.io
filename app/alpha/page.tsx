@@ -549,11 +549,28 @@ export default function Alpha() {
               <b className="bal-card-v" data-user-bal>$12,480.00</b>
             </div>
             <div className="bal-card-cover" data-bal-cover hidden>
-              <div className="bal-card-cover-main">
-                <span className="bal-card-cover-k">Coverage amount</span>
-                <b className="bal-card-cover-v" data-bal-cover-amt>$0.00</b>
+              <div className="bal-card-cover-row" data-cover-view="main">
+                <div className="bal-card-cover-main">
+                  <span className="bal-card-cover-k">Coverage amount</span>
+                  <b className="bal-card-cover-v" data-bal-cover-amt>$0.00</b>
+                </div>
+                <button type="button" className="bal-card-unlock" data-bal-unlock>Unlock</button>
               </div>
-              <button type="button" className="bal-card-unlock" data-bal-unlock>Unlock</button>
+              <div className="bal-card-cover-edit" data-cover-view="edit" hidden>
+                <div className="bcc-head">
+                  <span className="bcc-head-l"><ShieldCheck /> Covered by OpenCover</span>
+                  <b className="bcc-head-amt" data-bal-cover-tok>0.00 syzUSD</b>
+                </div>
+                <div className="bcc-inrow">
+                  <input type="text" className="bcc-in" data-bal-cover-input inputMode="decimal" aria-label="Coverage to remove" />
+                  <span className="bcc-in-tok">syzUSD</span>
+                  <button type="button" className="bcc-max" data-bal-cover-max>MAX</button>
+                </div>
+                <div className="bcc-actions">
+                  <button type="button" className="bcc-remove" data-bal-cover-remove>Remove 0.00 syzUSD</button>
+                  <button type="button" className="bcc-cancel" data-bal-cover-cancel>Cancel</button>
+                </div>
+              </div>
             </div>
             <div className="bal-card-stakerow">
               <p className="bal-card-note">Stake it to receive syzUSD and earn <b>7.75%</b> weekly yield.</p>

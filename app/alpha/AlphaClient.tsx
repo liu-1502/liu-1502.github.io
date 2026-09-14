@@ -455,7 +455,27 @@ export default function AlphaClient() {
     // Số dư syzUSD động: Stake & Cover -> cộng phần staked vào total + hiện phần covered (có nút Unlock).
     let syzTotal = 8900, syzCovered = 0;
     const money2 = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tok2 = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " syzUSD";
     let curTok = "yzusd";
+    // Chuyển giữa view "main" (label + Unlock) và view "edit" (chỉnh sửa bảo hiểm).
+    const setCoverView = (mode: "main" | "edit") => {
+      const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
+      if (!bc) return;
+      bc.querySelectorAll<HTMLElement>("[data-cover-view]").forEach((v) => (v.hidden = v.getAttribute("data-cover-view") !== mode));
+      if (mode === "edit") {
+        const inp = bc.querySelector<HTMLInputElement>("[data-bal-cover-input]");
+        if (inp) { inp.value = syzCovered.toFixed(2); setTimeout(() => { inp.focus(); inp.select(); }, 0); }
+        const tk = bc.querySelector("[data-bal-cover-tok]"); if (tk) tk.textContent = tok2(syzCovered);
+        syncCoverRemove();
+      }
+    };
+    // Nhãn nút Remove theo số nhập.
+    const syncCoverRemove = () => {
+      const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
+      if (!bc) return;
+      const amt = parseFloat((bc.querySelector<HTMLInputElement>("[data-bal-cover-input]")?.value || "").replace(/,/g, "")) || 0;
+      const rm = bc.querySelector("[data-bal-cover-remove]"); if (rm) rm.textContent = `Remove ${tok2(amt)}`;
+    };
     const renderBal = () => {
       const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
       const info = BAL[curTok];
@@ -468,6 +488,7 @@ export default function AlphaClient() {
       if (cov) {
         cov.hidden = !(curTok === "syzusd" && syzCovered > 0);
         const cv = bc.querySelector("[data-bal-cover-amt]"); if (cv) cv.textContent = money2(syzCovered);
+        setCoverView("main"); // luôn về view mặc định khi render lại
       }
     };
     // Stake & Cover xong -> cập nhật số dư + phần covered.
@@ -475,10 +496,26 @@ export default function AlphaClient() {
       const d = (e as CustomEvent<{ stakedUsd: number; covUsd: number }>).detail;
       syzTotal += d.stakedUsd; syzCovered = d.covUsd; renderBal();
     };
-    // Unlock -> gỡ bảo hiểm (số dư giữ nguyên).
-    const onUnlock = (e: Event) => { if ((e.target as HTMLElement).closest("[data-bal-unlock]")) { syzCovered = 0; renderBal(); } };
+    // Unlock -> mở panel chỉnh sửa; Cancel -> đóng; MAX -> điền toàn bộ; Remove -> gỡ (số dư giữ nguyên).
+    const onUnlock = (e: Event) => {
+      const t = e.target as HTMLElement;
+      if (t.closest("[data-bal-unlock]")) { setCoverView("edit"); return; }
+      if (t.closest("[data-bal-cover-cancel]")) { setCoverView("main"); return; }
+      if (t.closest("[data-bal-cover-max]")) {
+        const inp = document.querySelector<HTMLInputElement>(".pg-alpha [data-bal-cover-input]");
+        if (inp) { inp.value = syzCovered.toFixed(2); syncCoverRemove(); }
+        return;
+      }
+      if (t.closest("[data-bal-cover-remove]")) {
+        const amt = parseFloat((document.querySelector<HTMLInputElement>(".pg-alpha [data-bal-cover-input]")?.value || "").replace(/,/g, "")) || 0;
+        syzCovered = Math.max(0, syzCovered - amt); renderBal();
+        return;
+      }
+    };
+    const onCoverInput2 = (e: Event) => { if ((e.target as HTMLElement).closest("[data-bal-cover-input]")) syncCoverRemove(); };
     document.addEventListener("alpha-cover-staked", onCoverStaked);
     document.addEventListener("click", onUnlock);
+    document.addEventListener("input", onCoverInput2);
     const show = (name: string) => {
       if (!VALID.includes(name)) return;
       curTok = name;
@@ -569,6 +606,7 @@ export default function AlphaClient() {
       document.removeEventListener("click", onSheet);
       document.removeEventListener("alpha-cover-staked", onCoverStaked);
       document.removeEventListener("click", onUnlock);
+      document.removeEventListener("input", onCoverInput2);
     };
   }, []);
 
