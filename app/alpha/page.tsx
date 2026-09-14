@@ -548,6 +548,11 @@ export default function Alpha() {
               <span className="bal-card-k">Your yzUSD balance</span>
               <b className="bal-card-v" data-user-bal>$12,480.00</b>
             </div>
+            <div className="bal-card-cover" data-bal-cover hidden>
+              <span className="bal-card-cover-k">Coverage amount</span>
+              <b className="bal-card-cover-v" data-bal-cover-amt>$0.00</b>
+              <button type="button" className="bal-card-unlock" data-bal-unlock>Unlock</button>
+            </div>
             <div className="bal-card-stakerow">
               <p className="bal-card-note">Stake it to receive syzUSD and earn <b>7.75%</b> weekly yield.</p>
               <button type="button" className="bal-card-stake" data-bal-stake>Stake now <ArrowRight /></button>

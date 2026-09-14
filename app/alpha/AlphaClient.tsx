@@ -315,6 +315,14 @@ export default function AlphaClient() {
       // Cập nhật trạng thái mint/stake (điều khiển alert nhắc stake nếu còn).
       if (cfg.setMinted) { minted = true; staked = false; }
       if (cfg.setStaked) { staked = true; }
+      // Stake & Cover -> báo thẻ balance syzUSD cộng phần staked + hiện Coverage amount.
+      if (cfg === FLOWS.stake) {
+        const coverOn = document.querySelector(".pg-alpha [data-cover-toggle]")?.getAttribute("aria-checked") === "true";
+        if (coverOn) {
+          const covAmt = parseFloat((document.querySelector<HTMLInputElement>(".pg-alpha [data-cover-amt]")?.value || "").replace(/,/g, "")) || 0;
+          document.dispatchEvent(new CustomEvent("alpha-cover-staked", { detail: { stakedUsd: lastDep, covUsd: covAmt } }));
+        }
+      }
       resetForm(); // thành công -> form về mặc định
       open(review, false);
       open(dlg, true);
@@ -444,19 +452,40 @@ export default function AlphaClient() {
       syzusd: { sym: "syzUSD", icon: "/assets/tokens/syzUSD.svg", val: "$8,900.00", stake: false },
       yzpp: { sym: "yzPP", icon: "/assets/tokens/yzPP.svg", val: "$3,250.00", stake: false },
     };
+    // Số dư syzUSD động: Stake & Cover -> cộng phần staked vào total + hiện phần covered (có nút Unlock).
+    let syzTotal = 8900, syzCovered = 0;
+    const money2 = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    let curTok = "yzusd";
+    const renderBal = () => {
+      const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
+      const info = BAL[curTok];
+      if (!bc || !info) return;
+      bc.querySelector<HTMLImageElement>(".bal-card-ic img")?.setAttribute("src", info.icon);
+      const k = bc.querySelector(".bal-card-k"); if (k) k.textContent = `Your ${info.sym} balance`;
+      const v = bc.querySelector("[data-user-bal]"); if (v) v.textContent = curTok === "syzusd" ? money2(syzTotal) : info.val;
+      const sr = bc.querySelector<HTMLElement>(".bal-card-stakerow"); if (sr) sr.hidden = !info.stake;
+      const cov = bc.querySelector<HTMLElement>("[data-bal-cover]");
+      if (cov) {
+        cov.hidden = !(curTok === "syzusd" && syzCovered > 0);
+        const cv = bc.querySelector("[data-bal-cover-amt]"); if (cv) cv.textContent = money2(syzCovered);
+      }
+    };
+    // Stake & Cover xong -> cập nhật số dư + phần covered.
+    const onCoverStaked = (e: Event) => {
+      const d = (e as CustomEvent<{ stakedUsd: number; covUsd: number }>).detail;
+      syzTotal += d.stakedUsd; syzCovered = d.covUsd; renderBal();
+    };
+    // Unlock -> gỡ bảo hiểm (số dư giữ nguyên).
+    const onUnlock = (e: Event) => { if ((e.target as HTMLElement).closest("[data-bal-unlock]")) { syzCovered = 0; renderBal(); } };
+    document.addEventListener("alpha-cover-staked", onCoverStaked);
+    document.addEventListener("click", onUnlock);
     const show = (name: string) => {
       if (!VALID.includes(name)) return;
+      curTok = name;
       host.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => {
         p.style.display = p.getAttribute("data-panel") === name ? "" : "none";
       });
-      const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
-      const info = BAL[name];
-      if (bc && info) {
-        bc.querySelector<HTMLImageElement>(".bal-card-ic img")?.setAttribute("src", info.icon);
-        const k = bc.querySelector(".bal-card-k"); if (k) k.textContent = `Your ${info.sym} balance`;
-        const v = bc.querySelector("[data-user-bal]"); if (v) v.textContent = info.val;
-        const sr = bc.querySelector<HTMLElement>(".bal-card-stakerow"); if (sr) sr.hidden = !info.stake;
-      }
+      renderBal();
       // Đồng bộ highlight sub-menu sidebar: chỉ token đang chọn được .on.
       // (Next render href có thể là "/alpha/#yzusd" -> match theo "#" cho chắc.)
       document.querySelectorAll<HTMLAnchorElement>('.side-sub a[href*="#"]').forEach((a) => {
@@ -538,6 +567,8 @@ export default function AlphaClient() {
       window.removeEventListener("hashchange", fromHash);
       document.removeEventListener("click", onClick);
       document.removeEventListener("click", onSheet);
+      document.removeEventListener("alpha-cover-staked", onCoverStaked);
+      document.removeEventListener("click", onUnlock);
     };
   }, []);
 
