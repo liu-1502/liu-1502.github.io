@@ -504,8 +504,8 @@ export default function Alpha() {
                       <input type="text" inputMode="decimal" placeholder="0" data-cover-amt aria-label="Coverage amount" />
                       <span className="cover-amt-tok"><img src="/assets/tokens/yzUSD.svg" alt="" />yzUSD</span>
                     </div>
-                    <div className="cover-amt-fee" data-cover-fee-wrap hidden><span>Fee</span><b data-cover-fee>$0.00</b></div>
                   </div>
+                  <div className="cover-row"><span>Fee</span><b data-cover-fee>&mdash;</b></div>
                   <div className="cover-row"><span>Staking APY</span><b>7.50%</b></div>
                   <div className="cover-row cover-net"><span>APY with cover</span><b>5.44%</b></div>
                   <button type="button" className="cover-more" data-cover-more aria-expanded="false"><span data-cover-more-lbl>View more</span> <ChevronDown /></button>

@@ -227,10 +227,8 @@ export default function AlphaClient() {
       const inp = document.querySelector<HTMLInputElement>(".pg-alpha [data-cover-amt]");
       if (!inp) return;
       const amt = parseFloat((inp.value || "").replace(/,/g, "")) || 0;
-      const wrap = document.querySelector<HTMLElement>(".pg-alpha [data-cover-fee-wrap]");
       const feeEl = document.querySelector(".pg-alpha [data-cover-fee]");
-      if (feeEl) feeEl.textContent = money(amt * COVER_APR) + "/yr";
-      if (wrap) wrap.hidden = amt <= 0;
+      if (feeEl) feeEl.textContent = amt > 0 ? money(amt * COVER_APR) + "/yr" : "—";
     };
 
     // "How it works" chỉ hiện khi form đang ở tab Mint.
