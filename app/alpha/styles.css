@@ -390,7 +390,7 @@
   .cover-amt-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius: 12px; background: var(--surface); }
   .cover-amt-row input { all: unset; box-sizing: border-box; flex: 1; min-width: 0; font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: var(--text); }
   .cover-amt-row input::placeholder { color: var(--faint); }
-  .cover-amt-tok { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 6px; border-radius: 999px; background: #E9F5E2; font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--text); }
+  .cover-amt-tok { flex: none; display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--text); }
   .cover-amt-tok img { width: 22px; height: 22px; border-radius: 50%; }
   .cover-amt-fee { display: flex; align-items: baseline; gap: 6px; font-family: var(--font-body); font-size: 12.5px; }
   .cover-amt-fee[hidden] { display: none; }
@@ -403,6 +403,8 @@
   .cover-apy-base { color: var(--muted); }
   .cover-apy-arr { width: 14px; height: 14px; color: var(--muted); flex: none; }
   .cover-apy-nums b { color: var(--accent); font-weight: 700; font-size: 14.5px; }
+  /* Khung gom 3 dòng Fee / Staking APY / APY with cover */
+  .cover-key-box { margin-top: 10px; padding: 4px 14px; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); border-radius: 12px; }
   .cover-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 6px 0; font-family: var(--font-body); font-size: 13px; }
   .cover-row > span { color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
   .cover-row > span em { font-style: normal; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); }
@@ -832,7 +834,6 @@
   .tok-tab.on { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); }
   .dir-switch button.on { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); color: var(--text); }
   .mfield .token { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
-  .cover-amt-tok { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); }
   .swap-circle { color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, var(--surface)); }
   .swap-circle:hover { background: var(--surface-2); }
   .pct, .oicon { background: var(--surface-2); color: var(--muted); }
