@@ -392,9 +392,9 @@
   .cover-amt-row input::placeholder { color: var(--faint); }
   .cover-amt-tok { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 6px; border-radius: 999px; background: #E9F5E2; font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--text); }
   .cover-amt-tok img { width: 22px; height: 22px; border-radius: 50%; }
-  .cover-amt-fee { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; padding: 6px 0; font-family: var(--font-body); font-size: 13px; }
+  .cover-amt-fee { display: flex; align-items: baseline; gap: 6px; font-family: var(--font-body); font-size: 12.5px; }
   .cover-amt-fee[hidden] { display: none; }
-  .cover-amt-fee > span { color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
+  .cover-amt-fee > span { color: var(--muted); }
   .cover-amt-fee > b { color: var(--accent); font-family: var(--font-mono); font-weight: 600; }
   /* APY với cover: base -> covered (đánh đổi) */
   .cover-apy { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; font-family: var(--font-body); font-size: 13px; }
