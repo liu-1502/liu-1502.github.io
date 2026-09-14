@@ -508,7 +508,7 @@ export default function Alpha() {
                   <div className="cover-row"><span>Fee</span><b data-cover-fee>&mdash;</b></div>
                   <div className="cover-row"><span>Staking APY</span><b>7.50%</b></div>
                   <div className="cover-row cover-net"><span>APY with cover</span><b>5.44%</b></div>
-                  <button type="button" className="cover-more" data-cover-more aria-expanded="false"><span data-cover-more-lbl>View more</span> <ChevronDown /></button>
+                  <button type="button" className="cover-more" data-cover-more aria-expanded="false"><span>Coverage details</span> <ChevronDown /></button>
                   <div className="cover-more-body" data-cover-more-body hidden>
                     <div className="cover-row"><span>Staking yield</span><b>7.50%</b></div>
                     <div className="cover-row"><span>Cover fee <Info className="cover-i" /></span><b className="cover-neg">&minus;2.06% APR</b></div>

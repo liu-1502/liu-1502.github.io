@@ -347,8 +347,6 @@ export default function AlphaClient() {
         moreBtn.setAttribute("aria-expanded", open ? "false" : "true");
         const body = document.querySelector<HTMLElement>(".pg-alpha [data-cover-more-body]");
         if (body) body.hidden = open;
-        const lbl = moreBtn.querySelector("[data-cover-more-lbl]");
-        if (lbl) lbl.textContent = open ? "View more" : "View less";
         return;
       }
       // Nút CTA của form bất kỳ (data-flow) -> mở review order theo flow tương ứng.
