@@ -458,13 +458,13 @@ export default function AlphaClient() {
     const tok2 = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " syzUSD";
     let curTok = "yzusd";
     // Chuyển giữa view "main" (label + Unlock) và view "edit" (chỉnh sửa bảo hiểm).
-    const setCoverView = (mode: "main" | "edit") => {
+    const setCoverView = (mode: "main" | "edit" | "promo") => {
       const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
       if (!bc) return;
       bc.querySelectorAll<HTMLElement>("[data-cover-view]").forEach((v) => (v.hidden = v.getAttribute("data-cover-view") !== mode));
       if (mode === "edit") {
         const inp = bc.querySelector<HTMLInputElement>("[data-bal-cover-input]");
-        if (inp) { inp.value = syzCovered.toFixed(2); setTimeout(() => { inp.focus(); inp.select(); }, 0); }
+        if (inp) { inp.value = ""; setTimeout(() => inp.focus(), 0); } // default trống -> nhập mới hiện
         const tk = bc.querySelector("[data-bal-cover-tok]"); if (tk) tk.textContent = tok2(syzCovered);
         syncCoverRemove();
       }
@@ -474,7 +474,7 @@ export default function AlphaClient() {
       const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
       if (!bc) return;
       const amt = parseFloat((bc.querySelector<HTMLInputElement>("[data-bal-cover-input]")?.value || "").replace(/,/g, "")) || 0;
-      const rm = bc.querySelector("[data-bal-cover-remove]"); if (rm) rm.textContent = `Remove ${tok2(amt)}`;
+      const rm = bc.querySelector("[data-bal-cover-remove]"); if (rm) rm.textContent = amt > 0 ? `Unlock ${tok2(amt)}` : "Unlock";
     };
     const renderBal = () => {
       const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
@@ -486,9 +486,9 @@ export default function AlphaClient() {
       const sr = bc.querySelector<HTMLElement>(".bal-card-stakerow"); if (sr) sr.hidden = !info.stake;
       const cov = bc.querySelector<HTMLElement>("[data-bal-cover]");
       if (cov) {
-        cov.hidden = !(curTok === "syzusd" && syzCovered > 0);
+        cov.hidden = curTok !== "syzusd"; // luôn hiện với syzUSD (mời cover khi chưa có)
         const cv = bc.querySelector("[data-bal-cover-amt]"); if (cv) cv.textContent = money2(syzCovered);
-        setCoverView("main"); // luôn về view mặc định khi render lại
+        setCoverView(syzCovered > 0 ? "main" : "promo"); // chưa cover -> promo, có cover -> label + Unlock
       }
     };
     // Stake & Cover xong -> cập nhật số dư + phần covered.
@@ -499,6 +499,12 @@ export default function AlphaClient() {
     // Unlock -> mở panel chỉnh sửa; Cancel -> đóng; MAX -> điền toàn bộ; Remove -> gỡ (số dư giữ nguyên).
     const onUnlock = (e: Event) => {
       const t = e.target as HTMLElement;
+      if (t.closest("[data-bal-cover-start]")) { // "Cover with OpenCover" -> bật toggle + cuộn tới section
+        const toggle = document.querySelector<HTMLElement>(".pg-alpha [data-panel='syzusd'] [data-cover-toggle]");
+        if (toggle && toggle.getAttribute("aria-checked") !== "true") toggle.click();
+        document.querySelector(".pg-alpha [data-panel='syzusd'] [data-cover]")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
       if (t.closest("[data-bal-unlock]")) { setCoverView("edit"); return; }
       if (t.closest("[data-bal-cover-cancel]")) { setCoverView("main"); return; }
       if (t.closest("[data-bal-cover-max]")) {

@@ -147,6 +147,14 @@
   .bal-card-unlock { all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto; flex: none; display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 12.5px; color: var(--accent); transition: background .15s ease; }
   .bal-card-unlock:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); }
 
+  /* Chưa có cover -> mời user bật cover */
+  .bal-card-cover-promo[hidden] { display: none; }
+  .bcc-promo-note { margin: 0; font-family: var(--font-body); font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .bcc-promo-note b { font-weight: 700; color: var(--accent); }
+  .bcc-promo-cta { all: unset; cursor: pointer; margin-top: 9px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 700; font-size: 13.5px; color: var(--accent); }
+  .bcc-promo-cta svg { width: 15px; height: 15px; }
+  .bcc-promo-cta:hover { text-decoration: underline; }
+
   /* Unlock -> panel chỉnh sửa bảo hiểm (giống OpenCover) */
   .bal-card-cover-edit[hidden] { display: none; }
   .bcc-head { display: flex; align-items: center; gap: 10px; }

@@ -549,6 +549,10 @@ export default function Alpha() {
               <b className="bal-card-v" data-user-bal>$12,480.00</b>
             </div>
             <div className="bal-card-cover" data-bal-cover hidden>
+              <div className="bal-card-cover-promo" data-cover-view="promo" hidden>
+                <p className="bcc-promo-note">Insure it with OpenCover against protocol loss for <b>2.06% APR</b>, streamed from your yield.</p>
+                <button type="button" className="bcc-promo-cta" data-bal-cover-start>Cover with OpenCover <ArrowRight /></button>
+              </div>
               <div className="bal-card-cover-row" data-cover-view="main">
                 <div className="bal-card-cover-main">
                   <span className="bal-card-cover-k">Coverage amount</span>
@@ -562,12 +566,12 @@ export default function Alpha() {
                   <b className="bcc-head-amt" data-bal-cover-tok>0.00 syzUSD</b>
                 </div>
                 <div className="bcc-inrow">
-                  <input type="text" className="bcc-in" data-bal-cover-input inputMode="decimal" aria-label="Coverage to remove" />
+                  <input type="text" className="bcc-in" data-bal-cover-input inputMode="decimal" placeholder="0.00" aria-label="Coverage to unlock" />
                   <span className="bcc-in-tok">syzUSD</span>
                   <button type="button" className="bcc-max" data-bal-cover-max>MAX</button>
                 </div>
                 <div className="bcc-actions">
-                  <button type="button" className="bcc-remove" data-bal-cover-remove>Remove 0.00 syzUSD</button>
+                  <button type="button" className="bcc-remove" data-bal-cover-remove>Unlock</button>
                   <button type="button" className="bcc-cancel" data-bal-cover-cancel>Cancel</button>
                 </div>
               </div>
