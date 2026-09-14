@@ -403,8 +403,8 @@
   .cover-apy-base { color: var(--muted); }
   .cover-apy-arr { width: 14px; height: 14px; color: var(--muted); flex: none; }
   .cover-apy-nums b { color: var(--accent); font-weight: 700; font-size: 14.5px; }
-  /* Khung gom 3 dòng Fee / Staking APY / APY with cover */
-  .cover-key-box { margin-top: 10px; padding: 4px 14px; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); border-radius: 12px; }
+  /* Gom 3 dòng Fee / Staking APY / APY with cover (không stroke) */
+  .cover-key-box { margin-top: 8px; }
   .cover-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 6px 0; font-family: var(--font-body); font-size: 13px; }
   .cover-row > span { color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
   .cover-row > span em { font-style: normal; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); }
