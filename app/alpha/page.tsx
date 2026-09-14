@@ -505,10 +505,8 @@ export default function Alpha() {
                       <span className="cover-amt-tok"><img src="/assets/tokens/yzUSD.svg" alt="" />yzUSD</span>
                     </div>
                   </div>
-                  <div className="cover-apy">
-                    <span>APY with cover</span>
-                    <span className="cover-apy-nums"><span className="cover-apy-base">7.50%</span><ArrowRight className="cover-apy-arr" /><b>5.44%</b></span>
-                  </div>
+                  <div className="cover-row"><span>Staking APY</span><b>7.50%</b></div>
+                  <div className="cover-row cover-net"><span>APY with cover</span><b>5.44%</b></div>
                   <div className="cover-amt-fee" data-cover-fee-wrap hidden><span>Fee</span><b data-cover-fee>$0.00</b></div>
                   <button type="button" className="cover-more" data-cover-more aria-expanded="false"><span data-cover-more-lbl>View more</span> <ChevronDown /></button>
                   <div className="cover-more-body" data-cover-more-body hidden>
