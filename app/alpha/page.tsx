@@ -498,6 +498,15 @@ export default function Alpha() {
                   <button type="button" className="cover-toggle" role="switch" aria-checked="false" aria-label="Toggle cover" data-cover-toggle><i /></button>
                 </div>
                 <div className="cover-body" data-cover-body hidden>
+                  <div className="cover-amt">
+                    <span className="cover-amt-lbl">Coverage amount</span>
+                    <div className="cover-amt-row">
+                      <input type="text" inputMode="decimal" placeholder="0" data-cover-amt aria-label="Coverage amount" />
+                      <span className="cover-amt-tok"><img src="/assets/tokens/yzUSD.svg" alt="" />yzUSD</span>
+                    </div>
+                    <div className="cover-amt-fee" data-cover-fee-wrap hidden><span>Cover premium <em>2.06% / yr</em></span><b data-cover-fee>$0.00</b></div>
+                  </div>
+                  <div className="cover-div" />
                   <div className="cover-row"><span>Staking yield <em>VARIABLE</em></span><b>7.50%</b></div>
                   <div className="cover-row"><span>Cover fee <em>FIXED</em> <Info className="cover-i" /></span><b className="cover-neg">&minus;2.06% APR</b></div>
                   <div className="cover-div" />

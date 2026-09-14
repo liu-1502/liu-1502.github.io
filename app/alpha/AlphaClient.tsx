@@ -221,6 +221,17 @@ export default function AlphaClient() {
       if (body) body.hidden = !on;
       if (btn) { btn.textContent = on ? "Stake & cover" : "Stake"; btn.disabled = on && !ack?.checked; }
     };
+    // Coverage amount -> phí cover (annual = amount × 2.06%).
+    const COVER_APR = 0.0206;
+    const syncCoverFee = () => {
+      const inp = document.querySelector<HTMLInputElement>(".pg-alpha [data-cover-amt]");
+      if (!inp) return;
+      const amt = parseFloat((inp.value || "").replace(/,/g, "")) || 0;
+      const wrap = document.querySelector<HTMLElement>(".pg-alpha [data-cover-fee-wrap]");
+      const feeEl = document.querySelector(".pg-alpha [data-cover-fee]");
+      if (feeEl) feeEl.textContent = money(amt * COVER_APR) + "/yr";
+      if (wrap) wrap.hidden = amt <= 0;
+    };
 
     // "How it works" chỉ hiện khi form đang ở tab Mint.
     const howEl = document.querySelector<HTMLElement>(".pg-alpha [data-how-works]");
@@ -394,16 +405,20 @@ export default function AlphaClient() {
     const onInput = () => { xusd?.classList.remove("xusd-err"); };
     // Tick xác nhận cover -> mở/khoá nút "Stake & cover".
     const onChange = (e: Event) => { if ((e.target as HTMLElement).closest("[data-cover-ack]")) syncCover(); };
+    // Nhập Coverage amount -> tính phí cover.
+    const onCoverInput = (e: Event) => { if ((e.target as HTMLElement).closest("[data-cover-amt]")) syncCoverFee(); };
     depInput?.addEventListener("input", onInput);
     document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);
     document.addEventListener("change", onChange);
+    document.addEventListener("input", onCoverInput);
     syncCover();
     return () => {
       depInput?.removeEventListener("input", onInput);
       document.removeEventListener("click", onClick);
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("change", onChange);
+      document.removeEventListener("input", onCoverInput);
       yzForm?.querySelector(".dir-switch")?.removeEventListener("click", onDirClick);
       yzForm?.querySelector("[data-swap]")?.removeEventListener("click", onDirClick);
       if (confirmTimer) clearTimeout(confirmTimer);
