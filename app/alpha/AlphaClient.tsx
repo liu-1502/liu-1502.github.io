@@ -496,7 +496,7 @@ export default function AlphaClient() {
       const d = (e as CustomEvent<{ stakedUsd: number; covUsd: number }>).detail;
       syzTotal += d.stakedUsd; syzCovered = d.covUsd; renderBal();
     };
-    // Unlock -> mở panel chỉnh sửa; Cancel -> đóng; MAX -> điền toàn bộ; Remove -> gỡ (số dư giữ nguyên).
+    // Unlock -> mở panel chỉnh sửa; Cancel -> đóng; MAX -> điền toàn bộ; Remove -> gỡ cover và trả amount về Balance.
     const onUnlock = (e: Event) => {
       const t = e.target as HTMLElement;
       if (t.closest("[data-bal-cover-start]")) { // "Cover with OpenCover" -> bật toggle + cuộn tới section
@@ -514,7 +514,9 @@ export default function AlphaClient() {
       }
       if (t.closest("[data-bal-cover-remove]")) {
         const amt = parseFloat((document.querySelector<HTMLInputElement>(".pg-alpha [data-bal-cover-input]")?.value || "").replace(/,/g, "")) || 0;
-        syzCovered = Math.max(0, syzCovered - amt); renderBal();
+        const rel = Math.min(amt, syzCovered); // không gỡ quá phần đang cover
+        if (rel > 0) { syzCovered -= rel; syzTotal += rel; } // unlock -> trả về Balance
+        renderBal();
         return;
       }
     };
