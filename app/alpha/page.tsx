@@ -502,7 +502,7 @@ export default function Alpha() {
                     <span className="cover-amt-lbl">Coverage amount</span>
                     <div className="cover-amt-row">
                       <input type="text" inputMode="decimal" placeholder="0" data-cover-amt aria-label="Coverage amount" />
-                      <span className="cover-amt-tok">yzUSD<img src="/assets/tokens/yzUSD.svg" alt="" /></span>
+                      <span className="cover-amt-tok"><img src="/assets/tokens/yzUSD.svg" alt="" />yzUSD</span>
                     </div>
                   </div>
                   <div className="cover-key-box">
