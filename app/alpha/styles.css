@@ -129,17 +129,17 @@
   .hist-panel .olist { overflow-y: auto; min-height: 0; padding-bottom: 8px; }
   /* Your Balance card (dưới form) — layout token detail + OpenCover */
   .bal-card { align-self: stretch; display: flex; flex-direction: column; background: var(--surface); border-radius: 16px; padding: 6px; }
-  .bal-card-head { display: flex; align-items: center; gap: 12px; padding: 12px 14px 4px; }
+  .bal-card-head { display: flex; align-items: center; gap: 12px; padding: 14px; }
   .bal-card-ic { flex: none; display: inline-flex; }
-  .bal-card-ic img { width: 40px; height: 40px; }
+  .bal-card-ic img { width: 32px; height: 32px; }
   .bal-card-id { display: flex; flex-direction: column; gap: 1px; }
-  .bal-card-name { font-family: var(--font-display); font-weight: 660; font-size: 18px; color: var(--text); }
+  .bal-card-name { font-family: var(--font-body); font-weight: 500; font-size: 15.5px; color: var(--text); }
   .bal-card-desc { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
-  .bal-card-bal { display: flex; align-items: baseline; gap: 12px; padding: 8px 14px 14px; }
-  .bal-card-bal-k { font-family: var(--font-body); font-size: 13.5px; color: var(--muted); }
-  .bal-card-bal-v { margin-left: auto; display: flex; align-items: baseline; gap: 7px; }
+  .bal-card-bal { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right; }
+  .bal-card-bal-k { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
+  .bal-card-bal-v { display: flex; align-items: baseline; gap: 6px; }
   .bal-card-bal-v [data-user-bal] { font-family: var(--font-display); font-weight: 660; font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
-  .bal-card-bal-sym { font-family: var(--font-display); font-weight: 620; font-size: 15px; color: var(--text); }
+  .bal-card-bal-sym { font-family: var(--font-display); font-weight: 620; font-size: 15px; color: var(--muted); }
   .bal-card-stakerow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0 8px 8px; padding: 12px 12px 12px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 6%, transparent); }
   .bal-card-stakerow[hidden] { display: none; }
 
@@ -148,26 +148,31 @@
   .bal-card-cover[hidden] { display: none; }
   .oc-view[hidden] { display: none; }
   .oc-head { display: flex; align-items: center; gap: 11px; }
-  .oc-shield { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
-  .oc-shield svg { width: 19px; height: 19px; }
+  .oc-shield { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); }
+  .oc-shield svg { width: 20px; height: 20px; }
   .oc-head-id { display: flex; flex-direction: column; gap: 1px; }
-  .oc-head-id b { font-family: var(--font-display); font-weight: 640; font-size: 15px; color: var(--text); }
-  .oc-head-id span { font-family: var(--font-body); font-size: 12.5px; color: var(--muted); }
+  .oc-head-id > b { font-family: var(--font-body); font-weight: 500; font-size: 15.5px; color: var(--text); }
+  .oc-head-id span { font-family: var(--font-body); font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+  .oc-head-id span b { font-family: var(--font-body); font-weight: 700; font-size: inherit; color: var(--accent); }
   .oc-status { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 640; font-size: 12.5px; color: var(--accent); }
   .oc-status i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
   .oc-status.oc-off { color: var(--muted); }
   .oc-status.oc-off i { background: color-mix(in srgb, var(--text) 30%, transparent); }
   .oc-body { display: flex; align-items: flex-end; gap: 12px; margin-top: 14px; }
+  .oc-body .oc-cta { margin-left: auto; }
   .oc-amt { display: flex; flex-direction: column; gap: 3px; }
-  .oc-amt-k { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
-  .oc-amt-v { display: flex; align-items: baseline; gap: 6px; }
-  .oc-amt-v b { font-family: var(--font-display); font-weight: 680; font-size: 22px; color: var(--accent); }
+  .oc-head .bal-card-stake { margin-left: auto; flex: none; }
+  .oc-view[data-cover-view="edit"] .oc-amt { margin-left: auto; align-items: flex-end; text-align: right; }
+  .oc-amt-k { font-family: var(--font-body); font-size: 13px; line-height: 1.2; color: var(--text); }
+  .oc-amt-v { display: flex; align-items: baseline; gap: 6px; line-height: 1.2; }
+  .oc-amt-v b { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--text); }
   .oc-amt-v span { font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--muted); }
   .oc-cta { all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); background: var(--surface); font-family: var(--font-body); font-weight: 640; font-size: 13.5px; color: var(--accent); transition: background .15s ease, border-color .15s ease; }
   .oc-cta svg { width: 16px; height: 16px; }
+  .oc-cta .oc-cta-logo { width: 19px; height: 19px; color: #131026; }
   .oc-cta:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); border-color: color-mix(in srgb, var(--accent) 60%, transparent); }
-  .oc-promo { margin-top: 12px; }
-  .oc-promo .oc-cta { margin-top: 12px; margin-left: 0; }
+  .oc-unlock { width: 100%; justify-content: center; }
+  .oc-promo-view { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 
   /* Nút Unlock (dùng chung cho edit) */
   .bal-card-unlock { all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto; flex: none; display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 12.5px; color: var(--accent); transition: background .15s ease; }
@@ -180,7 +185,8 @@
   .bcc-head-l { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 600; font-size: 13.5px; color: var(--text); }
   .bcc-head-l svg { width: 17px; height: 17px; color: var(--accent); flex: none; }
   .bcc-head-amt { margin-left: auto; font-family: var(--font-display); font-weight: 640; font-size: 15px; color: var(--text); }
-  .bcc-inrow { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 9px 12px; border-radius: 10px; background: transparent; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+  .bcc-inrow { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 9px 12px; border-radius: 12px; background: transparent; border: 1.5px solid color-mix(in srgb, var(--text) 24%, transparent); transition: border-color .15s ease; }
+  .bcc-inrow:focus-within { border-color: var(--accent); }
   .bcc-in { flex: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--text); }
   .bcc-in-tok { flex: none; font-family: var(--font-body); font-weight: 600; font-size: 13.5px; color: var(--muted); }
   .bcc-max { all: unset; box-sizing: border-box; cursor: pointer; flex: none; padding: 3px 8px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); font-family: var(--font-body); font-weight: 700; font-size: 11px; letter-spacing: .02em; color: var(--accent); transition: background .15s ease; }
@@ -426,11 +432,13 @@
   .mint-note b { color: var(--accent); font-weight: 600; }
 
   /* ---- Cover with OpenCover (tuỳ chọn bảo hiểm ở form Stake) ---- */
-  .cover-sec { align-self: stretch; margin-top: 4px; padding: 0; border: none; border-radius: 0; background: transparent; }
+  .cover-sec { align-self: stretch; margin: -6px 0; padding: 0; border: none; border-radius: 0; background: transparent; }
+  .cover-row > span em.cover-hint { font-style: normal; font-weight: 400; font-size: 12.5px; letter-spacing: normal; text-transform: none; color: var(--muted); }
   .cover-head { display: flex; align-items: center; gap: 10px; }
+  .cover-sec:has([data-cover-body]:not([hidden])) .cover-head { padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
   .cover-title { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 640; font-size: 14.5px; color: var(--text); }
   .cover-title svg { width: 18px; height: 18px; color: var(--accent); }
-  .cover-title .cover-logo { width: 26px; height: 26px; flex: none; color: #131026; background: #fff; border-radius: 7px; padding: 3.5px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent); }  /* logo OpenCover trong nền trắng bo tròn (chữ đậm cố định vì nền luôn trắng) */
+  .cover-title .cover-logo { width: 28px; height: 28px; flex: none; color: #131026; background: #fff; border-radius: 50%; padding: 4.5px; overflow: visible; }  /* logo OpenCover trong nền trắng bo tròn (chữ đậm cố định vì nền luôn trắng) */
   .cover-apr { margin-left: auto; font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
   .cover-toggle { all: unset; box-sizing: border-box; width: 44px; height: 26px; border-radius: 999px; background: color-mix(in srgb, var(--text) 18%, transparent); position: relative; flex: none; cursor: pointer; transition: background .15s; }
   .cover-toggle i { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: left .15s; box-shadow: 0 1px 2px rgba(0,0,0,.18); }
@@ -473,7 +481,7 @@
   .cover-more { all: unset; box-sizing: border-box; cursor: pointer; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--accent); }
   .cover-more svg { width: 15px; height: 15px; transition: transform .15s ease; }
   .cover-more[aria-expanded="true"] svg { transform: rotate(180deg); }
-  .cover-more-body { display: flex; flex-direction: column; margin-top: 8px; padding-top: 8px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .cover-more-body { display: flex; flex-direction: column; margin-top: 8px; }
   .cover-more-body[hidden] { display: none; }
   .cover-links { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0 4px; }
   .cover-links a { display: inline-flex; align-items: center; gap: 3px; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--accent); text-decoration: none; }

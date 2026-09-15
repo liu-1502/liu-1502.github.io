@@ -470,7 +470,6 @@ export default function AlphaClient() {
     let syzTotal = 8900, syzCovered = 0;
     const n2 = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const money2 = (n: number) => "$" + n2(n);
-    const tok2 = (n: number) => n2(n) + " syzUSD";
     let curTok = "yzusd";
     // Chuyển giữa view "main" (label + Unlock) và view "edit" (chỉnh sửa bảo hiểm).
     const setCoverView = (mode: "main" | "edit" | "promo") => {
@@ -480,7 +479,7 @@ export default function AlphaClient() {
       if (mode === "edit") {
         const inp = bc.querySelector<HTMLInputElement>("[data-bal-cover-input]");
         if (inp) { inp.value = ""; setTimeout(() => inp.focus(), 0); } // default trống -> nhập mới hiện
-        const tk = bc.querySelector("[data-bal-cover-tok]"); if (tk) tk.textContent = tok2(syzCovered);
+        const tk = bc.querySelector("[data-bal-cover-tok]"); if (tk) tk.textContent = n2(syzCovered);
         syncCoverRemove();
       }
     };
@@ -488,8 +487,7 @@ export default function AlphaClient() {
     const syncCoverRemove = () => {
       const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
       if (!bc) return;
-      const amt = parseFloat((bc.querySelector<HTMLInputElement>("[data-bal-cover-input]")?.value || "").replace(/,/g, "")) || 0;
-      const rm = bc.querySelector("[data-bal-cover-remove]"); if (rm) rm.textContent = amt > 0 ? `Unlock ${tok2(amt)}` : "Unlock";
+      const rm = bc.querySelector("[data-bal-cover-remove]"); if (rm) rm.textContent = "Unlock";
     };
     const renderBal = () => {
       const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");

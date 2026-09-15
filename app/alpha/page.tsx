@@ -4,7 +4,7 @@ import AlphaClient from "./AlphaClient";
 import { pageMetadata } from "@/lib/pages";
 import Button from "@/components/ui/Button";
 import OpenCoverLogo from "@/components/OpenCoverLogo";
-import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, ChevronsRight, Check, Info } from "lucide-react";
+import { ArrowUpDown, ArrowDownRight, ArrowUpRight, ArrowLeftRight, ArrowRight, ArrowLeft, ShieldCheck, ExternalLink, Search, X, Settings, Wallet, WalletCards, Bookmark, Sun, Globe, Route, Fuel, Percent, DollarSign, Split, ChevronRight, ChevronDown, ChevronsRight, Check } from "lucide-react";
 
 export const metadata = pageMetadata("/alpha");
 
@@ -506,14 +506,12 @@ export default function Alpha() {
                     </div>
                   </div>
                   <div className="cover-key-box">
-                    <div className="cover-row"><span>Fee</span><b data-cover-fee>--</b></div>
-                    <div className="cover-row"><span>Staking APY</span><b>7.50%</b></div>
+                    <div className="cover-row"><span>Fee <em className="cover-hint">(2.06% APR)</em></span><b data-cover-fee>--</b></div>
+                    <div className="cover-row"><span>Staking yield</span><b>7.50%</b></div>
                     <div className="cover-row cover-net"><span>APY with cover</span><b>5.44%</b></div>
                   </div>
                   <button type="button" className="cover-more" data-cover-more aria-expanded="false"><span>Coverage details</span> <ChevronDown /></button>
                   <div className="cover-more-body" data-cover-more-body hidden>
-                    <div className="cover-row"><span>Staking yield</span><b>7.50%</b></div>
-                    <div className="cover-row"><span>Cover fee <Info className="cover-i" /></span><b className="cover-neg">&minus;2.06% APR</b></div>
                     <div className="cover-row"><span>Provider</span><b>Nexus Mutual, via OpenCover</b></div>
                     <div className="cover-row"><span>Loss covered</span><b>10&ndash;100%</b></div>
                     <div className="cover-row"><span>Deductible</span><b>5%</b></div>
@@ -546,48 +544,35 @@ export default function Alpha() {
             <div className="bal-card-head">
               <span className="bal-card-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
               <div className="bal-card-id">
-                <b className="bal-card-name" data-bal-sym>yzUSD</b>
-                <span className="bal-card-desc" data-bal-desc>Yield-bearing USD</span>
+                <b className="bal-card-name">Total balance</b>
               </div>
-            </div>
-            <div className="bal-card-bal">
-              <span className="bal-card-bal-k">Total balance</span>
-              <div className="bal-card-bal-v"><b data-user-bal>12,480.00</b> <span className="bal-card-bal-sym" data-bal-sym>yzUSD</span></div>
+              <div className="bal-card-bal">
+                <div className="bal-card-bal-v"><b data-user-bal>12,480.00</b> <span className="bal-card-bal-sym" data-bal-sym>yzUSD</span></div>
+              </div>
             </div>
             <div className="bal-card-cover" data-bal-cover hidden>
               {/* Chưa có cover -> mời bật */}
-              <div className="oc-view" data-cover-view="promo" hidden>
-                <div className="oc-head">
-                  <span className="oc-shield"><ShieldCheck /></span>
-                  <div className="oc-head-id"><b>OpenCover</b><span>Protection for your syzUSD</span></div>
-                  <span className="oc-status oc-off"><i />Inactive</span>
-                </div>
-                <div className="oc-promo">
-                  <p className="bcc-promo-note">Insure it with OpenCover against protocol loss for <b>2.06% APR</b>, streamed from your yield.</p>
-                  <button type="button" className="oc-cta" data-bal-cover-start><ShieldCheck /> Cover with OpenCover <ArrowRight /></button>
-                </div>
+              <div className="oc-view oc-promo-view" data-cover-view="promo" hidden>
+                <p className="bal-card-note">Insure it with OpenCover against protocol loss for <b>2.06% APR</b>, streamed from your yield.</p>
+                <button type="button" className="bal-card-stake" data-bal-cover-start>Cover now <ArrowRight /></button>
               </div>
               {/* Đang có cover */}
               <div className="oc-view" data-cover-view="main">
                 <div className="oc-head">
                   <span className="oc-shield"><ShieldCheck /></span>
-                  <div className="oc-head-id"><b>OpenCover</b><span>Protection for your syzUSD</span></div>
-                  <span className="oc-status"><i />Active</span>
-                </div>
-                <div className="oc-body">
                   <div className="oc-amt">
                     <span className="oc-amt-k">Covered amount</span>
                     <div className="oc-amt-v"><b data-bal-cover-amt>0.00</b> <span>syzUSD</span></div>
                   </div>
-                  <button type="button" className="oc-cta oc-unlock" data-bal-unlock><ShieldCheck /> Unlock covered amount <ArrowRight /></button>
+                  <button type="button" className="bal-card-stake" data-bal-unlock>Unlock <ArrowRight /></button>
                 </div>
               </div>
               {/* Chỉnh sửa / gỡ cover */}
               <div className="oc-view" data-cover-view="edit" hidden>
                 <div className="oc-head">
                   <span className="oc-shield"><ShieldCheck /></span>
-                  <div className="oc-head-id"><b>OpenCover</b><span>Protection for your syzUSD</span></div>
-                  <b className="bcc-head-amt" data-bal-cover-tok>0.00 syzUSD</b>
+                  <div className="oc-head-id"><b>Covered amount</b></div>
+                  <div className="oc-amt"><div className="oc-amt-v"><b data-bal-cover-tok>0.00</b> <span>syzUSD</span></div></div>
                 </div>
                 <div className="bcc-inrow">
                   <input type="text" className="bcc-in" data-bal-cover-input inputMode="decimal" placeholder="0.00" aria-label="Coverage to unlock" />
