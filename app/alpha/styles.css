@@ -139,12 +139,11 @@
   /* Hàng Coverage amount (syzUSD) — hiện sau khi Stake & Cover, kèm nút Unlock. */
   .bal-card-cover { padding: 11px 18px 14px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
   .bal-card-cover[hidden] { display: none; }
-  .bal-card-cover-row { display: flex; align-items: center; gap: 10px; }
+  .bal-card-cover-row { display: flex; align-items: center; gap: 12px; }
   .bal-card-cover-row[hidden] { display: none; }
-  .bal-cover-logo { flex: none; width: 30px; height: 30px; color: #131026; background: #fff; border-radius: 8px; padding: 4px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent); }
-  .bal-card-cover-main { display: flex; flex-direction: column; gap: 3px; }
-  .bal-card-cover-k { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
-  .bal-card-cover-v { font-family: var(--font-display); font-weight: 620; font-size: 18px; color: var(--text); }
+  .bal-cover-logo { flex: none; width: 28px; height: 28px; color: #131026; background: #fff; border-radius: 8px; padding: 3.5px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent); }
+  .bal-card-cover-k { font-family: var(--font-body); font-size: 14px; color: var(--muted); }
+  .bal-card-cover-v { font-family: var(--font-display); font-weight: 620; font-size: 19px; color: var(--text); }
   .bal-card-unlock { all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto; flex: none; display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 12.5px; color: var(--accent); transition: background .15s ease; }
   .bal-card-unlock:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); }
 

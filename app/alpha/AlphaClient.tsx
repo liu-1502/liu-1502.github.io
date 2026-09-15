@@ -427,22 +427,23 @@ export default function AlphaClient() {
         open(review, false); open(dlg, false); refreshAlert();
       }
     };
-    // Gõ vào ô deposit -> xoá lỗi (hook tự set lại text ≈$; ở đây bỏ màu đỏ).
-    const depInput = document.querySelector<HTMLInputElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l input');
-    const xusd = document.querySelector<HTMLElement>('.pg-alpha [data-panel="yzusd"] [data-dirpanel="mint"] .mfield-l .xusd');
-    const onInput = () => { xusd?.classList.remove("xusd-err"); };
+    // Gõ vào BẤT KỲ ô deposit nào -> xoá lỗi "Enter an amount first" (hook tự set lại text ≈$; ở đây bỏ màu đỏ).
+    const onInput = (e: Event) => {
+      const inp = (e.target as HTMLElement).closest<HTMLElement>(".mfield-l");
+      inp?.querySelector<HTMLElement>(".xusd")?.classList.remove("xusd-err");
+    };
     // Tick xác nhận cover -> mở/khoá nút "Stake & cover".
     const onChange = (e: Event) => { if ((e.target as HTMLElement).closest("[data-cover-ack]")) syncCover(); };
     // Nhập Coverage amount -> tính phí cover.
     const onCoverInput = (e: Event) => { if ((e.target as HTMLElement).closest("[data-cover-amt]")) syncCoverFee(); };
-    depInput?.addEventListener("input", onInput);
+    document.addEventListener("input", onInput);
     document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);
     document.addEventListener("change", onChange);
     document.addEventListener("input", onCoverInput);
     syncCover();
     return () => {
-      depInput?.removeEventListener("input", onInput);
+      document.removeEventListener("input", onInput);
       document.removeEventListener("click", onClick);
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("change", onChange);

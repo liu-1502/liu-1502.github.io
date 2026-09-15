@@ -555,10 +555,8 @@ export default function Alpha() {
               </div>
               <div className="bal-card-cover-row" data-cover-view="main">
                 <OpenCoverLogo className="bal-cover-logo" />
-                <div className="bal-card-cover-main">
-                  <span className="bal-card-cover-k">Coverage amount</span>
-                  <b className="bal-card-cover-v" data-bal-cover-amt>$0.00</b>
-                </div>
+                <span className="bal-card-cover-k">Coverage amount</span>
+                <b className="bal-card-cover-v" data-bal-cover-amt>$0.00</b>
                 <button type="button" className="bal-card-unlock" data-bal-unlock>Unlock</button>
               </div>
               <div className="bal-card-cover-edit" data-cover-view="edit" hidden>
