@@ -554,6 +554,7 @@ export default function Alpha() {
                 <button type="button" className="bcc-promo-cta" data-bal-cover-start>Cover with OpenCover <ArrowRight /></button>
               </div>
               <div className="bal-card-cover-row" data-cover-view="main">
+                <OpenCoverLogo className="bal-cover-logo" />
                 <div className="bal-card-cover-main">
                   <span className="bal-card-cover-k">Coverage amount</span>
                   <b className="bal-card-cover-v" data-bal-cover-amt>$0.00</b>

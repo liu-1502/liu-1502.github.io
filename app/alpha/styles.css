@@ -141,6 +141,7 @@
   .bal-card-cover[hidden] { display: none; }
   .bal-card-cover-row { display: flex; align-items: center; gap: 10px; }
   .bal-card-cover-row[hidden] { display: none; }
+  .bal-cover-logo { flex: none; width: 30px; height: 30px; color: #131026; background: #fff; border-radius: 8px; padding: 4px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent); }
   .bal-card-cover-main { display: flex; flex-direction: column; gap: 3px; }
   .bal-card-cover-k { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
   .bal-card-cover-v { font-family: var(--font-display); font-weight: 620; font-size: 18px; color: var(--text); }
