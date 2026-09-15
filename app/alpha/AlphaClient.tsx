@@ -461,15 +461,16 @@ export default function AlphaClient() {
     if (!host) return;
     const VALID = ["yzusd", "yzpp", "syzusd"];
     // Thẻ "Your balance" đổi theo token đang chọn (chỉ yzUSD mới có hàng stake).
-    const BAL: Record<string, { sym: string; icon: string; val: string; stake: boolean }> = {
-      yzusd: { sym: "yzUSD", icon: "/assets/tokens/yzUSD.svg", val: "$12,480.00", stake: true },
-      syzusd: { sym: "syzUSD", icon: "/assets/tokens/syzUSD.svg", val: "$8,900.00", stake: false },
-      yzpp: { sym: "yzPP", icon: "/assets/tokens/yzPP.svg", val: "$3,250.00", stake: false },
+    const BAL: Record<string, { sym: string; icon: string; base: number; desc: string; stake: boolean }> = {
+      yzusd: { sym: "yzUSD", icon: "/assets/tokens/yzUSD.svg", base: 12480, desc: "Yield-bearing USD", stake: true },
+      syzusd: { sym: "syzUSD", icon: "/assets/tokens/syzUSD.svg", base: 8900, desc: "Staked yield-bearing USD", stake: false },
+      yzpp: { sym: "yzPP", icon: "/assets/tokens/yzPP.svg", base: 3250, desc: "Principal-protected position", stake: false },
     };
     // Số dư syzUSD động: Stake & Cover -> cộng phần staked vào total + hiện phần covered (có nút Unlock).
     let syzTotal = 8900, syzCovered = 0;
-    const money2 = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const tok2 = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " syzUSD";
+    const n2 = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const money2 = (n: number) => "$" + n2(n);
+    const tok2 = (n: number) => n2(n) + " syzUSD";
     let curTok = "yzusd";
     // Chuyển giữa view "main" (label + Unlock) và view "edit" (chỉnh sửa bảo hiểm).
     const setCoverView = (mode: "main" | "edit" | "promo") => {
@@ -494,15 +495,18 @@ export default function AlphaClient() {
       const bc = document.querySelector<HTMLElement>(".pg-alpha .bal-card");
       const info = BAL[curTok];
       if (!bc || !info) return;
+      const total = curTok === "syzusd" ? syzTotal : info.base;
       bc.querySelector<HTMLImageElement>(".bal-card-ic img")?.setAttribute("src", info.icon);
-      const k = bc.querySelector(".bal-card-k"); if (k) k.textContent = `Your ${info.sym} balance`;
-      const v = bc.querySelector("[data-user-bal]"); if (v) v.textContent = curTok === "syzusd" ? money2(syzTotal) : info.val;
+      bc.querySelectorAll("[data-bal-sym]").forEach((el) => (el.textContent = info.sym));
+      const d = bc.querySelector("[data-bal-desc]"); if (d) d.textContent = info.desc;
+      const v = bc.querySelector("[data-user-bal]"); if (v) v.textContent = n2(total);
+      const u = bc.querySelector("[data-bal-usd]"); if (u) u.textContent = "≈ " + money2(total);
       const sr = bc.querySelector<HTMLElement>(".bal-card-stakerow"); if (sr) sr.hidden = !info.stake;
       const cov = bc.querySelector<HTMLElement>("[data-bal-cover]");
       if (cov) {
         cov.hidden = curTok !== "syzusd"; // luôn hiện với syzUSD (mời cover khi chưa có)
-        const cv = bc.querySelector("[data-bal-cover-amt]"); if (cv) cv.textContent = money2(syzCovered);
-        setCoverView(syzCovered > 0 ? "main" : "promo"); // chưa cover -> promo, có cover -> label + Unlock
+        const cv = bc.querySelector("[data-bal-cover-amt]"); if (cv) cv.textContent = n2(syzCovered);
+        setCoverView(syzCovered > 0 ? "main" : "promo"); // chưa cover -> promo, có cover -> Active + Unlock
       }
     };
     // Stake & Cover xong -> cập nhật số dư + phần covered.

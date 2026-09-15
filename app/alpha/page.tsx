@@ -543,25 +543,51 @@ export default function Alpha() {
 
           {/* Your Balance — ngay dưới form */}
           <div className="bal-card">
-            <div className="bal-card-top">
+            <div className="bal-card-head">
               <span className="bal-card-ic"><img src="/assets/tokens/yzUSD.svg" alt="" /></span>
-              <span className="bal-card-k">Your yzUSD balance</span>
-              <b className="bal-card-v" data-user-bal>$12,480.00</b>
+              <div className="bal-card-id">
+                <b className="bal-card-name" data-bal-sym>yzUSD</b>
+                <span className="bal-card-desc" data-bal-desc>Yield-bearing USD</span>
+              </div>
+            </div>
+            <div className="bal-card-bal">
+              <span className="bal-card-bal-k">Total balance</span>
+              <div className="bal-card-bal-v"><b data-user-bal>12,480.00</b> <span className="bal-card-bal-sym" data-bal-sym>yzUSD</span></div>
+              <span className="bal-card-bal-usd" data-bal-usd>≈ $12,480.00</span>
             </div>
             <div className="bal-card-cover" data-bal-cover hidden>
-              <div className="bal-card-cover-promo" data-cover-view="promo" hidden>
-                <p className="bcc-promo-note">Insure it with OpenCover against protocol loss for <b>2.06% APR</b>, streamed from your yield.</p>
-                <button type="button" className="bcc-promo-cta" data-bal-cover-start>Cover with OpenCover <ArrowRight /></button>
+              {/* Chưa có cover -> mời bật */}
+              <div className="oc-view" data-cover-view="promo" hidden>
+                <div className="oc-head">
+                  <span className="oc-shield"><ShieldCheck /></span>
+                  <div className="oc-head-id"><b>OpenCover</b><span>Protection for your syzUSD</span></div>
+                  <span className="oc-status oc-off"><i />Inactive</span>
+                </div>
+                <div className="oc-promo">
+                  <p className="bcc-promo-note">Insure it with OpenCover against protocol loss for <b>2.06% APR</b>, streamed from your yield.</p>
+                  <button type="button" className="oc-cta" data-bal-cover-start><ShieldCheck /> Cover with OpenCover <ArrowRight /></button>
+                </div>
               </div>
-              <div className="bal-card-cover-row" data-cover-view="main">
-                <OpenCoverLogo className="bal-cover-logo" />
-                <span className="bal-card-cover-k">Coverage amount</span>
-                <b className="bal-card-cover-v" data-bal-cover-amt>$0.00</b>
-                <button type="button" className="bal-card-unlock" data-bal-unlock>Unlock</button>
+              {/* Đang có cover */}
+              <div className="oc-view" data-cover-view="main">
+                <div className="oc-head">
+                  <span className="oc-shield"><ShieldCheck /></span>
+                  <div className="oc-head-id"><b>OpenCover</b><span>Protection for your syzUSD</span></div>
+                  <span className="oc-status"><i />Active</span>
+                </div>
+                <div className="oc-body">
+                  <div className="oc-amt">
+                    <span className="oc-amt-k">Covered amount</span>
+                    <div className="oc-amt-v"><b data-bal-cover-amt>0.00</b> <span>syzUSD</span></div>
+                  </div>
+                  <button type="button" className="oc-cta oc-unlock" data-bal-unlock><ShieldCheck /> Unlock covered amount <ArrowRight /></button>
+                </div>
               </div>
-              <div className="bal-card-cover-edit" data-cover-view="edit" hidden>
-                <div className="bcc-head">
-                  <span className="bcc-head-l"><ShieldCheck /> Covered by OpenCover</span>
+              {/* Chỉnh sửa / gỡ cover */}
+              <div className="oc-view" data-cover-view="edit" hidden>
+                <div className="oc-head">
+                  <span className="oc-shield"><ShieldCheck /></span>
+                  <div className="oc-head-id"><b>OpenCover</b><span>Protection for your syzUSD</span></div>
                   <b className="bcc-head-amt" data-bal-cover-tok>0.00 syzUSD</b>
                 </div>
                 <div className="bcc-inrow">

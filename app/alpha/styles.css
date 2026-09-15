@@ -127,37 +127,57 @@
   /* Trong dialog: list cuộn, filters/search cố định trên đầu */
   .hist-panel .ohist { display: flex; flex-direction: column; min-height: 0; flex: 1; }
   .hist-panel .olist { overflow-y: auto; min-height: 0; padding-bottom: 8px; }
-  /* Your Balance card (dưới form) */
-  .bal-card { align-self: stretch; display: flex; flex-direction: column; background: var(--surface); border-radius: 16px; }
-  .bal-card-top { display: flex; align-items: center; gap: 12px; padding: 12px 18px; }
-  .bal-card-k { font-family: var(--font-body); font-size: 14px; color: var(--text); }
-  .bal-card-v { margin-left: auto; font-family: var(--font-display); font-weight: 620; font-size: 19px; color: var(--text); }
+  /* Your Balance card (dưới form) — layout token detail + OpenCover */
+  .bal-card { align-self: stretch; display: flex; flex-direction: column; background: var(--surface); border-radius: 16px; padding: 6px; }
+  .bal-card-head { display: flex; align-items: center; gap: 12px; padding: 12px 14px 4px; }
   .bal-card-ic { flex: none; display: inline-flex; }
-  .bal-card-ic img { width: 28px; height: 28px; }
-  .bal-card-stakerow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 18px 14px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .bal-card-ic img { width: 40px; height: 40px; }
+  .bal-card-id { display: flex; flex-direction: column; gap: 1px; }
+  .bal-card-name { font-family: var(--font-display); font-weight: 660; font-size: 18px; color: var(--text); }
+  .bal-card-desc { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
+  .bal-card-bal { display: flex; flex-direction: column; gap: 2px; padding: 8px 14px 14px; }
+  .bal-card-bal-k { font-family: var(--font-body); font-size: 13.5px; color: var(--muted); }
+  .bal-card-bal-v { display: flex; align-items: baseline; gap: 8px; }
+  .bal-card-bal-v [data-user-bal] { font-family: var(--font-display); font-weight: 680; font-size: 30px; letter-spacing: -0.01em; color: var(--text); }
+  .bal-card-bal-sym { font-family: var(--font-display); font-weight: 620; font-size: 18px; color: var(--text); }
+  .bal-card-bal-usd { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .bal-card-stakerow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0 8px 8px; padding: 12px 12px 12px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 6%, transparent); }
   .bal-card-stakerow[hidden] { display: none; }
-  /* Hàng Coverage amount (syzUSD) — hiện sau khi Stake & Cover, kèm nút Unlock. */
-  .bal-card-cover { padding: 11px 18px 14px; border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+
+  /* Ô OpenCover (syzUSD) */
+  .bal-card-cover { margin: 0 8px 8px; padding: 14px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 6%, transparent); }
   .bal-card-cover[hidden] { display: none; }
-  .bal-card-cover-row { display: flex; align-items: center; gap: 12px; }
-  .bal-card-cover-row[hidden] { display: none; }
-  .bal-cover-logo { flex: none; width: 28px; height: 28px; color: #131026; background: #fff; border-radius: 8px; padding: 3.5px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent); }
-  .bal-card-cover-k { font-family: var(--font-body); font-size: 14px; color: var(--muted); }
-  .bal-card-cover-v { font-family: var(--font-display); font-weight: 620; font-size: 19px; color: var(--text); }
+  .oc-view[hidden] { display: none; }
+  .oc-head { display: flex; align-items: center; gap: 11px; }
+  .oc-shield { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+  .oc-shield svg { width: 19px; height: 19px; }
+  .oc-head-id { display: flex; flex-direction: column; gap: 1px; }
+  .oc-head-id b { font-family: var(--font-display); font-weight: 640; font-size: 15px; color: var(--text); }
+  .oc-head-id span { font-family: var(--font-body); font-size: 12.5px; color: var(--muted); }
+  .oc-status { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 640; font-size: 12.5px; color: var(--accent); }
+  .oc-status i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .oc-status.oc-off { color: var(--muted); }
+  .oc-status.oc-off i { background: color-mix(in srgb, var(--text) 30%, transparent); }
+  .oc-body { display: flex; align-items: flex-end; gap: 12px; margin-top: 14px; }
+  .oc-amt { display: flex; flex-direction: column; gap: 3px; }
+  .oc-amt-k { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
+  .oc-amt-v { display: flex; align-items: baseline; gap: 6px; }
+  .oc-amt-v b { font-family: var(--font-display); font-weight: 680; font-size: 22px; color: var(--accent); }
+  .oc-amt-v span { font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--muted); }
+  .oc-cta { all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); background: var(--surface); font-family: var(--font-body); font-weight: 640; font-size: 13.5px; color: var(--accent); transition: background .15s ease, border-color .15s ease; }
+  .oc-cta svg { width: 16px; height: 16px; }
+  .oc-cta:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); border-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+  .oc-promo { margin-top: 12px; }
+  .oc-promo .oc-cta { margin-top: 12px; margin-left: 0; }
+
+  /* Nút Unlock (dùng chung cho edit) */
   .bal-card-unlock { all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto; flex: none; display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); font-family: var(--font-body); font-weight: 600; font-size: 12.5px; color: var(--accent); transition: background .15s ease; }
   .bal-card-unlock:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); }
-
-  /* Chưa có cover -> mời user bật cover */
-  .bal-card-cover-promo[hidden] { display: none; }
   .bcc-promo-note { margin: 0; font-family: var(--font-body); font-size: 13px; line-height: 1.5; color: var(--muted); }
   .bcc-promo-note b { font-weight: 700; color: var(--accent); }
-  .bcc-promo-cta { all: unset; cursor: pointer; margin-top: 9px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 700; font-size: 13.5px; color: var(--accent); }
-  .bcc-promo-cta svg { width: 15px; height: 15px; }
-  .bcc-promo-cta:hover { text-decoration: underline; }
 
   /* Unlock -> panel chỉnh sửa bảo hiểm (giống OpenCover) */
-  .bal-card-cover-edit[hidden] { display: none; }
-  .bcc-head { display: flex; align-items: center; gap: 10px; }
+  .bcc-head { display: flex; align-items: center; gap: 11px; }
   .bcc-head-l { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 600; font-size: 13.5px; color: var(--text); }
   .bcc-head-l svg { width: 17px; height: 17px; color: var(--accent); flex: none; }
   .bcc-head-amt { margin-left: auto; font-family: var(--font-display); font-weight: 640; font-size: 15px; color: var(--text); }
