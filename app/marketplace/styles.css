@@ -222,11 +222,13 @@ body.p-mkt { --bg: color-mix(in srgb, #3E7BF0 2.5%, #FCFDFF); }
   .mkt-xchg .app-layout:not(.xtra-open) > .xchg { width: 100%; max-width: none; }
 
   /* ===== Layout 2 cột: trái = form/position/order (480px), phải = chi tiết ===== */
-  .mkt-vault-grid { display: grid; grid-template-columns: 480px minmax(0, 1fr); gap: 40px; align-items: start; }
-  .mkt-vault-left { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
-  .mkt-vault-right { min-width: 0; }
+  .mkt-vault-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 32px; align-items: start; }
+  .mkt-vault-left { order: 2; display: flex; flex-direction: column; gap: 16px; min-width: 0; position: sticky; top: 80px; }
+  .mkt-vault-right { order: 1; min-width: 0; }
   @media (max-width: 980px) {
     .mkt-vault-grid { grid-template-columns: 1fr; }
+    .mkt-vault-left { order: 1; position: static; top: auto; }
+    .mkt-vault-right { order: 2; }
   }
 
   /* ---- Your Position ---- */

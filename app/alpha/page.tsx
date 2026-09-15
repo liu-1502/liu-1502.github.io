@@ -577,7 +577,7 @@ export default function Alpha() {
                 <div className="bcc-inrow">
                   <input type="text" className="bcc-in" data-bal-cover-input inputMode="decimal" placeholder="0.00" aria-label="Coverage to unlock" />
                   <span className="bcc-in-tok">syzUSD</span>
-                  <button type="button" className="bcc-max" data-bal-cover-max>MAX</button>
+                  <button type="button" className="bcc-max" data-bal-cover-max>Max</button>
                 </div>
                 <div className="bcc-actions">
                   <button type="button" className="bcc-remove" data-bal-cover-remove>Unlock</button>
