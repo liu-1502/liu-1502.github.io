@@ -135,12 +135,11 @@
   .bal-card-id { display: flex; flex-direction: column; gap: 1px; }
   .bal-card-name { font-family: var(--font-display); font-weight: 660; font-size: 18px; color: var(--text); }
   .bal-card-desc { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
-  .bal-card-bal { display: flex; flex-direction: column; gap: 2px; padding: 8px 14px 14px; }
+  .bal-card-bal { display: flex; align-items: baseline; gap: 12px; padding: 8px 14px 14px; }
   .bal-card-bal-k { font-family: var(--font-body); font-size: 13.5px; color: var(--muted); }
-  .bal-card-bal-v { display: flex; align-items: baseline; gap: 8px; }
-  .bal-card-bal-v [data-user-bal] { font-family: var(--font-display); font-weight: 680; font-size: 30px; letter-spacing: -0.01em; color: var(--text); }
-  .bal-card-bal-sym { font-family: var(--font-display); font-weight: 620; font-size: 18px; color: var(--text); }
-  .bal-card-bal-usd { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .bal-card-bal-v { margin-left: auto; display: flex; align-items: baseline; gap: 7px; }
+  .bal-card-bal-v [data-user-bal] { font-family: var(--font-display); font-weight: 660; font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
+  .bal-card-bal-sym { font-family: var(--font-display); font-weight: 620; font-size: 15px; color: var(--text); }
   .bal-card-stakerow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0 8px 8px; padding: 12px 12px 12px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 6%, transparent); }
   .bal-card-stakerow[hidden] { display: none; }
 

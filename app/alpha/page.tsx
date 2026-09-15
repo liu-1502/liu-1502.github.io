@@ -553,7 +553,6 @@ export default function Alpha() {
             <div className="bal-card-bal">
               <span className="bal-card-bal-k">Total balance</span>
               <div className="bal-card-bal-v"><b data-user-bal>12,480.00</b> <span className="bal-card-bal-sym" data-bal-sym>yzUSD</span></div>
-              <span className="bal-card-bal-usd" data-bal-usd>≈ $12,480.00</span>
             </div>
             <div className="bal-card-cover" data-bal-cover hidden>
               {/* Chưa có cover -> mời bật */}
