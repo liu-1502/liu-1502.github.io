@@ -422,7 +422,8 @@
   /* Ô nhập Coverage amount + phí cover tính theo amount */
   .cover-amt { display: flex; flex-direction: column; gap: 5px; }
   .cover-amt-lbl { font-family: var(--font-body); font-size: 12.5px; color: var(--text); }
-  .cover-amt-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid color-mix(in srgb, var(--text) 24%, transparent); border-radius: 12px; background: transparent; }
+  .cover-amt-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1.5px solid color-mix(in srgb, var(--text) 24%, transparent); border-radius: 12px; background: transparent; transition: border-color .15s ease; }
+  .cover-amt-row:focus-within { border-color: var(--accent); }
   .cover-amt-row input { all: unset; box-sizing: border-box; flex: 1; min-width: 0; font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: var(--text); }
   .cover-amt-row input::placeholder { color: var(--faint); }
   .cover-amt-tok { flex: none; display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--text); }
