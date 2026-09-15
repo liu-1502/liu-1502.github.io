@@ -499,10 +499,12 @@ export default function AlphaClient() {
     // Unlock -> mở panel chỉnh sửa; Cancel -> đóng; MAX -> điền toàn bộ; Remove -> gỡ cover và trả amount về Balance.
     const onUnlock = (e: Event) => {
       const t = e.target as HTMLElement;
-      if (t.closest("[data-bal-cover-start]")) { // "Cover with OpenCover" -> bật toggle + cuộn tới section
+      if (t.closest("[data-bal-cover-start]")) { // "Cover with OpenCover" -> bật toggle + cuộn tới + focus field
         const toggle = document.querySelector<HTMLElement>(".pg-alpha [data-panel='syzusd'] [data-cover-toggle]");
         if (toggle && toggle.getAttribute("aria-checked") !== "true") toggle.click();
         document.querySelector(".pg-alpha [data-panel='syzusd'] [data-cover]")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        const amt = document.querySelector<HTMLInputElement>(".pg-alpha [data-panel='syzusd'] [data-cover-amt]");
+        if (amt) setTimeout(() => amt.focus({ preventScroll: true }), 350); // đợi expand + cuộn xong mới focus
         return;
       }
       if (t.closest("[data-bal-unlock]")) { setCoverView("edit"); return; }
