@@ -221,6 +221,18 @@ export default function AlphaClient() {
       if (body) body.hidden = !on;
       if (btn) { btn.textContent = on ? "Stake & cover" : "Stake"; btn.disabled = on && !ack?.checked; }
     };
+    // Reset section Cover về mặc định (sau khi Stake thành công): tắt toggle, xoá amount, bỏ tick, thu gọn.
+    const resetCover = () => {
+      const sec = document.querySelector<HTMLElement>(".pg-alpha [data-cover]");
+      if (!sec) return;
+      sec.querySelector("[data-cover-toggle]")?.setAttribute("aria-checked", "false");
+      const amt = sec.querySelector<HTMLInputElement>("[data-cover-amt]"); if (amt) amt.value = "";
+      const ack = sec.querySelector<HTMLInputElement>("[data-cover-ack]"); if (ack) ack.checked = false;
+      const more = sec.querySelector<HTMLElement>("[data-cover-more]"); more?.setAttribute("aria-expanded", "false");
+      const moreBody = sec.querySelector<HTMLElement>("[data-cover-more-body]"); if (moreBody) moreBody.hidden = true;
+      syncCoverFee(); // fee về "--"
+      syncCover();    // body ẩn + nút về "Stake"
+    };
     // Coverage amount -> phí cover (annual = amount × 2.06%).
     const COVER_APR = 0.0206;
     const syncCoverFee = () => {
@@ -322,6 +334,7 @@ export default function AlphaClient() {
           const covAmt = parseFloat((document.querySelector<HTMLInputElement>(".pg-alpha [data-cover-amt]")?.value || "").replace(/,/g, "")) || 0;
           document.dispatchEvent(new CustomEvent("alpha-cover-staked", { detail: { stakedUsd: lastDep, covUsd: covAmt } }));
         }
+        resetCover(); // reset section Cover về mặc định
       }
       resetForm(); // thành công -> form về mặc định
       open(review, false);
