@@ -659,6 +659,8 @@ export default function Alpha() {
             <div className="mrev-cost"><span>Rate</span><b data-rev-rate>1 USDT0 = 1 yzUSD</b></div>
             <div className="mrev-cost" data-rev-fee1-row><span data-rev-fee1-label>Mint fee <i>0.10%</i></span><b data-rev-fee1>$0.00</b></div>
             <div className="mrev-cost" data-rev-fee2-row hidden><span data-rev-fee2-label>Stake fee <i>0.50%</i></span><b data-rev-fee2>$0.00</b></div>
+            <div className="mrev-cost" data-rev-cover-row hidden><span>Coverage amount</span><b><span data-rev-cover>0</span> <span data-rev-cover-sym>yzUSD</span></b></div>
+            <div className="mrev-cost" data-rev-coverfee-row hidden><span>Cover fee <i>2.06% APR</i></span><b data-rev-coverfee>$0.00</b></div>
             <div className="mrev-cost"><span>Network fee</span><b>&lt;$0.01</b></div>
             <div className="mrev-cost"><span>Estimated time</span><b>~30 seconds</b></div>
             <button type="button" className="btn btn-accent btn-block mrev-cta" data-mint-review-confirm><span data-rev-cta>Confirm mint</span><span className="mrev-spinner" aria-hidden="true" /></button>

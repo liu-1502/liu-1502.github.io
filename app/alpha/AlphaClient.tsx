@@ -269,6 +269,21 @@ export default function AlphaClient() {
       review.querySelector("[data-rev-recv-icon]")?.setAttribute("src", cfg.recvIcon);
       set("[data-rev-rate]", cfg.rate);
       fillFees(review, "rev", cfg, true);
+      // Stake + cover -> hiện dòng Coverage amount + Cover premium trong review.
+      const coverRow = review.querySelector<HTMLElement>("[data-rev-cover-row]");
+      const coverFeeRow = review.querySelector<HTMLElement>("[data-rev-coverfee-row]");
+      let showCover = false;
+      if (cfg === FLOWS.stake) {
+        const coverOn = document.querySelector(".pg-alpha [data-cover-toggle]")?.getAttribute("aria-checked") === "true";
+        const covAmt = parseFloat((document.querySelector<HTMLInputElement>(".pg-alpha [data-cover-amt]")?.value || "").replace(/,/g, "")) || 0;
+        showCover = coverOn && covAmt > 0;
+        if (showCover) {
+          set("[data-rev-cover]", num(covAmt));
+          set("[data-rev-coverfee]", money(covAmt * 0.0206) + "/yr");
+        }
+      }
+      if (coverRow) coverRow.hidden = !showCover;
+      if (coverFeeRow) coverFeeRow.hidden = !showCover;
       set("[data-rev-cta]", cfg.revCta);
       setAlert(false); // ẩn alert khi đang mở review
       open(review, true);
