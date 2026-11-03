@@ -1,14 +1,13 @@
 /* Dashboard event banner + launch popup. */
 /* ---------- promo banner (Dashboard + Events) ---------- */
-.ev-promo-banner { display: block; border-radius: 20px; overflow: hidden; line-height: 0; transition: transform .2s, box-shadow .2s; }
+.ev-promo-banner { display: block; border-radius: 20px; overflow: hidden; line-height: 0; }
 .ev-promo-banner img { display: block; width: 100%; height: auto; }
-.ev-promo-banner:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .55); }
 .ev-promo-banner:focus-visible { outline: 2px solid var(--citrus, #9fe870); outline-offset: 3px; }
 
 /* ---------- launch popup ---------- */
 .ev-promo-pop {
   position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px;
-  background: rgba(2, 8, 5, .82); backdrop-filter: blur(4px); animation: ev-pop-fade .2s ease-out;
+  background: rgba(2, 8, 5, .92); backdrop-filter: blur(6px); animation: ev-pop-fade .2s ease-out;
 }
 .ev-promo-pop-in { position: relative; width: min(760px, 100%); border-radius: 24px; overflow: hidden; line-height: 0;
   box-shadow: 0 30px 80px rgba(0, 0, 0, .55); animation: ev-pop-in .28s cubic-bezier(.2, .8, .3, 1.1); }

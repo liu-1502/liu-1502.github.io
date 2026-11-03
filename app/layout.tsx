@@ -25,9 +25,15 @@ export const metadata: Metadata = {
 // tránh nháy giao diện và để CSS (html[data-mode] / [data-theme] / [data-eligible]) đúng ngay.
 const noFlash = `(function(){var d=document.documentElement;try{
 if(localStorage.getItem('${STORAGE_KEYS.theme}')==='dark')d.setAttribute('data-theme','dark');
+if(location.pathname.replace(/\\/$/,'')==='/events')d.setAttribute('data-theme','dark');
 d.setAttribute('data-mode',localStorage.getItem('${STORAGE_KEYS.mode}')||'lite');
 d.setAttribute('data-eligible',localStorage.getItem('${STORAGE_KEYS.eligible}')==='1'?'1':'0');
-}catch(e){d.setAttribute('data-mode','lite');d.setAttribute('data-eligible','0');}})();`;
+}catch(e){d.setAttribute('data-mode','lite');d.setAttribute('data-eligible','0');}
+/* Demo: reload trang nào cũng về Dashboard và bật lại popup sự kiện. */
+try{var nt=((performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{}).type;
+if(nt==='reload'){sessionStorage.removeItem('yz-event-popup-sleigh-the-yield');
+if(location.pathname.replace(/\\/$/,'')!=='')location.replace('/');}}catch(e){}
+})();`;
 
 export default function RootLayout({
   children,

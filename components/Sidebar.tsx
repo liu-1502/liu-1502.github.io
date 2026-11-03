@@ -47,7 +47,7 @@ const NAV_GROUPS: { heading: string; items: NavItem[] }[] = [
     items: [
       { nav: "opportunities", label: "Opportunities", href: "/opportunities", icon: <TrendingUp /> },
       { nav: "points", label: "Points", href: "/points", icon: <Droplet /> },
-      { nav: "events", label: "Events", href: "/events", icon: <PartyPopper />, meta: "Live" },
+      { nav: "events", label: "Events", href: "/events", icon: <PartyPopper /> },
     ],
   },
   {
