@@ -25,6 +25,7 @@ export const PAGES: Record<string, PageMeta> = {
   "/marketplace": { nav: "mkt", title: "Marketplace", bodyClass: "p-mkt", metaTitle: "Yuzu Marketplace · Curated vault strategies" },
   "/opportunities": { nav: "opportunities", title: "Yield Opportunities", metaTitle: "Yield Opportunities · Yuzu Money" },
   "/points": { nav: "points", title: "Points", metaTitle: "Points · Yuzu Money" },
+  "/events": { nav: "events", title: "Events", metaTitle: "Events · Yuzu Money" },
   "/transparency": { nav: "transparency", title: "Transparency", metaTitle: "Transparency · Yuzu Money" },
   "/whitelist": { nav: "whitelist", title: "Asset Whitelist", metaTitle: "Asset Whitelist · Yuzu Money" },
   "/bridge": { nav: "bridge", title: "Bridge", metaTitle: "Bridge · Yuzu Money" },

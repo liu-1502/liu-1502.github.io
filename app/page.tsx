@@ -6,6 +6,8 @@ import "./marketplace/styles.css";
 import { pageMetadata } from "@/lib/pages";
 import TokenStrip from "@/components/ui/TokenStrip";
 import DashboardHero from "@/components/DashboardHero";
+import { EventBanner, EventPopup } from "@/components/EventsPromo";
+import "./events/styles.css";
 import { VAULTS } from "./marketplace/data";
 import VaultCard from "./marketplace/VaultCard";
 
@@ -14,6 +16,10 @@ export const metadata = pageMetadata("/");
 export default function Dashboard() {
   return (
     <div className="pg-dashboard">
+      <EventPopup />
+      <div className="rv" style={{ marginBottom: 32 }}>
+        <EventBanner />
+      </div>
       <div className="opp-head dash-head rv" style={{ marginBottom: 32 }}>
         <div>
           <h1>Dashboard</h1>
