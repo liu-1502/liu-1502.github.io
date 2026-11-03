@@ -124,7 +124,8 @@ export default function Topbar() {
       </Link>
       <div className="right">
         <ChainSelector />
-        <ThemeToggle />
+        {/* Trang Events luôn dark -> ẩn nút đổi sáng/tối. */}
+        {pathname.replace(/\/$/, "") !== "/events" && <ThemeToggle />}
         {wallet ? (
           <div className="acct-wrap" ref={accountRef}>
             <Button variant="solid" onClick={() => setAccountOpen((o) => !o)} aria-expanded={accountOpen}>
