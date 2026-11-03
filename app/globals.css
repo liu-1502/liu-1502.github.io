@@ -1,0 +1,5 @@
+/* Tailwind — dùng cho code MỚI bạn thêm về sau.
+   Giao diện Yuzu gốc nằm ở styles/yuzu.css (import trong layout.tsx, đứng sau nên thắng cascade). */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

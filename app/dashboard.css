@@ -1,0 +1,250 @@
+/* Style riêng của trang Dashboard — lồng trong .pg-dashboard để không loang sang
+   trang khác (nhiều tên class trùng giữa các trang). */
+.pg-dashboard {
+  .dash-head { display: flex; justify-content: flex-end; margin-bottom: 18px; }
+  .dash-head .verified {
+    display: flex; align-items: center;
+    font-family: var(--font-mono); font-size: 11px; color: var(--good);
+    border: 1px solid color-mix(in srgb, var(--good) 35%, transparent);
+    border-radius: var(--r-sm); padding: 8px 13px;
+    text-decoration: none;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .dash-head .verified:hover { border-color: var(--good); background: color-mix(in srgb, var(--good) 7%, transparent); }
+  .dash-head .verified .arr { margin-left: 8px; transition: transform .18s ease; }
+  .dash-head .verified:hover .arr { transform: translateX(3px); }
+
+  /* 3 sản phẩm xếp hàng ngang: grid 3 cột, mỗi card là 1 cột dọc. */
+  /* Header dashboard: text trái, illus Yuzu bên phải (inline, không tuck) */
+  .dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+  .dash-hero-illus { flex: none; width: auto; height: 176px; display: block; overflow: visible; margin: -44px 0 -40px; }
+  @media (max-width: 700px) { .dash-hero-illus { height: 140px; } }
+  @media (max-width: 480px) { .dash-hero-illus { display: none; } }
+
+  /* Chuyển động quỹ đạo do SMIL <animateMotion> trong DashboardHero.tsx đảm nhận
+     (ổn định hơn CSS offset-distance vốn không interpolate trên <g> SVG). */
+  .dh-moon { will-change: transform; }
+
+  .prod-rows { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; align-items: stretch; }
+  /* POR section: khoảng cách tới hàng 3 card = 24px */
+  .section:has(.por) { padding-top: 24px; }
+  @media (max-width: 860px) { .prod-rows { grid-template-columns: 1fr; } }
+  .prod-row {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px;
+    text-decoration: none;
+    transition: background .25s ease, border-color .25s ease;   /* đổi màu mượt khi hover */
+  }
+  .prod-row .id { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .prod-row .id .tk-strip img { width: 30px; height: 30px; border: 2px solid #fff; background: #fff; border-radius: 9999px; }  /* logo bọc nền trắng tròn */
+  .prod-row .id b { font-family: var(--font-display); font-weight: 640; font-size: 19px; display: block; }
+  .prod-row .id small { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .09em; text-transform: none; letter-spacing: 0; font-weight: 600; }
+  .prod-row .desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 14px 0 0; flex: 1; transition: color .25s ease; }
+  /* Footer card: chỉ còn APY, luôn nằm đáy để 3 card thẳng hàng. */
+  .prod-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: auto; }
+  .prod-row .apy { text-align: left; }
+  .prod-row .apy .v { font-family: var(--font-mono); font-size: 19px; font-weight: 560; display: block; white-space: nowrap; letter-spacing: -.03em; }
+  .prod-row .apy .k { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .09em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); margin-top: 2px; display: block; }
+  /* "Open →" nằm góc trên phải, cùng hàng với logo token. */
+  .prod-row .cta {
+    position: absolute; top: 22px; right: 22px;
+    font-size: 13px; font-weight: 600; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 6px;
+    opacity: 0;
+    transition: opacity .18s ease;
+  }
+  .prod-row .cta .arr { font-family: var(--font-mono); display: inline-block; transition: transform .18s ease; }
+  /* Chỉ hiện "Open →" khi hover; mũi tên nhích nhẹ như "How they differ →" */
+  .prod-row:hover .cta { opacity: 1; }
+  .prod-row:hover .cta .arr { transform: translateX(3px); }
+
+  .prod-row.alpha { --pa: var(--alpha); }
+  .prod-row.prime { --pa: var(--prime); }
+  .prod-row.mkt   { --pa: var(--mkt); }
+  .prod-row .id small, .prod-row .apy .v, .prod-row .cta { color: var(--pa); }
+  .prod-row:hover { border-color: color-mix(in srgb, var(--pa) 50%, var(--line-strong)); }
+
+  /* Thanh Proof of Reserves (thay cho security stack cũ) */
+  .por {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 18px 22px;
+    background: var(--surface);
+    border-radius: var(--r-md);
+    text-decoration: none;
+    color: inherit;
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  /* Hover: nhấc nhẹ + shadow (không thêm stroke) + mũi tên nhích */
+  .por:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 34px color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+  .por-lead { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+  .por-shield {
+    flex: none; width: 40px; height: 40px; border-radius: 10px;
+    display: grid; place-items: center;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  }
+  .por-shield svg { width: 20px; height: 20px; }
+  .por-lead b { font-family: var(--font-display); font-size: 15px; font-weight: 640; display: block; line-height: 1.25; }
+  /* Chỉ nhắm span mô tả (trong div), KHÔNG trúng .por-shield (span con trực tiếp). */
+  .por-lead div span { font-size: 12.5px; color: var(--muted); display: block; margin-top: 2px; }
+  /* Cụm favicon đối tác (bấm được), nằm bên phải thay Learn More.
+     Favicon tròn xếp chồng như token strip, nền neutral nhạt. */
+  .por-marks { display: flex; align-items: center; flex: none; text-decoration: none; }
+  .por-marks img {
+    box-sizing: border-box;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    /* stroke nhẹ để tách các logo chồng nhau (màu cụ thể vì --line-solid đang
+       transparent do theme bỏ stroke) */
+    border: 1.5px solid #DBE4D5;
+    padding: 6px;
+    object-fit: contain;
+    margin-right: -10px;
+    display: block;
+  }
+  .por-marks img:last-of-type { margin-right: 0; }
+  /* Icon → bấm được kế cụm logo — style như "How they differ →" (không nền). */
+  .por-arr {
+    margin-left: 14px;
+    font-family: var(--font-mono); font-size: 18px;
+    color: var(--muted);
+    display: inline-flex; align-items: center;
+    transition: color .15s ease, transform .18s ease;
+  }
+  /* Hover cả thanh (không chỉ mũi tên) → mũi tên nhích nhẹ */
+  .por:hover .por-arr { color: var(--text); transform: translateX(4px); }
+  @media (max-width: 940px) {
+    /* Mobile: text chiếm trọn hàng 1, cụm logo rớt xuống hàng 2 */
+    .por { flex-wrap: wrap; gap: 18px; }
+    .por-lead { flex: 1 1 100%; }
+    .por-marks { flex: 1 1 100%; }
+    .por-arr { margin-left: auto; }
+  }
+
+  /* Xoá toàn bộ viền (stroke) của các section/card trên Dashboard */
+  .page-stats,
+  .page-stats > div,
+  .card,
+  .card:hover,
+  .prod-row:hover,
+  .trust > div { border: none; }
+
+  /* Divider dọc nhẹ giữa các cột stat — cao bằng khối text, không full card */
+  .page-stats > div { position: relative; }
+  .page-stats > div:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 38px;
+    background: color-mix(in srgb, var(--text) 8%, transparent);
+  }
+  /* Mobile: stats xuống lưới 2 cột — giữ divider dọc (giữa 2 cột) + thêm divider ngang (giữa 2 hàng). */
+  @media (max-width: 700px) {
+    .page-stats { grid-template-columns: 1fr 1fr; }
+    /* divider dọc: chỉ ở cột trái (cell lẻ) */
+    .page-stats > div:not(:last-child)::after { display: none; }
+    .page-stats > div:nth-child(odd)::after { display: block; }
+    /* divider ngang giữa hàng trên và dưới (top của cell hàng 2) */
+    .page-stats > div:nth-child(n+3)::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: color-mix(in srgb, var(--text) 8%, transparent);
+    }
+  }
+
+  /* Nền xanh nhạt + chữ xanh đậm như thẻ stat bên Transparency */
+  .page-stats { background: var(--surface-2); }
+
+  /* Màu + size + font số liệu trong khối stats; siết khoảng cách với label */
+  .page-stats .v {
+    color: #142F04;
+    font-size: 20px;
+    line-height: 30px;
+    margin-top: 1px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  /* Nhãn stat: xanh đậm, đậm hơn */
+  .page-stats .k { color: #142F04; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+
+  /* Dark mode: #142F04 (xanh đậm) chìm trên nền tối -> đổi sang màu sáng.
+     (Các số có tone dùng inline color:var(--good) nên vẫn giữ xanh, không bị ghi đè.) */
+  :root[data-theme="dark"] & {
+    .page-stats .v { color: var(--text); }
+    .page-stats .k { color: var(--muted); }
+  }
+
+  /* ===== Icon info + popover chart (hover) ===== */
+  .page-stats, .page-stats > div { overflow: visible; }   /* cho popover tràn ra */
+  .stat-info { position: relative; display: inline-flex; align-items: center; }
+  .stat-i { width: 13px; height: 13px; color: var(--faint); cursor: help; transition: color .15s ease; }
+  .stat-info:hover .stat-i { color: var(--accent); }
+  .stat-pop {
+    display: none; position: absolute; top: calc(100% + 10px); left: -10px; z-index: 50;
+    width: 260px; padding: 14px; border-radius: 14px;
+    background: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .16);
+    text-transform: none; letter-spacing: normal; cursor: default;
+  }
+  .stat-info:hover .stat-pop { display: block; }
+  .sp-title { display: block; font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--text); margin-bottom: 12px; }
+  /* Donut TVL (conic + mask) */
+  .sp-donut { display: flex; align-items: center; gap: 16px; }
+  .tvl-donut {
+    flex: none; width: 84px; height: 84px; border-radius: 50%;
+    background: conic-gradient(var(--alpha) 0 52.1%, var(--prime) 52.1% 82%, var(--mkt) 82% 93.4%, var(--faint) 93.4% 100%);
+    -webkit-mask: radial-gradient(circle, transparent 54%, #000 55%);
+    mask: radial-gradient(circle, transparent 54%, #000 55%);
+  }
+  .sp-legend { display: flex; flex-direction: column; gap: 7px; flex: 1; font-family: var(--font-body); font-size: 12px; color: var(--muted); }
+  .sp-legend > span { display: flex; align-items: center; gap: 7px; }
+  .sp-legend i { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+  .sp-legend b { margin-left: auto; color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+  /* Line chart Yield (2 màu) */
+  .sp-line { width: 100%; height: 92px; display: block; }
+  .sp-lgd { display: flex; gap: 16px; margin-top: 10px; font-family: var(--font-body); font-size: 12px; color: var(--muted); }
+  .sp-lgd > span { display: inline-flex; align-items: center; gap: 6px; }
+  .sp-lgd i { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+
+  /* Dashboard hiển thị tất cả vault dạng scroll ngang (thay vì grid 2 cột).
+     Dùng .mkt-embed.pg-marketplace để thắng specificity của rule grid dùng chung. */
+  .mkt-embed.pg-marketplace .mkt-grid {
+    display: flex; flex-wrap: nowrap; gap: 16px; overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;              /* Firefox: ẩn thanh cuộn */
+    -ms-overflow-style: none;           /* IE/Edge cũ */
+  }
+  .mkt-embed.pg-marketplace .mkt-grid > .mkt-card { flex: 0 0 360px; scroll-snap-align: start; }
+  .mkt-embed.pg-marketplace .mkt-grid::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
+  /* Bỏ đổ bóng khi hover card trên Dashboard */
+  .mkt-embed.pg-marketplace .mkt-card:hover { box-shadow: none; }
+  @media (max-width: 760px) { .mkt-embed.pg-marketplace .mkt-grid > .mkt-card { flex-basis: 300px; } }
+  /* Vault card trên Dashboard: cả card click được; hover hiện "Open →" như card Product */
+  .mkt-embed .mkt-card-link { text-decoration: none; color: inherit; cursor: pointer; }
+  .mkt-embed .mc-open {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--mkt);
+    opacity: 0; transition: opacity .18s ease;
+  }
+  .mkt-embed .mc-open .arr { font-family: var(--font-mono); transition: transform .18s ease; }
+  .mkt-embed .mkt-card-link:hover .mc-open { opacity: 1; }
+  .mkt-embed .mkt-card-link:hover .mc-open .arr { transform: translateX(3px); }
+  /* State badge (vd "3D liquidity") trên Dashboard: neutral thay vì xanh dương */
+  .mkt-embed.pg-marketplace .vt-badge.leverage,
+  .mkt-embed.pg-marketplace .vt-badge.lending {
+    color: var(--muted); background: color-mix(in srgb, var(--text) 6%, transparent);
+  }
+}

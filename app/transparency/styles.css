@@ -1,0 +1,396 @@
+/* Tab Prime: đổi theme nội dung sang nâu (nền vàng nhạt + accent xanh -> nâu Prime).
+   Chỉ trong .pg-transparency để sidebar giữ màu xanh như cũ. */
+body.tp-prime { --bg: color-mix(in srgb, var(--prime) 4%, #FDFCF8); }
+body.tp-prime .pg-transparency {
+  --accent: var(--prime);
+  --citrus: var(--prime);
+  --alpha: var(--prime);
+  --good: var(--prime);
+  --tp-green: var(--prime);
+  --tp-backing: var(--prime);
+  /* nền/surface xanh nhạt -> nâu (đậm như card mint/redeem bên Prime = 16%) */
+  --surface-2: color-mix(in srgb, var(--prime) 16%, #FBFAF3);
+}
+/* Nhãn stat card: Alpha = xanh đen đậm (--text), Prime = nâu đậm. */
+body.tp-prime .pg-transparency .bigstat .k { color: #3A2A06; }
+body.tp-prime .pg-transparency .s6 .k, body.tp-prime .pg-transparency .s6 .v { color: #3A2A06; }
+/* Nền nâu thẻ summary6 nhạt hơn 1 chút */
+body.tp-prime .pg-transparency .tp-summary6 { background: color-mix(in srgb, var(--prime) 9%, #FBFAF3); }
+
+/* Style riêng của trang Transparency — lồng trong .pg-transparency để không loang
+   sang trang khác (nhiều tên class trùng giữa các trang). */
+.pg-transparency {
+  /* Bộ màu chart DÙNG CHUNG toàn trang (backing/supply + APY lines + top strategies). */
+  --tp-green: #4FAE3C;   /* xanh lá vừa (backing / weekly target) */
+  --tp-amber: #EDA92C;   /* vàng cam (supply / 1D) */
+  --tp-blue: #3E86E0;    /* xanh dương (7D) */
+  --tp-red: #DC2626;     /* đỏ (30D) */
+  --tp-purple: #B292CE;  /* tím (dự phòng) */
+  --tp-backing: var(--tp-green);
+  --tp-supply: var(--tp-amber);
+
+  /* Hero: cụm text bên trái canh top */
+  .hub-hero { align-items: start; }
+
+  /* Khoảng cách giữa các section = 32px, bỏ padding-top. */
+  .section { margin: 0 0 32px; padding-top: 0; }
+  > .section:last-child { margin-bottom: 0; }
+
+  /* 2 chart nằm ngang 1 hàng, cao bằng nhau; phần dư dồn vào vùng chart chứ không
+     đẩy khoảng cách dưới chips (chips luôn cách đáy 20px). Thu nhỏ thì xuống 2 dòng. */
+  .tp-charts2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 0 0 32px; align-items: stretch; }
+  .tp-charts2 > .section { margin: 0; }
+  .tp-charts2 > .section > .card { height: 100%; display: flex; flex-direction: column; }
+  .tp-charts2 .tp-chart { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 180px; }
+  .tp-charts2 .tp-chart .tp-plot { flex: 1 1 auto; min-height: 160px; }
+  .tp-charts2 .tp-chart .tp-plot svg { height: 100%; }
+  @media (max-width: 1000px) { .tp-charts2 { grid-template-columns: 1fr; gap: 32px; } }
+  /* Section summary (đầu mỗi panel): thêm padding-top 32px. */
+  [data-tp-panel] > .section:first-child { padding-top: 32px; }
+
+  /* "Proof of Solvency": chữ gradient xanh + hiệu ứng gõ chữ có con trỏ. */
+  .hero-grad {
+    display: inline-block;
+    vertical-align: bottom;
+    white-space: nowrap;
+    min-height: 1em;
+    border-right: 0.06em solid var(--prime);
+    background: linear-gradient(100deg, #1E7B1E 0%, var(--prime) 50%, #1E7B1E 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .hero-grad.typing { animation: hero-caret 0.8s step-end infinite, hero-flow 6s ease-in-out infinite; }
+  @keyframes hero-caret { from, to { border-color: transparent; } 50% { border-color: var(--prime); } }
+  @keyframes hero-flow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  @media (prefers-reduced-motion: reduce) { .hero-grad.typing { animation: hero-flow 6s ease-in-out infinite; border-color: transparent; } }
+
+  .verify-meta {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line-solid);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    overflow: hidden;
+    padding: 6px 0;
+  }
+  .verify-meta > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 16px;
+    border-bottom: 1px solid var(--line-solid);
+    font-size: 12.5px;
+  }
+  .verify-meta > div:last-child { border-bottom: none; }
+  .verify-meta .k { color: var(--faint); font-family: var(--font-body); font-size: 11.5px; letter-spacing: .09em; text-transform: none; letter-spacing: 0; font-weight: 600; }
+  .verify-meta .v { font-family: var(--font-body); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+
+  /* Hero: text bên trái, 4 stat card bên phải. */
+  /* Illus bên PHẢI (như hero Dashboard), nội dung fill phần còn lại bên trái */
+  .hub-hero { align-items: center; grid-template-columns: 1fr auto; gap: 28px; }
+  .hub-hero .lede { max-width: none; }
+  /* Wrap để đặt "nền blob" phía sau ảnh (blob tách khỏi SVG để đổi màu theo tab). */
+  .tp-illus-wrap { position: relative; display: block; flex: none; width: 240px; height: 240px; margin: -24px 0; }
+  .tp-illus-wrap .tp-hero-illus { position: relative; z-index: 1; width: 100%; height: 100%; display: block; }
+  /* Blob nền: xanh lá nhạt trùng màu section số liệu (surface-2). */
+  .tp-illus-wrap::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background-color: var(--surface-2);
+    -webkit-mask: url(/assets/illus/pos-blob.svg) center / contain no-repeat;
+    mask: url(/assets/illus/pos-blob.svg) center / contain no-repeat;
+  }
+  @media (max-width: 720px) { .tp-illus-wrap { width: 120px; height: 120px; margin: 0; } }
+  .tp-hero-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--good); text-decoration: none; }
+  .tp-hero-cta:hover { text-decoration: underline; }
+  .tp-hero-cta .arr { font-weight: 400; }
+
+  /* Mobile: hero xuống 1 cột (statwall full width). */
+  @media (max-width: 720px) {
+    .hub-hero { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* 4 stat card dạng lưới 2x2 (nền xám nhạt, bo góc). */
+  .statwall { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .bigstat { background: var(--surface-2); border-radius: 14px; padding: 18px 20px; }
+  .bigstat .k { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; text-transform: none; color: #142F04; font-weight: 600; }
+  .bigstat .v { font-family: var(--font-body); font-size: clamp(20px, 2.2vw, 26px); font-weight: 560; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  @media (max-width: 560px) { .statwall { grid-template-columns: 1fr; } }
+  /* Products Verified: số đầu xanh lá, "/2" đen nhạt hơn. */
+  .pv-verified b { color: var(--tp-green); font-weight: inherit; }
+  .pv-verified .den { color: var(--text); font-weight: 440; }
+
+  .tp-panel { padding: 20px 20px 32px; margin-bottom: 16px; }
+  .apy-card { padding-bottom: 20px; }
+  .tp-panel .phead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; min-height: 34px; }
+  .tp-panel .phead h3 { font-size: 18px; }
+  /* Total ở góc phải title (thay cho total dưới đáy). */
+  /* Total: đồng bộ label + font size với APY readout (label 13.5px, value 17px mono). */
+  .tp-total-h { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--font-body); font-size: 13.5px; letter-spacing: 0; text-transform: none; color: var(--muted); }
+  .tp-total-h b { font-family: var(--font-body); font-size: 17px; font-weight: 560; color: var(--text); font-variant-numeric: tabular-nums; }
+
+  /* Summary: số lớn (collateral ratio) + lưới chỉ số. */
+  .tp-summary-lead { flex: none; }
+  .tp-lead-pct { font-family: var(--font-body); font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .tp-lead-lbl { font-family: var(--font-body); font-size: 11.5px; letter-spacing: .1em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); margin-top: 6px; }
+  .tp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 800px) { .tp-grid { grid-template-columns: 1fr 1fr; } }
+  .tp-grid .k { font-family: var(--font-body); font-size: 11.5px; letter-spacing: .1em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); }
+  .tp-grid .v { font-family: var(--font-body); font-size: 18px; font-weight: 560; margin-top: 4px; font-variant-numeric: tabular-nums; }
+
+  /* backing vs supply bars */
+  .bvs { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .bvs-row { display: grid; grid-template-columns: 150px 1fr 130px; gap: 16px; align-items: center; }
+  @media (max-width: 640px) { .bvs-row { grid-template-columns: 1fr; gap: 6px; } }
+  .bvs-row .name { font-size: 12.5px; font-weight: 600; }
+  .bvs-row .name small { display: block; font-family: var(--font-body); font-size: 10px; color: var(--faint); font-weight: 400; letter-spacing: .05em; }
+  .bvs-row .bar { height: 14px; background: var(--surface-2); border-radius: 3px; overflow: hidden; position: relative; }
+  .bvs-row .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 3px; width: 0; transition: width 1.1s cubic-bezier(.2,.7,.2,1); }
+  .bvs-row .amt { font-family: var(--font-body); font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; }
+  .surplus-note { font-family: var(--font-body); font-size: 11.5px; color: var(--good); margin-top: 14px; }
+
+  /* strategy / chain tables with bars */
+  .split-table { width: 100%; border-collapse: collapse; }
+  .split-table td { padding: 8px 10px 8px 0; font-size: 12.5px; vertical-align: middle; border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+  .split-table tr:last-child td { border-bottom: none; }
+  .split-table .nm { font-weight: 600; white-space: nowrap; }
+  .split-table .nm small { display: block; font-family: var(--font-body); font-size: 9.5px; color: var(--faint); font-weight: 400; }
+  .split-table .bar-cell { width: 40%; }
+  .split-table .bar { height: 7px; border-radius: 2px; background: var(--surface-2); overflow: hidden; position: relative; display: block; }
+  .split-table .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 2px; display: block; }
+  .split-table .amt { font-family: var(--font-body); font-size: 12px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .split-table .pct { font-family: var(--font-body); font-size: 11.5px; text-align: right; color: var(--muted); width: 52px; font-variant-numeric: tabular-nums; }
+  @media (max-width: 640px) { .split-table .nm { white-space: normal; } .split-table .bar-cell { width: 26%; } }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* APY table */
+  .apy-table { width: 100%; border-collapse: collapse; }
+  .apy-table th { font-family: var(--font-body); font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 500; text-align: right; padding: 11px 0; border-bottom: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
+  .apy-table th:first-child { text-align: left; }
+  .apy-table td { padding: 13px 0; font-size: 13px; border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent); text-align: right; font-family: var(--font-body); font-variant-numeric: tabular-nums; }
+  .apy-table td:first-child { text-align: left; font-family: var(--font-body); font-weight: 600; }
+  .apy-table tr:last-child td { border-bottom: none; }
+
+  /* charts */
+  .charts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 980px) { .charts { grid-template-columns: 1fr; } }
+  .chart-card { padding: 18px 18px 10px; }
+  .chart-card h4 { font-size: 13px; margin-bottom: 2px; }
+  .chart-card .cv { font-family: var(--font-body); font-size: 17px; font-weight: 560; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+  .chart-card svg { width: 100%; height: 130px; display: block; }
+  .chart-card .xlab { display: flex; justify-content: space-between; font-family: var(--font-body); font-size: 9px; color: var(--faint); padding: 6px 0; letter-spacing: .05em; }
+
+  /* wallets */
+  .wl-list { display: flex; flex-direction: column; }
+  .wl-list a {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 8px 0; font-size: 12.5px; text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .wl-list a:last-child { border-bottom: none; }
+  .wl-list a:hover .addr { color: var(--citrus); }
+  .wl-list .wname { color: var(--muted); }
+  .wl-list .addr { font-family: var(--font-body); font-size: 11px; color: var(--faint); transition: color .15s ease; }
+
+  .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .how { grid-template-columns: 1fr; } }
+  .how .card { padding: 20px; }
+  .how b { font-family: var(--font-display); font-weight: 620; font-size: 14.5px; display: block; margin-bottom: 6px; }
+  .how span { font-size: 12.5px; color: var(--muted); line-height: 1.6; display: block; }
+  .how em { font-family: var(--font-body); font-style: normal; font-size: 11.5px; color: var(--citrus); letter-spacing: .12em; text-transform: none; letter-spacing: 0; font-weight: 600; display: block; margin-bottom: 12px; }
+
+  .asof { font-family: var(--font-body); font-size: 11px; color: var(--faint); margin-top: 10px; }
+
+  /* ===== product tabs (Alpha / Prime) ===== */
+  .tp-tabs { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface-2); border-radius: 999px; margin: 30px 0 4px; }
+  .tp-tabs button { display: inline-flex; align-items: center; gap: 8px; border: none; background: transparent; cursor: pointer; padding: 7px 16px; border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--muted); transition: background .15s ease, color .15s ease; }
+  .tp-tabs button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  /* APY badge sau tên tab: mặc định nền trắng + chữ màu sản phẩm; khi tab được chọn thì nền tint. */
+  .tp-tab-apy { font-family: var(--font-body); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; font-variant-numeric: tabular-nums; background: var(--surface); }
+  .tp-tab-apy.a { color: var(--alpha); }
+  .tp-tab-apy.p { color: var(--prime); }
+  .tp-tabs button.on .tp-tab-apy.a { background: color-mix(in srgb, var(--alpha) 14%, var(--surface)); }
+  .tp-tabs button.on .tp-tab-apy.p { background: color-mix(in srgb, var(--prime) 16%, var(--surface)); }
+
+  /* ===== summary card: 6 data chia 3 trên / 3 dưới, divider dọc + ngang ===== */
+  .tp-summary6 { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0; background: var(--surface-2); }
+  .s6 { position: relative; padding: 16px 22px; min-width: 0; }
+  /* Mọi cell đều có divider dọc (::before) + ngang (::after), mặc định ẩn — chỉ bật display theo layout. */
+  .s6::before, .s6::after { content: ""; position: absolute; display: none; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  .s6::before { left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 42px; }
+  .s6::after { top: 0; left: 0; right: 0; height: 1px; }
+  /* 3 cột: dọc ở cột 2 & 3; ngang ở hàng dưới (chừa 24px 2 đầu). */
+  .s6:not(:nth-child(3n+1))::before { display: block; }
+  .s6:nth-child(n+4)::after { display: block; }
+  .s6:nth-child(4)::after { left: 24px; }
+  .s6:nth-child(6)::after { right: 24px; }
+  .s6 .k { font-family: var(--font-body); font-size: 11.5px; letter-spacing: 0; text-transform: none; color: #142F04; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s6 .v { font-family: var(--font-body); font-size: 22px; font-weight: 560; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; color: #142F04; }
+  .s6 .k:has(.s6-info) { overflow: visible; }
+
+  /* Dark mode: #142F04 (xanh đậm) chìm trên nền tối. Số có tone dùng inline color:var(--good) nên giữ nguyên. */
+  :root[data-theme="dark"] & {
+    .bigstat .k, .s6 .k { color: var(--muted); }
+    .s6 .v { color: var(--text); }
+  }
+  .s6-info { position: relative; display: inline-flex; align-items: center; color: var(--faint); margin-left: 3px; cursor: help; vertical-align: middle; }
+  .s6-info svg { width: 12px; height: 12px; }
+  .s6-tip {
+    position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+    width: max-content; max-width: 220px; white-space: normal; text-align: left;
+    background: var(--text); color: var(--surface);
+    font-size: 11.5px; font-weight: 400; letter-spacing: 0; line-height: 1.45;
+    padding: 8px 10px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    opacity: 0; pointer-events: none; transition: opacity .14s ease; z-index: 30;
+  }
+  .s6-info:hover .s6-tip { opacity: 1; }
+  /* 2 cột (mobile): dọc ở cột phải (even); ngang từ hàng 2 (cell >=3), full-width. */
+  @media (max-width: 640px) {
+    .tp-summary6 { grid-template-columns: 1fr 1fr; }
+    .s6:not(:nth-child(3n+1))::before { display: none; }
+    .s6:nth-child(even)::before { display: block; }
+    .s6:nth-child(n+4)::after { display: none; left: 0; right: 0; }
+    .s6:nth-child(n+3)::after { display: block; }
+  }
+
+  /* ===== summary card (donut + stats) — giữ lại cho tương thích ===== */
+  .tp-summary { display: grid; grid-template-columns: auto 1fr; gap: 34px; align-items: center; padding: 32px 28px 26px; }
+  @media (max-width: 720px) { .tp-summary { grid-template-columns: 1fr; gap: 24px; } }
+  .tp-summary-donut { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
+  .tp-donut { width: 150px; height: 150px; transform: rotate(0deg); }
+  .tp-donut-track { fill: none; stroke: var(--surface-2); stroke-width: 12; }
+  .tp-donut-arc { fill: none; stroke-width: 12; stroke-linecap: round; }
+  .tp-donut-cov { fill: none; stroke-width: 12; opacity: .18; }
+  .tp-donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1px; }
+  .tp-donut-center b { font-family: var(--font-body); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tp-donut-tag { font-family: var(--font-body); font-size: 11.5px; letter-spacing: .06em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--good); font-weight: 600; }
+  .tp-donut-center small { font-family: var(--font-body); font-size: 9px; color: var(--faint); letter-spacing: .05em; margin-top: 2px; }
+  .tp-summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 22px; }
+  @media (max-width: 560px) { .tp-summary-stats { grid-template-columns: 1fr 1fr; } }
+  .tp-summary-stats .k { font-family: var(--font-body); font-size: 11.5px; letter-spacing: .1em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); }
+  .tp-summary-stats .v { font-family: var(--font-body); font-size: 18px; font-weight: 560; margin-top: 6px; font-variant-numeric: tabular-nums; }
+
+  /* ===== supply vs backing bars ===== */
+  .tp-ratio { width: 210px; flex: none; }
+  @media (max-width: 720px) { .tp-ratio { width: 100%; } }
+  .tp-ratio-head { display: flex; align-items: center; gap: 10px; }
+  .tp-ratio-pct { font-family: var(--font-body); font-size: 24px; font-weight: 600; color: var(--good); font-variant-numeric: tabular-nums; }
+  .tp-ratio-badge { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-body); font-size: 11.5px; letter-spacing: .05em; text-transform: none; letter-spacing: 0; font-weight: 600; font-weight: 600; color: var(--good); background: color-mix(in srgb, var(--good) 12%, transparent); padding: 3px 8px; border-radius: 999px; }
+  .tp-ratio-lbl { font-family: var(--font-body); font-size: 11.5px; letter-spacing: .1em; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--faint); margin-top: 4px; }
+  .tp-ratio-bars { display: flex; gap: 14px; margin-top: 16px; }
+  .tp-ratio-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .tp-ratio-track { width: 100%; height: 120px; background: var(--surface-2); border-radius: 6px; display: flex; align-items: flex-end; overflow: visible; position: relative; }
+  .tp-ratio-fill { width: 100%; border-radius: 6px; position: relative; }
+  .tp-ratio-fill.supply { background: var(--tp-supply); }
+  .tp-ratio-fill.backing { background: var(--tp-backing); }
+  .tp-ratio-surplus { position: absolute; top: 6px; left: 0; right: 0; text-align: center; font-family: var(--font-body); font-size: 10px; font-weight: 600; color: #fff; line-height: 1.35; }
+  .tp-ratio-surplus b { display: block; font-size: 10.5px; }
+  .tp-ratio-cap { font-family: var(--font-body); font-size: 10.5px; color: var(--muted); }
+
+  /* ===== live badge ===== */
+  .tp-live { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 11.5px; letter-spacing: .08em; text-transform: none; letter-spacing: 0; font-weight: 600; font-weight: 600; color: var(--good); }
+  .tp-live i { width: 7px; height: 7px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 60%, transparent); animation: tp-pulse 1.8s ease-out infinite; }
+  @keyframes tp-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 55%, transparent); } 70% { box-shadow: 0 0 0 6px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  .phead-l { display: flex; align-items: center; gap: 12px; }
+
+  /* ===== range toggle ===== */
+  .tp-range { display: inline-flex; gap: 2px; padding: 3px; background: var(--surface-2); border-radius: 8px; }
+  .tp-range button { border: none; background: transparent; cursor: pointer; padding: 5px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 11.5px; font-weight: 500; color: var(--muted); }
+  .tp-range button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+
+  /* ===== chart blocks ===== */
+  .tp-chart-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin: 0 0 20px; }
+  .tp-legend { display: flex; gap: 30px; flex-wrap: wrap; }
+  .tp-legend > div { display: flex; align-items: baseline; gap: 8px; }
+  .tp-chart-head .dot { width: 9px; height: 9px; border-radius: 3px; align-self: center; }
+  .tp-chart-head .l { font-size: 13.5px; color: var(--muted); }
+  .tp-chart-head b { font-family: var(--font-body); font-size: 17px; font-weight: 560; font-variant-numeric: tabular-nums; }
+  .tp-chart svg { width: 100%; height: 180px; display: block; background-image: radial-gradient(color-mix(in srgb, var(--text) 12%, transparent) 1px, transparent 1.2px); background-size: 20px 20px; background-position: center; border-radius: 6px; }
+  /* Backing chart dùng lưới kẻ (grid) thay cho nền chấm. */
+  .tp-plot svg { background-image: none; }
+  .tp-grid line { stroke: color-mix(in srgb, var(--text) 9%, transparent); stroke-width: 1; stroke-dasharray: 2 4; vector-effect: non-scaling-stroke; }
+  .tp-yticks { position: absolute; inset: 0; pointer-events: none; }
+  .tp-yticks span { position: absolute; left: 0; transform: translateY(-50%); font-family: var(--font-body); font-size: 9px; color: var(--faint); background: color-mix(in srgb, var(--surface) 78%, transparent); padding: 0 4px 0 1px; border-radius: 2px; }
+
+  /* Trang này: bỏ hiệu ứng hover nâng card. */
+  .card:hover { transform: none; box-shadow: none; border-color: var(--line-solid); }
+  .tp-chart .xlab { display: flex; justify-content: space-between; font-family: var(--font-body); font-size: 9px; color: var(--faint); padding: 6px 0 0; letter-spacing: .05em; }
+
+  /* ===== hover crosshair + tooltip (theo kiểu liveline) ===== */
+  .tp-plot { position: relative; }
+  .tp-guide { position: absolute; top: 2px; bottom: 2px; width: 1px; background: color-mix(in srgb, var(--text) 20%, transparent); opacity: 0; pointer-events: none; transform: translateX(-0.5px); }
+  .tp-hdot { position: absolute; width: 11px; height: 11px; border-radius: 50%; background: var(--surface); transform: translate(-50%, -50%); opacity: 0; pointer-events: none; }
+  .tp-hdot.b { border: 2.5px solid var(--tp-backing); box-shadow: 0 0 0 3px color-mix(in srgb, var(--tp-backing) 22%, transparent); }
+  .tp-hdot.s { border: 2.5px solid var(--tp-supply); box-shadow: 0 0 0 3px color-mix(in srgb, var(--tp-supply) 22%, transparent); }
+  .tp-tip { position: absolute; top: 4px; transform: translateX(-50%); background: var(--text); color: var(--surface); border-radius: 8px; padding: 8px 10px; font-family: var(--font-body); font-size: 11px; line-height: 1.5; white-space: nowrap; pointer-events: none; opacity: 0; z-index: 3; box-shadow: 0 6px 20px rgba(0,0,0,.16); }
+  .tp-tip .d { display: block; font-size: 9.5px; letter-spacing: .05em; opacity: .6; margin-bottom: 4px; }
+  .tp-tip .row { display: flex; align-items: center; gap: 6px; }
+  .tp-tip .row i { width: 7px; height: 7px; border-radius: 50%; }
+  .tp-tip .row b { font-weight: 600; }
+  .tp-plot.show .tp-guide, .tp-plot.show .tp-hdot, .tp-plot.show .tp-tip { opacity: 1; }
+
+  /* ===== APY card ===== */
+  /* Toggle syzUSD / yzPP (pill switch bo tròn, nằm bên phải title APY). */
+  .tp-subtabs { display: inline-flex; gap: 2px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+  .tp-subtabs button { border: none; background: transparent; cursor: pointer; padding: 5px 14px; border-radius: 999px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; color: var(--muted); }
+  .tp-subtabs button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  /* APY readout dùng chung style legend với "Backing assets"; value màu xanh lá. */
+  .apy-readout b[data-apy-value] { color: var(--tp-green); }
+
+  /* Readout dùng chung mọi chart: dot + label + value trên 1 hàng ngang. */
+  .tp-readout { display: flex; gap: 18px; flex-wrap: nowrap; align-items: baseline; margin-bottom: 28px; min-height: 24px; }
+  /* Mobile: chart xếp 1 cột nên readout cho wrap để không tràn ngang. */
+  @media (max-width: 1000px) { .tp-readout { flex-wrap: wrap; gap: 8px 20px; } }
+  .tp-readout-item { display: inline-flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+  .tp-readout-item .rl { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--muted); }
+  .tp-readout-item .rl i { width: 9px; height: 9px; border-radius: 3px; align-self: center; }
+  .tp-readout-item .rv { font-family: var(--font-body); font-size: 15px; font-weight: 560; font-variant-numeric: tabular-nums; }
+
+  /* Chips bật/tắt các đường APY (Weekly Target / 1D / 7D / 30D) — nằm dưới chart, canh giữa. */
+  .apy-series { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
+  /* Mặc định: chỉ có viền (stroke), nền trắng. Khi chọn: nền tint đầy theo màu đường, bỏ viền. */
+  .apy-series button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid color-mix(in srgb, var(--text) 13%, transparent); background: var(--surface); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: var(--muted); transition: background .12s, border-color .12s, color .12s; }
+  .apy-series button i { width: 9px; height: 9px; border-radius: 3px; background: var(--c); }
+  /* Chọn: viền màu (stroke) theo màu đường + tint nhẹ, đồng bộ dạng chip. */
+  .apy-series button.on { color: var(--text); border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, var(--surface)); }
+  .apy-series button.locked { cursor: default; }
+  /* Mobile: giữ 4 chip trên 1 hàng (không rớt hàng) bằng cách thu nhỏ. */
+  @media (max-width: 720px) {
+    .apy-series { flex-wrap: nowrap; gap: 5px; justify-content: flex-start; }
+    .apy-series button { padding: 3px 8px; font-size: 11px; gap: 5px; }
+    .apy-series button i { width: 8px; height: 8px; }
+  }
+
+  /* ===== stacked bar (top strategies) ===== */
+  .tp-stack-bar { display: flex; height: 16px; border-radius: 5px; overflow: hidden; gap: 2px; }
+  .tp-stack-seg { display: block; height: 100%; }
+  /* Hàng card chiến lược (pill màu + % + tên + mô tả + số tiền). */
+  .tp-strat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 18px; }
+  .tp-strat-card { border: 1px solid color-mix(in srgb, var(--text) 9%, transparent); border-radius: 11px; padding: 12px 12px 13px; }
+  .tp-strat-top { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; }
+  .tp-strat-pill { width: 4px; height: 15px; border-radius: 3px; flex: none; }
+  .tp-strat-top b { font-family: var(--font-body); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tp-strat-nm { font-weight: 500; font-size: 12.5px; }
+  .tp-strat-sub { font-size: 11px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+  .tp-strat-am { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; margin-top: 3px; }
+
+  /* ===== attestation footer: 1 hàng, icon + tiêu đề + phụ đề, ngăn bởi divider ===== */
+  .tp-attest { display: flex; align-items: center; padding: 0; }
+  .tp-attest-item { flex: 1; display: flex; align-items: center; gap: 14px; padding: 0 24px; position: relative; }
+  .tp-attest-item:first-child { padding-left: 0; }
+  .tp-attest-item:last-child { padding-right: 0; }
+  .tp-attest-item:not(:first-child)::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 38px; background: color-mix(in srgb, var(--text) 12%, transparent); }
+  .tp-attest-ic { flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; color: var(--tp-green); background: color-mix(in srgb, var(--tp-green) 10%, var(--surface)); }
+  .tp-attest-ic svg { width: 20px; height: 20px; }
+  .tp-attest-txt b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+  .tp-attest-txt span { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  @media (max-width: 760px) {
+    .tp-attest { flex-direction: column; align-items: flex-start; gap: 20px; padding: 0; }
+    .tp-attest-item { padding: 0; }
+    .tp-attest-item:not(:first-child)::before { display: none; }
+  }
+}

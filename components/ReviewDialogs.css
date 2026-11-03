@@ -1,0 +1,60 @@
+/* Style tự chứa cho 2 dialog review + success (ReviewDialogs).
+   Cho các trang KHÔNG import alpha/styles.css (vd Vault). Trên Alpha/Prime/Marketplace/Bridge,
+   bản scoped .pg-* .mok trong alpha/styles.css thắng theo specificity (giá trị y hệt). */
+.mok { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 24px; }
+.mok[hidden] { display: none; }
+.mok-backdrop { position: absolute; inset: 0; background: color-mix(in srgb, #14211A 45%, transparent); backdrop-filter: blur(2px); animation: mok-fade .22s ease both; }
+:root[data-theme="dark"] .mok-backdrop { background: color-mix(in srgb, #05080A 74%, transparent); backdrop-filter: blur(4px); }
+.mok-card { position: relative; width: 100%; max-width: 430px; background: var(--surface); border-radius: 24px; padding: 60px 24px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 24px 64px rgba(0,0,0,.20); animation: mok-pop .3s cubic-bezier(.2,.9,.25,1.08) both; }
+@keyframes mok-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes mok-pop { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes mok-check-in { 0% { transform: translateX(-50%) scale(0); opacity: 0; } 60% { opacity: 1; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
+@keyframes mok-ripple { 0% { transform: scale(1); opacity: .45; } 100% { transform: scale(1.9); opacity: 0; } }
+@keyframes mok-check-mark { 0% { transform: scale(0); opacity: 0; } 70% { opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes mok-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .mok-backdrop, .mok-card, .mok-check, .mok-check > svg, .mrev-spinner { animation: none !important; } .mok-check::after { display: none; } }
+.mok-x { all: unset; box-sizing: border-box; position: absolute; top: 16px; right: 16px; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
+.mok-x:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.mok-x svg { width: 20px; height: 20px; }
+.mok-check { position: absolute; top: -32px; left: 50%; transform: translateX(-50%); width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 17%, var(--surface)); color: var(--accent);
+  box-shadow:
+    0 0 0 8px color-mix(in srgb, var(--accent) 9%, var(--surface)),
+    0 0 0 16px color-mix(in srgb, var(--accent) 4%, var(--surface));
+  animation: mok-check-in .6s cubic-bezier(.34,1.56,.64,1) .04s both; }
+.mok-check::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--accent); animation: mok-ripple .85s cubic-bezier(.22,.61,.36,1) .3s both; pointer-events: none; }
+.mok-check > svg { width: 32px; height: 32px; stroke-width: 3.2; animation: mok-check-mark .42s cubic-bezier(.34,1.56,.64,1) .26s both; }
+.mok-amt { font-family: var(--font-display); font-weight: 700; font-size: 26px; line-height: 1.1; color: var(--accent); margin: 0 0 12px; }
+.mok-title { font-family: var(--font-display); font-weight: 660; font-size: 18px; color: var(--text); margin: 0; }
+.mok-sub { font-family: var(--font-body); font-size: 15px; color: var(--muted); margin: 4px 0 0; }
+.mok-sub b { color: var(--accent); font-weight: 640; }
+.mok-exch { position: relative; align-self: stretch; margin: 6px 0 16px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 8px; }
+.mok-exch-card { background: color-mix(in srgb, var(--text) 3.5%, var(--surface)); border-radius: 16px; padding: 12px 12px 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+.mok-exch-card img { width: 34px; height: 34px; border-radius: 50%; object-fit: contain; }
+.mok-exch-card b { font-family: var(--font-body); font-weight: 640; font-size: 15px; color: var(--text); white-space: nowrap; }
+.mok-exch-ic { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--text) 3.5%, var(--surface)); color: var(--muted); box-shadow: 0 0 0 4px var(--surface); }
+.mok-exch-ic svg { width: 17px; height: 17px; }
+.mok-info { align-self: stretch; margin-top: 24px; padding: 14px 16px; border-radius: 14px; background: color-mix(in srgb, var(--text) 4%, var(--surface)); display: flex; flex-direction: column; gap: 11px; }
+.mok-info-row { display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 14px; }
+.mok-info-row[hidden] { display: none; }
+.mok-info-row.mok-info-between { justify-content: space-between; }
+.mok-info-row > span:first-child { color: var(--muted); flex: none; }
+.mok-info-row > b { color: var(--text); font-family: var(--font-mono); font-weight: 600; flex: none; }
+.mok-txid { font-size: 13px; }
+.mok-actions { align-self: stretch; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+.mok-actions .btn { width: 100%; height: 50px; border-radius: 14px; font-family: var(--font-body); font-weight: 640; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; }
+.mok-actions .btn[hidden] { display: none; }
+
+.mrev-card { text-align: left; align-items: stretch; padding: 22px; }
+.mrev-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.mrev-head b { font-family: var(--font-display); font-weight: 680; font-size: 20px; color: var(--text); }
+.mrev-x { position: static; }
+.mrev-cost { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; font-family: var(--font-body); font-size: 14px; }
+.mrev-cost[hidden] { display: none; }
+.mrev-cost > span { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+.mrev-cost > span i { font-style: normal; font-size: 11.5px; font-weight: 600; color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); padding: 1px 6px; border-radius: 999px; }
+.mrev-cost > b { font-family: var(--font-mono); font-weight: 600; color: var(--text); }
+.mrev-cta { position: relative; width: 100%; height: 52px; border-radius: 14px; margin-top: 20px; font-family: var(--font-body); font-weight: 640; font-size: 17px; display: inline-flex; align-items: center; justify-content: center; }
+.mrev-cta.is-loading { pointer-events: none; }
+.mrev-cta.is-loading [data-rev-cta] { visibility: hidden; }
+.mrev-spinner { display: none; position: absolute; width: 20px; height: 20px; border-radius: 50%; border: 2.5px solid rgba(255,255,255,.4); border-top-color: #fff; animation: mok-spin .7s linear infinite; }
+.mrev-cta.is-loading .mrev-spinner { display: block; }
