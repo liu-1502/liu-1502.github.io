@@ -1,0 +1,37 @@
+/* Events page (scoped). The promo banner + popup styles are global because the
+   Dashboard uses them too: see the .ev-promo-* rules at the bottom. */
+.pg-events {
+  .ev-live { display: flex; flex-direction: column; gap: 16px; }
+  .ev-live-head { display: flex; align-items: center; gap: 10px; }
+  .ev-live-head h2 { margin: 0; font-size: 18px; }
+  .ev-live-dot {
+    display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 700; color: var(--citrus, #9fe870); background: rgba(159, 232, 112, .1);
+  }
+  .ev-live-dot::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .ev-live-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .ev-live-row p { margin: 4px 0 0; font-size: 13px; color: var(--text); }
+}
+
+/* ---------- promo banner (Dashboard + Events) ---------- */
+.ev-promo-banner { display: block; border-radius: 20px; overflow: hidden; line-height: 0; transition: transform .2s, box-shadow .2s; }
+.ev-promo-banner img { display: block; width: 100%; height: auto; }
+.ev-promo-banner:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .55); }
+.ev-promo-banner:focus-visible { outline: 2px solid var(--citrus, #9fe870); outline-offset: 3px; }
+
+/* ---------- launch popup ---------- */
+.ev-promo-pop {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px;
+  background: rgba(3, 10, 6, .62); backdrop-filter: blur(3px); animation: ev-pop-fade .2s ease-out;
+}
+.ev-promo-pop-in { position: relative; width: min(760px, 100%); border-radius: 24px; overflow: hidden; line-height: 0;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .55); animation: ev-pop-in .28s cubic-bezier(.2, .8, .3, 1.1); }
+.ev-promo-pop-in img { display: block; width: 100%; height: auto; }
+.ev-promo-x {
+  position: absolute; right: 2%; top: 8%; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  border: 1px solid rgba(238, 245, 236, .16); border-radius: 999px; background: rgba(7, 26, 18, .7); color: #eef5ec;
+}
+.ev-promo-x svg { width: 18px; height: 18px; }
+@keyframes ev-pop-fade { from { opacity: 0; } }
+@keyframes ev-pop-in { from { opacity: 0; transform: translateY(12px) scale(.97); } }
+@media (prefers-reduced-motion: reduce) { .ev-promo-pop, .ev-promo-pop-in { animation: none; } }
