@@ -1,17 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LIVE_EVENT } from "@/lib/events";
 import { STORAGE_KEYS } from "@/lib/constants";
 
-/** Hosts the event build; the build reports its content height so the frame never scrolls on its own.
-    Nền tối của build (chống lớp trắng) đã được nhúng sẵn trong public/sleigh-the-yield.html
-    (<style id="host-embed-dark">) nên không cần tiêm từ host -> không bị nháy khi load. */
+/** Hosts the event build.
+    - Trang landing (#/events/<id>): iframe cao theo nội dung (build tự báo chiều cao).
+    - Trong game (#/events/<id>/<room>): các màn game cố định -> khoá iframe = chiều cao viewport
+      (trừ topbar + padding) để màn game fill full, đều nhau, không "lúc ngắn lúc dài".
+    Nền tối của build đã nhúng sẵn trong public/sleigh-the-yield.html (<style id="host-embed-dark">). */
+// Topbar (64) + content padding-top (48) + bottom padding (24) = chừa chỗ để game fill gọn, có padding 4 góc.
+const PLAY_GUTTER = 136;
+
 export default function EventFrame() {
   const [height, setHeight] = useState(900);
+  const [playing, setPlaying] = useState(false);
+  const [vh, setVh] = useState(900);
+  const frameRef = useRef<HTMLIFrameElement>(null);
 
-  // Trang Events luôn ở dark mode. Khi rời trang -> trả về theme user đã chọn (đọc từ localStorage,
-  // KHÔNG ghi đè lựa chọn của user). Direct-load đã được noFlash ép dark sẵn nên không bị nháy.
+  // Trang Events luôn ở dark mode. Khi rời trang -> trả về theme user đã chọn (không ghi đè localStorage).
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-theme", "dark");
@@ -21,6 +28,21 @@ export default function EventFrame() {
       if (saved === "dark") root.setAttribute("data-theme", "dark");
       else root.removeAttribute("data-theme");
     };
+  }, []);
+
+  // Theo dõi viewport + phát hiện đang chơi game (hash có thêm segment room sau <id>).
+  useEffect(() => {
+    const readVh = () => setVh(window.innerHeight);
+    readVh();
+    window.addEventListener("resize", readVh);
+    const iv = setInterval(() => {
+      try {
+        const hash = frameRef.current?.contentWindow?.location.hash || "";
+        const parts = hash.replace(/^#\/?/, "").split("/").filter(Boolean); // ["events","<id>","<room>"?]
+        setPlaying(parts.length >= 3);
+      } catch { /* cross-origin/chưa sẵn sàng */ }
+    }, 250);
+    return () => { window.removeEventListener("resize", readVh); clearInterval(iv); };
   }, []);
 
   useEffect(() => {
@@ -33,12 +55,15 @@ export default function EventFrame() {
     return () => window.removeEventListener("message", onMsg);
   }, []);
 
+  const frameHeight = playing ? Math.max(480, vh - PLAY_GUTTER) : height;
+
   return (
     <iframe
+      ref={frameRef}
       className="ev-frame"
       src={LIVE_EVENT.embed}
       title={LIVE_EVENT.title}
-      style={{ display: "block", width: "100%", height, border: 0, background: "transparent" }}
+      style={{ display: "block", width: "100%", height: frameHeight, border: 0, background: "transparent" }}
       allow="autoplay"
     />
   );
