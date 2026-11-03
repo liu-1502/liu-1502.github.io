@@ -7540,7 +7540,7 @@ html.xm-embed .relative.z-1.flex.min-h-screen { min-height: 0 !important; }
   if (forcePromo) history.replaceState(null, "", location.pathname + location.search + "#/dashboard");
   route();
   setTimeout(function() {
-    if (forcePromo || !/^#\/?events\//.test(location.hash)) showPromo(forcePromo);
+    if (forcePromo || !document.documentElement.classList.contains('xm-embed')) showPromo(true);
   }, forcePromo ? 300 : 700);
   var rwBtn = document.getElementById("rwPrevBtn");
   if (rwBtn) rwBtn.addEventListener("click", function() {
