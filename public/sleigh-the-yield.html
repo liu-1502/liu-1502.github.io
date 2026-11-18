@@ -7852,6 +7852,7 @@ html.adv-res-open #advRes { transform: translateX(0); }
   }
   function isOpen(ev, n) {
     if (advIsEnded(ev)) return false;
+    if (ADV_DAY && ev && ev.id === "advent-2026") return !!n && n.door === ADV_DAY;
     if (clockMode === "preview") return true;
     var t = now();
     return t >= Date.parse(n.opensAt) && t <= Date.parse(ev.endsAt);
@@ -7924,6 +7925,19 @@ html.adv-res-open #advRes { transform: translateX(0); }
     } catch (e) {}
     return "";
   })();
+  /* demo calendar day: ?day=N (1-25) on this page or the page that embeds it pretends it is N December -
+     only door N can be opened, earlier doors that were not opened are missed, later doors are locked (25 = the gift's day).
+     Without it the demo keeps its own rule (doors open one after another). */
+  var ADV_DAY = (function() {
+    try {
+      var q = location.search;
+      try { if (window.parent !== window) q += "&" + window.parent.location.search.slice(1); } catch (e2) {}
+      var m = /[?&]day=([0-9]+)/.exec(q);
+      if (m && +m[1] >= 1 && +m[1] <= 25) return +m[1];
+    } catch (e) {}
+    return 0;
+  })();
+  function advPast(ev, n) { return !!ADV_DAY && !!ev && ev.id === "advent-2026" && !!n && n.door < ADV_DAY; }
   function advIsEnded(ev) {
     if (!ev || ev.id !== "advent-2026") return false;
     if (ADV_PHASE) return ADV_PHASE === "ended";
@@ -7935,6 +7949,7 @@ html.adv-res-open #advRes { transform: translateX(0); }
   function advGiftGate(ev, allLit) {
     if (!ev || ev.id !== "advent-2026") return allLit;
     if (advIsEnded(ev)) return false;
+    if (ADV_DAY) return ADV_DAY === 25;
     if (clockMode === "preview") return allLit;
     var t = now();
     return t >= Date.parse("2026-12-25T00:00:00Z") && t <= Date.parse(ev.endsAt);
@@ -8311,7 +8326,7 @@ html.adv-res-open #advRes { transform: translateX(0); }
     var cells = ev.order.map(function(d) {
       var last = d === ev.doorCount, n = byDoor[d];
       var state = last ? p.finale ? "lit" : advGiftGate(ev, allLit) ? "open" : "locked" : stopState(ev, n, p);
-      if (state !== "lit" && advIsEnded(ev)) state = "lit";
+      if (state !== "lit" && (advIsEnded(ev) || advPast(ev, n))) state = "lit";
       var run = last ? p.finale : p.nights[n.id];
       var juice = last ? p.finale ? p.finale.bonus : 0 : run ? run.juice : 0;
       var title = last ? ev.finale.title : n.title;
