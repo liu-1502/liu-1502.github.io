@@ -3359,6 +3359,12 @@ html .ev-stage.ev-ev-advent-2026 > .st, html .adv-ov .adv-dlg { box-shadow: 0 0 
 html .ev-stage.ev-ev-advent-2026 > .st:has(.qk-res.is-ok), html .adv-ov .adv-dlg.is-ok { box-shadow: 0 0 0 5px #2f8a43, 0 7px 0 5px #1c5c2c, 0 26px 44px 4px rgba(0,0,0,.38) !important; }
 html .ev-stage.ev-ev-advent-2026 > .st:has(.qk-res.is-no), html .adv-ov .adv-dlg.is-no { box-shadow: 0 0 0 5px #c0392b, 0 7px 0 5px #7f2118, 0 26px 44px 4px rgba(0,0,0,.38) !important; }
 html #advHow, html #advRes { box-shadow: -6px 0 0 #e0b04a, -30px 0 56px rgba(0,0,0,.36) !important; }
+/* adv-how-green - the How it works sheet swaps its amber accents for the page's green: edge strip, step numbers, divider, bullets, small heading (the Final results sheet stays amber) */
+html #advHow { box-shadow: -6px 0 0 #2f8a43, -30px 0 56px rgba(0,0,0,.36) !important; scrollbar-color: #a8cfae transparent; }
+#advHow .how-n { background: #3a9a52; border-color: #14301f; box-shadow: 0 2px 0 #14301f; color: #fffbe9; }
+#advHow .how-div { border-top-color: #bcd8c2; }
+#advHow .how-kick { color: #4f7a5a; }
+#advHow .how-rules li::marker { color: #2f8a43; }
 /* wrong-answer result: the close icon is the way out, no "Back to the calendar" button */
 .ev-stage.ev-ev-advent-2026 .qk-res.is-no .qk-res-back { display: none !important; }
 /* ...and no "No Juice behind this door today." line */

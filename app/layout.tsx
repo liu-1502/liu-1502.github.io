@@ -30,10 +30,11 @@ d.setAttribute('data-mode',localStorage.getItem('${STORAGE_KEYS.mode}')||'lite')
 d.setAttribute('data-eligible',localStorage.getItem('${STORAGE_KEYS.eligible}')==='1'?'1':'0');
 }catch(e){d.setAttribute('data-mode','lite');d.setAttribute('data-eligible','0');}
 /* Demo: reload trang nào cũng về Dashboard, bật lại popup sự kiện và xoá tiến độ chơi event
-   (game trong iframe đọc key 'ye-progress-xmas') -> vào lại Events là Today = cửa 1. */
+   (game trong iframe đọc key 'ye-progress-xmas') -> vào lại Events là Today = cửa 1.
+   Ngoại lệ: địa chỉ có ?day=N / ?phase=... (công tắc demo của Advent) thì ở lại trang, để reload hay gõ lại địa chỉ không làm mất tham số. */
 try{var nt=((performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{}).type;
 if(nt==='reload'){sessionStorage.removeItem('yz-event-popup-sleigh-the-yield');try{localStorage.removeItem('ye-progress-xmas');}catch(e2){}
-if(location.pathname.replace(/\\/$/,'')!=='')location.replace('/');}}catch(e){}
+if(location.pathname.replace(/\\/$/,'')!==''&&!/[?&](day|phase)=/.test(location.search))location.replace('/');}}catch(e){}
 })();`;
 
 export default function RootLayout({
