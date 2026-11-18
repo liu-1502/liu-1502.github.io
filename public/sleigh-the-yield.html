@@ -3477,6 +3477,11 @@ html #advHow, html #advRes { box-shadow: -6px 0 0 #e0b04a, -30px 0 56px rgba(0,0
 /* Advent swaps in its own illustration (calendar house + tree + snowman); the shared markup and hero-santa.png stay as they are for Christmas */
 .ev-page.ev-ev-advent-2026 .hero-santa-img { content: url("/assets/events/hero-advent.png"); }
 .ev-page.ev-ev-advent-2026 .ev-meter .mn.mn-advent { width: 280px; max-width: 100%; margin-left: auto; margin-right: auto; }
+/* adv-hero-in-snow - wide layout: the illustration stands in the snow drift under the tree line (its base goes behind the snow, the pines stay in front), as on the Dashboard banner; the Juice bar sits above it */
+@container ev (min-width: 621px) {
+  .ev-page.ev-ev-advent-2026 .ev-meter { align-self: end; transform: translateY(76px); }
+  .ev-page.ev-ev-advent-2026 .ev-meter .xm-jbar { order: -1; margin-top: -37px !important; margin-bottom: 41px; }
+}
 /* "How it works": a plain underlined link right under the title */
 .ev-page.ev-ev-advent-2026 .ev-how-btn { position: static; display: inline-block; height: auto; padding: 0; margin: 8px 0 0; border: none; border-radius: 0; background: none; color: #1f2a22; font: 600 14.5px/1.3 var(--font-body); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .ev-page.ev-ev-advent-2026 .ev-how-btn:hover { background: none; color: #2f8a43; }
