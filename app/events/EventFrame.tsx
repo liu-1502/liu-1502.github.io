@@ -17,6 +17,8 @@ export default function EventFrame() {
   const [playing, setPlaying] = useState(false);
   // Build mở dialog ngoài game (vd Claim ở Final results) -> báo lên để iframe phủ full màn hình như lúc chơi.
   const [modal, setModal] = useState(false);
+  // Christmas giữ màn chơi nằm trong trang như bản gốc; chỉ Advent mới chơi dạng dialog phủ full màn hình.
+  const [inPage, setInPage] = useState(false);
   const [vh, setVh] = useState(900);
   const frameRef = useRef<HTMLIFrameElement>(null);
 
@@ -44,6 +46,7 @@ export default function EventFrame() {
         setPlaying(parts.length >= 3);
         // Theo event đang mở: Christmas = dark mode cả app, Advent = light mode.
         const evId = parts[1] || "";
+        setInPage(evId.startsWith("christmas"));
         const root = document.documentElement;
         // Báo event đang mở cho thanh chuyển trên topbar.
         if (evId && root.dataset.eventId !== evId) {
@@ -77,8 +80,8 @@ export default function EventFrame() {
     return () => window.removeEventListener("message", onMsg);
   }, []);
 
-  // Khi đang chơi / đang mở dialog, iframe full-screen; nâng z-index .content để phủ cả sidebar (z60) + topbar (z50).
-  const full = playing || modal;
+  // Khi đang chơi Advent / đang mở dialog, iframe full-screen; nâng z-index .content để phủ cả sidebar (z60) + topbar (z50).
+  const full = modal || (playing && !inPage);
   useEffect(() => {
     const content = document.querySelector<HTMLElement>(".content");
     if (!content) return;

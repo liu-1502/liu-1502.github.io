@@ -29,9 +29,10 @@ if(location.pathname.replace(/\\/$/,'')==='/events')d.removeAttribute('data-them
 d.setAttribute('data-mode',localStorage.getItem('${STORAGE_KEYS.mode}')||'lite');
 d.setAttribute('data-eligible',localStorage.getItem('${STORAGE_KEYS.eligible}')==='1'?'1':'0');
 }catch(e){d.setAttribute('data-mode','lite');d.setAttribute('data-eligible','0');}
-/* Demo: reload trang nào cũng về Dashboard và bật lại popup sự kiện. */
+/* Demo: reload trang nào cũng về Dashboard, bật lại popup sự kiện và xoá tiến độ chơi event
+   (game trong iframe đọc key 'ye-progress-xmas') -> vào lại Events là Today = cửa 1. */
 try{var nt=((performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{}).type;
-if(nt==='reload'){sessionStorage.removeItem('yz-event-popup-sleigh-the-yield');
+if(nt==='reload'){sessionStorage.removeItem('yz-event-popup-sleigh-the-yield');try{localStorage.removeItem('ye-progress-xmas');}catch(e2){}
 if(location.pathname.replace(/\\/$/,'')!=='')location.replace('/');}}catch(e){}
 })();`;
 
