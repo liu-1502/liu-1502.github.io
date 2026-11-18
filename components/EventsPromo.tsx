@@ -9,7 +9,7 @@ import "./EventsPromo.css";
 const SEEN_KEY = "yz-event-popup-sleigh-the-yield";
 const ADVENT = PROMO_EVENT === "advent";
 
-/* Treeline along the bottom of the Advent promo: sage ground with a white rim and small pines, as in the game's hero. */
+/* Treeline along the bottom of the Advent promo: a snow drift with small pines standing on it, as in the game's hero. */
 const TREES: [number, number, number][] = [
   [26, 40, 0.9], [62, 38, 1.15], [138, 33, 0.85], [176, 32, 1.1], [262, 34, 1], [330, 37, 1.2], [366, 38, 0.8],
   [452, 38, 1.05], [512, 36, 0.9], [596, 34, 1.2], [634, 34, 0.85], [716, 36, 1], [786, 38, 1.15], [858, 39, 0.9],
@@ -27,7 +27,16 @@ function Treeline() {
         ))}
       </svg>
       <svg className="adv-promo-ground" viewBox="0 0 1280 64" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-        <path d="M0 40 Q160 24 320 36 T640 34 T960 38 T1280 30 V64 H0Z" fill="#b8d4c1" />
+        {/* snow drift, as under the tree line on the event page: white at the crest, easing into the sage ground */}
+        <defs>
+          <linearGradient id="advPromoSnow" gradientUnits="userSpaceOnUse" x1="0" y1="26" x2="0" y2="64">
+            <stop offset="0" stopColor="#ffffff" />
+            <stop offset=".4" stopColor="#f6faf7" />
+            <stop offset=".78" stopColor="#dcebe1" />
+            <stop offset="1" stopColor="#c6dccd" />
+          </linearGradient>
+        </defs>
+        <path d="M0 40 Q160 24 320 36 T640 34 T960 38 T1280 30 V64 H0Z" fill="url(#advPromoSnow)" />
         <path d="M0 40 Q160 24 320 36 T640 34 T960 38 T1280 30" fill="none" stroke="#fff" strokeWidth="2" />
       </svg>
     </>
