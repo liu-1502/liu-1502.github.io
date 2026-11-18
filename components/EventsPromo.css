@@ -20,3 +20,78 @@
 @keyframes ev-pop-fade { from { opacity: 0; } }
 @keyframes ev-pop-in { from { opacity: 0; transform: translateY(12px) scale(.97); } }
 @media (prefers-reduced-motion: reduce) { .ev-promo-pop, .ev-promo-pop-in { animation: none; } }
+
+/* ================================================================
+   Advent of Yield promo (Dashboard banner + launch popup), drawn in the game's own style:
+   mint-to-white ground, green + amber awning, red script title, green game button, pine treeline.
+   It keeps its light palette whatever the app theme is.
+   Fonts ("Mountains of Christmas", "Lilita One") are loaded by the Google Fonts link in app/layout.tsx.
+   ================================================================ */
+.adv-promo {
+  position: relative; isolation: isolate; display: grid; align-items: center; overflow: hidden;
+  color: #1f2a22; text-decoration: none; background: linear-gradient(180deg, #d6e9dc 0%, #eef5f0 100%);
+}
+.adv-promo-awn {
+  position: absolute; inset: 0 0 auto 0; height: 22px; z-index: 4;
+  background:
+    radial-gradient(circle at 20px 0, #1f6a39 19.5px, transparent 20px) 0 0 / 80px 22px repeat-x,
+    radial-gradient(circle at 20px 0, #eab93f 19.5px, transparent 20px) 40px 0 / 80px 22px repeat-x;
+}
+/* back to front: illustration, snowy ground (hides the base of the illustration), pines standing on it, text */
+.adv-promo-trees, .adv-promo-ground { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 64px; display: block; pointer-events: none; }
+.adv-promo-ground { z-index: 1; }
+.adv-promo-trees { z-index: 2; }
+.adv-promo-txt { position: relative; z-index: 3; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
+.adv-promo-title {
+  margin: 0; font: 700 46px/1 "Mountains of Christmas", Georgia, serif; letter-spacing: 0; color: #c62d22;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 2px 3px 0 #8a1c16;
+}
+.adv-promo-sum { margin: 10px 0 0; max-width: 46ch; font: 500 15px/1.5 var(--font-body); color: #1f2a22; }
+.adv-promo-sum b { font-weight: 750; color: #14301f; }
+.adv-promo-btn {
+  margin-top: 16px; display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 18px; box-sizing: border-box;
+  border: 3px solid #04130c; border-radius: 12px; background: linear-gradient(180deg, #1a5a42 0%, #124532 55%, #0d3627 100%);
+  color: #ffd84d; font: 400 16.5px/1 "Lilita One", var(--font-body); letter-spacing: .02em; text-decoration: none; white-space: nowrap;
+  box-shadow: inset 0 0 0 1px rgba(242, 207, 122, .35), inset 0 6px 0 rgba(255, 255, 255, .06), 0 4px 10px -2px rgba(0, 0, 0, .45);
+  transition: filter .15s ease, transform .15s ease;
+}
+.adv-promo-banner:hover .adv-promo-btn, a.adv-promo-btn:hover { filter: brightness(1.12); }
+a.adv-promo-btn:active { transform: translateY(1px); }
+.adv-promo-illus { position: relative; z-index: 0; display: block; height: auto; }
+
+/* ---------- Dashboard banner (the whole banner is the link) ---------- */
+.adv-promo-banner { grid-template-columns: minmax(0, 1fr) auto; gap: 24px; min-height: 250px; box-sizing: border-box; padding: 44px 44px 58px; border-radius: 20px; }
+.adv-promo-banner .adv-promo-illus { width: 236px; align-self: end; margin-bottom: -46px; }
+.adv-promo-banner:focus-visible { outline: 2px solid #2f8a43; outline-offset: 3px; }
+
+/* ---------- launch popup: no frame, just the card on a dimmed (not blacked-out) page ---------- */
+.ev-promo-pop.adv-promo-ov { background: rgba(0, 0, 0, .68); backdrop-filter: none; }
+.adv-promo-pop {
+  grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; width: min(760px, 100%); min-height: 400px; box-sizing: border-box;
+  padding: 62px 40px 84px 44px; border-radius: 24px; overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .4);
+  animation: ev-pop-in .28s cubic-bezier(.2, .8, .3, 1.1);
+}
+.adv-promo-pop .adv-promo-title { font-size: 62px; }
+.adv-promo-pop .adv-promo-sum { margin-top: 14px; font-size: 16.5px; }
+.adv-promo-pop .adv-promo-btn { margin-top: 22px; height: 46px; padding: 0 22px; font-size: 18px; }
+.adv-promo-pop .adv-promo-illus { width: 300px; align-self: end; margin-bottom: -72px; }
+.adv-promo-pop a.adv-promo-btn:focus-visible, .adv-promo-x:focus-visible { outline: 2px solid #2f8a43; outline-offset: 3px; }
+.adv-promo-x {
+  position: absolute; top: 36px; right: 16px; z-index: 5; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  border: 1.5px solid #e2d7bd; border-radius: 12px; background: #fff; color: #5d5340;
+}
+.adv-promo-x:hover { background: #f1e9d6; }
+.adv-promo-x svg { width: 18px; height: 18px; }
+
+@media (max-width: 720px) {
+  .adv-promo-banner { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 40px 22px 64px; }
+  .adv-promo-banner .adv-promo-title { font-size: 38px; }
+  .adv-promo-banner .adv-promo-illus { width: 180px; justify-self: center; margin-bottom: -50px; }
+  /* the title starts below the close button and is sized to fit one line on a phone */
+  .adv-promo-pop { grid-template-columns: minmax(0, 1fr); gap: 4px; min-height: 0; padding: 84px 22px 72px; }
+  .adv-promo-pop .adv-promo-title { font-size: 40px; }
+  .adv-promo-pop .adv-promo-illus { width: 210px; justify-self: center; margin-bottom: -58px; }
+  .adv-promo-pop .adv-promo-btn { align-self: stretch; }
+}
+@media (prefers-reduced-motion: reduce) { .adv-promo-pop { animation: none; } }

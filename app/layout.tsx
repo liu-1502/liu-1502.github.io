@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 // tránh nháy giao diện và để CSS (html[data-mode] / [data-theme] / [data-eligible]) đúng ngay.
 const noFlash = `(function(){var d=document.documentElement;try{
 if(localStorage.getItem('${STORAGE_KEYS.theme}')==='dark')d.setAttribute('data-theme','dark');
-if(location.pathname.replace(/\\/$/,'')==='/events')d.setAttribute('data-theme','dark');
+if(location.pathname.replace(/\\/$/,'')==='/events')d.removeAttribute('data-theme');
 d.setAttribute('data-mode',localStorage.getItem('${STORAGE_KEYS.mode}')||'lite');
 d.setAttribute('data-eligible',localStorage.getItem('${STORAGE_KEYS.eligible}')==='1'?'1':'0');
 }catch(e){d.setAttribute('data-mode','lite');d.setAttribute('data-eligible','0');}
@@ -45,9 +45,10 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* Bộ font gốc: Bricolage Grotesque + Instrument Sans + Geist Mono; Onest cho số liệu/mono */}
+        {/* Bộ font gốc: Bricolage Grotesque + Instrument Sans + Geist Mono; Onest cho số liệu/mono.
+            Lilita One + Mountains of Christmas: font của game Advent, dùng cho banner/popup Advent ở Dashboard. */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400..700&family=Geist+Mono:wght@400;500;600&family=Onest:wght@400..700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400..700&family=Geist+Mono:wght@400;500;600&family=Onest:wght@400..700&family=Lilita+One&family=Mountains+of+Christmas:wght@700&display=swap"
           rel="stylesheet"
         />
         <script dangerouslySetInnerHTML={{ __html: noFlash }} />

@@ -8,6 +8,7 @@ import Button from "./ui/Button";
 import Logo from "./Logo";
 import ChainSelector from "./topbar/ChainSelector";
 import ThemeToggle from "./topbar/ThemeToggle";
+import EventSwitch from "./topbar/EventSwitch";
 import WalletModal from "./topbar/WalletModal";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { OPEN_WALLET_EVENT } from "@/lib/wallet";
@@ -119,6 +120,8 @@ export default function Topbar() {
       >
         <PanelLeft />
       </button>
+      {/* Trang Events: chuyển Advent / Christmas ngay trên topbar (không thuộc game). */}
+      {pathname.replace(/\/$/, "") === "/events" && <EventSwitch />}
       <Link className="brand topbar-brand" href="/" aria-label="Yuzu home">
         <Logo />
       </Link>
