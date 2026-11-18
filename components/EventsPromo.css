@@ -61,7 +61,7 @@ a.adv-promo-btn:active { transform: translateY(1px); }
 
 /* ---------- Dashboard banner (the whole banner is the link) ---------- */
 .adv-promo-banner { grid-template-columns: minmax(0, 1fr) auto; gap: 24px; min-height: 250px; box-sizing: border-box; padding: 44px 44px 58px; border-radius: 20px; }
-.adv-promo-banner .adv-promo-illus { width: 236px; align-self: end; margin-bottom: -46px; }
+.adv-promo-banner .adv-promo-illus { width: 340px; align-self: end; margin-bottom: -36px; }
 .adv-promo-banner:focus-visible { outline: 2px solid #2f8a43; outline-offset: 3px; }
 
 /* ---------- launch popup: no frame, just the card on a dimmed (not blacked-out) page ---------- */
@@ -75,7 +75,7 @@ a.adv-promo-btn:active { transform: translateY(1px); }
 .adv-promo-pop .adv-promo-title { font-size: 62px; }
 .adv-promo-pop .adv-promo-sum { margin-top: 14px; font-size: 16.5px; }
 .adv-promo-pop .adv-promo-btn { margin-top: 22px; height: 46px; padding: 0 22px; font-size: 18px; }
-.adv-promo-pop .adv-promo-illus { width: 300px; align-self: end; margin-bottom: -72px; }
+.adv-promo-pop .adv-promo-illus { width: 360px; max-width: none; align-self: end; margin: 0 0 -60px -40px; }
 .adv-promo-pop a.adv-promo-btn:focus-visible, .adv-promo-x:focus-visible { outline: 2px solid #2f8a43; outline-offset: 3px; }
 .adv-promo-x {
   position: absolute; top: 36px; right: 16px; z-index: 5; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; cursor: pointer;
@@ -87,11 +87,11 @@ a.adv-promo-btn:active { transform: translateY(1px); }
 @media (max-width: 720px) {
   .adv-promo-banner { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 40px 22px 64px; }
   .adv-promo-banner .adv-promo-title { font-size: 38px; }
-  .adv-promo-banner .adv-promo-illus { width: 180px; justify-self: center; margin-bottom: -50px; }
+  .adv-promo-banner .adv-promo-illus { width: 230px; justify-self: center; margin-bottom: -40px; }
   /* the title starts below the close button and is sized to fit one line on a phone */
   .adv-promo-pop { grid-template-columns: minmax(0, 1fr); gap: 4px; min-height: 0; padding: 84px 22px 72px; }
   .adv-promo-pop .adv-promo-title { font-size: 40px; }
-  .adv-promo-pop .adv-promo-illus { width: 210px; justify-self: center; margin-bottom: -58px; }
+  .adv-promo-pop .adv-promo-illus { width: 270px; justify-self: center; margin: 0 0 -48px; }
   .adv-promo-pop .adv-promo-btn { align-self: stretch; }
 }
 @media (prefers-reduced-motion: reduce) { .adv-promo-pop { animation: none; } }

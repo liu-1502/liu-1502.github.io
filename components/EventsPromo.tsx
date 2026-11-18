@@ -45,7 +45,7 @@ export function EventBanner() {
           <span className="adv-promo-sum">{ADVENT_PROMO.bannerSummary}</span>
           <span className="adv-promo-btn">{ADVENT_PROMO.cta}</span>
         </span>
-        <img className="adv-promo-illus" src={ADVENT_PROMO.illus} alt="" width={760} height={594} />
+        <img className="adv-promo-illus" src={ADVENT_PROMO.illus} alt="" width={1048} height={592} />
         <Treeline />
       </a>
     );
@@ -103,7 +103,7 @@ export function EventPopup() {
             </p>
             <a className="adv-promo-btn" href={ADVENT_PROMO.href} onClick={close}>{ADVENT_PROMO.cta}</a>
           </div>
-          <img className="adv-promo-illus" src={ADVENT_PROMO.illus} alt="" width={760} height={594} />
+          <img className="adv-promo-illus" src={ADVENT_PROMO.illus} alt="" width={1048} height={592} />
           <Treeline />
           <button type="button" className="adv-promo-x" aria-label="Close" onClick={close}>
             <X />

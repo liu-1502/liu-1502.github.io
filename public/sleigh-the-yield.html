@@ -3253,6 +3253,19 @@ html.xm-host-switch .ev-switch { display: none !important; }
 .ev-page.ev-ev-advent-2026 .ev-horizon { margin-top: 34px !important; }
 /* adv-wait-chip - hero when today's door is done: a dashed, locked chip (the build's border colour was made for the dark theme and vanished on the light hero) */
 .ev-page.ev-ev-advent-2026 .ev-wait { border: 1.5px dashed rgba(40,70,50,.36); border-radius: 12px; color: #4a6654; font-weight: 600; }
+/* hero in progress: Juice won + doors opened where the intro line was */
+.ev-page.ev-ev-advent-2026 .adv-stats.adv-prog { display: block; margin-top: 20px; }
+.ev-page.ev-ev-advent-2026 .adv-prog + .ev-cta-row { margin-top: 22px; }
+.ev-page.ev-ev-advent-2026 .ev-hero:has(.adv-prog) .ev-meter .xm-jbar { display: none; }
+.ev-page.ev-ev-advent-2026 .ev-cta-row:has(.adv-wait) { gap: 10px; }
+.ev-page.ev-ev-advent-2026 .ev-cta-row:has(.adv-wait) .ev-clock { display: none; }
+/* the locked primary button: same shape and colours, dimmed, no hover or press */
+.ev-page.ev-ev-advent-2026 .ev-cta.adv-wait { display: inline-flex; align-items: center; gap: 8px; }
+.ev-page.ev-ev-advent-2026 .ev-cta.adv-wait:disabled { opacity: .6; cursor: not-allowed; filter: none !important; transform: none !important; }
+.ev-page.ev-ev-advent-2026 .ev-cta.adv-wait .ico { width: 16px; height: 16px; flex: none; stroke-width: 2.4; }
+/* hero buttons: no drop shadow under them (the inner rim and top sheen stay) */
+.ev-page.ev-ev-advent-2026 .ev-hero .ev-cta { box-shadow: inset 0 0 0 1px rgba(242,207,122,.35), inset 0 6px 0 rgba(255,255,255,.06) !important; }
+.ev-page.ev-ev-advent-2026 .ev-hero .ev-cta.adv-res-btn { box-shadow: inset 0 0 0 1px rgba(217,131,20,.2), inset 0 5px 0 rgba(255,255,255,.55) !important; }
 /* doors that are not open yet keep the same cream face as before (no grey wash); the small lock stays */
 .ev-page.ev-ev-advent-2026 .adv-cell.is-locked .adv-leaf { filter: none; }
 /* adv-snow-band - the snow drift under the tree line is back: white at the crest, easing into the sage ground (green-tinted, not the build's blue-grey) */
@@ -3481,18 +3494,35 @@ html #advHow { box-shadow: -6px 0 0 #2f8a43, -30px 0 56px rgba(0,0,0,.36) !impor
 .ev-page.ev-ev-advent-2026 .adv-claim-done::before { content: "\2713"; }
 /* wide layout: same hero box model as Christmas (centred text column, bar as wide as the illustration column) */
 @container ev (min-width: 621px) {
-  .ev-page.ev-ev-advent-2026 .ev-hero { align-items: center; grid-template-columns: minmax(0, 1fr) 280px; }
+  .ev-page.ev-ev-advent-2026 .ev-hero { align-items: center; grid-template-columns: minmax(0, 1fr) 330px; }
   .ev-page.ev-ev-advent-2026 .ev-meter .xm-jbar { width: 220px; margin-left: auto; margin-right: auto; }
 }
 /* Advent swaps in its own illustration (calendar house + tree + snowman); the shared markup and hero-santa.png stay as they are for Christmas */
 .ev-page.ev-ev-advent-2026 .hero-santa-img { content: url("/assets/events/hero-advent.png"); }
-.ev-page.ev-ev-advent-2026 .ev-meter .mn.mn-advent { width: 280px; max-width: 100%; margin-left: auto; margin-right: auto; }
+.ev-page.ev-ev-advent-2026 .ev-meter .mn.mn-advent { width: 330px; max-width: 100%; margin-left: auto; margin-right: auto; }
+/* adv-hero-in-snow - wide layout: the Juice bar sits at the top of the illustration column, level with the title; the illustration stands at the bottom, in the snow drift under the tree line (its base goes behind the snow, the pines stay in front), as on the Dashboard banner */
+@container ev (min-width: 621px) {
+  .ev-page.ev-ev-advent-2026 .ev-meter { align-self: stretch; margin-top: 0; }
+  .ev-page.ev-ev-advent-2026 .ev-meter .mn.mn-advent { margin-top: auto; transform: translateY(70px); }
+  .ev-page.ev-ev-advent-2026 .ev-meter .xm-jbar { order: -1; margin-top: 3px !important; margin-bottom: 0; }
+}
+/* adv-hero-in-snow-end */
 /* "How it works": a plain underlined link right under the title */
 .ev-page.ev-ev-advent-2026 .ev-how-btn { position: static; display: inline-block; height: auto; padding: 0; margin: 8px 0 0; border: none; border-radius: 0; background: none; color: #1f2a22; font: 600 14.5px/1.3 var(--font-body); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .ev-page.ev-ev-advent-2026 .ev-how-btn:hover { background: none; color: #2f8a43; }
 .ev-page.ev-ev-advent-2026 .ev-how-btn:focus-visible { outline: 2px solid #2f8a43; outline-offset: 3px; border-radius: 3px; }
 .ev-page.ev-ev-advent-2026 .ev-how-btn svg { display: none; }
 .ev-page.ev-ev-advent-2026 .ev-how-btn + .ev-pitch { margin-top: 8px; }
+/* adv-how-right - wide layout: How it works is a small game-style button in the hero's top-right corner (right edge on the content edge), level with the title: no fill, a soft green rim, the game's button face, a round ? badge; quiet on purpose. The Juice bar no longer sits in that column. */
+.ev-page.ev-ev-advent-2026 .ev-meter .xm-jbar { display: none !important; }
+@container ev (min-width: 621px) {
+  .ev-page.ev-ev-advent-2026 .ev-how-btn { position: absolute; right: 0; top: calc(clamp(44px, 5.6cqi, 72px) * .5 - 17px); z-index: 3; display: inline-flex; align-items: center; gap: 7px; height: 34px; box-sizing: border-box; padding: 0 13px 0 7px; margin: 0; border: 2px solid rgba(44,97,69,.26); border-radius: 12px; background: none; color: #2c6145; font: 400 14px/1 "Lilita One", var(--font-body); letter-spacing: .03em; text-decoration: none; white-space: nowrap; transition: border-color .15s ease, color .15s ease, background .15s ease; }
+  .ev-page.ev-ev-advent-2026 .ev-how-btn::before { content: "?"; flex: none; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: #2f6b4a; color: #fffaea; font: 400 12.5px/1 "Lilita One", var(--font-body); letter-spacing: 0; }
+  .ev-page.ev-ev-advent-2026 .ev-how-btn:hover { background: rgba(255,255,255,.35); border-color: rgba(44,97,69,.8); color: #1c4a33; }
+  .ev-page.ev-ev-advent-2026 .ev-how-btn:focus-visible { border-radius: 12px; }
+  .ev-page.ev-ev-advent-2026 .ev-how-btn + .ev-pitch { margin-top: 16px; }
+}
+/* adv-how-right-end */
 /* the build's floating "Connect with our team" button is gone */
 /* hidden for Advent only (page or dialog on screen) - Christmas keeps the build's floating button as before */
 html:has(.ev-ev-advent-2026) a[aria-label="Connect with our team on Telegram"] { display: none !important; }
@@ -7932,7 +7962,7 @@ html.adv-res-open #advRes { transform: translateX(0); }
   })();
   /* demo calendar day: ?day=N (1-25) on this page or the page that embeds it pretends it is N December -
      only door N can be opened, earlier doors that were not opened are missed, later doors are locked (25 = the gift's day).
-     Without it the calendar is on day 1: one door a day, and once today's door is answered there is nothing more to open until the next day. */
+     Without it the demo has no day limit: doors open one after another, the next one as soon as the last is answered. */
   var ADV_DAY = (function() {
     try {
       var q = location.search;
@@ -7940,18 +7970,21 @@ html.adv-res-open #advRes { transform: translateX(0); }
       var m = /[?&]day=([0-9]+)/.exec(q);
       if (m && +m[1] >= 1 && +m[1] <= 25) return +m[1];
     } catch (e) {}
-    return 1;
+    return 0;
   })();
   function advPast(ev, n) { return !!ADV_DAY && !!ev && ev.id === "advent-2026" && !!n && n.door < ADV_DAY; }
-  /* hero, when today's door is done (or there is none): a quiet locked chip instead of a button - what happened today and when the next door comes */
+  /* hero, when today's door is done (or there is none): the primary button stays, locked and disabled, saying when the next door comes */
   function advWait(ev, p) {
-    var today = null, k;
-    for (k = 0; k < ev.nights.length; k++) if (ev.nights[k].door === ADV_DAY) today = ev.nights[k];
-    var run = today ? p.nights[today.id] : null;
-    var said = run ? (run.juice > 0 ? "Right answer today. " : "Wrong answer today. ") : "";
-    var iso = "2026-12-25T00:00:00Z";
+    var iso = "2026-12-25T00:00:00Z", k;
     for (k = 0; k < ev.nights.length; k++) if (ev.nights[k].door === ADV_DAY + 1) iso = ev.nights[k].opensAt;
-    return '<span class="ev-wait adv-wait">' + icon("lock") + said + "Next door " + day(iso) + "</span>";
+    return '<button type="button" class="g-btn g-btn-lamp ev-cta adv-wait" disabled>' + icon("lock") + "Next door " + day(iso) + "</button>";
+  }
+  /* hero, once the wallet has opened a door: what it has so far - Juice won and doors opened - in place of the intro line (the Juice bar by the illustration is hidden then) */
+  function advProg(ev, p) {
+    var opened = p.finale ? 1 : 0, k;
+    for (k = 0; k < ev.nights.length; k++) if (p.nights[ev.nights[k].id]) opened++;
+    if (!opened) return "";
+    return '<div class="adv-stats adv-prog"><div class="adv-stat"><span class="adv-claim-n">' + n0(juiceOf(ev, p).total) + juiceIcon("adv-jc") + '</span><small class="adv-stat-doors"><b>' + opened + "/" + (ev.doorCount || 25) + "</b> doors opened</small></div></div>";
   }
   function advIsEnded(ev) {
     if (!ev || ev.id !== "advent-2026") return false;
@@ -8270,7 +8303,7 @@ html.adv-res-open #advRes { transform: translateX(0); }
       var run = p.nights[n.id];
       return "<tr><td>" + day(n.opensAt) + '</td><th scope="row">' + n.title + "</th><td>" + (run ? run.correct + " of " + run.total + (run.perfect ? ' <span class="ev-tag">Perfect</span>' : "") : '<span class="ev-dim">Not played</span>') + '</td><td class="ev-num">' + (run ? n0(run.juice) : "0") + '<span class="ev-dim"> / ' + n0(nightMax(n)) + "</span></td></tr>";
     }).join("")) + (!ev.finale ? "" : "<tr><td>" + W.finaleWhen + '</td><th scope="row">' + W.bonusRow + "</th><td>" + (p.finale ? W.bonusDone : '<span class="ev-dim">' + W.lockedFinale + "</span>") + '</td><td class="ev-num">' + n0(got.bonus) + '<span class="ev-dim"> / ' + n0(ev.completionBonus) + "</span></td></tr>");
-    view.innerHTML = '<div class="ev-page ev-ev-' + ev.id + (advIsEnded(ev) ? " adv-ended" : "") + (advClaimOn(ev, p) ? " adv-claim-on" : "") + '"><section class="ev-grove ev-theme-' + ev.theme + '" aria-labelledby="evTitle"><div class="ev-scene">' + T.scene() + '</div><nav class="ev-switch" aria-label="Events">' + switcherHTML(ev) + '</nav><div class="ev-hero"><div class="ev-hero-txt"><h1 class="ev-title" id="evTitle">' + ev.title + '</h1><p class="ev-pitch">' + pitch.replace(". ", '.<br class="pb"> ') + "</p>" + (note ? '<p class="ev-note">' + note + "</p>" : "") + (advClaimOn(ev, p) ? advHeroHTML(ev, p) : '<div class="ev-cta-row">' + cta + '<span class="ev-clock"><span id="evClock" title="' + (st.key === "soon" ? "Opens " + localAndUtc(ev.startsAt) : "Ends " + localAndUtc(ev.endsAt)) + '">' + st.label + "</span>" + early + "</span></div>") + (chipTxt ? '<span class="ev-run-chip' + (chipTxt === "Event closed" ? " is-closed" : /^(Not eligible yet|Deposit quest not done|Add .* more to unlock)$/.test(chipTxt) ? " is-warn" : "") + '">' + chipTxt + "</span>" : "") + '</div><div class="ev-meter">' + (ev.id === "advent-2026" ? '<div class="mn mn-advent" aria-hidden="true"><img class="hero-santa-img" src="/assets/events/hero-advent.png" alt=""></div>' : T.meter(ratio, prev)) + (FS === "inprogress" && ev.layout === "house" ? '<p class="ev-meter-n"><b>2/5</b><span>rooms done</span></p>' : meterHTML ? meterHTML : (ev.theme === "snow" ? '<div class="xm-jbar" role="img" aria-label="' + n0(got.total) + " of " + n0(max) + ' Juice" style="--r:' + Math.max(0, Math.min(1, ratio)).toFixed(3) + '">' + juiceIcon("xm-jbar-ico") + '<span class="xm-jbar-track"><span class="xm-jbar-fill"></span><b class="xm-jbar-n">' + n0(got.total) + "/" + n0(max) + '</b></span><span class="xm-jbar-gift"></span></div>' : '<p class="ev-meter-n"><b>' + n0(got.total) + "</b><span>of " + n0(max) + " Juice</span></p>")) + (meterHTML ? "" : got.total > 0 && !phase2 && FS !== "disconnected" ? '<p class="ev-pend">Pending \xB7 credited ' + credit(ev) + "</p>" : phase2 && got.total > 0 ? '<p class="ev-pend is-done">Credited ' + credit(ev) + "</p>" : "") + '</div></div><div class="ev-horizon">' + T.horizon() + "</div>" + (ev.layout === "calendar" ? calendar(ev, p, T) : '<div class="ev-ground">' + (ev.layout === "house" && !p.nights[ev.nights[0].id] && !isOpen(ev, ev.nights[0]) && st.key === "soon" ? '<p class="ev-path-note">The house opens ' + localAndUtc(ev.startsAt) + "</p>" : "") + '<ol class="ev-path' + (ev.layout === "house" ? " ev-path-house" : "") + '" style="--cols:' + (ev.layout === "house" ? ev.nights[0].content.rooms.length + (ev.entry ? 1 : 0) : ev.nights.length) + '" aria-label="The ' + (ev.layout === "house" ? ev.nights[0].content.rooms.length : ev.nights.length) + " " + W.units + '">' + stops + "</ol></div>") + '</section><div class="ev-below' + (phase2 ? " ev-below-rw" : "") + '">' + (ev.id === "advent-2026" ? "" : phase2 ? '<section class="ev-card yz-rw" id="evRewards" aria-labelledby="rwTitle"></section>' : FS === "disconnected" ? '<section class="ev-card ev-ledger" aria-labelledby="ldH"><header class="ev-card-head"><h2 id="ldH">Your event Juice</h2></header><p class="ev-led-note" style="margin-top:0">Connect your wallet to see your score and the Juice you earned in this event.</p><div style="margin-top:14px"><button type="button" class="g-btn g-btn-ghost" data-connect>Connect wallet</button></div></section>' : '<section class="ev-card ev-ledger" aria-labelledby="ldH"><header class="ev-card-head"><h2 id="ldH">Your event Juice</h2><span>' + short(WALLET) + '</span></header><table class="ev-table"><thead><tr><th scope="col">' + (ev.layout === "house" ? "When" : W.unit) + '</th><th scope="col">Game</th><th scope="col">Score</th><th scope="col" class="ev-num">Juice</th></tr></thead><tbody>' + ledger + '</tbody><tfoot><tr><th scope="row" colspan="3">Total, credited on ' + credit(ev) + '</th><td class="ev-num"><b>' + n0(got.total) + "</b></td></tr></tfoot></table>" + (ev.creditOn ? '<p class="ev-led-note">Final results for every wallet are published here on ' + credit(ev) + ".</p>" : "") + "</section>") + (phase2 ? countedCard(ev) : '<section class="ev-card ev-how" aria-labelledby="hwH"><h2 id="hwH">How it works</h2><ol class="ev-steps">' + W.how.map(function(h) {
+    view.innerHTML = '<div class="ev-page ev-ev-' + ev.id + (advIsEnded(ev) ? " adv-ended" : "") + (advClaimOn(ev, p) ? " adv-claim-on" : "") + '"><section class="ev-grove ev-theme-' + ev.theme + '" aria-labelledby="evTitle"><div class="ev-scene">' + T.scene() + '</div><nav class="ev-switch" aria-label="Events">' + switcherHTML(ev) + '</nav><div class="ev-hero"><div class="ev-hero-txt"><h1 class="ev-title" id="evTitle">' + ev.title + '</h1>' + (ev.id === "advent-2026" && !advClaimOn(ev, p) && advProg(ev, p) || '<p class="ev-pitch">' + pitch.replace(". ", '.<br class="pb"> ') + "</p>") + (note ? '<p class="ev-note">' + note + "</p>" : "") + (advClaimOn(ev, p) ? advHeroHTML(ev, p) : '<div class="ev-cta-row">' + cta + '<span class="ev-clock"><span id="evClock" title="' + (st.key === "soon" ? "Opens " + localAndUtc(ev.startsAt) : "Ends " + localAndUtc(ev.endsAt)) + '">' + st.label + "</span>" + early + "</span></div>") + (chipTxt ? '<span class="ev-run-chip' + (chipTxt === "Event closed" ? " is-closed" : /^(Not eligible yet|Deposit quest not done|Add .* more to unlock)$/.test(chipTxt) ? " is-warn" : "") + '">' + chipTxt + "</span>" : "") + '</div><div class="ev-meter">' + (ev.id === "advent-2026" ? '<div class="mn mn-advent" aria-hidden="true"><img class="hero-santa-img" src="/assets/events/hero-advent.png" alt=""></div>' : T.meter(ratio, prev)) + (FS === "inprogress" && ev.layout === "house" ? '<p class="ev-meter-n"><b>2/5</b><span>rooms done</span></p>' : meterHTML ? meterHTML : (ev.theme === "snow" ? '<div class="xm-jbar" role="img" aria-label="' + n0(got.total) + " of " + n0(max) + ' Juice" style="--r:' + Math.max(0, Math.min(1, ratio)).toFixed(3) + '">' + juiceIcon("xm-jbar-ico") + '<span class="xm-jbar-track"><span class="xm-jbar-fill"></span><b class="xm-jbar-n">' + n0(got.total) + "/" + n0(max) + '</b></span><span class="xm-jbar-gift"></span></div>' : '<p class="ev-meter-n"><b>' + n0(got.total) + "</b><span>of " + n0(max) + " Juice</span></p>")) + (meterHTML ? "" : got.total > 0 && !phase2 && FS !== "disconnected" ? '<p class="ev-pend">Pending \xB7 credited ' + credit(ev) + "</p>" : phase2 && got.total > 0 ? '<p class="ev-pend is-done">Credited ' + credit(ev) + "</p>" : "") + '</div></div><div class="ev-horizon">' + T.horizon() + "</div>" + (ev.layout === "calendar" ? calendar(ev, p, T) : '<div class="ev-ground">' + (ev.layout === "house" && !p.nights[ev.nights[0].id] && !isOpen(ev, ev.nights[0]) && st.key === "soon" ? '<p class="ev-path-note">The house opens ' + localAndUtc(ev.startsAt) + "</p>" : "") + '<ol class="ev-path' + (ev.layout === "house" ? " ev-path-house" : "") + '" style="--cols:' + (ev.layout === "house" ? ev.nights[0].content.rooms.length + (ev.entry ? 1 : 0) : ev.nights.length) + '" aria-label="The ' + (ev.layout === "house" ? ev.nights[0].content.rooms.length : ev.nights.length) + " " + W.units + '">' + stops + "</ol></div>") + '</section><div class="ev-below' + (phase2 ? " ev-below-rw" : "") + '">' + (ev.id === "advent-2026" ? "" : phase2 ? '<section class="ev-card yz-rw" id="evRewards" aria-labelledby="rwTitle"></section>' : FS === "disconnected" ? '<section class="ev-card ev-ledger" aria-labelledby="ldH"><header class="ev-card-head"><h2 id="ldH">Your event Juice</h2></header><p class="ev-led-note" style="margin-top:0">Connect your wallet to see your score and the Juice you earned in this event.</p><div style="margin-top:14px"><button type="button" class="g-btn g-btn-ghost" data-connect>Connect wallet</button></div></section>' : '<section class="ev-card ev-ledger" aria-labelledby="ldH"><header class="ev-card-head"><h2 id="ldH">Your event Juice</h2><span>' + short(WALLET) + '</span></header><table class="ev-table"><thead><tr><th scope="col">' + (ev.layout === "house" ? "When" : W.unit) + '</th><th scope="col">Game</th><th scope="col">Score</th><th scope="col" class="ev-num">Juice</th></tr></thead><tbody>' + ledger + '</tbody><tfoot><tr><th scope="row" colspan="3">Total, credited on ' + credit(ev) + '</th><td class="ev-num"><b>' + n0(got.total) + "</b></td></tr></tfoot></table>" + (ev.creditOn ? '<p class="ev-led-note">Final results for every wallet are published here on ' + credit(ev) + ".</p>" : "") + "</section>") + (phase2 ? countedCard(ev) : '<section class="ev-card ev-how" aria-labelledby="hwH"><h2 id="hwH">How it works</h2><ol class="ev-steps">' + W.how.map(function(h) {
       return "<li>" + fill(h, ev) + "</li>";
     }).join("") + '</ol><ul class="ev-rules">' + ev.rules.map(function(r) {
       return "<li>" + fill(r, ev) + "</li>";
