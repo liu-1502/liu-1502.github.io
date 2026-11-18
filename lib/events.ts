@@ -8,7 +8,7 @@ export const LIVE_EVENT = {
   /** Where the banner, popup and sidebar take you: the Events page inside the app. */
   href: "/events",
   /** The game itself is a self-contained build in public/, embedded by app/events. */
-  embed: "/sleigh-the-yield.html?embed=1#/events/advent-2026",
+  embed: `/sleigh-the-yield.html?embed=1&v=${process.env.NEXT_PUBLIC_BUILD ?? "dev"}#/events/advent-2026`,
   banner: "/assets/events/sleigh-the-yield-banner.webp",
   popup: "/assets/events/sleigh-the-yield-popup.webp",
 };

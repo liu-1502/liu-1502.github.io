@@ -3251,6 +3251,10 @@ html.xm-host-switch .ev-switch { display: none !important; }
 .ev-page.ev-ev-advent-2026 .ev-sw.is-on .ev-sw-ico { color: #fff !important; background: rgba(255,255,255,.22) !important; }
 /* same gap from the hero down to the treeline as Christmas */
 .ev-page.ev-ev-advent-2026 .ev-horizon { margin-top: 34px !important; }
+/* adv-wait-chip - hero when today's door is done: a dashed, locked chip (the build's border colour was made for the dark theme and vanished on the light hero) */
+.ev-page.ev-ev-advent-2026 .ev-wait { border: 1.5px dashed rgba(40,70,50,.36); border-radius: 12px; color: #4a6654; font-weight: 600; }
+/* doors that are not open yet keep the same cream face as before (no grey wash); the small lock stays */
+.ev-page.ev-ev-advent-2026 .adv-cell.is-locked .adv-leaf { filter: none; }
 /* adv-snow-band - the snow drift under the tree line is back: white at the crest, easing into the sage ground (green-tinted, not the build's blue-grey) */
 .ev-page.ev-ev-advent-2026 .ev-horizon [fill="url(#hzF)"] { fill: url(#hzF) !important; }
 .ev-page.ev-ev-advent-2026 .ev-horizon #hzF stop:nth-child(2) { stop-color: #f6faf7; }
@@ -7928,7 +7932,7 @@ html.adv-res-open #advRes { transform: translateX(0); }
   })();
   /* demo calendar day: ?day=N (1-25) on this page or the page that embeds it pretends it is N December -
      only door N can be opened, earlier doors that were not opened are missed, later doors are locked (25 = the gift's day).
-     Without it the demo keeps its own rule (doors open one after another). */
+     Without it the calendar is on day 1: one door a day, and once today's door is answered there is nothing more to open until the next day. */
   var ADV_DAY = (function() {
     try {
       var q = location.search;
@@ -7936,9 +7940,19 @@ html.adv-res-open #advRes { transform: translateX(0); }
       var m = /[?&]day=([0-9]+)/.exec(q);
       if (m && +m[1] >= 1 && +m[1] <= 25) return +m[1];
     } catch (e) {}
-    return 0;
+    return 1;
   })();
   function advPast(ev, n) { return !!ADV_DAY && !!ev && ev.id === "advent-2026" && !!n && n.door < ADV_DAY; }
+  /* hero, when today's door is done (or there is none): a quiet locked chip instead of a button - what happened today and when the next door comes */
+  function advWait(ev, p) {
+    var today = null, k;
+    for (k = 0; k < ev.nights.length; k++) if (ev.nights[k].door === ADV_DAY) today = ev.nights[k];
+    var run = today ? p.nights[today.id] : null;
+    var said = run ? (run.juice > 0 ? "Right answer today. " : "Wrong answer today. ") : "";
+    var iso = "2026-12-25T00:00:00Z";
+    for (k = 0; k < ev.nights.length; k++) if (ev.nights[k].door === ADV_DAY + 1) iso = ev.nights[k].opensAt;
+    return '<span class="ev-wait adv-wait">' + icon("lock") + said + "Next door " + day(iso) + "</span>";
+  }
   function advIsEnded(ev) {
     if (!ev || ev.id !== "advent-2026") return false;
     if (ADV_PHASE) return ADV_PHASE === "ended";
@@ -8191,7 +8205,7 @@ html.adv-res-open #advRes { transform: translateX(0); }
       var upcoming = ev.nights.find(function(n) {
         return !p.nights[n.id];
       });
-      cta = '<span class="ev-wait">' + icon("lock") + "Next " + W.item + " opens " + day(upcoming.opensAt) + "</span>";
+      cta = ev.id === "advent-2026" ? advWait(ev, p) : '<span class="ev-wait">' + icon("lock") + "Next " + W.item + " opens " + day(upcoming.opensAt) + "</span>";
     }
     var early = clockMode === "preview" && st.key === "soon" ? "" : "";
     var note = "", hn2 = ev.nights[0], pitch = ev.pitch, chipTxt = "", meterHTML = "";
